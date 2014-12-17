@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Location extends Migration {
+class CreateBatchPhotoMapTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,9 @@ class Location extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('location', function($table){
-			$table->increments("location_id");
-			$table->string("location",255);
-			$table->timestamps();
+		Schema::create('batch_photo_map', function($table){
+		$table->integer('batch_id')->foreign('batch_id')->references('batch_id')->on('batch');
+		$table->integer('photo_id');
 		});
 	}
 
@@ -26,7 +25,7 @@ class Location extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('location');
+		Schema::drop('batch_photo_map');
 	}
 
 }

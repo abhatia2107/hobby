@@ -12,9 +12,9 @@ class CreateSubcategoryTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('subcategory', function($table){
+		Schema::create('Subcategories', function($table){
 			$table->increments("subcategory_id");
-			$table->integer('category_id')->foreign('category_id')->references('category_id')->on('category');
+			$table->integer('category_id')->foreign('category_id')->references('category_id')->on('Categories');
 			$table->string("subcategory",255);
 			$table->timestamps();
 		});
@@ -27,7 +27,7 @@ class CreateSubcategoryTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('subcategory');
+		Schema::drop('Subcategories');
 	}
 
 }

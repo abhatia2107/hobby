@@ -11,42 +11,41 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		$this->call('BatchTableSeeder');
-        $this->command->info('batch table seeded!');
+		$this->call('BatchesTableSeeder');
+        $this->command->info('Batches table seeded!');
 
-		$this->call('BatchKeywordMapSeeder');
-		$this->command->info('batch keyword map seeded!');
+ 		$this->call('BatchKeywordSeeder');
+ 		$this->command->info('Batch Keyword seeded!');
 
-		$this->call('BatchPhotoMapSeeder');
-		$this->command->info('batch photo map seeded!');
+		$this->call('BatchPhotoSeeder');
+		$this->command->info('Batch Photo seeded!');
 
-		$this->call('CategoryTableSeeder');
-        $this->command->info('category table seeded!');
+		$this->call('CategoriesTableSeeder');
+	    $this->command->info('Categories table seeded!');
 
-		$this->call('CategoryInstituteMapSeeder');
-		$this->command->info('category institute map seeded!');
+		$this->call('CategoryInstituteSeeder');
+ 		$this->command->info('Category Institute seeded!');
 
-		$this->call('CommentTableSeeder');
-		$this->command->info('comment table seeded!');
+		$this->call('CommentsTableSeeder');
+		$this->command->info('Comments table seeded!');
 
-		$this->call('InstituteTableSeeder');
-        $this->command->info('institute table seeded!');
+		$this->call('InstitutesTableSeeder');
+        $this->command->info('Institutes table seeded!');
 
-		$this->call('KeywordTableSeeder');
-		$this->command->info('keyword table seeded!');
+		$this->call('KeywordsTableSeeder');
+		$this->command->info('Keywords table seeded!');
 
-		$this->call('LocationTableSeeder');
-		$this->command->info('location table seeded!');
+		$this->call('LocationsTableSeeder');
+		$this->command->info('Locations table seeded!');
 
-		$this->call('UserTableSeeder');
-        $this->command->info('user table seeded!');
+		$this->call('UsersTableSeeder');
+        $this->command->info('Users table seeded!');
 
-		$this->call('VenueTableSeeder');
-		$this->command->info('venue table seeded!');
+		$this->call('VenuesTableSeeder');
+		$this->command->info('Venues table seeded!');
 
-		$this->call('SubcategoryTableSeeder');
-		$this->command->info('subcategory table seeded!');
+		$this->call('SubcategoriesTableSeeder');
+		$this->command->info('Subcategories table seeded!');
 
-	}
-
+	}	
 }

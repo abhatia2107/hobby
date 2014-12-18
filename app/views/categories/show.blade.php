@@ -1,0 +1,1 @@
+/home/abhishek/Hobby/app/views/categories/show.blade.php

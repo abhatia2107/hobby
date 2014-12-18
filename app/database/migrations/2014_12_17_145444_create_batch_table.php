@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-batch CreateBatchTable extends Migration {
+class CreateBatchTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -28,7 +28,7 @@ batch CreateBatchTable extends Migration {
 			$table->integer('batch_age_group');
 			$table->integer('batch_gender_group');
 			$table->integer('batch_price');
-			$table->integer('batch_recurring');
+			$table->boolean('batch_recurring');
 			$table->boolean('batch_approved');
 			$table->integer('batch_no_of_classes_in_week');
 			$table->integer('batch_trial');

@@ -17,13 +17,14 @@ class CreateInstituteTable extends Migration {
 			$table->string('institute',50);
 			$table->string('institute_location',50)->foreign('institute_location')->references('location_id')->on('location');
 			$table->string('institute_url',255);
-			$table->string('class_website',255)->nullable();
-			$table->string('class_fblink',255)->nullable();
-			$table->string('class_twitter',255)->nullable();
+			$table->string('institute_website',255)->nullable();
+			$table->string('institute_fblink',255)->nullable();
+			$table->string('institute_twitter',255)->nullable();
 			$table->longText('institute_description');
 			$table->boolean('institute_approved');
 			$table->timestamps();
 			//Institute photo would be store as institute_id.jpg so no need for separate column.
+			});
 	}
 
 	/**

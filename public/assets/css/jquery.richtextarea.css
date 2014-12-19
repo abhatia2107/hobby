@@ -15,8 +15,8 @@
 .ui-richtextarea-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }
 
 /* states and images */
-.ui-richtextarea-icon { width: 16px; height: 16px; background-image: url(images/ui-richtextarea-icons_222222_256x16.png); }
-.ui-state-active .ui-richtextarea-icon {background-image: url(images/ui-richtextarea-icons_222222_256x16.png); }
+.ui-richtextarea-icon { width: 16px; height: 16px; background-image: url(../../../public/assets/images/ui-richtextarea-icons_222222_256x16.png); }
+.ui-state-active .ui-richtextarea-icon {background-image: url(../../../public/assets/images/ui-richtextarea-icons_222222_256x16.png); }
 
 /* positioning */
 .ui-richtextarea-icon-bold { background-position: 0 0; }

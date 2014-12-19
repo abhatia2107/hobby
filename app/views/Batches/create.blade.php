@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -452,7 +451,7 @@
     </div>
 </nav>
 <div class="container-fluid">
-        <form role="form" class="form-horizontal"style="margin-left: auto;margin-right: auto;width: 900px;" id="classInfo">
+        <form role="form" class="form-horizontal" action="@if(isset($batchDetails)){{"batches/$batchDetails->batch_id"}}@else{{"/batches/store"}}@endif" method="@if(isset($batchDetails)){{"put"}}@else{{"post"}}@endif" enctype="multipart/form-data" style="margin-left: auto;margin-right: auto;width: 900px;" id="classInfo">
             <br><br>
             <div class="row">
                 <p style="font-size: 20px;
@@ -735,39 +734,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-3 label1">&nbsp;&nbsp;&nbsp;Tickets can be booked&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;upto</div>
-                <div class="col-sm-2">
-                    <select class="form-control input1">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
-                </div>
-                <span class="col-sm-1 label1">Days</span>
-                <div class="col-sm-2">
-                    <select class="form-control input1">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
-                </div>
-                <span class="col-sm-1 label1">Hours</span>
-                <div class="col-sm-2">
-                    <select class="form-control input1">
-                        <option>Before the class starts</option>
-                        <option>After the class starts</option>
-                    </select>
-                </div>
-            </div><br><br>
-            <div class="row">
-                <div class="col-sm-3 label1">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Ticket</div>
-                <div class="col-sm-3 label1">Ticket Name<br><input type="text" class="form-control"></div>
-                <div class="col-sm-3 label1">Price<br><input type="text" class="form-control"></div>
-                <div class="col-sm-3 label1">Number Of Tickets<br><input type="text" class="form-control"></div>
-            </div><br><br>
             <div class="row">
                 <div class="col-sm-2" >
                     <button type="button" style="float:right;font-size:19px;color:white;background-color:cornflowerblue" class="form-control btn  btn-default">

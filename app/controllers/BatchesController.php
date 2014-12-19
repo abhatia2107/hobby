@@ -10,7 +10,7 @@ class BatchesController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('Batches.show');
 	}
 
 	/**
@@ -21,7 +21,7 @@ class BatchesController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('Batches.create');
 	}
 
 	/**
@@ -32,7 +32,31 @@ class BatchesController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$credentianls=Input::all();
+		$validator = Validator::make($credentianls, Batch::$rules);
+
+		/** to check wether event date is valid or not **/
+		$dateToday=Carbon::now();
+		$startDate=Input::get('batch_start_date');
+		$endDate=Input::get('batch_end_date');
+		
+		if(($dateToday >= $startDate)||($dateToday >= $endDate))
+		{
+			return Redirect::back()->withInput()->with('failed',Lang::get('batch.batch_currentDateError'));
+		}
+		
+		if($startDate > $endDate)
+		{	
+			return Redirect::back()->withInput()->with('failed',Lang::get('batch.batch_startEndDateError'));		
+		}
+
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		$batch=Batch::create($credentianls);
+
 	}
 
 	/**
@@ -56,7 +80,7 @@ class BatchesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		return View::make('Batches.create');
 	}
 
 	/**

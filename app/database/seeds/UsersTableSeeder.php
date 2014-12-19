@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder {
                      'user_remember_token'=>$faker->lexify(),
                      'user_facebook_access_token'=>$faker->lexify(),
                      'user_confirmation_code' =>$faker->randomNumber(1000000,100000000000),
-                     'user_confirmed' =>1,
+                     'user_confirmed' =>$faker->boolean,
                      ));
               }
        }

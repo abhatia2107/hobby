@@ -1,10 +1,10 @@
 <?php
 
-class CategoriesController extends \BaseController {
+class SubscriptionsController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /categories
+	 * GET /subscriptions
 	 *
 	 * @return Response
 	 */
@@ -15,18 +15,18 @@ class CategoriesController extends \BaseController {
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /categories/create
+	 * GET /subscriptions/create
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		return View::make('Categories.create');
+		//
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /categories
+	 * POST /subscriptions
 	 *
 	 * @return Response
 	 */
@@ -37,7 +37,7 @@ class CategoriesController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
-	 * GET /categories/{id}
+	 * GET /subscriptions/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -49,7 +49,7 @@ class CategoriesController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /categories/{id}/edit
+	 * GET /subscriptions/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -61,7 +61,7 @@ class CategoriesController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /categories/{id}
+	 * PUT /subscriptions/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -73,7 +73,7 @@ class CategoriesController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /categories/{id}
+	 * DELETE /subscriptions/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

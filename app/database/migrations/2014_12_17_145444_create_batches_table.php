@@ -14,7 +14,7 @@ class CreateBatchesTable extends Migration {
 	{
 		Schema::create('Batches', function($table){
 			$table->increments('batch_id');
-			$table->string('batch_title',50);
+			$table->string('batch',50);
 			$table->integer('batch_category_id')->foreign('batch_category_id')->references('category_id')->on('Categories');
 			$table->integer('batch_subcategory_id')->foreign('batch_subcategory_id')->references('subcategory_id')->on('Subcategories');
 			$table->longText('batch_accomplishment')->nullable();
@@ -31,6 +31,13 @@ class CreateBatchesTable extends Migration {
 			$table->boolean('batch_recurring');
 			$table->boolean('batch_approved');
 			$table->integer('batch_no_of_classes_in_week');
+			$table->boolean('batch_class_on_monday');
+			$table->boolean('batch_class_on_tuesday');
+			$table->boolean('batch_class_on_wednesday');
+			$table->boolean('batch_class_on_thursday');
+			$table->boolean('batch_class_on_friday');
+			$table->boolean('batch_class_on_saturday');
+			$table->boolean('batch_class_on_sunday');
 			$table->integer('batch_trial');
 			$table->string('batch_comment')->nullable();
 			$table->string('batch_tagline',40)->nullable();

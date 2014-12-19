@@ -15,8 +15,8 @@ class CreateCategoryInstituteTable extends Migration {
 		Schema::create('Category_Institute', function(Blueprint $table)
 		{
 			$table->increments('category_institute_id');
-			$table->integer('category_id')->foreign('category_id')->references('category_id')->on('category');
-			$table->integer('institute_id')->foreign('institute_id')->references('institute_id')->on('institute');
+			$table->integer('category_id')->foreign('category_id')->references('category_id')->on('Categories');
+			$table->integer('institute_id')->foreign('institute_id')->references('institute_id')->on('Institutes');
 			$table->timestamps();
 		});
 	}

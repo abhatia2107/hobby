@@ -8,7 +8,7 @@ class BatchesTableSeeder extends Seeder {
               foreach(range(1,20) as $index)
               {            
                      DB::table('Batches')->insert(array(
-                     'batch_title' => $faker->Name,
+                     'batch' => $faker->Name,
                      'batch_category_id'=>$faker->randomDigitNotNull,
                      'batch_subcategory_id'=>$faker->randomNumber(1,20),
                      'batch_accomplishment' =>'<p>'.$faker->paragraph(1).'<p>',
@@ -25,6 +25,13 @@ class BatchesTableSeeder extends Seeder {
                      'batch_recurring' =>$faker->boolean(),
                      'batch_approved' =>$faker->boolean(),
                      'batch_no_of_classes_in_week' =>$faker->randomNumber(1,7),
+                     'batch_class_on_monday'=>$faker->boolean(),
+                     'batch_class_on_tuesday'=>$faker->boolean(),
+                     'batch_class_on_wednesday'=>$faker->boolean(),
+                     'batch_class_on_thursday'=>$faker->boolean(),
+                     'batch_class_on_friday'=>$faker->boolean(),
+                     'batch_class_on_saturday'=>$faker->boolean(),
+                     'batch_class_on_sunday'=>$faker->boolean(),
                      'batch_trial' =>$faker->randomNumber(0,4),
                      'batch_comment'=>$faker->lexify(),
                      'batch_tagline'=>$faker->lexify(),

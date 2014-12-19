@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class BatchesController extends \BaseController {
 
 	/**
@@ -33,29 +35,31 @@ class BatchesController extends \BaseController {
 	public function store()
 	{
 		$credentianls=Input::all();
-		$validator = Validator::make($credentianls, Batch::$rules);
+		// $validator = Validator::make($credentianls, Batch::$rules);
 
-		/** to check wether event date is valid or not **/
-		$dateToday=Carbon::now();
-		$startDate=Input::get('batch_start_date');
-		$endDate=Input::get('batch_end_date');
+		// /** to check wether event date is valid or not **/
+		// $dateToday=Carbon::now();
+		// $startDate=Input::get('batch_start_date');
+		// $endDate=Input::get('batch_end_date');
 		
-		if(($dateToday >= $startDate)||($dateToday >= $endDate))
-		{
-			return Redirect::back()->withInput()->with('failed',Lang::get('batch.batch_currentDateError'));
-		}
+		// if(($dateToday >= $startDate)||($dateToday >= $endDate))
+		// {
+		// 	return Redirect::back()->withInput()->with('failed',Lang::get('batch.batch_currentDateError'));
+		// }
 		
-		if($startDate > $endDate)
-		{	
-			return Redirect::back()->withInput()->with('failed',Lang::get('batch.batch_startEndDateError'));		
-		}
+		// if($startDate > $endDate)
+		// {	
+		// 	return Redirect::back()->withInput()->with('failed',Lang::get('batch.batch_startEndDateError'));		
+		// }
 
-		if($validator->fails())
-		{
-			return Redirect::back()->withInput()->withErrors($validator);
-		}
+		// if($validator->fails())
+		// {
+		// 	return Redirect::back()->withInput()->withErrors($validator);
+		// }
 
-		$batch=Batch::create($credentianls);
+		// $batch=Batch::create($credentianls);
+
+		dd($credentianls);
 
 	}
 

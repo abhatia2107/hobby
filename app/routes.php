@@ -116,3 +116,9 @@ Route::get('/subscribed', function()
 {
 	return View::make('message');
 });
+
+Route::get('/dummy', function()
+{
+	return View::make('create');
+});
+

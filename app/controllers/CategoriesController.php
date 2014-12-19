@@ -32,7 +32,13 @@ class CategoriesController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$credentianls=Input::all();
+		$validator = Validator::make($credentianls, Category::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+		$category=Category::create($credentianls);
 	}
 
 	/**

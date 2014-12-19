@@ -21,7 +21,7 @@ class InstitutesController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('Institutes.create');
 	}
 
 	/**

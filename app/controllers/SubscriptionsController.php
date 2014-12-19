@@ -32,7 +32,13 @@ class SubscriptionsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$credentianls=Input::all();
+		$validator = Validator::make($credentianls, Subscription::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+		$subscription=Subscription::create($credentianls);
 	}
 
 	/**

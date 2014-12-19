@@ -21,7 +21,7 @@ class UsersController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('Users.create');
 	}
 
 	/**
@@ -32,7 +32,13 @@ class UsersController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$credentianls=Input::all();
+		$validator = Validator::make($credentianls, Users::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+		$user=Users::create($credentianls);
 	}
 
 	/**

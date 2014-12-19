@@ -21,7 +21,7 @@ class CommentsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('Comments.create');
 	}
 
 	/**
@@ -32,7 +32,13 @@ class CommentsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$credentianls=Input::all();
+		$validator = Validator::make($credentianls, Comment::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+		$comment=Comment::create($credentianls);
 	}
 
 	/**

@@ -30,7 +30,7 @@
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields: {
-                    username: {
+                    institute: {
                         message: 'The username is not valid',
                         validators: {
                             notEmpty: {
@@ -64,7 +64,7 @@
                             }
                         }
                     },
-                    city: {
+                    institute_location: {
                         message: 'The city is not valid',
                         validators: {
                             notEmpty: {
@@ -104,7 +104,7 @@
                             }
                         }
                     },
-                    url: {
+                    institute_website: {
                         validators: {
                             notEmpty: {
                                 message: 'The url is required and cannot be empty'
@@ -132,6 +132,9 @@
         });
     </script>
     <style>
+    .has-feedback label~.form-control-feedback {
+    top: 32px;
+    }
         label
         {
             font-size: 20px;
@@ -206,8 +209,8 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="c1 form-group">
-                        <label for="username">First Name/Organisation Name &nbsp;&nbsp;<span style="color:red;font-size: 15px;">*</span></label>
-                        <input type="text" class="form-control" name="username" id="username">
+                        <label for="institute">First Name/Organisation Name &nbsp;&nbsp;<span style="color:red;font-size: 15px;">*</span></label>
+                        <input type="text" class="form-control" name="institute" id="institute">
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -234,14 +237,14 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="c1 form-group ">
-                        <label for="city" >City &nbsp;&nbsp;<span style="color:red;font-size: 15px;">*</span></label>
-                        <input type="text" class="form-control" name="city" id="city">
+                        <label for="institute_location" >City &nbsp;&nbsp;<span style="color:red;font-size: 15px;">*</span></label>
+                        <input type="text" class="form-control" name="institute_location" id="institute_location">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="c1 form-group">
-                        <label for="url">Website</label>
-                        <input type="url" class="form-control" placeholder="http://" name="url" id="url">
+                        <label for="institute_website">Website</label>
+                        <input type="url" class="form-control" placeholder="http://" name="institute_website" id="institute_website">
                     </div>
                 </div>
             </div>
@@ -263,7 +266,7 @@
                 <div class="col-sm-12">
                     <div class="c1">
                         <p >About me</p>
-                        <textarea name="edit1" id="edit1" cols="40" rows="5">
+                        <textarea name="institute_description" id="institute_description" cols="40" rows="5">
                             Test
                             &lt;ul&gt;&lt;li&gt;Test line 1&lt;/li&gt;
                             &lt;li&gt;Test line 2&lt;/li&gt;
@@ -271,7 +274,7 @@
                         </textarea>
 
                         <script type="text/javascript">
-                            $("#edit1").richtextarea();
+                            $("#institute_description").richtextarea();
                         </script>
                     </div>
                 </div>
@@ -320,8 +323,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="c1 form-group">
-                            <label for="facebook">Facebook Page</label>
-                            <input type="url" class="form-control" placeholder="http://" id="facebook" name="facebook">
+                            <label for="institute_fblink">Facebook Page</label>
+                            <input type="url" class="form-control" placeholder="http://" id="institute_fblink" name="institute_fblink">
                         </div>
                     </div>
                 </div>
@@ -334,8 +337,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="c1 form-group" >
-                            <label for="twitter">Twitter Profile</label>
-                            <input type="url" class="form-control" placeholder="http://" id="twitter" name="twitter">
+                            <label for="institute_twitter">Twitter Profile</label>
+                            <input type="url" class="form-control" placeholder="http://" id="institute_twitter" name="institute_twitter">
                         </div>
                     </div>
                 </div>

@@ -37,7 +37,7 @@
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields: {
-                    venuename: {
+                    venue: {
                         message: 'The name is not valid',
                         validators: {
                             notEmpty: {
@@ -54,41 +54,8 @@
                             }
                         }
                     },
-                    pitch: {
-                        message: 'The pitch is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The  pitch is required and cannot be empty'
-                            },
-                            stringLength: {
-                                min: 3,
 
-                                message: 'The pitch must be more than 3  characters long'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                                message: 'The  pitch can only consist of alphabets'
-                            }
-                        }
-                    },
-                    keywords: {
-                        message: 'The keywords is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The keywords is required and cannot be empty'
-                            },
-                            stringLength: {
-                                min: 3,
-
-                                message: 'The keywords must be more than 3  characters long'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                                message: 'The  keywords can only consist of alphabets'
-                            }
-                        }
-                    },
-                    textarea1: {
+                                       textarea1: {
                         message: 'The text is not valid',
                         validators: {
                             notEmpty: {
@@ -105,20 +72,8 @@
                             }
                         }
                     },
-                    sessions: {
-                        message: 'The text is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The session is required and cannot be empty'
-                            },
 
-                            regexp: {
-                                regexp: /^[0-9]+$/,
-                                message: 'The sessions can contain only digits  '
-                            }
-                        }
-                    },
-                    pincode: {
+                    venue_pincode: {
                                             message: 'The pincode is not valid',
                                             validators: {
                                                 notEmpty: {
@@ -131,61 +86,17 @@
                                                 }
                                             }
                                         },
-                    time1: {
-                        message: 'The timings is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The timings are  required and cannot be empty'
-                            }
 
-                        }
-                    },
-                    time2: {
-                        message: 'The timings is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The timings are  required and cannot be empty'
-                            }
 
-                        }
-                    },
-                    date1: {
-                        message: 'The date is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The date are  required and cannot be empty'
-                            }
-
-                        }
-                    },
-                    date2: {
-                        message: 'The date is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The dates are  required and cannot be empty'
-                            }
-
-                        }
-                    },
-
-                    city: {
+                    venue_location: {
                         message: 'The city is not valid',
                         validators: {
                             notEmpty: {
                                 message: 'The city name is required and cannot be empty'
-                            },
-                            stringLength: {
-                                min: 3,
-                                max: 30,
-                                message: 'The city must be more than 3 and less than 30 characters long'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                                message: 'The city name can only consist of alphabets'
                             }
                         }
                     },
-                    mobile: {
+                    venue_contact_no: {
                         message: 'The number is not valid',
                         validators: {
                             notEmpty: {
@@ -197,31 +108,12 @@
                                 message: 'The phone number consists of 10 digits'
                             }
                         }
-                    },
-                    email: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The email is required and cannot be empty'
-                            },
-                            emailAddress: {
-                                message: 'The input is not a valid email address'
-                            }
-                        }
-                    },
-                    url: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The url is required and cannot be empty'
-                            },
-                            url: {
-                                message: 'The input is not a valid url address'
-                            }
-                        }
                     }
-                }
-            });
+
+            }
 
         });
+    });
     </script>
     <style type="text/css">
         .input1
@@ -280,54 +172,54 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="form-group">
-                                    <label for="venuename" class="col-sm-3 control-label ">Venue Name&nbsp;<span style="color:red">*</span></label>
+                                    <label for="venue" class="col-sm-3 control-label ">Venue Name&nbsp;<span style="color:red">*</span></label>
                                     <div class="col-sm-8">
-                                        <input type="text"  class="form-control input1" name="venuename"  id="venuename">
+                                        <input type="text"  class="form-control input1" name="venue"  id="venue">
                                     </div>
                                 </div>
 
                             </div><br>
                             <div class="row">
                                 <div class="form-group">
-                                    <label for="city1" class="col-sm-3 control-label ">City&nbsp;<span style="color:red">*</span></label>
+                                    <label for="venue_location" class="col-sm-3 control-label ">City&nbsp;<span style="color:red">*</span></label>
                                     <div class="col-sm-8">
-                                        <select  class="form-control " name="city1"  id="city1"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                                        <select  class="form-control input1" name="venue_location"  id="venue_location"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
                                     </div>
                                 </div>
 
                             </div><br>
                             <div class="row">
                                 <div class="form-group">
-                                    <label for="locality" class="col-sm-3 control-label ">Locality&nbsp;<span style="color:red">*</span></label>
+                                    <label for="venue_locality" class="col-sm-3 control-label ">Locality&nbsp;<span style="color:red">*</span></label>
                                     <div class="col-sm-8">
-                                        <select  class="form-control " name="locality"  id="locality"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+                                        <select  class="form-control input1" name="venue_locality"  id="venue_locality"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
                                     </div>
                                 </div>
 
                             </div><br>
                             <div class="row">
                                 <div class="form-group">
-                                    <label for="address" class="col-sm-3 control-label ">Address&nbsp;<span style="color:red">*</span></label>
+                                    <label for="venue_address" class="col-sm-3 control-label ">Address&nbsp;<span style="color:red">*</span></label>
                                     <div class="col-sm-8">
-                                        <input type="text"  class="form-control input1" name="address"  id="address">
+                                        <input type="text"  class="form-control input1" name="venue_address"  id="venue_address">
                                     </div>
                                 </div>
 
                             </div><br>
                             <div class="row">
                                 <div class="form-group">
-                                    <label for="pincode" class="col-sm-3 control-label ">Pincode&nbsp;<span style="color:red">*</span></label>
+                                    <label for="venue_pincode" class="col-sm-3 control-label ">Pincode&nbsp;<span style="color:red">*</span></label>
                                     <div class="col-sm-8">
-                                        <input type="text"  class="form-control input1" name="pincode"  id="pincode">
+                                        <input type="text"  class="form-control input1" name="venue_pincode"  id="venue_pincode">
                                     </div>
                                 </div>
 
                             </div><br>
                             <div class="row">
                                 <div class="form-group">
-                                    <label for="mobile" class="col-sm-3 control-label ">mobile&nbsp;<span style="color:red">*</span></label>
+                                    <label for="venue_contact_no" class="col-sm-3 control-label ">mobile&nbsp;<span style="color:red">*</span></label>
                                     <div class="col-sm-8">
-                                        <input type="tel"  class="form-control input1" name="mobile"  id="mobile">
+                                        <input type="tel"  class="form-control input1" name="venue_contact_no"  id="venue_contact_no">
                                     </div>
                                 </div>
 
@@ -345,7 +237,7 @@
                                 <div class="form-group">
                                     <label for="comments" class="col-sm-3 control-label ">Comments&nbsp;</label>
                                     <div class="col-sm-8">
-                                        <textarea   class="form-control " name="comments"  id="comments"></textarea>
+                                        <textarea   class="form-control input1" name="comments"  id="comments"></textarea>
                                     </div>
                                 </div>
 

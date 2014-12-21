@@ -1,7 +1,6 @@
 <?php
 
 class Institute extends \Eloquent {
-	protected $table = 'Institutes';
 	protected $primaryKey = 'institute_id';
 
 	protected $fillable = [

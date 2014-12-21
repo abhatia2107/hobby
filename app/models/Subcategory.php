@@ -1,7 +1,6 @@
 <?php
 
 class Subcategory extends \Eloquent {
-	protected $table = 'Subcategories';
 	protected $primaryKey = 'subcategory_id';
 
 	protected $fillable = [

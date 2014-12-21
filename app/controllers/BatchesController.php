@@ -35,7 +35,7 @@ class BatchesController extends \BaseController {
 	public function store()
 	{
 		$credentianls=Input::all();
-		$validator = Validator::make($credentianls, Batch::$rules);
+//		$validator = Validator::make($credentianls, Batch::$rules);
 
 		/** to check wether event date is valid or not **/
 		$dateToday=Carbon::now();
@@ -52,13 +52,14 @@ class BatchesController extends \BaseController {
 			return Redirect::back()->withInput()->with('failed',Lang::get('batch.batch_startEndDateError'));		
 		}
 
-		if($validator->fails())
+/*		if($validator->fails())
 		{
+			dd("error");
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-
+*/
 		$batch=Batch::create($credentianls);
-		return Redirect::to('/Batches/')->with('success',Lang::get('batch.batch_created'));
+		return Redirect::to('/batches/')->with('success',Lang::get('batch.batch_created'));
 
 		
 	}

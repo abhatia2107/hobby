@@ -7,7 +7,7 @@ class BatchesTableSeeder extends Seeder {
               $faker = Faker\Factory::create();
               foreach(range(1,20) as $index)
               {            
-                     DB::table('Batches')->insert(array(
+                     DB::table('batches')->insert(array(
                      'batch' => $faker->Name,
                      'batch_category_id'=>$faker->randomDigitNotNull,
                      'batch_subcategory_id'=>$faker->randomNumber(1,20),

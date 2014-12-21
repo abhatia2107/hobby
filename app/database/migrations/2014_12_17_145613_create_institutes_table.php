@@ -12,7 +12,7 @@ class CreateInstitutesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Institutes', function($table){
+		Schema::create('institutes', function($table){
 			$table->increments('institute_id');
 			$table->string('institute',50);
 			$table->string('institute_location',50)->foreign('institute_location')->references('location_id')->on('Locations');
@@ -34,7 +34,7 @@ class CreateInstitutesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Institutes');
+		Schema::drop('institutes');
 	}
 
 }

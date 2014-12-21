@@ -12,7 +12,7 @@ class CreateKeywordsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Keywords', function($table){
+		Schema::create('keywords', function($table){
 			$table->increments("keyword_id");
 			$table->string("keyword",255);
 			$table->timestamps();
@@ -26,6 +26,6 @@ class CreateKeywordsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Keywords');
+		Schema::drop('keywords');
 	}
 }

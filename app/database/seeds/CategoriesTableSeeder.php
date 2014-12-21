@@ -1,37 +1,37 @@
 <?php
  
-class CategoriesTableSeeder extends Seeder {
+class categoriesTableSeeder extends Seeder {
 
        public function run()
        {
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Art & Craft',
               ));
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Cooking',
               ));
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Dance',
               ));
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Education',
               ));
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Fitness',
               ));
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Media',
               ));
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Music',
               ));
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Professional',
               ));
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Sports',
               ));
-              DB::table('Categories')->insert(array(
+              DB::table('categories')->insert(array(
               'category' =>'Technology',
               ));
        }

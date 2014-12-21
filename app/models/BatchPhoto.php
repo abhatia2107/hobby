@@ -1,7 +1,6 @@
 <?php
 
 class BatchPhoto extends \Eloquent {
-	protected $table = 'Batch_Photo';
 	protected $primaryKey = 'batch_photo_id';
 
 	protected $fillable = [

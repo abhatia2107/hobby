@@ -7,7 +7,7 @@ class BatchKeywordSeeder extends Seeder {
               $faker = Faker\Factory::create();
               foreach(range(1,20) as $index)
               { 
-                     DB::table('Batch_Keyword')->insert(array(
+                     DB::table('batch_keyword')->insert(array(
                      'batch_id'=>$faker->randomNumber(1,20),
                      'keyword_id'=>$faker->randomNumber(1,20),
                      ));

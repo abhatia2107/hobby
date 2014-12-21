@@ -1,7 +1,6 @@
 <?php
 
 class Comment extends \Eloquent {
-	protected $table = 'Comments';
 	protected $primaryKey = 'comment_id';
 
 	protected $fillable = [

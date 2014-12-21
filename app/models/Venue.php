@@ -1,8 +1,7 @@
 <?php
 
 class Venue extends \Eloquent {
-	protected $table = 'Users';
-	protected $primaryKey = 'user_id';
+	protected $primaryKey = 'venue_id';
 
 	protected $fillable = [
 		'venue',

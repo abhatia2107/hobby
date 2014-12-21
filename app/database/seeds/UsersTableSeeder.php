@@ -8,7 +8,7 @@ class UsersTableSeeder extends Seeder {
               $faker->addProvider(new Faker\Provider\en_US\Person($faker));
               foreach(range(1,40) as $index)
               {
-                     DB::table('Users')->insert(array(
+                     DB::table('users')->insert(array(
                      'user_first_name' => $faker->firstName,
                      'user_last_name' =>$faker->lastName,
                      'user_email' =>$faker->email,

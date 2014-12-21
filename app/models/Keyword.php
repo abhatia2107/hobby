@@ -1,7 +1,6 @@
 <?php
 
 class Keyword extends \Eloquent {
-	protected $table = 'Keywords';
 	protected $primaryKey = 'keyword_id';
 
 	protected $fillable = [

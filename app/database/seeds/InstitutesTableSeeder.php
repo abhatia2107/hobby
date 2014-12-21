@@ -10,7 +10,7 @@ class InstitutesTableSeeder extends Seeder {
               $faker->addProvider(new Faker\Provider\en_US\Company($faker));
               foreach(range(1,10) as $index)
               { 
-                     DB::table('Institutes')->insert(array(
+                     DB::table('institutes')->insert(array(
                      'institute' =>$faker->company,
                      'institute_location'=>$faker->randomDigitNotNull,
                      'institute_url' =>$faker->company,

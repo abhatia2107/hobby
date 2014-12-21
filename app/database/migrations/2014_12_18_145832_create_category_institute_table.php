@@ -12,7 +12,7 @@ class CreateCategoryInstituteTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Category_Institute', function(Blueprint $table)
+		Schema::create('category_institute', function(Blueprint $table)
 		{
 			$table->increments('category_institute_id');
 			$table->integer('category_id')->foreign('category_id')->references('category_id')->on('Categories');
@@ -29,7 +29,7 @@ class CreateCategoryInstituteTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Category_Institute');
+		Schema::drop('category_institute');
 	}
 
 }

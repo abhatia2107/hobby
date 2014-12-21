@@ -1,7 +1,6 @@
 <?php
 
 class Subscription extends \Eloquent {
-	protected $table = 'Subscriptions';
 	protected $primaryKey = 'subscription_id';
 
 	protected $fillable = [

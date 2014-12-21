@@ -33,11 +33,12 @@ class VenuesController extends \BaseController {
 	public function store()
 	{
 		$credentianls=Input::all();
-		$validator = Validator::make($credentianls, Venue::$rules);
+		/*$validator = Validator::make($credentianls, Venue::$rules);
 		if($validator->fails())
 		{
+			dd("errors");
 			return Redirect::back()->withInput()->withErrors($validator);
-		}
+		}*/
 		$venue=Venue::create($credentianls);
 	}
 
@@ -50,7 +51,7 @@ class VenuesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		return View::make('Venues.show');
 	}
 
 	/**

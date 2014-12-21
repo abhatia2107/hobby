@@ -12,7 +12,7 @@ class CreateSubscriptionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Subscriptions', function(Blueprint $table)
+		Schema::create('subscriptions', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('user_id')->foreign('user_id')->references('user_id')->on('Users');
@@ -28,7 +28,7 @@ class CreateSubscriptionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Subscriptions');
+		Schema::drop('subscriptions');
 	}
 
 }

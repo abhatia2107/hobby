@@ -12,7 +12,7 @@ class CreateCommentsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Comments', function($table){
+		Schema::create('comments', function($table){
 		$table->integer('user_id')->foreign('user_id')->references('user_id')->on('Users');
 		$table->integer('institute_id')->foreign('institute_id')->references('institute_id')->on('Institutes');
 		$table->longText('comment')->nullable();
@@ -28,7 +28,7 @@ class CreateCommentsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Comments');
+		Schema::drop('comments');
 	}
 
 }

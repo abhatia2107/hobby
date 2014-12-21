@@ -12,7 +12,7 @@ class CreateLocationsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Locations', function($table){
+		Schema::create('locations', function($table){
 			$table->increments("location_id");
 			$table->string("location",255);
 			$table->timestamps();
@@ -26,7 +26,7 @@ class CreateLocationsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Locations');
+		Schema::drop('locations');
 	}
 
 }

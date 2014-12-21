@@ -12,7 +12,7 @@ class CreateBatchesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Batches', function($table){
+		Schema::create('batches', function($table){
 			$table->increments('batch_id');
 			$table->string('batch',50);
 			$table->integer('batch_category_id')->foreign('batch_category_id')->references('category_id')->on('Categories');
@@ -52,7 +52,7 @@ class CreateBatchesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Batches');
+		Schema::drop('batches');
 	}
 
 }

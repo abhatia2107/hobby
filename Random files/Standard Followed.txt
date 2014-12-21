@@ -1,0 +1,5 @@
+Migrations are saved as timestamp_create_{table name in small and plural}_table
+Migrations of pivot table are saved as timestamp_create_{both table name in small and singular separated with underscore}_table
+Seeds are named as {Table Name with first letter capital} followed by TableSeeder.
+For seeds of pivot table, they are named as name of both table followed by Seeder.
+Name of model is given as singular and first letter capital.

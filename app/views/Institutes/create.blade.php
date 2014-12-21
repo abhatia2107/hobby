@@ -202,12 +202,12 @@
 </div>
 </div><br><br><br>
     <div class="container-fluid">
-        <form role="form" style="margin-left: auto;margin-right: auto;width: 650px;" id="personalInfo">
+        <form role="form" style="margin-left: auto;margin-right: auto;width: 650px;" id="personalInfo"  action="/institutes/store" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="c1 form-group">
                         <label for="username">First Name/Organisation Name &nbsp;&nbsp;<span style="color:red;font-size: 15px;">*</span></label>
-                        <input type="text" class="form-control" name="username" id="username">
+                        <input type="text" class="form-control" name="institute" id="username">
                     </div>
                 </div>
                 <div class="col-sm-6">

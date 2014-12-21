@@ -12,7 +12,7 @@ class CreateVenuesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('Venues',function($table){
+		Schema::create('venues',function($table){
 		$table->increments('venue_id');
 		$table->string('venue',50);
 		$table->integer('venue_location')->foreign('venue_location')->references('location_id')->on('Locations');
@@ -36,7 +36,7 @@ class CreateVenuesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('Venues');
+		Schema::drop('venues');
 	}
 
 }

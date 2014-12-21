@@ -8,7 +8,7 @@ class LocationsTableSeeder extends Seeder {
               $faker->addProvider(new Faker\Provider\en_GB\Address($faker));
               foreach(range(1,10) as $index)
               {
-                     DB::table('Locations')->insert(array(
+                     DB::table('locations')->insert(array(
                      'location' =>$faker->unique()->city,
                      ));
               }

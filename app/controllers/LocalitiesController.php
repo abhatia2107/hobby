@@ -1,10 +1,10 @@
 <?php
 
-class InstitutesController extends \BaseController {
+class LocalitiesController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /institutes
+	 * GET /localities
 	 *
 	 * @return Response
 	 */
@@ -15,37 +15,29 @@ class InstitutesController extends \BaseController {
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /institutes/create
+	 * GET /localities/create
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		return View::make('Institutes.create');
+		//
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /institutes
+	 * POST /localities
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		$credentials=Input::all();
-		// dd($credentials);
-		$credentials['institute_user_id']=1;
-		$validator = Validator::make($credentials, Venue::$rules);
-		if($validator->fails())
-		{
-			return Redirect::back()->withInput()->withErrors($validator);
-		}
-		$venue=Venue::create($credentials);
+		//
 	}
 
 	/**
 	 * Display the specified resource.
-	 * GET /institutes/{id}
+	 * GET /localities/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -57,7 +49,7 @@ class InstitutesController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /institutes/{id}/edit
+	 * GET /localities/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -69,7 +61,7 @@ class InstitutesController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /institutes/{id}
+	 * PUT /localities/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -81,7 +73,7 @@ class InstitutesController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /institutes/{id}
+	 * DELETE /localities/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

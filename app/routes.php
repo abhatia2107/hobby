@@ -21,7 +21,8 @@ Route::resource('batches', 'BatchesController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('comments', 'CommentsController');
 Route::resource('institutes', 'InstitutesController');
-Route::resource('Subscriptions', 'SubscriptionsController');
+Route::resource('subscriptions', 'SubscriptionsController');
+Route::resource('localities', 'LocalitiesController');
 Route::resource('users', 'UsersController');
 Route::resource('venues', 'VenuesController');
 

@@ -1,0 +1,1 @@
+/home/abhishek/Hobby/app/views/Localities/index.blade.php

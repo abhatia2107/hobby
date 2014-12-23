@@ -36,7 +36,153 @@ p{
       <link href="css/sb-admin.css" rel="stylesheet">
       <link href="css/plugins/morris.css" rel="stylesheet">
       <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<style>
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  float: right;
+ 
+     
+}
 
+nav li {
+  float: left;          
+}
+
+nav #login {
+  border-right: 1px solid #ddd;
+  box-shadow: 1px 0 0 #fff;  
+}
+
+nav #login-trigger,
+nav #signup a {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  height: 25px;
+  line-height: 25px;
+  font-weight: bold;
+  padding: 0 8px;
+  text-decoration: none;
+  color: #444;
+  text-shadow: 0 1px 0 #fff; 
+}
+
+nav #signup a {
+  border-radius: 0 3px 3px 0;
+}
+
+nav #login-trigger {
+  border-radius: 3px 0 0 3px;
+}
+
+nav #login-trigger:hover,
+nav #login .active,
+nav #signup a:hover {
+  background: #fff;
+}
+
+nav #login-content {
+  display: none;
+  position: absolute;
+  top: 24px;
+  right: 0;
+  z-index: 999;    
+  background: #fff;
+  background-image: linear-gradient(top, #fff, #eee);  
+  padding: 15px;
+  box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
+  border-radius: 3px 0 3px 3px;
+}
+
+nav li #login-content {
+  right: 0;
+  width: 250px;  
+}
+
+/*--------------------*/
+
+#inputs input {
+  background: #f1f1f1;
+  padding: 6px 5px;
+  margin: 0 0 5px 0;
+  width: 238px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px #ccc inset;
+}
+
+#inputs input:focus {
+  background-color: #fff;
+  border-color: #e8c291;
+  outline: none;
+  box-shadow: 0 0 0 1px #e8c291 inset;
+}
+
+/*--------------------*/
+
+#login #actions {
+  margin: 10px 0 0 0;
+}
+
+#login #submit {    
+  background-color: #d14545;
+  background-image: linear-gradient(top, #e97171, #d14545);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  text-shadow: 0 1px 0 rgba(0,0,0,.5);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;    
+  border: 1px solid #7e1515;
+  float: left;
+  height: 30px;
+  padding: 0;
+  width: 100px;
+  cursor: pointer;
+  font: bold 14px Arial, Helvetica;
+  color: #fff;
+}
+
+#login #submit:hover,
+#login #submit:focus {    
+  background-color: #e97171;
+  background-image: linear-gradient(top, #d14545, #e97171);
+} 
+
+#login #submit:active {   
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;   
+}
+
+#login #submit::-moz-focus-inner {
+  border: none;
+}
+
+#login label {
+  float: right;
+  line-height: 30px;
+}
+
+#login label input {
+  position: relative;
+  top: 2px;
+  right: 2px;
+}
+
+</style>
+<script>
+$(document).ready(function(){
+  $('#login-trigger').click(function(){
+    $(this).next('#login-content').slideToggle();
+    $(this).toggleClass('active');          
+    
+    if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+      else $(this).find('span').html('&#x25BC;')
+    })
+});
+</script>
    </head>
    <body>
       <div id="wrapper">
@@ -50,10 +196,63 @@ p{
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Admin Portal</a>
+            <a class="navbar-brand" href="Dashboard.html">Admin Portal</a>
          </div>
          <!-- Top Menu Items -->
          <ul class="nav navbar-right top-nav">
+<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>Arya Mihir Singh</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Approval Request</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>Pavan Patel</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> 20th December 2014 at 2:00 AM</p>
+                                        <p>Error in logging in</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>Bhavesh Goel</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> 11th December 2014 at 6:00 PM</p>
+                                        <p>Thank you for adding.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-footer">
+                            <a href="#">Read All New Messages</a>
+                        </li>
+                    </ul>
+                </li>
             <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Options <b class="caret"></b></a>
                <ul class="dropdown-menu">
@@ -70,24 +269,18 @@ p{
                   <a href="Dashboard.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                </li>
                <li class="active">
-                  <a href="Dashboard.html"><i class="fa fa-fw fa-dashboard"></i> Approval</a>
+                  <a href="Approval.html"><i class="fa fa-fw fa-dashboard"></i> Approval</a>
                </li>
                <li class="active">
-                  <a href="Dashboard.html"><i class="fa fa-fw fa-dashboard"></i> Institutes</a>
+                  <a href="Institutes.html"><i class="fa fa-fw fa-dashboard"></i> Institutes</a>
                </li>
                <li class="active">
                   <a href="Main-Admin.html"><i class="fa fa-fw fa-dashboard"></i> Main Admin</a>
                </li>
-               <li>
-                  <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Categories <i class="fa fa-fw fa-caret-down"></i></a>
-                  <ul id="demo" class="collapse">
-                     <li>
-                        <a href="#">Sub Category 1</a>
-                     </li>
-                     <li>
-                        <a href="#">Sub Category 2</a>
-                     </li>
-                  </ul>
+               <li class="active">
+                  <a href="Categories.html"><i class="fa fa-fw fa-dashboard"></i> Categories</a>
+               </li><li class="active">
+                  <a href="Sub-Categories.html"><i class="fa fa-fw fa-dashboard"></i> Sub-Categories</a>
                </li>
             </ul>
          </div>
@@ -98,13 +291,13 @@ p{
       <!-- Page Heading -->
       <div class="row">
          <div class="col-lg-12">
-            <h1 class="page-header">Main Admin
+            <h1 class="page-header">Categories
                <small></small>
             </h1>
          </div>
       </div>
       <!-- /.row -->
-                <div class="row">
+                                <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -140,7 +333,7 @@ p{
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="Batch-registrations.html">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -162,7 +355,7 @@ p{
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="Institute-Registrations.html">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -193,57 +386,44 @@ p{
                             </a>
                         </div>
                     </div>
-
-      <div class="btn-group">
-         <button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle">Add an Admin <span class="caret"></span></button>
-         <ul class="dropdown-menu">
-            <div class="bs-example">
-               <form class="form-horizontal">
-                  <div class="form-group has-success has-feedback">
-                     <label class="col-xs-2 control-label" for="inputSuccess">Username</label>
-                     <div class="col-xs-10">
-                        <input type="text" id="inputSuccess" class="form-control" placeholder="Input with success">
-                        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-                        <span class="help-block">Username is available</span>
-                     </div>
-                  </div>
-                  <div class="form-group has-warning has-feedback">
-                     <label class="col-xs-2 control-label" for="inputWarning">Password</label>
-                     <div class="col-xs-10">
-                        <input type="password" id="inputWarning" class="form-control" placeholder="Input with warning">
-                        <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-                        <span class="help-block">Password strength: Weak</span>
-                     </div>
-                  </div>
-                  <div class="form-group has-error has-feedback">
-                     <label class="col-xs-2 control-label" for="inputError">Email</label>
-                     <div class="col-xs-10">
-                        <input type="email" id="inputError" class="form-control" placeholder="Input with error">
-                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                        <span class="help-block">Please enter a valid email address</span>
-                     </div>
-                  </div>
-               </form>
-               <button type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span> Add an Admin</button>
-            </div>
-         </ul>
-      </div>
+                    </div>
+<nav>
+  <ul>
+    <li id="login">
+      <a id="login-trigger" href="#">
+        Add a Category <span>▼</span>
+      </a>
+      <div id="login-content">
+        <form>
+          <fieldset id="inputs">
+		<input id="username" type="password" name="User Name" placeholder="Category Name" required>  
+          </fieldset>
+          <fieldset id="actions">
+            
+		<input type="submit" id="submit" value="Submit">
+<input type="button" id="submit" value="Cancel">
+          </fieldset>
+        </form>
+      </div>                     
+    </li>
+  </ul>
+</nav>
 
 
-         <table class="table">
+        <table class="table">
             <thead>
                <tr>
-                  <th>S.No.</th>
-                  <th>Name (Job Title)</th>
-                  <th>User ID</th>
+                  <th>Category ID</th>
+                  <th>Category Name</th>
+                  <th>Number of Sub Categories</th>
                   <th></th>
                </tr>
             </thead>
             <tbody>
                <tr>
                   <td>1</td>
-                  <td>John</td>
-                  <td>3</td>
+                  <td>Dancing</td>
+                  <td>9</td>
                   <td>
                      <div class="bs-example">
                         <div class="btn-group">
@@ -262,8 +442,8 @@ p{
                </tr>
                <tr>
                   <td>2</td>
-                  <td>Peter</td>
-                  <td>34</td>
+                  <td>Singing</td>
+                  <td>10</td>
                   <td>
                      <div class="bs-example">
                         <div class="btn-group">
@@ -282,8 +462,8 @@ p{
                </tr>
                <tr>
                   <td>3</td>
-                  <td>Rachel</td>
-                  <td>8</td>
+                  <td>Photography</td>
+                  <td>2</td>
                   <td>
                      <div class="bs-example">
                         <div class="btn-group">
@@ -303,7 +483,6 @@ p{
             </tbody>
          </table>
       </div>
-
       <!-- jQuery -->
       <script src="js/jquery.js"></script>
       <!-- Bootstrap Core JavaScript -->

@@ -12,7 +12,7 @@ class InstitutesTableSeeder extends Seeder {
               { 
                      DB::table('institutes')->insert(array(
                      'institute' =>$faker->company,
-                     'institute_location'=>$faker->randomDigitNotNull,
+                     'institute_location_id'=>$faker->randomDigitNotNull,
                      'institute_url' =>$faker->company,
                      'institute_user_id'=>$faker->unique()->randomNumber(1,20),
                      'institute_website' =>$faker->url,

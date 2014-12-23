@@ -2,6 +2,11 @@
 
 class InstitutesController extends \BaseController {
 
+	private $location;
+	public function __construct(Location $locationObject)
+	{
+		$this->location = $locationObject;
+	}
 	/**
 	 * Display a listing of the resource.
 	 * GET /institutes
@@ -10,7 +15,9 @@ class InstitutesController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$institutes=Institute::all();
+	
+		return View::make('Institutes.index',compact('institutes'));
 	}
 
 	/**
@@ -21,7 +28,9 @@ class InstitutesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Institutes.create');
+		//To give all locations to the user.
+		$all_location=$this->location->all();
+		return View::make('Institutes.create',compact('all_location'));
 	}
 
 	/**
@@ -33,14 +42,16 @@ class InstitutesController extends \BaseController {
 	public function store()
 	{
 		$credentials=Input::all();
-		// dd($credentials);
 		$credentials['institute_user_id']=1;
-		$validator = Validator::make($credentials, Venue::$rules);
+		$credentials['institute_url']=$credentials['institute'].$credentials['institute_user_id'];
+		$validator = Validator::make($credentials, Institute::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$venue=Venue::create($credentials);
+		$venue=Institute::create($credentials);
+		return Redirect::to('/institutes')->with('success',Lang::get('institute.institute_created'));
+
 	}
 
 	/**
@@ -64,7 +75,14 @@ class InstitutesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		//TO DO: Authenticate that user has permission to edit this institute
+		$institute_id=$id;
+		$instituteDetails=Institute::find($institute_id);
+		$location_id=$instituteDetails['institute_location_id'];
+		$all_location=$this->location->all();
+		$institute_location=$all_location->find($location_id);
+		$instituteDetails['institute_location']=$institute_location['location'];
+		return View::make('Institutes.create',compact('instituteDetails','all_location'));
 	}
 
 	/**

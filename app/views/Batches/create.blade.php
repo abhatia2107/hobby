@@ -8,6 +8,15 @@
 </head>
 <body class="blurBg-false" style="background-color:#ffffff">
 
+  @if($errors->has())
+    <div class="alert alert-block alert-danger fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="fa fa-times-circle fa-fw fa-lg"></i>Oh snap! You got an error!</h4>
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}<br></p>
+        @endforeach
+    </div>
+  @endif
 
 
 <!-- Start Formoid form-->

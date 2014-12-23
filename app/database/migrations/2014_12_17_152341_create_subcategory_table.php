@@ -14,7 +14,7 @@ class CreateSubcategoryTable extends Migration {
 	{
 		Schema::create('subcategories', function($table){
 			$table->increments("subcategory_id");
-			$table->integer('category_id')->foreign('category_id')->references('category_id')->on('Categories');
+			$table->integer('subcategory_category_id')->foreign('subcategory_category_id')->references('category_id')->on('Categories');
 			$table->string("subcategory",255);
 			$table->timestamps();
 		});

@@ -5,7 +5,8 @@ class Institute extends \Eloquent {
 
 	protected $fillable = [
 		'institute',
-        'institute_location',
+        'institute_user_id',
+        'institute_location_id',
         'institute_url',
         'institute_website',
         'institute_fblink',
@@ -16,11 +17,10 @@ class Institute extends \Eloquent {
 
 	public static $rules = [		
 		'institute'=>'required',
-        'institute_location'=>'required|numeric',
+        'institute_user_id'=>'required|numeric',
+        'institute_location_id'=>'required|numeric',
         'institute_url'=>'required|alpha_num',
-        'institute_website'=>'alpha_num'
-        'institute_fblink'=>'alpha_num'
-        'institute_twitter'=>'alpha_num'
+        'institute_website'=>'active_url',
         'institute_description'=>'required',
         'institute_approved'=>'boolean',
     ];                         

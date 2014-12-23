@@ -23,6 +23,7 @@ class BatchesController extends \BaseController {
 	 */
 	public function create()
 	{
+		/*dd(public_path());*/
 		return View::make('Batches.create');
 	}
 
@@ -57,10 +58,11 @@ class BatchesController extends \BaseController {
 			dd("error");
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-*/
+
 		$batch=Batch::create($credentianls);
 		return Redirect::to('/batches/')->with('success',Lang::get('batch.batch_created'));
-
+*/		
+		dd($credentianls);
 		
 	}
 

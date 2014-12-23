@@ -28,7 +28,7 @@ class CreateBatchesTable extends Migration {
 			$table->integer('batch_age_group');
 			$table->integer('batch_gender_group');
 			$table->integer('batch_price');
-			$table->boolean('batch_recurring');
+			$table->integer('batch_recurring');
 			$table->boolean('batch_approved');
 			$table->integer('batch_no_of_classes_in_week');
 			$table->boolean('batch_class_on_monday');

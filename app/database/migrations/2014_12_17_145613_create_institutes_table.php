@@ -15,7 +15,7 @@ class CreateInstitutesTable extends Migration {
 		Schema::create('institutes', function($table){
 			$table->increments('institute_id');
 			$table->string('institute',50);
-			$table->string('institute_location',50)->foreign('institute_location')->references('location_id')->on('Locations');
+			$table->integer('institute_location')->foreign('institute_location')->references('location_id')->on('Locations');
 			$table->string('institute_url',255);
 			$table->string('institute_website',255)->nullable();
 			$table->string('institute_fblink',255)->nullable();

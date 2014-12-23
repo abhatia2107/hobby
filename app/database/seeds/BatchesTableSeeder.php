@@ -22,7 +22,7 @@ class BatchesTableSeeder extends Seeder {
                      'batch_age_group' =>$faker->randomNumber(0,2),
                      'batch_gender_group' =>$faker->randomNumber(0,2),
                      'batch_price' =>$faker->randomNumber(1000,5000),
-                     'batch_recurring' =>$faker->boolean(),
+                     'batch_recurring' =>$faker->randomNumber(0,3),
                      'batch_approved' =>$faker->boolean(),
                      'batch_no_of_classes_in_week' =>$faker->randomNumber(1,7),
                      'batch_class_on_monday'=>$faker->boolean(),

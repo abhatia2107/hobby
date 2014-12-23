@@ -456,7 +456,7 @@
                 <p style="font-size: 20px;
                     font-weight: 600;">Create your Class
                 </p>
-                <div class="col-lg-12" style="background: url('../../../public/assets/images/classdesc.PNG');height:41px ">
+                <div class="col-lg-12" style="background: url('/assets/images/classdesc.PNG');height:41px ">
                 </div>
 
             </div><br>
@@ -533,7 +533,7 @@
                 </div>
             </div><br><br><br>
             <div class="row">
-                <div class="col-lg-12" style="background: url('../../../public/assets/images/targetaud.PNG');height:41px ">
+                <div class="col-lg-12" style="background: url('/assets/images/targetaud.PNG');height:41px ">
                 </div>
             </div><br><br>
             <div class="row">
@@ -590,7 +590,7 @@
             <br><br><br>
             <div class="row">
 
-                <div class="col-lg-12" style="background: url('../../../public/assets/images/schedule.PNG');height:41px ">
+                <div class="col-lg-12" style="background: url('/assets/images/schedule.PNG');height:41px ">
                 </div>
             </div><br><br>
             <div class="row">

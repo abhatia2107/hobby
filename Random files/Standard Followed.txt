@@ -1,5 +1,19 @@
+Name of table is in small and plural.
 Migrations are saved as timestamp_create_{table name in small and plural}_table
 Migrations of pivot table are saved as timestamp_create_{both table name in small and singular separated with underscore}_table
 Seeds are named as {Table Name with first letter capital} followed by TableSeeder.
 For seeds of pivot table, they are named as name of both table followed by Seeder.
 Name of model is given as singular and first letter capital.
+Name of controller as plural Model name, followed by controller.
+Name of lang file as small and singular.
+Views in folders with 4 standard views for all major tables. create, edit, index, show.
+Random Views also present.
+Routes for one table together.
+Routes as name of table(small, plural) followed by the purpose. 
+Only table name represents list of all the entries.
+Create represent the create form to be shown.
+Store represents the post request for data be stored.
+get /{id} represents show full detail for a particular entry.
+edit/{id} is edit form for that entry. 
+put /{id} represents store the data and redirect it to the show page with get/{id}
+delete/{id} it deletes the entry and redirects to the list page.

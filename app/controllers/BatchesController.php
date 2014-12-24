@@ -12,7 +12,8 @@ class BatchesController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('Batches.show');
+		$batches=Batch::all();
+		return View::make('Batchs.index',compact('batches'));
 	}
 
 	/**
@@ -75,7 +76,8 @@ class BatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$batchDetails=Batch::find($id);
+		return View::make('Batchs.show',compact('batchDetails'));
 	}
 
 	/**
@@ -87,7 +89,8 @@ class BatchesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return View::make('Batches.create');
+		$batchDetails=Batch::find($id);
+		return View::make('Batchs.create',compact('batchDetails'));
 	}
 
 	/**
@@ -99,7 +102,18 @@ class BatchesController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$credentials=Input::all();
+	
+		$validator = Validator::make($credentials, Batch::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+		$updated=$this->batch->updateBatch($credentials,$id);
+		if ($updated) 
+			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_updated'));
+		else
+			return Redirect::to('/batches')->with('failure',Lang::get('batch.batch_already_failed'));
 	}
 
 	/**
@@ -111,7 +125,11 @@ class BatchesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$deleted=Batch::destroy($id);
+		if($deleted)
+			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_deleted'));
+		else
+			return Redirect::to('/batches')->with('failure',Lang::get('batch.batch_delete_failed'));
 	}
 
 }

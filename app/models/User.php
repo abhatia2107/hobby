@@ -14,8 +14,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'users';
-
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
@@ -23,9 +21,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
-	protected $primaryKey = 'user_id';
-
-	protected $fillable = [
+/*	protected $fillable = [
 		'user_first_name',
 	    'user_last_name',
 	    'user_email',
@@ -40,19 +36,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	    'user_confirmation_code',
 	    'user_confirmed',
 	];
-
+*/
+	protected $guarded = [
+		'id',
+		'user_confirmed',
+		'created_at',
+		'updated_at',
+	];
 	public static $rules = [
 		'user_first_name'=>'required',
 	    'user_last_name'=>'required',
 	   	'user_email'=>'required|unique:users,user_email',
-		'user_contact_no'=>'required|size:10',
+		'user_contact_no'=>'required|numeric|size:10',
 		'user_password'=>'required|confirmed|alpha_num|min:6',
 	    'user_location'=>'required',
-	    'user_birthdate'=>'date'
-	    'user_gender'=>'boolean'
-	    'user_confirmed'=>'boolean'                   
+	    'user_birthdate'=>'date',
+	    'user_gender'=>'boolean',
+	    'user_confirmed'=>'boolean',                   
 	];
 
+	public function updateUser($credentials,$id)
+    {
+        $updated=DB::table('users')->where('id','=',$id)->update($credentials);
+        return ($updated);
+    } 
 
 
 }

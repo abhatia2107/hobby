@@ -21,6 +21,8 @@ Route::resource('batches', 'BatchesController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('comments', 'CommentsController');
 Route::resource('institutes', 'InstitutesController');
+Route::resource('locations', 'LocationsController');
+Route::resource('subcategories', 'SubcategoriesController');
 Route::resource('subscriptions', 'SubscriptionsController');
 Route::resource('localities', 'LocalitiesController');
 Route::resource('users', 'UsersController');
@@ -32,8 +34,8 @@ Route::get('/admins/create','AdminsController@create');
 Route::post('/admins/store','AdminsController@store');
 Route::get('/admins/{id}','AdminsController@show');
 Route::get('/admins/edit/{id}','AdminsController@edit');
-Route::put('/admins/{id}','AdminsController@update');
-Route::delete('/admins/{id}','AdminsController@destroy');
+Route::post('/admins/update/{id}','AdminsController@update');
+Route::get('/admins/delete/{id}','AdminsController@destroy');
 
 //Route for BatchesController
 Route::get('/batches','BatchesController@index');
@@ -41,8 +43,8 @@ Route::get('/batches/create','BatchesController@create');
 Route::post('/batches/store','BatchesController@store');
 Route::get('/batches/{id}','BatchesController@show');
 Route::get('/batches/edit/{id}','BatchesController@edit');
-Route::put('/batches/{id}','BatchesController@update');
-Route::delete('/batches/{id}','BatchesController@destroy');
+Route::post('/batches/update/{id}','BatchesController@update');
+Route::get('/batches/delete/{id}','BatchesController@destroy');
 
 //Route for CategoriesController
 Route::get('/categories','CategoriesController@index');
@@ -50,8 +52,8 @@ Route::get('/categories/create','CategoriesController@create');
 Route::post('/categories/store','CategoriesController@store');
 Route::get('/categories/{id}','CategoriesController@show');
 Route::get('/categories/edit/{id}','CategoriesController@edit');
-Route::put('/categories/{id}','CategoriesController@update');
-Route::delete('/categories/{id}','CategoriesController@destroy');
+Route::post('/categories/update/{id}','CategoriesController@update');
+Route::get('/categories/delete/{id}','CategoriesController@destroy');
 
 //Route for CommentsController
 Route::get('/comments','CommentsController@index');
@@ -59,8 +61,8 @@ Route::get('/comments/create','CommentsController@create');
 Route::post('/comments/store','CommentsController@store');
 Route::get('/comments/{id}','CommentsController@show');
 Route::get('/comments/edit/{id}','CommentsController@edit');
-Route::put('/comments/{id}','CommentsController@update');
-Route::delete('/comments/{id}','CommentsController@destroy');
+Route::post('/comments/update/{id}','CommentsController@update');
+Route::get('/comments/delete/{id}','CommentsController@destroy');
 
 //Route for InstitutesController
 Route::get('/institutes','InstitutesController@index');
@@ -68,12 +70,31 @@ Route::get('/institutes/create','InstitutesController@create');
 Route::post('/institutes/store','InstitutesController@store');
 Route::get('/institutes/{id}','InstitutesController@show');
 Route::get('/institutes/edit/{id}','InstitutesController@edit');
-Route::put('/institutes/{id}','InstitutesController@update');
-Route::delete('/institutes/{id}','InstitutesController@destroy');
+Route::post('/institutes/update/{id}','InstitutesController@update');
+Route::get('/institutes/delete/{id}','InstitutesController@destroy');
+
+//Route for LocationsController
+Route::get('/locations','LocationsController@index');
+Route::get('/locations/create','LocationsController@create');
+Route::post('/locations/store','LocationsController@store');
+Route::get('/locations/{id}','LocationsController@show');
+Route::get('/locations/edit/{id}','LocationsController@edit');
+Route::post('/locations/update/{id}','LocationsController@update');
+Route::get('/locations/delete/{id}','LocationsController@destroy');
+
+//Route for SubcategoriesController
+Route::get('/subcategories','SubcategoriesController@index');
+Route::get('/subcategories/create','SubcategoriesController@create');
+Route::post('/subcategories/store','SubcategoriesController@store');
+Route::get('/subcategories/{id}','SubcategoriesController@show');
+Route::get('/subcategories/edit/{id}','SubcategoriesController@edit');
+Route::post('/subcategories/update/{id}','SubcategoriesController@update');
+Route::get('/subcategories/delete/{id}','SubcategoriesController@destroy');
 
 //Route for SubscriptionsController
+Route::get('/subscriptions','SubscripitonsController@index');
 Route::post('/subscriptions/{id}','SubscripitonsController@store');
-Route::delete('/subscriptions/{id}','SubscripitionsController@destroy');
+Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
 
 //Route for VenuesController
 Route::get('/venues','VenuesController@index');
@@ -81,8 +102,8 @@ Route::get('/venues/create','VenuesController@create');
 Route::post('/venues/store','VenuesController@store');
 Route::get('/venues/{id}','VenuesController@show');
 Route::get('/venues/edit/{id}','VenuesController@edit');
-Route::put('/venues/{id}','VenuesController@update');
-Route::delete('/venues/{id}','VenuesController@destroy');
+Route::post('/venues/update/{id}','VenuesController@update');
+Route::get('/venues/delete/{id}','VenuesController@destroy');
 
 //Route for UsersController
 Route::get('/users','UsersController@index');
@@ -90,8 +111,8 @@ Route::get('/users/create','UsersController@create');
 Route::post('/users/store','UsersController@store');
 Route::get('/users/{id}','UsersController@show');
 Route::get('/users/edit/{id}','UsersController@edit');
-Route::put('/users/{id}','UsersController@update');
-Route::delete('/users/{id}','UsersController@destroy');
+Route::post('/users/update/{id}','UsersController@update');
+Route::get('/users/delete/{id}','UsersController@destroy');
 
 
 Route::get('/aboutus', function()

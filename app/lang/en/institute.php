@@ -14,7 +14,7 @@ return array(
 		
 		"institute_delete_failed" => "Sorry, We are unable to delete the institute",
 		
-		"institute_already_failed"=>"You already have this institute in your list.",
+		"institute_already_failed"=>"You already have same details of institute in your list.",
 
 		"error_institute_photo"=>"Error in uploading your institute photo, Please try again."
 	);

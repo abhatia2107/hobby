@@ -1,7 +1,6 @@
 <?php
 
 class BatchKeyword extends \Eloquent {
-	protected $primaryKey = 'batch_keyword_id';
 
 	protected $fillable = [
 		'batch_id',

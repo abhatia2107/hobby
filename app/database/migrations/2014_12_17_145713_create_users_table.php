@@ -13,13 +13,13 @@ class CreateUsersTable extends Migration {
 	public function up()
 	{
 		Schema::create('users',function($table){
-		$table->increments('user_id');
+		$table->increments('id');
 		$table->string('user_first_name',50);
         $table->string('user_last_name',50)->nullable();
 		$table->string('user_email',50);
 		$table->string('user_contact_no',15);
 		$table->string('user_password',70);	
-		$table->integer('user_location')->foreign('user_location')->references('location_id')->on('Locations');
+		$table->integer('user_location_id')->foreign('user_location_id')->references('id')->on('locations');
 		$table->string('user_fb_id',50)->nullable();
 		$table->date('user_birthdate')->nullable();	
 		$table->string('user_gender',6)->nullable();

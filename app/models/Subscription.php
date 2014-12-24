@@ -1,12 +1,11 @@
 <?php
 
 class Subscription extends \Eloquent {
-	protected $primaryKey = 'subscription_id';
 
 	protected $fillable = [
-		'user_id',
+		'subscription_user_id',
 	];
 	public static $rules = [		
-		'user_id'=>'required|numeric',
+		'subscription_user_id'=>'required|numeric',
 	];
 }

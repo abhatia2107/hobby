@@ -8,9 +8,24 @@ class VenuesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+	
+	private $location;
+	private $institute;
+	private $venue;
+	private $user;
+	public function __construct(Location $locationObject, Locality $localityObject, Institute $instituteObject, User $userObject, Venue $venueObject)
+	{
+		$this->location = $locationObject;
+		$this->locality=$localityObject;
+		$this->institute = $instituteObject;
+		$this->user = $userObject;
+		$this->venue = $venueObject;
+	}
+
 	public function index()
 	{
-		//
+		$venues=Venue::all();
+		return View::make('Venues.index',compact('venues'));
 	}
 
 	/**
@@ -21,7 +36,9 @@ class VenuesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Venues.create');
+		$all_locations=$this->location->all();
+		$all_localities=$this->locality->all();
+		return View::make('Venues.create',compact('all_locations','all_localities'));
 	}
 
 	/**
@@ -32,15 +49,20 @@ class VenuesController extends \BaseController {
 	 */
 	public function store()
 	{
+		//TO DO: Take venue_user_id and venue_institute_id automatically 
 		$credentials=Input::all();
-		// dd($credentials);
 		$credentials['venue_institute_id']=1;
+		$credentials['venue_user_id']=1;
 		$validator = Validator::make($credentials, Venue::$rules);
 		if($validator->fails())
 		{
-			return Redirect::back()->withInput()->withErrors($validator);
+			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('venue.venue_create_failed'));
 		}
-		$venue=Venue::create($credentials);
+		$created=Venue::create($credentials);
+		if($created)
+			return Redirect::to('/venues')->with('success',Lang::get('venue.venue_created'));
+		else
+			return Redirect::back()->withInput()->with('failure',Lang::get('venue.venue_create_failed'));	
 	}
 
 	/**
@@ -52,7 +74,12 @@ class VenuesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return View::make('Venues.show');
+		$venueDetails=Venue::find($id);
+		$location_id=$venueDetails['venue_location_id'];
+		$all_locations=$this->location->all();
+		$venue_location=$all_locations->find($location_id);
+		$venueDetails['venue_location']=$venue_location['location'];
+		return View::make('Venues.show',compact('venueDetails'));
 	}
 
 	/**
@@ -64,7 +91,17 @@ class VenuesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		return View::make('Venues.create');
+		//TO DO: Authenticate that user has permission to edit this venue
+		$venueDetails=Venue::find($id);
+		$location_id=$venueDetails['venue_location_id'];
+		$locality_id=$venueDetails['venue_locality_id'];
+		$all_locations=$this->location->all();
+		$all_localities=$this->locality->all();
+		$venue_location=$all_locations->find($location_id);
+		$venue_locality=$all_localities->find($locality_id);
+		$venueDetails['venue_location']=$venue_location;
+		$venueDetails['venue_locality']=$venue_locality;
+		return View::make('Venues.create',compact('venueDetails','all_locations','all_localities'));
 	}
 
 	/**
@@ -76,7 +113,20 @@ class VenuesController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		//TO DO: Take venue_user_id and venue_institute_id automatically 
+		$credentials=Input::all();
+		$credentials['venue_user_id']=1;
+		$credentials['venue_institute_id']=1;
+		$validator = Validator::make($credentials, Venue::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+		$updated=$this->venue->updateVenue($credentials,$id);
+		if ($updated) 
+			return Redirect::to('/venues')->with('success',Lang::get('venue.venue_updated'));
+		else
+			return Redirect::to('/venues')->with('failure',Lang::get('venue.venue_already_failed'));
 	}
 
 	/**
@@ -88,7 +138,11 @@ class VenuesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$deleted=Venue::destroy($id);
+		if($deleted)
+			return Redirect::to('/venues')->with('success',Lang::get('venue.venue_deleted'));
+		else
+			return Redirect::to('/venues')->with('failure',Lang::get('venue.venue_delete_failed'));
 	}
 
 }

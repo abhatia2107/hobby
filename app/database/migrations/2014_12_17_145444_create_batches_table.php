@@ -13,17 +13,17 @@ class CreateBatchesTable extends Migration {
 	public function up()
 	{
 		Schema::create('batches', function($table){
-			$table->increments('batch_id');
+			$table->increments('id');
 			$table->string('batch',50);
-			$table->integer('batch_category_id')->foreign('batch_category_id')->references('category_id')->on('Categories');
-			$table->integer('batch_subcategory_id')->foreign('batch_subcategory_id')->references('subcategory_id')->on('Subcategories');
+			$table->integer('batch_category_id')->foreign('batch_category_id')->references('id')->on('categories');
+			$table->integer('batch_subcategory_id')->foreign('batch_subcategory_id')->references('id')->on('subcategories');
 			$table->longText('batch_accomplishment')->nullable();
-			$table->integer('batch_institute_id')->foreign('batch_institute_id')->references('institute_id')->on('Institutes');
+			$table->integer('batch_institute_id')->foreign('batch_institute_id')->references('id')->on('institutes');
 			$table->date('batch_start_date');
 			$table->date('batch_end_date');
 			$table->time('batch_start_time');
 			$table->time('batch_end_time');
-			$table->integer('batch_venue_id')->foreign('batch_venue_id')->references('venue_id')->on('Venues');
+			$table->integer('batch_venue_id')->foreign('batch_venue_id')->references('id')->on('venues');
 			$table->integer('batch_difficulty_level');
 			$table->integer('batch_age_group');
 			$table->integer('batch_gender_group');

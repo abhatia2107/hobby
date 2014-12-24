@@ -13,7 +13,7 @@ class CreateLocationsTable extends Migration {
 	public function up()
 	{
 		Schema::create('locations', function($table){
-			$table->increments("location_id");
+			$table->increments("id");
 			$table->string("location",255);
 			$table->timestamps();
 		});

@@ -14,8 +14,8 @@ class CreateLocalitiesTable extends Migration {
 	{
 		Schema::create('localities', function(Blueprint $table)
 		{
-			$table->increments('locality_id');
-			$table->integer('locality_location_id')->foreign('locality_location_id')->references('location_id')->on('Location');
+			$table->increments('id');
+			$table->integer('locality_location_id')->foreign('locality_location_id')->references('id')->on('location');
 			$table->string("locality",255);
 			$table->timestamps();
 		});

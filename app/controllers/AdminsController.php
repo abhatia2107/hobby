@@ -10,7 +10,8 @@ class AdminsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$admins=Admin::all();
+		return View::make('Admins.index',compact('admins'));
 	}
 
 	/**
@@ -21,7 +22,7 @@ class AdminsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('Admins.create');
 	}
 
 	/**
@@ -32,7 +33,17 @@ class AdminsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$credentials=Input::all();
+		$validator = Validator::make($credentials, Admin::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('admin.admin_create_failed'));
+		}
+		$created=Admin::create($credentials);
+		if($created)
+			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_created'));
+		else
+			return Redirect::back()->withInput()->with('failure',Lang::get('admin.admin_create_failed'));	
 	}
 
 	/**
@@ -44,7 +55,8 @@ class AdminsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$adminDetails=Admin::find($id);
+		return View::make('Admins.show',compact('adminDetails'));
 	}
 
 	/**
@@ -56,7 +68,8 @@ class AdminsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$adminDetails=Admin::find($id);
+		return View::make('Admins.create',compact('adminDetails'));
 	}
 
 	/**
@@ -68,7 +81,18 @@ class AdminsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$credentials=Input::all();
+	
+		$validator = Validator::make($credentials, Admin::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+		$updated=$this->admin->updateAdmin($credentials,$id);
+		if ($updated) 
+			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_updated'));
+		else
+			return Redirect::to('/admins')->with('failure',Lang::get('admin.admin_already_failed'));
 	}
 
 	/**
@@ -80,7 +104,11 @@ class AdminsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$deleted=Admin::destroy($id);
+		if($deleted)
+			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_deleted'));
+		else
+			return Redirect::to('/admins')->with('failure',Lang::get('admin.admin_delete_failed'));
 	}
 
 }

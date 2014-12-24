@@ -10,7 +10,8 @@ class CommentsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$comments=Comment::all();
+		return View::make('Comments.index',compact('comments'));
 	}
 
 	/**
@@ -50,7 +51,8 @@ class CommentsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$commentDetails=Comment::find($id);
+		return View::make('Comments.show',compact('commentDetails'));
 	}
 
 	/**
@@ -62,7 +64,8 @@ class CommentsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$commentDetails=Comment::find($id);
+		return View::make('Comments.create',compact('commentDetails'));
 	}
 
 	/**
@@ -74,7 +77,18 @@ class CommentsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$credentials=Input::all();
+	
+		$validator = Validator::make($credentials, Comment::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+		$updated=$this->comment->updateComment($credentials,$id);
+		if ($updated) 
+			return Redirect::to('/comments')->with('success',Lang::get('comment.comment_updated'));
+		else
+			return Redirect::to('/comments')->with('failure',Lang::get('comment.comment_already_failed'));
 	}
 
 	/**
@@ -86,7 +100,11 @@ class CommentsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$deleted=Comment::destroy($id);
+		if($deleted)
+			return Redirect::to('/comments')->with('success',Lang::get('comment.comment_deleted'));
+		else
+			return Redirect::to('/comments')->with('failure',Lang::get('comment.comment_delete_failed'));
 	}
 
 }

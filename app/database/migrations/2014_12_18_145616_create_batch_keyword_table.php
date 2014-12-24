@@ -13,9 +13,9 @@ class CreateBatchKeywordTable extends Migration {
 	public function up()
 	{
 		Schema::create('batch_keyword', function($table){
-			$table->increments("batch_keyword_id");
-			$table->integer('batch_id')->foreign('batch_id')->references('batch_id')->on('Batches');
-			$table->integer('keyword_id')->foreign('keyword_id')->references('keyword_id')->on('Keywords');
+			$table->increments("id");
+			$table->integer('batch_id')->foreign('batch_id')->references('batch_id')->on('batches');
+			$table->integer('keyword_id')->foreign('keyword_id')->references('keyword_id')->on('keywords');
 			$table->timestamps();
 		});
 	}

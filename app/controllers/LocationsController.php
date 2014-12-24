@@ -10,8 +10,8 @@ class CategoriesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$categories=Category::all();
-		return View::make('Categories.index',compact('categories'));
+		$locations=Location::all();
+		return View::make('Locations.index',compact('locations'));
 	}
 
 	/**
@@ -22,7 +22,7 @@ class CategoriesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Categories.create');
+		return View::make('Locations.create');
 	}
 
 	/**
@@ -51,8 +51,8 @@ class CategoriesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$categoryDetails=Category::find($id);
-		return View::make('Categories.show',compact('categoryDetails'));
+		$locationDetails=Location::find($id);
+		return View::make('Locations.show',compact('locationDetails'));
 	}
 
 	/**
@@ -64,8 +64,8 @@ class CategoriesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$categoryDetails=Category::find($id);
-		return View::make('Categories.create',compact('categoryDetails'));
+		$locationDetails=Location::find($id);
+		return View::make('Locations.create',compact('locationDetails'));
 	}
 
 	/**
@@ -79,16 +79,16 @@ class CategoriesController extends \BaseController {
 	{
 		$credentials=Input::all();
 	
-		$validator = Validator::make($credentials, Category::$rules);
+		$validator = Validator::make($credentials, Location::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$updated=$this->category->updateCategory($credentials,$id);
+		$updated=$this->location->updateLocation($credentials,$id);
 		if ($updated) 
-			return Redirect::to('/categories')->with('success',Lang::get('category.category_updated'));
+			return Redirect::to('/locations')->with('success',Lang::get('location.location_updated'));
 		else
-			return Redirect::to('/categories')->with('failure',Lang::get('category.category_already_failed'));
+			return Redirect::to('/locations')->with('failure',Lang::get('location.location_already_failed'));
 	}
 
 	/**
@@ -100,11 +100,11 @@ class CategoriesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$deleted=Category::destroy($id);
+		$deleted=Location::destroy($id);
 		if($deleted)
-			return Redirect::to('/categories')->with('success',Lang::get('category.category_deleted'));
+			return Redirect::to('/locations')->with('success',Lang::get('location.location_deleted'));
 		else
-			return Redirect::to('/categories')->with('failure',Lang::get('category.category_delete_failed'));
+			return Redirect::to('/locations')->with('failure',Lang::get('location.location_delete_failed'));
 	}
 
 }

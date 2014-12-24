@@ -49,7 +49,7 @@
                                 message: 'The venue name must be more than 3 and less than 30 characters long'
                             },
                             regexp: {
-                                regexp: /^[a-zA-Z]+$/,
+                                regexp: /^[a-zA-Z_ ]+$/,
                                 message: 'The venue can only consist of alphabets'
                             }
                         }
@@ -159,6 +159,10 @@
           </div>
         </div>
               <div class="clearfix visible-lg">
+                <div class="">
+                    <h4><i class="fa fa-times-circle fa-fw fa-lg"></i></h4>
+                    {{$venueDetails}}
+                </div>
               </div>
       </div>
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

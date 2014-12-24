@@ -13,11 +13,12 @@ class CreateCommentsTable extends Migration {
 	public function up()
 	{
 		Schema::create('comments', function($table){
-		$table->longText('comment')->nullable();
-		$table->integer('comment_user_id')->foreign('comment_user_id')->references('user_id')->on('Users');
-		$table->integer('comment_institute_id')->foreign('institute_id')->references('institute_id')->on('Institutes');
-		$table->integer('comment_rating');
-		$table->timestamps();
+			$table->increments("id");
+			$table->longText('comment')->nullable();
+			$table->integer('comment_user_id')->foreign('comment_user_id')->references('id')->on('users');
+			$table->integer('comment_institute_id')->foreign('comment_institute_id')->references('id')->on('institutes');
+			$table->integer('comment_rating');
+			$table->timestamps();
 		});
 	}
 

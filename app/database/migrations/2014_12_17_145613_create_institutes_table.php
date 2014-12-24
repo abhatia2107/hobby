@@ -13,10 +13,10 @@ class CreateInstitutesTable extends Migration {
 	public function up()
 	{
 		Schema::create('institutes', function($table){
-			$table->increments('institute_id');
+			$table->increments('id');
 			$table->string('institute',50);
-			$table->integer('institute_user_id')->foreign('institute_user_id')->references('user_id')->on('Users');
-			$table->integer('institute_location_id')->foreign('institute_location_id')->references('location_id')->on('Locations');
+			$table->integer('institute_user_id')->foreign('institute_user_id')->references('id')->on('users');
+			$table->integer('institute_location_id')->foreign('institute_location_id')->references('id')->on('locations');
 			$table->string('institute_url',255);
 			$table->string('institute_website',255)->nullable();
 			$table->string('institute_fblink',255)->nullable();

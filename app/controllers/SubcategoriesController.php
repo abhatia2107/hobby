@@ -1,6 +1,6 @@
 <?php
 
-class LocalitiesController extends \BaseController {
+class SubcategoriesController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -10,8 +10,8 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$localities=Locality::all();
-		return View::make('Localities.index',compact('localities'));
+		$subcategories=Subcategory::all();
+		return View::make('Subcategories.index',compact('subcategories'));
 	}
 
 	/**
@@ -22,7 +22,7 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Localities.create');
+		return View::make('Subcategories.create');
 	}
 
 	/**
@@ -34,12 +34,12 @@ class LocalitiesController extends \BaseController {
 	public function store()
 	{
 		$credentianls=Input::all();
-		$validator = Validator::make($credentianls, Locality::$rules);
+		$validator = Validator::make($credentianls, Subcategory::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$comment=Locality::create($credentianls);
+		$comment=Subcategory::create($credentianls);
 	}
 
 	/**
@@ -51,8 +51,8 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$localityDetails=Locality::find($id);
-		return View::make('Localities.show',compact('localityDetails'));
+		$subcategoryDetails=Subcategory::find($id);
+		return View::make('Subcategories.show',compact('subcategoryDetails'));
 	}
 
 	/**
@@ -64,8 +64,8 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$localityDetails=Locality::find($id);
-		return View::make('Localities.create',compact('localityDetails'));
+		$subcategoryDetails=Subcategory::find($id);
+		return View::make('Subcategories.create',compact('subcategoryDetails'));
 	}
 
 	/**
@@ -79,16 +79,16 @@ class LocalitiesController extends \BaseController {
 	{
 		$credentials=Input::all();
 	
-		$validator = Validator::make($credentials, Locality::$rules);
+		$validator = Validator::make($credentials, Subcategory::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$updated=$this->locality->updateLocality($credentials,$id);
+		$updated=$this->subcategory->updateSubcategory($credentials,$id);
 		if ($updated) 
-			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_updated'));
+			return Redirect::to('/subcategories')->with('success',Lang::get('subcategory.subcategory_updated'));
 		else
-			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_already_failed'));
+			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_already_failed'));
 	}
 
 	/**
@@ -100,11 +100,11 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$deleted=Locality::destroy($id);
+		$deleted=Subcategory::destroy($id);
 		if($deleted)
-			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_deleted'));
+			return Redirect::to('/subcategories')->with('success',Lang::get('subcategory.subcategory_deleted'));
 		else
-			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_delete_failed'));
+			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_delete_failed'));
 	}
 
 }

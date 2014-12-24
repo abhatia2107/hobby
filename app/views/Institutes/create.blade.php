@@ -5,6 +5,8 @@
     <title>Add an institute</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/formoid1/formoid-metro-cyan.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css">
 </head>
 <body class="blurBg-false" style="background-color:#EBEBEB">
   @if($errors->has())
@@ -18,9 +20,13 @@
   @endif
 
 
+<div class="col-md-4">
+    
+</div>
+<div class="col-md-4">
 
 <!-- Start Formoid form-->
-<form enctype="multipart/form-data" class="formoid-metro-cyan form_create" action="/institutes/store" method="@if(isset($instituteDetails)){{'post'}}@else{{put}}@endif">
+<form enctype="multipart/form-data" class="formoid-metro-cyan form_create" action="@if(isset($instituteDetails)){{"/institutes/update/$instituteDetails->institute_id"}}@else{{"/institutes/store"}}@endif" method=post>
     <div class="title">
         <h2><span>
         @if(isset($instituteDetails)) 
@@ -36,7 +42,7 @@
         Name of the institute
         <span class="required">*</span>
         </label>
-        <input class="large" type="text" name="institute" value="@if(isset($instituteDetails)){{$instituteDetails->institute}}@endif" required="required"/>
+        <input class="large" type="text" name="institute" value="@if(isset($instituteDetails)){{$instituteDetails->institute}}@else{{Input::old('institute')}}@endif" required="required"/>
     </div>
     <div class="element-textarea" title="Description of the institute">
     <label class="title">
@@ -44,7 +50,7 @@
     <span class="required">*</span>
     </label>
     <textarea class="medium" name="institute_description" cols="20" rows="5" required="required">
-        @if(isset($instituteDetails)){{$instituteDetails->institute_description}}@endif
+        @if(isset($instituteDetails)){{$instituteDetails->institute_description}}@else{{Input::old('institute_description')}}@endif
     </textarea>
     </div>
     <div class="element-select" title="City">
@@ -55,9 +61,9 @@
         <div class="large">
             <span>
                 <select name="institute_location_id" required="required">
-                    <option value="instituteDetails->institute_location_id" selected>@if(isset($instituteDetails)){{$instituteDetails['institute_location']}}@endif</option>                 
-                    @foreach ($all_location as $data)
-                        <option value="data->location_id">
+                    <!-- <option value="$instituteDetails->institute_location_id"selected>@if(isset($instituteDetails)){{$instituteDetails['institute_location']}}@else{{Input::old('institute_location')}}@endif</option> -->
+                    @foreach ($all_locations as $data)
+                        <option value="{{$data->location_id}}" selected="@if(isset($instituteDetails)){{"selected"}}@else{{"unselected"}}@endif">
                             {{$data->location}}
                         </option>
                     @endforeach
@@ -69,17 +75,20 @@
         <label class="title">
             Website
         </label>
-            <input class="large" type="url" name="institute_website" value="@if(isset($instituteDetails)){{$instituteDetails->institute_website}}@else{{"http://"}}@endif" />
-        </div>
-    <div class="element-input" title="Facebook Page"><label class="title">Facebook Page</label><input class="large" type="text" name="institute_fblink" value="@if(isset($instituteDetails)){{$instituteDetails->institute_fblink}}@endif"/></div>
-    <div class="element-input" title="Twitter Profile"><label class="title">Twitter Profile</label><input class="large" type="text" name="institute_twitter" value="@if(isset($instituteDetails)){{$instituteDetails->institute_twitter}}@endif"/></div>
+        <input class="large" type="url" name="institute_website" value="@if(isset($instituteDetails)){{$instituteDetails->institute_website}}@else{{Input::old('institute_website')}}@endif"/>
+    </div>
+    <div class="element-input" title="Facebook Page"><label class="title">Facebook Page</label><input class="large" type="text" name="institute_fblink" value="@if(isset($instituteDetails)){{$instituteDetails->institute_fblink}}@else{{Input::old('institute_fblink')}}@endif"/></div>
+    <div class="element-input" title="Twitter Profile"><label class="title">Twitter Profile</label><input class="large" type="text" name="institute_twitter" value="@if(isset($instituteDetails)){{$instituteDetails->institute_twitter}}@else{{Input::old('institute_twitter')}}@endif"/></div>
     <div class="submit"><input type="submit" value="Submit"/></div></form>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="/assets/formoid1/formoid-metro-cyan.js"></script>
 
 <!-- Stop Formoid form-->
 
-
+</div>
+<div class="col-md-4">
+    
+</div>
 
 </body>
 </html>

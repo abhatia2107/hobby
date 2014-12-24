@@ -10,7 +10,8 @@ class UsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$users=User::all();
+		return View::make('Users.index',compact('users'));
 	}
 
 	/**
@@ -33,7 +34,7 @@ class UsersController extends \BaseController {
 	public function store()
 	{
 		$credentianls=Input::all();
-		$validator = Validator::make($credentianls, Users::$rules);
+		$validator = Validator::make($credentianls, User::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
@@ -50,7 +51,8 @@ class UsersController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$userDetails=User::find($id);
+		return View::make('Users.show',compact('userDetails'));
 	}
 
 	/**
@@ -62,7 +64,8 @@ class UsersController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$userDetails=User::find($id);
+		return View::make('Users.create',compact('userDetails'));
 	}
 
 	/**
@@ -74,7 +77,18 @@ class UsersController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$credentials=Input::all();
+	
+		$validator = Validator::make($credentials, User::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+		$updated=$this->user->updateUser($credentials,$id);
+		if ($updated) 
+			return Redirect::to('/users')->with('success',Lang::get('user.user_updated'));
+		else
+			return Redirect::to('/users')->with('failure',Lang::get('user.user_already_failed'));
 	}
 
 	/**
@@ -86,7 +100,11 @@ class UsersController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$deleted=User::destroy($id);
+		if($deleted)
+			return Redirect::to('/users')->with('success',Lang::get('user.user_deleted'));
+		else
+			return Redirect::to('/users')->with('failure',Lang::get('user.user_delete_failed'));
 	}
 
 }

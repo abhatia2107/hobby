@@ -10,7 +10,8 @@ class SubscriptionsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$subscriptions=Subscription::all();
+		return View::make('Subscriptions.index',compact('subscriptions'));
 	}
 
 	/**
@@ -21,7 +22,7 @@ class SubscriptionsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('Subscriptions.create');
 	}
 
 	/**
@@ -41,43 +42,7 @@ class SubscriptionsController extends \BaseController {
 		$subscription=Subscription::create($credentianls);
 	}
 
-	/**
-	 * Display the specified resource.
-	 * GET /subscriptions/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /subscriptions/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /subscriptions/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
+		/**
 	 * Remove the specified resource from storage.
 	 * DELETE /subscriptions/{id}
 	 *
@@ -86,7 +51,11 @@ class SubscriptionsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$deleted=Subscription::destroy($id);
+		if($deleted)
+			return Redirect::to('/subscriptions')->with('success',Lang::get('subscription.subscription_deleted'));
+		else
+			return Redirect::to('/subscriptions')->with('failure',Lang::get('subscription.subscription_delete_failed'));
 	}
 
 }

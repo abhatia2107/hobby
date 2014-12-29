@@ -7,7 +7,7 @@
 <body style="" class="home page page-id-6 page-template page-template-page-templates page-template-template-home page-template-page-templatestemplate-home-php custom-background template-home  directory-fields color-scheme-default footer- woocommerce-social-login listify-child wp-job-manager-categories-enabled wp-job-manager-categories-only">
     <div id="page" class="hfeed site">
 <!--Header Section contains sign-in sign-up searchbox and logo -->
-    <header  style="font-family: 'Montserrat', sans-serif;position:fixed;width:100%">@include('header')</header>
+    <header  style="font-family: 'Montserrat', sans-serif;">@include('header')</header>
 <!--sign-In pop up modal-->
     <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         @include('signin')

@@ -18,7 +18,7 @@ class InstitutesTableSeeder extends Seeder {
                      'institute_website' =>$faker->url,
                      'institute_fblink' =>$faker->userName,
                      'institute_twitter' =>$faker->userName,
-                     'institute_description'=>'<p>'.$faker->paragraph(1).'<p>',
+                     'institute_description'=>$faker->text(),
                      'institute_approved'=>$faker->boolean(),
                      ));
               }

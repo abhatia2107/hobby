@@ -1,171 +1,392 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>Add a batch</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/formoid1/formoid-metro-cyan.css" type="text/css" />
+	<meta charset="utf-8" />
+
+	<link href="/assets/css/ion.checkRadio.css" rel="stylesheet">
+	<link href="/assets/css/ion.checkRadio.cloudy.css" rel="stylesheet">
+	<link href="/css/bootstrap/css/jquery-ui.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/jquery.datetimepicker.css"/>
 </head>
-<body class="blurBg-false" style="background-color:#ffffff">
 
-  @if($errors->has())
-    <div class="alert alert-block alert-danger fade in">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4><i class="fa fa-times-circle fa-fw fa-lg"></i>Oh snap! You got an error!</h4>
-        @foreach($errors->all() as $error)
-            <p>{{ $error }}<br></p>
-        @endforeach
-    </div>
-  @endif
+<body class="blurBg-false" style="background-color:#EBEBEB">
+
+	<div class="container main-container headerOffset">
 
 
-<!-- Start Formoid form-->
-<form enctype="multipart/form-data" class="formoid-metro-cyan form_create" action="/batches/store" method="post">
-<div class="title"><h2>Add a batch</h2></div>
-    <div class="element-input" title="Name of Batch"><label class="title">Name of Batch<span class="required">*</span></label><input class="large" type="text" name="batch" required="required"/></div>
-    <div class="element-select" title="Category">
-        <label class="title">Category<span class="required">*</span></label>
-            <div class="large">
-            <span>
-                <select name="batch_category" required="required">
-                    <option value="Cooking">Cooking</option>
-                    <option value="Dance">Dance</option>
-                </select><i></i>
-            </span>
-        </div>
-    </div>
-    <div class="element-select" title="SubCategory">
-        <label class="title">SubCategory<span class="required">*</span></label>
-        <div class="large">
-            <span>
-                <select name="batch_subcategory" required="required">
-                    <option value="option 1">option 1</option>
-                    <option value="option 2">option 2</option>
-                    <option value="option 3">option 3</option>
-                </select><i></i>
-            </span>
-        </div>
-    </div>
-    <div class="element-select" title="SubCategory">
-        <label class="title">Keyword<span class="required">*</span></label>
-        <div class="large">
-            <span>
-                <select name="batch_keyword" required="required">
-                    <option value="option 1">option 1</option>
-                    <option value="option 2">option 2</option>
-                    <option value="option 3">option 3</option>
-                </select><i></i>
-            </span>
-        </div>
-    </div>
-    <div class="element-date" title="Start Date"><label class="title">Start Date<span class="required">*</span></label><input class="large" data-format="yyyy-mm-dd" type="date" name="batch_start_date" required="required" placeholder="yyyy-mm-dd"/></div>
-    <div class="element-date" title="End Date"><label class="title">End Date<span class="required">*</span></label><input class="large" data-format="yyyy-mm-dd" type="date" name="batch_end_date" required="required" placeholder="yyyy-mm-dd"/></div>
-<!--     <div class="form-group has-feedback">
-        <div class="input-group date" id="datetimepicker4">
-            <input data-bv-field="time1" class="form-control" name="batch_start_time" id="batch_start_time" type="text">
-        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
-        </span>
-        </div><i data-bv-icon-for="time1" class="form-control-feedback bv-no-label bv-icon-input-group" style="display: none;"></i>
-    <small data-bv-result="NOT_VALIDATED" data-bv-for="time1" data-bv-validator="notEmpty" class="help-block" style="display: none;">The timings are  required and cannot be empty</small></div>
-    <div class="form-group has-feedback">
-        <div class="input-group date" id="datetimepicker5">
-            <input data-bv-field="time1" class="form-control" name="batch_end_time" id="batch_end_time" type="text">
-        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
-        </span>
-        </div><i data-bv-icon-for="time1" class="form-control-feedback bv-no-label bv-icon-input-group" style="display: none;"></i>
-    <small data-bv-result="NOT_VALIDATED" data-bv-for="time1" data-bv-validator="notEmpty" class="help-block" style="display: none;">The timings are  required and cannot be empty</small></div>
-  -->   <div class="element-select" title="Venue"><label class="title">Venue<span class="required">*</span></label><div class="large"><span><select name="batch_venue_id" required="required">
+	<div class="row">
+	<div class="breadcrumbDiv col-lg-12">
+	<ul class="breadcrumb">
+	<li><a href="/">Home</a> </li>
+	<li class="active">@if(isset($batchDetails)) Edit Batch @else Create Batch @endif </li> 
+	</ul>
+	</div>
+	</div>
+	@if($errors->has())
+	<div class="alert alert-block alert-danger fade in">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	<h4><i class="fa fa-times-circle fa-fw fa-lg"></i>Oh snap! You got an error!</h4>
+	@foreach($errors->all() as $error)
+	<p>{{ $error }}<br></p>
+	@endforeach
+	</div>
+	@endif
+	@if(Session::has('success'))
+	<div class="alert alert-success fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	<i class="fa fa-check-circle fa-fw fa-lg"></i>
+	<strong>Well done!</strong> {{Session::get('success')}}     
+	</div>
 
-        <option value="option 1">option 1</option>
-        <option value="option 2">option 2</option>
-        <option value="option 3">option 3</option></select><i></i></span></div></div>
-    <div class="element-textarea" title="Accomplishment from the batch"><label class="title">Accomplishment from the batch<span class="required">*</span></label><textarea class="medium" name="batch_accomplishment" cols="20" rows="5" required="required"></textarea></div>
-    <div class="element-file" title="Upload Photo of the batch"><label class="title">Upload Photo of the batch</label><label class="large" ><div class="button">Choose Photo</div><input type="file" class="file_input" name="batch_photo" /><div class="file_text">No file selected</div></label></div>
-    <div class="element-select" title="Difficulty Level"><label class="title">Difficulty Level</label><div class="large"><span><select name="batch_difficulty_level" >
+	@endif
+	@if(Session::has('failure'))
+	<div class="alert alert-danger fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	<i class="fa fa-times-circle fa-fw fa-lg"></i>
+	{{Session::get('failure')}}
+	</div>
 
-        <option value="0">All</option>
-        <option value="1">Beginner</option>
-        <option value="2">Intermediate</option>
-        <option value="3">Advanced</option></select><i></i></span></div></div>
-    <div class="element-select" title="Age Group"><label class="title">Age Group</label><div class="large"><span><select name="batch_age_group" >
+	@endif
 
-        <option value="0">All</option>
-        <option value="1">Children</option>
-        <option value="2">Adults</option></select><i></i></span></div></div>
-    <div class="element-select" title="Gender"><label class="title">Gender</label><div class="large"><span><select name="batch_gender_group" >
+	<div class="row">
+	<div class="col-lg-9 col-md-9 col-sm-7">
+	<h1 class="section-title-inner"><span>@if(isset($batchDetails)) <i class="glyphicon glyphicon-pencil"></i>&nbsp; Edit Your Batch @else <i class="glyphicon glyphicon-plus"></i>&nbsp; Add Your Batch @endif </span></h1>
+	<div class="row userInfo">
+	<div class="col-lg-12">
 
-        <option value="0">Both</option>
-        <option value="1">Male</option>
-        <option value="2">Female</option></select><i></i></span></div></div>
-    <div class="element-input" title="Price"><label class="title">Price</label><input class="large" type="text" name="batch_price" /></div>
-    <div class="element-number" title="Number of sessions in week"><label class="title">Number of sessions in week<span class="required">*</span></label><input class="large" type="text" min="0" max="7" name="batch_no_of_classes_in_week" required="required" value=""/></div>
-    <div class="element-checkbox" title="Batch Schedule">
-    <label class="title" required="required">Batch have Classes on<span class="required">*</span></label>      
-        <div class="column column1">
-        <label><input type="checkbox" name="batch_class_on_monday" value="1"/><span>Monday</span></label>
-        <label><input type="checkbox" name="batch_class_on_tuesday" value="1"/><span>Tuesday</span></label>
-        <label><input type="checkbox" name="batch_class_on_wednesday" value="1"/><span>Wednesday</span></label>
-        <label><input type="checkbox" name="batch_class_on_thursday" value="1"/><span>Thursday</span></label>
-        <label><input type="checkbox" name="batch_class_on_friday" value="1"/><span>Friday</span></label>
-        <label><input type="checkbox" name="batch_class_on_saturday" value="1"/><span>Saturday</span></label>
-        <label><input type="checkbox" name="batch_class_on_sunday" value="1"/><span>Sunday</span></label>
-        </div>
-    <span class="clearfix"></span>
-    </div>
-    <div class="element-radio"><label class="title">Batch Recurring<span class="required">*</span></label>
-        <div class="column column1">
-        <label><input type="radio" name="batch_recurring" value="0" required="required"/><span>Not recurring</span></label>
-        <label><input type="radio" name="batch_recurring" value="1" required="required"/><span>Weekly</span></label>
-        <label><input type="radio" name="batch_recurring" value="2" required="required"/><span>Monthly</span></label>
-        <label><input type="radio" name="batch_recurring" value="3" required="required"/><span>Yearly</span></label>
-        </div>
-        <span class="clearfix"></span>
-    </div>
-    <div class="element-radio" title="Trial available">
-    <label class="title">Trial available<span class="required">*</span></label>
-    <div class="column column1">
-    <label>
-    <input type="radio" name="batch_trial" value="0" required="required"/>
-    <span>Not available</span>
-    </label>
-    <label>
-    <input type="radio" name="batch_trial" value="1" required="required"/>
-    <span>Free Trial any time walk-in</span>
-    </label>
-    <label>
-    <input type="radio" name="batch_trial" value="2" required="required"/>
-    <span>Paid Trial any time walk-in</span>
-    </label>
-    <label>
-    <input type="radio" name="batch_trial" value="3" required="required"/>
-    <span>Free Trial only in beginning of batch</span>
-    </label>
-    <label>
-    <input type="radio" name="batch_trial" value="4" required="required"/>
-    <span>Paid Trial only in beginning of batch</span>
-    </label>
-    </div>
-    <span class="clearfix"></span>
-    </div>
-    <div class="element-textarea" title="Special Comments"><label class="title">Special Comments about the batch (Prerequisite required, anything else you wish to share)</label><textarea class="medium" name="batch_comment" cols="20" rows="5" ></textarea></div>
-    <div class="element-input" title="Tagline"><label class="title">Tagline of the batch</label><input class="large" type="text" name="batch_tagline" /></div>
-<div class="submit"><input type="submit" value="Submit"/></div></form>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="/assets/formoid1/formoid-metro-cyan.js"></script>
-<!-- Stop Formoid form-->
+	<h2 class="block-title-2">@if(isset($batchDetails)) Update Details @else Add Details @endif </h2>
+	<p class="required"><sup>*</sup> Required field</p>
+	</div>
 
-<script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker4').datetimepicker({
-                        pickDate: false
-                    });
-                });
-                $(function () {
-                    $('#datetimepicker5').datetimepicker({
-                        pickDate: false
-                    });
-                });
-                </script>
+	<form role="form" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data">
+	<div class="col-md-6">
+	<div class="form-group required">
+		<label for="InputBatch">Batch Title <sup>*</sup> </label>
 
+		<input type="text" class="form-control" tabindex=1 placeholder="Batch Title" name="batch" value="@if(isset($batchDetails)){{$batchDetails->batch}}@else{{Input::old('batch')}}@endif" required>
+	</div>
+
+	<div class="form-group required">
+		<label>Batch Category <sup>*</sup> </label>
+		<select class="form-control" tabindex=7 name="batch_category_id" required>
+		@foreach ($all_categories as $data)
+			<option value={{$data->id}} 
+				@if(isset($batchDetails)) 
+					{{($batchDetails->batch_category_id==$data->id)?
+						'selected="selected"':''}}
+				@else{{"Input::old('batch_category_id')"}}
+				@endif>
+				{{$data->category}}
+			</option>
+		
+		@endforeach
+		</select>
+	</div>
+
+	<div class="form-group required">
+	<label for="date_picker_start"> Start Date <sup>*</sup></label>
+	<p class="input-group">
+	<input type="text" id="date_picker_start" tabindex=5 class="form-control" name="batch_start_date" value="@if(isset($batchDetails)){{$batchDetails->batch_start_date}}@else{{Input::old('batch_start_date')}}@endif" required>
+	<!--<span class="input-group-btn"><button type="button"class="btn btn-default datetimepicker"><span class="glyphicon glyphicon-calendar"></span></button></span>-->
+	<label for="date_picker_start" class="input-group-addon btn"><span class="glyphicon glyphicon-calendar"></span></label>
+	</p>
+	</div>
+	<div class="form-group required">
+	<label for="time_picker_start"> Start Time<sup>*</sup></label>
+	<p class="input-group">
+	<input type="text" id="time_picker_start" tabindex=5 class="form-control" name="batch_start_time" value="@if(isset($batchDetails)){{$batchDetails->batch_start_time}}@else{{Input::old('batch_start_time')}}@endif" required>
+	<!--<span class="input-group-btn"><button type="button"class="btn btn-default datetimepicker"><span class="glyphicon glyphicon-calendar"></span></button></span>-->
+	<label for="time_picker_start" class="input-group-addon btn"><span class="glyphicon glyphicon-time"></span></label>
+	</p>
+	</div>
+	
+	<div class="form-group required">
+		<label>Batch Venue <sup>*</sup> </label>
+		<select class="form-control" tabindex=7 name="batch_venue_id" required>
+		@foreach ($all_venues as $data)
+			<option value={{$data->id}} 
+				@if(isset($batchDetails)) 
+					{{($batchDetails->batch_venue_id==$data->id)?
+						'selected="selected"':''}}
+				@else{{"Input::old('batch_venue_id')"}}
+				@endif>
+				{{$data->venue}}
+			</option>
+		
+		@endforeach
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label>
+			Batch Difficulty Level
+		</label>
+		<div class="radio">
+		<?php $i=0; ?>
+			@foreach($difficulty_level as $data)
+			<label>
+				<input name="batch_difficulty_level" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$i)?'checked':''}}@else{{"Input::old('batch_difficulty_level')"}}@endif type="radio" >{{$data}}
+				<?php $i++; ?>	
+			</label><br/>
+			@endforeach
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label>
+			Batch Age Group
+		</label>
+		<div class="radio">
+		<?php $i=0; ?>
+			@foreach($age_group as $data)
+			<label>
+				<input name="batch_age_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$i)?'checked':''}}@else{{"Input::old('batch_age_group')"}}@endif type="radio" >{{$data}}
+				<?php $i++; ?>	
+			</label><br/>
+			@endforeach
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label>
+			Number of classes in week<sup>*</sup>
+		</label>
+		<div class="radio">
+			@for($i=1;$i<8;$i++)
+			<label>
+				<input name="batch_no_of_classes_in_week" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_no_of_classes_in_week==$i)?'checked':''}}@else{{"Input::old('batch_no_of_classes_in_week')"}}@endif type="radio" >{{$i}}
+			</label><br/>
+			@endfor
+		</div>
+	</div>
+
+
+	<div class="form-group">
+		<label>
+			Trial Available<sup>*</sup>
+		</label>
+		<div class="radio">
+		<?php $i=0; ?>
+			@foreach($trial as $data)
+			<label>
+				<input name="batch_trial" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$i)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" >{{$data}}
+				<?php $i++; ?>	
+			</label><br/>
+			@endforeach
+		</div>
+	</div>
+	
+	</div>
+
+	<div class="col-md-6">
+
+	<div id="tagline" class="form-group">
+	<label>Batch tagline</label>
+
+	<input type="text" class="form-control" tabindex=2 title="Not more than 40 characters" maxlength="40" name="batch_tagline" value="@if(isset($batchDetails)){{$batchDetails->batch_tagline}}@else{{Input::old('batch_tagline')}}@endif" required>
+	</div>
+
+	<div class="form-group required">
+		<label>Batch Subcategory <sup>*</sup> </label>
+		<select class="form-control" tabindex=7 name="batch_subcategory_id" required>
+		@foreach ($all_subcategories as $data)
+			<option value={{$data->id}} 
+				@if(isset($batchDetails)) 
+					{{($batchDetails->batch_subcategory_id==$data->id)?
+						'selected="selected"':''}}
+				@else{{"Input::old('batch_subcategory_id')"}}
+				@endif>
+				{{$data->subcategory}}
+			</option>
+		@endforeach
+		</select>
+	</div>
+
+	<div class="form-group required">
+	<label for="date_picker_end"> End Date<sup>*</sup> </label>
+	<p class="input-group">
+	<input type="text" id="date_picker_end" tabindex=6 class="form-control datetimepicker" name="batch_end_date" value="@if(isset($batchDetails)){{$batchDetails->batch_end_date}}@else{{Input::old('batch_end_date')}}@endif" required>
+	<label for="date_picker_end" class="input-group-addon btn"><span class="glyphicon glyphicon-calendar"></span></label>
+	</p>
+	</div>
+
+	<div class="form-group required">
+	<label for="time_picker_end">End Time <sup>*</sup></label>
+	<p class="input-group">
+	<input type="text" id="time_picker_end" tabindex=5 class="form-control" name="batch_end_time" value="@if(isset($batchDetails)){{$batchDetails->batch_end_time}}@else{{Input::old('batch_end_time')}}@endif" required>
+	<!--<span class="input-group-btn"><button type="button"class="btn btn-default datetimepicker"><span class="glyphicon glyphicon-calendar"></span></button></span>-->
+	<label for="time_picker_end" class="input-group-addon btn"><span class="glyphicon glyphicon-time"></span></label>
+	</p>
+	</div>
+
+	<div class="form-group">
+	<label>Batch Price</label>
+
+	<input type="text" class="form-control" tabindex=8 name="batch_price" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
+	</div>
+
+	<div class="form-group">
+	<label>Batch Images</label>
+
+	<input type="file" id="batch_photo" tabindex=18 name="batch_photo" value="@if(isset($batchDetails)){{$batchDetails->batch_photo}}@endif">
+	</div>
+	
+
+	<div class="form-group">
+		<label>
+			Batch Gender Group
+		</label>
+		<div class="radio">
+		<?php $i=0; ?>
+			@foreach($gender_group as $data)
+			<label>
+				<input name="batch_gender_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$i)?'checked':''}}@else{{"Input::old('batch_gender_group')"}}@endif type="radio" >{{$data}}
+				<?php $i++; ?>	
+			</label><br/>
+			@endforeach
+		</div>
+	</div>
+
+	<div class="form-group" title="Batch Schedule">
+		<label class="title">
+		Batch have Classes on<sup>*</sup> </label>	
+		<div class="column column1">
+
+			@foreach($weekdays as $data)
+				<input type="checkbox" name="batch_class[]" value="{{$data}}"
+				@if(isset($batchDetails))
+				<?php if(in_array($data, $batchDetails->batch_class)): echo 'checked="checked"'; endif; ?>
+				@else{{Input::old('batch_class[]')}}
+				@endif/>
+				<?php
+					echo ucfirst($data);
+				?><br/>
+			@endforeach
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label>
+			Batch Recurring
+		</label>
+		<div class="radio">
+		<?php $i=0; ?>
+			@foreach($recurring as $data)
+			<label>
+				<input name="batch_recurring" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_recurring==$i)?'checked':''}}@else{{"Input::old('batch_recurring')"}}@endif type="radio" >{{$data}}
+				<?php $i++; ?>	
+			</label><br/>
+			@endforeach
+		</div>
+	</div>
+	
+	</div>
+	<div class="col-md-12">
+	<div class="form-group required">
+	<label>What will participants achieve through this class?<sup>*</sup> </label>
+	</div>
+
+	<div class="form-group">
+
+	<textarea name="batch_accomplishment" tabindex=21 class="form-control" rows="5">@if(isset($batchDetails)){{$batchDetails->batch_accomplishment}}@else{{Input::old('batch_accomplishment')}}@endif</textarea> 
+	</div>
+
+	<div class="form-group required">
+	<label>Tell us more about your batch(Prerequisite required, anything else you wish to share)<sup>*</sup> </label>
+	</div>
+
+	<div class="form-group">
+
+	<textarea name="batch_comment" tabindex=21 class="form-control" rows="5">@if(isset($batchDetails)){{$batchDetails->batch_comment}}@else{{Input::old('batch_comment')}}@endif</textarea> 
+	</div>
+	
+
+
+	<div class="form-group">
+	<button type="submit" tabindex=22 class="btn btn-primary"> @if(isset($batchDetails)) <i class="fa fa-save"></i> &nbsp; Save @else <i class="fa fa-plus"></i> &nbsp; Create @endif</button>
+	<button type="reset" tabindex=23 class="btn btn-primary"><i class="fa fa-power-off"></i> &nbsp; Reset</button>
+	</div>
+	</div>
+	</div>
+	</form>
+	<div class="col-lg-12 clearfix">
+	<ul class="pager">
+	<li class="next pull-right"><a href="/myaccount" tabindex=24> &larr; Back to My Account</a> </li>
+	</ul>
+	</div>
+	</div>
+	<!--/row end--> 
+
+	</div>
+	<div class="col-lg-3 col-md-3 col-sm-5"> </div>
+	</div>
+	<!--/row-->
+
+	<div style="clear:both"></div>
+	</div>
+	<!-- /main-container -->
+
+	<script type="text/javascript" src="/assets/js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+	<script src="/css/bootstrap/js/jquery-ui.js"></script>
+	<!-- include checkRadio plugin //Custom check & Radio  --> 
+	<script type="text/javascript" src="/assets/js/ion-checkRadio/ion.checkRadio.min.js"></script> 
+	<!-- include grid.js // for equal Div height  --> 
+	<script src="/assets/js/grids.js"></script> 
+	<script src="/assets/js/jquery.datetimepicker.js"></script>
+
+	<script>
+	jQuery(function(){
+	jQuery('#date_picker_start').datetimepicker({
+	format:'Y/m/d',
+	onShow:function( ct ){
+	this.setOptions({
+	maxDate:jQuery('#date_picker_end').val()?jQuery('#date_picker_end').val():false
+	})
+	},
+	timepicker:false
+	});
+	jQuery('#date_picker_end').datetimepicker({
+	format:'Y/m/d',
+	onShow:function( ct ){
+	this.setOptions({
+	minDate:jQuery('#date_picker_start').val()?jQuery('#date_picker_start').val():false
+	})
+	},
+	timepicker:false
+	});
+	});
+	$('.timepicker').datetimepicker({
+	format:'Y-m-d',
+	datepicker:false,
+	});
+	$('#paid').click(function(){
+	$('.paid').css('display','block');
+	});
+	$('#free').click(function(){
+	$('.paid').css('display','none');
+	});
+	</script>
+	<script>
+	jQuery(function(){
+	jQuery('#time_picker_start').datetimepicker({
+	format:'H:i:00',
+	onShow:function( ct ){
+	this.setOptions({
+	})
+	},
+	datepicker:false
+	});
+	jQuery('#time_picker_end').datetimepicker({
+	format:'H:i:00',
+	onShow:function( ct ){
+	this.setOptions({
+	})
+	},
+	datepicker:false
+	});
+	});
+	</script>
 </body>
-</html>

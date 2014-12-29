@@ -13,8 +13,10 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('Miscellaneous.home');
 });
+
+Route::get('/hello',function() { return View::make('layout'); });
 
 Route::resource('admins', 'AdminsController');
 Route::resource('batches', 'BatchesController');
@@ -24,6 +26,7 @@ Route::resource('institutes', 'InstitutesController');
 Route::resource('locations', 'LocationsController');
 Route::resource('subcategories', 'SubcategoriesController');
 Route::resource('subscriptions', 'SubscriptionsController');
+Route::resource('keywords', 'KeywordsController');
 Route::resource('localities', 'LocalitiesController');
 Route::resource('users', 'UsersController');
 Route::resource('venues', 'VenuesController');
@@ -72,6 +75,15 @@ Route::get('/institutes/{id}','InstitutesController@show');
 Route::get('/institutes/edit/{id}','InstitutesController@edit');
 Route::post('/institutes/update/{id}','InstitutesController@update');
 Route::get('/institutes/delete/{id}','InstitutesController@destroy');
+
+//Route for KeywordsController
+Route::get('/keywords','KeywordsController@index');
+Route::get('/keywords/create','KeywordsController@create');
+Route::post('/keywords/store','KeywordsController@store');
+Route::get('/keywords/{id}','KeywordsController@show');
+Route::get('/keywords/edit/{id}','KeywordsController@edit');
+Route::post('/keywords/update/{id}','KeywordsController@update');
+Route::get('/keywords/delete/{id}','KeywordsController@destroy');
 
 //Route for LocationsController
 Route::get('/locations','LocationsController@index');

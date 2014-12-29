@@ -91,6 +91,7 @@
     <div class="submit"><input type="submit" value="Submit"/></div></form>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="/assets/formoid1/formoid-metro-cyan.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
 <!-- Stop Formoid form-->
 
 

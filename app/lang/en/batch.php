@@ -6,6 +6,8 @@ return array(
 		
 		"batch_create_failed" => "Sorry, We are unable to add the batch",
 		
+		"batch_no_of_class_error"=>"Number of classes should be equal to number of days selected.",
+
 		"batch_updated"=>"Your batch have been updated successfully",
 		
 		"batch_update_failed" => "Sorry, We are unable to update the batch",
@@ -18,7 +20,7 @@ return array(
 		
 		"batch_startEndDateError"=>"End date can not be less than start date",
 		
-		"batch_already_failed"=>"You already have this batch in your list.",
+		"batch_already_failed"=>"You already have same details of batch in your list",
 
 		"error_batch_photo"=>"Error in uploading your batch photo, Please try again."
 

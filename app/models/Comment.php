@@ -1,14 +1,12 @@
 <?php
 
 class Comment extends \Eloquent {
-	protected $primaryKey = 'comment_id';
 
-	protected $fillable = [
-		'user_id',
-	    'institute_id',
-		'comment',
-	    'rating',
-	];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
 	public static $rules = [
     	'user_id'=>'required|numeric',
@@ -16,5 +14,11 @@ class Comment extends \Eloquent {
 		'comment'=>'required|alpha_num',
 	    'rating'=>'required|numeric|min:1|max:5',
     ];
-                     
+    
+    public function updateComment($credentials,$id)
+    {
+        $updated=DB::table('comment')->where('id','=',$id)->update($credentials);
+        return ($updated);
+    } 
+            
 }

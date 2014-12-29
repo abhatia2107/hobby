@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
+		$this->call('AdminsTableSeeder');
+        $this->command->info('Admins table seeded!');
+
 		$this->call('BatchesTableSeeder');
         $this->command->info('Batches table seeded!');
 
@@ -49,6 +52,9 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('SubcategoriesTableSeeder');
 		$this->command->info('Subcategories table seeded!');
+
+		$this->call('SubscriptionsTableSeeder');
+		$this->command->info('Subscriptions table seeded!');
 
 	}	
 }

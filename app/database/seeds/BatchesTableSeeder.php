@@ -11,7 +11,7 @@ class BatchesTableSeeder extends Seeder {
                      'batch' => $faker->Name,
                      'batch_category_id'=>$faker->randomDigitNotNull,
                      'batch_subcategory_id'=>$faker->randomNumber(1,20),
-                     'batch_accomplishment' =>'<p>'.$faker->paragraph(1).'<p>',
+                     'batch_accomplishment' =>$faker->text(),
                      'batch_institute_id'=>$faker->randomNumber(1,20),
                      'batch_start_date' =>$faker->date($format = 'Y-m-d', $max = 'now'),
                      'batch_end_date' => $faker->date($format = 'Y-m-d', $max = 'now'),

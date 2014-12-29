@@ -2,13 +2,14 @@
 
 class InstitutesController extends \BaseController {
 
-	private $location;
 	private $institute;
+	private $location;
 	private $user;
-	public function __construct(Location $locationObject, Institute $instituteObject, User $userObject)
+
+	public function __construct(Institute $instituteObject ,Locality $localityObject, Location $locationObject, User $userObject)
 	{
-		$this->location = $locationObject;
 		$this->institute = $instituteObject;
+		$this->location = $locationObject;
 		$this->user = $userObject;
 	}
 	/**

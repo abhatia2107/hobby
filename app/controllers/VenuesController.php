@@ -8,20 +8,21 @@ class VenuesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	
-	private $location;
 	private $institute;
-	private $venue;
+	private $locality;
+	private $location;
 	private $user;
-	public function __construct(Location $locationObject, Locality $localityObject, Institute $instituteObject, User $userObject, Venue $venueObject)
+	private $venue;
+
+	public function __construct(Institute $instituteObject, Locality $localityObject, Location $locationObject, User $userObject, Venue $venueObject)
 	{
-		$this->location = $locationObject;
-		$this->locality=$localityObject;
 		$this->institute = $instituteObject;
+		$this->locality=$localityObject;
+		$this->location = $locationObject;
 		$this->user = $userObject;
 		$this->venue = $venueObject;
-	}
-
+	}	
+	
 	public function index()
 	{
 		$venues=Venue::all();

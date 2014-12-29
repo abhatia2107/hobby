@@ -1,18 +1,13 @@
 <?php
 
 class Institute extends \Eloquent {
-	
-	protected $fillable = [
-		'institute',
-        'institute_user_id',
-        'institute_location_id',
-        'institute_url',
-        'institute_website',
-        'institute_fblink',
-        'institute_twitter',
-        'institute_description',
+
+    protected $guarded = [
+        'id',
         'institute_approved',
-	];
+        'created_at',
+        'updated_at',
+    ];
 
 	public static $rules = [		
 		'institute'=>'required',

@@ -2,16 +2,21 @@
 
 class BatchKeyword extends \Eloquent {
 
-	protected $fillable = [
-		'batch_id',
-		'keyword_id',
-	];
-
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
 	public static $rules = [
 		'batch_id'=>'required|numeric',
 		'keyword_id'=>'required|numeric',
 	];
+   	public function updateBatchKeyword($credentials,$id)
+    {
+        $updated=DB::table('batch_keyword')->where('id','=',$id)->update($credentials);
+        return ($updated);
+    } 
 
 /* 	public function deleteKeyword($keywordId)
  	{

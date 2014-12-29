@@ -42,7 +42,7 @@ class SubscriptionsController extends \BaseController {
 		$subscription=Subscription::create($credentianls);
 	}
 
-		/**
+	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /subscriptions/{id}
 	 *

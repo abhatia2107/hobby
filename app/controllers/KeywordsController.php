@@ -84,6 +84,7 @@ class KeywordsController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		$all_batches = $this->batch->all();
 		$all_categories=$this->category->all();
 		$all_locations=$this->location->all();
 		$all_subcategories=$this->subcategory->all();
@@ -94,7 +95,7 @@ class KeywordsController extends \BaseController {
 		$recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		return View::make('Keywords.show',compact('all_categories','all_locations','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
+		return View::make('Keywords.show',compact('all_categories','all_locations','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays','all_batches'));
 	}
 
 	/**

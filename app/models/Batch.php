@@ -43,5 +43,9 @@ class Batch extends \Eloquent {
         /*$updated=true;*/
         return ($updated);
     } 
+    public function batches_list($id)
+    {
+        return DB::table('batches')->where('id','=',$id)->pluck('category');
+    }
 
 }

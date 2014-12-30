@@ -4,6 +4,7 @@ class Category extends \Eloquent {
 
     protected $guarded = [
         'id',
+        'category_no_of_subcategories',
         'created_at',
         'updated_at',
     ];
@@ -18,8 +19,20 @@ class Category extends \Eloquent {
         return ($updated);
     } 
 
-    public function categoryName($id)
+    public function getCategory($id)
     {
         return DB::table('categories')->where('id','=',$id)->get(['category']);
+    }
+
+    public function increment_no($id)
+    {
+        $updated=DB::table('categories')->where('id','=',$id)->increment('category_no_of_subcategories');
+        return ($updated);
+    }
+
+    public function decrement_no($id)
+    {
+        $updated=DB::table('categories')->where('id','=',$id)->decrement('category_no_of_subcategories');
+        return ($updated);
     }
 }

@@ -431,7 +431,7 @@ $(document).ready(function(){
           <table class="table">
             <thead>
                <tr>
-                  <th>Category ID</th>
+                  <th>S.No.</th>
                   <th>Category Name</th>
                   <th>Number of Sub Categories</th>
                   <th></th>
@@ -451,7 +451,7 @@ $(document).ready(function(){
                            <button data-toggle="dropdown" class="btn btn-info dropdown-toggle"><span class="caret"></span></button>
                            <ul class="dropdown-menu">
                               <li><a href="/categories/{{$data->id}}"><span class="glyphicon glyphicon-pencil"></span>View</a></li>
-                              <li><a href="#"><span class="glyphicon glyphicon-share"></span> Edit</a></li>
+                              <li><a href="/categories/edit/{{$data->id}}"><span class="glyphicon glyphicon-share"></span> Edit</a></li>
                               <li><a href="#"><span class="glyphicon glyphicon-print"></span> Print the details</a></li>
                               <li class="divider"></li>
                               <li><a href="/categories/delete/{{$data->id}}"><span class="glyphicon glyphicon-trash"></span> Remove</a></li>

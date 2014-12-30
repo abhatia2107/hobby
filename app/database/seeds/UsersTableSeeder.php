@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder {
                      'user_contact_no' => $faker->phoneNumber,
                      'user_password' => Hash::make('123'),
                      'user_location_id'=>$faker->randomDigitNotNull,
-                     'user_fb_id' =>$faker->randomNumber(15),
+                     'user_fb_id' =>$faker->randomNumber(5),
                      'user_birthdate' =>$faker->date,
                      'user_gender'=>"male",
                      'user_remember_token'=>$faker->lexify(),

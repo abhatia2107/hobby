@@ -64,7 +64,6 @@
 	<div class="col-md-6">
 	<div class="form-group required">
 		<label for="InputBatch">Batch Title <sup>*</sup> </label>
-
 		<input type="text" class="form-control" tabindex=1 placeholder="Batch Title" name="batch" value="@if(isset($batchDetails)){{$batchDetails->batch}}@else{{Input::old('batch')}}@endif" required>
 	</div>
 

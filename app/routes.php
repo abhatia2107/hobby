@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-	return View::make('Miscellaneous.home');
+	return View::make('hello');
 });
 
 
@@ -23,11 +23,11 @@ Route::resource('batches', 'BatchesController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('comments', 'CommentsController');
 Route::resource('institutes', 'InstitutesController');
+Route::resource('keywords', 'KeywordsController');
+Route::resource('localities', 'LocalitiesController');
 Route::resource('locations', 'LocationsController');
 Route::resource('subcategories', 'SubcategoriesController');
 Route::resource('subscriptions', 'SubscriptionsController');
-Route::resource('keywords', 'KeywordsController');
-Route::resource('localities', 'LocalitiesController');
 Route::resource('users', 'UsersController');
 Route::resource('venues', 'VenuesController');
 
@@ -84,6 +84,15 @@ Route::get('/keywords/{id}','KeywordsController@show');
 Route::get('/keywords/edit/{id}','KeywordsController@edit');
 Route::post('/keywords/update/{id}','KeywordsController@update');
 Route::get('/keywords/delete/{id}','KeywordsController@destroy');
+
+//Route for LocalitiesController
+Route::get('/localities','LocalitiesController@index');
+Route::get('/localities/create','LocalitiesController@create');
+Route::post('/localities/store','LocalitiesController@store');
+Route::get('/localities/{id}','LocalitiesController@show');
+Route::get('/localities/edit/{id}','LocalitiesController@edit');
+Route::post('/localities/update/{id}','LocalitiesController@update');
+Route::get('/localities/delete/{id}','LocalitiesController@destroy');
 
 //Route for LocationsController
 Route::get('/locations','LocationsController@index');
@@ -150,9 +159,3 @@ Route::get('/subscribed', function()
 {
 	return View::make('message');
 });
-
-Route::get('/dummy', function()
-{
-	return View::make('create');
-});
-

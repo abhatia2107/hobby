@@ -18,4 +18,20 @@ class Location extends \Eloquent {
         return ($updated);
     } 
 
+    public function getLocation($id)
+    {
+        return DB::table('locations')->where('id','=',$id)->get(['location']);
+    }
+
+    public function increment_no($id)
+    {
+        $updated=DB::table('locations')->where('id','=',$id)->increment('location_no_of_localities');
+        return ($updated);
+    }
+
+    public function decrement_no($id)
+    {
+        $updated=DB::table('locations')->where('id','=',$id)->decrement('location_no_of_localities');
+        return ($updated);
+    }
 }

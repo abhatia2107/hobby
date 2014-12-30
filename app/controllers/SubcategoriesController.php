@@ -2,6 +2,35 @@
 
 class SubcategoriesController extends \BaseController {
 
+	private $admin;
+	private $batch;
+	private $category;
+	private $comment;
+	private $institute;
+	private $keyword;
+	private $locality;
+	private $location;
+	private $subcategory;
+	private $subscription;
+	private $user;
+	private $venue;
+
+	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
+	{
+		$this->admin = $adminObject;
+		$this->batch = $batchObject;
+		$this->category = $categoryObject;
+		$this->comment = $commentObject;
+		$this->institute = $instituteObject;
+		$this->keyword = $keywordObject;
+		$this->locality=$localityObject;
+		$this->location = $locationObject;
+		$this->subcategory = $subcategoryObject;
+		$this->subscription = $subscriptionObject;
+		$this->user = $userObject;
+		$this->venue = $venueObject;
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /localities
@@ -10,7 +39,7 @@ class SubcategoriesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$subcategories=Subcategory::all();
+		$subcategories=$this->subcategory->getAllSubcategories();
 		return View::make('Subcategories.index',compact('subcategories'));
 	}
 
@@ -22,7 +51,9 @@ class SubcategoriesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Subcategories.create');
+		$all_categories=$this->category->all();
+		$all_locations=$this->location->all();
+		return View::make('Subcategories.create',compact('all_categories','all_locations'));
 	}
 
 	/**
@@ -33,13 +64,18 @@ class SubcategoriesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$credentianls=Input::all();
-		$validator = Validator::make($credentianls, Subcategory::$rules);
+		$credentials=Input::all();
+		$validator = Validator::make($credentials, Subcategory::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$comment=Subcategory::create($credentianls);
+		$this->category->increment_no($credentials['subcategory_category_id']);
+		$created=Subcategory::create($credentials);
+		if ($created)
+			return Redirect::to('/subcategories')->with('success',Lang::get('subcategory.subcategory_created'));
+		else
+			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_already_failed'));
 	}
 
 	/**
@@ -64,8 +100,10 @@ class SubcategoriesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+		$all_categories=$this->category->all();
+		$all_locations=$this->location->all();
 		$subcategoryDetails=Subcategory::find($id);
-		return View::make('Subcategories.create',compact('subcategoryDetails'));
+		return View::make('Subcategories.create',compact('all_categories','all_locations','subcategoryDetails'));
 	}
 
 	/**
@@ -78,7 +116,6 @@ class SubcategoriesController extends \BaseController {
 	public function update($id)
 	{
 		$credentials=Input::all();
-	
 		$validator = Validator::make($credentials, Subcategory::$rules);
 		if($validator->fails())
 		{
@@ -100,11 +137,12 @@ class SubcategoriesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+		$category=$this->subcategory->getSubcategory($id);
+		$this->category->decrement_no($category[0]->subcategory_category_id);
 		$deleted=Subcategory::destroy($id);
 		if($deleted)
 			return Redirect::to('/subcategories')->with('success',Lang::get('subcategory.subcategory_deleted'));
 		else
 			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_delete_failed'));
 	}
-
 }

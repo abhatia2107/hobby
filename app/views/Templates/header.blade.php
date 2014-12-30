@@ -21,29 +21,39 @@
 			</form>
 		</div>
 
-		@if(Auth::guest())
-			<div class=" col-sm-3 col-md-3 ">
-			<ul class="list-inline">
-			<li style="padding-top: 11px;font-size: 20px;width:50%;padding-left:20px;color:white;">   
-			<a style="text-decoration:none;color:white;" href="#" >My Account</a>
-			</li>
-			<li style="padding-top: 11px;font-size: 20px;color:white;">
-			<a style="text-decoration:none;color:white;" href="#" >&nbsp;Logout</a>
-			</li>
-			</ul>
-			</div>
-		@else
-			<div class=" col-sm-3 col-md-3 ">
-			<ul class="list-inline">
-			<li style="padding-top: 11px;font-size: 20px;width:50%;padding-left:20px;color:white;">   
-			<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#signinModal">Sign In</a>
-			</li>
-			<li style="padding-top: 11px;font-size: 20px;color:white;">
-			<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
-			</li>
-			</ul>
-			</div>
-		@endif
+			@if(Auth::guest())
+				<div class=" col-sm-3 col-md-3 ">
+					<ul class="list-inline">
+					<li style="padding-top: 11px;font-size: 20px;width:50%;padding-left:20px;color:white;">   
+					<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#signinModal">Sign In</a>
+					</li>
+					<li style="padding-top: 11px;font-size: 20px;color:white;">
+					<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+					</li>
+					</ul>
+				</div>
+			@else
+				<div class=" col-sm-3 col-md-3 ">
+				<ul class="list-inline">
+				<li style="pa<div class=" col-sm-3 col-md-3 ">
+				<ul class="list-inline">
+				<li style="padding-top: 11px;font-size: 20px;width:50%;padding-left:20px;color:white;">   
+				<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#signinModal">Sign In</a>
+				</li>
+				<li style="padding-top: 11px;font-size: 20px;color:white;">
+				<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+				</li>
+				</ul>
+				</div>dding-top: 11px;font-size: 20px;width:50%;padding-left:20px;color:white;">   
+				<a style="text-decoration:none;color:white;" href="#" >My Account</a>
+				</li>
+				<li style="padding-top: 11px;font-size: 20px;color:white;">
+				<a style="text-decoration:none;color:white;" href="#" >&nbsp;Logout</a>
+				</li>
+				</ul>
+				</div>
+			@endif
+			
 		<div class=" col-sm-2 col-md-2 ">
 			<select  style="margin-top: 7px;width:100%">
 				@foreach($all_locations as $data)

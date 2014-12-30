@@ -2,6 +2,35 @@
 
 class LocalitiesController extends \BaseController {
 
+	private $admin;
+	private $batch;
+	private $category;
+	private $comment;
+	private $institute;
+	private $keyword;
+	private $locality;
+	private $location;
+	private $subcategory;
+	private $subscription;
+	private $user;
+	private $venue;
+
+	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
+	{
+		$this->admin = $adminObject;
+		$this->batch = $batchObject;
+		$this->category = $categoryObject;
+		$this->comment = $commentObject;
+		$this->institute = $instituteObject;
+		$this->keyword = $keywordObject;
+		$this->locality=$localityObject;
+		$this->location = $locationObject;
+		$this->subcategory = $subcategoryObject;
+		$this->subscription = $subscriptionObject;
+		$this->user = $userObject;
+		$this->venue = $venueObject;
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /localities
@@ -10,7 +39,7 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$localities=Locality::all();
+		$localities=$this->locality->getAllLocalities();
 		return View::make('Localities.index',compact('localities'));
 	}
 
@@ -22,7 +51,9 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Localities.create');
+		$all_categories=$this->category->all();
+		$all_locations=$this->location->all();
+		return View::make('Localities.create',compact('all_categories','all_locations'));
 	}
 
 	/**
@@ -33,15 +64,19 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$credentianls=Input::all();
-		$validator = Validator::make($credentianls, Locality::$rules);
+		$credentials=Input::all();
+		$validator = Validator::make($credentials, Locality::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$comment=Locality::create($credentianls);
+		$this->location->increment_no($credentials['locality_location_id']);
+		$created=Locality::create($credentials);
+		if ($created)
+			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_created'));
+		else
+			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_already_failed'));
 	}
-
 	/**
 	 * Display the specified resource.
 	 * GET /localities/{id}
@@ -64,8 +99,10 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+		$all_categories=$this->category->all();
+		$all_locations=$this->location->all();
 		$localityDetails=Locality::find($id);
-		return View::make('Localities.create',compact('localityDetails'));
+		return View::make('Localities.create',compact('all_categories','all_locations','localityDetails'));
 	}
 
 	/**
@@ -100,11 +137,12 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+		$location=$this->locality->getLocality($id);
+		$this->location->decrement_no($location[0]->locality_location_id);
 		$deleted=Locality::destroy($id);
 		if($deleted)
 			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_deleted'));
 		else
 			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_delete_failed'));
 	}
-
 }

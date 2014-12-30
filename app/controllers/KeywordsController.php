@@ -70,9 +70,9 @@ class KeywordsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store($credentials)
+	public function store()
 	{
-		dd($credentials);
+		//
 	}
 
 	/**
@@ -84,17 +84,7 @@ class KeywordsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$all_categories=$this->category->all();
-		$all_locations=$this->location->all();
-		$all_subcategories=$this->subcategory->all();
-		$all_venues=$this->venue->all();
-		$age_group=$this->age_group;
-		$difficulty_level=$this->difficulty_level;
-		$gender_group=$this->gender_group;
-		$recurring=$this->recurring;
-		$trial=$this->trial;
-		$weekdays=$this->weekdays;
-		return View::make('Keywords.show',compact('all_categories','all_locations','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
+		//
 	}
 
 	/**
@@ -106,16 +96,7 @@ class KeywordsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$batchDetails=Batch::find($id);
-		$weekdays=$this->weekdays;
-		$batch_class=array();
-		foreach($this->weekdays as $data){
-			if($batchDetails['batch_class_on_'.$data])
-				array_push($batch_class,$data);
-		}
-		$batchDetails['batch_class']=$batch_class;
-		$all_categories=$this->category->all();
-		return View::make('Keywords.create',compact('batchDetails','all_categories','weekdays'));
+		//
 	}
 
 	/**
@@ -127,16 +108,7 @@ class KeywordsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$credentials=Input::all();
-		foreach($this->weekdays as $data){
-			$credentials['batch_class_on_'.$data]=0;
-		}
-		if(!empty($credentials['batch_class'])){
-			foreach($credentials['batch_class'] as $data){
-				$credentials['batch_class_on_'.$data]=1;
-	    	}
-		}
-		dd($credentials);
+		//
 	}
 
 	/**
@@ -151,4 +123,8 @@ class KeywordsController extends \BaseController {
 		//
 	}
 
+	public function instituteByCategory($category)
+	{
+		return $this->categoryInstitute->getInstituteForCategory($category);
+	}
 }

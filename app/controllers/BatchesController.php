@@ -51,9 +51,9 @@ class BatchesController extends \BaseController {
 	public function index()
 	{
 		$batches=Batch::all();
-		$all_locations=$this->location->all();
 		$all_categories=$this->category->all();
-		return View::make('Miscellaneous.home',compact('all_locations','all_categories'));
+		$all_locations=$this->location->all();
+		return View::make('Miscellaneous.home',compact('batches','all_categories','all_locations'));
 	}
 
 	/**
@@ -65,6 +65,7 @@ class BatchesController extends \BaseController {
 	public function create()
 	{
 		$all_categories=$this->category->all();
+		$all_locations=$this->location->all();
 		$all_subcategories=$this->subcategory->all();
 		$all_venues=$this->venue->all();
 		$age_group=$this->age_group;
@@ -73,7 +74,7 @@ class BatchesController extends \BaseController {
 		$recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		return View::make('Batches.create',compact('all_categories','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
+		return View::make('Batches.create',compact('all_categories','all_locations','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
 	}
 
 	/**

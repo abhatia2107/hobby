@@ -1,1 +1,4 @@
-/home/abhishek/Hobby/app/views/Keywords/show.blade.php
+@extends('Layouts.layout')
+@section('content')
+
+@stop

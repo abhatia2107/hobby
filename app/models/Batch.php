@@ -4,6 +4,8 @@ class Batch extends \Eloquent {
 
     protected $guarded = [
         'id',
+        'batch_class',
+        'batch_photo',
         'batch_approved',
         'created_at',
         'updated_at',

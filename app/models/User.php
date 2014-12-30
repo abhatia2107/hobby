@@ -46,5 +46,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return ($updated);
     } 
 
+    public function userExist($id)
+    {
+    	if(count(DB::table('users')->where('id','=',$id)->get(['id'])))
+	    	return true;
+	    else
+	    	return false;
+    }
+
+    public function getEmailVerified($credentials)
+    {
+    	$user_email=DB::table('users')->where('id','=',$credentials['admin_user_id'])->get(['user_email']);
+    	if($user_email==$credentials['user_email'])
+    		return true;
+    	else
+	    	return false;
+    }
 
 }

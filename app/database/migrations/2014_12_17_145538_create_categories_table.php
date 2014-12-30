@@ -15,6 +15,7 @@ class CreateCategoriesTable extends Migration {
 		Schema::create('categories', function($table){
 			$table->increments("id");
 			$table->string("category",50);
+			$table->integer("category_no_of_subcategories");
 			$table->timestamps();
 		});
 	}

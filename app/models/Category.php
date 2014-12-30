@@ -14,8 +14,12 @@ class Category extends \Eloquent {
 
 	public function updateCategory($credentials,$id)
     {
-        $updated=DB::table('category')->where('id','=',$id)->update($credentials);
+        $updated=DB::table('categories')->where('id','=',$id)->update($credentials);
         return ($updated);
     } 
 
+    public function categoryName($id)
+    {
+        return DB::table('categories')->where('id','=',$id)->get(['category']);
+    }
 }

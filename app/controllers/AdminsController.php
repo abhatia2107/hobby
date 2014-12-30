@@ -2,6 +2,36 @@
 
 class AdminsController extends \BaseController {
 
+	private $admin;
+	private $batch;
+	private $category;
+	private $comment;
+	private $institute;
+	private $keyword;
+	private $locality;
+	private $location;
+	private $subcategory;
+	private $subscription;
+	private $user;
+	private $venue;
+
+	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
+	{
+		$this->admin = $adminObject;
+		$this->batch = $batchObject;
+		$this->category = $categoryObject;
+		$this->comment = $commentObject;
+		$this->institute = $instituteObject;
+		$this->keyword = $keywordObject;
+		$this->locality=$localityObject;
+		$this->location = $locationObject;
+		$this->subcategory = $subcategoryObject;
+		$this->subscription = $subscriptionObject;
+		$this->user = $userObject;
+		$this->venue = $venueObject;
+	}
+
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /admins
@@ -10,7 +40,8 @@ class AdminsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$admins=Admin::all();
+		$admins=$this->admin->getalladmins();
+		//dd($admins);
 		return View::make('Admins.index',compact('admins'));
 	}
 
@@ -34,12 +65,24 @@ class AdminsController extends \BaseController {
 	public function store()
 	{
 		$credentials=Input::all();
+		//dd($credentials);
 		$validator = Validator::make($credentials, Admin::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('admin.admin_create_failed'));
 		}
+		$user_id=$this->user->userExist($credentials['admin_user_id']);
+		if(!$user_id)
+		{
+			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('admin.admin_user_not_exist'));
+		}
+		$email=$this->user->getEmailVerified($credentials);
+		if(!$email)
+		{
+			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('admin.admin_email_mismatch'));
+		}
 		$created=Admin::create($credentials);
+		dd($created);
 		if($created)
 			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_created'));
 		else
@@ -56,7 +99,7 @@ class AdminsController extends \BaseController {
 	public function show($id)
 	{
 		$adminDetails=Admin::find($id);
-		return View::make('Admins.show',compact('adminDetails'));
+		return Redirect::to('/users/'.$adminDetails['admin_user_id']);
 	}
 
 	/**

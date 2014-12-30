@@ -15,7 +15,13 @@ class Subcategory extends \Eloquent {
     } 
 
 	public static $rules = [		
-		'category_id'=>'required|numeric',
+		'subcategory_category_id'=>'required|numeric',
 		'subcategory'=>'required|alpha',
 	];
+
+	public function subcategoriesForCategory($id)
+	{
+		return DB::table('subcategories')->where('subcategory_category_id','=',$id)->get();
+	}
+
 }

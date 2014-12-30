@@ -15,4 +15,8 @@ return array(
 		"admin_delete_failed" => "Sorry, We are unable to delete the admin",
 		
 		"admin_already_failed"=>"You already have same details of admin in your list",
+	
+		"admin_user_not_exist"=>"No user exist with this User ID.",
+
+		"admin_email_mismatch"=>"Email doesn't match our records for the user id.",
 	);

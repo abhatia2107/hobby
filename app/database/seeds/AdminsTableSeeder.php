@@ -1,20 +1,16 @@
 <?php
 
-// Composer: "fzaninotto/faker": "v1.3.0"
-use Faker\Factory as Faker;
-
 class AdminsTableSeeder extends Seeder {
 
-	public function run()
-	{
-		$faker = Faker::create();
-
-		foreach(range(1, 10) as $index)
-		{
-			Admin::create([
-
-			]);
+   	public function run()
+   	{
+		$faker = Faker\Factory::create();
+		foreach(range(1,20) as $index)
+		{ 
+			DB::table('admins')->insert(array(
+			'admin_user_id'=>$faker->unique()->randomNumber(1,20),
+		));
 		}
-	}
+  	}
 
 }

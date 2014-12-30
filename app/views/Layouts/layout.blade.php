@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @include('head')
+    @include('Templates.head')
 	<title></title>
 </head>
-<body style="padding-top: 75px;" class="home page page-id-6 page-template page-template-page-templates page-template-template-home page-template-page-templatestemplate-home-php custom-background template-home fixed-header directory-fields color-scheme-default footer- woocommerce-social-login listify-child wp-job-manager-categories-enabled wp-job-manager-categories-only">
+<body style="" class="home page page-id-6 page-template page-template-page-templates page-template-template-home page-template-page-templatestemplate-home-php custom-background template-home  directory-fields color-scheme-default footer- woocommerce-social-login listify-child wp-job-manager-categories-enabled wp-job-manager-categories-only">
     <div id="page" class="hfeed site">
 <!--Header Section contains sign-in sign-up searchbox and logo -->
-    <header id="masthead" class="site-header" role="banner">@include('header')</header>
-
-
-    
+    @include('Templates.header')
+    @include('Templates.navbar')
 <!--sign-In pop up modal-->
     <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        @include('signin')
+        @include('Users.signin')
     </div>
 <!--sign-UP pop up modal-->
     <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        @include('signup')
+        @include('Users.signup')
     </div>
     <div id="content" class="site-content">
         @yield('content')
     </div>
     <!--Footer Section social networking links-->
-    <div class="footer-wrapper">@include('footer')</div>
+    <div class="footer-wrapper">@include('Templates.footer')</div>
     
     </div>
     <!-- Few Scripts from Listify Template-->

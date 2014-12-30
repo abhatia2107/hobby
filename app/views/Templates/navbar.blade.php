@@ -1,30 +1,25 @@
-<p style="height:1px"></p>
-<nav class="navbar navbar-inverse ">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-                <li  class="active"><a href="#">Art&Craft</a></li>
-                <li><a href="#" >Cooking</a></li>
-                <li><a href="#">Dance</a></li>
-                <li><a href="#">Education</a></li>
-                <li><a href="#" >Fitness</a></li>
-                <li><a href="#">Media</a></li>
-                <li><a href="#">Music</a></li>
-                <li><a href="#" >Professional</a></li>
-                <li><a href="#">Sports</a></li>
-                <li><a href="#">Technology</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-
-                <li><a href="#"> Submit Listing</a></li>
-            </ul>
-        </div>
+<div class="row">
+    <div class=" col-sm-10 col-md-10 ">
+        <nav class="navbar navbar-inverse" >
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        @foreach($all_categories as $data)
+                            <li ><a href="category/{{$data->id}}">{{$data->category}}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
-</nav>
+    <div class= "col-sm-2 col-md-2 ">
+        <button class="btn btn-lg" style="width:100%;height:52px">Submit Listing</button>
+    </div>
+</div>

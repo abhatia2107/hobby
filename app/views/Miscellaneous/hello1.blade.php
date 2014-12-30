@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('Layouts.layout')
 @section('content')
 <div style="background-image: url(https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/10/main-bg-top_mini-1.jpg);" class="homepage-cover page-cover entry-cover has-image">
                <div class="cover-wrapper container">

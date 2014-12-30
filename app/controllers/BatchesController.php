@@ -51,7 +51,9 @@ class BatchesController extends \BaseController {
 	public function index()
 	{
 		$batches=Batch::all();
-		return View::make('Batches.index',compact('batches'));
+		$all_locations=$this->location->all();
+		$all_categories=$this->category->all();
+		return View::make('Miscellaneous.home',compact('all_locations','all_categories'));
 	}
 
 	/**
@@ -110,6 +112,20 @@ class BatchesController extends \BaseController {
 		}
 		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
+		if (Input::hasFile('batch_photo'))
+		{
+
+		   	/**for long file name **/
+		   	$extension = Input::file('batch_photo')->getClientOriginalExtension();
+		   	$name = Input::file('batch_photo')->getClientOriginalName();
+		   	$imageName = $this->getImageName($name,$extension);
+		   	$credentianls['batch_photo']=$imageName;
+
+		   	$fileName = $maxEventId.'.'.$extension;
+		   	$thumbnailFile=Input::file('batch_photo');
+		   	$thumbnailFile->move($destinationPathForThumbnail,$fileName);
+			
+		}
 		unset($credentials["batch_class"]);
 		unset($credentials["batch_photo"]);
 		$batch=Batch::create($credentials);

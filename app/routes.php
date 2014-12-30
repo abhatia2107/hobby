@@ -16,7 +16,7 @@ Route::get('/', function()
 	return View::make('Miscellaneous.home');
 });
 
-Route::get('/hello',function() { return View::make('layout'); });
+
 
 Route::resource('admins', 'AdminsController');
 Route::resource('batches', 'BatchesController');

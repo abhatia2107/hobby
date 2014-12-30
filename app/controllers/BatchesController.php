@@ -91,22 +91,32 @@ class BatchesController extends \BaseController {
 				$credentials['batch_class_on_'.$data]=1;
 	    	}
 		}
-		dd($credentials);
-//		$validator = Validator::make($credentials, Batch::$rules);
-
-		/** to check wether event date is valid or not **/
-
-/*		if($validator->fails())
+		$dateToday=date_create(Carbon::now()->toDateString());
+		$startDate=date_create($credentials['batch_start_date']);
+		$endDate=date_create($credentials['batch_end_date']);
+		$credentials['batch_institute_id']=1;
+		$validator = Validator::make($credentials, Batch::$rules);
+		if($validator->fails())
 		{
-			dd("error");
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-
+		if(($dateToday >= $startDate)||($dateToday >= $endDate))
+		{
+			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_currentDateError'));
+		}
+		if($startDate > $endDate)
+		{	
+			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_startEndDateError'));		
+		}
+		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
+			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
+		unset($credentials["batch_class"]);
+		unset($credentials["batch_photo"]);
 		$batch=Batch::create($credentials);
-		return Redirect::to('/batches/')->with('success',Lang::get('batch.batch_created'));
-*/		
-		dd($credentials);
-		
+		if($batch) 
+			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_created'));
+		else
+			return Redirect::to('/batches')->with('failure',Lang::get('batch.batch_create_failed'));
 	}
 
 	/**
@@ -169,40 +179,54 @@ class BatchesController extends \BaseController {
 	    	}
 		}
 		$credentials['batch_institute_id']=1;
-		/*dd($credentials);*/
+		$dateToday=date_create(Carbon::now()->toDateString());
+		$startDate=date_create($credentials['batch_start_date']);
+		$endDate=date_create($credentials['batch_end_date']);
 		$validator = Validator::make($credentials, Batch::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
+		if(($dateToday >= $startDate)||($dateToday >= $endDate))
+		{
+			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_currentDateError'));
+		}
+		if($startDate > $endDate)
+		{	
+			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_startEndDateError'));		
+		}
 		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
+		unset($credentials["batch_class"]);
+		unset($credentials["batch_photo"]);
 		$updated=$this->batch->updateBatch($credentials,$id);
 		if ($updated) 
 			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_updated'));
 		else
 			return Redirect::to('/batches')->with('failure',Lang::get('batch.batch_already_failed'));
+
 	}
 
 	public function validationBeforeSavingBatch($credentials)
 	{
-		$dateToday=Carbon::now();
-		$startDate=$credentials['batch_start_date'];
-		$endDate=$credentials['batch_end_date'];
-		
+		$dateToday=date_create(Carbon::now()->toDateString());
+		$startDate=date_create($credentials['batch_start_date']);
+		$endDate=date_create($credentials['batch_end_date']);
+		$validator = Validator::make($credentials, Batch::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
 		if(($dateToday >= $startDate)||($dateToday >= $endDate))
 		{
-			return Redirect::back()->withInput()->with('failed',Lang::get('batch.batch_currentDateError'));
+			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_currentDateError'));
 		}
-		
 		if($startDate > $endDate)
 		{	
-			return Redirect::back()->withInput()->with('failed',Lang::get('batch.batch_startEndDateError'));		
+			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_startEndDateError'));		
 		}
-
 		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
-
 	}
 	/**
 	 * Remove the specified resource from storage.

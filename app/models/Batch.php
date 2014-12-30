@@ -38,6 +38,7 @@ class Batch extends \Eloquent {
    public function updateBatch($credentials,$id)
     {
         $updated=DB::table('batches')->where('id','=',$id)->update($credentials);
+        /*$updated=true;*/
         return ($updated);
     } 
 

@@ -13,6 +13,90 @@
 body {
   padding-top: 60px;
 }
+.navbar_submit_listing
+{
+    width:100% !important;
+    height:52px !important;
+}
+.header_location_dropdown
+{
+    margin-top: 7px;
+    width:100% !important;
+}
+.header_signin
+{
+    padding-top: 11px;
+    font-size: 20px;
+    width:50%;
+    padding-left:20px;
+    color:white;
+}
+.header_signup
+{
+    padding-top: 11px;
+    font-size: 20px;   
+    color:white;
+}
+.header_signin_a {
+    color:white;
+    text-decoration:none;
+}
+.header_signin_a:hover {
+    color:white;
+    text-decoration:none;
+}
+.header_signup_a {
+    color:white;
+    text-decoration:none;
+}
+.header_signup_a:hover {
+    color:white;
+    text-decoration:none;
+}
+.header_myaccount{
+    padding-top: 11px;
+    font-size: 20px;
+    width:50%;
+    padding-left:20px;
+    color:white;
+}
+.header_myaccount_a {
+    color:white;
+    text-decoration:none;
+}
+.header_myaccount_a:hover {
+    color:white;
+    text-decoration:none;
+}
+.header_logout
+{
+    padding-top: 11px;
+    font-size: 20px;
+    color:white;
+}
+.header_logout_a
+{
+    color:white;
+    text-decoration: none;
+}
+.header_logout_a:hover
+{
+    color:white;
+    text-decoration: none;
+}
+
+.header_search_button{
+    height: 34px;
+    margin-top: 1px;
+    font-size: 18px !important;
+    padding-top: 5px !important;"
+}
+.header_row1{
+    background-color: #3396d1;
+}
+.layout_header{
+    font-family: 'Montserrat', sans-serif;";
+}
 .form_create{
 	background-color:#ffffff;
 	font-size:14px;
@@ -24,7 +108,7 @@ body {
 .form-control-feedback {
 position: absolute;
 top: 0;
-right: 10px;
+right: 10px !important;
 z-index: 2;
 display: none;
 width: 34px;

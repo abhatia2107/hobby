@@ -20,6 +20,6 @@
         </nav>
     </div>
     <div class= "col-sm-2 col-md-2 ">
-        <button class="btn btn-lg" style="width:100%;height:52px">Submit Listing</button>
+        <button class="btn btn-lg navbar_submit_listing" >Submit Listing</button>
     </div>
 </div>

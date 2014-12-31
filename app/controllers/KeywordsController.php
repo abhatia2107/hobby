@@ -6,6 +6,7 @@ class KeywordsController extends \BaseController {
 	private $admin;
 	private $batch;
 	private $category;
+	private $categoryInstitute;
 	private $comment;
 	private $institute;
 	private $keyword;
@@ -23,11 +24,12 @@ class KeywordsController extends \BaseController {
 	private $trial=array("Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only in beginning of batch","Paid Trial only in beginning of batch");
 	private $weekdays=array("monday","tuesday","wednesday","thursday","friday","saturday","sunday");
 	
-	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
+	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, CategoryInstitute $categoryInstituteObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
 	{
 		$this->admin = $adminObject;
 		$this->batch = $batchObject;
 		$this->category = $categoryObject;
+		$this->categoryInstitute = $categoryInstituteObject;
 		$this->comment = $commentObject;
 		$this->institute = $instituteObject;
 		$this->keyword = $keywordObject;
@@ -84,7 +86,25 @@ class KeywordsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$categoryInstituteArray=$this->categoryInstitute->getInstituteForCategory($id);	
+		$size=count($categoryInstituteArray);
+		for ($i=0; $i < $size; $i++) { 
+			$instituteArray[$i]=$categoryInstituteArray[$i]->institute_id;
+		}
+		//dd($instituteArray);
+		$batchesForInstitute = $this->batch->getBatchForInstitute($instituteArray);
+		dd($batchesForInstitute);
+		$all_categories=$this->category->all();
+		$all_locations=$this->location->all();
+		$all_subcategories=$this->subcategory->all();
+		$all_venues=$this->venue->all();
+		$age_group=$this->age_group;
+		$difficulty_level=$this->difficulty_level;
+		$gender_group=$this->gender_group;
+		$recurring=$this->recurring;
+		$trial=$this->trial;
+		$weekdays=$this->weekdays;
+		return View::make('Keywords.show',compact('all_categories','all_locations','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays','all_batches'));
 	}
 
 	/**
@@ -123,8 +143,5 @@ class KeywordsController extends \BaseController {
 		//
 	}
 
-	public function instituteByCategory($category)
-	{
-		return $this->categoryInstitute->getInstituteForCategory($category);
-	}
+	
 }

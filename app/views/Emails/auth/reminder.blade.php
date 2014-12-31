@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<!-- When user sign up but didn't verified his/her email ID, this is a reminder email to verify your account. -->
+<html lang="en-US"
 	<head>
 		<meta charset="utf-8">
 	</head>

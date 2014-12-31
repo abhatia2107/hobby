@@ -19,10 +19,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password', 'remember_token');
+	protected $hidden = array('user_password', 'remember_token');
 
 	protected $guarded = [
 		'id',
+		'user_password_confirmation',
 		'user_confirmed',
 		'created_at',
 		'updated_at',
@@ -63,4 +64,52 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	    	return false;
     }
 
+    public static $rulesSignup=[
+		'user_email'=>'required|unique:users,user_email',
+		'user_first_name'=>'required',
+		'user_last_name'=>'required',
+		'user_password'=>'required|confirmed|alpha_num|min:6',
+		'user_password_confirmation'=>'required',
+	];
+
+	public static $rulesChangePassword=[
+		'current_password'=>'required',
+		'user_password'=>'required|confirmed|alpha_num|min:6',
+		'user_password_confirmation'=>'required',
+	];
+	public static $uniqueEmail=[
+		'user_email'=>'unique:users,user_email',
+	];
+	public static $rulesUpdatePersonalDetail=[
+		'user_first_name'=>'required',
+		'user_last_name'=>'required',
+		'user_mobile_no'=>'size:10',
+		'user_email'=>'required|email',
+	];
+	public function getUid($uid)
+	{
+		return DB::select('select * from users where user_fb_id=?',array($uid));
+	}
+	/**
+	*Function To Get 'user_id' From Users Table 
+	*@param emailid of the user
+	*@return array of userid
+	*/
+	public function  getid($email)
+	{
+		return DB::select('select user_id from users where user_email=?',array($email));
+	}
+	/**
+	*To change the password of the user.
+	*@param user_id of the logged in user
+	*
+	*/
+	public function change_password($id)
+	{
+		
+	}
+	public function getAuthPassword()
+	{
+		return $this->password;
+	}
 }

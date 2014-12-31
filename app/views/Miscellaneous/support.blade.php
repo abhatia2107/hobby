@@ -1,8 +1,8 @@
-@extends('layouts.layoutdef')
+@extends('Layouts.layout')
 @section('pagestylesheet')
   <link href="/css/bootstrap/css/jquery-ui.css" rel="stylesheet">
 @stop
-@section("contents")
+@section('content')
   @if($errors->has())
     @foreach($errors->all() as $error)
       <p>{{ $error }}<br>

@@ -8,13 +8,13 @@ class InstitutesTableSeeder extends Seeder {
               $faker->addProvider(new Faker\Provider\en_GB\Address($faker));
               $faker->addProvider(new Faker\Provider\en_GB\Internet($faker));
               $faker->addProvider(new Faker\Provider\en_US\Company($faker));
-              foreach(range(1,10) as $index)
+              foreach(range(1,30) as $index)
               { 
                      DB::table('institutes')->insert(array(
                      'institute' =>$faker->company,
                      'institute_location_id'=>$faker->randomDigitNotNull,
                      'institute_url' =>$faker->company,
-                     'institute_user_id'=>$faker->unique()->randomNumber(1,20),
+                     'institute_user_id'=>$faker->unique()->randomNumber(1,30),
                      'institute_website' =>$faker->url,
                      'institute_fblink' =>$faker->userName,
                      'institute_twitter' =>$faker->userName,

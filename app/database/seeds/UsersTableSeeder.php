@@ -6,7 +6,7 @@ class UsersTableSeeder extends Seeder {
        {
               $faker = Faker\Factory::create();
               $faker->addProvider(new Faker\Provider\en_US\Person($faker));
-              foreach(range(1,40) as $index)
+              foreach(range(1,30) as $index)
               {
                      DB::table('users')->insert(array(
                      'user_first_name' => $faker->firstName,
@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder {
                      'user_remember_token'=>$faker->lexify(),
                      'user_facebook_access_token'=>$faker->lexify(),
                      'user_confirmation_code' =>$faker->randomNumber(1000000,10000000),
+                     'user_csrf_token' =>$faker->lexify(),
                      'user_confirmed' =>$faker->boolean,
                      ));
               }

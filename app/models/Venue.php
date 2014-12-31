@@ -25,5 +25,9 @@ class Venue extends \Eloquent {
         return ($updated);
     } 
 
-
+    public function getVenueForInstitute($venue_institute_id)
+    {
+        return DB::table('venues')->whereIn('venue_institute_id',$venue_institute_id)->get();
+    }
+    
 }

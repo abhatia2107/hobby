@@ -9,7 +9,7 @@ class BatchPhotoSeeder extends Seeder {
               { 
                      DB::table('batch_photo')->insert(array(
                      'batch_id'=>$faker->randomDigitNotNull,
-                     'photo_id'=>$faker->unique()->randomNumber(1,50),
+                     'photo_id'=>$faker->unique()->randomNumber(1,30),
                     ));
               }
        }

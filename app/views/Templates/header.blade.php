@@ -46,9 +46,11 @@
 		@endif
 		<div class=" col-sm-2 col-md-2 ">
 			<select  style="margin-top: 7px;width:100%">
-				@foreach($all_locations as $data)
-					<option ><a href="location/{{$data->id}}">{{$data->location}}</a></option>
-				@endforeach
+				@if(isset($all_locations))
+					@foreach($all_locations as $data)
+						<option ><a href="location/{{$data->id}}">{{$data->location}}</a></option>
+					@endforeach
+				@endif
 			</select>
 		</div>
 	</div>

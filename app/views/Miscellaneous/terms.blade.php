@@ -1,5 +1,5 @@
-@extends('layouts.layoutdef')
-@section('contents')
+@extends('Layouts.layout')
+@section('content')
 	<div class="container main-container headerOffset">
   		<div class="row innerPage">
     		<div class="col-lg-12 col-md-12 col-sm-12">

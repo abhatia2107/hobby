@@ -37,4 +37,5 @@ class Locality extends \Eloquent {
 	{
 		return DB::table('localities')->Join('locations', 'localities.locality_location_id', '=', 'locations.id')->get(['localities.id','localities.locality','localities.locality_location_id','locations.location']);
 	}
+
 }

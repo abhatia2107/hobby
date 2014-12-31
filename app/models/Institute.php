@@ -26,4 +26,9 @@ class Institute extends \Eloquent {
         return ($updated);
     } 
 
+    public function getInstituteForCategory($id)
+    {
+        return DB::table('institutes')->whereIn('institutes.id',$id)->Join('venues', 'institutes.id', '=', 'venues.venue_institute_id')->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')->Join('locations', 'locations.id', '=', 'venues.venue_location_id')->get();
+    }
+
 }

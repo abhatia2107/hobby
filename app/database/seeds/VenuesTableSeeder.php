@@ -6,7 +6,7 @@ class VenuesTableSeeder extends Seeder {
        {
               $faker = Faker\Factory::create();
               $faker->addProvider(new Faker\Provider\en_GB\Address($faker));
-              foreach(range(1,20) as $index)
+              foreach(range(1,30) as $index)
               { 
                      DB::table('venues')->insert(array(
                      'venue'=>$faker->name,

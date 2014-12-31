@@ -34,4 +34,5 @@ class Location extends \Eloquent {
         $updated=DB::table('locations')->where('id','=',$id)->decrement('location_no_of_localities');
         return ($updated);
     }
+
 }

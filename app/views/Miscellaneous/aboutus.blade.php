@@ -1,5 +1,5 @@
-@extends('layouts.layoutdef')
-@section('contents')
+@extends('Layouts.layout')
+@section('content')
 
 <div class="container main-container headerOffset">
   

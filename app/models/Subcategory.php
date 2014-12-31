@@ -37,4 +37,10 @@ class Subcategory extends \Eloquent {
 	{
 		return DB::table('subcategories')->Join('categories', 'subcategories.subcategory_category_id', '=', 'categories.id')->get(['subcategories.id','subcategories.subcategory','subcategories.subcategory_category_id','categories.category']);
 	}
+
+	public function getSubcategoryForCategory($subcategory_category_id)
+    {
+    	return DB::table('subcategories')->where('subcategory_category_id','=',$subcategory_category_id)->get();
+    }
+    
 }

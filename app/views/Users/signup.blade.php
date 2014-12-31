@@ -147,7 +147,7 @@
                                 message: 'The password can only consist of alphabetical, number and underscore'
                             },
                             identical: {
-                                field: 'password',
+                                field: 'user_password',
                                 message: 'The password and its confirm must be the same'
                             }
                         }

@@ -9,10 +9,10 @@ class SubscriptionsTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
-		foreach(range(1, 20) as $index)
+		foreach(range(1,30) as $index)
 		{
 			Subscription::create([
-				'subscription_user_id'=>$faker->unique()->randomNumber(1,20),
+				'subscription_user_id'=>$faker->unique()->randomNumber(1,30),
 			]);
 		}
 	}

@@ -11,9 +11,11 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        @foreach($all_categories as $data)
-                            <li ><a href="/keywords/{{$data->id}}">{{$data->category}}</a></li>
-                        @endforeach
+                        @if(isset($all_locations))
+                            @foreach($all_categories as $data)
+                                <li ><a href="/keywords/{{$data->id}}">{{$data->category}}</a></li>
+                            @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>

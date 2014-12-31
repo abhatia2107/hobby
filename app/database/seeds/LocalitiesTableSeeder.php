@@ -9,7 +9,7 @@ class LocalitiesTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
-		foreach(range(1, 10) as $index)
+		foreach(range(1,30) as $index)
 		{
 			Locality::create([
 				'locality_location_id'=>$faker->randomDigitNotNull,

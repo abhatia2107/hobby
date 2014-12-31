@@ -6,6 +6,7 @@ class KeywordsController extends \BaseController {
 	private $admin;
 	private $batch;
 	private $category;
+	private $categoryInstitute;
 	private $comment;
 	private $institute;
 	private $keyword;
@@ -23,11 +24,12 @@ class KeywordsController extends \BaseController {
 	private $trial=array("Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only in beginning of batch","Paid Trial only in beginning of batch");
 	private $weekdays=array("monday","tuesday","wednesday","thursday","friday","saturday","sunday");
 	
-	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
+	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, CategoryInstitute $categoryInstituteObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
 	{
 		$this->admin = $adminObject;
 		$this->batch = $batchObject;
 		$this->category = $categoryObject;
+		$this->categoryInstitute = $categoryInstituteObject;
 		$this->comment = $commentObject;
 		$this->institute = $instituteObject;
 		$this->keyword = $keywordObject;
@@ -70,9 +72,9 @@ class KeywordsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store($credentials)
+	public function store()
 	{
-		dd($credentials);
+		//
 	}
 
 	/**
@@ -84,7 +86,14 @@ class KeywordsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$all_batches = $this->batch->all();
+		$categoryInstituteArray=$this->categoryInstitute->getInstituteForCategory($id);	
+		$size=count($categoryInstituteArray);
+		for ($i=0; $i < $size; $i++) { 
+			$instituteArray[$i]=$categoryInstituteArray[$i]->institute_id;
+		}
+		//dd($instituteArray);
+		$batchesForInstitute = $this->batch->getBatchForInstitute($instituteArray);
+		dd($batchesForInstitute);
 		$all_categories=$this->category->all();
 		$all_locations=$this->location->all();
 		$all_subcategories=$this->subcategory->all();
@@ -107,16 +116,7 @@ class KeywordsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$batchDetails=Batch::find($id);
-		$weekdays=$this->weekdays;
-		$batch_class=array();
-		foreach($this->weekdays as $data){
-			if($batchDetails['batch_class_on_'.$data])
-				array_push($batch_class,$data);
-		}
-		$batchDetails['batch_class']=$batch_class;
-		$all_categories=$this->category->all();
-		return View::make('Keywords.create',compact('batchDetails','all_categories','weekdays'));
+		//
 	}
 
 	/**
@@ -128,16 +128,7 @@ class KeywordsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$credentials=Input::all();
-		foreach($this->weekdays as $data){
-			$credentials['batch_class_on_'.$data]=0;
-		}
-		if(!empty($credentials['batch_class'])){
-			foreach($credentials['batch_class'] as $data){
-				$credentials['batch_class_on_'.$data]=1;
-	    	}
-		}
-		dd($credentials);
+		//
 	}
 
 	/**
@@ -152,4 +143,5 @@ class KeywordsController extends \BaseController {
 		//
 	}
 
+	
 }

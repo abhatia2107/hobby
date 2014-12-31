@@ -19,4 +19,8 @@ class CategoryInstitute extends \Eloquent {
         return ($updated);
     } 
 
+    public function getInstituteForCategory($category_id)
+    {
+        return DB::table('category_institute')->where('category_id','=',$category_id)->get();
+    }
 }

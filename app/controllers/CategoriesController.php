@@ -53,7 +53,9 @@ class CategoriesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Categories.create');
+		$all_categories=$this->category->all();
+		$all_locations=$this->location->all();
+		return View::make('Categories.create',compact('all_categories','all_locations'));
 	}
 
 	/**
@@ -64,13 +66,18 @@ class CategoriesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$credentianls=Input::all();
-		$validator = Validator::make($credentianls, Category::$rules);
+		$credentials=Input::all();
+		$validator = Validator::make($credentials, Category::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$category=Category::create($credentianls);
+		$credentials['category_no_of_subcategories']=0;
+		$created=Category::create($credentials);
+		if ($created) 
+			return Redirect::to('/categories')->with('success',Lang::get('category.category_created'));
+		else
+			return Redirect::to('/categories')->with('failure',Lang::get('category.category_already_failed'));
 	}
 
 	/**
@@ -83,7 +90,7 @@ class CategoriesController extends \BaseController {
 	public function show($id)
 	{
 		$categoryDetails=$this->subcategory->subcategoriesForCategory($id);
-		$category=$this->category->categoryName($id);
+		$category=$this->category->getCategory($id);
 		return View::make('Categories.show',compact('category','categoryDetails'));
 	}
 
@@ -96,8 +103,10 @@ class CategoriesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+		$all_categories=$this->category->all();
+		$all_locations=$this->location->all();
 		$categoryDetails=Category::find($id);
-		return View::make('Categories.create',compact('categoryDetails'));
+		return View::make('Categories.create',compact('all_categories','all_locations','categoryDetails'));
 	}
 
 	/**
@@ -132,7 +141,8 @@ class CategoriesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$deleted=Category::destroy($id);
+		$deleted1=Category::destroy($id);
+		$this->subcategory->deleteCategory($id);
 		if($deleted)
 			return Redirect::to('/categories')->with('success',Lang::get('category.category_deleted'));
 		else

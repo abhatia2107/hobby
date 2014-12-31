@@ -19,7 +19,7 @@ class Admin extends \Eloquent {
 		return ($updated);
 	}
 
-	public function getalladmins()
+	public function getAllAdmins()
 	{
 		return DB::table('admins')->Join('users', 'admins.admin_user_id', '=', 'users.id')->get(['admins.id','admins.admin_user_id','users.user_first_name','users.user_last_name']);
 	}

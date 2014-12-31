@@ -40,7 +40,7 @@ class AdminsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$admins=$this->admin->getalladmins();
+		$admins=$this->admin->getAllAdmins();
 		//dd($admins);
 		return View::make('Admins.index',compact('admins'));
 	}

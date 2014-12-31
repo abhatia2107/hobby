@@ -15,6 +15,7 @@ class CreateLocationsTable extends Migration {
 		Schema::create('locations', function($table){
 			$table->increments("id");
 			$table->string("location",255);
+			$table->integer("location_no_of_localities");
 			$table->timestamps();
 		});
 	}

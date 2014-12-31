@@ -127,8 +127,6 @@ pointer-events: none;
 .pac-placeholder {
     color: gray;
 }
-</style>
-<style type="text/css">
 .pac-container {
     background-color: #fff;
     position: absolute!important;

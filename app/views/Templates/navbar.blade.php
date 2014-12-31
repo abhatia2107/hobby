@@ -1,4 +1,4 @@
-<div class="row">
+<div class="clearfix" style="margin-left:-15px">
     <div class=" col-sm-10 col-md-10 ">
         <nav class="navbar navbar-inverse" >
             <div class="container-fluid">

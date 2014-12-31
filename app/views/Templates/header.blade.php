@@ -1,5 +1,5 @@
 @section("header")
-	<div class="row" style="background-color: #3396d1;">
+	<div class="clearfix" style="background-color: #3396d1;">
 		<div class=" col-sm-4 col-md-4  ">
 		<a class="navbar-brand" href="/">
 			<img src="/assets/images/logo.png" class="img-responsive" alt="HOBBY">

@@ -104,15 +104,17 @@ class KeywordsController extends \BaseController {
 		//dd($batchesForInstitute);
 		$instituteForCategory=$this->institute->getInstituteForCategory($instituteIdArray);
 		//dd($instituteForCategory);
-		$subcategoriesForCategory =  $this->subcategory->getSubcategoryForCategory($id);
-		//dd($subcategoriesForCategory);
 		$venuesForInstitute =  $this->venue->getVenueForInstitute($instituteIdArray);
 		dd($venuesForInstitute);*/
 
+		$localitiesForLocation = $this->locality->getlocalitiesForLocation(1);
+		//dd($localitiesForLocation);
+		$subcategoriesForCategory =  $this->subcategory->getSubcategoryForCategory($id);
+		//dd($subcategoriesForCategory);
 		$batchesForCategory = $this->batch->getBatchForCategory($id);
 		//dd($batchesForCategory);
 		
-		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategory'));
+		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategory','localitiesForLocation','subcategoriesForCategory'));
 	}
 
 	/**

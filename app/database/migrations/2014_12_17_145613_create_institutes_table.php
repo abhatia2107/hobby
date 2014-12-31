@@ -22,6 +22,7 @@ class CreateInstitutesTable extends Migration {
 			$table->string('institute_fblink',255)->nullable();
 			$table->string('institute_twitter',255)->nullable();
 			$table->longText('institute_description');
+			$table->integer('institute_rating');
 			$table->boolean('institute_approved');
 			$table->timestamps();
 			//Institute photo would be store as institute_id.jpg so no need for separate column.

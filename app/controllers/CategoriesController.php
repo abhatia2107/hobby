@@ -89,7 +89,7 @@ class CategoriesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$categoryDetails=$this->subcategory->subcategoriesForCategory($id);
+		$categoryDetails=$this->subcategory->getSubcategoryForCategory($id);
 		$category=$this->category->getCategory($id);
 		return View::make('Categories.show',compact('category','categoryDetails'));
 	}

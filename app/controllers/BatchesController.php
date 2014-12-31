@@ -145,7 +145,7 @@ class BatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$batchDetails=Batch::find($id);
+		$batchDetails= $this->batch->getBatch($id);
 		return View::make('Batches.show',compact('batchDetails'));
 	}
 

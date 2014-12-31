@@ -87,7 +87,7 @@ class LocationsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$locationDetails=$this->locality->localitiesForLocation($id);
+		$locationDetails=$this->locality->getLocalitiesForLocation($id);
 		$location=$this->location->getLocation($id);
 		return View::make('Locations.show',compact('location','locationDetails'));
 	}

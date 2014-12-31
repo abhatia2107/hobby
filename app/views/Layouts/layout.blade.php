@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		@include('Templates.head')
+	    @yield('pagestylesheet')
 	</head>
 	<body  class="home page page-id-6 page-template page-template-page-templates page-template-template-home page-template-page-templatestemplate-home-php custom-background template-home  directory-fields color-scheme-default footer- woocommerce-social-login listify-child wp-job-manager-categories-enabled wp-job-manager-categories-only">
 		<div id="page" class="hfeed site">
@@ -76,6 +77,9 @@
 		<div style="display: none;" class="pac-container"></div>
 		<script src="https://beacon-5.newrelic.com/1/e20a3d19de?a=6656365&amp;pl=1419191821978&amp;v=476.c73f3a6&amp;to=NQBaN0JUCEMDBkRZCQxKeQBEXAleTRFVXRYOBEwGHV0JXQc%3D&amp;ap=502&amp;be=2527&amp;fe=11717&amp;dc=2863&amp;f=%5B%5D&amp;perf=%7B%22timing%22:%7B%22of%22:1419191821978,%22n%22:0,%22dl%22:2417,%22di%22:5133,%22ds%22:5389,%22de%22:5533,%22dc%22:14243,%22l%22:14244,%22le%22:14326,%22r%22:1,%22re%22:1,%22f%22:1,%22dn%22:1,%22dne%22:1,%22c%22:1,%22ce%22:1,%22rq%22:17,%22rp%22:2415,%22rpe%22:2416%7D,%22navigation%22:%7B%7D%7D&amp;at=GUdNQQpOGxxABBIKHR8Y&amp;jsonp=NREUM.setToken" type="text/javascript"></script><script src="http://js-agent.newrelic.com/nr-476.min.js"></script><script src="http://beacon-5.newrelic.com/1/e20a3d19de?a=6656365&amp;pl=1419238232412&amp;v=476.c73f3a6&amp;to=NQBaN0JUCEMDBkRZCQxKeQBEXAleTRFVXRYOBEwGHV0JXQc%3D&amp;ap=502&amp;f=%5B%5D&amp;perf=%7B%22timing%22:%7B%22of%22:1419238232412,%22n%22:0,%22u%22:69,%22ue%22:70,%22dl%22:68,%22di%22:2574,%22ds%22:3503,%22de%22:3554,%22dc%22:5826,%22l%22:5826,%22le%22:5839,%22r%22:0,%22re%22:0,%22f%22:0,%22dn%22:0,%22dne%22:0,%22c%22:0,%22ce%22:0,%22rq%22:0,%22rp%22:0,%22rpe%22:0%7D,%22navigation%22:%7B%22ty%22:1%7D%7D&amp;at=GUdNQQpOGxxABBIKHR8Y&amp;jsonp=NREUM.setToken" type="text/javascript"></script>
 
-		
+	    @yield('pagejavascript')
+	    
+	    <!--this page specific jquery-->
+	    @yield('pagejquery')
 	</body>
 </html>

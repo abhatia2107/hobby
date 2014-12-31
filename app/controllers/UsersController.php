@@ -180,7 +180,7 @@ class UsersController extends \BaseController {
 		{
 			if($email_verification->confirmed==0)
 			{
-				return Redirect::to('/login')->with('failed',Lang::get('login.verify_email'));
+				return Redirect::to('/login')->with('failed',Lang::get('user.verify_email'));
 			}
 		}
 		if(Auth::attempt($credentials,$remember))
@@ -200,7 +200,7 @@ class UsersController extends \BaseController {
 			
 		else
 			{
-				return Redirect::to('/login')->with('failed',Lang::get('login.invalid_login'))->withInput(Input::except('user_password'));
+				return Redirect::to('/login')->with('failed',Lang::get('user.invalid_login'))->withInput(Input::except('user_password'));
 			}
 
 	}
@@ -225,7 +225,7 @@ class UsersController extends \BaseController {
 	{
 		Auth::logout();
 		Session::flush();
-    	Session::flash('success', Lang::get('login.logout'));
+    	Session::flash('success', Lang::get('user.logout'));
     	return Redirect::to("/login");
 	}
 	/**
@@ -254,13 +254,13 @@ class UsersController extends \BaseController {
 		$code = Input::get('code');
     	if (strlen($code) == 0) 
     	{
-    		return Redirect::to('/login')->with('failed', Lang::get('login.error_fb_comm'));
+    		return Redirect::to('/login')->with('failed', Lang::get('user.error_fb_comm'));
     	}
 
     	$facebook = new Facebook(Config::get('facebook'));
     	$uid = $facebook->getUser();
 
-    	if ($uid == 0) return Redirect::to('/login')->with('failed', Lang::get('login.error'));
+    	if ($uid == 0) return Redirect::to('/login')->with('failed', Lang::get('user.error'));
     	/** $me contains all the user information in the form of associative array **/
     	$me = $facebook->api('/me');
  		
@@ -317,7 +317,7 @@ class UsersController extends \BaseController {
     	$id=$this->user->getUid($uid);
     	$id=$id[0]->id;
     	Auth::loginUsingId($id);
-    	return Redirect::to('/')->with('success',Lang::get('login.welcome',array('name'=>$me['first_name'])));
+    	return Redirect::to('/')->with('success',Lang::get('user.welcome',array('name'=>$me['first_name'])));
 	}
 	/**
 	*This function is to get all the current logged in user details which is passed to
@@ -384,7 +384,7 @@ class UsersController extends \BaseController {
  		/* Details are updated in database */
  		
 		$oldData->update($userData);
- 		return Redirect::back()->with('success',Lang::get('login.update_personal_detail'));
+ 		return Redirect::back()->with('success',Lang::get('user.update_personal_detail'));
 	}
 
 	/**
@@ -438,7 +438,7 @@ class UsersController extends \BaseController {
 			{
     			$message->to($email,$name)->subject('Welcome!');
 			});
-			return Redirect::to('/login')->with('success',Lang::get('signup.register_success'));
+			return Redirect::to('/login')->with('success',Lang::get('user.register_success'));
 		}	
 	}
 	/**
@@ -457,7 +457,7 @@ class UsersController extends \BaseController {
 			/* to check whether the email has been allready verified or not  */
 			if($validate->confirmed==1)
 			{
-				return Redirect::to('/login')->with('success',Lang::get('signup.email_already_verified'));
+				return Redirect::to('/login')->with('success',Lang::get('user.email_already_verified'));
 			}
 			/* to check the whether confirmation code is matching or not */
 			if($validate->user_confirmation_code==$confirmationCode)
@@ -466,7 +466,7 @@ class UsersController extends \BaseController {
 				$validate->user_confirmation_code="";
 				$validate->save();
 				Auth::loginUsingId($userId);
-				return Redirect::to('/myaccount')->with('success',Lang::get('signup.welcome',array("name"=>$validate->user_first_name)));
+				return Redirect::to('/myaccount')->with('success',Lang::get('user.welcome',array("name"=>$validate->user_first_name)));
 			}
 			else
 			{

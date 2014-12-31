@@ -5,6 +5,7 @@ class Institute extends \Eloquent {
     protected $guarded = [
         'id',
         'institute_approved',
+        'institute_rating',
         'created_at',
         'updated_at',
     ];

@@ -28,9 +28,9 @@ class Locality extends \Eloquent {
         return DB::table('localities')->where('id','=',$id)->get(['locality_location_id']);
     }
 
-	public function localitiesForCategory($id)
+	public function getLocalitiesForLocation($locality_location_id)
 	{
-		return DB::table('localities')->where('locality_location_id','=',$id)->get();
+		return DB::table('localities')->where('locality_location_id','=',$locality_location_id)->get();
 	}
 
 	public function getAllLocalities()

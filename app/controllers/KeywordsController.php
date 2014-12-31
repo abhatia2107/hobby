@@ -86,7 +86,7 @@ class KeywordsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$categoryInstituteArray=$this->categoryInstitute->getInstituteForCategory($id);	
+		/*$categoryInstituteArray=$this->categoryInstitute->getInstituteForCategory($id);	
 		$size=count($categoryInstituteArray);
 		for ($i=0; $i < $size; $i++) { 
 			$instituteArray[$i]=$categoryInstituteArray[$i]->institute_id;
@@ -94,6 +94,8 @@ class KeywordsController extends \BaseController {
 		//dd($instituteArray);
 		$batchesForInstitute = $this->batch->getBatchForInstitute($instituteArray);
 		dd($batchesForInstitute);
+		*/
+		$all_batches=$this->batch->all();
 		$all_categories=$this->category->all();
 		$all_locations=$this->location->all();
 		$all_subcategories=$this->subcategory->all();
@@ -104,7 +106,7 @@ class KeywordsController extends \BaseController {
 		$recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		return View::make('Keywords.show',compact('all_categories','all_locations','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays','all_batches'));
+		return View::make('Keywords.show',compact('all_batches','all_categories','all_locations','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
 	}
 
 	/**

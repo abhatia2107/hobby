@@ -1,7 +1,7 @@
 @section("signin")
 <div class="modal-dialog">
         <div class="modal-content">
-            <form name="signIn" id="signIn" role="form">
+            <form name="signIn" id="signIn" role="form" method="post" action="/signin/submit" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
@@ -16,7 +16,8 @@
                                 <span style="color:red">*</span>
                             </label>
                             <div class="col-sm-8">
-                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="email"  id="email">
+                                <input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
+                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="user_email"  id="email">
                             </div>
                         </div>
                     </div><br>
@@ -27,64 +28,73 @@
                                 <span style="color:red">*</span>
                             </label>
                             <div class="col-sm-8">
-                                <input type="password"   class="form-control " name="password"  id="password">
+                                <input type="password"   class="form-control " name="user_password"  id="password">
                             </div>
                         </div>
                     </div><br>
+                    <div class="form-group">
+                        <div >
+                            <div class="checkbox login-remember">
+                                <label>
+                                    <input name="remember"  value="forever" checked="checked" type="checkbox">
+                                    Remember Me 
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Sign In</button>
                 </div>
             </form>
-             <script type="text/javascript">
-        $(document).ready(function(){
-            
-            $('#signIn').bootstrapValidator({
-                message: 'This value is not valid',
-                feedbackIcons: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
-                fields: {
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    
+                    $('#signIn').bootstrapValidator({
+                        message: 'This value is not valid',
+                        feedbackIcons: {
+                            valid: 'glyphicon glyphicon-ok',
+                            invalid: 'glyphicon glyphicon-remove',
+                            validating: 'glyphicon glyphicon-refresh'
+                        },
+                        fields: {
 
-                    password: {
-                        message: 'The password is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The password is required and cannot be empty'
+                            password: {
+                                message: 'The password is not valid',
+                                validators: {
+                                    notEmpty: {
+                                        message: 'The password is required and cannot be empty'
+                                    },
+                                    stringLength: {
+                                        min: 4,
+                                        max: 20,
+                                        message: 'The password must be more than 4 and less than 20 characters long'
+                                    },
+                                    regexp: {
+                                        regexp: /^[a-zA-Z0-9_]+$/,
+                                        message: 'The password can only consist of alphabetical, number and underscore'
+                                    }
+                                }
                             },
-                            stringLength: {
-                                min: 4,
-                                max: 20,
-                                message: 'The password must be more than 4 and less than 20 characters long'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z0-9_]+$/,
-                                message: 'The password can only consist of alphabetical, number and underscore'
+
+                            email: {
+                                validators: {
+                                    notEmpty: {
+                                        message: 'The email is required and cannot be empty'
+                                    },
+                                    emailAddress: {
+                                        message: 'The input is not a valid email address'
+                                    }
+                                }
                             }
-                        }
-                    },
 
-                    email: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The email is required and cannot be empty'
-                            },
-                            emailAddress: {
-                                message: 'The input is not a valid email address'
-                            }
                         }
-                    }
-
-                }
-            });
-            
-            
-        });
-    </script>
+                    });
+                    
+                    
+                });
+            </script>
         </div>
     </div>
-
 @show

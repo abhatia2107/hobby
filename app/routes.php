@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@showWelcome');
 
 
 
@@ -169,18 +166,16 @@ Route::get('/myaccount','UsersController@getMyAccount');
 Route::get('/changepassword','UsersController@getChangePassword');
 Route::post('/changepassword/submit','UsersController@postChangePassword');
 Route::post('/update/personaldetail/submit','UsersController@postUpdatePersonalDetail');
-Route::get('/login', 'UsersController@getLogin');
 Route::get('/logout','UsersController@getLogout');
 Route::get('login/fb','UsersController@loginFb');
 Route::get('/login/fb/callback','UsersController@loginFbCallback');
-Route::get('/signup','UsersController@getSignUp');
 Route::get('registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
 Route::get('/resetpassword','RemindersController@getRemind');
 Route::get('password/reset/{token}','RemindersController@getReset');
 Route::post('/password/reset/submit','RemindersController@postReset');
 
 Route::group(array('before' => "csrf"), function() {
-Route::post('/authenticate','UsersController@postAuthenticate');
-Route::post('/resetpassword/submit','RemindersController@postRemind');
-Route::post('/signup/submit','UsersController@postSignup');
+	Route::post('/signin/submit','UsersController@postAuthenticate');
+	Route::post('/resetpassword/submit','RemindersController@postRemind');
+	Route::post('/signup/submit','UsersController@postSignup');
 });

@@ -21,22 +21,11 @@
                                  <label for="search_categories">Category</label>
                                  <select name="search_categories" id="search_categories" class="postform">
                                     <option value="0">Any category</option>
-                                    <option class="level-0" value="46">Arts &amp; Entertainment</option>
-                                    <option class="level-1" value="156">&nbsp;&nbsp;&nbsp;Nightclub</option>
-                                    <option class="level-0" value="50">Bars</option>
-                                    <option class="level-1" value="75">&nbsp;&nbsp;&nbsp;Breweries</option>
-                                    <option class="level-0" value="49">Beauty &amp; Spas</option>
-                                    <option class="level-1" value="174">&nbsp;&nbsp;&nbsp;Barbershop</option>
-                                    <option class="level-0" value="28">Food</option>
-                                    <option class="level-1" value="29">&nbsp;&nbsp;&nbsp;Coffee &amp; Tea</option>
-                                    <option class="level-1" value="72">&nbsp;&nbsp;&nbsp;Doughnuts</option>
-                                    <option class="level-0" value="48">Home Services</option>
-                                    <option class="level-0" value="45">Hotels &amp; Travel</option>
-                                    <option class="level-0" value="43">Pets</option>
-                                    <option class="level-0" value="21">Restaurants</option>
-                                    <option class="level-1" value="163">&nbsp;&nbsp;&nbsp;Cafes</option>
-                                    <option class="level-1" value="165">&nbsp;&nbsp;&nbsp;Chinese</option>
-                                    <option class="level-1" value="79">&nbsp;&nbsp;&nbsp;Pizza</option>
+                                    @if(isset($all_locations))
+                                       @foreach($all_categories as $data)
+                                          <option value="{{$data->id}}">{{$data->category}}</option>
+                                       @endforeach
+                                    @endif
                                  </select>
                               </div>
                               <div style="display: none;" class="search-radius-wrapper">

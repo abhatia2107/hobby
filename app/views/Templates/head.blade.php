@@ -70,8 +70,8 @@
     <meta property="og:site_name" content="Listify">
     <meta property="og:image" content="https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/10/main-bg-top_mini-1.jpg">
     
-    <script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bcommon,util,geocoder%7D.js" charset="UTF-8" type="text/javascript"></script>
+    <!--<script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bcommon,util,geocoder%7D.js" charset="UTF-8" type="text/javascript"></script>
     <style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style>
-    <script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bcontrols,places_impl%7D.js" charset="UTF-8" type="text/javascript"></script><script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bstats%7D.js" charset="UTF-8" type="text/javascript"></script><script src="https://maps.googleapis.com/maps/api/js/AuthenticationService.Authenticate?1shttps%3A%2F%2Fdemo.astoundify.com%2Flistify%2F&amp;5e1&amp;callback=_xdc_._wj932p&amp;token=39812" charset="UTF-8" type="text/javascript"></script>
+    <script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bcontrols,places_impl%7D.js" charset="UTF-8" type="text/javascript"></script><script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bstats%7D.js" charset="UTF-8" type="text/javascript"></script><script src="https://maps.googleapis.com/maps/api/js/AuthenticationService.Authenticate?1shttps%3A%2F%2Fdemo.astoundify.com%2Flistify%2F&amp;5e1&amp;callback=_xdc_._wj932p&amp;token=39812" charset="UTF-8" type="text/javascript"></script> -->
     
 @show

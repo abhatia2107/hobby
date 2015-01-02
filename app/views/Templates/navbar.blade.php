@@ -1,5 +1,5 @@
 <?php $location_id =0;?>
-<div class="row">
+<div class="clearfix">
     <div class=" col-sm-12 col-md-12 ">
         <nav class="navbar navbar-inverse" >
             <div class="container-fluid">

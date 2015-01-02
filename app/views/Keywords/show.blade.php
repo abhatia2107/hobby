@@ -9,14 +9,30 @@
 	}
     #batchInfo
     {
-      background: white;border:1px solid;padding:10px 10px;margin-bottom: 15px;border-color: skyblue;
+      background: white;border:0px solid;padding:10px 10px;margin-bottom: 15px;border-color: skyblue;
       box-shadow: 0px 0px 10px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 10px rgba(0,0,0,0.5);-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
     }
     #inst_name
     {
-    	font-size: 18px;
+    	font-size: 19px;
+    	font-weight: normal;
+    	color: blue;
+    }
+    #inst_tagline
+    {
+    	font-size: 14px;
     	font-weight: normal;
     	color: black;
+    }
+    #inst_rating
+    {
+    	font-size: 18px;
+    	font-weight: normal;
+    	color: blue;
+    }
+    .sub input[type="checkbox"]:checked
+    {
+    	background:url(/assets/images/checked.gif) center top no-repeat;
     }
 
 
@@ -31,88 +47,88 @@
 	<div class="row clearfix">
 		<div class="col-md-12 col-xs-12 col-sm-12 column">
 			<div class="row clearfix">
-				<div class="col-md-3 col-xs-12 col-sm-3 column" >
-						<h4>Filter Results</h4>
-						<div id="browse-filter">
-						<div id="facetList" class="facetList">
-						<div id="facetHead" class="line facet-head"> 
-							 
-						</div> 
-						<div >
-							<div class="oneFacet bmargin5">
-							<div class="head line"> 
-							<div title="Click to Collapse" class="facet-title"> 
-							<h4 class="unit line">Sub Categories</h4> 
-							<span style="display: none;" class="clear-wrap"> 
-							<span class="separator">|</span> <a class="clear fk-font-13">Clear</a></span>
-							<span class="icon minus"></span> </div>  </div>
-							<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter"> 
+				<!--Start of filter division -->
+				<div class="col-md-3 col-xs-12 col-sm-3 column">
+					<h4>Filter Results</h4>
+					<div id="browse-filter">	
+						<h4 class="unit line">Sub Categories</h4> 
+						<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+						@foreach ($subcategoriesForCategory as $subcategoryData)
+							<?php
+								$subcategory = $subcategoryData->subcategory;
+								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory); 
+							?>				
+							<li subcategory="{{$class}}" style="margin-bottom:5px;margin-left:-23px">								
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$class}}" type="checkbox" class="SubCheckbox" />{{$subcategory}}</label>
+							</li>
+						 @endforeach
+						 </ul> 
+					</div>
+					<div id="browse-filter">	
+						<h4 class="unit line">Locality</h4> 
+						<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+						@foreach ($localitiesForLocation as $localityData)
 							<?php 
-								foreach ($subcategoriesForCategory as $subcategoryData) {
-									$subcategory = $subcategoryData->subcategory;
-									$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory);
-									# code...
-								
-								echo '
-								<li subcategory="'.$class.'" style="margin-bottom:5px;margin-left:-23px" >								
-								 	 <label><input autocomplete="off" style="background:#fafafa;" value="'.$class.'" type="checkbox" class="SubCheckbox" />'.$subcategory.'</label>
-								</li> '; }
-							?> 
-							 </ul> </div>
-
-						</div>
-						</div>
-						</div>
-						</div>
-				<div class="col-md-8 col-xs-12 col-sm-9 column">
+								$locality = $localityData->locality;
+								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $locality);
+							?>
+							<li subcategory="{{$class}}" style="margin-bottom:5px;margin-left:-23px">								
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$class}}" type="checkbox" class="LocCheckbox" />{{$locality}}</label>
+							</li> 
+						@endforeach
+						 </ul> 
+					</div>
+				</div>
+				<div class="col-md-8 col-xs-11 col-sm-9 column">
 					<center><h4>Results</h4></center>
 					<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
-					<?php 
-					foreach ($batchesForCategory as $key => $batchInfo)
-					{ 
-						$institute = $batchInfo->institute;
-						$batch = $batchInfo->batch;
-						$subcategory = $batchInfo->subcategory;
-						$location = $batchInfo->location;
-						$locality = $batchInfo->locality;
-						$tagline = $batchInfo->batch_tagline;
-						$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory);
-						echo "<li subcategory='$class' class='batch$key' style='display:block'>";
+					@foreach ($batchesForCategory as $key => $batchInfo)
+						<?php  
+							$institute = $batchInfo->institute;
+							$batch = $batchInfo->batch;
+							$subcategory = $batchInfo->subcategory;
+							$location = $batchInfo->location;
+							$locality = $batchInfo->locality;
+							$tagline = $batchInfo->batch_tagline;
+							$sub = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory);
+							$loc = preg_replace('/[^A-Za-z0-9\-]/', '', $locality);
 						?>
-						
-						<?php echo "<div class='row clearfix batch' id='batchInfo' >"; ?>
+						<li subcategory='{{$sub}}' locality='{{$loc}}' class='batch{{$key}}' id='batchInfo' style='display:block'>
+						<div class='row clearfix batch' >
 							<div class="col-md-12 col-xs-12 col-sm-12 column" >
-									<div class="row clearfix">
-										<div class="col-md-12 col-xs-12 col-sm-12 column">
-											<div class="row clearfix">
-												<div class="col-md-12 col-xs-12 col-sm-4 column">
-												<div class="col-md-8 col-xs-12 col-sm-4 column">
-													<span id="inst_name"><?php echo $institute ;?><br></span>
-													Tagline<br>
+								<div class="row clearfix">
+									<div class="col-md-12 col-xs-12 col-sm-12 column">
+										<div class="row clearfix">
+											<div class="col-md-12 col-xs-12 col-sm-4 column">
+												<div class="col-md-9 col-xs-12 col-sm-9 column">
+													<span id="inst_name">{{$institute}}<br></span>
+													<span id="inst_tagline">{{$tagline}}<br></span>
+													{{ $locality }}<br>
 												</div>
-												<div class="col-md-4 col-xs-12 col-sm-4 column">
-													<span id="inst_name"><?php echo 'Rating' ;?><br></span>
+												<div class="col-md-3 col-xs-12 col-sm-3 column">
+													<span id="inst_rating">{{ 'Rating' }}<br></span>
 												</div>
-												</div>
-												<div class="col-md-12 col-xs-12 col-sm-4 column">
+											</div>
+											<div class="col-md-12 col-xs-12 col-sm-4 column">
+												
 												<div class="col-md-6 col-xs-12 col-sm-4 column">
-													<h4><?php echo $batch ;?></h4>
+													{{ $batch }}
 													
-													<h4><?php echo $subcategory ;?></h4>
+													{{ $subcategory }}
 												</div>
 												<div class="col-md-6 col-xs-12 col-sm-4 column">
 											
 												</div>
-												</div>
 											</div>
 										</div>
 									</div>
+								</div>
 							</div>
-						</div>
+						</div> <!--end of batch info -->
 						</li>
-					<?php } ?>
-				</div>
-				</ul>
+					@endforeach
+					</ul>
+				</div><!--end of results info -->
 			</div>
 		</div>
 	</div>
@@ -122,18 +138,27 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 			var sub_select = new Array();
-			$("#filter li").click(function () {
+			$("#filter-sub li").click(function () {
 				//var subcategory = 'batch_'+$(this).attr('subcategory');
 				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-				if(sub_select.length>0)
-				{	
-					$('#batch_list').css('display','none');	
+				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
+				//alert('sub '+sub_select);
+				//alert('lco' +loc_select);
+				if(sub_select.length>0 && loc_select.length>0)
+				{
+					//alert('two');		
+					//$('#batchInfo').css('display','none');	
 					$("#filter_data li").each(function () 
 					{
 						var test = $(this).attr('class');
 						subcategory = $(this).attr('subcategory');
-						var result = jQuery.inArray(subcategory,sub_select);
-						if (result==-1) 
+						locality = $(this).attr('locality');
+						//alert(locality);
+						var subResult = jQuery.inArray(subcategory,sub_select);
+						var locResult = jQuery.inArray(locality,loc_select);
+						//alert('sub '+sub_select);
+						//alert('lco' +loc_select);
+						if (subResult==-1 || locResult==-1) 
 						{	$('.'+test).fadeOut(500);	}
 						else
 						{	$('.'+test).fadeIn(500);	}
@@ -141,13 +166,33 @@
 				}
 				else
 				{
-					$("#filter_data li").each(function () 
+					if(sub_select.length>0 || loc_select.length>0)
 					{
-						var class_name = $(this).attr('class');
-						$('.'+class_name).fadeIn(500);
-					});
+						//alert('yes');
+						//$('#batchInfo').css('display','none');	
+						$("#filter_data li").each(function () 
+						{
+							//alert('yes');
+							var test = $(this).attr('class');
+							subcategory = $(this).attr('subcategory');
+							locality = $(this).attr('locality');
+							var subResult = jQuery.inArray(subcategory,sub_select);
+							var locResult = jQuery.inArray(locality,loc_select);
+							if (subResult==-1 && locResult==-1) 
+							{	$('.'+test).fadeOut(500);	}
+							else
+							{	$('.'+test).fadeIn(500);	}
+						});
+					}
+					else
+					{
+						$("#filter_data li").each(function () 
+						{
+							var class_name = $(this).attr('class');
+							$('.'+class_name).fadeIn(500);
+						});
+					}
 				}
-				
 			});
 	});
 </script>

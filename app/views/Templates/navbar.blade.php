@@ -1,3 +1,4 @@
+<?php $location_id =0;?>
 <div class="row">
     <div class=" col-sm-10 col-md-10 ">
         <nav class="navbar navbar-inverse" >
@@ -12,7 +13,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         @foreach($all_categories as $data)
-                            <li ><a href="/categories/{{$data->id}}">{{$data->category}}</a></li>
+                            <li ><a href="/filter/categories/{{$data->id}}/locations/{{$location_id}}">{{$data->category}}</a></li>
                         @endforeach
                     </ul>
                 </div>

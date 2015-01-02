@@ -82,7 +82,7 @@
 				<div class="col-md-8 col-xs-11 col-sm-9 column">
 					<center><h4>Results</h4></center>
 					<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
-					@foreach ($batchesForCategory as $key => $batchInfo)
+					@foreach ($batchesForCategoryLocation as $key => $batchInfo)
 						<?php  
 							$institute = $batchInfo->institute;
 							$batch = $batchInfo->batch;

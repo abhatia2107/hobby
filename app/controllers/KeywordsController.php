@@ -84,7 +84,7 @@ class KeywordsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($category_id)
+	public function show($category_id,$location_id)
 	{
 		//For headers
 		$all_categories=$this->category->all();
@@ -106,14 +106,19 @@ class KeywordsController extends \BaseController {
 		//dd($instituteForCategory);
 		$venuesForInstitute =  $this->venue->getVenueForInstitute($instituteIdArray);
 		dd($venuesForInstitute);*/
-
-		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
+		if(!$category_id)
+			$subcategoriesForCategory=$this->subcategory->all();
+		else
+			$subcategoriesForCategory =  $this->subcategory->getSubcategoryForCategory($category_id);
+		if(!$location_id)
+			$localitiesForLocation = $this->locality->all();
+		else		
+			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		//dd($localitiesForLocation);
-		$subcategoriesForCategory =  $this->subcategory->getSubcategoryForCategory($category_id);
 		//dd($subcategoriesForCategory);
-		$batchesForCategory = $this->batch->getBatchForCategory($category_id);
-		//dd($batchesForCategory);localit
-		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategory','localitiesForLocation','subcategoriesForCategory'));
+		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id);
+		//dd($batchesForCategoryLocation);
+		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory'));
 	}
 
 	public function filter()

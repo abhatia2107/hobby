@@ -49,18 +49,31 @@ class Batch extends \Eloquent {
         return DB::table('batches')->whereIn('batch_institute_id',$batch_institute_id)->get();
     }
     
-    public function getBatchForCategory($batch_category_id)
+    public function getBatchForCategoryLocation($category_id,$location_id)
     {
-        return DB::table('batches')
-            ->where('batches.batch_category_id','=',$batch_category_id)
-            ->Join('institutes','institutes.id','=','batches.batch_institute_id')
-            ->Join('categories','categories.id','=','batches.batch_category_id')
-            ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
-            ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
-            ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
-            ->Join('locations', 'locations.id', '=', 'localities.locality_location_id')
-            ->orderBy('batch_institute_id')
-            ->get();
+        $allBatches=DB::table('batches')
+                        ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+                        ->Join('categories','categories.id','=','batches.batch_category_id')
+                        ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
+                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
+                        ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+                        ->Join('locations', 'locations.id', '=', 'localities.locality_location_id')
+                        ->orderBy('batch_institute_id');
+                        
+        if(!$category_id&&!$location_id)
+            return $allBatches->get();
+
+        else if(!$location_id)
+            return $allBatches->where('batches.batch_category_id','=',$category_id)->get();
+
+        else if(!$category_id)
+            return $allBatches->where('venues.venue_location_id','=',$location_id)->get();
+
+        else
+            return $allBatches
+                ->where('batches.batch_category_id','=',$category_id)
+                ->where('venues.venue_location_id','=',$location_id)
+                ->get();
     }
     public function getBatch($id)
     {

@@ -17,8 +17,8 @@
                      <input name="keywords" id="search_keywords" placeholder="{{$homeLang['home_keyword']}}" type="text">
                   </div>
                   <div>
-                     <option value="0">{{$homeLang['home_category']}}</option>
                      <select name="categories" id="search_categories" class="postform">
+                        <option value="0">{{$homeLang['home_category']}}</option>
                         @if(isset($all_categories))
                            @foreach($all_categories as $data)
                               <option value="{{$data->id}}">{{$data->category}}</option>

@@ -327,3 +327,9 @@ a.button-social-login.button-social-login-instagram, .widget-area a.button-socia
      background-image:url(https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/10/iphone-home-page.jpg);
      background-position: center center;
 }
+@media (min-device-width:767px) {
+    .navbar-header
+	{
+		display:none;
+	}
+}

@@ -163,6 +163,10 @@ Route::get('/hello', function()
 	return View::make('Miscellaneous.hello');
 });
 
+Route::get('/dummy', function()
+{
+	return View::make('Miscellaneous.dummy');
+});
 
 
 //Routes for user, to be modified later
@@ -192,5 +196,4 @@ Route::get('/filter/categories/{category_id}/locations/{location_id}','KeywordsC
 
 // Route::get('/filter/categories/{category_id}/locations/{location_id}/keywords/{keyword?}','KeywordsController@show');
 
-Route::get('/filter','KeywordsController@filter');
-
+Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id/}/{location_id}/{chunk},','KeywordsController@filter');

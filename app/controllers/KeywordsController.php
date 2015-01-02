@@ -111,28 +111,18 @@ class KeywordsController extends \BaseController {
 		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory'));
 	}
 
-	public function filter()
+	public function filter($subcategoriesString,$localitiesString,$category_id,$location_id,$chunk)
 	{
 		if(Request::ajax()){
-			return ("test");
-		}
-			/*$credentials=Input::all();
-			dd($credentials);
-			$subcategories=Input::get('subcategories');
-			$localities=Input::get('localities');
-			$chunk=Input::get('chunk');
-			*/
-			$subcategories=array();
-			$localities=array();
-			$category_id=1;
-			$location_id=1;
-			$chunk=0;
+			$subcategories=$subcategoriesString.split(",");
+			$localities=$localitiesString.split(",");
 			if(!$subcategories&&!$localities)
 				$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 			else
 				$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
 			//dd($batchesForCategoryLocation);
-			//return $batchesForCategoryLocation;		
+			return $batchesForCategoryLocation;
+		}
 	}
 
 	/**

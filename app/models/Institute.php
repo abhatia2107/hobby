@@ -32,4 +32,8 @@ class Institute extends \Eloquent {
         return DB::table('institutes')->whereIn('institutes.id',$id)->Join('venues', 'institutes.id', '=', 'venues.venue_institute_id')->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')->Join('locations', 'locations.id', '=', 'venues.venue_location_id')->get();
     }
 
+    public function getInstituteforUser($institute_user_id)
+    {
+        return DB::table('institutes')->where('institute_user_id',$institute_user_id)->pluck('id');
+    }
 }

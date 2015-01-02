@@ -1,21 +1,11 @@
-@section("header")
+@section("header2")
 	<div class="row header_row1" >
-		<div class=" col-sm-4 col-md-4  ">
+		<div class=" col-sm-4 col-md-4">
 			<a class="navbar-brand" href="/">
 				<img src="/assets/images/logo.png" class="img-responsive" alt="HOBBY">
 			</a>
 		</div>
-		<div class="col-sm-3 col-md-3 " >
-			<form class="navbar-form" role="search">
-				<div class="input-group" style="width:100%">
-					<input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" >
-					<div class="input-group-btn">
-						<button class=" header_search_button btn btn-default" type="submit" >
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
-			</form>
+		<div class="col-sm-5 col-md-5">
 		</div>
 
 		<div class=" col-sm-3 col-md-3 ">
@@ -36,13 +26,6 @@
 					</li>
 				@endif
 			</ul>
-		</div>
-		<div class=" col-sm-2 col-md-2 ">
-			<select  class="header_location_dropdown">
-				@foreach($all_locations as $data)
-					<option><a href="location/{{$data->id}}">{{$data->location}}</a></option>
-				@endforeach
-			</select>
 		</div>
 	</div>
 @show

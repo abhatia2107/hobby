@@ -59,11 +59,11 @@
           <div class="col-xs-12 col-sm-6">
               <div class="form-group required">
                 <label>Password <sup>*</sup> </label>
-                <input type="password" class="form-control"  placeholder="Password" name="user_password" required>
+                <input type="password" class="form-control"  placeholder="Password" name="password" required>
               </div>
               <div class="form-group required">
                 <label>Confirm Password <sup>*</sup> </label>
-                <input type="password" class="form-control"  placeholder="Confirm Password" name="user_password_confirmation" required>
+                <input type="password" class="form-control"  placeholder="Confirm Password" name="password_confirmation" required>
               </div>
               
           </div>

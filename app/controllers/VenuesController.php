@@ -65,10 +65,11 @@ class VenuesController extends \BaseController {
 	 */
 	public function store()
 	{
-		//TO DO: Take venue_user_id and venue_institute_id automatically 
 		$credentials=Input::all();
-		$credentials['venue_institute_id']=1;
-		$credentials['venue_user_id']=1;
+		$venue_user_id=Auth::id();
+		$venue_institute_id=$this->institute->getInstituteforUser($venue_user_id);
+		$credentials['venue_institute_id']=$venue_institute_id;
+		$credentials['venue_user_id']=$venue_user_id;
 		$validator = Validator::make($credentials, Venue::$rules);
 		if($validator->fails())
 		{
@@ -107,8 +108,10 @@ class VenuesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//TO DO: Authenticate that user has permission to edit this venue
+		$user_id=Auth::id();
 		$venueDetails=Venue::find($id);
+		if($user_id!=$venueDetails['venue_user_id'])
+			return Redirect::to('/venues')->with('failure',Lang::get('venue.venue_not_authorize'));
 		$location_id=$venueDetails['venue_location_id'];
 		$locality_id=$venueDetails['venue_locality_id'];
 		$all_locations=$this->location->all();
@@ -129,10 +132,11 @@ class VenuesController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//TO DO: Take venue_user_id and venue_institute_id automatically 
 		$credentials=Input::all();
-		$credentials['venue_user_id']=1;
-		$credentials['venue_institute_id']=1;
+		$venue_user_id=Auth::id();
+		$venue_institute_id=$this->institute->getInstituteforUser($venue_user_id);
+		$credentials['venue_institute_id']=$venue_institute_id;
+		$credentials['venue_user_id']=$venue_user_id;
 		$validator = Validator::make($credentials, Venue::$rules);
 		if($validator->fails())
 		{

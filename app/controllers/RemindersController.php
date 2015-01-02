@@ -55,12 +55,12 @@ class RemindersController extends Controller {
 		$all_$categories= Category::all();
         $all_locations=Location::all();
         $credentials = Input::only(
-			'user_email', 'user_password', 'user_password_confirmation', 'user_csrf_token'
+			'user_email', 'password', 'password_confirmation', 'user_csrf_token'
 		);
 
 		$response = Password::reset($credentials, function($user, $password)
 		{
-			$user->user_password = Hash::make($password);
+			$user->password = Hash::make($password);
 
 			$user->save();
 		});

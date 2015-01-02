@@ -97,7 +97,9 @@ class BatchesController extends \BaseController {
 		$dateToday=date_create(Carbon::now()->toDateString());
 		$startDate=date_create($credentials['batch_start_date']);
 		$endDate=date_create($credentials['batch_end_date']);
-		$credentials['batch_institute_id']=1;
+		$user_id=Auth::id();
+		$batch_institute_id=$this->institute->getInstituteforUser($user_id);
+		$credentials['batch_institute_id']=$batch_institute_id;
 		$validator = Validator::make($credentials, Batch::$rules);
 		if($validator->fails())
 		{

@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder {
                      'user_last_name' =>$faker->lastName,
                      'user_email' =>$faker->email,
                      'user_contact_no' => $faker->phoneNumber,
-                     'user_password' => Hash::make('123'),
+                     'password' => Hash::make('123'),
                      'user_location_id'=>$faker->randomDigitNotNull,
                      'user_fb_id' =>$faker->randomNumber(5),
                      'user_birthdate' =>$faker->date,

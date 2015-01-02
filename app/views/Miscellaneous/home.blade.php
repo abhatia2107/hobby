@@ -11,13 +11,14 @@
          </hgroup>
          <div class="job_listings" data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">
             <a href="#" data-toggle=".job_filters" class="js-toggle-area-trigger">Toggle Filters</a>
-            <form action="/keyword" class="job_search_form" method="post">
+            <form action="/filter" class="job_search_form" method="get">
                <div class="search_jobs">
                   <div class="search_keywords">
-                     <input name="search_keywords" id="search_keywords" placeholder="Keywords" value="" type="text">
+                     <input name="keywords" id="search_keywords" placeholder="{{$homeLang['home_keyword']}}" type="text">
                   </div>
                   <div>
-                     <select name="search_categories" id="search_categories" class="postform">
+                     <option value="0">{{$homeLang['home_category']}}</option>
+                     <select name="categories" id="search_categories" class="postform">
                         @if(isset($all_categories))
                            @foreach($all_categories as $data)
                               <option value="{{$data->id}}">{{$data->category}}</option>
@@ -26,7 +27,8 @@
                      </select>
                   </div>
                   <div>
-                     <select name="search_locations" id="search_locations" class="postform">
+                     <select name="locations" id="search_locations" class="postform">
+                        <option value="0">{{$homeLang['home_location']}}</option>
                         @if(isset($all_locations))
                            @foreach($all_locations as $data)
                               <option value="{{$data->id}}" >{{$data->location}}</option>

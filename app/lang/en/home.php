@@ -6,6 +6,12 @@ return array(
 
 	"home_subtitle"=>"Hobby helps you find out whats happening in your city, Let's explore.",
 
+	"home_keyword"=>"Keyword",
+
+	"home_location"=>"Any Location",
+
+	"home_category"=>"Any Category",
+	
 	"home_search_button_text"=>"Search Listings",
 
 	"home_category_title"=>"Explore Your Community",

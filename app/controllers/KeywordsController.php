@@ -116,6 +116,12 @@ class KeywordsController extends \BaseController {
 		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategory','localitiesForLocation','subcategoriesForCategory'));
 	}
 
+	public function filter()
+	{
+		$credentials=Input::all();
+		dd($credentials);
+	}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 * GET /keywords/{id}/edit

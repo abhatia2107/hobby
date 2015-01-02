@@ -192,8 +192,8 @@ class UsersController extends \BaseController {
 				Session::flash('success','Welcome user!');
 				/*
 				|$id is used to store the the unique 'id'
-				|of the logged in user in session varible so thar
-				|latter this can be used.
+				|of the logged in user in session varible so that
+				|later this can be used.
 				|
 				*/
 				$data=$this->user->getid(Input::get('user_email'));
@@ -202,7 +202,7 @@ class UsersController extends \BaseController {
 			
 		else
 			{
-				return Redirect::to('/')->with('failure',Lang::get('user.invalid_login'))->withInput(Input::except('user_password'));
+				return Redirect::to('/')->with('failure',Lang::get('user.invalid_login'))->withInput(Input::except('password'));
 			}
 
 	}
@@ -214,7 +214,7 @@ class UsersController extends \BaseController {
 	{
 		return [
 			"user_email"=>Input::get('user_email'),
-			"user_password"=>Input::get('user_password'),
+			"password"=>Input::get('password'),
 			"user_confirmed"=>1,
 		];
 	}
@@ -421,7 +421,7 @@ class UsersController extends \BaseController {
 		else
 		{
 			$confirmationCode=str_random();
-			$newUserData['user_password']=Hash::make(Input::get('password'));
+			$newUserData['password']=Hash::make(Input::get('password'));
 			$newUserData['user_confirmation_code']=$confirmationCode;
 			$email=$newUserData['user_email'];
 			$name=$newUserData['user_first_name'];
@@ -516,7 +516,7 @@ class UsersController extends \BaseController {
 		{
 			$user         = $this->user->find($id);
 			$current_password = Input::get('current_password');
-			$password     = Input::get('user_password');
+			$password     = Input::get('password');
 			if(Hash::check($current_password,$user->password))
 			{
 				$user->password = Hash::make($password);

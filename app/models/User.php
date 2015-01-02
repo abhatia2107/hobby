@@ -19,7 +19,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('user_password', 'remember_token');
+	protected $hidden = array('password', 'remember_token');
 
 	protected $guarded = [
 		'id',
@@ -67,7 +67,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $rulesChangePassword=[
 		'current_password'=>'required',
-		'user_password'=>'required|confirmed|alpha_num|min:6',
+		'password'=>'required|confirmed|alpha_num|min:6',
 	];
 	public static $uniqueEmail=[
 		'user_email'=>'unique:users,user_email',
@@ -104,4 +104,5 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->password;
 	}
+
 }

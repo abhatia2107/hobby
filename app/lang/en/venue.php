@@ -8,6 +8,8 @@ return array(
 		
 		"venue_updated"=>"Your venue have been updated successfully",
 		
+		"venue_not_authorize"=>"Sorry, You are not authorize to edit this venue.",
+
 		"venue_update_failed" => "Sorry, We are unable to update the venue",
 		
 		"venue_deleted"=>"Your venue have been deleted successfully",

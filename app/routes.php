@@ -196,4 +196,4 @@ Route::get('/filter/categories/{category_id}/locations/{location_id}','KeywordsC
 
 // Route::get('/filter/categories/{category_id}/locations/{location_id}/keywords/{keyword?}','KeywordsController@show');
 
-Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id/}/{location_id}/{chunk},','KeywordsController@filter');
+Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id}/{location_id}/{chunk}','KeywordsController@filter');

@@ -12,10 +12,7 @@ class UsersController extends \BaseController {
 	|
 	|
 	*/
-	/**
-	 *Constructor to initialize the instance of Model User
-	 */
-
+	
 	private $admin;
 	private $batch;
 	private $category;
@@ -28,6 +25,9 @@ class UsersController extends \BaseController {
 	private $subscription;
 	private $user;
 	private $venue;
+	/**
+	 *Constructor to initialize the instance of Model User
+	 */
 
 	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
 	{
@@ -160,7 +160,6 @@ class UsersController extends \BaseController {
         $all_locations=Location::all();
         if(Auth::check())
 		{
-			
  	 		return Redirect::to("/");
  		}
 		return View::make('Users.login',compact('all_categories','all_locations'));
@@ -174,38 +173,38 @@ class UsersController extends \BaseController {
 	{	
 		$remember=(Input::has('remember'))?true:false;
 		$credentials=$this->getCredentials();
-		$email_verification=$this->user->where('user_email','=',Input::get('user_email'))->first();
-		if(!$email_verification)
+		$userDetails=$this->user->where('user_email','=',Input::get('user_email'))->first();
+		if(!$userDetails)
 		{
 			return Redirect::to('/signup')->with('failure',Lang::get('user.user_not_registered'));
 		}
 		/* To check whether the user has verified his/her email or not. */
-		if(isset($email_verification))
+		if(isset($userDetails))
 		{
-			if($email_verification->user_confirmed==0)
+			if($userDetails->user_confirmed==0)
 			{
 				return Redirect::to('/')->with('failure',Lang::get('user.verify_email'));
 			}
 		}
 		if(Auth::attempt($credentials,$remember))
-			{
-				Session::flash('success','Welcome user!');
-				/*
-				|$id is used to store the the unique 'id'
-				|of the logged in user in session varible so that
-				|later this can be used.
-				|
-				*/
-				$data=$this->user->getid(Input::get('user_email'));
-				return Redirect::to('/');
-			}
-			
+		{
+			Session::flash('success','Welcome '.$userDetails['user_first_name'].' '.$userDetails['user_last_name']);
+			/*
+			|$id is used to store the the unique 'id'
+			|of the logged in user in session varible so that
+			|later this can be used.
+			|
+			*/
+			//$data=$this->user->getid(Input::get('user_email'));
+			return Redirect::to('/');
+		}
 		else
-			{
-				return Redirect::to('/')->with('failure',Lang::get('user.invalid_login'))->withInput(Input::except('password'));
-			}
-
+		{
+			return Redirect::to('/')->with('failure',Lang::get('user.invalid_login'))->withInput(Input::except('password'));
+		}
 	}
+
+
 	/**
 	 * Function to get credentials from View
 	 * @return array of email,password,confirmed status
@@ -230,6 +229,102 @@ class UsersController extends \BaseController {
     	Session::flash('success', Lang::get('user.logout'));
     	return Redirect::to("/");
 	}
+
+	/**
+	*This function is to redirect to the signup page
+	*
+	*@param
+	*@return View to signup page
+	*/
+	public function getSignup()
+	{
+		$all_categories= Category::all();
+        $all_locations=Location::all();
+        return View::make('Users.signup',compact('all_categories','all_locations'));
+	}
+	/**
+	*Function to add new user to the database.
+	*
+	*@param
+	*@return Route to login page with message
+	*/
+	public function postSignUp()
+	{
+		$all_categories= Category::all();
+        $all_locations=Location::all();
+        $newUserData=Input::all();
+        /*dd($newUserData);*/
+        $validator=Validator::make($newUserData,User::$rules);
+		if($validator->fails())
+		{
+			return Redirect::to('/signup')->withErrors($validator)->withInput(Input::except('password'));
+		}
+		else
+		{
+			$confirmationCode=str_random();
+			$password=Input::get('password');
+			$newUserData['password']=Hash::make($password);
+			if (Hash::needsRehash($newUserData['password']))
+			{
+			    $newUserData['password'] = Hash::make($password);
+			}
+			$newUserData['user_confirmation_code']=$confirmationCode;
+			$email=$newUserData['user_email'];
+			$name=$newUserData['user_first_name'];
+			$this->user->create($newUserData);
+			$userId=$this->user->max('id');
+			/**
+			 * $data contains the name of the user reggistered and the confirmation code in the form
+			 * of array which will be used to confirm the email.
+			 * 
+			 */
+			$data=[
+			'name'=>$newUserData['user_first_name'],
+			'confirmationcode'=>$confirmationCode,
+			'userId'=>$userId,
+			];
+			/*Confirmation mail is to be send to the newly registerd user*/
+			Mail::send('Emails.welcome', $data, function($message) use ($email,$name)
+			{
+    			$message->to($email,$name)->subject('Welcome!');
+			});
+			return Redirect::to('/')->with('success',Lang::get('user.register_success'));
+		}	
+	}
+	/**
+	*Function to verify the email of the newly registered user. 
+	*
+	*@param userId and confirmation code; 
+	*@return Route to login
+	*/
+	public function getEmailVerify($userId,$confirmationCode)
+	{
+		$all_categories= Category::all();
+        $all_locations=Location::all();
+        $validate=$this->user->find($userId);
+		if($validate)
+		{
+			/* to check whether the email has been already verified or not  */
+			if($validate->user_confirmed==1)
+			{
+				return Redirect::to('/')->with('success',Lang::get('user.email_already_verified'));
+			}
+			/* to check the whether confirmation code is matching or not */
+			if($validate->user_confirmation_code==$confirmationCode)
+			{
+				$validate->user_confirmed=1;
+				$validate->user_confirmation_code="";
+				$validate->save();
+				Auth::loginUsingId($userId);
+				return Redirect::to('/')->with('success',Lang::get('user.welcome',array("name"=>$validate->user_first_name)));
+			}
+			else
+			{
+				return Redirect::to('/signup')->with('failure','Sorry you are not an authorized user.'); 	
+			}
+		}
+	}
+	
 	/**
 	*This Is Used To Login Via Facebook
 	*Uses Facebook API and call to facebook.com
@@ -238,7 +333,7 @@ class UsersController extends \BaseController {
 	*/
 	public function loginFb()
 	{
-		 $facebook = new Facebook(Config::get('facebook'));
+		$facebook = new Facebook(Config::get('facebook'));
     	$params = array(
         'redirect_uri' => url('/login/fb/callback'),
         'scope' => 'email',
@@ -346,7 +441,7 @@ class UsersController extends \BaseController {
 		$id=Auth::id();
 		$userData = Input::all();
 		$oldData=$this->user->find($id);
-		$validator=Validator::make($userData,User::$rulesUpdatePersonalDetail);
+		$validator=Validator::make($userData,User::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator);
@@ -389,95 +484,6 @@ class UsersController extends \BaseController {
  		return Redirect::back()->with('success',Lang::get('user.update_personal_detail'));
 	}
 
-	/**
-	*This function is to redirect to the signup page
-	*
-	*@param
-	*@return View to signup page
-	*/
-	public function getSignup()
-	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        return View::make('Users.signup',compact('all_categories','all_locations'));
-	}
-	/**
-	*Function to add new user to the database.
-	*
-	*@param
-	*@return Route to login page with message
-	*/
-	public function postSignUp()
-	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        $newUserData=Input::all();
-        /*dd($newUserData);*/
-        $validator=Validator::make($newUserData,User::$rulesSignup);
-		if($validator->fails())
-		{
-			return Redirect::to('/signup')->withErrors($validator)->withInput(Input::except('password'));
-		}
-		else
-		{
-			$confirmationCode=str_random();
-			$newUserData['password']=Hash::make(Input::get('password'));
-			$newUserData['user_confirmation_code']=$confirmationCode;
-			$email=$newUserData['user_email'];
-			$name=$newUserData['user_first_name'];
-			$this->user->create($newUserData);
-			$userId=$this->user->max('id');
-			/**
-			 * $data contains the name of the user reggistered and the confirmation code in the form
-			 * of array which will be used to confirm the email.
-			 * 
-			 */
-			$data=[
-			'name'=>$newUserData['user_first_name'],
-			'confirmationcode'=>$confirmationCode,
-			'userId'=>$userId,
-			];
-			/*Confirmation mail is to be send to the newly registerd user*/
-			Mail::send('Emails.welcome', $data, function($message) use ($email,$name)
-			{
-    			$message->to($email,$name)->subject('Welcome!');
-			});
-			return Redirect::to('/')->with('success',Lang::get('user.register_success'));
-		}	
-	}
-	/**
-	*Function to verify the email of the newly registered user. 
-	*
-	*@param userId and confirmation code; 
-	*@return Route to login
-	*/
-	public function getEmailVerify($userId,$confirmationCode)
-	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        $validate=$this->user->find($userId);
-		if($validate)
-		{
-			/* to check whether the email has been already verified or not  */
-			if($validate->user_confirmed==1)
-			{
-				return Redirect::to('/')->with('success',Lang::get('user.email_already_verified'));
-			}
-			/* to check the whether confirmation code is matching or not */
-			if($validate->user_confirmation_code==$confirmationCode)
-			{
-				$validate->user_confirmed=1;
-				$validate->user_confirmation_code="";
-				$validate->save();
-				Auth::loginUsingId($userId);
-				return Redirect::to('/')->with('success',Lang::get('user.welcome',array("name"=>$validate->user_first_name)));
-			}
-			else
-			{
-				return Redirect::to('/signup')->with('failure','Sorry you are not an authorized user.'); 	
-			}
-		}
-	}
 	/**
 	 * To visit the "My account page"
 	 * @return View to myaccount.blade.php

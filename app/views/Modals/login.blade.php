@@ -1,13 +1,13 @@
 @section("login")
 <div class="modal-dialog">
         <div class="modal-content">
-            <form name="signIn" id="signIn" role="form" method="post" action="/login/submit" enctype="multipart/form-data">
+            <form name="login" id="login" role="form" method="post" action="/login/submit" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel2">Sign-In</h4>
+                    <h4 class="modal-title" id="myModalLabel2">Login</h4>
                 </div>
                 <div class="modal-body" >
                     <div class="row">
@@ -17,7 +17,7 @@
                             </label>
                             <div class="col-sm-8">
                                 <input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
-                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="user_email"  id="email">
+                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="user_email"  id="email"  id="user_email" value="@if(isset($userDetails)){{$userDetails->user_email}}@else{{Input::old('user_email')}}@endif">
                             </div>
                         </div>
                     </div><br>
@@ -51,7 +51,7 @@
             <script type="text/javascript">
                 $(document).ready(function(){
                     
-                    $('#signIn').bootstrapValidator({
+                    $('#login').bootstrapValidator({
                         message: 'This value is not valid',
                         feedbackIcons: {
                             valid: 'glyphicon glyphicon-ok',
@@ -60,23 +60,23 @@
                         },
                         fields: {
 
-                            password: {
+                             password: {
                                 message: 'The password is not valid',
                                 validators: {
                                     notEmpty: {
                                         message: 'The password is required and cannot be empty'
                                     },
                                     stringLength: {
-                                        min: 4,
+                                        min: 8,
                                         max: 20,
-                                        message: 'The password must be more than 4 and less than 20 characters long'
+                                        message: 'The password must be more than 8 and less than 20 characters long'
                                     },
                                     regexp: {
-                                        regexp: /^[a-zA-Z0-9_]+$/,
-                                        message: 'The password can only consist of alphabetical, number and underscore'
+                                        regexp: /^[a-zA-Z0-9!@#$%&_]+$/,
+                                        message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,%,&,_'
                                     }
                                 }
-                            },
+                            }},
 
                             email: {
                                 validators: {

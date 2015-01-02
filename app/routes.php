@@ -131,7 +131,10 @@ Route::get('/users/{id}','UsersController@show');
 Route::get('/users/edit/{id}','UsersController@edit');
 Route::post('/users/update/{id}','UsersController@update');
 Route::get('/users/delete/{id}','UsersController@destroy');
-
+Route::get('/login', 'UsersController@getLogin');
+Route::get('/logout','UsersController@getLogout');
+Route::get('/signup','UsersController@getSignUp');
+Route::get('registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
 
 Route::get('/aboutus', function()
 {
@@ -176,12 +179,8 @@ Route::get('/myaccount','UsersController@getMyAccount');
 Route::get('/changepassword','UsersController@getChangePassword');
 Route::post('/changepassword/submit','UsersController@postChangePassword');
 Route::post('/update/personaldetail/submit','UsersController@postUpdatePersonalDetail');
-Route::get('/login', 'UsersController@getLogin');
-Route::get('/logout','UsersController@getLogout');
 Route::get('login/fb','UsersController@loginFb');
 Route::get('/login/fb/callback','UsersController@loginFbCallback');
-Route::get('/signup','UsersController@getSignUp');
-Route::get('registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
 Route::get('/resetpassword','RemindersController@getRemind');
 Route::get('password/reset/{token}','RemindersController@getReset');
 Route::post('/password/reset/submit','RemindersController@postReset');
@@ -196,4 +195,4 @@ Route::get('/filter/categories/{category_id}/locations/{location_id}','KeywordsC
 
 // Route::get('/filter/categories/{category_id}/locations/{location_id}/keywords/{keyword?}','KeywordsController@show');
 
-Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id/}/{location_id}/{chunk},','KeywordsController@filter');
+Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id}/{location_id}/{chunk}','KeywordsController@filter');

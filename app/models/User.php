@@ -23,16 +23,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $guarded = [
 		'id',
-		'password',
 		'password_confirmation',
 		'user_confirmed',
 		'created_at',
 		'updated_at',
 	];
 
-	public static $rulesSignup = [
+	public static $rules = [
 		'user_first_name'=>'required',
-	    'user_last_name'=>'required',
 	   	'user_email'=>'required|unique:users,user_email',
 		'user_contact_no'=>'required|unique:users,user_contact_no|regex:/[0-9]{10,11}/',
 		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
@@ -67,16 +65,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $rulesChangePassword=[
 		'current_password'=>'required',
-		'password'=>'required|confirmed|alpha_num|min:6',
+		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
 	];
 	public static $uniqueEmail=[
 		'user_email'=>'unique:users,user_email',
-	];
-	public static $rulesUpdatePersonalDetail=[
-		'user_first_name'=>'required',
-		'user_last_name'=>'required',
-		'user_mobile_no'=>'size:10',
-		'user_email'=>'required|email',
 	];
 	public function getUid($uid)
 	{
@@ -89,7 +81,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	*/
 	public function  getid($email)
 	{
-		return DB::select('select user_id from users where user_email=?',array($email));
+		return DB::select('select id from users where user_email=?',array($email));
 	}
 	/**
 	*To change the password of the user.

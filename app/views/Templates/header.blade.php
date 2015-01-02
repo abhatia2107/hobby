@@ -33,10 +33,10 @@
 			<div class=" col-sm-3 col-md-3 ">
 			<ul class="list-inline">
 			<li class="header_myaccount" >   
-			<a  href="#" class="header_myaccount_a">My Account</a>
+			<a class="header_myaccount_a" href="/myaccount">My Account</a>
 			</li>
 			<li class="header_logout" >
-			<a class="header_logout_a" href="#" >Logout</a>
+			<a class="header_logout_a" href="/logout" >Logout</a>
 			</li>
 			</ul>
 			</div>		

@@ -33,9 +33,9 @@
 				@yield('content')
 			</div>
 			<!--Footer Section social networking links-->
-			<div class="navbar-inverse"> <!--  class="footer-wrapper" -->
+			<!-- <div class="navbar-inverse">  class="footer-wrapper"
 				@include('Templates.footer')
-			</div>
+			</div> -->
 		</div>
 		
 	    @yield('pagejavascript')

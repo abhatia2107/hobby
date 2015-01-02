@@ -3,7 +3,7 @@
     <div class=" col-sm-12 col-md-12 ">
         <nav class="navbar navbar-inverse" >
             <div class="container-fluid">
-                <a class="navbar-brand navbar-right" href="#">Submit Listing</a>
+                <a class="navbar-brand btn btn-primary navbar-right" href="/batches/create">Submit Listing</a>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                         <span class="icon-bar"></span>
@@ -14,9 +14,11 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
+                    @if(isset($all_categories))
                         @foreach($all_categories as $data)
                             <li ><a href="/filter/categories/{{$data->id}}/locations/{{$location_id}}">{{$data->category}}</a></li>
                         @endforeach
+                    @endif
                     </ul>
                 </div>
             </div>

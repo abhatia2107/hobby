@@ -98,14 +98,7 @@ class KeywordsController extends \BaseController {
 		$weekdays=$this->weekdays;
 		
 		//For display
-		/*$instituteIdArray=$this->categoryInstitute->getInstituteIdForCategory($id);	
-		//dd($instituteIdArray);
-		$batchesForInstitute = $this->batch->getBatchForInstitute($instituteIdArray);
-		//dd($batchesForInstitute);
-		$instituteForCategory=$this->institute->getInstituteForCategory($instituteIdArray);
-		//dd($instituteForCategory);
-		$venuesForInstitute =  $this->venue->getVenueForInstitute($instituteIdArray);
-		dd($venuesForInstitute);*/
+		$chunk=0;
 		if(!$category_id)
 			$subcategoriesForCategory=$this->subcategory->all();
 		else
@@ -114,17 +107,32 @@ class KeywordsController extends \BaseController {
 			$localitiesForLocation = $this->locality->all();
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
-		//dd($localitiesForLocation);
-		//dd($subcategoriesForCategory);
-		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id);
-		//dd($batchesForCategoryLocation);
+		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory'));
 	}
 
 	public function filter()
 	{
-		$credentials=Input::all();
-		dd($credentials);
+		if(Request::ajax()){
+			return ("test");
+		}
+			/*$credentials=Input::all();
+			dd($credentials);
+			$subcategories=Input::get('subcategories');
+			$localities=Input::get('localities');
+			$chunk=Input::get('chunk');
+			*/
+			$subcategories=array();
+			$localities=array();
+			$category_id=1;
+			$location_id=1;
+			$chunk=0;
+			if(!$subcategories&&!$localities)
+				$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
+			else
+				$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
+			//dd($batchesForCategoryLocation);
+			//return $batchesForCategoryLocation;		
 	}
 
 	/**

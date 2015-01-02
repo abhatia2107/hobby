@@ -56,17 +56,19 @@
                             </label>
                             <div class="col-sm-8">
                                 <select class="form-control select" name="user_location_id" id="user_location_id" required>
-                                    @foreach ($all_locations as $data)
-                                        <option value={{$data->id}} 
-                                            @if(isset($userDetails)) 
-                                                {{($userDetails->user_location_id==$data->id)?
-                                                    'selected="selected"':''}}
-                                            @else
-                                                {{"Input::old('user_location_id')"}}
-                                            @endif>
-                                            {{$data->location}}
-                                        </option>
-                                    @endforeach
+                                    @if(isset($all_locations))
+                                        @foreach ($all_locations as $data)
+                                            <option value={{$data->id}} 
+                                                @if(isset($userDetails)) 
+                                                    {{($userDetails->user_location_id==$data->id)?
+                                                        'selected="selected"':''}}
+                                                @else
+                                                    {{"Input::old('user_location_id')"}}
+                                                @endif>
+                                                {{$data->location}}
+                                            </option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                         </div>

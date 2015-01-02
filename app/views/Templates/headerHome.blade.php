@@ -1,5 +1,5 @@
 @section("header2")
-	<div class="row header_row1" >
+	<div class="clearfix header_row1" >
 		<div class=" col-sm-4 col-md-4">
 			<a class="navbar-brand" href="/">
 				<img src="/assets/images/logo.png" class="img-responsive" alt="HOBBY">

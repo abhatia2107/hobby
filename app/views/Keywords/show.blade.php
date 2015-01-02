@@ -34,6 +34,12 @@
     {
     	background:url(/assets/images/checked.gif) center top no-repeat;
     }
+    .locality_filter
+    {
+    	max-height: 150px;
+    	overflow: auto;
+    	margin-bottom:5px;
+    }
 
 
   </style>
@@ -50,29 +56,29 @@
 				<!--Start of filter division -->
 				<div class="col-md-3 col-xs-12 col-sm-3 column">
 					<h4>Filter Results</h4>
-					<div id="browse-filter">	
+					<div id="browse-filter" class="filter" >	
 						<h4 class="unit line">Sub Categories</h4> 
-						<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+						<ul class="list-unstyled locality_filter" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 						@foreach ($subcategoriesForCategory as $subcategoryData)
 							<?php
 								$subcategory = $subcategoryData->subcategory;
 								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory); 
 							?>				
-							<li subcategory="{{$class}}" style="margin-bottom:5px;margin-left:-23px">								
+							<li subcategory="{{$class}}">								
 							 	 <label class="sub"><input autocomplete="off" style="" value="{{$class}}" type="checkbox" class="SubCheckbox" />{{$subcategory}}</label>
 							</li>
 						 @endforeach
 						 </ul> 
 					</div>
-					<div id="browse-filter">	
+					<div id="browse-filter" >	
 						<h4 class="unit line">Locality</h4> 
-						<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+						<ul class="list-unstyled locality_filter" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 						@foreach ($localitiesForLocation as $localityData)
 							<?php 
 								$locality = $localityData->locality;
 								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $locality);
 							?>
-							<li subcategory="{{$class}}" style="margin-bottom:5px;margin-left:-23px">								
+							<li subcategory="{{$class}}">								
 							 	 <label class="sub"><input autocomplete="off" style="" value="{{$class}}" type="checkbox" class="LocCheckbox" />{{$locality}}</label>
 							</li> 
 						@endforeach

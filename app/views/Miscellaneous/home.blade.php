@@ -52,7 +52,7 @@
             @foreach($all_categories as $data)
                <section id="image-grid-term-new-york-city" class="col-xs-12 col-sm-6 col-md-4 image-grid-item">
                   <div class="home_category_image col-xs-12 col-sm-6 col-md- image-grid-cover entry-cover has-image">
-                     <a href="/keyword/{{$data->id}}" class="cover-wrapper">{{$data->category}}</a>
+                     <a href="/categories/{{$data->id}}" class="cover-wrapper">{{$data->category}}</a>
                   </div>
                </section>
             @endforeach

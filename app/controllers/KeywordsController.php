@@ -84,7 +84,7 @@ class KeywordsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($category_id)
 	{
 		//For headers
 		$all_categories=$this->category->all();
@@ -107,13 +107,12 @@ class KeywordsController extends \BaseController {
 		$venuesForInstitute =  $this->venue->getVenueForInstitute($instituteIdArray);
 		dd($venuesForInstitute);*/
 
-		$localitiesForLocation = $this->locality->getlocalitiesForLocation(1);
+		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		//dd($localitiesForLocation);
-		$subcategoriesForCategory =  $this->subcategory->getSubcategoryForCategory($id);
+		$subcategoriesForCategory =  $this->subcategory->getSubcategoryForCategory($category_id);
 		//dd($subcategoriesForCategory);
-		$batchesForCategory = $this->batch->getBatchForCategory($id);
+		$batchesForCategory = $this->batch->getBatchForCategory($category_id);
 		//dd($batchesForCategory);localit
-		
 		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategory','localitiesForLocation','subcategoriesForCategory'));
 	}
 

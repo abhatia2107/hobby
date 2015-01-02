@@ -25,10 +25,10 @@
 			<div class=" col-sm-3 col-md-3 ">
 			<ul class="list-inline">
 			<li style="padding-top: 11px;font-size: 20px;width:50%;padding-left:20px;color:white;">   
-			<a style="text-decoration:none;color:white;" href="#" >My Account</a>
+			<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#loginModal">Sign In</a>
 			</li>
 			<li style="padding-top: 11px;font-size: 20px;color:white;">
-			<a style="text-decoration:none;color:white;" href="#" >&nbsp;Logout</a>
+			<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
 			</li>
 			</ul>
 			</div>
@@ -36,10 +36,10 @@
 			<div class=" col-sm-3 col-md-3 ">
 			<ul class="list-inline">
 			<li style="padding-top: 11px;font-size: 20px;width:50%;padding-left:20px;color:white;">   
-			<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#signinModal">Sign In</a>
+			<a style="text-decoration:none;color:white;" href="/institutes" >My Account</a>
 			</li>
 			<li style="padding-top: 11px;font-size: 20px;color:white;">
-			<a style="text-decoration:none;color:white;" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+			<a style="text-decoration:none;color:white;" href="/logout" >&nbsp;Logout</a>
 			</li>
 			</ul>
 			</div>

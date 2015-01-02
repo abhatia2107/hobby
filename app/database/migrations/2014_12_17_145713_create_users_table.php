@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration {
 		$table->string('user_fb_id',50)->nullable();
 		$table->date('user_birthdate')->nullable();	
 		$table->string('user_gender',6)->nullable();
-		$table->string('user_remember_token',70)->nullable();
+		$table->string('remember_token',255)->nullable();
 		$table->string('user_facebook_access_token',70)->nullable();
 		$table->string('user_confirmation_code',90);
 		$table->boolean('user_confirmed');

@@ -4,9 +4,6 @@ class categoriesTableSeeder extends Seeder {
 
        public function run()
        {
-
-
-              
               DB::table('categories')->insert(array(
               'category' =>'Art & Craft',
               'category_no_of_subcategories'=>10,

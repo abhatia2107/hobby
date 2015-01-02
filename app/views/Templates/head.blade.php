@@ -47,7 +47,6 @@
     <script src="https://demo.astoundify.com/listify/wp-includes,_js,_jquery,_jquery-migrate.min.js,qver==1.2.1+wp-content,_plugins,_woocommerce-social-login,_assets,_js,_frontend,_wc-social-login.min.js,qver==1.2.1+wp-content,_plugins,_wp-job-manager-google-places-api,_assets,_js,_wp-job-manager-google-places-api.js,qver==1.0.0+wp-content,_plugins,_wp-job-manager-reviews,_assets,_js,_wp-job-manager-reviews.js,qver==4.1+wp-includes,_js,_jquery,_ui,_core.min.js,qver==1.11.2+wp-includes,_js,_jquery,_ui,_widget.min.js,qver==1.11.2+wp-includes,_js,_jquery,_ui,_mouse.min.js,qver==1.11.2+wp-includes,_js,_jquery,_ui,_slider.min.js,qver==1.11.2+wp-includes,_js,_underscore.min.js,qver==1.6.0.pagespeed.jc.FywLkvSVov.js"></script><script>eval(mod_pagespeed_arESZBBxlN);</script>
     <script>eval(mod_pagespeed_sZgzetOcHG);</script>
     <script type="text/javascript" src="https://app.receiptful.com/scripts/tracking.js?ver=1.0.4"></script>
-    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3&amp;libraries=places&amp;ver=4.1"></script><script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bmain,places%7D.js"></script>
     <script>eval(mod_pagespeed_we4rbNH4kE);</script>
     <script>eval(mod_pagespeed_0vGv7D$Brg);</script>
     <script>eval(mod_pagespeed__4yTNMzw9s);</script>
@@ -70,8 +69,11 @@
     <meta property="og:site_name" content="Listify">
     <meta property="og:image" content="https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/10/main-bg-top_mini-1.jpg">
     
+    <!--
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?v=3&amp;libraries=places&amp;ver=4.1"></script><script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bmain,places%7D.js"></script>
     <script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bcommon,util,geocoder%7D.js" charset="UTF-8" type="text/javascript"></script>
     <style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style>
-    <script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bcontrols,places_impl%7D.js" charset="UTF-8" type="text/javascript"></script><script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bstats%7D.js" charset="UTF-8" type="text/javascript"></script><script src="https://maps.googleapis.com/maps/api/js/AuthenticationService.Authenticate?1shttps%3A%2F%2Fdemo.astoundify.com%2Flistify%2F&amp;5e1&amp;callback=_xdc_._wj932p&amp;token=39812" charset="UTF-8" type="text/javascript"></script>
+    <script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bcontrols,places_impl%7D.js" charset="UTF-8" type="text/javascript"></script><script src="https://maps.gstatic.com/cat_js/maps-api-v3/api/js/18/18/%7Bstats%7D.js" charset="UTF-8" type="text/javascript"></script><script src="https://maps.googleapis.com/maps/api/js/AuthenticationService.Authenticate?1shttps%3A%2F%2Fdemo.astoundify.com%2Flistify%2F&amp;5e1&amp;callback=_xdc_._wj932p&amp;token=39812" charset="UTF-8" type="text/javascript"></script> 
+    -->
     
 @show

@@ -4,6 +4,8 @@ return array(
 	
 	//login
 	"invalid_login"=>"Invalid login credentials",
+
+	"user_not_registered"=>"This email ID had not been registered at our site. Sign-Up within minutes.",
 	
 	"welcome"=>"Welcome ,:name",
 	
@@ -22,6 +24,6 @@ return array(
 
 	"email_already_verified"=>"Your email has been already verified.",
 
-	"welcome"=>"Welcome, :name your email has been verified, Please add your events and update your personal detail",
+	"welcome"=>"Welcome, :name your email has been verified. Please feel free to drop a mail at Support, if you have any complaint or feedback.",
 
 );

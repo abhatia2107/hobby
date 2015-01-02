@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder {
                      'user_fb_id' =>$faker->randomNumber(5),
                      'user_birthdate' =>$faker->date,
                      'user_gender'=>"male",
-                     'user_remember_token'=>$faker->lexify(),
+                     'remember_token'=>$faker->lexify(),
                      'user_facebook_access_token'=>$faker->lexify(),
                      'user_confirmation_code' =>$faker->randomNumber(1000000,10000000),
                      'user_csrf_token' =>$faker->lexify(),

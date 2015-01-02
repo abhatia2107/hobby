@@ -133,7 +133,7 @@ class UsersController extends \BaseController {
 		if ($updated) 
 			return Redirect::to('/users')->with('success',Lang::get('user.user_updated'));
 		else
-			return Redirect::to('/users')->with('failure',Lang::get('user.user_already_failed'));
+			return Redirect::to('/users')->with('failure',Lang::get('user.user_already_failure'));
 	}
 
 	/**
@@ -149,7 +149,7 @@ class UsersController extends \BaseController {
 		if($deleted)
 			return Redirect::to('/users')->with('success',Lang::get('user.user_deleted'));
 		else
-			return Redirect::to('/users')->with('failure',Lang::get('user.user_delete_failed'));
+			return Redirect::to('/users')->with('failure',Lang::get('user.user_delete_failure'));
 	}
 
 
@@ -163,7 +163,7 @@ class UsersController extends \BaseController {
 			
  	 		return Redirect::to("/");
  		}
-		return View::make('pages.login.login',compact('all_categories','all_locations'));
+		return View::make('Users.login',compact('all_categories','all_locations'));
 	}
 
 	/**
@@ -175,12 +175,16 @@ class UsersController extends \BaseController {
 		$remember=(Input::has('remember'))?true:false;
 		$credentials=$this->getCredentials();
 		$email_verification=$this->user->where('user_email','=',Input::get('user_email'))->first();
+		if(!$email_verification)
+		{
+			return Redirect::to('/signup')->with('failure',Lang::get('user.user_not_registered'));
+		}
 		/* To check whether the user has verified his/her email or not. */
 		if(isset($email_verification))
 		{
-			if($email_verification->confirmed==0)
+			if($email_verification->user_confirmed==0)
 			{
-				return Redirect::to('/')->with('failed',Lang::get('user.verify_email'));
+				return Redirect::to('/')->with('failure',Lang::get('user.verify_email'));
 			}
 		}
 		if(Auth::attempt($credentials,$remember))
@@ -193,14 +197,12 @@ class UsersController extends \BaseController {
 				|
 				*/
 				$data=$this->user->getid(Input::get('user_email'));
-				
-
 				return Redirect::to('/');
 			}
 			
 		else
 			{
-				return Redirect::to('/')->with('failed',Lang::get('user.invalid_login'))->withInput(Input::except('user_password'));
+				return Redirect::to('/')->with('failure',Lang::get('user.invalid_login'))->withInput(Input::except('user_password'));
 			}
 
 	}
@@ -213,7 +215,7 @@ class UsersController extends \BaseController {
 		return [
 			"user_email"=>Input::get('user_email'),
 			"user_password"=>Input::get('user_password'),
-			"confirmed"=>1,
+			"user_confirmed"=>1,
 		];
 	}
 	/**
@@ -254,13 +256,13 @@ class UsersController extends \BaseController {
 		$code = Input::get('code');
     	if (strlen($code) == 0) 
     	{
-    		return Redirect::to('/')->with('failed', Lang::get('user.error_fb_comm'));
+    		return Redirect::to('/')->with('failure', Lang::get('user.error_fb_comm'));
     	}
 
     	$facebook = new Facebook(Config::get('facebook'));
     	$uid = $facebook->getUser();
 
-    	if ($uid == 0) return Redirect::to('/')->with('failed', Lang::get('user.error'));
+    	if ($uid == 0) return Redirect::to('/')->with('failure', Lang::get('user.error'));
     	/** $me contains all the user information in the form of associative array **/
     	$me = $facebook->api('/me');
  		
@@ -278,7 +280,7 @@ class UsersController extends \BaseController {
     		$profiledata['user_first_name']=$me['first_name'];
     		$profiledata['user_last_name']=$me['last_name'];
     		$profiledata['user_email']=$me['email'];
-    		$profiledata['confirmed']=1;
+    		$profiledata['user_confirmed']=1;
     		if(isset($me['username']))
     		{
     			$profiledata['user_username']=$me['username'];
@@ -378,7 +380,7 @@ class UsersController extends \BaseController {
 			else
 			{
 				return "file not uploaded";
-   				return Redirect::back()->with('failed',Lang::get('upload.error_profile_pic'));
+   				return Redirect::back()->with('failure',Lang::get('upload.error_profile_pic'));
 			}
 	}
  		/* Details are updated in database */
@@ -397,7 +399,7 @@ class UsersController extends \BaseController {
 	{
 		$all_categories= Category::all();
         $all_locations=Location::all();
-        return View::make('pages.signup.signup',compact('all_categories','all_locations'));
+        return View::make('Users.signup',compact('all_categories','all_locations'));
 	}
 	/**
 	*Function to add new user to the database.
@@ -409,15 +411,17 @@ class UsersController extends \BaseController {
 	{
 		$all_categories= Category::all();
         $all_locations=Location::all();
-        $validator=Validator::make($newUserData=Input::all(),User::$rulesSignup);
+        $newUserData=Input::all();
+        /*dd($newUserData);*/
+        $validator=Validator::make($newUserData,User::$rulesSignup);
 		if($validator->fails())
 		{
-			return Redirect::to('/signup')->withErrors($validator)->withInput(Input::except('user_password'));
+			return Redirect::to('/signup')->withErrors($validator)->withInput(Input::except('password'));
 		}
 		else
 		{
 			$confirmationCode=str_random();
-			$newUserData['user_password']=Hash::make(Input::get('user_password'));
+			$newUserData['user_password']=Hash::make(Input::get('password'));
 			$newUserData['user_confirmation_code']=$confirmationCode;
 			$email=$newUserData['user_email'];
 			$name=$newUserData['user_first_name'];
@@ -454,8 +458,8 @@ class UsersController extends \BaseController {
         $validate=$this->user->find($userId);
 		if($validate)
 		{
-			/* to check whether the email has been allready verified or not  */
-			if($validate->confirmed==1)
+			/* to check whether the email has been already verified or not  */
+			if($validate->user_confirmed==1)
 			{
 				return Redirect::to('/')->with('success',Lang::get('user.email_already_verified'));
 			}
@@ -470,7 +474,7 @@ class UsersController extends \BaseController {
 			}
 			else
 			{
-				return Redirect::to('/signup')->with('failed','Sorry you are not an authorized user.'); 	
+				return Redirect::to('/signup')->with('failure','Sorry you are not an authorized user.'); 	
 			}
 		}
 	}
@@ -521,7 +525,7 @@ class UsersController extends \BaseController {
 			}
 			else
 			{
-				return Redirect::back()->with('failed','Your current password is not same');
+				return Redirect::back()->with('failure','Your current password is not same');
 			}
 		}
 	}

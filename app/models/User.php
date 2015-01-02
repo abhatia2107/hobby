@@ -23,19 +23,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	protected $guarded = [
 		'id',
-		'user_password_confirmation',
+		'password',
+		'password_confirmation',
 		'user_confirmed',
 		'created_at',
 		'updated_at',
 	];
 
-	public static $rules = [
+	public static $rulesSignup = [
 		'user_first_name'=>'required',
 	    'user_last_name'=>'required',
 	   	'user_email'=>'required|unique:users,user_email',
-		'user_contact_no'=>'required|numeric|size:10',
-		'user_password'=>'required|confirmed|alpha_num|min:6',
-	    'user_location'=>'required',
+		'user_contact_no'=>'required|unique:users,user_contact_no|regex:/[0-9]{10,11}/',
+		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
+	    'user_location_id'=>'required',
 	    'user_birthdate'=>'date',
 	    'user_gender'=>'boolean',
 	    'user_confirmed'=>'boolean',                   
@@ -64,18 +65,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	    	return false;
     }
 
-    public static $rulesSignup=[
-		'user_email'=>'required|unique:users,user_email',
-		'user_first_name'=>'required',
-		'user_last_name'=>'required',
-		'user_password'=>'required|confirmed|alpha_num|min:6',
-		'user_password_confirmation'=>'required',
-	];
-
 	public static $rulesChangePassword=[
 		'current_password'=>'required',
 		'user_password'=>'required|confirmed|alpha_num|min:6',
-		'user_password_confirmation'=>'required',
 	];
 	public static $uniqueEmail=[
 		'user_email'=>'unique:users,user_email',

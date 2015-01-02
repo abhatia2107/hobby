@@ -112,7 +112,7 @@ class KeywordsController extends \BaseController {
 		$subcategoriesForCategory =  $this->subcategory->getSubcategoryForCategory($id);
 		//dd($subcategoriesForCategory);
 		$batchesForCategory = $this->batch->getBatchForCategory($id);
-		//dd($batchesForCategory);
+		//dd($batchesForCategory);localit
 		
 		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategory','localitiesForLocation','subcategoriesForCategory'));
 	}

@@ -304,3 +304,26 @@ a.button-social-login.button-social-login-google, .widget-area a.button-social-l
 a.button-social-login.button-social-login-instagram, .widget-area a.button-social-login.button-social-login-instagram, .social-badge.social-badge-instagram {
     background: #517fa4;
 }
+.required{
+    color: red;
+}
+.select{
+    padding: 5px !important;
+}
+.home_banner_image{
+    background-image: url(https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/10/main-bg-top_mini-1.jpg);
+}
+.home_category_image{
+    background-image: url(https://demo.astoundify.com/listify/wp-content/uploads/sites/39/job_listings/2014/11/nyc-photo-1024x682.jpg);    
+}
+.home_recent_image{
+     background-image: url(https://demo.astoundify.com/listify/wp-content/uploads/sites/39/job_listings/2014/11/Stocksy_txp782c31421CE000_Medium_85879-1024x682.jpg);
+}
+.home_user_image{
+    background-image:url(https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/11/get-exposure-for-your-biz.jpg);
+    background-position: center top;
+}
+.home_institute_image{
+     background-image:url(https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/10/iphone-home-page.jpg);
+     background-position: center center;
+}

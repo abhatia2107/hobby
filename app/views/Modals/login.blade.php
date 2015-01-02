@@ -1,7 +1,7 @@
-@section("signin")
+@section("login")
 <div class="modal-dialog">
         <div class="modal-content">
-            <form name="signIn" id="signIn" role="form" method="post" action="/signin/submit" enctype="multipart/form-data">
+            <form name="signIn" id="signIn" role="form" method="post" action="/login/submit" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>

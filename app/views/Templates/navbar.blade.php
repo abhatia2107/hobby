@@ -1,4 +1,4 @@
-<div class="clearfix" style="margin-left:-15px">
+<div class="row">
     <div class=" col-sm-10 col-md-10 ">
         <nav class="navbar navbar-inverse" >
             <div class="container-fluid">
@@ -11,11 +11,9 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        @if(isset($all_locations))
-                            @foreach($all_categories as $data)
-                                <li ><a href="/keywords/{{$data->id}}">{{$data->category}}</a></li>
-                            @endforeach
-                        @endif
+                        @foreach($all_categories as $data)
+                            <li ><a href="category/{{$data->id}}">{{$data->category}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

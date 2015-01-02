@@ -84,7 +84,7 @@ class KeywordsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($category_id,$location_id)
+	public function show($category_id,$location_id="0")
 	{
 		//For headers
 		$all_categories=$this->category->all();
@@ -114,15 +114,17 @@ class KeywordsController extends \BaseController {
 	public function filter($subcategoriesString,$localitiesString,$category_id,$location_id,$chunk)
 	{
 		if(Request::ajax()){
-			$subcategories=$subcategoriesString.split(",");
-			$localities=$localitiesString.split(",");
+			$subcategories=explode(",",$subcategoriesString);
+			$localities=explode(",", $localitiesString);
+			//dd($subcategories);
+			//dd($localities);
 			if(!$subcategories&&!$localities)
 				$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 			else
 				$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
-			//dd($batchesForCategoryLocation);
+			//$batchesForCategoryLocation;
 			return $batchesForCategoryLocation;
-		}
+		}	
 	}
 
 	/**

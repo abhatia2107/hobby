@@ -191,7 +191,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/signup/submit','UsersController@postSignup');
 });
 
-Route::get('/filter/categories/{category_id}/locations/{location_id}','KeywordsController@show');
+Route::get('/filter/categories/{category_id}/locations/{location_id?}','KeywordsController@show');
 
 // Route::get('/filter/categories/{category_id}/locations/{location_id}/keywords/{keyword?}','KeywordsController@show');
 

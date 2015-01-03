@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<h2>Password Reset</h2>
-
+		<!-- TO DO: Send your name along with the mail. -->
 		<div>
 			To reset your password, complete this form: {{ URL::to('/users/password/reset', array($token)) }}.<br/>
 			This link will expire in {{ Config::get('auth.reminder.expire', 12) }} hours.

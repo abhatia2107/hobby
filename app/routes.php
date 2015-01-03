@@ -25,7 +25,7 @@ Route::resource('localities', 'LocalitiesController');
 Route::resource('locations', 'LocationsController');
 Route::resource('subcategories', 'SubcategoriesController');
 Route::resource('subscriptions', 'SubscriptionsController');
-Route::resource('users', 'UsersController');
+//Route::resource('users', 'UsersController');
 Route::resource('venues', 'VenuesController');
 
 //Route for AdminsController
@@ -133,8 +133,18 @@ Route::get('/users/delete/{id}','UsersController@destroy');
 Route::get('/users/login', 'UsersController@getLogin');
 Route::get('/users/logout','UsersController@getLogout');
 Route::get('/users/signup','UsersController@getSignUp');
-Route::get('/registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
+Route::get('/users/registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
 Route::get('/users/changepassword','UsersController@getChangePassword');
+Route::get('/users/password/remind','RemindersController@getRemind');
+Route::get('/users/password/reset/{token}','RemindersController@getReset');
+Route::post('/users/password/reset/submit','RemindersController@postReset');
+
+Route::group(array('before' => "csrf"), function() {
+	Route::post('/users/login/submit','UsersController@postAuthenticate');
+	Route::post('/users/signup/submit','UsersController@postSignup');
+	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
+	Route::post('/users/password/remind/submit','RemindersController@postRemind');
+});
 
 Route::get('/aboutus', function()
 {
@@ -166,11 +176,6 @@ Route::get('/hello', function()
 	return View::make('Miscellaneous.hello');
 });
 
-Route::get('/dummy', function()
-{
-	return View::make('Miscellaneous.dummy');
-});
-
 
 //Routes for user, to be modified later
 
@@ -180,16 +185,6 @@ Route::post('/changepassword/submit','UsersController@postChangePassword');
 Route::post('/update/personaldetail/submit','UsersController@postUpdatePersonalDetail');
 Route::get('login/fb','UsersController@loginFb');
 Route::get('/login/fb/callback','UsersController@loginFbCallback');
-Route::get('/users/password/remind','RemindersController@getRemind');
-Route::get('/users/password/reset/{token}','RemindersController@getReset');
-Route::post('/users/password/reset/submit','RemindersController@postReset');
-
-Route::group(array('before' => "csrf"), function() {
-	Route::post('/users/login/submit','UsersController@postAuthenticate');
-	Route::post('/users/signup/submit','UsersController@postSignup');
-	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
-	Route::post('/users/password/remind/submit','RemindersController@postRemind');
-});
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','KeywordsController@show');
 

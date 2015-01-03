@@ -17,7 +17,9 @@
 					@include('Templates.header')
 				</header>
 			@endif
-			@include('Templates.navbar')
+			@if(isset($all_categories))
+				@include('Templates.navbar')
+			@endif
 			<!--sign-In pop up modal-->
 			<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				@include('Modals.login')

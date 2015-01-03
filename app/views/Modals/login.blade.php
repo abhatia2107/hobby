@@ -68,7 +68,7 @@
                         },
                         fields: {
 
-                             password: {
+                            password: {
                                 message: 'The password is not valid',
                                 validators: {
                                     notEmpty: {
@@ -84,7 +84,7 @@
                                         message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,%,&,_'
                                     }
                                 }
-                            }},
+                            },
 
                             email: {
                                 validators: {
@@ -96,13 +96,10 @@
                                     }
                                 }
                             }
-
                         }
                     });
-                    
-                    
                 });
-            </script>
+                </script>
         </div>
     </div>
 @show

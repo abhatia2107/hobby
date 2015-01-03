@@ -15,7 +15,7 @@
 <div class="container main-container headerOffset">
 <div class="main container">
 		<div class="col-md-5 col-sm-7 col-xs-12">
-			<form  role="form" id="support" method="post" enctype="multipart/form-data" action="/support/submit">
+			<form  role="form" id="support" method="post" enctype="multipart/form-data" action="/feedbacks/store">
 				<div class="form-group">
 					<h3 class="heading">Submit a request/feedback/complaint</h3>
 				</div>

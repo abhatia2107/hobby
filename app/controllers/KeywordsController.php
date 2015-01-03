@@ -84,7 +84,7 @@ class KeywordsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($category_id,$location_id="0")
+	public function show($category_id,$location_id)
 	{
 		//For headers
 		$all_categories=$this->category->all();

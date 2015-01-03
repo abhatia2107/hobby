@@ -183,16 +183,32 @@
 	var linksContainer = $('#filter_data'),baseUrl;
 	for (var i=0; i<result.length; i++)
 	{
-    	console.log("Source: "+result[i]['institute']);
+    	//console.log("Source: "+result[i]['institute']);
     	var institute = result[i]['institute'];
 		var batch = result[i]['batch'];
 		var subcategory = result[i]['subcategory'];
-		var location = result[i]['location'];
+		var location_name = result[i]['location'];
 		var sub_id = result[i]['batch_subcategory_id'];
 		var loc_id = result[i]['venue_locality_id'];
 		var locality =result[i]['locality'];
 		var tagline =result[i]['batch_tagline'];
-    	
+		$(linksContainer).append("<li subcategory='"+sub_id+"' locality='"+loc_id+"' class='batch"+i+"' id='batchInfo'>"+
+			"<div class='row clearfix batch' >"+
+				"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
+					"<div class='row clearfix'><div class='col-md-12 col-xs-12 col-sm-12 column'>"+
+							"<div class='row clearfix'><div class='col-md-12 col-xs-12 col-sm-4 column'>"+
+								"<div class='col-md-9 col-xs-12 col-sm-9 column'>"+
+									"<span id='inst_name'>"+location_name+"<br></span>"+
+									"<span id='inst_tagline'>"+tagline+"<br></span>"+
+								"</div>"+
+								"<div class='col-md-3 col-xs-12 col-sm-3 column'>"+
+									"<span id='inst_rating'>Rating<br></span>"+
+								"</div>"+
+							"</div>"+
+							"<div class='col-md-12 col-xs-12 col-sm-4 column'>"+
+								"<div class='col-md-6 col-xs-12 col-sm-4 column'>someinfor</div>"+
+								"<div class='col-md-6 col-xs-12 col-sm-4 column'></div>"+
+			"</div></div></div></div></div></div></li>");	
     }
 	$(document).ready(function() {
 			var sub_select = new Array();
@@ -204,10 +220,10 @@
 				//var subcategory = 'batch_'+$(this).attr('subcategory');
 				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
-				//$.get("/filter/"+sub_select+"/"+loc_select+"/1/1/1",function(response)
-			//	{
-			//		alert(response[4].toSource());
-			//	});
+				$.get("/filter/"+sub_select+"/"+loc_select+"/1/1/1",function(response)
+				{
+					alert(response[4].toSource());
+				});
 				//alert('sub '+sub_select);
 				//alert('lco' +loc_select);
 				if(sub_select.length>0 && loc_select.length>0)
@@ -247,8 +263,7 @@
 							if (subResult==-1 && locResult==-1) 
 							{	$('.'+test).fadeOut(500);	}
 							else
-							{	$('.'+test).fadeIn(500);
-								$('.'+test+" #inst_name").append("<h3>harikrishna<h3>");	}
+							{	$('.'+test).fadeIn(500);	}
 						});
 					}
 					else

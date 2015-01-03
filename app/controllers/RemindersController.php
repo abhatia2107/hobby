@@ -21,7 +21,11 @@ class RemindersController extends Controller {
 	 */
 	public function postRemind()
 	{
-		switch ($response = Password::remind(Input::only('email')))
+		//TO DO: Pass userID too to the user
+		switch ($response = Password::remind(Input::only('email'),function($message){
+	    				$message->subject('Password Reminder');
+					})
+				)
 		{
 			case Password::INVALID_USER:
 				return Redirect::back()->with('failure', Lang::get($response));
@@ -52,6 +56,7 @@ class RemindersController extends Controller {
 	 */
 	public function postReset()
 	{
+		//TO DO: Don't take email as input from user. Put it automatically.
 		$all_categories= Category::all();
         $all_locations=Location::all();
         $credentials = Input::only(

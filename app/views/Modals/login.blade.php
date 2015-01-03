@@ -10,7 +10,7 @@
                     <h4 class="modal-title" id="myModalLabel2">Login</h4>
                 </div>
                 <div class="modal-body" >
-                    <div class="row">
+                    <div class="clearfix">
                         <div class="form-group">
                             <label for="email" class="col-sm-3 control-label ">Email&nbsp;
                                 <span style="color:red">*</span>
@@ -20,9 +20,9 @@
                                 <input type="email"  placeholder="mymail@example.com" class="form-control " name="email"  id="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
                             </div>
                         </div>
-                    </div><br>
+                    </div>
 
-                    <div class="row">
+                    <div class="clearfix">
                         <div class="form-group">
                             <label for="password" class="col-sm-3 control-label ">Password&nbsp;
                                 <span style="color:red">*</span>
@@ -31,17 +31,24 @@
                                 <input type="password"   class="form-control " name="password"  id="password">
                             </div>
                         </div>
-                    </div><br>
-                    <div class="form-group">
-                        <div >
-                            <div class="checkbox login-remember">
-                                <label>
-                                    <input name="remember"  value="forever" checked="checked" type="checkbox">
-                                    Remember Me 
-                                </label>
+                    </div>
+                        <div class="clearfix">
+                            <div class="form-group">
+                                <div >
+                                    <div class="checkbox login-remember">
+                                        <label class="col-sm-4 control-label">
+                                            <input name="remember"  value="forever" checked="checked" type="checkbox">
+                                            Remember Me 
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
+                                <a href="/users/password/remind">Forgot Your Password</a>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

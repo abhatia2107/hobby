@@ -119,14 +119,14 @@
 					</div>
 				</div>
 				<div class="col-md-8 col-xs-11 col-sm-9 column" >
-					<center><h4>Results</h4k></center>
+					<center><h4>Results</h4></center>
 					<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					@foreach ($batchesForCategoryLocation as $key => $batchInfo)
 						<?php  
 							$institute = $batchInfo->institute;
 							$batch = $batchInfo->batch;
 							$subcategory = $batchInfo->subcategory;
-							$location = $batchInfo->location;
+							$location_name = $batchInfo->location;
 							$sub_id = $batchInfo->batch_subcategory_id;
 							$loc_id = $batchInfo->venue_locality_id;
 							$locality = $batchInfo->locality;

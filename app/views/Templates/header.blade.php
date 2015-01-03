@@ -22,7 +22,7 @@
 			<div class=" col-sm-3 col-md-3 ">
 				<ul class="list-inline">
 					<li class="header_signin" >   
-						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#signinModal">Sign In</a>
+						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">Sign In</a>
 					</li>
 					<li class="header_signup">
 						<a  class="header_signup_a" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>

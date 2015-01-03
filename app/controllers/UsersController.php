@@ -192,7 +192,7 @@ class UsersController extends \BaseController {
 		}
 		else
 		{
-			return Redirect::to('/')->with('failure',Lang::get('user.invalid_login'))->withInput(Input::except('password'));
+			return Redirect::to('/users/login')->with('failure',Lang::get('user.invalid_login'))->withInput(Input::except('password'));
 		}
 	}
 
@@ -249,7 +249,7 @@ class UsersController extends \BaseController {
         $validator=Validator::make($newUserData,User::$rules);
 		if($validator->fails())
 		{
-			return Redirect::to('/signup')->withErrors($validator)->withInput(Input::except('password'));
+			return Redirect::to('/users/signup')->withErrors($validator)->withInput(Input::except('password'));
 		}
 		else
 		{
@@ -357,11 +357,11 @@ class UsersController extends \BaseController {
 			{
 				$userDetails->password = Hash::make($password);
 				$userDetails->save();
-				return Redirect::back()->with('success', Lang::get('user.user_password_changed');
+				return Redirect::back()->with('success', Lang::get('user.user_password_changed'));
 			}
 			else
 			{
-				return Redirect::back()->with('failure', Lang::get('user.user_password_change_failed');
+				return Redirect::back()->with('failure', Lang::get('user.user_password_change_failed'));
 			}
 		}
 	}

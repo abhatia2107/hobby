@@ -114,17 +114,15 @@ class KeywordsController extends \BaseController {
 	public function filter($subcategoriesString,$localitiesString,$category_id,$location_id,$chunk)
 	{
 		if(Request::ajax()){
-			$subcategories=explode(",",$subcategoriesString);
-			$localities=explode(",", $localitiesString);
-			//dd($subcategories);
-			//dd($localities);
+			$subcategories=$subcategoriesString.split(",");
+			$localities=$localitiesString.split(",");
 			if(!$subcategories&&!$localities)
 				$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 			else
 				$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
-			//$batchesForCategoryLocation;
+			//dd($batchesForCategoryLocation);
 			return $batchesForCategoryLocation;
-		}	
+		}
 	}
 
 	/**

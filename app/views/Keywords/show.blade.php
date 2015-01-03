@@ -68,6 +68,12 @@
     	margin-top: -17px;
     	margin-left: 16px;
     }
+    #loadMore
+    {
+    	background: lightgray;
+    	height: 40px;
+    	padding:5px;
+    }
 
 
   </style>
@@ -121,54 +127,8 @@
 				<div class="col-md-8 col-xs-11 col-sm-9 column" >
 					<center><h4>Results</h4></center>
 					<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
-					@foreach ($batchesForCategoryLocation as $key => $batchInfo)
-						<?php  
-							$institute = $batchInfo->institute;
-							$batch = $batchInfo->batch;
-							$subcategory = $batchInfo->subcategory;
-							$location_name = $batchInfo->location;
-							$sub_id = $batchInfo->batch_subcategory_id;
-							$loc_id = $batchInfo->venue_locality_id;
-							$locality = $batchInfo->locality;
-							$tagline = $batchInfo->batch_tagline;
-							$sub = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory);
-							$loc = preg_replace('/[^A-Za-z0-9\-]/', '', $locality);
-						?>
-						<!--<li subcategory='{{$sub_id}}' locality='{{$loc_id}}' class='batch{{$key}}' id='batchInfo' style='display:block'>
-						<div class='row clearfix batch' >
-							<div class="col-md-12 col-xs-12 col-sm-12 column" >
-								<div class="row clearfix">
-									<div class="col-md-12 col-xs-12 col-sm-12 column">
-										<div class="row clearfix">
-											<div class="col-md-12 col-xs-12 col-sm-4 column">
-												<div class="col-md-9 col-xs-12 col-sm-9 column">
-													<span id="inst_name">{{$institute}}<br></span>
-													<span id="inst_tagline">{{$tagline}}<br></span>
-													{{ $locality }}<br>
-												</div>
-												<div class="col-md-3 col-xs-12 col-sm-3 column">
-													<span id="inst_rating">{{ 'Rating' }}<br></span>
-												</div>
-											</div>
-											<div class="col-md-12 col-xs-12 col-sm-4 column">
-												
-												<div class="col-md-6 col-xs-12 col-sm-4 column">
-													{{ $batch }}
-													{{ $batchInfo->batch_id }}
-													{{ $subcategory}}
-												</div>
-												<div class="col-md-6 col-xs-12 col-sm-4 column">
-											
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> end of batch info 
-						</li> --> 
-					@endforeach
 					</ul>
+					<div id="loadMore"><center><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</center></div><br><br>
 				</div><!--end of results info -->
 			</div>
 		</div>
@@ -177,105 +137,171 @@
 <br>
 </body>
 <script type="text/javascript">
-	var result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
+	var result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;	
+	var range = 10;
+	var completeRange = 0;
+	var filterRestultCount = 0;
+	var fiterStatus;
+	displayResults(result,0);
+	LoadResult(0,20);
+	//Load_Some(20,40);
+	function LoadResult(start,end)
+	{
+		//alert(end);
+		var i = 0;
+		$("#filter_data li").each(function () 
+		{	
+			if(i>=start && i<=end)
+			{
+				//alert('yes');
+				var test = $(this).attr('class');
+				$('.'+test).fadeIn(100);
+			}
+			i++;
+		});
+		completeRange = i;
+		range = end;
+		//alert(range);
+
+	}
+
 	//var json = JSON.parse(photos);
 	//photos = photos[0].toSource();
-	var linksContainer = $('#filter_data'),baseUrl;
-	for (var i=0; i<result.length; i++)
-	{
-    	//console.log("Source: "+result[i]['institute']);
-    	var institute = result[i]['institute'];
-		var batch = result[i]['batch'];
-		var subcategory = result[i]['subcategory'];
-		var location_name = result[i]['location'];
-		var sub_id = result[i]['batch_subcategory_id'];
-		var loc_id = result[i]['venue_locality_id'];
-		var locality =result[i]['locality'];
-		var tagline =result[i]['batch_tagline'];
-		$(linksContainer).append("<li subcategory='"+sub_id+"' locality='"+loc_id+"' class='batch"+i+"' id='batchInfo'>"+
-			"<div class='row clearfix batch' >"+
-				"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
-					"<div class='row clearfix'><div class='col-md-12 col-xs-12 col-sm-12 column'>"+
-							"<div class='row clearfix'><div class='col-md-12 col-xs-12 col-sm-4 column'>"+
-								"<div class='col-md-9 col-xs-12 col-sm-9 column'>"+
-									"<span id='inst_name'>"+location_name+"<br></span>"+
-									"<span id='inst_tagline'>"+tagline+"<br></span>"+
+	function displayResults(results,start)
+	{	
+		//alert(range);
+		var linksContainer = $('#filter_data'),baseUrl;
+		for (var i=start; i<results.length; i++)
+		{
+	    	//console.log("Source: "+results[i]['institute']);
+	    	var institute = results[i]['institute'];
+			var batch = results[i]['batch'];
+			var key  = i;
+			var subcategory = results[i]['subcategory'];
+			var location_name = results[i]['location'];
+			var locality =results[i]['locality'];
+			var tagline =results[i]['batch_tagline'];
+			var sub_id = results[i]['batch_subcategory_id'];
+			var loc_id = results[i]['venue_locality_id'];	
+			$(linksContainer).append("<li subcategory='"+sub_id+"' locality='"+loc_id+"' class='batch"+key+"' id='batchInfo' style='display:none'>"+
+				"<div class='row clearfix batch' >"+
+					"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
+						"<div class='row clearfix'><div class='col-md-12 col-xs-12 col-sm-12 column'>"+
+								"<div class='row clearfix'><div class='col-md-12 col-xs-12 col-sm-4 column'>"+
+									"<div class='col-md-9 col-xs-12 col-sm-9 column'>"+
+										"<span id='inst_name'>"+i+","+institute+"<br></span>"+
+										"<span id='inst_tagline'>"+tagline+"<br></span>"+
+										locality+","+location_name+
+									"</div>"+
+									"<div class='col-md-3 col-xs-12 col-sm-3 column'>"+
+										"<span id='inst_rating'>Rating<br></span>"+
+									"</div>"+
 								"</div>"+
-								"<div class='col-md-3 col-xs-12 col-sm-3 column'>"+
-									"<span id='inst_rating'>Rating<br></span>"+
-								"</div>"+
-							"</div>"+
-							"<div class='col-md-12 col-xs-12 col-sm-4 column'>"+
-								"<div class='col-md-6 col-xs-12 col-sm-4 column'>someinfor</div>"+
-								"<div class='col-md-6 col-xs-12 col-sm-4 column'></div>"+
-			"</div></div></div></div></div></div></li>");	
-    }
+								"<div class='col-md-12 col-xs-12 col-sm-4 column'>"+
+									"<div class='col-md-6 col-xs-12 col-sm-4 column'>"+
+														batch+"<br>"+
+														subcategory+"<br>"+
+									"<div class='col-md-6 col-xs-12 col-sm-4 column'></div>"+
+				"</div></div></div></div></div></div></li>");	
+	    }
+	}
 	$(document).ready(function() {
-			var sub_select = new Array();
-			var loc_select = new Array();
-			sub_select[0] =0;
-			loc_select[0] =0;
-			$("#filter-sub li").click(function () {
-				$("#batchInfo").css('display','none');
-				//var subcategory = 'batch_'+$(this).attr('subcategory');
-				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
-				$.get("/filter/"+sub_select+"/"+loc_select+"/1/1/1",function(response)
+		var linksContainer = $('#filter_data'),baseUrl;
+		window.onscroll = function(ev)
+		{
+			if ((window.innerHeight + window.scrollY) == $(document).height())
+			{
+				if(range==result.length)
 				{
-					alert(response[4].toSource());
-				});
-				//alert('sub '+sub_select);
-				//alert('lco' +loc_select);
-				if(sub_select.length>0 && loc_select.length>0)
-				{
-					//alert('two');		
-					//$('#batchInfo').css('display','none');	
-					$("#filter_data li").each(function () 
+					$.get("/filter/0/0/0/0/1",function(response)
 					{
-						var test = $(this).attr('class');
-						subcategory = $(this).attr('subcategory');
-						locality = $(this).attr('locality');
-						//alert(locality);
-						var subResult = jQuery.inArray(subcategory,sub_select);
-						var locResult = jQuery.inArray(locality,loc_select);
-						//alert('sub '+sub_select);
-						//alert('lco' +loc_select);
-						if (subResult==-1 || locResult==-1) 
-						{	$('.'+test).fadeOut(500);	}
-						else
-						{	$('.'+test).fadeIn(500);	}
+							alert(response);
 					});
 				}
 				else
 				{
-					if(sub_select.length>0 || loc_select.length>0)
+					LoadResult(range,range+10);
+				}
+
+			}
+		}
+		var sub_select = new Array();
+		var loc_select = new Array();
+		$("#filter-sub li").click(function () {
+			$(linksContainer).empty();
+			displayResults(result,0);
+			//$("#batchInfo").css('display','none');
+			//var subcategory = 'batch_'+$(this).attr('subcategory');
+			sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
+			loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
+			
+			//alert('sub '+sub_select);
+			//alert('lco' +loc_select);
+			if(sub_select.length>0 && loc_select.length>0)
+			{
+				//alert('two');		
+				//$('#batchInfo').css('display','none');	
+				filterRestultCount=0;
+				$("#filter_data li").each(function () 
+				{
+					
+					var test = $(this).attr('class');
+					subcategory = $(this).attr('subcategory');
+					locality = $(this).attr('locality');
+					//alert(locality);
+					var subResult = jQuery.inArray(subcategory,sub_select);
+					var locResult = jQuery.inArray(locality,loc_select);
+					//alert('sub '+sub_select);
+					//alert('lco' +loc_select);
+					if (subResult==-1 || locResult==-1) 
+					{	$('.'+test).remove();	}
+					else
+					{	
+						//$('.'+test).fadeIn(500);
+						filterRestultCount++;
+					}
+				});
+				LoadResult(0,20);
+			}
+			else
+			{
+				if(sub_select.length>0 || loc_select.length>0)
+				{
+					filterRestultCount=0;
+					//alert('yes');
+					//$('#batchInfo').css('display','none');	
+					$("#filter_data li").each(function () 
 					{
 						//alert('yes');
-						//$('#batchInfo').css('display','none');	
-						$("#filter_data li").each(function () 
-						{
-							//alert('yes');
-							var test = $(this).attr('class');
-							subcategory = $(this).attr('subcategory');
-							locality = $(this).attr('locality');
-							var subResult = jQuery.inArray(subcategory,sub_select);
-							var locResult = jQuery.inArray(locality,loc_select);
-							if (subResult==-1 && locResult==-1) 
-							{	$('.'+test).fadeOut(500);	}
-							else
-							{	$('.'+test).fadeIn(500);	}
-						});
-					}
-					else
-					{
-						$("#filter_data li").each(function () 
-						{
-							var class_name = $(this).attr('class');
-							$('.'+class_name).fadeIn(500);
-						});
-					}
+						var test = $(this).attr('class');
+						subcategory = $(this).attr('subcategory');
+						locality = $(this).attr('locality');
+						var subResult = jQuery.inArray(subcategory,sub_select);
+						var locResult = jQuery.inArray(locality,loc_select);
+						if (subResult==-1 && locResult==-1) 
+						{	$('.'+test).remove();	}
+						else
+						{	
+							//$('.'+test).fadeIn(500);
+							filterRestultCount++;
+						}
+					});
+					//alert(filterRestultCount);
+					LoadResult(0,20);
 				}
-			});
+				else
+				{
+					$(linksContainer).empty();
+					range = 0;
+					LoadResult(0,20);
+
+				}
+			}
+			if(filterRestultCount<20)
+			{	
+				//alert('yes');
+			}
+		});
 	});
 </script>
 </html>

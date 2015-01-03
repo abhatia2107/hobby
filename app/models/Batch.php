@@ -48,90 +48,77 @@ class Batch extends \Eloquent {
     public function getBatchForCategoryLocation($category_id,$location_id,$chunk)
     {
         $allBatches=DB::table('batches')
+                        ->whereBetween('batches.id', array($chunk, $chunk+99))
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
-                        ->Join('locations', 'locations.id', '=', 'localities.locality_location_id')
-                        ->select('*','batches.id as batch_id')
-                        ->orderBy('batch_id');
-                
+                        ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+                        ->select('*','batches.id as batch_id');
         if(!$category_id&&!$location_id)
             return $allBatches
-                ->skip(100*$chunk)
-                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
 
         else if(!$location_id)
             return $allBatches
                 ->where('batches.batch_category_id','=',$category_id)
-                ->skip(100*$chunk)
-                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
 
         else if(!$category_id)
             return $allBatches
-                ->skip(100*$chunk)
                 ->where('venues.venue_location_id','=',$location_id)
-                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
 
         else
             return $allBatches
-                ->skip(100*$chunk)
                 ->where('batches.batch_category_id','=',$category_id)
                 ->where('venues.venue_location_id','=',$location_id)
-                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
     }
     public function getBatchForFilter($subcategories,$localities,$chunk)
     {
+
         $allBatches=DB::table('batches')
+                        ->whereBetween('batches.id', array($chunk, $chunk+99))
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
-                        ->Join('locations', 'locations.id', '=', 'localities.locality_location_id')
-                        ->select('*','batches.id as batch_id')
-                        ->orderBy('batch_id');
-        $chunk=0;
-        if(!$subcategories&&!$localities)
+                        ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+                        ->select('*','batches.id as batch_id');
+/*        $chunk=0;*/
+        if(!$subcategories[0]&&!$localities[0]){
             return $allBatches
-                ->skip(100*$chunk)
-                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
+        }
 
-        else if(!$localities){
+        else if(!$localities[0]){
             return $allBatches
-                ->skip(100*$chunk)
-                ->take(100)
                 ->whereIn('batches.batch_subcategory_id',$subcategories)
                 ->orderBy('institute_rating')
                 ->get();
-            }
+        }
 
-        else if(!$subcategories)
+        else if(!$subcategories[0]){
             return $allBatches
-                ->skip(100*$chunk)
-                ->take(100)
                 ->whereIn('venues.venue_locality_id',$localities)
                 ->orderBy('institute_rating')
                 ->get();
-        else
+        }
+        else{
             return $allBatches
-                ->skip(100*$chunk)
-                ->take(100)
                 ->whereIn('batches.batch_subcategory_id',$subcategories)
                 ->whereIn('venues.venue_locality_id',$localities)
                 ->orderBy('institute_rating')
                 ->get();
+        }
     }
 
     public function getBatch($id)

@@ -62,6 +62,7 @@ class KeywordsController extends \BaseController {
 			$localitiesForLocation = $this->locality->all();
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
+		$chunk=$chunk*100+1;
 		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		if(Request::ajax()){
 		//	dd($batchesForCategoryLocation);
@@ -71,7 +72,7 @@ class KeywordsController extends \BaseController {
 				return $batchesForCategoryLocation="Empty";
 		}
 		else{
-		//	dd($batchesForCategoryLocation);
+			dd($batchesForCategoryLocation);
 			return View::make('Keywords.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 		}
 	}
@@ -81,10 +82,16 @@ class KeywordsController extends \BaseController {
 		if(Request::ajax()){
 			$subcategories=explode(",",$subcategoriesString);
 			$localities=explode(",", $localitiesString);
-			if(!$subcategories&&!$localities)
+			if(!$subcategories[0]&&!$localities[0]){
+				$chunk=$chunk*100+1;
 				$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
-			else
+			
+			}
+			else{
+				$chunk=$chunk*100+1;
 				$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
+			}
+			dd($batchesForCategoryLocation);
 			if($batchesForCategoryLocation)
 				return $batchesForCategoryLocation;
 			else

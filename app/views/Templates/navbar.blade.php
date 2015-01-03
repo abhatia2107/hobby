@@ -1,4 +1,3 @@
-
     <div class="clearfix">
         <div class=" col-sm-12 col-md-12 ">
             <nav class="navbar navbar-inverse" >
@@ -16,8 +15,7 @@
                         <ul class="nav navbar-nav">
                         @if(isset($all_categories))
                             @foreach($all_categories as $data)
-                                    <li ><a href="/filter/categories/{{$data->id}}/locations/@if(isset($location_id)){{$location_id}}@endif">{{$data->category}}</a></li>
-                                
+                                <li ><a href="/filter/categories/{{$data->id}}/locations/@if(isset($location_id)){{$location_id}}@endif">{{$data->category}}</a></li>
                             @endforeach
                         @endif
                         </ul>

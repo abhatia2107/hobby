@@ -67,6 +67,13 @@ Route::get('/comments/edit/{id}','CommentsController@edit');
 Route::post('/comments/update/{id}','CommentsController@update');
 Route::get('/comments/delete/{id}','CommentsController@destroy');
 
+//Route for FeedbacksController
+Route::get('/feedbacks','FeedbacksController@index');
+Route::get('/feedbacks/create','FeedbacksController@create');
+Route::post('/feedbacks/store','FeedbacksController@store');
+Route::get('/feedbacks/{id}','FeedbacksController@show');
+Route::get('/institutes/delete/{id}','FeedbacksController@destroy');
+
 //Route for InstitutesController
 Route::get('/institutes','InstitutesController@index');
 Route::get('/institutes/create','InstitutesController@create');

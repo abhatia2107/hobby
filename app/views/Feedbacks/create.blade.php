@@ -3,14 +3,6 @@
   <link href="/css/bootstrap/css/jquery-ui.css" rel="stylesheet">
 @stop
 @section('content')
-  @if($errors->has())
-    @foreach($errors->all() as $error)
-      <p>{{ $error }}<br>
-    @endforeach
-  @endif
-  @if(Session::has('message'))
-      <p>{{Session::get('message')}}
-  @endif
 
 <div class="container main-container headerOffset">
 <div class="main container">
@@ -33,7 +25,7 @@
 		        <textarea rows="5" class="form-control"  placeholder="Tell us more about the issue." name="description" id="description"></textarea>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary" name="submit">Submit</button>
+				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 			<div class="box-content">
 					<h6><br/>Submit a request for assistance and we'll notify you as soon as possible.</h6>

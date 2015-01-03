@@ -33,19 +33,20 @@ class FeedbacksController extends \BaseController {
 	 */
 	public function store()
 	{
-		$credentianls=Input::all();
+		$credentials=Input::all();
 		if (Auth::check())
 		{
 		    // The user is logged in...
 		    $credentials['user_id']=Auth::id(); 
 		}
-		$validator = Validator::make($credentianls, Feedback::$rules);
+		dd($credentials);
+		$validator = Validator::make($credentials, Feedback::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$feedback=Feedback::create($credentianls);
-		return Redirect::back()->with('success',Lang::get('feedback.feedback_updated'));
+		$feedback=Feedback::create($credentials);
+		return Redirect::to('/')->with('success',Lang::get('feedback.feedback_updated'));
 	}
 
 

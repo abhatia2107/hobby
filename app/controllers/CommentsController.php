@@ -33,14 +33,14 @@ class CommentsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$credentianls=Input::all();
+		$credentials=Input::all();
 		$credentials['user_id']=Auth::id();
-		$validator = Validator::make($credentianls, Comment::$rules);
+		$validator = Validator::make($credentials, Comment::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$comment=Comment::create($credentianls);
+		$comment=Comment::create($credentials);
 		return Redirect::back()->with('success',Lang::get('comment.comment_updated'));
 	}
 

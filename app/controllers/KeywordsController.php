@@ -76,8 +76,8 @@ class KeywordsController extends \BaseController {
 	public function filter($subcategoriesString,$localitiesString,$category_id,$location_id,$chunk)
 	{
 		if(Request::ajax()){
-			$subcategories=$subcategoriesString.explode(",",$subcategoriesString);
-			$localities=$localitiesString.explode(",", $localitiesString);
+			$subcategories=explode(",",$subcategoriesString);
+			$localities=explode(",", $localitiesString);
 			if(!$subcategories&&!$localities)
 				$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 			else

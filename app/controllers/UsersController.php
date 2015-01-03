@@ -13,39 +13,6 @@ class UsersController extends \BaseController {
 	|
 	*/
 	
-	private $admin;
-	private $batch;
-	private $category;
-	private $comment;
-	private $institute;
-	private $keyword;
-	private $locality;
-	private $location;
-	private $subcategory;
-	private $subscription;
-	private $user;
-	private $venue;
-	/**
-	 *Constructor to initialize the instance of Model User
-	 */
-
-	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
-	{
-		$this->admin = $adminObject;
-		$this->batch = $batchObject;
-		$this->category = $categoryObject;
-		$this->comment = $commentObject;
-		$this->institute = $instituteObject;
-		$this->keyword = $keywordObject;
-		$this->locality=$localityObject;
-		$this->location = $locationObject;
-		$this->subcategory = $subcategoryObject;
-		$this->subscription = $subscriptionObject;
-		$this->user = $userObject;
-		$this->venue = $venueObject;
-	}
-
-
 
 	/**
 	 * Show the form for creating a new resource.
@@ -55,7 +22,7 @@ class UsersController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('User.create');
+		return View::make('Users.create');
 	}
 
 	/**
@@ -86,9 +53,7 @@ class UsersController extends \BaseController {
 	{
 		$id=Auth::id();
 		$userDetails=User::find($id);
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        return View::make('Users.show',compact('all_categories','all_locations','userDetails'));
+		return View::make('Users.show',compact('userDetails'));
 	}
 
 	/**
@@ -100,9 +65,7 @@ class UsersController extends \BaseController {
 	 */
 	public function edit()
 	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-		return View::make('Users.edit',compact('all_categories','all_locations'));
+		return View::make('Users.edit');
 	}
 
 	/**
@@ -168,7 +131,7 @@ class UsersController extends \BaseController {
 		$userDetails=$this->user->where('email','=',Input::get('email'))->first();
 		if(!$userDetails)
 		{
-			return Redirect::to('/signup')->with('failure',Lang::get('user.user_not_registered'));
+			return Redirect::to('/users/signup')->with('failure',Lang::get('user.user_not_registered'));
 		}
 		/* To check whether the user has verified his/her email or not. */
 		if(isset($userDetails))
@@ -312,7 +275,7 @@ class UsersController extends \BaseController {
 			}
 			else
 			{
-				return Redirect::to('/signup')->with('failure','Sorry you are not an authorized user.'); 	
+				return Redirect::to('/users/signup')->with('failure','email_verification_failed'); 	
 			}
 		}
 	}

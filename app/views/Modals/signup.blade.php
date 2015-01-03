@@ -8,6 +8,7 @@
                         <span class="sr-only">Close</span>
                     </button>
                     <h4 class="modal-title" id="myModalLabel1">Sign-Up</h4>
+                    <a href="/users/login">Already a member? Login</a>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -72,7 +73,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div><br>
+                    </div><br/>
                     <div class="row">
                         <div class="form-group">
                             <label for="password" class="col-sm-3 control-label ">Password&nbsp;
@@ -92,9 +93,15 @@
                                 <input type="password"   class="form-control " name="password_confirmation"  id="password_confirmation">
                             </div>
                         </div>
-                    </div><br>
+                    </div><br/>
                 </div>
                 <div class="modal-footer">
+                    <div class="checkbox login-remember">
+                        <label class="col-sm-5 control-label">
+                            <input name="remember"  value="forever" checked="checked" type="checkbox">
+                            I agree to <a href="/terms">terms and conditions.</a>
+                        </label>
+                    </div>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>

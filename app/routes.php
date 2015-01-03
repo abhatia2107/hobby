@@ -19,6 +19,9 @@ Route::resource('admins', 'AdminsController');
 Route::resource('batches', 'BatchesController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('comments', 'CommentsController');
+Route::resource('feedbacks', 'FeedbacksController',[
+    'except' => ['edit']
+]);
 Route::resource('institutes', 'InstitutesController');
 Route::resource('keywords', 'KeywordsController');
 Route::resource('localities', 'LocalitiesController');
@@ -144,6 +147,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/signup/submit','UsersController@postSignup');
 	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
+	Route::post('/supports/store', 'SupportController@store');
 });
 
 Route::get('/aboutus', function()
@@ -173,6 +177,8 @@ Route::get('/subscribed', function()
 
 Route::get('/hello', function()
 {
+
+	View::composer('hello', 'Composer');
 	return View::make('Miscellaneous.hello');
 });
 
@@ -191,3 +197,5 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}','Keywords
 // Route::get('/filter/categories/{category_id}/locations/{location_id}/keywords/{keyword?}','KeywordsController@show');
 
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id}/{location_id}/{chunk}','KeywordsController@filter');
+
+Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','KeywordsController@show');

@@ -17,7 +17,7 @@
 		<div class="col-md-5 col-sm-7 col-xs-12">
 			<form  role="form" id="support" method="post" enctype="multipart/form-data" action="/support/submit">
 				<div class="form-group">
-					<h3 class="heading">Submit a request</h3>
+					<h3 class="heading">Submit a request/feedback/complaint</h3>
 				</div>
 			<div class="form-group">
 				<input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">

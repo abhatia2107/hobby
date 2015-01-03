@@ -82,12 +82,17 @@ require app_path().'/filters.php';
 
 /*
 |--------------------------------------------------------------------------
-| Require The Composer File
+| The View::share code
 |--------------------------------------------------------------------------
 |
-| Next we will load the composer file for the application. This gives us
-| a file in which we can define some variable which are required for all Views.
+| Next we will load the all_categories and all_locations variable for the application. 
+| This gives us access to categories list and locations list which are required for all Views.
 |
 */
 
-require app_path().'/composers.php';
+
+$all_categories= Category::all();
+$all_locations=Location::all();
+        
+View::share('all_categories', $all_categories);
+View::share('all_locations',$all_locations);

@@ -8,6 +8,7 @@
                         <span class="sr-only">Close</span>
                     </button>
                     <h4 class="modal-title" id="myModalLabel2">Login</h4>
+                    Not a member yet? <a href="/users/signup">Sign Up</a>
                 </div>
                 <div class="modal-body" >
                     <div class="clearfix">
@@ -34,7 +35,7 @@
                     </div>
                         <div class="clearfix">
                             <div class="form-group">
-                                <div >
+                                <div>
                                     <div class="checkbox login-remember">
                                         <label class="col-sm-4 control-label">
                                             <input name="remember"  value="forever" checked="checked" type="checkbox">

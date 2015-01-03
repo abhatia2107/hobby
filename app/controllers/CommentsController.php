@@ -34,12 +34,14 @@ class CommentsController extends \BaseController {
 	public function store()
 	{
 		$credentianls=Input::all();
+		$credentials['user_id']=Auth::id();
 		$validator = Validator::make($credentianls, Comment::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 		$comment=Comment::create($credentianls);
+		return Redirect::back()->with('success',Lang::get('comment.comment_updated'));
 	}
 
 	/**
@@ -78,7 +80,7 @@ class CommentsController extends \BaseController {
 	public function update($id)
 	{
 		$credentials=Input::all();
-	
+		$credentials['user_id']=Auth::id();
 		$validator = Validator::make($credentials, Comment::$rules);
 		if($validator->fails())
 		{
@@ -86,7 +88,7 @@ class CommentsController extends \BaseController {
 		}
 		$updated=$this->comment->updateComment($credentials,$id);
 		if ($updated) 
-			return Redirect::to('/comments')->with('success',Lang::get('comment.comment_updated'));
+			return Redirect::back()->with('success',Lang::get('comment.comment_updated'));
 		else
 			return Redirect::to('/comments')->with('failure',Lang::get('comment.comment_already_failed'));
 	}

@@ -2,16 +2,6 @@
 
 class InstitutesController extends \BaseController {
 
-	private $institute;
-	private $location;
-	private $user;
-
-	public function __construct(Institute $instituteObject ,Locality $localityObject, Location $locationObject, User $userObject)
-	{
-		$this->institute = $instituteObject;
-		$this->location = $locationObject;
-		$this->user = $userObject;
-	}
 	/**
 	 * Display a listing of the resource.
 	 * GET /institutes
@@ -32,9 +22,7 @@ class InstitutesController extends \BaseController {
 	 */
 	public function create()
 	{
-		//To give all locations to the user.
-		$all_locations=$this->location->all();
-		return View::make('Institutes.create',compact('all_locations'));
+		return View::make('Institutes.create');
 	}
 
 	/**
@@ -59,7 +47,7 @@ class InstitutesController extends \BaseController {
 		if ($created) 
 			return Redirect::to('/institutes')->with('success',Lang::get('institute.institute_created'));
 		else
-			return Redirect::back()->withInput()->with('failed',Lang::get('institute.institute_create_failed'));
+			return Redirect::back()->withInput()->with('failure',Lang::get('institute.institute_create_failed'));
 	}
 
 	/**
@@ -88,13 +76,15 @@ class InstitutesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//TO DO: Authenticate that user has permission to edit this institute
 		$instituteDetails=Institute::find($id);
+		$user_id=Auth::id();
+		if($instituteDetails->institute_user_id!=$user_id)
+			return Redirect::to('/')->with('failure',Lang::get('institute.institute_access_failed'));
 		$location_id=$instituteDetails['institute_location_id'];
 		$all_locations=$this->location->all();
 		$institute_location=$all_locations->find($location_id);
 		$instituteDetails['institute_location']=$institute_location['location'];
-		return View::make('Institutes.create',compact('instituteDetails','all_locations'));
+		return View::make('Institutes.create',compact('instituteDetails'));
 	}
 
 	/**
@@ -106,9 +96,9 @@ class InstitutesController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//TO DO: Take user id automatically
+		$user_id=Auth::id();
 		$credentials=Input::all();
-		$credentials['institute_user_id']=1;
+		$credentials['institute_user_id']=$user_id;
 		$credentials['institute_url']=$credentials['institute'].$credentials['institute_user_id'];
 		/*dd($credentials['institute_website']);
 		*/$validator = Validator::make($credentials, Institute::$rules);
@@ -132,6 +122,8 @@ class InstitutesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+		$url =URL::action('UsersController@getLogin');
+		dd($url);
 		$deleted=Institute::destroy($id);
 		if($deleted)
 			return Redirect::to('/institutes')->with('success',Lang::get('institute.institute_deleted'));

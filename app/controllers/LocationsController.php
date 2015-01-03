@@ -2,35 +2,6 @@
 
 class LocationsController extends \BaseController {
 
-	private $admin;
-	private $batch;
-	private $category;
-	private $comment;
-	private $institute;
-	private $keyword;
-	private $locality;
-	private $location;
-	private $subcategory;
-	private $subscription;
-	private $user;
-	private $venue;
-
-	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
-	{
-		$this->admin = $adminObject;
-		$this->batch = $batchObject;
-		$this->category = $categoryObject;
-		$this->comment = $commentObject;
-		$this->institute = $instituteObject;
-		$this->keyword = $keywordObject;
-		$this->locality=$localityObject;
-		$this->location = $locationObject;
-		$this->subcategory = $subcategoryObject;
-		$this->subscription = $subscriptionObject;
-		$this->user = $userObject;
-		$this->venue = $venueObject;
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 * GET /locations
@@ -39,8 +10,7 @@ class LocationsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$locations=Location::all();
-		return View::make('Locations.index',compact('locations'));
+		return View::make('Locations.index');
 	}
 
 	/**
@@ -51,9 +21,7 @@ class LocationsController extends \BaseController {
 	 */
 	public function create()
 	{
-		$all_categories=$this->category->all();
-		$all_locations=$this->location->all();
-		return View::make('Locations.create',compact('all_categories','all_locations'));
+		return View::make('Locations.create');
 	}
 
 	/**
@@ -101,10 +69,8 @@ class LocationsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$all_categories=$this->category->all();
-		$all_locations=$this->location->all();
 		$locationDetails=Location::find($id);
-		return View::make('Locations.create',compact('all_categories','all_locations','locationDetails'));
+		return View::make('Locations.create',compact('locationDetails'));
 	}
 
 	/**

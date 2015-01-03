@@ -13,6 +13,7 @@ class SubscriptionsTableSeeder extends Seeder {
 		{
 			Subscription::create([
 				'subscription_user_id'=>$faker->unique()->randomNumber(1,30),
+				'suscription_email'=>$faker->unique()->email;
 			]);
 		}
 	}

@@ -24,6 +24,8 @@ return array(
 	//sign up
 	"register_success"=>"You have been successfully registered, Please verify your email address.",
 
+	"email_verification_failed"=>"Sorry you are not an authorized user, Sign-Up within 2 minutes.",
+
 	"email_already_verified"=>"Your email has been already verified.",
 
 	"welcome"=>"Welcome, :name your email has been verified. Please feel free to drop a mail at Support, if you have any complaint or feedback.",

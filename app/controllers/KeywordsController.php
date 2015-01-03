@@ -2,46 +2,6 @@
 
 class KeywordsController extends \BaseController {
 
-
-	private $admin;
-	private $batch;
-	private $category;
-	private $categoryInstitute;
-	private $comment;
-	private $institute;
-	private $keyword;
-	private $locality;
-	private $location;
-	private $subcategory;
-	private $subscription;
-	private $user;
-	private $venue;
-
-	private $age_group=array("All","Children","Adult");
-	private $difficulty_level=array("All","Beginners","Intermediate","Advanced");
-	private $gender_group=array("Both","Male","Female");
-	private $recurring=array("Not recurring","Weekly","Monthly","Yearly");
-	private $trial=array("Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only in beginning of batch","Paid Trial only in beginning of batch");
-	private $weekdays=array("monday","tuesday","wednesday","thursday","friday","saturday","sunday");
-	
-	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, CategoryInstitute $categoryInstituteObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
-	{
-		$this->admin = $adminObject;
-		$this->batch = $batchObject;
-		$this->category = $categoryObject;
-		$this->categoryInstitute = $categoryInstituteObject;
-		$this->comment = $commentObject;
-		$this->institute = $instituteObject;
-		$this->keyword = $keywordObject;
-		$this->locality=$localityObject;
-		$this->location = $locationObject;
-		$this->subcategory = $subcategoryObject;
-		$this->subscription = $subscriptionObject;
-		$this->user = $userObject;
-		$this->venue = $venueObject;
-	}
-
-
 	/**
 	 * Display a listing of the resource.
 	 * GET /keywords
@@ -84,13 +44,9 @@ class KeywordsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($category_id,$location_id="0")
+	public function show($category_id,$location_id="0",$chunk="0")
 	{
-		//For headers
-		$all_categories=$this->category->all();
-		$all_locations=$this->location->all();
-		
-		//For filters
+		//For future filters
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
@@ -98,7 +54,6 @@ class KeywordsController extends \BaseController {
 		$weekdays=$this->weekdays;
 		
 		//For display
-		$chunk=0;
 		if(!$category_id)
 			$subcategoriesForCategory=$this->subcategory->all();
 		else
@@ -108,7 +63,14 @@ class KeywordsController extends \BaseController {
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
-		return View::make('Keywords.show',compact('all_categories','all_locations','age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory'));
+		if(Request::ajax()){
+		//	dd($batchesForCategoryLocation);
+			return $batchesForCategoryLocation;
+		}
+		else{
+		//	dd($batchesForCategoryLocation);
+			return View::make('Keywords.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory'));
+		}
 	}
 
 	public function filter($subcategoriesString,$localitiesString,$category_id,$location_id,$chunk)

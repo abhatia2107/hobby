@@ -12,7 +12,7 @@
 			<ul class="list-inline">
 				@if(Auth::guest())
 					<li class="header_signin" >   
-						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">Sign In</a>
+						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
 					</li>
 					<li class="header_signup">
 						<a  class="header_signup_a" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>

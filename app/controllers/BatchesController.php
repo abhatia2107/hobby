@@ -4,44 +4,6 @@ use Carbon\Carbon;
 
 class BatchesController extends \BaseController {
 
-	private $admin;
-	private $batch;
-	private $category;
-	private $comment;
-	private $institute;
-	private $keyword;
-	private $locality;
-	private $location;
-	private $subcategory;
-	private $subscription;
-	private $user;
-	private $venue;
-
-	private $age_group=array("All","Children","Adult");
-	private $difficulty_level=array("All","Beginners","Intermediate","Advanced");
-	private $gender_group=array("Both","Male","Female");
-	private $recurring=array("Not recurring","Weekly","Monthly","Yearly");
-	private $trial=array("Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only in beginning of batch","Paid Trial only in beginning of batch");
-	private $weekdays=array("monday","tuesday","wednesday","thursday","friday","saturday","sunday");
-	
-	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
-	{
-		$this->admin = $adminObject;
-		$this->batch = $batchObject;
-		$this->category = $categoryObject;
-		$this->comment = $commentObject;
-		$this->institute = $instituteObject;
-		$this->keyword = $keywordObject;
-		$this->locality=$localityObject;
-		$this->location = $locationObject;
-		$this->subcategory = $subcategoryObject;
-		$this->subscription = $subscriptionObject;
-		$this->user = $userObject;
-		$this->venue = $venueObject;
-	}
-
-
-
 	/**
 	 * Display a listing of the resource.
 	 * GET /batches
@@ -51,9 +13,7 @@ class BatchesController extends \BaseController {
 	public function index()
 	{
 		$batches=Batch::all();
-		$all_categories=$this->category->all();
-		$all_locations=$this->location->all();
-		return View::make('Miscellaneous.home',compact('batches','all_categories','all_locations'));
+		return View::make('Miscellaneous.home',compact('batches'));
 	}
 
 	/**
@@ -64,8 +24,6 @@ class BatchesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$all_categories=$this->category->all();
-		$all_locations=$this->location->all();
 		$all_subcategories=$this->subcategory->all();
 		$all_venues=$this->venue->all();
 		$age_group=$this->age_group;
@@ -74,7 +32,7 @@ class BatchesController extends \BaseController {
 		$recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		return View::make('Batches.create',compact('all_categories','all_locations','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
+		return View::make('Batches.create',compact('all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
 	}
 
 	/**
@@ -147,6 +105,7 @@ class BatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		//check count how many time page is viewed.
 		$batchDetails= $this->batch->getBatch($id);
 		return View::make('Batches.show',compact('batchDetails'));
 	}
@@ -161,7 +120,6 @@ class BatchesController extends \BaseController {
 	public function edit($id)
 	{
 		$age_group=$this->age_group;
-		$all_categories=$this->category->all();
 		$all_subcategories=$this->subcategory->all();
 		$all_venues=$this->venue->all();
 		$batchDetails=Batch::find($id);
@@ -176,7 +134,7 @@ class BatchesController extends \BaseController {
 				array_push($batch_class,$data);
 		}
 		$batchDetails['batch_class']=$batch_class;
-		return View::make('Batches.create',compact('batchDetails','all_categories','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
+		return View::make('Batches.create',compact('batchDetails','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
 	}
 
 	/**

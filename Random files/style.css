@@ -1,0 +1,339 @@
+@charset "UTF-8";
+/*
+ * jQuery File Upload Plugin CSS Example 8.8.2
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+
+.header_img
+{
+	height:15px;
+}
+.navbar_submit_listing
+{
+    width:100% !important;
+    height:52px !important;
+}
+.header_location_dropdown
+{
+    margin-top: 0px;
+	font-size:10px;
+	height:37px;
+    width:100% !important;
+}
+.header_signin
+{
+    padding-top: 15px;
+    font-size: 15px;
+    width:50%;
+    padding-left:45px !important;
+    color:white;
+}
+.header_signup
+{
+    padding-top: 15px;
+    font-size: 15px;   
+    color:white;
+}
+.header_signin_a {
+    color:white;
+    text-decoration:none;
+}
+.header_signin_a:hover {
+    color:white;
+    text-decoration:none;
+}
+.header_signup_a {
+    color:white;
+    text-decoration:none;
+}
+.header_signup_a:hover {
+    color:white;
+    text-decoration:none;
+}
+.header_myaccount{
+    padding-top: 15px;
+    font-size: 15px;
+    width:50%;
+    padding-left:45px !important;
+    color:white;
+}
+.header_myaccount_a {
+    color:white;
+    text-decoration:none;
+}
+.header_myaccount_a:hover {
+    color:white;
+    text-decoration:none;
+}
+.header_logout
+{
+    padding-top: 15px;
+    font-size: 15px;
+    color:white;
+}
+.header_logout_a
+{
+    color:white;
+    text-decoration: none;
+}
+.header_logout_a:hover
+{
+    color:white;
+    text-decoration: none;
+}
+
+.header_search_button{
+    height: 34px;
+    margin-top: 1px;
+    font-size: 18px !important;
+    padding-top: 5px !important;"
+}
+.header_row1{
+    background-color: #3396d1;
+	height:45px !important;
+}
+.layout_header{
+    font-family: 'Montserrat', sans-serif;";
+}
+.form_create{
+	background-color:#ffffff;
+	font-size:14px;
+	font-family:'Open Sans','Helvetica Neue','Helvetica',Arial,Verdana,sans-serif;
+	color:#666666;
+	max-width:480px;
+	min-width:150px;
+}
+.form-control-feedback {
+position: absolute;
+top: 0;
+right: 10px !important;
+z-index: 2;
+display: none;
+width: 34px;
+height: 34px;
+line-height: 34px;
+text-align: center;
+pointer-events: none;
+}
+.pac-container
+{
+
+    background-color: #fff;
+
+    position: absolute!important;
+
+    z-index: 1000;
+
+    border-radius: 2px;
+
+    border-top: 1px solid #d9d9d9;
+
+    font-family: Arial, sans-serif;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden
+}
+
+.pac-container: after
+{
+
+    content: "";
+    padding: 1px 1px 1px 0;
+    height: 16px;
+    text-align: right;
+
+    display: block;
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 104px 16px;
+}
+.hdpi.pac-container:after {
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2_hdpi.png);
+}
+.pac-item {
+    cursor: default;
+    padding: 0 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 30px;
+    text-align: left;
+    border-top: 1px solid #e6e6e6;
+    font-size: 11px;
+    color: #999;
+}
+.pac-item:hover {
+    background-color: #fafafa;
+}
+.pac-item-selected, .pac-item-selected:hover {
+    background-color: #ebf2fe;
+}
+.pac-matched {
+    font-weight: 700;
+}
+.pac-item-query {
+    font-size: 13px;
+    padding-right: 3px;
+    color: #000;
+}
+.pac-icon {
+    width: 15px;
+    height: 20px;
+    margin-right: 7px;
+    margin-top: 6px;
+    display: inline-block;
+    vertical-align: top;
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);
+    background-size: 34px;
+}
+.hdpi .pac-icon {
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png);
+}
+.pac-icon-search {
+    background-position: -1px -1px;
+}
+.pac-item-selected .pac-icon-search {
+    background-position: -18px -1px;
+}
+.pac-icon-marker {
+    background-position: -1px -161px;
+}
+.pac-item-selected .pac-icon-marker {
+    background-position: -18px -161px;
+}
+.pac-placeholder {
+    color: gray;
+}
+.pac-container {
+    background-color: #fff;
+    position: absolute!important;
+    z-index: 1000;
+    border-radius: 2px;
+    border-top: 1px solid #d9d9d9;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.pac-container:after {
+    content: "";
+    padding: 1px 1px 1px 0;
+    height: 16px;
+    text-align: right;
+    display: block;
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 104px 16px;
+}
+.hdpi.pac-container:after {
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white2_hdpi.png);
+}
+.pac-item {
+    cursor: default;
+    padding: 0 4px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 30px;
+    text-align: left;
+    border-top: 1px solid #e6e6e6;
+    font-size: 11px;
+    color: #999;
+}
+.pac-item:hover {
+    background-color: #fafafa;
+}
+.pac-item-selected, .pac-item-selected:hover {
+    background-color: #ebf2fe;
+}
+.pac-matched {
+    font-weight: 700;
+}
+.pac-item-query {
+    font-size: 13px;
+    padding-right: 3px;
+    color: #000;
+}
+.pac-icon {
+    width: 15px;
+    height: 20px;
+    margin-right: 7px;
+    margin-top: 6px;
+    display: inline-block;
+    vertical-align: top;
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);
+    background-size: 34px;
+}
+.hdpi .pac-icon {
+    background-image: url(//maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png);
+}
+.pac-icon-search {
+    background-position: -1px -1px;
+}
+.pac-item-selected .pac-icon-search {
+    background-position: -18px -1px;
+}
+.pac-icon-marker {
+    background-position: -1px -161px;
+}
+.pac-item-selected .pac-icon-marker {
+    background-position: -18px -161px;
+}
+.pac-placeholder {
+    color: gray;
+}
+a.button-social-login.button-social-login-facebook, .widget-area a.button-social-login.button-social-login-facebook, .social-badge.social-badge-facebook {
+    background: #3b5998;
+}
+a.button-social-login.button-social-login-twitter, .widget-area a.button-social-login.button-social-login-twitter, .social-badge.social-badge-twitter {
+    background: #00aced;
+}
+a.button-social-login.button-social-login-google, .widget-area a.button-social-login.button-social-login-google, .social-badge.social-badge-google {
+    background: #dd4b39;
+}
+a.button-social-login.button-social-login-instagram, .widget-area a.button-social-login.button-social-login-instagram, .social-badge.social-badge-instagram {
+    background: #517fa4;
+}
+.required{
+    color: red;
+}
+.select{
+    padding: 5px !important;
+}
+.home_banner_image{
+    background-image: url("/assets/images/home/banner.jpg");
+}
+.home_category_image{
+    background-image: url(/assets/images/home/category.jpg);
+}
+.home_recent_image{
+    background-image: url(/assets/images/home/recent.jpg);
+}
+.home_user_image{
+    background-image: url(/assets/images/home/user.jpg);
+    background-position: center top;
+}
+.home_institute_image{
+    background-image: url(/assets/images/home/institute.jpg);
+    background-position: center center;
+}
+@media (min-width:767px) {
+    .navbar-header
+	{
+		display:none;
+	}
+}

@@ -4,7 +4,7 @@
 * Composer class for having some variables required in Layout File to be rendered
 * for all views.
 */
-/*class Composer
+class Composer
 {
 	
 	private $category;	
@@ -28,15 +28,15 @@
 
 	public function compose($view)
     {
-			$all_categories=$this->category->all();
-			$all_locations=$this->location->all();
-		    $homeLang =Lang::get('home');
-			$view->with($all_categories, $all_locations,$homeLang);
-    }
+		$all_categories=$this->category->all();
+		$all_locations=$this->location->all();
+	    $homeLang =Lang::get('home');
+		$view->with($all_categories, $all_locations,$homeLang);
+	}
 }
-*/
-View::composer('*', function($view)
+/*
+View::composer('hello', function($view)
 {
 	$all_categories=array(1,2,3);			
 	$view->with($all_categories);
-});
+});*/

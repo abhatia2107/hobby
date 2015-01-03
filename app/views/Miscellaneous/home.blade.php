@@ -9,14 +9,14 @@
                {{$homeLang['home_subtitle']}}
             </h2>
          </hgroup>
-         <div class="job_listings" data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">
+         <div  data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">
             <a href="#" data-toggle=".job_filters" class="js-toggle-area-trigger">Toggle Filters</a>
             <form action="/filter" class="job_search_form" method="get">
-               <div class="search_jobs">
-                  <div class="search_keywords">
+               <div class="row">
+                  <div class="col-md-3 col-sm-3">
                      <input name="keywords" id="search_keywords" placeholder="{{$homeLang['home_keyword']}}" type="text">
                   </div>
-                  <div>
+                  <div class="col-md-3 col-sm-3">
                      <select name="categories" id="search_categories" class="postform">
                         <option value="0">{{$homeLang['home_category']}}</option>
                         @if(isset($all_categories))
@@ -26,7 +26,7 @@
                         @endif
                      </select>
                   </div>
-                  <div>
+                  <div class="col-md-3 col-sm-3">
                      <select name="locations" id="search_locations" class="postform">
                         <option value="0">{{$homeLang['home_location']}}</option>
                         @if(isset($all_locations))
@@ -36,8 +36,8 @@
                         @endif
                      </select>
                   </div>
-               </div>
-               <button type="submit" name="update_results" class="update_results">{{$homeLang['home_search_button_text']}}</button>
+               <div class="col-md-3">
+               <button type="submit" name="update_results" class="update_results ">{{$homeLang['home_search_button_text']}}</button></div></div>
             </form>
          </div>
       </div>

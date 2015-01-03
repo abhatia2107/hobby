@@ -16,5 +16,7 @@ return array(
 		
 		"institute_already_failed"=>"You already have same details of institute in your list.",
 
-		"error_institute_photo"=>"Error in uploading your institute photo, Please try again."
+		"error_institute_photo"=>"Error in uploading your institute photo, Please try again.",
+	
+		"institute_access_failed"=>"You don't have permission to access this institute details.",
 	);

@@ -1,4 +1,8 @@
 @extends('Layouts.layout')
 @section('content')
-	<h1>Here we have the content now!!!!</h1>
+    <div class="clearfix">
+    	<h1>We'll have a page here soon. Stay in touch!!!</h1>
+    	<a href="{{URL::to('/')}}">Home</a>
+    	
+    </div>
 @stop

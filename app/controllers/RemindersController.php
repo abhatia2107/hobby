@@ -9,9 +9,7 @@ class RemindersController extends Controller {
 	 */
 	public function getRemind()
 	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        return View::make('Users.forgotPassword',compact('all_categories','all_locations'));
+		return View::make('Users.forgotPassword');
 	}
 		
 	/**
@@ -44,9 +42,7 @@ class RemindersController extends Controller {
 	public function getReset($token = null)
 	{
 		if (is_null($token)) App::abort(404);
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        return View::make('Users.resetPassword',compact('all_categories','all_locations'))->with('token', $token);
+		return View::make('Users.resetPassword')->with('token', $token);
 	}
 
 	/**

@@ -65,7 +65,10 @@ class KeywordsController extends \BaseController {
 		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		if(Request::ajax()){
 		//	dd($batchesForCategoryLocation);
-			return $batchesForCategoryLocation;
+			if($batchesForCategoryLocation)
+				return $batchesForCategoryLocation;
+			else
+				return $batchesForCategoryLocation="Empty";
 		}
 		else{
 		//	dd($batchesForCategoryLocation);
@@ -82,7 +85,10 @@ class KeywordsController extends \BaseController {
 				$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 			else
 				$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
-			return $batchesForCategoryLocation;
+			if($batchesForCategoryLocation)
+				return $batchesForCategoryLocation;
+			else
+				return $batchesForCategoryLocation="Empty";
 		}
 	}
 

@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration {
 		$table->increments('id');
 		$table->string('user_first_name',50);
         $table->string('user_last_name',50)->nullable();
-		$table->string('user_email',50);
+		$table->string('email',50);
 		$table->string('user_contact_no',15);
 		$table->string('password',70);	
 		$table->integer('user_location_id')->foreign('user_location_id')->references('id')->on('locations');

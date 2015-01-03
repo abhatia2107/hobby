@@ -1,7 +1,7 @@
 @section("login")
 <div class="modal-dialog">
         <div class="modal-content">
-            <form name="login" id="login" role="form" method="post" action="/login/submit" enctype="multipart/form-data">
+            <form name="login" id="login" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
@@ -17,7 +17,7 @@
                             </label>
                             <div class="col-sm-8">
                                 <input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
-                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="user_email"  id="email"  id="user_email" value="@if(isset($userDetails)){{$userDetails->user_email}}@else{{Input::old('user_email')}}@endif">
+                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="email"  id="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
                             </div>
                         </div>
                     </div><br>

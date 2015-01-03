@@ -63,7 +63,7 @@
 	<div class="form-group  required">
 	<label>Email address <sup>*</sup> </label>
 	<input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
-	<input type="email" class="form-control"  placeholder="Email" name="user_email" value="{{Input::old('user_email')}}">
+	<input type="email" class="form-control"  placeholder="Email" name="email" value="{{Input::old('email')}}">
 	</div>
 	<div class="form-group  required">
 	<label>Password <sup>*</sup> </label>

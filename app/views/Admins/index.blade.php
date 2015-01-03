@@ -391,7 +391,7 @@ $(document).ready(function(){
         <form action="/admins/store" method="post">
           <fieldset id="inputs">
 		        <input type="text" name="admin_user_id" placeholder="User ID" required>
-            <input type="email" name="user_email" placeholder="Email address" required>   
+            <input type="email" name="email" placeholder="Email address" required>   
           </fieldset>
           <fieldset id="actions">
             <input type="submit" id="submit" value="Add Admin">

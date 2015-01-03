@@ -53,7 +53,7 @@
               </div>
               <div class="form-group  required">
                 <label >Email address <sup>*</sup> </label>
-                <input type="email" class="form-control"  placeholder="Email" name="user_email" value="{{Input::old('user_email')}}" required>
+                <input type="email" class="form-control"  placeholder="Email" name="email" value="{{Input::old('email')}}" required>
               </div>   
           </div>
           <div class="col-xs-12 col-sm-6">

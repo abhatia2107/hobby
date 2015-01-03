@@ -9,7 +9,9 @@ return array(
 	
 	"welcome"=>"Welcome ,:name",
 	
-	"update_personal_detail"=>"You have successfully updated your personal detail",
+	"user_updated"=>"You have successfully updated your personal detail",
+
+	"user_update_failed"=>"Sorry, We are unable to update your personal detail",
 	
 	"error_fb_comm"=>"There was an error communicating with Facebook",
 	
@@ -26,4 +28,7 @@ return array(
 
 	"welcome"=>"Welcome, :name your email has been verified. Please feel free to drop a mail at Support, if you have any complaint or feedback.",
 
+	"user_password_changed"=>"Your password has been successfully changed",
+
+	"user_password_change_failed"=>"Your current password is incorrect",
 );

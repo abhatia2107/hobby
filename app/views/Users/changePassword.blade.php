@@ -4,7 +4,7 @@
 		<div class="col-xs-12 col-sm-6">
 		<div class="form-group required">
 		<label for="InputPasswordnew"> Current Password<sup>*</sup> </label>
-		<input type="hidden" name="token" value="{{ csrf_token() }}">
+		<input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
 		<input type="password"  name="current_password" class="form-control" id="InputPasswordnew">
 		</div>
 		<div class="form-group required">

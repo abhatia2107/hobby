@@ -702,7 +702,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_first_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `user_last_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `user_email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `user_contact_no` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `user_password` varchar(70) COLLATE utf8_unicode_ci NOT NULL,
   `user_location` int(11) NOT NULL,
@@ -722,7 +722,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
 -- Dumping data for table `Users`
 --
 
-INSERT INTO `Users` (`user_id`, `user_first_name`, `user_last_name`, `user_email`, `user_contact_no`, `user_password`, `user_location`, `user_fb_id`, `user_birthdate`, `user_gender`, `user_remember_token`, `user_facebook_access_token`, `user_confirmation_code`, `user_confirmed`, `created_at`, `updated_at`) VALUES
+INSERT INTO `Users` (`user_id`, `user_first_name`, `user_last_name`, `email`, `user_contact_no`, `user_password`, `user_location`, `user_fb_id`, `user_birthdate`, `user_gender`, `user_remember_token`, `user_facebook_access_token`, `user_confirmation_code`, `user_confirmed`, `created_at`, `updated_at`) VALUES
 (1, 'Gisselle', 'Bins', 'tromp.aniya@hoeger.biz', '886-241-4593x66', '$2y$10$GyJlnd0.tit0W0jk9ciAs.gVqoso9/uZEdmrK/b3GOW00LaaS30fC', 7, '827401957940310', '1987-11-13', 'male', 'gwfl', 'izeg', '81177887510', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 'Prudence', 'Wunsch', 'mante.breana@sauerjacobs.com', '(021)062-7985', '$2y$10$S/e.aqSFDzxTevvAu.a2lOMuZkKo4Dx67PVequwCvSNitI4NhL7tO', 5, '638677418697625', '1982-08-05', 'male', 'gljh', 'duri', '54036464481', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 'Daija', 'Glover', 'dhaley@gmail.com', '999.832.9862x58', '$2y$10$nMQGqVUmhHbGDAfQZruHvOpJZNyoKpJUI6Rkzg/CMDCnZ16/AGbQy', 4, '946271567605435', '1973-07-24', 'male', 'bpxe', 'cfnm', '19936938657', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),

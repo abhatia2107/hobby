@@ -29,6 +29,7 @@
             <strong>OOPS!</strong> {{Session::get('failed')}}        
     </div>
 
+  
   @endif
   <div class="row">
     <div class="col-lg-9 col-md-9 col-sm-7">
@@ -62,7 +63,6 @@
     <div class="col-lg-3 col-md-3 col-sm-5"> </div>
   </div>
   <!--/row-->
-  
   <div style="clear:both"> </div>
 </div>
 @stop

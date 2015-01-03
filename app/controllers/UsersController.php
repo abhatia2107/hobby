@@ -48,18 +48,6 @@ class UsersController extends \BaseController {
 
 
 	/**
-	 * Display a listing of the resource.
-	 * GET /users
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$users=User::all();
-		return View::make('User.index',compact('users'));
-	}
-
-	/**
 	 * Show the form for creating a new resource.
 	 * GET /users/create
 	 *
@@ -94,10 +82,13 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show()
 	{
+		$id=Auth::id();
 		$userDetails=User::find($id);
-		return View::make('User.show',compact('userDetails'));
+		$all_categories= Category::all();
+        $all_locations=Location::all();
+        return View::make('Users.show',compact('all_categories','all_locations','userDetails'));
 	}
 
 	/**
@@ -107,10 +98,11 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit()
 	{
-		$userDetails=User::find($id);
-		return View::make('User.create',compact('userDetails'));
+		$all_categories= Category::all();
+        $all_locations=Location::all();
+		return View::make('Users.edit',compact('all_categories','all_locations'));
 	}
 
 	/**
@@ -120,10 +112,10 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		$credentials=Input::all();
-	
+		$id=Auth::id();
+		$credentials=Input::all();	
 		$validator = Validator::make($credentials, User::$rules);
 		if($validator->fails())
 		{
@@ -173,7 +165,7 @@ class UsersController extends \BaseController {
 	{	
 		$remember=(Input::has('remember'))?true:false;
 		$credentials=$this->getCredentials();
-		$userDetails=$this->user->where('user_email','=',Input::get('user_email'))->first();
+		$userDetails=$this->user->where('email','=',Input::get('email'))->first();
 		if(!$userDetails)
 		{
 			return Redirect::to('/signup')->with('failure',Lang::get('user.user_not_registered'));
@@ -195,7 +187,7 @@ class UsersController extends \BaseController {
 			|later this can be used.
 			|
 			*/
-			//$data=$this->user->getid(Input::get('user_email'));
+			//$data=$this->user->getid(Input::get('email'));
 			return Redirect::to('/');
 		}
 		else
@@ -212,7 +204,7 @@ class UsersController extends \BaseController {
 	public function getCredentials()
 	{
 		return [
-			"user_email"=>Input::get('user_email'),
+			"email"=>Input::get('email'),
 			"password"=>Input::get('password'),
 			"user_confirmed"=>1,
 		];
@@ -269,7 +261,7 @@ class UsersController extends \BaseController {
 			    $newUserData['password'] = Hash::make($password);
 			}
 			$newUserData['user_confirmation_code']=$confirmationCode;
-			$email=$newUserData['user_email'];
+			$email=$newUserData['email'];
 			$name=$newUserData['user_first_name'];
 			$this->user->create($newUserData);
 			$userId=$this->user->max('id');
@@ -326,6 +318,55 @@ class UsersController extends \BaseController {
 	}
 	
 	/**
+	 * To go to "Change Password" page
+	 * @return View
+	 */
+	public function getChangePassword()
+	{
+		$all_categories= Category::all();
+        $all_locations=Location::all();
+        return View::make('Users.chan',compact('all_categories','all_locations'));
+	}
+	/**
+	*This function is to get all the current logged in user details which is passed to
+	*the 'View' in the form of 'userPersonalDetail'.
+	*@param Redirect to view 
+	*/
+
+
+	/**
+	 * Logic for changing the password
+	 * @return Routes
+	 */
+	public function postChangePassword()
+	{
+		$all_categories= Category::all();
+        $all_locations=Location::all();
+        $id=Auth::id();
+		$validator = Validator::make(Input::all(),User::$rulesChangePassword);
+		if($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator);
+		}
+		else
+		{
+			$userDetails = User::find($id);
+			$current_password = Input::get('current_password');
+			$password = Input::get('password');
+			if(Hash::check($current_password,$userDetails->password))
+			{
+				$userDetails->password = Hash::make($password);
+				$userDetails->save();
+				return Redirect::back()->with('success', Lang::get('user.user_password_changed');
+			}
+			else
+			{
+				return Redirect::back()->with('failure', Lang::get('user.user_password_change_failed');
+			}
+		}
+	}
+
+	/**
 	*This Is Used To Login Via Facebook
 	*Uses Facebook API and call to facebook.com
 	*@param 
@@ -374,19 +415,19 @@ class UsersController extends \BaseController {
     		$profiledata['user_fb_id']=$uid;
     		$profiledata['user_first_name']=$me['first_name'];
     		$profiledata['user_last_name']=$me['last_name'];
-    		$profiledata['user_email']=$me['email'];
+    		$profiledata['email']=$me['email'];
     		$profiledata['user_confirmed']=1;
     		if(isset($me['username']))
     		{
     			$profiledata['user_username']=$me['username'];
     			
     		}
-    		$checkEmail=Validator::make(array("user_email"=>$me['email']),User::$uniqueEmail);
+    		$checkEmail=Validator::make(array("email"=>$me['email']),User::$uniqueEmail);
     		if($checkEmail->fails())
     		{
     			if(isset($me['username']))
     			{
-    				$user=$this->user->where('user_email','=',$me['email'])->update(array(
+    				$user=$this->user->where('email','=',$me['email'])->update(array(
     						"user_fb_id"=>$uid,
     						"user_username"=>$me['username'],
     					));
@@ -394,7 +435,7 @@ class UsersController extends \BaseController {
     			else
     			{
     				
-    				$user=$this->user->where('user_email','=',$me['email'])->update(array(
+    				$user=$this->user->where('email','=',$me['email'])->update(array(
     						"user_fb_id"=>$uid,
     					));
     			}
@@ -416,125 +457,5 @@ class UsersController extends \BaseController {
     	Auth::loginUsingId($id);
     	return Redirect::to('/')->with('success',Lang::get('user.welcome',array('name'=>$me['first_name'])));
 	}
-	/**
-	*This function is to get all the current logged in user details which is passed to
-	*the 'View' in the form of 'userPersonalDetail'.
-	*@param Redirect to view 
-	*/
-
-	public function getUpdatePersonalDetail()
-	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        $id=Auth::id();
-		$userPersonalDetail=User::find($id);
-		return View::make('pages.users.personaldetail',compact('userPersonalDetail','all_categories','all_locations'));
-	}
-	/**
-	*This function is to update the personal detail of the logged in user.
-	*
-	*@param
-	*/
-
-	public function postUpdatePersonalDetail()
-	{
-		$id=Auth::id();
-		$userData = Input::all();
-		$oldData=$this->user->find($id);
-		$validator=Validator::make($userData,User::$rules);
-		if($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator);
-		}
-
- 		if(Input::file('user_profile_pic'))
- 		{
- 		/*Delete the previous profile pic*/
- 		if($oldData->user_profile_pic)
- 		{
- 			$oldExtension=explode(".",$oldData->user_profile_pic);
- 			$oldExtension='.'.$oldExtension[1];
- 			File::delete('public/user_profile_pic/'.$id.$oldExtension);
- 		}
- 			$file=Input::file('user_profile_pic');
- 			$newExtension = $file->getClientOriginalExtension();
- 			$fileName=$id.'.'.$newExtension;
- 			if(strlen($file->getClientOriginalName())<10)
- 			{
- 				$userData['user_profile_pic']=$file->getClientOriginalName().'.'.$newExtension;
- 			}
- 			else
- 			{
- 				$userData['user_profile_pic']=substr($file->getClientOriginalName(),0,10).'.'.$newExtension;
- 			}
-			$upload_success = $file->move('public/user_profile_pic/', $fileName);
-			if( $upload_success ) 
-			{
-
-			} 
-			else
-			{
-				return "file not uploaded";
-   				return Redirect::back()->with('failure',Lang::get('upload.error_profile_pic'));
-			}
-	}
- 		/* Details are updated in database */
- 		
-		$oldData->update($userData);
- 		return Redirect::back()->with('success',Lang::get('user.update_personal_detail'));
-	}
-
-	/**
-	 * To visit the "My account page"
-	 * @return View to myaccount.blade.php
-	 */
-	public function getMyAccount()
-	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        return View::make('pages.users.myaccount',compact('all_categories','all_locations'));
-	}
-	/**
-	 * To go to "Change Password" page
-	 * @return View
-	 */
-	public function getChangePassword()
-	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        return View::make('pages.users.changepassword',compact('all_categories','all_locations'));
-	}
-	/**
-	 * Logic for changing the password
-	 * @return Routes
-	 */
-	public function postChangePassword()
-	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        $id=Auth::id();
-		$validator = Validator::make(Input::all(),User::$rulesChangePassword);
-		if($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator);
-		}
-		else
-		{
-			$user         = $this->user->find($id);
-			$current_password = Input::get('current_password');
-			$password     = Input::get('password');
-			if(Hash::check($current_password,$user->password))
-			{
-				$user->password = Hash::make($password);
-				$user->save();
-				return Redirect::back()->with('success','Your password has been successfully changed');
-			}
-			else
-			{
-				return Redirect::back()->with('failure','Your current password is not same');
-			}
-		}
-	}
-
-
+	
 }

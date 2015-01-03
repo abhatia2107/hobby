@@ -1,1 +1,4 @@
-/home/abhishek/Hobby/app/views/users/show.blade.php
+@extends('Layouts.layout')
+@section('content')
+    We'll have a page here soon. Stay in touch.
+@stop

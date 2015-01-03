@@ -3,14 +3,14 @@ class Admin extends \Eloquent {
 
 	protected $guarded = [
 		'id',
-		'user_email',
+		'email',
 		'created_at',
 		'updated_at',
 	];
 	
 	public static $rules = [
 		'admin_user_id'=>'required|numeric|unique:admins',
-		'user_email'=>'required|email',	  
+		'email'=>'required|email',	  
 	];
 
 	public function updateAdmin($credentials,$id)

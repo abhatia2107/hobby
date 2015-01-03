@@ -31,7 +31,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $rules = [
 		'user_first_name'=>'required',
-	   	'user_email'=>'required|unique:users,user_email',
+	   	'email'=>'required|unique:users,email',
 		'user_contact_no'=>'required|unique:users,user_contact_no|regex:/[0-9]{10,11}/',
 		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
 	    'user_location_id'=>'required',
@@ -39,7 +39,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	    'user_gender'=>'boolean',
 	    'user_confirmed'=>'boolean',                   
 	];
-
+	
+	public static $rulesChangePassword=[
+		'current_password'=>'required',
+		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
+	];
+	
 	public function updateUser($credentials,$id)
     {
         $updated=DB::table('users')->where('id','=',$id)->update($credentials);
@@ -56,19 +61,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function getEmailVerified($credentials)
     {
-    	$user_email=DB::table('users')->where('id','=',$credentials['admin_user_id'])->get(['user_email']);
-    	if($user_email==$credentials['user_email'])
+    	$email=DB::table('users')->where('id','=',$credentials['admin_user_id'])->get(['email']);
+    	if($email==$credentials['email'])
     		return true;
     	else
 	    	return false;
     }
 
-	public static $rulesChangePassword=[
-		'current_password'=>'required',
-		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
-	];
 	public static $uniqueEmail=[
-		'user_email'=>'unique:users,user_email',
+		'email'=>'unique:users,email',
 	];
 	public function getUid($uid)
 	{
@@ -81,7 +82,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	*/
 	public function  getid($email)
 	{
-		return DB::select('select id from users where user_email=?',array($email));
+		return DB::select('select id from users where email=?',array($email));
 	}
 	/**
 	*To change the password of the user.

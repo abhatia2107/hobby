@@ -1,7 +1,7 @@
 @section("signup")
 <div class="modal-dialog">
         <div class="modal-content">
-            <form name="signUp" id="signUp" role="form" method="post" action="/signup/submit" enctype="multipart/form-data">
+            <form name="signUp" id="signUp" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
@@ -33,11 +33,11 @@
                     </div><br>
                     <div class="row">
                         <div class="form-group">
-                            <label for="user_email" class="col-sm-3 control-label ">Email&nbsp;
+                            <label for="email" class="col-sm-3 control-label ">Email&nbsp;
                                 <span class="required">*</span>
                             </label>
                             <div class="col-sm-8">
-                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="user_email"  id="user_email" value="@if(isset($userDetails)){{$userDetails->user_email}}@else{{Input::old('user_email')}}@endif">
+                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
                             </div>
                         </div>
                     </div><br>
@@ -190,7 +190,7 @@
                             }
                         }
                     },
-                    user_email: {
+                    email: {
                         validators: {
                             notEmpty: {
                                 message: 'The email is required and cannot be empty'

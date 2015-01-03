@@ -9,9 +9,9 @@ class RemindersController extends Controller {
 	 */
 	public function getRemind()
 	{
-		$all_$categories= Category::all();
+		$all_categories= Category::all();
         $all_locations=Location::all();
-        return View::make('pages.users.forgotpassword',compact('all_categories','all_locations'));
+        return View::make('Users.forgotPassword',compact('all_categories','all_locations'));
 	}
 		
 	/**
@@ -21,10 +21,10 @@ class RemindersController extends Controller {
 	 */
 	public function postRemind()
 	{
-		switch ($response = Password::remind(Input::only('user_email')))
+		switch ($response = Password::remind(Input::only('email')))
 		{
 			case Password::INVALID_USER:
-				return Redirect::back()->with('failed', Lang::get($response));
+				return Redirect::back()->with('failure', Lang::get($response));
 
 			case Password::REMINDER_SENT:
 				return Redirect::back()->with('success', Lang::get($response));
@@ -40,9 +40,9 @@ class RemindersController extends Controller {
 	public function getReset($token = null)
 	{
 		if (is_null($token)) App::abort(404);
-		$all_$categories= Category::all();
+		$all_categories= Category::all();
         $all_locations=Location::all();
-        return View::make('pages.users.resetpassword',compact('all_categories','all_locations'))->with('token', $token);
+        return View::make('Users.resetPassword',compact('all_categories','all_locations'))->with('token', $token);
 	}
 
 	/**
@@ -52,10 +52,10 @@ class RemindersController extends Controller {
 	 */
 	public function postReset()
 	{
-		$all_$categories= Category::all();
+		$all_categories= Category::all();
         $all_locations=Location::all();
         $credentials = Input::only(
-			'user_email', 'password', 'password_confirmation', 'user_csrf_token'
+			'email', 'password', 'password_confirmation', 'token'
 		);
 
 		$response = Password::reset($credentials, function($user, $password)
@@ -70,10 +70,10 @@ class RemindersController extends Controller {
 			case Password::INVALID_PASSWORD:
 			case Password::INVALID_TOKEN:
 			case Password::INVALID_USER:
-				return Redirect::back()->with('failed', Lang::get($response));
+				return Redirect::back()->with('failure', Lang::get($response));
 
 			case Password::PASSWORD_RESET:
-				return Redirect::to('/login')->with('success',Lang::get($response));
+				return Redirect::to('/users/login')->with('success',Lang::get($response));
 		}
 	}
 

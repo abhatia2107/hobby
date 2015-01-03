@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder {
                      DB::table('users')->insert(array(
                      'user_first_name' => $faker->firstName,
                      'user_last_name' =>$faker->lastName,
-                     'user_email' =>$faker->email,
+                     'email' =>$faker->email,
                      'user_contact_no' => $faker->phoneNumber,
                      'password' => Hash::make('123'),
                      'user_location_id'=>$faker->randomDigitNotNull,

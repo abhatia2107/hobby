@@ -7756,7 +7756,7 @@ body #OT_searchWrapperAll {
 }
 }.site-footer-widgets {
     background-color: #2f3339;
-    padding: 6em 0;
+    padding: 2em 0;
 }
 .footer-widget-column {
     margin-bottom: 3em;
@@ -7845,3 +7845,9 @@ body #OT_searchWrapperAll {
     content: '\f2b1'}
 .site-social a[href$=".rss"]::before, .site-social a[href*="vimeo.com"]::before {
     content: '\f245'}
+.footer_links{
+    padding-left:6px;
+}
+.copyright{
+    color:white;margin-top:15px;
+}

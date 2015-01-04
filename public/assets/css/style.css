@@ -2571,24 +2571,19 @@ audio, canvas, video {
 html {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%}
-:not(.wp-core-ui) button, body, input, select, textarea {
+/*:not(.wp-core-ui) button, body, input, select, textarea {
     font-family: Montserrat, sans-serif;
     font-size: 13px;
     font-weight: 400;
     line-height: 1.5;
-}
+}*/
 body, html {
     background-color: #f0f3f6;
 }
 a {
     text-decoration: none;
 }
-a:focus {
-    outline: thin dotted;
-}
-a:active, a:hover {
-    outline: 0;
-}
+
 h1, h2, h3, h4, h5, h6 {
     clear: both;
     font-weight: 400;
@@ -2626,19 +2621,7 @@ abbr[title] {
     border-bottom: 1px dotted #2b2b2b;
     cursor: help;
 }
-b, strong {
-    font-weight: 700;
-}
-cite, dfn, em, i {
-    font-style: italic;
-}
-ins, mark {
-    background: #fff9c0;
-    text-decoration: none;
-}
-p {
-    margin-bottom: 24px;
-}
+
 code, kbd, pre, samp, tt, var {
     font-family: monospace, serif;
     font-size: 13px;
@@ -2648,16 +2631,7 @@ code, kbd, pre, samp, tt, var {
     hyphens: none;
     line-height: 1.6;
 }
-pre {
-    border: 1px solid rgba(0, 0, 0, .1);
-    margin-bottom: 24px;
-    max-width: 100%;
-    overflow: auto;
-    padding: 12px;
-    white-space: pre;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
+
 blockquote, q {
     -webkit-hyphens: none;
     -moz-hyphens: none;
@@ -2719,18 +2693,7 @@ dt {
 dd {
     margin-bottom: 24px;
 }
-ol, ul {
-    margin: 0 0 24px 20px;
-}
-ul {
-    list-style: disc;
-}
-ol {
-    list-style: decimal;
-}
-li>ol, li>ul {
-    margin: 0 0 0 20px;
-}
+
 img {
     -ms-interpolation-mode: bicubic;
     border: 0;
@@ -2756,19 +2719,6 @@ legend {
     max-width: 100%;
     vertical-align: baseline;
 }*/
-button, input {
-    line-height: normal;
-}
-button, html input[type=button], input[type=reset], input[type=submit] {
-    -webkit-appearance: button;
-    cursor: pointer;
-}
-button[disabled], input[disabled] {
-    cursor: default;
-}
-input[type=search] {
-    -webkit-appearance: textfield;
-}
 input[type=search]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
@@ -2974,7 +2924,8 @@ blockquote.alignright, img.alignright {
     .listing-cover {
     padding: 8em 0 3em;
 }
-}@media (min-width:992px) {
+}
+@media (min-width:992px) {
     .listing-cover.has-image {
     padding: 16em 0 5em;
 }
@@ -3100,15 +3051,6 @@ table.responsive td:first-child, table.responsive th:first-child, table.responsi
 }
 textarea {
     width: 100%}
-input[type=search] {
-    border-radius: 60px;
-}
-input[type=file] {
-    background: 0 0;
-    margin-right: 10px;
-    padding: 0;
-    border: 0;
-}
 .content-shop-wrapper .site-main .type-product select, .facetwp-pager .facetwp-page, .job-manager-pagination li>*, .js-toggle-area-trigger, .listify_widget_search_listings.home-widget .site-main .job_search_form select, .site select, .site-main .archive-job_listing-toggle-inner select, .site-main .content-box select, .site-main .content-shop-wrapper .type-product select, .site-main .home-feature select, .site-main .job-package select, .site-main .job_listings select, .site-main .listify_widget_search_listings.home-widget .job_search_form select, .site-main .listing-by-term-inner select, .site-main .tabbed-listings-tabs a select, .site-main .type-product .thumbnails a select, .site-main .woocommerce div.product div.summary select, .site-main .woocommerce-main-image select, .site-main .woocommerce-page div.product div.summary select, .site-main .woocommerce-tabs select, .tabbed-listings-tabs .site-main a select, .type-product .thumbnails .site-main a select, .woocommerce div.product .site-main div.summary select, .woocommerce-page div.product .site-main div.summary select, a.page-numbers, span.page-numbers {
     padding: 13px 15px 12px;
     border: 0;
@@ -3157,9 +3099,7 @@ input:focus, textarea:focus {
     line-height: 45px;
     background: 0 0;
 }
-input:focus, select:focus, textarea:focus {
-    outline: 0;
-}
+
 .account-sign-in .button, .account-sign-in .content-shop-wrapper .added_to_cart, .account-sign-in .content-shop-wrapper .button.add_to_cart_button, .account-sign-in .content-single-job_listing-gallery-wrapper .type-attachment .comment-count, .account-sign-in .load_more_jobs, .button, .button-secondary, .button-small.load_more_jobs, .button.button-small, .button[name=apply_coupon], .button[name=proceed], .button[name=update_cart], .content-shop-wrapper .account-sign-in .added_to_cart, .content-shop-wrapper .account-sign-in .button.add_to_cart_button, .content-shop-wrapper .added_to_cart, .content-shop-wrapper .button-small.added_to_cart, .content-shop-wrapper .button-small.button.add_to_cart_button, .content-shop-wrapper .button.add_to_cart_button, .content-shop-wrapper .job-manager-error .added_to_cart, .content-shop-wrapper .job-manager-error .button.add_to_cart_button, .content-shop-wrapper .job-manager-message .added_to_cart, .content-shop-wrapper .job-manager-message .button.add_to_cart_button, .content-shop-wrapper .job_listing_packages_title .added_to_cart, .content-shop-wrapper .job_listing_packages_title .button.add_to_cart_button, .content-shop-wrapper .woocommerce-message .added_to_cart, .content-shop-wrapper .woocommerce-message .button.add_to_cart_button, .content-shop-wrapper .woocommerce_message .added_to_cart, .content-shop-wrapper .woocommerce_message .button.add_to_cart_button, .content-single-job_listing-gallery-wrapper .type-attachment .account-sign-in .comment-count, .content-single-job_listing-gallery-wrapper .type-attachment .button-small.comment-count, .content-single-job_listing-gallery-wrapper .type-attachment .comment-count, .content-single-job_listing-gallery-wrapper .type-attachment .job-manager-error .comment-count, .content-single-job_listing-gallery-wrapper .type-attachment .job-manager-message .comment-count, .content-single-job_listing-gallery-wrapper .type-attachment .job_listing_packages_title .comment-count, .content-single-job_listing-gallery-wrapper .type-attachment .woocommerce-message .comment-count, .content-single-job_listing-gallery-wrapper .type-attachment .woocommerce_message .comment-count, .job-manager-error .button, .job-manager-error .content-shop-wrapper .added_to_cart, .job-manager-error .content-shop-wrapper .button.add_to_cart_button, .job-manager-error .content-single-job_listing-gallery-wrapper .type-attachment .comment-count, .job-manager-error .load_more_jobs, .job-manager-message .button, .job-manager-message .content-shop-wrapper .added_to_cart, .job-manager-message .content-shop-wrapper .button.add_to_cart_button, .job-manager-message .content-single-job_listing-gallery-wrapper .type-attachment .comment-count, .job-manager-message .load_more_jobs, .job_listing_packages_title .button, .job_listing_packages_title .content-shop-wrapper .added_to_cart, .job_listing_packages_title .content-shop-wrapper .button.add_to_cart_button, .job_listing_packages_title .content-single-job_listing-gallery-wrapper .type-attachment .comment-count, .job_listing_packages_title .load_more_jobs, .load_more_jobs, .widget_shopping_cart .button, .woocommerce-message .button, .woocommerce-message .content-shop-wrapper .added_to_cart, .woocommerce-message .content-shop-wrapper .button.add_to_cart_button, .woocommerce-message .content-single-job_listing-gallery-wrapper .type-attachment .comment-count, .woocommerce-message .load_more_jobs, .woocommerce_message .button, .woocommerce_message .content-shop-wrapper , .woocommerce_message .content-shop-wrapper , .woocommerce_message .content-single-job_listing-gallery-wrapper .type-attachment .comment-count,      {
     border: 0;
     border-radius: 3px;
@@ -3181,7 +3121,8 @@ input:focus, select:focus, textarea:focus {
     font-size: 14px;
     padding: 16px 38px;
 }
-}@media (min-width:992px) {
+}
+@media (min-width:992px) {
     .button, .button-secondary, .button[name=apply_coupon], .button[name=proceed], .button[name=update_cart], .content-shop-wrapper .added_to_cart, .content-shop-wrapper .button.add_to_cart_button, .content-single-job_listing-gallery-wrapper .type-attachment .comment-count, .load_more_jobs, .widget_shopping_cart .button, button, input[type=button], input[type=reset], input[type=submit] {
     padding: 18px 40px;
 }

@@ -17,7 +17,7 @@
                                 <span class="required">*</span>
                             </label>
                             <div class="col-sm-8">
-                                <input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <input type="text"   class="form-control " name="user_first_name"  id="user_first_name" value="@if(isset($userDetails)){{$userDetails->user_first_name}}@else{{Input::old('user_first_name')}}@endif">
                             </div>
                         </div>
@@ -97,8 +97,8 @@
                 </div>
                 <div class="modal-footer">
                     <div class="checkbox login-remember">
-                        <label class="col-sm-5 control-label">
-                            <input name="remember"  value="forever" checked="checked" type="checkbox">
+                        <label class="col-sm-6 control-label">
+                            <input name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
                             I agree to <a href="/terms">terms and conditions.</a>
                         </label>
                     </div>
@@ -108,15 +108,17 @@
             </form>
         </div>
     </div>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#signUp').bootstrapValidator({
-                message: 'This value is not valid',
-                feedbackIcons: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
+     <script type="text/javascript">
+            $(document).ready(function(){
+                    
+                $('#signUp').bootstrapValidator({
+                    message: 'This value is not valid',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                        
                 fields: {
                     user_first_name: {
                         message: 'The name is not valid',
@@ -207,8 +209,15 @@
                             }
                         }
                     },
+                    signup_terms:{
+                        validators: {
+                            notEmpty: {
+                                message: 'You need to agree to terms and conditions.'
+                            }
+                        }
+                    }
                 }
-            }); 
+            });
         });
     </script>
 @show

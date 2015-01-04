@@ -19,9 +19,10 @@ Route::resource('admins', 'AdminsController');
 Route::resource('batches', 'BatchesController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('comments', 'CommentsController');
-Route::resource('feedbacks', 'FeedbacksController',[
+/*Route::resource('feedbacks', 'FeedbacksController',[
     'except' => ['edit']
 ]);
+*/
 Route::resource('institutes', 'InstitutesController');
 Route::resource('keywords', 'KeywordsController');
 Route::resource('localities', 'LocalitiesController');
@@ -72,7 +73,7 @@ Route::get('/feedbacks','FeedbacksController@index');
 Route::get('/feedbacks/create','FeedbacksController@create');
 Route::post('/feedbacks/store','FeedbacksController@store');
 Route::get('/feedbacks/{id}','FeedbacksController@show');
-Route::get('/institutes/delete/{id}','FeedbacksController@destroy');
+Route::get('/feedbacks/delete/{id}','FeedbacksController@destroy');
 
 //Route for InstitutesController
 Route::get('/institutes','InstitutesController@index');

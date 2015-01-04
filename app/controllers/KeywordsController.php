@@ -72,7 +72,6 @@ class KeywordsController extends \BaseController {
 				return $batchesForCategoryLocation="Empty";
 		}
 		else{
-			dd($batchesForCategoryLocation);
 			return View::make('Keywords.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 		}
 	}
@@ -91,7 +90,6 @@ class KeywordsController extends \BaseController {
 				$chunk=$chunk*100+1;
 				$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
 			}
-			dd($batchesForCategoryLocation);
 			if($batchesForCategoryLocation)
 				return $batchesForCategoryLocation;
 			else

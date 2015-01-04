@@ -45,11 +45,25 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 | shown, which includes a detailed stack trace during debug.
 |
 */
-
+/*
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+   	return View::make('Errors.error');
 });
+*/
+/*
+|--------------------------------------------------------------------------
+| Require The Errors File
+|--------------------------------------------------------------------------
+|
+| Next we will load the errors file for the application. This gives us
+| a nice separate location to store our error handlers instead of putting
+| them all here in the main global file.
+|
+*/
+
+require app_path().'/errors.php';
 
 /*
 |--------------------------------------------------------------------------

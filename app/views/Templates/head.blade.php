@@ -5,6 +5,7 @@
     <meta name="author" content="Abhishek">
     <meta property="og:image" content="/assets/images/home/banner.jpg">
     <title>Hobby</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.11.2.min.css" id="jquery-ui-style-css" media="all">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css"></link>
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">

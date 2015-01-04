@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration {
 		$table->string('user_facebook_access_token',70)->nullable();
 		$table->string('user_confirmation_code',90);
 		$table->boolean('user_confirmed');
-		$table->string('user_csrf_token',90);
+		$table->boolean('user_subscription_token');
 		$table->timestamps();
  		});
  		//user profile photo would be store as user_id.jpg so no need for separate column.

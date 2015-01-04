@@ -48,7 +48,7 @@ class Batch extends \Eloquent {
     public function getBatchForCategoryLocation($category_id,$location_id,$chunk)
     {
         $allBatches=DB::table('batches')
-                        ->whereBetween('batches.id', array($chunk, $chunk+99))
+        //                ->whereBetween('batches.id', array($chunk, $chunk+99))
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
@@ -58,6 +58,7 @@ class Batch extends \Eloquent {
                         ->select('*','batches.id as batch_id');
         if(!$category_id&&!$location_id)
             return $allBatches
+                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
 

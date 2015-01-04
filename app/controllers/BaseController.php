@@ -6,6 +6,7 @@ class BaseController extends Controller {
 	protected $batch;
 	protected $category;
 	protected $comment;
+	protected $feedback;
 	protected $institute;
 	protected $keyword;
 	protected $locality;
@@ -26,12 +27,13 @@ class BaseController extends Controller {
 	 *Constructor to initialize the instance of Model User
 	 */
 
-	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
+	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Feedback $feedbackObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
 	{
 		$this->admin = $adminObject;
 		$this->batch = $batchObject;
 		$this->category = $categoryObject;
 		$this->comment = $commentObject;
+		$this->feedback = $feedbackObject;
 		$this->institute = $instituteObject;
 		$this->keyword = $keywordObject;
 		$this->locality=$localityObject;

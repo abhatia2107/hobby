@@ -193,9 +193,7 @@ class UsersController extends \BaseController {
 	*/
 	public function getSignup()
 	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        return View::make('Users.signup',compact('all_categories','all_locations'));
+		return View::make('Users.signup');
 	}
 	/**
 	*Function to add new user to the database.
@@ -205,9 +203,7 @@ class UsersController extends \BaseController {
 	*/
 	public function postSignUp()
 	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        $newUserData=Input::all();
+		$newUserData=Input::all();
         /*dd($newUserData);*/
         $validator=Validator::make($newUserData,User::$rules);
 		if($validator->fails())
@@ -239,9 +235,10 @@ class UsersController extends \BaseController {
 			'userId'=>$userId,
 			];
 			/*Confirmation mail is to be send to the newly registerd user*/
-			Mail::send('Emails.welcome', $data, function($message) use ($email,$name)
+			$subject="Welcome to Hobby";
+			Mail::later(5,'Emails.welcome', $data, function($message) use ($email,$name,$subject)
 			{
-    			$message->to($email,$name)->subject('Welcome!');
+    			$message->to($email,$name)->subject($subject);
 			});
 			return Redirect::to('/')->with('success',Lang::get('user.register_success'));
 		}	
@@ -254,9 +251,7 @@ class UsersController extends \BaseController {
 	*/
 	public function getEmailVerify($userId,$confirmationCode)
 	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        $validate=$this->user->find($userId);
+		$validate=$this->user->find($userId);
 		if($validate)
 		{
 			/* to check whether the email has been already verified or not  */
@@ -275,7 +270,7 @@ class UsersController extends \BaseController {
 			}
 			else
 			{
-				return Redirect::to('/users/signup')->with('failure','email_verification_failed'); 	
+				return Redirect::to('/users/signup')->with('failure',Lang::get('user.email_verification_failed')); 
 			}
 		}
 	}
@@ -286,9 +281,7 @@ class UsersController extends \BaseController {
 	 */
 	public function getChangePassword()
 	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
-        return View::make('Users.chan',compact('all_categories','all_locations'));
+		return View::make('Users.changePassword');
 	}
 	/**
 	*This function is to get all the current logged in user details which is passed to

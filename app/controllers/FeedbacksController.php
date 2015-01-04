@@ -37,16 +37,30 @@ class FeedbacksController extends \BaseController {
 		if (Auth::check())
 		{
 		    // The user is logged in...
-		    $credentials['user_id']=Auth::id(); 
+		    $credentials['feedback_user_id']=Auth::id(); 
 		}
-		dd($credentials);
+		//dd($credentials);
 		$validator = Validator::make($credentials, Feedback::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 		$feedback=Feedback::create($credentials);
-		return Redirect::to('/')->with('success',Lang::get('feedback.feedback_updated'));
+		$email=Lang::get('feedback.feedback_email');
+		$name=Lang::get('feedback.feedback_email_name');
+		$subject=$credentials['feedback_subject'];
+		Mail::later(60,'Emails.feedback.sendFeedback', $credentials, function($message) use ($email,$name,$subject)
+		{
+			$message->to($email,$name)->subject($subject);
+		});
+		$email=$credentials['feedback_email'];
+		$name="User";
+		$subject=Lang::get('feedback.feedback_emailSubjectRecieved');
+		Mail::later(3600,'Emails.feedback.feedbackRecieved', $credentials, function($message) use ($email,$name,$subject)
+		{
+			$message->to($email,$name)->subject($subject);
+		});
+		return Redirect::to('/')->with('success',Lang::get('feedback.feedback_created'));
 	}
 
 
@@ -72,7 +86,8 @@ class FeedbacksController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$deleted=Feedback::destroy($id);
+		$feedback=Feedback::find($id);
+		$deleted=$feedback->forceDelete();
 		if($deleted)
 			return Redirect::to('/feedbacks')->with('success',Lang::get('feedback.feedback_deleted'));
 		else

@@ -19,16 +19,16 @@ class CreateBatchesTable extends Migration {
 			$table->integer('batch_subcategory_id')->foreign('batch_subcategory_id')->references('id')->on('subcategories');
 			$table->longText('batch_accomplishment')->nullable();
 			$table->integer('batch_institute_id')->foreign('batch_institute_id')->references('id')->on('institutes');
-			$table->date('batch_start_date');
-			$table->date('batch_end_date');
-			$table->time('batch_start_time');
-			$table->time('batch_end_time');
+			$table->date('batch_start_date')->nullable();
+			$table->date('batch_end_date')->nullable();
+			$table->time('batch_start_time')->nullable();
+			$table->time('batch_end_time')->nullable();
 			$table->integer('batch_venue_id')->foreign('batch_venue_id')->references('id')->on('venues');
 			$table->integer('batch_difficulty_level');
 			$table->integer('batch_age_group');
 			$table->integer('batch_gender_group');
-			$table->integer('batch_price');
-			$table->integer('batch_recurring');
+			$table->integer('batch_price')->nullable();
+			$table->integer('batch_recurring')->nullable();
 			$table->boolean('batch_approved');
 			$table->integer('batch_no_of_classes_in_week');
 			$table->boolean('batch_class_on_monday');
@@ -41,6 +41,7 @@ class CreateBatchesTable extends Migration {
 			$table->integer('batch_trial');
 			$table->string('batch_comment')->nullable();
 			$table->string('batch_tagline',40)->nullable();
+			$table->softDeletes();
 			$table->timestamps();
 		});		
 	}

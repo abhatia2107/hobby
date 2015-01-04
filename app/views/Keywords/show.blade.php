@@ -106,7 +106,7 @@
 								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory); 
 							?>				
 							<li subcategory="{{$sub_id}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" checked class="SubCheckbox" /><div id="fiter-text">{{' '.$subcategory}}</div></label>
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" class="SubCheckbox" /><div id="fiter-text">{{' '.$subcategory}}</div></label>
 							</li>
 						 @endforeach
 						 </ul> 
@@ -195,6 +195,7 @@
 		{
 			chunk++;
 			loadFilters = true;	
+			alert(response.length);
 			if(response == "Empty")
 			{
 				$('#loadMore').css('display','none');
@@ -206,6 +207,7 @@
 				{
 					result[i+resultRange] = response[i];
 				}
+				alert(result.length);
 				displayResults(result,resultRange);
 				var count  = LoadResult(range,range+10);
 				if(count<10)
@@ -283,10 +285,13 @@
 				}
 				else if(filterStatus)
 				{
-					if(range<filterRestultCount)
-					{	LoadResult(range,range+10);	}
+					if(filterRestultCount)
+					{
+					 	LoadResult(range,range+10);	}
 					else
-					{	LoadFilterResults(sub_select,loc_select);	}
+					{
+						alert('coming');
+						LoadFilterResults(sub_select,loc_select);	}
 				}
 				else
 				{	LoadResult(range,range+10);	}

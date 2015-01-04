@@ -52,7 +52,7 @@ class AdminsController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('admin.admin_email_mismatch'));
 		}
 		$created=Admin::create($credentials);
-		dd($created);
+		//dd($created);
 		if($created)
 			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_created'));
 		else

@@ -1,6 +1,8 @@
 <?php
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Keyword extends \Eloquent {
+	use SoftDeletingTrait;
 
 	protected $guarded = [
 		'id',

@@ -138,12 +138,11 @@ class UsersController extends \BaseController {
 		{
 			if($userDetails->user_confirmed==0)
 			{
-				return Redirect::to('/')->with('failure',Lang::get('user.verify_email'));
+				return Redirect::back()->with('failure',Lang::get('user.verify_email'));
 			}
 		}
 		if(Auth::attempt($credentials,$remember))
 		{
-			Session::flash('success','Welcome '.$userDetails['user_first_name'].' '.$userDetails['user_last_name']);
 			/*
 			|$id is used to store the the unique 'id'
 			|of the logged in user in session varible so that
@@ -151,7 +150,7 @@ class UsersController extends \BaseController {
 			|
 			*/
 			//$data=$this->user->getid(Input::get('email'));
-			return Redirect::to('/');
+    		return Redirect::intended('/')->with('success','Welcome '.$userDetails['user_first_name'].' '.$userDetails['user_last_name']);
 		}
 		else
 		{
@@ -236,7 +235,7 @@ class UsersController extends \BaseController {
 			];
 			/*Confirmation mail is to be send to the newly registerd user*/
 			$subject="Welcome to Hobby";
-			Mail::later(5,'Emails.welcome', $data, function($message) use ($email,$name,$subject)
+			Mail::later(60,'Emails.welcome', $data, function($message) use ($email,$name,$subject)
 			{
     			$message->to($email,$name)->subject($subject);
 			});

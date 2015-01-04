@@ -56,7 +56,7 @@ class FeedbacksController extends \BaseController {
 		$email=$credentials['feedback_email'];
 		$name="User";
 		$subject=Lang::get('feedback.feedback_emailSubjectRecieved');
-		Mail::later(3600,'Emails.feedback.feedbackRecieved', $credentials, function($message) use ($email,$name,$subject)
+		Mail::later(60,'Emails.feedback.feedbackRecieved', $credentials, function($message) use ($email,$name,$subject)
 		{
 			$message->to($email,$name)->subject($subject);
 		});

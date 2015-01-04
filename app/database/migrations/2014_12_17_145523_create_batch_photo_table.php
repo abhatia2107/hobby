@@ -13,10 +13,10 @@ class CreateBatchPhotoTable extends Migration {
 	public function up()
 	{
 		Schema::create('batch_photo', function($table){
-		$table->increments('id');
-		$table->integer('batch_id')->foreign('batch_id')->references('id')->on('Batches');
-		$table->integer('photo_id');
-		$table->timestamps();
+			$table->increments('id');
+			$table->integer('batch_id')->foreign('batch_id')->references('id')->on('Batches');
+			$table->integer('photo_id');
+			$table->timestamps();
 		});
 	}
 

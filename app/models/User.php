@@ -4,10 +4,11 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	use UserTrait, RemindableTrait;
+	use UserTrait, RemindableTrait, SoftDeletingTrait;
 
 	/**
 	 * The database table used by the model.
@@ -28,6 +29,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'csrf_token',
 		'signup_terms',
 		'remember',
+		'deleted_at',
 		'created_at',
 		'updated_at',
 	];
@@ -37,7 +39,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	   	'email'=>'required|unique:users,email',
 		'user_contact_no'=>'required|unique:users,user_contact_no|regex:/[0-9]{10}/',
 		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
-	    'user_location_id'=>'required',
 	    'user_birthdate'=>'date',
 	    'user_gender'=>'boolean',
 	    'user_confirmed'=>'boolean',                   
@@ -64,7 +65,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function getEmailVerified($credentials)
     {
-    	$email=DB::table('users')->where('id','=',$credentials['admin_user_id'])->get(['email']);
+    	$email=DB::table('users')->where('id','=',$credentials['admin_user_id'])->pluck('email');
     	if($email==$credentials['email'])
     		return true;
     	else

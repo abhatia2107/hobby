@@ -41,7 +41,19 @@ Route::filter('auth', function()
 		{
 			return Response::make('Unauthorized', 401);
 		}
-		return Redirect::guest('login');
+		return Redirect::guest('/users/login');
+	}
+});
+
+Route::filter('auth.institute', function()
+{
+	if(is_null(Institute::getInstituteforUser(Auth::id())))
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		return Redirect::to('/institutes/create');
 	}
 });
 

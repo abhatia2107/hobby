@@ -22,7 +22,11 @@ class InstitutesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Institutes.create');
+		$instituteId=Institute::getInstituteforUser(Auth::id());
+		if(is_null($instituteId))
+			return View::make('Institutes.create');
+		else
+			return Redirect::to('/institutes/'.$instituteId);
 	}
 
 	/**
@@ -33,19 +37,18 @@ class InstitutesController extends \BaseController {
 	 */
 	public function store()
 	{
-		//TO DO: Take user id automatically 
 		$credentials=Input::all();
-		$credentials['institute_user_id']=1;
+		$credentials['institute_user_id']=Auth::id();
 		$credentials['institute_url']=$credentials['institute'].$credentials['institute_user_id'];
-		/*dd($credentials);*/
 		$validator = Validator::make($credentials, Institute::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 		$created=Institute::create($credentials);
-		if ($created) 
-			return Redirect::to('/institutes')->with('success',Lang::get('institute.institute_created'));
+		//dd($created->id);
+		if ($created)
+			return Redirect::intended('/institutes/'.$created->id)->with('success',Lang::get('institute.institute_created'));
 		else
 			return Redirect::back()->withInput()->with('failure',Lang::get('institute.institute_create_failed'));
 	}
@@ -78,7 +81,7 @@ class InstitutesController extends \BaseController {
 	{
 		$instituteDetails=Institute::find($id);
 		$user_id=Auth::id();
-		if($instituteDetails->institute_user_id!=$user_id)
+		if($instituteDetails['institute_user_id']!=$user_id)
 			return Redirect::to('/')->with('failure',Lang::get('institute.institute_access_failed'));
 		$location_id=$instituteDetails['institute_location_id'];
 		$all_locations=$this->location->all();

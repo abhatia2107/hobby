@@ -52,30 +52,6 @@
                     </div><br>
                     <div class="row">
                         <div class="form-group">
-                            <label for="user_location_id" class="col-sm-3 control-label ">City&nbsp;
-                                <span class="required">*</span>
-                            </label>
-                            <div class="col-sm-8">
-                                <select class="form-control select" name="user_location_id" id="user_location_id" required>
-                                    @if(isset($all_locations))
-                                        @foreach ($all_locations as $data)
-                                            <option value={{$data->id}} 
-                                                @if(isset($userDetails)) 
-                                                    {{($userDetails->user_location_id==$data->id)?
-                                                        'selected="selected"':''}}
-                                                @else
-                                                    {{"Input::old('user_location_id')"}}
-                                                @endif>
-                                                {{$data->location}}
-                                            </option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                        </div>
-                    </div><br/>
-                    <div class="row">
-                        <div class="form-group">
                             <label for="password" class="col-sm-3 control-label ">Password&nbsp;
                                 <span class="required">*</span>
                             </label>

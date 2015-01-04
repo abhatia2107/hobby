@@ -16,6 +16,7 @@ class CreateLocationsTable extends Migration {
 			$table->increments("id");
 			$table->string("location",255);
 			$table->integer("location_no_of_localities");
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}

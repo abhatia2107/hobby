@@ -8,6 +8,7 @@ class Subscription extends \Eloquent {
 
 	protected $guarded = [
         'id',
+        'deleted_at',
         'created_at',
         'updated_at',
     ];
@@ -20,19 +21,19 @@ class Subscription extends \Eloquent {
 
 	public function unsubscribe()
     {
-        return DB::table('feedbacks')
+        return DB::table('subscriptions')
             ->softDeletes();
  	}
  	
- 	public function unmarkDoneFeedback()
+ 	public function reSubscribe()
  	{
-        return DB::table('feedbacks')
+        return DB::table('subscriptions')
         	->restore();
  	}
  	
  	public function getUnsubscribe()
  	{
- 		return DB::table('feedbacks')
+ 		return DB::table('subscriptions')
             ->onlyTrashed()
             ->get();
  	}

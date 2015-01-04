@@ -1,6 +1,9 @@
 <?php
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Subcategory extends \Eloquent {
+	use SoftDeletingTrait;
+
 	protected $guarded = [
 		'id',
 		'created_at',

@@ -1,6 +1,8 @@
 <?php
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Venue extends \Eloquent {
+	use SoftDeletingTrait;
 
 	protected $guarded = [
 		'id',

@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration {
 			$table->integer('comment_user_id')->foreign('comment_user_id')->references('id')->on('users');
 			$table->integer('comment_institute_id')->foreign('comment_institute_id')->references('id')->on('institutes');
 			$table->integer('comment_rating');
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}

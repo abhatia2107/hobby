@@ -79,23 +79,25 @@ class KeywordsController extends \BaseController {
 
 	public function filter($subcategoriesString,$localitiesString,$category_id,$location_id,$chunk)
 	{
+		$subcategories=explode(",",$subcategoriesString);
+		$localities=explode(",", $localitiesString);
+		if(!$subcategories[0]&&!$localities[0]){
+			$chunk=$chunk*100;
+			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
+		
+		}
+		else{
+			$chunk=$chunk*100;
+			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
+		}
 		if(Request::ajax()){
-			$subcategories=explode(",",$subcategoriesString);
-			$localities=explode(",", $localitiesString);
-			if(!$subcategories[0]&&!$localities[0]){
-				$chunk=$chunk*100;
-				$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
-			
-			}
-			else{
-				$chunk=$chunk*100;
-				$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
-			}
-		//	dd($batchesForCategoryLocation);
 			if($batchesForCategoryLocation)
 				return $batchesForCategoryLocation;
 			else
 				return $batchesForCategoryLocation="Empty";
+		}
+		else{
+			dd($batchesForCategoryLocation);
 		}
 	}
 

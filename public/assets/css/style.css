@@ -7845,9 +7845,11 @@ body #OT_searchWrapperAll {
     content: '\f2b1'}
 .site-social a[href$=".rss"]::before, .site-social a[href*="vimeo.com"]::before {
     content: '\f245'}
+/*Footer CSS start*/
 .footer_links{
     padding-left:6px;
 }
 .copyright{
     color:white;margin-top:15px;
 }
+/*Footer CSS end*/

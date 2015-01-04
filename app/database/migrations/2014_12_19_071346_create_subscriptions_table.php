@@ -17,6 +17,7 @@ class CreateSubscriptionsTable extends Migration {
 			$table->increments('id');
 			$table->integer('subscription_user_id')->foreign('subscription_user_id')->references('id')->on('users');
 			$table->string('subscription_email');
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}

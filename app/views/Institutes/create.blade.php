@@ -1,31 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Add an institute</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@extends('Layouts.layout')
+@section('pagestylesheet')
     <link rel="stylesheet" href="/assets/formoid1/formoid-metro-cyan.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css">
-</head>
-<body class="blurBg-false" style="background-color:#EBEBEB">
-  @if($errors->has())
-    <div class="alert alert-block alert-danger fade in">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4><i class="fa fa-times-circle fa-fw fa-lg"></i>{{Lang::get('institute.institute_create_failed')}}</h4>
-        @foreach($errors->all() as $error)
-            <p>{{ $error }}<br></p>
-        @endforeach
-    </div>
-  @endif
 
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css">
+@stop
+@section('content')
 
 <div class="col-md-4">
     
 </div>
 <div class="col-md-4">
 
-<!-- Start Formoid form-->
+<!-- Start form-->
 <form enctype="multipart/form-data" class="formoid-metro-cyan form_create" action="@if(isset($instituteDetails)){{"/institutes/update/$instituteDetails->institute_id"}}@else{{"/institutes/store"}}@endif" method=post>
     <div class="title">
         <h2><span>
@@ -60,14 +47,19 @@
         </label>
         <div class="large">
             <span>
-                <select name="institute_location_id" required="required">
-                    <!-- <option value="$instituteDetails->institute_location_id"selected>@if(isset($instituteDetails)){{$instituteDetails['institute_location']}}@else{{Input::old('institute_location')}}@endif</option> -->
+                <select class="form-control" tabindex=7 name="institute_location_id" required>
                     @foreach ($all_locations as $data)
-                        <option value="{{$data->location_id}}" selected="@if(isset($instituteDetails)){{"selected"}}@else{{"unselected"}}@endif">
+                        <option value={{$data->id}} 
+                            @if(isset($batchDetails)) 
+                                {{($batchDetails->institute_location_id==$data->id)?
+                                    'selected="selected"':''}}
+                            @else{{"Input::old('institute_location_id')"}}
+                            @endif>
                             {{$data->location}}
                         </option>
+                    
                     @endforeach
-                </select><i></i>
+                </select>
             </span>
         </div>
     </div>
@@ -75,14 +67,16 @@
         <label class="title">
             Website
         </label>
-        <input class="large" type="url" name="institute_website" value="@if(isset($instituteDetails)){{$instituteDetails->institute_website}}@else{{Input::old('institute_website')}}@endif"/>
+        <input class="large" name="institute_website" value="@if(isset($instituteDetails)){{$instituteDetails->institute_website}}@else{{Input::old('institute_website')}}@endif"/>
     </div>
     <div class="element-input" title="Facebook Page"><label class="title">Facebook Page</label><input class="large" type="text" name="institute_fblink" value="@if(isset($instituteDetails)){{$instituteDetails->institute_fblink}}@else{{Input::old('institute_fblink')}}@endif"/></div>
     <div class="element-input" title="Twitter Profile"><label class="title">Twitter Profile</label><input class="large" type="text" name="institute_twitter" value="@if(isset($instituteDetails)){{$instituteDetails->institute_twitter}}@else{{Input::old('institute_twitter')}}@endif"/></div>
-    <div class="submit"><input type="submit" value="Submit"/></div></form>
+    <input type="submit" value="Submit"/>
+    </form>
+    <!--
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="/assets/formoid1/formoid-metro-cyan.js"></script>
-
+    -->
 <!-- Stop Formoid form-->
 
 </div>
@@ -90,5 +84,4 @@
     
 </div>
 
-</body>
-</html>
+@stop

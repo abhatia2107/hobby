@@ -1,55 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-
-	<link href="/assets/css/ion.checkRadio.css" rel="stylesheet">
-	<link href="/assets/css/ion.checkRadio.cloudy.css" rel="stylesheet">
-	<link href="/css/bootstrap/css/jquery-ui.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" type="text/css" href="/assets/css/jquery.datetimepicker.css"/>
-</head>
-
-<body class="blurBg-false" style="background-color:#EBEBEB">
-
-	<div class="container main-container headerOffset">
-
-
-	<div class="row">
-	<div class="breadcrumbDiv col-lg-12">
-	<ul class="breadcrumb">
-	<li><a href="/">Home</a> </li>
-	<li class="active">@if(isset($batchDetails)) Edit Batch @else Create Batch @endif </li> 
-	</ul>
-	</div>
-	</div>
-	@if($errors->has())
-	<div class="alert alert-block alert-danger fade in">
-	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-	<h4><i class="fa fa-times-circle fa-fw fa-lg"></i>Oh snap! You got an error!</h4>
-	@foreach($errors->all() as $error)
-	<p>{{ $error }}<br></p>
-	@endforeach
-	</div>
-	@endif
-	@if(Session::has('success'))
-	<div class="alert alert-success fade in" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-	<i class="fa fa-check-circle fa-fw fa-lg"></i>
-	<strong>Well done!</strong> {{Session::get('success')}}     
-	</div>
-
-	@endif
-	@if(Session::has('failure'))
-	<div class="alert alert-danger fade in" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-	<i class="fa fa-times-circle fa-fw fa-lg"></i>
-	{{Session::get('failure')}}
-	</div>
-
-	@endif
-
+@extends('Layouts.layout')
+@section('content')
 	<div class="row">
 	<div class="col-lg-9 col-md-9 col-sm-7">
 	<h1 class="section-title-inner"><span>@if(isset($batchDetails)) <i class="glyphicon glyphicon-pencil"></i>&nbsp; Edit Your Batch @else <i class="glyphicon glyphicon-plus"></i>&nbsp; Add Your Batch @endif </span></h1>
@@ -326,10 +276,8 @@
 	<div style="clear:both"></div>
 	</div>
 	<!-- /main-container -->
-
-	<script type="text/javascript" src="/assets/js/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
-	<script src="/css/bootstrap/js/jquery-ui.js"></script>
+@stop
+@pagejavascript
 	<!-- include checkRadio plugin //Custom check & Radio  --> 
 	<script type="text/javascript" src="/assets/js/ion-checkRadio/ion.checkRadio.min.js"></script> 
 	<!-- include grid.js // for equal Div height  --> 
@@ -388,4 +336,4 @@
 	});
 	});
 	</script>
-</body>
+@stop

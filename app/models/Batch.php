@@ -1,6 +1,8 @@
 <?php
-
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 class Batch extends \Eloquent {
+
+    use SoftDeletingTrait;
 
     protected $guarded = [
         'id',

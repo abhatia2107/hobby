@@ -10,7 +10,10 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.11.2.min.css" id="jquery-ui-style-css" media="all">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link href="/assets/css/sb-admin.css" rel="stylesheet">
+    <link href="/assets/css/adminstyle.css" rel="stylesheet">
+    <link href="/assets/css/plugins/morris.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
     <script src="/assets/js/jquery-1.11.2.min.js"></script>
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>

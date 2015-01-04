@@ -15,6 +15,7 @@ class CreateKeywordsTable extends Migration {
 		Schema::create('keywords', function($table){
 			$table->increments("id");
 			$table->string("keyword",255);
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}

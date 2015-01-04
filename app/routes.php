@@ -13,26 +13,26 @@
 
 Route::get('/', 'HomeController@showWelcome');
 
-
+/*
 
 Route::resource('admins', 'AdminsController');
 Route::resource('batches', 'BatchesController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('comments', 'CommentsController');
-/*Route::resource('feedbacks', 'FeedbacksController',[
+Route::resource('feedbacks', 'FeedbacksController',[
     'except' => ['edit']
 ]);
-*/
+
 Route::resource('institutes', 'InstitutesController');
 Route::resource('keywords', 'KeywordsController');
 Route::resource('localities', 'LocalitiesController');
 Route::resource('locations', 'LocationsController');
 Route::resource('subcategories', 'SubcategoriesController');
 Route::resource('subscriptions', 'SubscriptionsController');
-//Route::resource('users', 'UsersController');
+Route::resource('users', 'UsersController');
 Route::resource('venues', 'VenuesController');
 
-//Route for AdminsController
+*///Route for AdminsController
 Route::get('/admins','AdminsController@index');
 Route::get('/admins/create','AdminsController@create');
 Route::post('/admins/store','AdminsController@store');
@@ -41,14 +41,17 @@ Route::get('/admins/edit/{id}','AdminsController@edit');
 Route::post('/admins/update/{id}','AdminsController@update');
 Route::get('/admins/delete/{id}','AdminsController@destroy');
 
-//Route for BatchesController
-Route::get('/batches','BatchesController@index');
-Route::get('/batches/create','BatchesController@create');
-Route::post('/batches/store','BatchesController@store');
+Route::group(array('before' => "auth|auth.institute"), function() {
+	//Route for BatchesController
+	Route::get('/batches','BatchesController@index');
+	Route::get('/batches/create','BatchesController@create');
+	Route::post('/batches/store','BatchesController@store');
+	Route::get('/batches/edit/{id}','BatchesController@edit');
+	Route::post('/batches/update/{id}','BatchesController@update');
+	Route::get('/batches/delete/{id}','BatchesController@destroy');
+});
 Route::get('/batches/{id}','BatchesController@show');
-Route::get('/batches/edit/{id}','BatchesController@edit');
-Route::post('/batches/update/{id}','BatchesController@update');
-Route::get('/batches/delete/{id}','BatchesController@destroy');
+
 
 //Route for CategoriesController
 Route::get('/categories','CategoriesController@index');
@@ -75,15 +78,16 @@ Route::post('/feedbacks/store','FeedbacksController@store');
 Route::get('/feedbacks/{id}','FeedbacksController@show');
 Route::get('/feedbacks/delete/{id}','FeedbacksController@destroy');
 
+Route::group(array('before' => "auth"), function() {
 //Route for InstitutesController
-Route::get('/institutes','InstitutesController@index');
+//Route::get('/institutes','InstitutesController@index');
 Route::get('/institutes/create','InstitutesController@create');
 Route::post('/institutes/store','InstitutesController@store');
 Route::get('/institutes/{id}','InstitutesController@show');
 Route::get('/institutes/edit/{id}','InstitutesController@edit');
 Route::post('/institutes/update/{id}','InstitutesController@update');
 Route::get('/institutes/delete/{id}','InstitutesController@destroy');
-
+});
 //Route for KeywordsController
 Route::get('/keywords','KeywordsController@index');
 Route::get('/keywords/create','KeywordsController@create');
@@ -185,11 +189,13 @@ Route::get('/subscribed', function()
 
 Route::get('/hello', function()
 {
-
-	View::composer('hello', 'Composer');
 	return View::make('Miscellaneous.hello');
 });
 
+Route::get('/dummy', function()
+{
+	return View::make('Templates.headerAdmin');
+});
 
 //Routes for user, to be modified later
 

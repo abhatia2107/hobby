@@ -24,9 +24,10 @@ class CreateInstitutesTable extends Migration {
 			$table->longText('institute_description');
 			$table->decimal('institute_rating', 2, 1);
 			$table->boolean('institute_approved');
+			$table->softDeletes();
 			$table->timestamps();
 			//Institute photo would be store as institute_id.jpg so no need for separate column.
-			});
+		});
 	}
 
 	/**

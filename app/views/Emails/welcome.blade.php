@@ -14,7 +14,7 @@
 			Moreover you can control your events.<br/>
 			<br/>
 			Don't forget to update your personal details and adding your company.<br/>
-			Please click on this <a href="{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}.">link</a>
+			Please click on this <a href="{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}">link</a>
 
 			Problems clinking the link, copy and paste this URL to the browser.
 			{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}.

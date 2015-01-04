@@ -470,9 +470,9 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <label for="pitch" class="col-sm-3 control-label label1">One Time Pitch&nbsp;<span style="color:red">*</span></label>
+                    <label for="pitch" class="col-sm-3 control-label label1">Tagline&nbsp;<span style="color:red">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control input1" name="pitch" placeholder="One Time Pitch" id="pitch">
+                        <input type="text" class="form-control input1" name="pitch" placeholder="Tagline" id="pitch">
                     </div>
                 </div>
             </div>
@@ -515,14 +515,6 @@
                 </div>
                 </div>
 
-            </div><br/>
-            <div class="row">
-                <div class="form-group">
-                    <label for="keywords" class="col-sm-3 control-label label1">Search Keywords&nbsp;<span style="color:red">*</span></label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control input1" name="keywords" placeholder="Search Keywords" id="keywords">
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="form-group">
@@ -594,88 +586,6 @@
                 </div>
             </div><br/><br/>
             <div class="row">
-                <div class="col-sm-3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="label1">Timings</span>
-                </div>
-                <div class="col-sm-1">From
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker4'>
-                            <input type='text' class="form-control" name="time1" id="time1"/>
-                    	<span class="input-group-addon"><span class="glyphicon glyphicon-time"></span>
-                    	</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-1">
-                    To
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker5'>
-                            <input type='text' class="form-control" name="time2" id="time2">
-                    	    <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-time"></span>
-                    	    </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="label1">Date</span>
-                </div>
-                <div class="col-sm-1">
-                    From
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker6'>
-                            <input type='text' class="form-control" name="date1" id="date1"data-date-format="YYYY/MM/DD">
-						    <span class="input-group-addon">
-						        <span class="glyphicon glyphicon-calendar"></span>
-						    </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-1">
-                    To
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker7'>
-                            <input type='text' class="form-control" name="date2" id="date2"data-date-format="YYYY/MM/DD"/>
-						    <span class="input-group-addon">
-						        <span class="glyphicon glyphicon-calendar"></span>
-						    </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker4').datetimepicker({
-                        pickDate: false
-                    });
-                });
-                $(function () {
-                    $('#datetimepicker5').datetimepicker({
-                        pickDate: false
-                    });
-                });
-                $(function () {
-                    $('#datetimepicker6').datetimepicker({
-                        pickTime: false
-                    });
-                });
-                $(function () {
-                    $('#datetimepicker7').datetimepicker({
-                        pickTime: false
-                    });
-                });
-            </script>
-            <div class="row">
                 <div class="form-group">
                     <label for="venue" class="col-sm-3 control-label label1">Venue&nbsp;<span style="color:red">*</span></label>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -693,14 +603,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group">
-                    <label for="confsched" class="col-sm-3 control-label label1">My Schedule Is Confirmed&nbsp;<span style="color:red">*</span></label>
-                    <div class="col-sm-7">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input class="input1" type="checkbox" value="" checked id="confsched">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-sm-5">
                     <label class="col-sm-8 label1" for="sessions">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Of Sessions&nbsp;&nbsp;
                         <span style="color: red">*</span>
@@ -709,8 +611,10 @@
                     <input type="text" id="sessions" name="sessions" class="form-control input1">
                 </div>
                 </div>
-                <div class="col-sm-2 input1">Repeat</div>
-                <div class="col-sm-4"><select class="form-control" id="session1"><option>No</option><option value="1">Weekly</option></select></div>
+                <div class="col-sm-2 input1">Price</div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="session1">
+                </div>
 
 
             </div>
@@ -733,46 +637,6 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-3 label1">&nbsp;&nbsp;&nbsp;Tickets can be booked&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;upto</div>
-                <div class="col-sm-2">
-                    <select class="form-control input1">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
-                </div>
-                <span class="col-sm-1 label1">Days</span>
-                <div class="col-sm-2">
-                    <select class="form-control input1">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
-                </div>
-                <span class="col-sm-1 label1">Hours</span>
-                <div class="col-sm-2">
-                    <select class="form-control input1">
-                        <option>Before the class starts</option>
-                        <option>After the class starts</option>
-                    </select>
-                </div>
-            </div><br/><br/>
-            <div class="row">
-                <div class="col-sm-3 label1">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Ticket</div>
-                <div class="col-sm-3 label1">Ticket Name<br/><input type="text" class="form-control"></div>
-                <div class="col-sm-3 label1">Price<br/><input type="text" class="form-control"></div>
-                <div class="col-sm-3 label1">Number Of Tickets<br/><input type="text" class="form-control"></div>
-            </div><br/><br/>
-            <div class="row">
-                <div class="col-sm-2" >
-                    <button type="button" style="float:right;font-size:19px;color:white;background-color:cornflowerblue" class="form-control btn  btn-default">
-                        + &nbsp;Schedule
-                    </button>
-                </div>
-            </div><br/><br/>
             <div  style="width: 53%">
                 <button type="submit" style="float: right;font-size: 30px;color: white;background-color: cornflowerblue;width: 30%" class="form-control btn  btn-default">
                     Submit
@@ -895,7 +759,7 @@
                     </div><br/>
                     <div class="row">
                         <div class="form-group">
-                            <label for="landline" class="col-sm-3 control-label ">LandLine&nbsp;<span style="color:red">*</span></label>
+                            <label for="landline" class="col-sm-3 control-label ">Email&nbsp;<span style="color:red">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="landline"  id="landline">
                             </div>
@@ -903,7 +767,7 @@
                     </div><br/>
                     <div class="row">
                         <div class="form-group">
-                            <label for="comments" class="col-sm-3 control-label ">Comments&nbsp;</label>
+                            <label for="comments" class="col-sm-3 control-label ">Landmark&nbsp;</label>
                             <div class="col-sm-8">
                                 <textarea   class="form-control " name="comments"  id="comments"></textarea>
                             </div>

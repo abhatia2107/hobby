@@ -40,8 +40,7 @@
 			</div>
 		</div>
 		
-	    @yield('pagejavascript')
-	    
+	    @yield('pagejavascript')	    
 	    <!--this page specific jquery-->
 	    @yield('pagejquery')
 	</body>

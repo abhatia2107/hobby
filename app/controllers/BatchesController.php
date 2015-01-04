@@ -13,7 +13,7 @@ class BatchesController extends \BaseController {
 	public function index()
 	{
 		$batches=Batch::all();
-		return View::make('Miscellaneous.home',compact('batches'));
+		return View::make('Batches.index',compact('batches'));
 	}
 
 	/**

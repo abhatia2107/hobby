@@ -68,19 +68,23 @@
     	margin-top: -17px;
     	margin-left: 16px;
     }
-    #loadMore
+    .resultsMessage
     {
+    	font-size:20px;
     	background: lightgray;
     	height: 40px;
     	padding:5px;
+    	margin-left: 20px;
     }
+    #noResults
+   	{
+   		display: none;
+   	}
 
 
   </style>
 </head>
 <body>
-
-
 @extends('Layouts.layout')
 @section('content')
 <div class="container" >
@@ -102,7 +106,7 @@
 								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory); 
 							?>				
 							<li subcategory="{{$sub_id}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" class="SubCheckbox" /><div id="fiter-text">{{' '.$subcategory}}</div></label>
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" checked class="SubCheckbox" /><div id="fiter-text">{{' '.$subcategory}}</div></label>
 							</li>
 						 @endforeach
 						 </ul> 
@@ -128,7 +132,8 @@
 					<center><h4>Results</h4></center>
 					<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
-					<div id="loadMore"><center><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</center></div><br><br>
+					<div id="loadMore" class='resultsMessage'><center><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</center></div>
+					<div id="noResults" class='resultsMessage' ><center>No More results to display.</center></div><br><br>
 				</div><!--end of results info -->
 			</div>
 		</div>
@@ -137,43 +142,84 @@
 <br>
 </body>
 <script type="text/javascript">
-	var result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;	
+	var result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
+	var categoryId = "<?php echo $category_id; ?>";
+	var locationId = "<?php echo $location_id; ?>";
 	var range = 10;
-	var completeRange = 0;
 	var filterRestultCount = 0;
-	var fiterStatus;
-	displayResults(result,0);
-	LoadResult(0,20);
-	//Load_Some(20,40);
+	var filterStatus=false;
+	var loadFilters = false;
+	var chunk = 1;
+	var resultCount = 0;
+	var sub_select = new Array();
+	var loc_select = new Array();
+	if(result.length==0)	
+	{
+		$('#loadMore').css('display','none');
+		$('#noResults').css('display','block');
+	}
 	function LoadResult(start,end)
 	{
-		//alert(end);
 		var i = 0;
 		$("#filter_data li").each(function () 
 		{	
 			if(i>=start && i<=end)
 			{
-				//alert('yes');
 				var test = $(this).attr('class');
 				$('.'+test).fadeIn(100);
 			}
 			i++;
 		});
-		completeRange = i;
 		range = end;
-		//alert(range);
-
+		if(filterStatus)
+		{
+			if(i<10)
+			{
+				chunk++;
+				LoadFilterResults(sub_select,loc_select);	
+			}
+		}
+		if(range>i) range=i;
+		return i;
 	}
-
-	//var json = JSON.parse(photos);
-	//photos = photos[0].toSource();
+	displayResults(result,0);
+	LoadResult(0,20);
+	function LoadFilterResults(sub_select,loc_select)
+	{
+		resultRange = result.length;
+		if(sub_select.length==0)
+			sub_select=0;
+		if(loc_select.length==0)
+			loc_select=0;
+		$.get("/filter/"+sub_select+"/"+loc_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
+		{
+			chunk++;
+			loadFilters = true;	
+			if(response == "Empty")
+			{
+				$('#loadMore').css('display','none');
+				$('#noResults').css('display','block');
+			}
+			else
+			{
+				for (var i=0; i<response.length; i++)
+				{
+					result[i+resultRange] = response[i];
+				}
+				displayResults(result,resultRange);
+				var count  = LoadResult(range,range+10);
+				if(count<10)
+				{
+					LoadFilterResults(sub_select,loc_select);
+				}
+			}
+		});
+	}
 	function displayResults(results,start)
-	{	
-		//alert(range);
+	{
 		var linksContainer = $('#filter_data'),baseUrl;
 		for (var i=start; i<results.length; i++)
 		{
-	    	//console.log("Source: "+results[i]['institute']);
 	    	var institute = results[i]['institute'];
 			var batch = results[i]['batch'];
 			var key  = i;
@@ -200,7 +246,7 @@
 								"<div class='col-md-12 col-xs-12 col-sm-4 column'>"+
 									"<div class='col-md-6 col-xs-12 col-sm-4 column'>"+
 														batch+"<br>"+
-														subcategory+"<br>"+
+														subcategory+" id : "+sub_id+
 									"<div class='col-md-6 col-xs-12 col-sm-4 column'></div>"+
 				"</div></div></div></div></div></div></li>");	
 	    }
@@ -211,36 +257,59 @@
 		{
 			if ((window.innerHeight + window.scrollY) == $(document).height())
 			{
-				if(range==result.length)
+				resultRange = result.length;
+				if(range>=resultRange)
 				{
-					$.get("/filter/0/0/0/0/1",function(response)
+					if(!filterStatus)
 					{
-							alert(response);
-					});
+						$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
+						{
+
+							if(response == "Empty")
+							{
+								$('#loadMore').css('display','none');
+								$('#noResults').css('display','block');
+							}
+							else
+							{
+								for (var i=0; i<response.length; i++)
+								{	result[i+resultRange] = response[i];	}
+								displayResults(result,resultRange);	
+								LoadResult(range,range+10);
+							}
+							chunk++;	
+						});
+					}
+				}
+				else if(filterStatus)
+				{
+					if(range<filterRestultCount)
+					{	LoadResult(range,range+10);	}
+					else
+					{	LoadFilterResults(sub_select,loc_select);	}
 				}
 				else
-				{
-					LoadResult(range,range+10);
-				}
+				{	LoadResult(range,range+10);	}
 
 			}
 		}
-		var sub_select = new Array();
-		var loc_select = new Array();
 		$("#filter-sub li").click(function () {
+			$('#loadMore').css('display','block');
+			$('#noResults').css('display','none');
+			if(loadFilters)
+			{
+				chunk = 1;
+				result = null;
+				result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
+			}
 			$(linksContainer).empty();
 			displayResults(result,0);
-			//$("#batchInfo").css('display','none');
-			//var subcategory = 'batch_'+$(this).attr('subcategory');
 			sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 			loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
 			
-			//alert('sub '+sub_select);
-			//alert('lco' +loc_select);
 			if(sub_select.length>0 && loc_select.length>0)
 			{
-				//alert('two');		
-				//$('#batchInfo').css('display','none');	
+				filterStatus =  true;
 				filterRestultCount=0;
 				$("#filter_data li").each(function () 
 				{
@@ -248,31 +317,23 @@
 					var test = $(this).attr('class');
 					subcategory = $(this).attr('subcategory');
 					locality = $(this).attr('locality');
-					//alert(locality);
 					var subResult = jQuery.inArray(subcategory,sub_select);
 					var locResult = jQuery.inArray(locality,loc_select);
-					//alert('sub '+sub_select);
-					//alert('lco' +loc_select);
 					if (subResult==-1 || locResult==-1) 
 					{	$('.'+test).remove();	}
 					else
-					{	
-						//$('.'+test).fadeIn(500);
-						filterRestultCount++;
-					}
+					{	filterRestultCount++;	}
 				});
-				LoadResult(0,20);
+				resultCount= LoadResult(0,20);
 			}
 			else
 			{
 				if(sub_select.length>0 || loc_select.length>0)
 				{
+					filterStatus = true;
 					filterRestultCount=0;
-					//alert('yes');
-					//$('#batchInfo').css('display','none');	
 					$("#filter_data li").each(function () 
 					{
-						//alert('yes');
 						var test = $(this).attr('class');
 						subcategory = $(this).attr('subcategory');
 						locality = $(this).attr('locality');
@@ -281,25 +342,18 @@
 						if (subResult==-1 && locResult==-1) 
 						{	$('.'+test).remove();	}
 						else
-						{	
-							//$('.'+test).fadeIn(500);
-							filterRestultCount++;
-						}
+						{	filterRestultCount++;	}
 					});
-					//alert(filterRestultCount);
-					LoadResult(0,20);
+					resultCount = LoadResult(0,20);
 				}
 				else
 				{
+					filterStatus = false;
 					$(linksContainer).empty();
+					displayResults(result,0);
 					range = 0;
 					LoadResult(0,20);
-
 				}
-			}
-			if(filterRestultCount<20)
-			{	
-				//alert('yes');
 			}
 		});
 	});

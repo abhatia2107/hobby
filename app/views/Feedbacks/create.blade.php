@@ -12,23 +12,32 @@
 					<h3 class="heading">Submit a request/feedback/complaint</h3>
 				</div>
 			<div class="form-group">
-				<input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
-		    	<label for="email">Email</label>
-		        <input type="text" class="form-control"  placeholder="Email" name="email" id="email">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+		    	<label for="feedback_email">
+                    Email
+    		        <span class="required">*</span>
+                </label>
+                <input type="text" class="form-control"  placeholder="Email" name="feedback_email" id="feedback_email">
 			</div>
 			<div class="form-group">
-		    	<label for="subject">Subject</label>
-		        <input type="text" class="form-control"  placeholder="Subject of the issue" name="subject" id="subject">
+		    	<label for="feedback_subject">
+                    Subject
+                    <span class="required">*</span>
+                </label>
+                <input type="text" class="form-control"  placeholder="Subject of the issue" name="feedback_subject" id="feedback_subject">
 			</div>
 			<div class="form-group">
-		    	<label for="description">Description</label>
-		        <textarea rows="5" class="form-control"  placeholder="Tell us more about the issue." name="description" id="description"></textarea>
+		    	<label for="feedback_description">
+                    Description
+                    <span class="required">*</span>
+                </label>
+                <textarea rows="5" class="form-control"  placeholder="Tell us more about the issue." name="feedback_description" id="feedback_description"></textarea>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 			<div class="box-content">
-					<h6><br/>Submit a request for assistance and we'll notify you as soon as possible.</h6>
+					<h6>Submit a request for assistance and we'll notify you as soon as possible.</h6>
 			</div>
 		</form>
 		</div>
@@ -53,7 +62,7 @@
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields: {
-                    email: {
+                    feedback_email: {
                         validators: {
                             notEmpty: {
                                 message: 'The email is required and cannot be empty'
@@ -63,17 +72,17 @@
                             }
                         }
                     },
-                    subject: {
+                    feedback_subject: {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required and cannot be empty'
+                                message: 'The subject is required and cannot be empty'
                             }
                     }},
 
-                    description: {
+                    feedback_description: {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required and cannot be empty'
+                                message: 'The description is required and cannot be empty'
                             }
                     }},
 

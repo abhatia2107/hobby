@@ -19,7 +19,7 @@ class InstitutesTableSeeder extends Seeder {
                      'institute_fblink' =>$faker->userName,
                      'institute_twitter' =>$faker->userName,
                      'institute_description'=>$faker->text(),
-                     'institute_rating' =>$faker->randomNumber(1,5),
+                     'institute_rating' =>$faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 5),
                      'institute_approved'=>$faker->boolean(),
                      ));
               }

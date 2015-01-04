@@ -20,7 +20,7 @@
 					<h3 class="heading">Submit a request</h3>
 				</div>
 			<div class="form-group">
-				<input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 		    	<label for="email">Email</label>
 		        <input type="text" class="form-control"  placeholder="Email" name="email" id="email">
 			</div>

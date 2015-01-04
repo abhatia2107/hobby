@@ -9,7 +9,7 @@
 		<h4>User confirmation mail</h4>
 
 		<div>
-			Thank you for registering at <a href="{{URL::to('/')}}">Home</a><br/>
+			Thank you for registering at <a href="{{URL::to('/')}}">{{URL::to('/')}}</a><br/>
 			Now you can add new events and can go to your favorite events.<br/>
 			Moreover you can control your events.<br/>
 			<br/>

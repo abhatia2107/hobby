@@ -106,7 +106,7 @@
 								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory); 
 							?>				
 							<li subcategory="{{$sub_id}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" class="SubCheckbox" /><div id="fiter-text">{{' '.$subcategory}}</div></label>
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" checked class="SubCheckbox" /><div id="fiter-text">{{' '.$subcategory}}</div></label>
 							</li>
 						 @endforeach
 						 </ul> 

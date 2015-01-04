@@ -48,7 +48,7 @@ class Batch extends \Eloquent {
     public function getBatchForCategoryLocation($category_id,$location_id,$chunk)
     {
         $allBatches=DB::table('batches')
-                        ->whereBetween('batches.id', array($chunk, $chunk+99))
+        //                ->whereBetween('batches.id', array($chunk, $chunk+99))
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
@@ -58,18 +58,24 @@ class Batch extends \Eloquent {
                         ->select('*','batches.id as batch_id');
         if(!$category_id&&!$location_id)
             return $allBatches
+                ->skip($chunk)
+                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
 
         else if(!$location_id)
             return $allBatches
                 ->where('batches.batch_category_id','=',$category_id)
+                ->skip($chunk)
+                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
 
         else if(!$category_id)
             return $allBatches
                 ->where('venues.venue_location_id','=',$location_id)
+                ->skip($chunk)
+                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
 
@@ -77,6 +83,8 @@ class Batch extends \Eloquent {
             return $allBatches
                 ->where('batches.batch_category_id','=',$category_id)
                 ->where('venues.venue_location_id','=',$location_id)
+                ->skip($chunk)
+                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
     }
@@ -84,7 +92,7 @@ class Batch extends \Eloquent {
     {
 
         $allBatches=DB::table('batches')
-                        ->whereBetween('batches.id', array($chunk, $chunk+99))
+                        //->whereBetween('batches.id', array($chunk, $chunk+99))
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
@@ -92,7 +100,6 @@ class Batch extends \Eloquent {
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->select('*','batches.id as batch_id');
-/*        $chunk=0;*/
         if(!$subcategories[0]&&!$localities[0]){
             return $allBatches
                 ->orderBy('institute_rating')
@@ -102,6 +109,8 @@ class Batch extends \Eloquent {
         else if(!$localities[0]){
             return $allBatches
                 ->whereIn('batches.batch_subcategory_id',$subcategories)
+                ->skip($chunk)
+                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
         }
@@ -109,6 +118,8 @@ class Batch extends \Eloquent {
         else if(!$subcategories[0]){
             return $allBatches
                 ->whereIn('venues.venue_locality_id',$localities)
+                ->skip($chunk)
+                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
         }
@@ -116,6 +127,8 @@ class Batch extends \Eloquent {
             return $allBatches
                 ->whereIn('batches.batch_subcategory_id',$subcategories)
                 ->whereIn('venues.venue_locality_id',$localities)
+                ->skip($chunk)
+                ->take(100)
                 ->orderBy('institute_rating')
                 ->get();
         }

@@ -14,9 +14,6 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AdminsTableSeeder');
         $this->command->info('Admins table seeded!');
 
-		$this->call('BatchesTableSeeder');
-        $this->command->info('Batches table seeded!');
-
  		$this->call('BatchKeywordSeeder');
  		$this->command->info('Batch Keyword seeded!');
 
@@ -58,6 +55,9 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('SubscriptionsTableSeeder');
 		$this->command->info('Subscriptions table seeded!');
+
+		$this->call('BatchesTableSeeder');
+        $this->command->info('Batches table seeded!');
 
 	}	
 }

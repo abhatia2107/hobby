@@ -25,6 +25,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'id',
 		'password_confirmation',
 		'user_confirmed',
+		'csrf_token',
+		'signup_terms',
+		'remember',
 		'created_at',
 		'updated_at',
 	];
@@ -32,7 +35,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public static $rules = [
 		'user_first_name'=>'required',
 	   	'email'=>'required|unique:users,email',
-		'user_contact_no'=>'required|unique:users,user_contact_no|regex:/[0-9]{10,11}/',
+		'user_contact_no'=>'required|unique:users,user_contact_no|regex:/[0-9]{10}/',
 		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
 	    'user_location_id'=>'required',
 	    'user_birthdate'=>'date',

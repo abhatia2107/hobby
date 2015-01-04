@@ -5,7 +5,7 @@ class BatchesTableSeeder extends Seeder {
        public function run()
        {
               $faker = Faker\Factory::create();
-              foreach(range(1,500) as $index)
+              foreach(range(1,40000) as $index)
               {            
                      DB::table('batches')->insert(array(
                      'batch' => $faker->Name,

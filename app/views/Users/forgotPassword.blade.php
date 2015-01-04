@@ -14,7 +14,7 @@
 					<p> To reset your password, enter the email address which you use to login. We will then send you a link to change the password </p>
 					<form role="form" method="POST" action="/users/password/remind/submit">
 						<div class="form-group">
-							<input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
+							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 							<label for="email" > Email address </label>
 							<input  type="email" class="form-control" id="email" placeholder="Enter email" name="email">
 						</div>

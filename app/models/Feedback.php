@@ -8,6 +8,7 @@ class Feedback extends \Eloquent {
 
 	protected $guarded = [
         'id',
+        'csrf_token',
         'created_at',
         'updated_at',
     ];
@@ -15,8 +16,9 @@ class Feedback extends \Eloquent {
     protected $dates = ['deleted_at'];
  
     public static $rules = [
-    	'subject'=>'required',
-	    'description'=>'required',
+        'feedback_email'=>'email',
+    	'feedback_subject'=>'required',
+	    'feedback_description'=>'required',
     ];
     
 

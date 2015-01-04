@@ -10,7 +10,7 @@
             </h2>
          </hgroup>
          <div  data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">
-            <a href="#" data-toggle=".job_filters" class="js-toggle-area-trigger">Toggle Filters</a>
+            
             <form action="/filter" class="job_search_form" method="get">
                <div class="row">
                   <div class="col-md-3 col-sm-3">

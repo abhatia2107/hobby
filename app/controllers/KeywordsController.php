@@ -62,7 +62,7 @@ class KeywordsController extends \BaseController {
 			$localitiesForLocation = $this->locality->all();
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
-		$chunk=$chunk*100+1;
+		$chunk=$chunk*100;
 		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		if(Request::ajax()){
 		//	dd($batchesForCategoryLocation);
@@ -83,15 +83,15 @@ class KeywordsController extends \BaseController {
 			$subcategories=explode(",",$subcategoriesString);
 			$localities=explode(",", $localitiesString);
 			if(!$subcategories[0]&&!$localities[0]){
-				$chunk=$chunk*100+1;
+				$chunk=$chunk*100;
 				$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 			
 			}
 			else{
-				$chunk=$chunk*100+1;
+				$chunk=$chunk*100;
 				$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
 			}
-			//dd($batchesForCategoryLocation);
+		//	dd($batchesForCategoryLocation);
 			if($batchesForCategoryLocation)
 				return $batchesForCategoryLocation;
 			else

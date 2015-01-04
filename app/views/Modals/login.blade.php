@@ -14,10 +14,10 @@
                     <div class="clearfix">
                         <div class="form-group">
                             <label for="email" class="col-sm-3 control-label ">Email&nbsp;
-                                <span style="color:red">*</span>
+                                <span class="required">*</span>
                             </label>
                             <div class="col-sm-8">
-                                <input type="hidden" name="user_csrf_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <input type="email"  placeholder="mymail@example.com" class="form-control " name="email"  id="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                     <div class="clearfix">
                         <div class="form-group">
                             <label for="password" class="col-sm-3 control-label ">Password&nbsp;
-                                <span style="color:red">*</span>
+                                <span class="required">*</span>
                             </label>
                             <div class="col-sm-8">
                                 <input type="password"   class="form-control " name="password"  id="password">

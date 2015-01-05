@@ -9,14 +9,22 @@
 	}
     #batchInfo
     {
-      background: white;border:0px solid;padding:10px 10px;margin-bottom: 15px;border-color: skyblue;
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 10px rgba(0,0,0,0.5);-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+      background: white;border:0px solid;margin-bottom: 15px;border-color: skyblue;
+        -webkit-box-shadow: 0px 3px 0px -2px #0099FF;
+            box-shadow: 0px 3px 0px -2px #0099FF;
+
     }
-    #inst_name
+    #filter_data
+   	{
+   		padding-top: 10px;
+   		box-shadow: 0px 0px 4px #3366CC;-moz-box-shadow: 0px 0px 4px #3366CC;-webkit-box-shadow: 0px 0px 4px #3366CC;
+   		margin-bottom: 20px;
+   	}
+    #batch_name
     {
-    	font-size: 19px;
-    	font-weight: normal;
-    	color: blue;
+    	font-size: 22px;
+    	font-weight: bold;
+    	color: #0033CC;
     }
     #inst_tagline
     {
@@ -26,17 +34,12 @@
     }
     #inst_rating
     {
-    	font-size: 18px;
+    	margin-top: 10px;
+    }
+    .inst_name
+    {
+    	font-size: 16px;
     	font-weight: normal;
-    	color: blue;
-    }
-     .sub input[type="checkbox"]
-    {
-    	height: 15px;
-    }
-    .sub input[type="checkbox"]:checked
-    {
-    	background:url(/assets/images/checked.gif) center top no-repeat;
     }
     .filters
     {
@@ -45,10 +48,7 @@
     }
     #browse-filter
     {
-    	font-size: 14px;
-    	font-style: normal;
-    	color:black;
-    	line-height: 1em;
+    	
     }
     .filter2
     {
@@ -74,14 +74,139 @@
     	background: lightgray;
     	height: 40px;
     	padding:5px;
-    	margin-left: 20px;
     }
     #noResults
    	{
    		display: none;
    	}
-
-
+   	.location-icon
+   	{
+   		width:12px;height: 17px;
+   		margin-top: -4px;
+   		margin-right: 5px;
+   	}
+   	#inst_contact
+   	{
+   		min-width:175px;
+   		height:30px;
+   		border: 1px solid;
+   		padding:3px;
+   		border-color: #0099FF;
+   		border-radius: 4px;
+   		float: left;
+   		text-align: center;
+   		margin-right:5px;
+   		margin-top: 2px;
+   	}
+   	#inst_contact:hover
+   	{
+   		background: #E8E8E8  ;
+   		cursor: pointer;
+   	}
+   	#inst_message:hover
+   	{
+   		background: #E8E8E8  ;
+   		cursor: pointer;
+   	}
+   	#inst_message
+   	{
+   		margin-top: 2px;
+   		min-width:130px;
+   		height:30px;
+   		border: 1px solid;
+   		padding:3px;
+   		border-color: #0099FF;
+   		border-radius: 4px;
+   		float: left;
+   		text-align: center;
+   	}
+   	.inscore {
+   			border-radius: 50%;
+		border: 4px solid;
+		border-color:#FF8000;
+		vertical-align: middle;
+	    width: 45px;
+	    height: 45px;
+	    padding: 5px 5px 5px 5px; 
+	    font-size: 19px;
+	    font-weight: bold;
+	    color: #333;
+	    text-align: center;
+	    float: left;
+	}
+	#rating
+	{
+		margin-top: -6px;
+		margin-left: 42px;
+	}
+	#rating-tittle
+	{
+		text-align: center;
+		float:left;
+		margin-top: 10px;
+	}
+	#inst_type
+	{
+		margin-top: 10px;
+	}
+	#inst_price
+	{
+		margin-top: 10px;
+	}
+	#hand-icon
+	{
+		color: #0099FF;
+		margin-right: 5px;
+	}
+	#cell-icon
+	{
+		color: #0099FF;
+	}
+		#msg-icon
+	{
+		color: #0099FF;
+		font-size: 0.9em;
+	}
+	.day
+	{
+		padding: 1px;
+		padding-top:0px;
+		width:20px;
+		height:23px;
+		border: 1px solid;
+		border-color: #0099FF;
+		margin-left: 4px;
+		float:left;
+		text-align: center;
+		opacity: .20;
+		margin-top: 11px;
+	}
+	#contact
+	{
+		display: none;
+	}
+	.institute-profile-pic 
+	{
+		width:146px;
+		height: 145px;
+		border-radius: 50%;
+		border: 5px solid;
+		border-color:#0099FF;
+		vertical-align: middle;
+	}
+	.institute-profile-pic img 
+	{
+		width:140px;
+		height: 140px;
+	}
+	#inst_details
+	{
+		margin-top: 7px;
+	}
+	#batch-schedule
+	{
+		margin-top: 87px;
+	}
   </style>
 </head>
 <body>
@@ -94,7 +219,6 @@
 				<!--Start of filter division -->
 				<div class="col-md-3 col-xs-12 col-sm-3 column">
 					<h4>Filter Options</h4>
-					<br>
 					<div id="browse-filter">	
 						<h4>Sub Categories</h4> 
 						<ul class="list-unstyled filters filter1" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
@@ -106,7 +230,7 @@
 								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory); 
 							?>				
 							<li subcategory="{{$sub_id}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" class="SubCheckbox" /><div id="fiter-text">{{' '.$subcategory}}</div></label>
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" class="SubCheckbox" />{{' '.$subcategory}}</label>
 							</li>
 						 @endforeach
 						 </ul> 
@@ -121,16 +245,17 @@
 								$loc_id = $localityData->id;
 								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $locality);
 							?>
-							<li subcategory="{{$loc_id}}">								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox" /><div id="fiter-text">{{' '.$locality}}</div></label>
+							<li subcategory="{{$loc_id}}" >								
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox" />{{' '.$locality}}</label>
 							</li> 
 						@endforeach
 						 </ul> 
 					</div>
 				</div>
-				<div class="col-md-8 col-xs-11 col-sm-9 column" >
+				<div class="col-md-9 col-xs-11 col-sm-9 column" >
 					<center><h4>Results</h4></center>
-					<ul class="list-unstyled" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
+					
+					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><center><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</center></div>
 					<div id="noResults" class='resultsMessage' ><center>No More results to display.</center></div><br><br>
@@ -160,31 +285,23 @@
 	}
 	function LoadResult(start,end)
 	{
-		var i = 0;
+		var index = 0;
 		$("#filter_data li").each(function () 
 		{	
-			if(i>=start && i<=end)
+			if(index>=start && index<=end)
 			{
 				var test = $(this).attr('class');
 				$('.'+test).fadeIn(100);
 			}
-			i++;
+			index++;
 		});
 		range = end;
-		if(filterStatus)
-		{
-			if(i<10)
-			{
-				chunk++;
-				LoadFilterResults(sub_select,loc_select);	
-			}
-		}
-		if(range>i) range=i;
-		return i;
+		if(range>index) range=index;
+		return index;
 	}
 	displayResults(result,0);
 	LoadResult(0,20);
-	function LoadFilterResults(sub_select,loc_select)
+	function LoadFilterResults(sub_select,loc_select,start)
 	{
 		resultRange = result.length;
 		if(sub_select.length==0)
@@ -195,7 +312,6 @@
 		{
 			chunk++;
 			loadFilters = true;	
-			alert(response.length);
 			if(response == "Empty")
 			{
 				$('#loadMore').css('display','none');
@@ -203,54 +319,97 @@
 			}
 			else
 			{
-				for (var i=0; i<response.length; i++)
+				for (var index=0; index<response.length; index++)
 				{
-					result[i+resultRange] = response[i];
+					result[index+resultRange] = response[index];
 				}
-				alert(result.length);
-				displayResults(result,resultRange);
-				var count  = LoadResult(range,range+10);
+				displayResults(result,start);
+				var count  = LoadResult(start,start+20);
 				if(count<10)
 				{
-					LoadFilterResults(sub_select,loc_select);
+					LoadFilterResults(sub_select,loc_select,0);
 				}
 			}
 		});
 	}
+	function show_contact (id) 
+	{
+		$('#show_contact'+id).empty();
+		$('#contact'+id).css('display','block');
+		// body...
+	}
 	function displayResults(results,start)
 	{
 		var linksContainer = $('#filter_data'),baseUrl;
-		for (var i=start; i<results.length; i++)
+		for (var index=start; index<results.length; index++)
 		{
-	    	var institute = results[i]['institute'];
-			var batch = results[i]['batch'];
-			var key  = i;
-			var subcategory = results[i]['subcategory'];
-			var location_name = results[i]['location'];
-			var locality =results[i]['locality'];
-			var tagline =results[i]['batch_tagline'];
-			var sub_id = results[i]['batch_subcategory_id'];
-			var loc_id = results[i]['venue_locality_id'];	
-			$(linksContainer).append("<li subcategory='"+sub_id+"' locality='"+loc_id+"' class='batch"+key+"' id='batchInfo' style='display:none'>"+
+	    var institute = results[index]['institute'];
+	    var institute_id =  results[index]['batch_institute_id'];
+	    var institute_photo_path = '/assets/images/institute/institute.gif';
+	    /*var institute_photo_exists = results[index]['institute_photo'];
+	    if(institute_photo_exists==1)
+	    {	institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}*/
+			var batch = results[index]['batch'];
+			var price = results[index]['batch_price'];
+			var subcategory = results[index]['subcategory'];
+			var category =  results[index]['category'];
+			var location_name = results[index]['location'];
+			var locality =results[index]['locality'];
+			var tagline =results[index]['batch_tagline'];
+			var subcategoryID = results[index]['batch_subcategory_id'];
+			var localityID = results[index]['venue_locality_id'];
+			var contact = results[index]['venue_contact_no'];
+			var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
+			var daysResult = new Array();
+			for(day = 0;day<7;day++)
+			{
+				var dayID = "batch_class_on_"+weekDays[day];
+				daysResult[day] = results[index][dayID];
+			}
+			$(linksContainer).append("<li subcategory='"+subcategoryID+"' locality='"+localityID+"' class='batch"+index+"' id='batchInfo' style='display:none'>"+
 				"<div class='row clearfix batch' >"+
 					"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
-						"<div class='row clearfix'><div class='col-md-12 col-xs-12 col-sm-12 column'>"+
-								"<div class='row clearfix'><div class='col-md-12 col-xs-12 col-sm-4 column'>"+
-									"<div class='col-md-9 col-xs-12 col-sm-9 column'>"+
-										"<span id='inst_name'>"+i+","+institute+"<br></span>"+
-										"<span id='inst_tagline'>"+tagline+"<br></span>"+
-										locality+","+location_name+
+						"<div class='row clearfix batch'>"+
+							"<div class='col-md-12 col-xs-12 col-sm-12 column' >"+
+								"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
+									"<span id='batch_name'>"+batch+"<br></span>"+
+									"<span class='inst_name'>"+institute+
+									".</span>"+
+								"</div>"+
+							"</div>"+
+						"</div>"+
+						"<div class='row clearfix batch'>"+
+							"<div class='col-md-12 col-xs-12 col-sm-12 column' style='margin-top:20px'>"+
+								"<div class='col-md-3 col-xs-12 col-sm-4 column'>"+
+									"<center><img src='"+institute_photo_path+"' class='institute-profile-pic' ></ 	>"+
+								"</div>"+
+								"<div class='col-md-6 col-xs-12 col-sm-8 column'>"+
+									"<div id='inst_contact' class='col-md-5 col-xs-12 col-sm-4 column'><span style='display:none' id='contact"+index+"'><span id='cell-icon'>☎ </span>"+contact+"</span>"+
+										"<span id='show_contact"+index+"' onClick='show_contact("+index+")'><span id='cell-icon'>☎ </span>View Phone Number</span>"+
 									"</div>"+
-									"<div class='col-md-3 col-xs-12 col-sm-3 column'>"+
-										"<span id='inst_rating'>Rating<br></span>"+
+									"<div id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
+									"<div id='inst_details' class='col-xs-12' >"+
+										"<div id='inst_type'><span id='hand-icon'>☛</span>Type: "+subcategory+", "+category+".</div>"+
+										"<div id='inst_price'><span id='hand-icon'>☛</span>Price:  ₹ "+price+"</div>"+
+										"<div id='inst_price'><span id='hand-icon'>☛</span>Address: "+locality+", "+location_name+"</div>"+
 									"</div>"+
 								"</div>"+
-								"<div class='col-md-12 col-xs-12 col-sm-4 column'>"+
-									"<div class='col-md-6 col-xs-12 col-sm-4 column'>"+
-														batch+"<br>"+
-														subcategory+" id : "+sub_id+
-									"<div class='col-md-6 col-xs-12 col-sm-4 column'></div>"+
-				"</div></div></div></div></div></div></li>");	
+								"<div class='col-md-3 col-xs-12 col-sm-5 column'>"+
+								"<div id='rating'><div id='rating-tittle'>Rating :</div><div class='inscore' ><span id='rating-value'>9.7</span></div></div>"+
+									"<div id='batch-schedule'><center>Batch Schedule</center><div id='day1' class='day'>M</div><div id='day2' class='day'>T</div><div id='day3' class='day'>W</div>"+
+									"<div id='day4' class='day'>T</div><div id='day5' class='day'>F</div><div id='day6' class='day'>S</div><div id='day7' class='day'>S</div></div>"+
+								"</div>"+
+						"</div>"+
+					"</div>"+
+				"</div>"+
+				"</div><hr></li>");
+				for(day=0;day<7;day++)
+				{
+					if(daysResult[day]==1)
+					{
+						$('.batch'+index+' #day'+(day+1)).css('opacity','1');
+					}
+				}				
 	    }
 	}
 	$(document).ready(function() {
@@ -266,7 +425,6 @@
 					{
 						$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 						{
-
 							if(response == "Empty")
 							{
 								$('#loadMore').css('display','none');
@@ -274,91 +432,70 @@
 							}
 							else
 							{
-								for (var i=0; i<response.length; i++)
-								{	result[i+resultRange] = response[i];	}
+								for (var index=0; index<response.length; index++)
+								{	
+									result[index+resultRange] = response[index];	
+								}
 								displayResults(result,resultRange);	
 								LoadResult(range,range+10);
 							}
 							chunk++;	
 						});
 					}
-				}
-				else if(filterStatus)
-				{
-					if(filterRestultCount)
+					if(filterStatus)
 					{
-					 	LoadResult(range,range+10);	}
-					else
-					{
-						alert('coming');
-						LoadFilterResults(sub_select,loc_select);	}
+						//alert(sub_select+","+loc_select);
+						LoadFilterResults(sub_select,loc_select,resultRange);
+
+					}
 				}
 				else
 				{	LoadResult(range,range+10);	}
 
 			}
 		}
-		$("#filter-sub li").click(function () {
+		$("#filter-sub input").click(function () {
+			//e.preventDefault();
+			//e.stopPropagation();
+			//	e.preventDefault();
+			//	alert('yes');
+			filterStatus = true;
 			$('#loadMore').css('display','block');
 			$('#noResults').css('display','none');
-			if(loadFilters)
-			{
-				chunk = 1;
-				result = null;
-				result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
-			}
+			result = [];
+			//result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
+			//alert('yes');
+		//	alert(result.length);
 			$(linksContainer).empty();
-			displayResults(result,0);
 			sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 			loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
-			
-			if(sub_select.length>0 && loc_select.length>0)
+			//alert(sub_select+','+loc_select);
+			if(sub_select.length>0 || loc_select.length>0)
 			{
-				filterStatus =  true;
-				filterRestultCount=0;
-				$("#filter_data li").each(function () 
-				{
-					
-					var test = $(this).attr('class');
-					subcategory = $(this).attr('subcategory');
-					locality = $(this).attr('locality');
-					var subResult = jQuery.inArray(subcategory,sub_select);
-					var locResult = jQuery.inArray(locality,loc_select);
-					if (subResult==-1 || locResult==-1) 
-					{	$('.'+test).remove();	}
-					else
-					{	filterRestultCount++;	}
-				});
-				resultCount= LoadResult(0,20);
+				chunk = 0;
+				LoadFilterResults(sub_select,loc_select,0);
 			}
 			else
 			{
-				if(sub_select.length>0 || loc_select.length>0)
+				chunk = 0;
+				$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 				{
-					filterStatus = true;
-					filterRestultCount=0;
-					$("#filter_data li").each(function () 
+					if(response == "Empty")
 					{
-						var test = $(this).attr('class');
-						subcategory = $(this).attr('subcategory');
-						locality = $(this).attr('locality');
-						var subResult = jQuery.inArray(subcategory,sub_select);
-						var locResult = jQuery.inArray(locality,loc_select);
-						if (subResult==-1 && locResult==-1) 
-						{	$('.'+test).remove();	}
-						else
-						{	filterRestultCount++;	}
-					});
-					resultCount = LoadResult(0,20);
-				}
-				else
-				{
-					filterStatus = false;
-					$(linksContainer).empty();
-					displayResults(result,0);
-					range = 0;
-					LoadResult(0,20);
-				}
+						$('#loadMore').css('display','none');
+						$('#noResults').css('display','block');
+					}
+					else
+					{
+						for (var index=0; index<response.length; index++)
+						{	
+							result[index] = response[index];	
+						}
+						displayResults(result,0);	
+						LoadResult(0,20);
+					}
+					chunk++;	
+				});
 			}
 		});
 	});

@@ -40,7 +40,7 @@
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields: {
-                    title: {
+                    InputBatch: {
                         message: 'The title is not valid',
                         validators: {
                             notEmpty: {
@@ -57,7 +57,7 @@
                             }
                         }
                     },
-                    pitch: {
+                    batch_tagline: {
                         message: 'The pitch is not valid',
                         validators: {
                             notEmpty: {
@@ -74,24 +74,8 @@
                             }
                         }
                     },
-                    keywords: {
-                        message: 'The keywords is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The keywords is required and cannot be empty'
-                            },
-                            stringLength: {
-                                min: 3,
 
-                                message: 'The keywords must be more than 3  characters long'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                                message: 'The  keywords can only consist of alphabets'
-                            }
-                        }
-                    },
-                    textarea1: {
+                    batch_accomplishment: {
                         message: 'The text is not valid',
                         validators: {
                             notEmpty: {
@@ -108,19 +92,7 @@
                             }
                         }
                     },
-                    sessions: {
-                        message: 'The text is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The session is required and cannot be empty'
-                            },
 
-                            regexp: {
-                                regexp: /^[0-9]+$/,
-                                message: 'The sessions can contain only digits  '
-                            }
-                        }
-                    },
                     time1: {
                         message: 'The timings is not valid',
                         validators: {
@@ -158,56 +130,7 @@
                         }
                     },
 
-                    city: {
-                        message: 'The city is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The city name is required and cannot be empty'
-                            },
-                            stringLength: {
-                                min: 3,
-                                max: 30,
-                                message: 'The city must be more than 3 and less than 30 characters long'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                                message: 'The city name can only consist of alphabets'
-                            }
-                        }
-                    },
-                    phone: {
-                        message: 'The number is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The mobile number is required and cannot be empty'
-                            },
-
-                            regexp: {
-                                regexp: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
-                                message: 'The phone number consists of 10 digits'
-                            }
-                        }
-                    },
-                    email: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The email is required and cannot be empty'
-                            },
-                            emailAddress: {
-                                message: 'The input is not a valid email address'
-                            }
-                        }
-                    },
-                    url: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The url is required and cannot be empty'
-                            },
-                            url: {
-                                message: 'The input is not a valid url address'
-                            }
-                        }
-                    }
+                    
                 }
             });
             $('#venueform').bootstrapValidator({
@@ -422,6 +345,12 @@
             font-size: 15px;
             height:32px;
          }
+         #classInfo
+         {
+            margin-left: auto;
+            margin-right: auto;
+            width: 900px;
+         }
     </style>
 </head>
 <body>
@@ -451,7 +380,7 @@
     </div>
 </nav>
 <div class="container-fluid">
-        <form role="form" class="form-horizontal"style="margin-left: auto;margin-right: auto;width: 900px;" id="classInfo">
+        <form role="form" class="form-horizontal" id="classInfo">
             <br/><br/>
             <div class="row">
                 <p style="font-size: 20px;
@@ -462,38 +391,51 @@
             </div><br/>
             <div class="row">
                 <div class="form-group">
-                    <label for="title" class="col-sm-3 control-label label1">Title&nbsp;<span style="color:red">*</span></label>
+                    <label for="InputBatch" class="col-sm-3 control-label label1">Title&nbsp;<span style="color:red">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control input1" name="title" placeholder="Title" id="title">
+                        <input type="text" class="form-control input1" id="InputBatch" name="batch" value="@if(isset($batchDetails)){{$batchDetails->batch}}@else{{Input::old('batch')}}@endif" required>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
-                    <label for="pitch" class="col-sm-3 control-label label1">Tagline&nbsp;<span style="color:red">*</span></label>
+                    <label for="batch_tagline" class="col-sm-3 control-label label1">Tagline&nbsp;<span style="color:red">*</span></label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control input1" name="pitch" placeholder="Tagline" id="pitch">
+                        <input type="text" class="form-control" tabindex=2 title="Not more than 40 characters" maxlength="40" id="batch_tagline"  name="batch_tagline" value="@if(isset($batchDetails)){{$batchDetails->batch_tagline}}@else{{Input::old('batch_tagline')}}@endif" required>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
-                    <label for="categ" class="col-sm-3 control-label label1">Category&nbsp;<span style="color:red">*</span></label>
+                    <label for="batch_category_id" class="col-sm-3 control-label label1">Category&nbsp;<span style="color:red">*</span></label>
                     <div class="col-sm-2">
-                        <select  class="form-control input1" name="categ"  id="categ">
-                            <option selected>Dance</option>
-                            <option>Cooking</option>
-                            <option>Other</option>
-                            <option>Art & Craft</option>
+                        <select class="form-control input1" tabindex=7 id="batch_category_id" name="batch_category_id"required>
+                            @foreach ($all_categories as $data)
+                            <option value={{$data->id}}
+                                @if(isset($batchDetails))
+                                {{($batchDetails->batch_category_id==$data->id)?
+                                'selected="selected"':''}}
+                                @else{{"Input::old('batch_category_id')"}}
+                                @endif>
+                                {{$data->category}}
+                            </option>
+
+                            @endforeach
                         </select>
                     </div>
-                    <label for="subcateg" class="col-sm-3 control-label label1">Sub Category&nbsp;<span style="color:red">*</span></label>
+                    <label name="batch_subcategory_id" class="col-sm-3 control-label label1">Sub Category&nbsp;<span style="color:red">*</span></label>
                     <div class="col-sm-2">
-                        <select  class="form-control input1" name="subcateg"  id="subcateg">
-                            <option >Salsa</option>
-                            <option>Tango</option>
-                            <option>Zumba</option>
-                            <option>Other</option>
+                        <select class="form-control input1" tabindex=7 name="batch_subcategory_id" id="batch_subcategory_id" required>
+                            @foreach ($all_subcategories as $data)
+                            <option value={{$data->id}}
+                                @if(isset($batchDetails))
+                                {{($batchDetails->batch_subcategory_id==$data->id)?
+                                'selected="selected"':''}}
+                                @else{{"Input::old('batch_subcategory_id')"}}
+                                @endif>
+                                {{$data->subcategory}}
+                            </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -504,7 +446,7 @@
                         <label class="col-sm-3 control-label label1">Photo Gallery</label>
                         <div class="col-sm-6">&nbsp;&nbsp;&nbsp;&nbsp;
                             <span class="btn btn-default btn-file" style="font-size:20px;background-color:#3A8AF1;color:white;">
-                                Add Photos <input type="file">
+                                Add Photos <input type="file" id="batch_photo" tabindex=18 name="batch_photo" value="@if(isset($batchDetails)){{$batchDetails->batch_photo}}@endif">
                             </span>&nbsp;&nbsp;
                             <span style="position: absolute">
                                 <div>
@@ -518,9 +460,9 @@
             </div>
             <div class="row">
                 <div class="form-group">
-                    <br/><label for="textarea1" class="col-sm-3 control-label label1">Description&nbsp;<span style="color:red">*</span></label>
+                    <br/><label for="batch_accomplishment" class="col-sm-3 control-label label1">What will participants achieve through this class?<span style="color:red">*</span></label>
                     <div class="col-sm-8">
-                        <textarea class="jqte-test"name="textarea1"  id="textarea1"></textarea>
+                        <textarea name="batch_accomplishment" id="batch_accomplishment" tabindex=21 class="jqte-test" >@if(isset($batchDetails)){{$batchDetails->batch_accomplishment}}@else{{Input::old('batch_accomplishment')}}@endif</textarea>
                     </div>
                 </div>
             </div><br/><br/><br/>
@@ -533,16 +475,13 @@
                     <label for="diflevel" class="col-sm-3 control-label label1">Difficulty Level&nbsp;<span style="color:red">*</span></label>
                     <div class="col-sm-8">
                         <div class="radio" name="diflevel" id="diflevel">
-                            <label><input type="radio" name="optradio" checked >Not Specified</label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" name="optradio">Beginner</label>
-                        </div>
-                        <div class="radio ">
-                            <label><input type="radio" name="optradio" >Intermediate</label>
-                        </div>
-                        <div class="radio ">
-                            <label><input type="radio" name="optradio" >Advanced</label>
+                            <?php $i=0; ?>
+                            @foreach($difficulty_level as $data)
+                            <label>
+                                <input name="batch_difficulty_level" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$i)?'checked':''}}@else{{"Input::old('batch_difficulty_level')"}}@endif type="radio" >{{$data}}
+                                <?php $i++; ?>
+                            </label><br/>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -552,13 +491,13 @@
                     <label for="agegroup" class="col-sm-3 control-label label1">Target Age Group&nbsp;<span style="color:red">*</span></label>
                     <div class="col-sm-8">
                         <div class="radio" name="agegroup" id="agegroup">
-                            <label><input type="radio" name="optradio1" checked >All</label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" name="optradio1">Kids</label>
-                        </div>
-                        <div class="radio ">
-                            <label><input type="radio" name="optradio1" >Adults</label>
+                            <?php $i=0; ?>
+                            @foreach($age_group as $data)
+                            <label>
+                                <input name="batch_age_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$i)?'checked':''}}@else{{"Input::old('batch_age_group')"}}@endif type="radio" >{{$data}}
+                                <?php $i++; ?>
+                            </label><br/>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -568,13 +507,13 @@
                     <label for="gengroup" class="col-sm-3 control-label label1">Target Gender Group&nbsp;<span style="color:red">*</span></label>
                     <div class="col-sm-8">
                         <div class="radio" name="gengroup" id="gengroup">
-                            <label><input type="radio" name="optradio2" checked >All</label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" name="optradio2">Male</label>
-                        </div>
-                        <div class="radio ">
-                            <label><input type="radio" name="optradio2" >Female</label>
+                            <?php $i=0; ?>
+                            @foreach($gender_group as $data)
+                            <label>
+                                <input name="batch_gender_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$i)?'checked':''}}@else{{"Input::old('batch_gender_group')"}}@endif type="radio" >{{$data}}
+                                <?php $i++; ?>
+                            </label><br/>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -587,14 +526,21 @@
             </div><br/><br/>
             <div class="row">
                 <div class="form-group">
-                    <label for="venue" class="col-sm-3 control-label label1">Venue&nbsp;<span style="color:red">*</span></label>
+                    <label for="batch_venue_id" class="col-sm-3 control-label label1">Venue&nbsp;<span style="color:red">*</span></label>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div class="col-sm-6">
-                        <select  class="form-control input1" name="venue"  id="venue">
-                            <option >Option1</option>
-                            <option>Option2</option>
-                            <option>Option3</option>
-                            <option>Option4</option>
+                        <select class="form-control" tabindex=7 id="batch_venue_id" name="batch_venue_id" required>
+                            @foreach ($all_venues as $data)
+                            <option value={{$data->id}}
+                                @if(isset($batchDetails))
+                                {{($batchDetails->batch_venue_id==$data->id)?
+                                'selected="selected"':''}}
+                                @else{{"Input::old('batch_venue_id')"}}
+                                @endif>
+                                {{$data->venue}}
+                            </option>
+
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-sm-3">
@@ -604,25 +550,74 @@
             </div>
             <div class="row">
                 <div class="form-group col-sm-5">
-                    <label class="col-sm-8 label1" for="sessions">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Of Sessions&nbsp;&nbsp;
+                    <label class="col-sm-8 label1" for="batch_no_of_classes_in_week">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Of Sessions&nbsp;&nbsp;
                         <span style="color: red">*</span>
                     </label>
                 <div class="col-sm-4">
-                    <input type="text" id="sessions" name="sessions" class="form-control input1">
+                    <select class="form-control" tabindex=7 id="batch_no_of_classes_in_week" name="batch_no_of_classes_in_week" required>
+                        @foreach ($all_categories as $data)
+                        <option value={{$data->id}}
+                            @if(isset($batchDetails))
+                            {{($batchDetails->batch_category_id==$data->id)?
+                            'selected="selected"':''}}
+                            @else{{"Input::old('batch_category_id')"}}
+                            @endif>
+                            {{$data->category}}
+                        </option>
+
+                        @endforeach
+                    </select>
                 </div>
                 </div>
                 <div class="col-sm-2 input1">Price</div>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" id="session1">
+                    <input type="text" class="form-control" tabindex=8 id="batch_price" name="batch_price" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
                 </div>
 
 
             </div>
             <div class="row">
                 <div class="form-group">
-                    <br/><label for="textarea2" class="col-sm-3 control-label label1">Days/Comments&nbsp;<span style="color:red">*</span></label>
+                    <label  class="col-sm-3 control-label label1">Batch have Classes on&nbsp;<span style="color:red">*</span></label>
+
+                    <div class="col-sm-6">
+                        @foreach($weekdays as $data)
+                        <input type="checkbox" name="batch_class[]" value="{{$data}}"
+                        @if(isset($batchDetails))
+                        <?php if(in_array($data, $batchDetails->batch_class)): echo 'checked="checked"'; endif; ?>
+                        @else{{Input::old('batch_class[]')}}
+                        @endif/>
+                        <?php
+					echo ucfirst($data);
+				?><br/>
+                        @endforeach
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="batch_trial" class="col-sm-3 control-label label1">Trial Availbale&nbsp;<span style="color:red">*</span></label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-sm-6">
+                        <div class="radio">
+                            <?php $i=0; ?>
+                            @foreach($trial as $data)
+                            <label>
+                                <input name="batch_trial" id="batch_trial" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$i)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" >{{$data}}
+                                <?php $i++; ?>
+                            </label><br/>
+                            @endforeach
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <br/><label for="batch_comment" class="col-sm-3 control-label label1">Tell us more about your batch(Prerequisite required, anything else you wish to share)<span style="color:red">*</span></label>
                     <div class="col-sm-8">
-                        <textarea name="textarea2" class="jqte-test" id="textarea2"></textarea>
+                        <textarea  class="jqte-test" name="batch_comment" id="batch_comment" tabindex=21  >@if(isset($batchDetails)){{$batchDetails->batch_comment}}@else{{Input::old('batch_comment')}}@endif</textarea>
                         <script>
                             $('.jqte-test').jqte();
 
@@ -638,9 +633,8 @@
                 </div>
             </div>
             <div  style="width: 53%">
-                <button type="submit" style="float: right;font-size: 30px;color: white;background-color: cornflowerblue;width: 30%" class="form-control btn  btn-default">
-                    Submit
-                </button>
+                <button type="submit" tabindex=22 class="btn btn-primary"> @if(isset($batchDetails)) <i class="fa fa-save"></i> &nbsp; Save @else <i class="fa fa-plus"></i> &nbsp; Create @endif</button>
+                <button type="reset" tabindex=23 class="btn btn-primary"><i class="fa fa-power-off"></i> &nbsp; Reset</button>
             </div>
         </form>
 </div>

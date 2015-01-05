@@ -108,6 +108,7 @@ class BatchesController extends \BaseController {
 	{
 		//check count how many time page is viewed.
 		$batchDetails= $this->batch->getBatch($id);
+		//dd($batchDetails);
 		return View::make('Batches.show',compact('batchDetails'));
 	}
 

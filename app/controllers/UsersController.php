@@ -98,6 +98,38 @@ class UsersController extends \BaseController {
 			return Redirect::to('/users')->with('failure',Lang::get('user.user_already_failure'));
 	}
 
+
+	public function enable($id)
+	{
+		$user=Institute::withTrashed()->find($id);
+		if($user){
+			$userDisabled=Institute::onlyTrashed()->find($id);
+			if($userDisabled){
+				$userDisabled->restore();	
+				return Redirect::to('/users')->with('success',Lang::get('user.user_enabled'));
+			}
+			else{
+					return Redirect::to('/users')->with('failure',Lang::get('user.user_enable_failed'));
+			}
+		}
+		else
+			return Redirect::to('/users')->with('failure',Lang::get('user.user_not_exist'));
+	}
+
+	public function disable($id)
+	{
+		$user=Institute::find($id);	
+		//dd($user);
+		if($user){
+			$user->delete();
+			return Redirect::to('/users')->with('success',Lang::get('user.user_disabled'));
+		}
+		else{
+			return Redirect::to('/users')->with('failure',Lang::get('user.user_disable_failed'));
+		}
+	}
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /users/{id}
@@ -107,13 +139,15 @@ class UsersController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$deleted=User::destroy($id);
-		if($deleted)
+		$user=Institute::withTrashed()->find($id);
+		if($user){
+			$user->forceDelete();
 			return Redirect::to('/users')->with('success',Lang::get('user.user_deleted'));
-		else
-			return Redirect::to('/users')->with('failure',Lang::get('user.user_delete_failure'));
+		}
+		else{
+			return Redirect::to('/users')->with('failure',Lang::get('user.user_delete_failed'));
+		}
 	}
-
 
 
 	public function getLogin()

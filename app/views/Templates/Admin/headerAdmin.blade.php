@@ -88,7 +88,7 @@
               <a href="/institutes"><i class="fa fa-fw fa-dashboard"></i> Institutes</a>
            </li>
            <li class="active">
-              <a href="/admins"><i class="fa fa-fw fa-dashboard"></i> Main Admin</a>
+              <a href="/users"><i class="fa fa-fw fa-dashboard"></i> User</a>
            </li>
            <li class="active">
               <a href="/categories"><i class="fa fa-fw fa-dashboard"></i> Categories</a>
@@ -104,6 +104,9 @@
               <a href="/subscriptions"><i class="fa fa-fw fa-dashboard"></i> Subscriptions</a>
            </li><li class="active">
               <a href="/feedbacks"><i class="fa fa-fw fa-dashboard"></i> Feedbacks</a>
+           </li>
+            <li class="active">
+              <a href="/admins"><i class="fa fa-fw fa-dashboard"></i> Main Admin</a>
            </li>
         </ul>
      </div>

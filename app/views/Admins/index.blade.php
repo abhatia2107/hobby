@@ -28,7 +28,7 @@
 	    <thead>
 	       <tr>
 	          <th>S.No.</th>
-	          <th>Name (Job Title)</th>
+	          <th>Name</th>
 	          <th>User ID</th>
 	          <th>Action</th>
 	       </tr>

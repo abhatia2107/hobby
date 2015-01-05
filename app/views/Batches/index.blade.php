@@ -15,7 +15,7 @@
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>                
+                 <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">WebSiteName</a>
         </div>
@@ -27,7 +27,7 @@
             <li><a href="./myvenues.html">My Venues</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            
+
             <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           </ul>
         </div>
@@ -44,7 +44,7 @@ margin-left: 70px;" >
                       Display All Classes <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                      <li><a href="myclasses2.html">Display All Classes</a></li>
+                      <li><a href="#">Display All Classes</a></li>
                       <li><a href="#">Display Past Classes</a></li>
                       <li><a href="#">Display Submitted Classes</a></li>
                       <li><a href="#">Display Rejected Classes</a></li>
@@ -52,7 +52,7 @@ margin-left: 70px;" >
                   </ul>
               </div>
           </div>
-            
+
           <div class="col-md-3" style="height:51px" >
             <button style="color: white;font-size: 16px;border-radius: 4px;
             background-color: #2274ef;" class="btn btn-default "><a style="color: white;font-size: 16px;text-decoration:none"href="listclass.html">List a Class </a></button>
@@ -101,7 +101,7 @@ line-height: 0px;">
         </div>
       </div>
 </div>
-        
+
 
         <div class="clearfix visible-lg">
 

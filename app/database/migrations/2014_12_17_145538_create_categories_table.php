@@ -17,7 +17,8 @@ class CreateCategoriesTable extends Migration {
 			$table->string("category",50);
 			$table->integer("category_no_of_subcategories");
 			$table->softDeletes();
-			$table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});
 	}
 

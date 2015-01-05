@@ -4,7 +4,7 @@
     <meta name="description" content="Hobby Website">
     <meta name="author" content="Abhishek">
     <meta property="og:image" content="/assets/images/home/banner.jpg">
-    <title>Hobby</title>
+    <title>Hobby Admin Portal</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css"></link>
     <link rel="stylesheet" type="text/css" href=""/assets/css/bootstrap-theme.min.css"">
     <link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css">
@@ -19,4 +19,15 @@
     <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
     <script  src="/assets/js/bootstrapValidator-0.5.3.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>   
+    <script>
+        $(document).ready(function(){
+          $('.login-trigger').click(function(){
+            $(this).next('#login-content').slideToggle();
+            $(this).toggleClass('active');          
+            
+            if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+              else $(this).find('span').html('&#x25BC;')
+            })
+        });
+    </script>
 @show

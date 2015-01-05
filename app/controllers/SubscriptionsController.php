@@ -11,7 +11,8 @@ class SubscriptionsController extends \BaseController {
 	public function index()
 	{
 		$subscriptions=Subscription::all();
-		return View::make('Subscriptions.index',compact('subscriptions'));
+		$tableName="$_SERVER[REQUEST_URI]";
+		return View::make('Subscriptions.index',compact('subscriptions','tableName'));
 	}
 
 	/**
@@ -42,6 +43,37 @@ class SubscriptionsController extends \BaseController {
 		$subscription=Subscription::create($credentianls);
 	}
 
+	public function enable($id)
+	{
+		$subscription=Subscription::withTrashed()->find($id);
+		if($subscription){
+			$subscriptionDisabled=Subscription::onlyTrashed()->find($id);
+			if($subscriptionDisabled){
+				$subscriptionDisabled->restore();	
+				return Redirect::to('/subscriptions')->with('success',Lang::get('subscription.subscription_enabled'));
+			}
+			else{
+					return Redirect::to('/subscriptions')->with('failure',Lang::get('subscription.subscription_enable_failed'));
+			}
+		}
+		else
+			return Redirect::to('/subscriptions')->with('failure',Lang::get('subscription.subscription_not_exist'));
+	}
+
+	public function disable($id)
+	{
+		$subscription=Subscription::find($id);	
+		//dd($subscription);
+		if($subscription){
+			$subscription->delete();
+			return Redirect::to('/subscriptions')->with('success',Lang::get('subscription.subscription_disabled'));
+		}
+		else{
+			return Redirect::to('/subscriptions')->with('failure',Lang::get('subscription.subscription_disable_failed'));
+		}
+	}
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /subscriptions/{id}
@@ -51,11 +83,14 @@ class SubscriptionsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$deleted=Subscription::destroy($id);
-		if($deleted)
+		$subscription=Subscription::withTrashed()->find($id);
+		if($subscription){
+			$subscription->forceDelete();
 			return Redirect::to('/subscriptions')->with('success',Lang::get('subscription.subscription_deleted'));
-		else
+		}
+		else{
 			return Redirect::to('/subscriptions')->with('failure',Lang::get('subscription.subscription_delete_failed'));
+		}
 	}
 
 }

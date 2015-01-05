@@ -16,20 +16,8 @@ class Subscription extends \Eloquent {
     protected $dates = ['deleted_at'];
 
 	public static $rules = [		
-		'subscription_email'=>'email',
+		'subscription_email'=>'required|email',
 	];
-
-	public function unsubscribe()
-    {
-        return DB::table('subscriptions')
-            ->softDeletes();
- 	}
- 	
- 	public function reSubscribe()
- 	{
-        return DB::table('subscriptions')
-        	->restore();
- 	}
  	
  	public function getUnsubscribe()
  	{

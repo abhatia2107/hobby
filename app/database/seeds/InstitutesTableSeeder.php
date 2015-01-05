@@ -21,6 +21,7 @@ class InstitutesTableSeeder extends Seeder {
                      'institute_description'=>$faker->text(),
                      'institute_rating' =>$faker->randomFloat($nbMaxDecimals = NULL, $min = 0, $max = 5),
                      'institute_approved'=>$faker->boolean(),
+                     'institute_photo'=>"0",
                      ));
               }
        }

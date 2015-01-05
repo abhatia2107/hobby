@@ -21,7 +21,8 @@ class CreateFeedbacksTable extends Migration {
 			$table->text('feedback_description');
 			$table->boolean('feedback_read');
 			$table->softDeletes();
-			$table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});
 	}
 

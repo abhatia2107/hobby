@@ -24,8 +24,10 @@ class CreateInstitutesTable extends Migration {
 			$table->longText('institute_description');
 			$table->decimal('institute_rating', 2, 1);
 			$table->boolean('institute_approved');
+			$table->boolean('institute_photo');
 			$table->softDeletes();
-			$table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 			//Institute photo would be store as institute_id.jpg so no need for separate column.
 		});
 	}

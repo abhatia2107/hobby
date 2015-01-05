@@ -36,7 +36,7 @@
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <a href="Batch-registrations.html">
+	                    <a href="/batches/history">
 	                        <div class="panel-footer">
 	                            <span class="pull-left">View Details</span>
 	                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -58,7 +58,7 @@
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <a href="Institute-Registrations.html">
+	                    <a href="/institutes/history">
 	                        <div class="panel-footer">
 	                            <span class="pull-left">View Details</span>
 	                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

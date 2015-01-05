@@ -11,8 +11,8 @@ class CategoriesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$categories=Category::all();
-		return View::make('Categories.index',compact('categories'));
+		$tableName="$_SERVER[REQUEST_URI]";
+		return View::make('Categories.index',compact('tableName'));
 	}
 
 	/**
@@ -98,6 +98,38 @@ class CategoriesController extends \BaseController {
 			return Redirect::to('/categories')->with('failure',Lang::get('category.category_already_failed'));
 	}
 
+	// TO DO: Subcategory table should also be affected by this.
+	public function enable($id)
+	{
+		$category=Category::withTrashed()->find($id);
+		if($category){
+			$categoryDisabled=Category::onlyTrashed()->find($id);
+			if($categoryDisabled){
+				$categoryDisabled->restore();	
+				return Redirect::to('/categories')->with('success',Lang::get('category.category_enabled'));
+			}
+			else{
+					return Redirect::to('/categories')->with('failure',Lang::get('category.category_enable_failed'));
+			}
+		}
+		else
+			return Redirect::to('/categories')->with('failure',Lang::get('category.category_user_not_exist'));
+	}
+
+	public function disable($id)
+	{
+		$category=Category::find($id);	
+		//dd($category);
+		if($category){
+			$category->delete();
+			return Redirect::to('/categories')->with('success',Lang::get('category.category_disabled'));
+		}
+		else{
+			return Redirect::to('/categories')->with('failure',Lang::get('category.category_disable_failed'));
+		}
+	}
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /categories/{id}
@@ -107,12 +139,31 @@ class CategoriesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$deleted1=Category::destroy($id);
+		$category=Category::withTrashed()->find($id);
+		if($category){
+			$category->forceDelete();
+			return Redirect::to('/categories')->with('success',Lang::get('category.category_deleted'));
+		}
+		else{
+			return Redirect::to('/categories')->with('failure',Lang::get('category.category_delete_failed'));
+		}
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 * DELETE /categories/{id}
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+/*	public function destroy($id)
+	{
+		$deleted=Category::destroy($id);
 		$this->subcategory->deleteCategory($id);
 		if($deleted)
 			return Redirect::to('/categories')->with('success',Lang::get('category.category_deleted'));
 		else
 			return Redirect::to('/categories')->with('failure',Lang::get('category.category_delete_failed'));
 	}
-
+*/
 }

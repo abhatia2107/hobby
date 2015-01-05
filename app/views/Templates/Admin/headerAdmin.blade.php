@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="Dashboard.html">Admin Portal</a>
+        <a class="navbar-brand" href="/admins/home">Admin Portal</a>
      </div>
      <!-- Top Menu Items -->
      <ul class="nav-ul nav navbar-right top-nav">
@@ -79,21 +79,31 @@
      <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
            <li class="active">
-              <a href="Dashboard.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+              <a href="/admins/home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
            </li>
            <li class="active">
-              <a href="Approval.html"><i class="fa fa-fw fa-dashboard"></i> Approval</a>
+              <a href="/batches/approve"><i class="fa fa-fw fa-dashboard"></i> Approval</a>
            </li>
            <li class="active">
-              <a href="Institutes.html"><i class="fa fa-fw fa-dashboard"></i> Institutes</a>
+              <a href="/institutes"><i class="fa fa-fw fa-dashboard"></i> Institutes</a>
            </li>
            <li class="active">
-              <a href="Main-Admin.html"><i class="fa fa-fw fa-dashboard"></i> Main Admin</a>
+              <a href="/admins"><i class="fa fa-fw fa-dashboard"></i> Main Admin</a>
            </li>
            <li class="active">
-              <a href="Categories.html"><i class="fa fa-fw fa-dashboard"></i> Categories</a>
+              <a href="/categories"><i class="fa fa-fw fa-dashboard"></i> Categories</a>
            </li><li class="active">
-              <a href="Sub-Categories.html"><i class="fa fa-fw fa-dashboard"></i> Sub-Categories</a>
+              <a href="/subcategories"><i class="fa fa-fw fa-dashboard"></i> Sub-Categories</a>
+           </li>
+           <li class="active">
+              <a href="/locations"><i class="fa fa-fw fa-dashboard"></i> Locations</a>
+           </li><li class="active">
+              <a href="/localities"><i class="fa fa-fw fa-dashboard"></i> Localities</a>
+           </li>
+           <li class="active">
+              <a href="/subscriptions"><i class="fa fa-fw fa-dashboard"></i> Subscriptions</a>
+           </li><li class="active">
+              <a href="/feedbacks"><i class="fa fa-fw fa-dashboard"></i> Feedbacks</a>
            </li>
         </ul>
      </div>

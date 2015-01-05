@@ -99,14 +99,14 @@ require app_path().'/filters.php';
 | The View::share code
 |--------------------------------------------------------------------------
 |
-| Next we will load the all_categories and all_locations variable for the application. 
+| Next we will load the categories and locations variable for the application. 
 | This gives us access to categories list and locations list which are required for all Views.
 |
 */
 
 
-$all_categories= Category::all();
-$all_locations=Location::all();
-        
-View::share('all_categories', $all_categories);
-View::share('all_locations',$all_locations);
+$categories = Category::all();
+$locations = Location::all();
+$mainAdminId = 1;
+View::share('categories', $categories);
+View::share('locations',$locations);

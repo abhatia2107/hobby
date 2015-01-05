@@ -14,8 +14,8 @@
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                        @if(isset($all_categories))
-                            @foreach($all_categories as $data)
+                        @if(isset($categories))
+                            @foreach($categories as $data)
                                 <li ><a href="/filter/categories/{{$data->id}}/locations/@if(isset($location_id)){{$location_id}}@endif">{{$data->category}}</a></li>
                             @endforeach
                         @endif

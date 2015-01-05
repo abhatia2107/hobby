@@ -27,7 +27,8 @@ class CreateVenuesTable extends Migration {
 			$table->string('venue_latitude',50)->nullable();
 			$table->string('venue_longitude',50)->nullable();
 			$table->softDeletes();
-			$table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});
 	}
 		

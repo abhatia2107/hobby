@@ -11,7 +11,8 @@ class FeedbacksController extends \BaseController {
 	public function index()
 	{
 		$feedbacks=Feedback::all();
-		return View::make('Feedbacks.index',compact('feedbacks'));
+		$tableName="$_SERVER[REQUEST_URI]";
+		return View::make('Feedbacks.index',compact('feedbacks','tableName'));
 	}
 
 	/**

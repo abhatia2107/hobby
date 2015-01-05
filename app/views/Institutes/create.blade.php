@@ -48,7 +48,7 @@
         <div class="large">
             <span>
                 <select class="form-control" tabindex=7 name="institute_location_id" required>
-                    @foreach ($all_locations as $data)
+                    @foreach ($locations as $data)
                         <option value={{$data->id}} 
                             @if(isset($batchDetails)) 
                                 {{($batchDetails->institute_location_id==$data->id)?

@@ -12,7 +12,15 @@ return array(
 		
 		"admin_deleted"=>"Your admin have been deleted successfully",
 		
-		"admin_delete_failed" => "Sorry, We are unable to delete the admin",
+		"admin_delete_failed" => "Sorry, No admin exist with this User ID.",
+		
+		"admin_enabled"=>"Your admin have been enabled successfully",
+		
+		"admin_enable_failed" => "User is already enabled as the admin",
+		
+		"admin_disabled"=>"Your admin have been disabled successfully",
+		
+		"admin_disable_failed" => "You already have disabled the admin",
 		
 		"admin_already_failed"=>"You already have same details of admin in your list",
 	

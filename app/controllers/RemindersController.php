@@ -53,8 +53,6 @@ class RemindersController extends Controller {
 	public function postReset()
 	{
 		//TO DO: Don't take email as input from user. Put it automatically.
-		$all_categories= Category::all();
-        $all_locations=Location::all();
         $credentials = Input::only(
 			'email', 'password', 'password_confirmation', 'token'
 		);

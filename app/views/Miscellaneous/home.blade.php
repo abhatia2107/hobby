@@ -19,8 +19,8 @@
                   <div class="col-md-3 col-sm-3">
                      <select name="categories" id="search_categories" class="postform">
                         <option value="0">{{$homeLang['home_category']}}</option>
-                        @if(isset($all_categories))
-                           @foreach($all_categories as $data)
+                        @if(isset($categories))
+                           @foreach($categories as $data)
                               <option value="{{$data->id}}">{{$data->category}}</option>
                            @endforeach
                         @endif
@@ -29,8 +29,8 @@
                   <div class="col-md-3 col-sm-3">
                      <select name="locations" id="search_locations" class="postform">
                         <option value="0">{{$homeLang['home_location']}}</option>
-                        @if(isset($all_locations))
-                           @foreach($all_locations as $data)
+                        @if(isset($locations))
+                           @foreach($locations as $data)
                               <option value="{{$data->id}}" >{{$data->location}}</option>
                            @endforeach
                         @endif
@@ -50,8 +50,8 @@
          <h2 class="home-widget-description">{{$homeLang['home_category_subtitle']}}</h2>
       </hgroup>
       <div class="row">
-         @if(isset($all_categories))
-            @foreach($all_categories as $data)
+         @if(isset($categories))
+            @foreach($categories as $data)
                <section id="image-grid-term-new-york-city" class="col-xs-12 col-sm-6 col-md-4 image-grid-item">
                   <div class="home_category_image col-xs-12 col-sm-6 col-md- image-grid-cover entry-cover has-image">
                      <a href="/categories/{{$data->id}}" class="cover-wrapper">{{$data->category}}</a>

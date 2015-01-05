@@ -5,7 +5,7 @@
   		<div class="form-group required">
 			<label>Category<sup>*</sup> </label>
 			<select class="form-control" tabindex=7 name="subcategory_category_id" required>
-			@foreach ($all_categories as $data)
+			@foreach ($categories as $data)
 				<option value={{$data->id}} 
 					@if(isset($subcategoryDetails)) 
 						{{($subcategoryDetails->subcategory_category_id==$data->id)?

@@ -11,8 +11,8 @@ class AdminsController extends \BaseController {
 	public function index()
 	{
 		$admins=$this->admin->getAllAdmins();
-		//dd($admins);
-		return View::make('Admins.index',compact('admins'));
+		$tableName="$_SERVER[REQUEST_URI]";
+		return View::make('Admins.index',compact('admins','tableName'));
 	}
 
 	/**
@@ -108,6 +108,37 @@ class AdminsController extends \BaseController {
 			return Redirect::to('/admins')->with('failure',Lang::get('admin.admin_already_failed'));
 	}
 
+	public function enable($id)
+	{
+		$admin=Admin::withTrashed()->find($id);
+		if($admin){
+			$adminDisabled=Admin::onlyTrashed()->find($id);
+			if($adminDisabled){
+				$adminDisabled->restore();	
+				return Redirect::to('/admins')->with('success',Lang::get('admin.admin_enabled'));
+			}
+			else{
+					return Redirect::to('/admins')->with('failure',Lang::get('admin.admin_enable_failed'));
+			}
+		}
+		else
+			return Redirect::to('/admins')->with('failure',Lang::get('admin.admin_user_not_exist'));
+	}
+
+	public function disable($id)
+	{
+		$admin=Admin::find($id);	
+		//dd($admin);
+		if($admin){
+			$admin->delete();
+			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_disabled'));
+		}
+		else{
+			return Redirect::to('/admins')->with('failure',Lang::get('admin.admin_disable_failed'));
+		}
+	}
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /admins/{id}
@@ -117,11 +148,14 @@ class AdminsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$deleted=Admin::destroy($id);
-		if($deleted)
+		$admin=Admin::withTrashed()->find($id);
+		if($admin){
+			$admin->forceDelete();
 			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_deleted'));
-		else
+		}
+		else{
 			return Redirect::to('/admins')->with('failure',Lang::get('admin.admin_delete_failed'));
+		}
 	}
 
 }

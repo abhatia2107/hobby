@@ -56,7 +56,7 @@
             <span>
                 <select name="venue_location_id" required="required">
                     <!-- <option value="$venueDetails->venue_location_id"selected>@if(isset($venueDetails)){{$venueDetails['venue_location']}}@else{{Input::old('venue_location')}}@endif</option> -->
-                    @foreach ($all_locations as $data)
+                    @foreach ($locations as $data)
                         <option value="{{$data->location_id}}" selected="@if(isset($venueDetails)){{"selected"}}@else{{"unselected"}}@endif">
                             {{$data->location}}
                         </option>
@@ -74,7 +74,7 @@
             <span>
                 <select name="venue_locality_id" required="required">
                     <!-- <option value="$venueDetails->venue_locality_id"selected>@if(isset($venueDetails)){{$venueDetails['venue_locality']}}@else{{Input::old('venue_locality')}}@endif</option> -->
-                    @foreach ($all_localities as $data)
+                    @foreach ($localities as $data)
                         <option value="{{$data->locality_id}}" selected="@if(isset($venueDetails)){{"selected"}}@else{{"unselected"}}@endif">
                             {{$data->locality}}
                         </option>

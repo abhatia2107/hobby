@@ -12,7 +12,7 @@ return array(
 
 	"home_category"=>"Any Category",
 	
-	"home_search_button_text"=>"Search Listings",
+	"home_search_button_text"=>"Search",
 
 	"home_category_title"=>"Explore Your Community",
 

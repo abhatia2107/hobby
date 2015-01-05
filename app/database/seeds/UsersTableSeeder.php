@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder {
                      'user_confirmation_code' =>$faker->randomNumber(1000000,10000000),
                      'user_confirmed' =>$faker->boolean,
                      'user_subscription_token' =>$faker->boolean,
+                     'user_photo'=>"0"
                      ));
               }
        }

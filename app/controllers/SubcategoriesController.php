@@ -11,7 +11,8 @@ class SubcategoriesController extends \BaseController {
 	public function index()
 	{
 		$subcategories=$this->subcategory->getAllSubcategories();
-		return View::make('Subcategories.index',compact('subcategories'));
+		$tableName="$_SERVER[REQUEST_URI]";
+		return View::make('Subcategories.index',compact('subcategories','tableName'));
 	}
 
 	/**
@@ -95,6 +96,57 @@ class SubcategoriesController extends \BaseController {
 			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_already_failed'));
 	}
 
+	// TO DO: Category table should also be affected by this.
+	public function enable($id)
+	{
+		$category=Category::withTrashed()->find($id);
+		if($category){
+			$categoryDisabled=Category::onlyTrashed()->find($id);
+			if($categoryDisabled){
+				$categoryDisabled->restore();	
+				return Redirect::to('/categories')->with('success',Lang::get('category.category_enabled'));
+			}
+			else{
+					return Redirect::to('/categories')->with('failure',Lang::get('category.category_enable_failed'));
+			}
+		}
+		else
+			return Redirect::to('/categories')->with('failure',Lang::get('category.category_user_not_exist'));
+	}
+
+	public function disable($id)
+	{
+		$category=Category::find($id);	
+		//dd($category);
+		if($category){
+			$category->delete();
+			return Redirect::to('/categories')->with('success',Lang::get('category.category_disabled'));
+		}
+		else{
+			return Redirect::to('/categories')->with('failure',Lang::get('category.category_disable_failed'));
+		}
+	}
+
+
+	/**
+	 * Remove the specified resource from storage.
+	 * DELETE /categories/{id}
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		$category=Category::withTrashed()->find($id);
+		if($category){
+			$category->forceDelete();
+			return Redirect::to('/categories')->with('success',Lang::get('category.category_deleted'));
+		}
+		else{
+			return Redirect::to('/categories')->with('failure',Lang::get('category.category_delete_failed'));
+		}
+	}
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /localities/{id}
@@ -102,7 +154,7 @@ class SubcategoriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	/*public function destroy($id)
 	{
 		$category=$this->subcategory->getSubcategory($id);
 		$this->category->decrement_no($category[0]->subcategory_category_id);
@@ -111,5 +163,5 @@ class SubcategoriesController extends \BaseController {
 			return Redirect::to('/subcategories')->with('success',Lang::get('subcategory.subcategory_deleted'));
 		else
 			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_delete_failed'));
-	}
+	}*/
 }

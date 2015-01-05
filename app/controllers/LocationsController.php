@@ -10,7 +10,8 @@ class LocationsController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('Locations.index');
+		$tableName="$_SERVER[REQUEST_URI]";
+		return View::make('Locations.index',compact('tableName'));
 	}
 
 	/**
@@ -96,6 +97,38 @@ class LocationsController extends \BaseController {
 			return Redirect::to('/locations')->with('failure',Lang::get('location.location_already_failed'));
 	}
 
+	// TO DO: Sublocation table should also be affected by this.
+	public function enable($id)
+	{
+		$location=Location::withTrashed()->find($id);
+		if($location){
+			$locationDisabled=Location::onlyTrashed()->find($id);
+			if($locationDisabled){
+				$locationDisabled->restore();	
+				return Redirect::to('/locations')->with('success',Lang::get('location.location_enabled'));
+			}
+			else{
+					return Redirect::to('/locations')->with('failure',Lang::get('location.location_enable_failed'));
+			}
+		}
+		else
+			return Redirect::to('/locations')->with('failure',Lang::get('location.location_user_not_exist'));
+	}
+
+	public function disable($id)
+	{
+		$location=Location::find($id);	
+		//dd($location);
+		if($location){
+			$location->delete();
+			return Redirect::to('/locations')->with('success',Lang::get('location.location_disabled'));
+		}
+		else{
+			return Redirect::to('/locations')->with('failure',Lang::get('location.location_disable_failed'));
+		}
+	}
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /locations/{id}
@@ -105,12 +138,31 @@ class LocationsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+		$location=Location::withTrashed()->find($id);
+		if($location){
+			$location->forceDelete();
+			return Redirect::to('/locations')->with('success',Lang::get('location.location_deleted'));
+		}
+		else{
+			return Redirect::to('/locations')->with('failure',Lang::get('location.location_delete_failed'));
+		}
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 * DELETE /locations/{id}
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	/*public function destroy($id)
+	{
 		$deleted=Location::destroy($id);
 		$this->locality->deleteLocation($id);
 		if($deleted)
 			return Redirect::to('/locations')->with('success',Lang::get('location.location_deleted'));
 		else
 			return Redirect::to('/locations')->with('failure',Lang::get('location.location_delete_failed'));
-	}
+	}*/
 
 }

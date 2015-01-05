@@ -57,7 +57,7 @@ class Batch extends \Eloquent {
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
-                        ->select('*','batches.id as batch_id');
+                        ->select('*','batches.id as id');
         if(!$category_id&&!$location_id)
             return $allBatches
                 ->skip($chunk)
@@ -101,7 +101,7 @@ class Batch extends \Eloquent {
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
-                        ->select('*','batches.id as batch_id');
+                        ->select('*','batches.id as id');
         if(!$subcategories[0]&&!$localities[0]){
             return $allBatches
                 ->orderBy('institute_rating')
@@ -146,7 +146,7 @@ class Batch extends \Eloquent {
             ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
             ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
             ->Join('locations', 'locations.id', '=', 'localities.locality_location_id')
-            ->select('*','batches.id as batch_id')
+            ->select('*','batches.id as id')
             ->get();
     }
 
@@ -161,7 +161,7 @@ class Batch extends \Eloquent {
             ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
             ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
             ->Join('locations', 'locations.id', '=', 'localities.locality_location_id')
-            ->select('*','batches.id as batch_id')
+            ->select('*','batches.id as id')
             ->get();
     }
        

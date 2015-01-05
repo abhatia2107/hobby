@@ -17,7 +17,9 @@ class CreateCategoryInstituteTable extends Migration {
 			$table->increments('id');
 			$table->integer('category_id')->foreign('category_id')->references('id')->on('categories');
 			$table->integer('institute_id')->foreign('institute_id')->references('id')->on('institutes');
-			$table->timestamps();
+			$table->softDeletes();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});
 	}
 

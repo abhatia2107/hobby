@@ -23,9 +23,8 @@ class VenuesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$all_locations=$this->location->all();
-		$all_localities=$this->locality->all();
-		return View::make('Venues.create',compact('all_locations','all_localities'));
+		$localities=$this->locality->all();
+		return View::make('Venues.create',compact('localities'));
 	}
 
 	/**
@@ -64,8 +63,8 @@ class VenuesController extends \BaseController {
 	{
 		$venueDetails=Venue::find($id);
 		$location_id=$venueDetails['venue_location_id'];
-		$all_locations=$this->location->all();
-		$venue_location=$all_locations->find($location_id);
+		$locations=$this->location->all();
+		$venue_location=$locations->find($location_id);
 		$venueDetails['venue_location']=$venue_location['location'];
 		return View::make('Venues.show',compact('venueDetails'));
 	}
@@ -85,13 +84,13 @@ class VenuesController extends \BaseController {
 			return Redirect::to('/venues')->with('failure',Lang::get('venue.venue_not_authorize'));
 		$location_id=$venueDetails['venue_location_id'];
 		$locality_id=$venueDetails['venue_locality_id'];
-		$all_locations=$this->location->all();
-		$all_localities=$this->locality->all();
-		$venue_location=$all_locations->find($location_id);
-		$venue_locality=$all_localities->find($locality_id);
+		$locations=$this->location->all();
+		$localities=$this->locality->all();
+		$venue_location=$locations->find($location_id);
+		$venue_locality=$localities->find($locality_id);
 		$venueDetails['venue_location']=$venue_location;
 		$venueDetails['venue_locality']=$venue_locality;
-		return View::make('Venues.create',compact('venueDetails','all_locations','all_localities'));
+		return View::make('Venues.create',compact('venueDetails','locations','localities'));
 	}
 
 	/**

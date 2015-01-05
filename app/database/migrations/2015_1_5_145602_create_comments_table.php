@@ -19,7 +19,8 @@ class CreateCommentsTable extends Migration {
 			$table->integer('comment_institute_id')->foreign('comment_institute_id')->references('id')->on('institutes');
 			$table->integer('comment_rating');
 			$table->softDeletes();
-			$table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});
 	}
 

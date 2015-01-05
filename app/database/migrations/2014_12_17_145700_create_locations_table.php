@@ -17,7 +17,8 @@ class CreateLocationsTable extends Migration {
 			$table->string("location",255);
 			$table->integer("location_no_of_localities");
 			$table->softDeletes();
-			$table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});
 	}
 

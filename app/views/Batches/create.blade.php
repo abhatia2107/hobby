@@ -20,7 +20,7 @@
 	<div class="form-group required">
 		<label>Batch Category <sup>*</sup> </label>
 		<select class="form-control" tabindex=7 name="batch_category_id" required>
-		@foreach ($all_categories as $data)
+		@foreach ($categories as $data)
 			<option value={{$data->id}} 
 				@if(isset($batchDetails)) 
 					{{($batchDetails->batch_category_id==$data->id)?

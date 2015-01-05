@@ -5,7 +5,7 @@
   		<div class="form-group required">
 			<label>Locations<sup>*</sup> </label>
 			<select class="form-control" tabindex=7 name="locality_location_id" required>
-			@foreach ($all_locations as $data)
+			@foreach ($locations as $data)
 				<option value={{$data->id}} 
 					@if(isset($localityDetails)) 
 						{{($localityDetails->locality_location_id==$data->id)?

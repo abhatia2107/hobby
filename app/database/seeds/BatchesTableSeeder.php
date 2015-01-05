@@ -35,6 +35,7 @@ class BatchesTableSeeder extends Seeder {
                      'batch_trial' =>$faker->randomNumber(0,4),
                      'batch_comment'=>$faker->lexify(),
                      'batch_tagline'=>$faker->lexify(),
+                     'batch_photo'=>"0",
                      ));
               }
        }

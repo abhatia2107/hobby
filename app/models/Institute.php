@@ -17,11 +17,20 @@ class Institute extends \Eloquent {
         'institute_user_id'=>'required|numeric',
         'institute_location_id'=>'required|numeric',
         'institute_url'=>'required',
-        //TO DO: Check institute_website is active_url
+        //TO DO: Check institute_website is active_url don't have any error.
+        //It might have some bug.
         'institute_website'=>'active_url',
         'institute_description'=>'required',
         'institute_approved'=>'boolean',
     ];
+
+    public function getAllInstitutes()
+    {
+        return( DB::table('institutes')
+            ->leftJoin('locations','institutes.institute_location_id','=','locations.id')
+            ->select('*','institutes.id as id','institutes.deleted_at as deleted_at','institutes.created_at as created_at','institutes.updated_at as updated_at')
+            ->get());
+    }
 
     public function updateInstitute($credentials,$id)
     {

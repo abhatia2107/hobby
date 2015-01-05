@@ -26,4 +26,12 @@ class HomeController extends BaseController {
 		return View::make('Miscellaneous.home',compact('homeLang','recentBatches'));
 	}
 
+	public function showAdminHome()
+	{
+		//dd($recentBatches);
+		$homeAdminLang =Lang::get('homeAdmin');
+		//dd($homeLang);
+		return View::make('Miscellaneous.Admin.home',compact('homeAdminLang'));
+	}
+
 }

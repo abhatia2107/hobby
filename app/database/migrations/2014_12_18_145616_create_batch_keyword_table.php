@@ -16,7 +16,9 @@ class CreateBatchKeywordTable extends Migration {
 			$table->increments("id");
 			$table->integer('batch_id')->foreign('batch_id')->references('batch_id')->on('batches');
 			$table->integer('keyword_id')->foreign('keyword_id')->references('keyword_id')->on('keywords');
-			$table->timestamps();
+			$table->softDeletes();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});
 	}
 

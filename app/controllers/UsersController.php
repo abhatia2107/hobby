@@ -13,6 +13,13 @@ class UsersController extends \BaseController {
 	|
 	*/
 	
+	//Not going use now. But can use it in future, in admin panel.
+	public function index()
+	{
+		$users=User::all();
+		$tableName="$_SERVER[REQUEST_URI]";
+		return View::make('Users.index',compact('users','tableName'));
+	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -111,13 +118,11 @@ class UsersController extends \BaseController {
 
 	public function getLogin()
 	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
         if(Auth::check())
 		{
  	 		return Redirect::to("/");
  		}
-		return View::make('Users.login',compact('all_categories','all_locations'));
+		return View::make('Users.login');
 	}
 
 	/**
@@ -219,6 +224,7 @@ class UsersController extends \BaseController {
 			    $newUserData['password'] = Hash::make($password);
 			}
 			$newUserData['user_confirmation_code']=$confirmationCode;
+			$newUserData['user_subscription_token']=true;
 			$email=$newUserData['email'];
 			$name=$newUserData['user_first_name'];
 			$this->user->create($newUserData);
@@ -295,8 +301,6 @@ class UsersController extends \BaseController {
 	 */
 	public function postChangePassword()
 	{
-		$all_categories= Category::all();
-        $all_locations=Location::all();
         $id=Auth::id();
 		$validator = Validator::make(Input::all(),User::$rulesChangePassword);
 		if($validator->fails())

@@ -44,8 +44,8 @@
 			
 		<div class=" col-sm-2 col-md-2 ">
 			<select  class="header_location_dropdown">
-				@if(isset($all_locations))
-					@foreach($all_locations as $data)
+				@if(isset($locations))
+					@foreach($locations as $data)
 						<option ><a href="location/{{$data->id}}">{{$data->location}}</a></option>
 					@endforeach
 				@endif

@@ -11,7 +11,8 @@ class LocalitiesController extends \BaseController {
 	public function index()
 	{
 		$localities=$this->locality->getAllLocalities();
-		return View::make('Localities.index',compact('localities'));
+		$tableName="$_SERVER[REQUEST_URI]";
+		return View::make('Localities.index',compact('localities','tableName'));
 	}
 
 	/**
@@ -95,6 +96,38 @@ class LocalitiesController extends \BaseController {
 			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_already_failed'));
 	}
 
+		// TO DO: Sublocality table should also be affected by this.
+	public function enable($id)
+	{
+		$locality=Locality::withTrashed()->find($id);
+		if($locality){
+			$localityDisabled=Locality::onlyTrashed()->find($id);
+			if($localityDisabled){
+				$localityDisabled->restore();	
+				return Redirect::to('/localities')->with('success',Lang::get('locality.locality_enabled'));
+			}
+			else{
+					return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_enable_failed'));
+			}
+		}
+		else
+			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_user_not_exist'));
+	}
+
+	public function disable($id)
+	{
+		$locality=Locality::find($id);	
+		//dd($locality);
+		if($locality){
+			$locality->delete();
+			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_disabled'));
+		}
+		else{
+			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_disable_failed'));
+		}
+	}
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /localities/{id}
@@ -104,6 +137,25 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+		$locality=Locality::withTrashed()->find($id);
+		if($locality){
+			$locality->forceDelete();
+			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_deleted'));
+		}
+		else{
+			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_delete_failed'));
+		}
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 * DELETE /localities/{id}
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	/*public function destroy($id)
+	{
 		$location=$this->locality->getLocality($id);
 		$this->location->decrement_no($location[0]->locality_location_id);
 		$deleted=Locality::destroy($id);
@@ -111,5 +163,5 @@ class LocalitiesController extends \BaseController {
 			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_deleted'));
 		else
 			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_delete_failed'));
-	}
+	}*/
 }

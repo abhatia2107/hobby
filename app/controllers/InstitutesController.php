@@ -10,8 +10,10 @@ class InstitutesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$institutes=Institute::all();
-		return View::make('Institutes.index',compact('institutes'));
+		$institutes=$this->institute->getAllInstitutes();
+		$tableName="$_SERVER[REQUEST_URI]";
+		//dd($institutes);
+		return View::make('Institutes.index',compact('institutes','tableName'));
 	}
 
 	/**
@@ -62,10 +64,14 @@ class InstitutesController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		//Allow admin to view data and put this check in filter file.
 		$instituteDetails=Institute::find($id);
+		$user_id=Auth::id();
+		if($instituteDetails['institute_user_id']!=$user_id)
+			return Redirect::back()->with('failure',Lang::get('institute.institute_access_failed'));
 		$location_id=$instituteDetails['institute_location_id'];
-		$all_locations=$this->location->all();
-		$institute_location=$all_locations->find($location_id);
+		$locations=$this->location->all();
+		$institute_location=$locations->find($location_id);
 		$instituteDetails['institute_location']=$institute_location['location'];
 		return View::make('Institutes.show',compact('instituteDetails'));
 	}
@@ -84,8 +90,8 @@ class InstitutesController extends \BaseController {
 		if($instituteDetails['institute_user_id']!=$user_id)
 			return Redirect::to('/')->with('failure',Lang::get('institute.institute_access_failed'));
 		$location_id=$instituteDetails['institute_location_id'];
-		$all_locations=$this->location->all();
-		$institute_location=$all_locations->find($location_id);
+		$locations=$this->location->all();
+		$institute_location=$locations->find($location_id);
 		$instituteDetails['institute_location']=$institute_location['location'];
 		return View::make('Institutes.create',compact('instituteDetails'));
 	}
@@ -116,6 +122,38 @@ class InstitutesController extends \BaseController {
 			return Redirect::to('/institutes')->with('failed',Lang::get('institute.institute_already_failed'));
 	}
 
+
+	public function enable($id)
+	{
+		$institute=Institute::withTrashed()->find($id);
+		if($institute){
+			$instituteDisabled=Institute::onlyTrashed()->find($id);
+			if($instituteDisabled){
+				$instituteDisabled->restore();	
+				return Redirect::to('/institutes')->with('success',Lang::get('institute.institute_enabled'));
+			}
+			else{
+					return Redirect::to('/institutes')->with('failure',Lang::get('institute.institute_enable_failed'));
+			}
+		}
+		else
+			return Redirect::to('/institutes')->with('failure',Lang::get('institute.institute_not_exist'));
+	}
+
+	public function disable($id)
+	{
+		$institute=Institute::find($id);	
+		//dd($institute);
+		if($institute){
+			$institute->delete();
+			return Redirect::to('/institutes')->with('success',Lang::get('institute.institute_disabled'));
+		}
+		else{
+			return Redirect::to('/institutes')->with('failure',Lang::get('institute.institute_disable_failed'));
+		}
+	}
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /institutes/{id}
@@ -125,13 +163,14 @@ class InstitutesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$url =URL::action('UsersController@getLogin');
-		dd($url);
-		$deleted=Institute::destroy($id);
-		if($deleted)
+		$institute=Institute::withTrashed()->find($id);
+		if($institute){
+			$institute->forceDelete();
 			return Redirect::to('/institutes')->with('success',Lang::get('institute.institute_deleted'));
-		else
-			return Redirect::to('/institutes')->with('failed',Lang::get('institute.institute_delete_failed'));
+		}
+		else{
+			return Redirect::to('/institutes')->with('failure',Lang::get('institute.institute_delete_failed'));
+		}
 	}
 
 }

@@ -16,7 +16,9 @@ class CreateBatchPhotoTable extends Migration {
 			$table->increments('id');
 			$table->integer('batch_id')->foreign('batch_id')->references('id')->on('Batches');
 			$table->integer('photo_id');
-			$table->timestamps();
+			$table->softDeletes();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});
 	}
 

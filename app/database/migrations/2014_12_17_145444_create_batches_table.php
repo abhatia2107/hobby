@@ -41,8 +41,10 @@ class CreateBatchesTable extends Migration {
 			$table->integer('batch_trial');
 			$table->string('batch_comment')->nullable();
 			$table->string('batch_tagline',40)->nullable();
+			$table->boolean('batch_photo');
 			$table->softDeletes();
-			$table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});		
 	}
 

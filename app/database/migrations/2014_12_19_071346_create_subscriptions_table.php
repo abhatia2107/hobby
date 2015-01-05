@@ -15,10 +15,10 @@ class CreateSubscriptionsTable extends Migration {
 		Schema::create('subscriptions', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('subscription_user_id')->foreign('subscription_user_id')->references('id')->on('users');
 			$table->string('subscription_email');
 			$table->softDeletes();
-			$table->timestamps();
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at');
 		});
 	}
 

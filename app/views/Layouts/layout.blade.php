@@ -17,7 +17,7 @@
 					@include('Templates.header')
 				</header>
 			@endif
-			@if(isset($all_categories))
+			@if(isset($categories))
 				@include('Templates.navbar')
 			@endif
 			<!--sign-In pop up modal-->

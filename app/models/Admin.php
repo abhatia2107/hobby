@@ -14,9 +14,13 @@ class Admin extends \Eloquent {
 		'updated_at',
 	];
 	
+	public static $rulesInput = [
+		'email'=>'required|email',
+		'user_contact_no'=>'required|regex:/[0-9]{10}/',
+	];
+
 	public static $rules = [
-		'admin_user_id'=>'required|numeric|unique:admins',
-		'email'=>'required|email',	  
+		'admin_user_id'=>'unique:admins,admin_user_id',
 	];
 
 	public function updateAdmin($credentials,$id)
@@ -27,6 +31,9 @@ class Admin extends \Eloquent {
 
 	public function getAllAdmins()
 	{
-		return DB::table('admins')->Join('users', 'admins.admin_user_id', '=', 'users.id')->get(['admins.id','admins.admin_user_id','users.user_first_name','users.user_last_name']);
+		return DB::table('admins')
+		->Join('users', 'admins.admin_user_id', '=', 'users.id')
+		->select('*','admins.id as id','admins.deleted_at as deleted_at','admins.created_at as created_at','admins.updated_at as updated_at')
+		->get();
 	}
 }

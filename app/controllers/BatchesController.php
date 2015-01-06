@@ -142,6 +142,7 @@ class BatchesController extends \BaseController {
 				array_push($batch_class,$data);
 		}
 		$batchDetails['batch_class']=$batch_class;
+		// dd($batchDetails);
 		return View::make('Batches.create',compact('batchDetails','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
 	}
 

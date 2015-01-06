@@ -10,10 +10,10 @@
 
 		<div>
 			Thank you for registering at <a href="{{URL::to('/')}}">{{URL::to('/')}}</a><br/>
-			Now you can add new events and can go to your favorite events.<br/>
-			Moreover you can control your events.<br/>
+			Now you can add new batches and can go to your favorite batches.<br/>
+			Moreover you can control your batches.<br/>
 			<br/>
-			Don't forget to update your personal details and adding your company.<br/>
+			Don't forget to update your personal details and add your institute.<br/>
 			Please click on this <a href="{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}">link</a>
 
 			Problems clinking the link, copy and paste this URL to the browser.

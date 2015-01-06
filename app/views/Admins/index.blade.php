@@ -17,7 +17,7 @@
 						</fieldset>
 						<fieldset id="actions">
 		                    <button type="submit" class="btn btn-success">Add Admin</button>
-		                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+		                    <button type="button" id="cancel1" class="btn btn-warning " >Cancel</button>
 						</fieldset>
 					</form>
 				</div>                     
@@ -29,7 +29,8 @@
 	       <tr>
 	          <th>S.No.</th>
 	          <th>Name</th>
-	          <th>User ID</th>
+	          <th>Email</th>
+	          <th>Mobile No.</th>
 	          <th>Action</th>
 	       </tr>
 	    </thead>
@@ -42,7 +43,8 @@
 	        <tr>
 	            <td>{{++$i}}</td>
 	            <td>{{$data->user_first_name.' '.$data->user_last_name}}</td>
-	            <td>{{$data->admin_user_id}}</td>
+	            <td>{{$data->email}}</td>
+	            <td>{{$data->user_contact_no}}</td>
 				<td>
 					@if($view)
 					<a href="{{$tableName}}/{{$data->id}}">
@@ -61,7 +63,7 @@
 					@endif
 					</td>
 					<td>
-					@if(isset($data->deleted_at))
+					@if($data->deleted_at)
 						<a href="{{$tableName}}/enable/{{$data->id}}">
 							<button type="button" class="btn btn-info " input type="submit" value="Button">
 								<span class="glyphicon glyphicon-open"></span> 

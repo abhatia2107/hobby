@@ -12,7 +12,7 @@ return array(
 		
 		"admin_deleted"=>"Your admin have been deleted successfully",
 		
-		"admin_delete_failed" => "Sorry, No admin exist with this User ID.",
+		"admin_delete_failed" => "Sorry, No admin exist with this Credentials.",
 		
 		"admin_enabled"=>"Your admin have been enabled successfully",
 		
@@ -27,4 +27,6 @@ return array(
 		"admin_user_not_exist"=>"No user exist with this User ID.",
 
 		"admin_email_mismatch"=>"Email doesn't match our records for the user id.",
+	
+		"admin_mail_subject"=>"You're promoted as admin of Hobby."
 	);

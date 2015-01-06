@@ -36,13 +36,21 @@ class CommentsController extends \BaseController {
 		$credentials=Input::all();
 		unset($credentials['csrf_token']);
 		$validator = Validator::make($credentials, Comment::$rules);
-		if($validator->fails())
+		if(request::Ajax())
 		{
-			return Redirect::back()->withInput()->withErrors($validator);
+			if($validator->fails())
+			{
+				return Redirect::back()->withInput()->withErrors($validator);
+			}
+			$comment=Comment::create($credentials);
+			return Redirect::back()->with('success',Lang::get('comment.comment_updated'));
 		}
+<<<<<<< HEAD
 		$credentials['comment_user_id']=Auth::id();
 		$comment=Comment::create($credentials);
 		return Redirect::back()->with('success',Lang::get('comment.comment_created'));
+=======
+>>>>>>> e5d90ee70c18c31b84ce5f9d4befbc62d212c710
 	}
 
 	/**

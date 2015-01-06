@@ -103,6 +103,7 @@ class LocalitiesController extends \BaseController {
 		if($locality){
 			$localityDisabled=Locality::onlyTrashed()->find($id);
 			if($localityDisabled){
+				$this->location->increment_no($locality['locality_location_id']);
 				$localityDisabled->restore();	
 				return Redirect::to('/localities')->with('success',Lang::get('locality.locality_enabled'));
 			}
@@ -120,6 +121,7 @@ class LocalitiesController extends \BaseController {
 		//dd($locality);
 		if($locality){
 			$locality->delete();
+			$this->location->decrement_no($locality['locality_location_id']);
 			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_disabled'));
 		}
 		else{
@@ -139,6 +141,7 @@ class LocalitiesController extends \BaseController {
 	{
 		$locality=Locality::withTrashed()->find($id);
 		if($locality){
+			$this->location->decrement_no($locality['locality_location_id']);
 			$locality->forceDelete();
 			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_deleted'));
 		}

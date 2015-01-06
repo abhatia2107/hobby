@@ -106,6 +106,7 @@ class CategoriesController extends \BaseController {
 		if($category){
 			$categoryDisabled=Category::onlyTrashed()->find($id);
 			if($categoryDisabled){
+				$this->subcategory->enableSubcategoryForCategory($id);
 				$categoryDisabled->restore();	
 				return Redirect::to('/categories')->with('success',Lang::get('category.category_enabled'));
 			}
@@ -120,11 +121,10 @@ class CategoriesController extends \BaseController {
 	public function disable($id)
 	{
 		$category=Category::find($id);
-
 		// $category=$this->category->find($id);
 		if($category){
-			$category->delete();
 			$this->subcategory->disableSubcategoryForCategory($id);
+			$category->delete();
 			return Redirect::to('/categories')->with('success',Lang::get('category.category_disabled'));
 		}
 		else{
@@ -144,6 +144,7 @@ class CategoriesController extends \BaseController {
 	{
 		$category=Category::withTrashed()->find($id);
 		if($category){
+			$this->subcategory->deleteSubcategoryForCategory($id);
 			$category->forceDelete();
 			return Redirect::to('/categories')->with('success',Lang::get('category.category_deleted'));
 		}

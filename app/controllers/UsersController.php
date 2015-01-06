@@ -275,7 +275,7 @@ class UsersController extends \BaseController {
 			];
 			/*Confirmation mail is to be send to the newly registerd user*/
 			$subject="Welcome to Hobby";
-			Mail::later(60,'Emails.welcome', $data, function($message) use ($email,$name,$subject)
+			Mail::later(15,'Emails.welcome', $data, function($message) use ($email,$name,$subject)
 			{
     			$message->to($email,$name)->subject($subject);
 			});

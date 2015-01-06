@@ -38,7 +38,27 @@ class Locality extends \Eloquent {
 
 	public function getAllLocalities()
 	{
-		return DB::table('localities')->Join('locations', 'localities.locality_location_id', '=', 'locations.id')->get(['localities.id','localities.locality','localities.locality_location_id','locations.location']);
+		return 
+		DB::table('localities')->
+		// localities::
+	//	withTrashed()
+		leftJoin('locations', 'localities.locality_location_id', '=', 'locations.id','localities.id as id','localities.deleted_at as deleted_at','localities.created_at as created_at','localities.updated_at as updated_at')
+		->select('*','localities.id as id','localities.deleted_at as deleted_at','localities.created_at as created_at','localities.updated_at as updated_at')
+        ->get();
 	}
 
+	public function disableLocalityForLocation($locality_location_id)
+    {
+		$locality=Locality::where('locality_location_id', '=', $locality_location_id)->delete();
+    }
+    
+    public function enableLocalityForLocation($locality_location_id)
+    {
+		$locality=Locality::withTrashed()->where('locality_location_id', '=', $locality_location_id)->restore();
+    }
+
+    public function deleteLocalityForLocation($locality_location_id)
+    {
+		Locality::withTrashed()->where('locality_location_id', '=', $locality_location_id)->forceDelete();
+    }
 }

@@ -97,7 +97,8 @@ class KeywordsController extends \BaseController {
 				return $batchesForCategoryLocation="Empty";
 		}
 		else{
-			dd($batchesForCategoryLocation);
+			// dd($batchesForCategoryLocation);
+			return Response::make('Errors.pageNotFound', 404);
 		}
 	}
 

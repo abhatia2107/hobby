@@ -80,6 +80,7 @@ nav li #login-content {
 /*--------------------*/
 
 #inputs input {
+  width: 200px !important;
   background: #f1f1f1;
   padding: 6px 5px;
   margin: 0 0 5px 0;

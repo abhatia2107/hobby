@@ -11,12 +11,13 @@
 					</button>
 				</a>
 				<div id="login-content">
-					<form action="/categories/store" enctype="multipart/form-data" method="post">						<fieldset id="inputs">
+					<form action="/categories/store" enctype="multipart/form-data" method="post">						
+						<fieldset id="inputs">
 						<input id="username" type="text" name="category" placeholder="Category Name" required>  
 						</fieldset>
 						<fieldset id="actions">
-							<input type="submit" id="submit" value="Submit">
-							<input type="button" id="submit" value="Cancel">
+							<button type="submit" id="submit" class="btn btn-success" >SUBMIT</button>
+							<button type="button" id="cancel1" class="btn btn-warning">CANCEL</button>
 						</fieldset>
 					</form>
 				</div>

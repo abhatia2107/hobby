@@ -1,5 +1,5 @@
 @section("navbar")
-    <div class="clearfix">
+    <div class="row">
         <div class=" col-sm-12 col-md-12 ">
             <nav class="navbar navbar-inverse" >
                 <div class="container-fluid">

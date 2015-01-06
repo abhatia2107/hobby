@@ -11,6 +11,7 @@
  */
 body {
   padding-top: 60px;
+  overflow-x: hidden;
 }
 .header_img
 {

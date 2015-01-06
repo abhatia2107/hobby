@@ -21,6 +21,9 @@
     <script src="/assets/js/bootstrap.min.js"></script>   
     <script>
         $(document).ready(function(){
+            $('#cancel1').click(function(){
+                $('#login-content').toggle();
+            });
           $('.login-trigger').click(function(){
             $(this).next('#login-content').slideToggle();
             $(this).toggleClass('active');          

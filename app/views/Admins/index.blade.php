@@ -17,7 +17,7 @@
 						</fieldset>
 						<fieldset id="actions">
 		                    <button type="submit" class="btn btn-success">Add Admin</button>
-		                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+		                    <button type="button" id="cancel1" class="btn btn-warning " >Cancel</button>
 						</fieldset>
 					</form>
 				</div>                     

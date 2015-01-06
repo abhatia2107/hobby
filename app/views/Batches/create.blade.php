@@ -4,7 +4,29 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.7.2.custom.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery.richtextarea.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-te-1.4.0.css">
+    <script type="text/javascript" src="/assets/js/jquery-te-1.4.0.min.js"></script>
     <style>
+	.ul-without-bullets
+	{
+		
+	list-style-type: none;
+	
+	}
+	#gengroup
+	{
+	list-style-type: none;
+	}
+	#agegroup
+	{
+		
+
+    list-style-type: none;
+
+	}
+	.row_padding
+	{
+		padding-top:30px;
+	}
     .img_requirement_span
     {
         position: absolute;
@@ -33,6 +55,7 @@
         {
             font-size: 15px;
             font-weight: 100;
+			padding-left:100px;
         }
         .btn_save_div
         {
@@ -77,38 +100,43 @@
             background: url('/assets/images/batch/create/schedule.PNG');
             height:41px 
          }
+			.radio_data
+			{
+				position:relative;
+				top:-7px;
+			}
     </style>
 @stop
 
 @section('content')
 <div class="container-fluid">
     <form role="form" class="form-horizontal" id="classInfo">
-        <br/><br/>
-        <div class="row">
+        
+        <div class="row row_padding">
             <p  class="create_class">Create your Class
             </p>
-            <div class="col-lg-12 img-responsive" class="class_desc">
+            <div class="col-lg-12 img-responsive class_desc">
             </div>
-        </div><br/>
-        <div class="row">
+        </div>
+        <div class="row row_padding">
             <div class="form-group">
-                <label for="InputBatch" class="col-sm-3 control-label label1">Title&nbsp;<span class="important_required">*</span></label>
+                <label for="InputBatch" class="col-sm-3 control-label label1">Title<span class="important_required">*</span></label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control input1" id="InputBatch" name="batch" value="@if(isset($batchDetails)){{$batchDetails->batch}}@else{{Input::old('batch')}}@endif" required>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row row_padding">
             <div class="form-group">
-                <label for="batch_tagline" class="col-sm-3 control-label label1">Tagline&nbsp;<span class="important_required">*</span></label>
+                <label for="batch_tagline" class="col-sm-3 control-label label1">Tagline<span class="important_required">*</span></label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" tabindex=2 title="Not more than 40 characters" maxlength="40" id="batch_tagline"  name="batch_tagline" value="@if(isset($batchDetails)){{$batchDetails->batch_tagline}}@else{{Input::old('batch_tagline')}}@endif" required>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row row_padding">
             <div class="form-group">
-                <label for="batch_category_id" class="col-sm-3 control-label label1">Category&nbsp;<span class="important_required">*</span></label>
+                <label for="batch_category_id" class="col-sm-3 control-label label1">Category<span class="important_required">*</span></label>
                 <div class="col-sm-2">
                     <select class="form-control input1" tabindex=7 id="batch_category_id" name="batch_category_id"required>
                         @foreach ($categories as $data)
@@ -124,7 +152,7 @@
                         @endforeach
                     </select>
                 </div>
-                <label name="batch_subcategory_id" class="col-sm-3 control-label label1">Sub Category&nbsp;<span class="important_required">*</span></label>
+                <label name="batch_subcategory_id" class="col-sm-3 control-label label1">Sub Category<span class="important_required">*</span></label>
                 <div class="col-sm-2">
                     <select class="form-control input1" tabindex=7 name="batch_subcategory_id" id="batch_subcategory_id" required>
                         @foreach ($all_subcategories as $data)
@@ -145,90 +173,99 @@
         <div class="row ">
             <div class="form-group">
                     <label class="col-sm-3 control-label label1">Photo Gallery</label>
-                    <div class="col-sm-6">&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-sm-6">
                         <span class="btn btn-default btn-file" >
                             Add Photos <input type="file" id="batch_photo" tabindex=18 name="batch_photo" value="@if(isset($batchDetails)){{$batchDetails->batch_photo}}@endif">
-                        </span>&nbsp;&nbsp;
+                        </span>
                         <span class="img_requirement_span">
-                            <div>
-                        <span class="img_requirement">1.Based on requirements</span><br/>
-                        <span class="img_requirement">2.Based on requirements</span>
-                </div></span>
+                            <ul class="ul-without-bullets">
+							<li>
+                        <span class="img_requirement">1.Based on requirements</span></li>
+                        <li><span class="img_requirement">2.Based on requirements</span></li>
+                </ul></span>
 
             </div>
             </div>
 
         </div>
-        <div class="row">
+        <div class="row row_padding">
             <div class="form-group">
-                <br/><label for="batch_accomplishment" class="col-sm-3 control-label label1">What will participants achieve through this class?<span class="important_required">*</span></label>
+                <label for="batch_accomplishment" class="col-sm-3 control-label label1">What will participants achieve through this class?<span class="important_required">*</span></label>
                 <div class="col-sm-8">
                     <textarea name="batch_accomplishment" id="batch_accomplishment" tabindex=21 class="jqte-test" >@if(isset($batchDetails)){{$batchDetails->batch_accomplishment}}@else{{Input::old('batch_accomplishment')}}@endif</textarea>
                 </div>
             </div>
-        </div><br/><br/><br/>
-        <div class="row">
-            <div class="col-lg-12 img-responsive" class="targetaud" >
+        </div>
+        <div class="row row_padding">
+            <div class="col-lg-12 col-md-10 col-sm-10 targetaud" >
             </div>
-        </div><br/><br/>
-        <div class="row">
+        </div>
+        <div class="row row_padding">
             <div class="form-group">
-                <label for="diflevel" class="col-sm-3 control-label label1">Difficulty Level&nbsp;<span class="important_required">*</span></label>
+                <label for="diflevel" class="col-sm-3 control-label label1">Difficulty Level<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <div class="radio" name="diflevel" id="diflevel">
+                    <ul class="radio ul-without-bullets" name="diflevel" id="diflevel">
                         <?php $i=0; ?>
                         @foreach($difficulty_level as $data)
+						<li>
                         <label>
-                            <input name="batch_difficulty_level" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$i)?'checked':''}}@else{{"Input::old('batch_difficulty_level')"}}@endif type="radio" >{{$data}}
+                            <input name="batch_difficulty_level" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$i)?'checked':''}}@else{{"Input::old('batch_difficulty_level')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                             <?php $i++; ?>
-                        </label><br/>
+                        </label>
+						</li>
                         @endforeach
-                    </div>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row row_padding">
             <div class="form-group">
-                <label for="agegroup" class="col-sm-3 control-label label1">Target Age Group&nbsp;<span class="important_required">*</span></label>
+                <label for="agegroup" class="col-sm-3 control-label label1">Target Age Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <div class="radio" name="agegroup" id="agegroup">
-                        <?php $i=0; ?>
+                    <ul class="radio" name="agegroup" id="agegroup">
+                        
+						<?php $i=0; ?>
                         @foreach($age_group as $data)
-                        <label>
-                            <input name="batch_age_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$i)?'checked':''}}@else{{"Input::old('batch_age_group')"}}@endif type="radio" >{{$data}}
+						<li>
+                        <label >
+                            <input name="batch_age_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$i)?'checked':''}}@else{{"Input::old('batch_age_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                             <?php $i++; ?>
-                        </label><br/>
+                        </label>
+						</li>
                         @endforeach
-                    </div>
+						
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row row_padding">
             <div class="form-group">
-                <label for="gengroup" class="col-sm-3 control-label label1">Target Gender Group&nbsp;<span class="important_required">*</span></label>
+                <label for="gengroup" class="col-sm-3 control-label label1">Target Gender Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <div class="radio" name="gengroup" id="gengroup">
+                    <ul class="radio" name="gengroup" id="gengroup">
                         <?php $i=0; ?>
                         @foreach($gender_group as $data)
+						<li>
                         <label>
-                            <input name="batch_gender_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$i)?'checked':''}}@else{{"Input::old('batch_gender_group')"}}@endif type="radio" >{{$data}}
+                            <input name="batch_gender_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$i)?'checked':''}}@else{{"Input::old('batch_gender_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                             <?php $i++; ?>
-                        </label><br/>
+                        </label>
+						</li>
                         @endforeach
-                    </div>
+                    </ul>
                 </div>
             </div>
         </div>
-        <br/><br/><br/>
-        <div class="row">
+        
+        <div class="row row_padding">
 
-            <div class="col-lg-12 img-responsive" class="schedule">
+            <div class="col-lg-12 img-responsive schedule">
             </div>
-        </div><br/><br/>
-        <div class="row">
+        </div>
+        <div class="row row_padding">
             <div class="form-group">
-                <label for="batch_venue_id" class="col-sm-3 control-label label1">Venue&nbsp;<span class="important_required">*</span></label>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="batch_venue_id" class="col-sm-3 control-label label1">Venue<span class="important_required">*</span></label>
+                
                 <div class="col-sm-6">
                     <select class="form-control" tabindex=7 id="batch_venue_id" name="batch_venue_id" required>
                         @foreach ($all_venues as $data)
@@ -249,9 +286,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row row_padding">
             <div class="form-group col-sm-5">
-                <label class="col-sm-8 label1" for="batch_no_of_classes_in_week">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No Of Sessions&nbsp;&nbsp;
+                <label class="col-sm-8 label1" for="batch_no_of_classes_in_week">No Of Sessions
                     <span class="important_required">*</span>
                 </label>
             <div class="col-sm-4">
@@ -275,13 +312,16 @@
                 <input type="text" class="form-control" tabindex=8 id="batch_price" name="batch_price" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
             </div>
         </div>
-        <div class="row">
+        <div class="row row_padding">
             <div class="form-group">
-                <label  class="col-sm-3 control-label label1">Batch have Classes on&nbsp;
+                <label  class="col-sm-3 control-label label1">Batch have Classes on
                     <span class="important_required">*</span></label>
 
                 <div class="col-sm-6">
+				<ul class="ul-without-bullets">
+				
                     @foreach($weekdays as $data)
+					<li>
                         <input type="checkbox" name="batch_class[]" value="{{$data}}"
                         @if(isset($batchDetails))
                             <?php if(in_array($data, $batchDetails->batch_class)): echo 'checked="checked"'; endif; ?>
@@ -290,40 +330,44 @@
                         @endif/>
                         <?php
                             echo ucfirst($data);
-                        ?><br/>
+                        ?>
+						</li>
                     @endforeach
+					</ul>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row row_padding">
             <div class="form-group">
-                <label for="batch_trial" class="col-sm-3 control-label label1">Trial Availbale&nbsp;<span class="important_required">*</span></label>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="batch_trial" class="col-sm-3 control-label label1">Trial Availbale<span class="important_required">*</span></label>
+                
                 <div class="col-sm-6">
-                    <div class="radio">
+                    <ul class="radio ul-without-bullets">
                         <?php $i=0; ?>
                         @foreach($trial as $data)
+						<li>
                         <label>
-                            <input name="batch_trial" id="batch_trial" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$i)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" >{{$data}}
+                            <input name="batch_trial" id="batch_trial" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$i)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                             <?php $i++; ?>
-                        </label><br/>
+                        </label>
+						</li>
                         @endforeach
-                    </div>
+                    </ul>
                 </div>
 
             </div>
         </div>
-        <div class="row">
+        <div class="row row_padding">
             <div class="form-group">
-                <br/><label for="batch_comment" class="col-sm-3 control-label label1">Tell us more about your batch(Prerequisite required, anything else you wish to share)<span class="important_required">*</span></label>
+                <label for="batch_comment" class="col-sm-3 control-label label1">Tell us more about your batch(Prerequisite required, anything else you wish to share)<span class="important_required">*</span></label>
                 <div class="col-sm-8">
                     <textarea  class="jqte-test" name="batch_comment" id="batch_comment" tabindex=21  >@if(isset($batchDetails)){{$batchDetails->batch_comment}}@else{{Input::old('batch_comment')}}@endif</textarea>
                 </div>
             </div>
         </div>
         <div class="btn_save_div" >
-            <button type="submit" tabindex=22 class="btn btn-primary"> @if(isset($batchDetails)) <i class="fa fa-save"></i> &nbsp; Save @else <i class="fa fa-plus"></i> &nbsp; Create @endif</button>
-            <button type="reset" tabindex=23 class="btn btn-primary"><i class="fa fa-power-off"></i> &nbsp; Reset</button>
+            <button type="submit" tabindex=22 class="btn btn-primary"> @if(isset($batchDetails)) <i class="fa fa-save"></i>  Save @else <i class="fa fa-plus"></i>  Create @endif</button>
+            <button type="reset" tabindex=23 class="btn btn-primary"><i class="fa fa-power-off"></i> Reset</button>
         </div>
     </form>
 </div>
@@ -339,33 +383,33 @@
             </div>
             <form name="weekform" id="weekform" role="form">
                 <div class="modal-body">
-                    <div class="row">
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="weekrepeat" class="col-sm-3 control-label ">Repeats every&nbsp;<span class="important_required">*</span></label>
+                            <label for="weekrepeat" class="col-sm-3 control-label ">Repeats every<span class="important_required">*</span></label>
                             <div class="col-sm-8">
                                 <select  class="form-control " name="weekrepeat"  id="weekrepeat"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="endsafter" class="col-sm-3 control-label ">Ends After&nbsp;<span class="important_required">*</span></label>
+                            <label for="endsafter" class="col-sm-3 control-label ">Ends After<span class="important_required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="date"  class="form-control " name="endsafter"  id="endsafter">
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label  class="col-sm-3 control-label ">Batches Start On&nbsp;<span class="important_required">*</span></label>
+                            <label  class="col-sm-3 control-label ">Batches Start On<span class="important_required">*</span></label>
                             <div class="col-sm-8">
-                                Sun&nbsp;<input  type="checkbox" value="1"  id="sun">
-                                Mon&nbsp;<input  type="checkbox" value="2"  id="mon">
-                                Tue&nbsp;<input  type="checkbox" value="3"  id="tue"><br/>
-                                Wed&nbsp;<input  type="checkbox" value="4"  id="wed">
-                                Thu&nbsp;<input  type="checkbox" value="5"  id="thu">
-                                Fri&nbsp;<input  type="checkbox" value="6"  id="fri">
-                                Sat&nbsp;<input  type="checkbox" value="7"  id="sat">
+                                Sun<input  type="checkbox" value="1"  id="sun">
+                                Mon<input  type="checkbox" value="2"  id="mon">
+                                Tue<input  type="checkbox" value="3"  id="tue">
+                                Wed<input  type="checkbox" value="4"  id="wed">
+                                Thu<input  type="checkbox" value="5"  id="thu">
+                                Fri<input  type="checkbox" value="6"  id="fri">
+                                Sat<input  type="checkbox" value="7"  id="sat">
                             </div>
                         </div>
                     </div>
@@ -390,73 +434,73 @@
                     <h4 class="modal-title" id="myModalLabel1">Add a Venue</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="venuename" class="col-sm-3 control-label ">Venue Name&nbsp;
+                            <label for="venuename" class="col-sm-3 control-label ">Venue Name
                                 <span class="important_required">*</span>
                             </label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="venuename"  id="venuename">
                             </div>
                         </div>
-                    </div><br/>
-                    <div class="row">
+                    </div>
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="city1" class="col-sm-3 control-label ">City&nbsp;<span class="important_required">*</span></label>
+                            <label for="city1" class="col-sm-3 control-label ">City<span class="important_required">*</span></label>
                             <div class="col-sm-8">
                                 <select  class="form-control " name="city1"  id="city1"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
                             </div>
                         </div>
-                    </div><br/>
-                    <div class="row">
+                    </div>
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="locality" class="col-sm-3 control-label ">Locality&nbsp;<span class="important_required">*</span></label>
+                            <label for="locality" class="col-sm-3 control-label ">Locality<span class="important_required">*</span></label>
                             <div class="col-sm-8">
                                 <select  class="form-control " name="locality"  id="locality"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
                             </div>
                         </div>
-                    </div><br/>
-                    <div class="row">
+                    </div>
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="address" class="col-sm-3 control-label ">Address&nbsp;<span class="important_required">*</span></label>
+                            <label for="address" class="col-sm-3 control-label ">Address<span class="important_required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="address"  id="address">
                             </div>
                         </div>
-                    </div><br/>
-                    <div class="row">
+                    </div>
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="pincode" class="col-sm-3 control-label ">pincode&nbsp;<span class="important_required">*</span></label>
+                            <label for="pincode" class="col-sm-3 control-label ">pincode<span class="important_required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="pincode"  id="pincode">
                             </div>
                         </div>
-                    </div><br/>
-                    <div class="row">
+                    </div>
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="mobile" class="col-sm-3 control-label ">mobile&nbsp;<span class="important_required">*</span></label>
+                            <label for="mobile" class="col-sm-3 control-label ">mobile<span class="important_required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="tel"  class="form-control " name="mobile"  id="mobile">
                             </div>
                         </div>
-                    </div><br/>
-                    <div class="row">
+                    </div>
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="landline" class="col-sm-3 control-label ">Email&nbsp;<span class="important_required">*</span></label>
+                            <label for="landline" class="col-sm-3 control-label ">Email<span class="important_required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="landline"  id="landline">
                             </div>
                         </div>
-                    </div><br/>
-                    <div class="row">
+                    </div>
+                    <div class="row row_padding">
                         <div class="form-group">
-                            <label for="comments" class="col-sm-3 control-label ">Landmark&nbsp;</label>
+                            <label for="comments" class="col-sm-3 control-label ">Landmark</label>
                             <div class="col-sm-8">
                                 <textarea   class="form-control " name="comments"  id="comments"></textarea>
                             </div>
                         </div>
 
-                    </div><br/>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -10,8 +10,9 @@ class LocationsController extends \BaseController {
 	 */
 	public function index()
 	{
+		$locations=Location::withTrashed()->get();
 		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Locations.index',compact('tableName'));
+		return View::make('Locations.index',compact('locations','tableName'));
 	}
 
 	/**

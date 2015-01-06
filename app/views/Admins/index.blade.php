@@ -29,7 +29,8 @@
 	       <tr>
 	          <th>S.No.</th>
 	          <th>Name</th>
-	          <th>User ID</th>
+	          <th>Email</th>
+	          <th>Mobile No.</th>
 	          <th>Action</th>
 	       </tr>
 	    </thead>
@@ -42,7 +43,8 @@
 	        <tr>
 	            <td>{{++$i}}</td>
 	            <td>{{$data->user_first_name.' '.$data->user_last_name}}</td>
-	            <td>{{$data->admin_user_id}}</td>
+	            <td>{{$data->email}}</td>
+	            <td>{{$data->user_contact_no}}</td>
 				<td>
 					@if($view)
 					<a href="{{$tableName}}/{{$data->id}}">

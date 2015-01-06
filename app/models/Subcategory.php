@@ -43,9 +43,9 @@ class Subcategory extends \Eloquent {
 
     public function disableSubcategoryForCategory($subcategory_category_id)
     {
-    	/*dd(DB::table('subcategories')
+    	dd(DB::table('subcategories')
 	    	->where('subcategory_category_id','=',$subcategory_category_id)
-	    	->delete());*/
+	    	->delete());
     }
     
 }

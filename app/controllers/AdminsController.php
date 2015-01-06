@@ -37,25 +37,44 @@ class AdminsController extends \BaseController {
 	{
 		$credentials=Input::all();
 		//dd($credentials);
-		$validator = Validator::make($credentials, Admin::$rules);
+		$validator = Validator::make($credentials, Admin::$rulesInput);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('admin.admin_create_failed'));
 		}
-		$user_id=$this->user->userExist($credentials['admin_user_id']);
-		if(!$user_id)
+		$user=$this->user->getUserForEmailAndContactNo($credentials);
+		if(!$user)
 		{
-			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('admin.admin_user_not_exist'));
+			return Redirect::back()->withInput()->with('failure',Lang::get('admin.admin_user_not_exist'));
 		}
-		$email=$this->user->getEmailVerified($credentials);
-		if(!$email)
+		else
 		{
-			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('admin.admin_email_mismatch'));
+			$userAdmin['admin_user_id']=$user->id;
+			$validator = Validator::make($userAdmin, Admin::$rules);
+			if($validator->fails())
+			{
+				return Redirect::back()->withInput()->with('failure',Lang::get('admin.admin_already_failed'));
+			}
+			else
+			{
+				$created=Admin::create($userAdmin);
+			}	
 		}
-		$created=Admin::create($credentials);
 		//dd($created);
-		if($created)
+		if($created){
+			/*Confirmation mail is to be send to the newly registerd admin*/
+			$email=$user->email;
+			$name=$user->user_first_name.' '.$user->user_last_name;
+			$data=[
+				'name'=>$name,
+			];
+			$subject=Lang::get('admin.admin_mail_subject');
+			Mail::later(60,'Emails.admin', $data, function($message) use ($email,$name,$subject)
+			{
+    			$message->to($email,$name)->subject($subject);
+			});
 			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_created'));
+		}
 		else
 			return Redirect::back()->withInput()->with('failure',Lang::get('admin.admin_create_failed'));	
 	}

@@ -11,10 +11,9 @@ class CategoriesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$categories=$this->category->withTrashed();
-		dd($categories);
+		$categories=Category::withTrashed()->get();
 		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Categories.index',compact('tableName'));
+		return View::make('Categories.index',compact('categories','tableName'));
 	}
 
 	/**

@@ -85,20 +85,18 @@
 @extends('Layouts.layout')
 @section('content')
 <?php
-  foreach ($batchDetails as $data) 
-  {
-      $instituteName = $data->institute;
-      $instituteAddress = $data->venue_address;
-      $instituteContact = $data->venue_contact_no;
-      $batchName = $data->batch;
-      $category = $data->category;
-      $subcategory = $data->subcategory;
-      $ageGroup = $data->batch_age_group;
-      $gendeGroup = $data->batch_gender_group;
-      $difficultyLevel = $data->batch_difficulty_level;
-      $trailClass = $data->batch_trial;
-      $sessionsCount = $data->batch_no_of_classes_in_week;
-  }
+  $data = $batchDetails[0];
+  $instituteName = $data->institute;
+  $instituteAddress = $data->venue_address;
+  $instituteContact = $data->venue_contact_no;
+  $batchName = $data->batch;
+  $category = $data->category;
+  $subcategory = $data->subcategory;
+  $ageGroup = $data->batch_age_group;
+  $genderGroup = $data->batch_gender_group;
+  $difficultyLevel = $data->batch_difficulty_level;
+  $trailClass = $data->batch_trial;
+  $sessionsCount = $data->batch_no_of_classes_in_week;
 ?>
 <div id="page" class="hfeed site">
    <div id="content" class="site-content">
@@ -143,16 +141,16 @@
                       Sessions per Week: {{$sessionsCount}}
                     </div>
                     <div id='batch-openclass' class="batch-deatails"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-                      Trail Class:
+                      Trail Class: 
                     </div>
                     <div id='batch-gender' class="batch-deatails"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-                      Gender:
+                      Gender:{{' '.$gender_group[$genderGroup]}}
                     </div>
                     <div id='batch-age-group' class="batch-deatails"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-                      Age Group:
+                      Age Group: {{' '.$age_group[$ageGroup]}}
                     </div>
                     <div id='batch-difficulty' class="batch-deatails"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-                      Difficulty Level:
+                      Difficulty Level: {{' '.$difficulty_level[$difficultyLevel]}}
                     </div>
                   </aside>
                   <aside id="listify_widget_panel_listing_content-2" class="widget widget-job_listing listify_widget_panel_listing_content">

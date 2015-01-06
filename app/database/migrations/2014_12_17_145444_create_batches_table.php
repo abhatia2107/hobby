@@ -39,6 +39,7 @@ class CreateBatchesTable extends Migration {
 			$table->boolean('batch_class_on_saturday');
 			$table->boolean('batch_class_on_sunday');
 			$table->integer('batch_trial');
+			$table->integer('batch_view');
 			$table->string('batch_comment')->nullable();
 			$table->string('batch_tagline',40)->nullable();
 			$table->boolean('batch_photo');

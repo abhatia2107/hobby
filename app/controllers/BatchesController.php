@@ -30,10 +30,10 @@ class BatchesController extends \BaseController {
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
-		$recurring=$this->recurring;
+		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		return View::make('Batches.create',compact('all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
+		return View::make('Batches.create',compact('all_subcategories','all_venues','difficulty_level','age_group','gender_group','trial','weekdays'));
 	}
 
 	/**
@@ -108,8 +108,14 @@ class BatchesController extends \BaseController {
 	{
 		//check count how many time page is viewed.
 		$batchDetails= $this->batch->getBatch($id);
-		//dd($batchDetails);
-		return View::make('Batches.show',compact('batchDetails'));
+		$age_group=$this->age_group;
+		$difficulty_level=$this->difficulty_level;
+		$gender_group=$this->gender_group;
+		// $recurring=$this->recurring;
+		$trial=$this->trial;
+		$weekdays=$this->weekdays;
+		dd($batchDetails);
+		return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays'));
 	}
 
 	/**

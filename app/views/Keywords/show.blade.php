@@ -12,6 +12,7 @@
       background: white;border:0px solid;margin-bottom: 15px;border-color: skyblue;
         -webkit-box-shadow: 0px 3px 0px -2px #0099FF;
             box-shadow: 0px 3px 0px -2px #0099FF;
+             color: #333;
 
     }
     #filter_data
@@ -19,6 +20,7 @@
    		padding-top: 10px;
    		box-shadow: 0px 0px 4px #3366CC;-moz-box-shadow: 0px 0px 4px #3366CC;-webkit-box-shadow: 0px 0px 4px #3366CC;
    		margin-bottom: 20px;
+   		 color: #333;
    	}
     #batch_name
     {
@@ -30,21 +32,24 @@
     {
     	font-size: 14px;
     	font-weight: normal;
-    	color: black;
+    	 color: #333;
     }
     #inst_rating
     {
     	margin-top: 10px;
+
     }
     .inst_name
     {
     	font-size: 16px;
     	font-weight: normal;
+    	 color: #333;
     }
     .filters
     {
     	max-height: 155px;
     	overflow: auto;
+    	 color: #333;
     }
     #browse-filter
     {
@@ -133,6 +138,14 @@
 	    color: #333;
 	    text-align: center;
 	    float: left;
+	    margin-left: 18px;
+	    margin-bottom: 5px;
+	}
+	.rating_starts
+	{
+		clear:both;
+		color: #FF8000;
+		margin-top:10px;
 	}
 	#rating
 	{
@@ -161,6 +174,7 @@
 	#cell-icon
 	{
 		color: #0099FF;
+		font-size: 0.9em;
 	}
 		#msg-icon
 	{
@@ -193,6 +207,8 @@
 		border: 5px solid;
 		border-color:#0099FF;
 		vertical-align: middle;
+		margin-top: -9px;
+		margin-bottom: 10px;
 	}
 	.institute-profile-pic img 
 	{
@@ -202,16 +218,109 @@
 	#inst_details
 	{
 		margin-top: 7px;
+		margin-bottom: 10px;
 	}
 	#batch-schedule
 	{
-		margin-top: 87px;
+		margin-top: 10px;
 	}
-  </style>
+	.sendMessage a
+	{
+		color: #333;
+	}
+
+	@media screen and (min-width: 768px) {
+	
+	#sendMessage .modal-dialog  {width:430px;}
+
+	}
+	#sendMessage 
+	{
+		border-radius: 5px;
+	}
+	#sendMessage .modal-dialog
+	{
+		margin-top:7%;
+	}
+	#sendMessage .modal-header
+	{
+		font-size: 22px;
+		color: #333333;
+		font-weight: bolder;
+		font-family: serif;
+	}
+	#rating-schedule
+	{
+		float: right;
+	}
+	#MsgInputName
+	{
+		background: 
+	}
+	.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 8px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+#offerMessage
+{
+	float: right;
+	margin-top: -60px;
+}
+#offerMessage .glyphicon
+{
+	float: right;
+	font-size: 100px;
+}
+
+</style>
 </head>
 <body>
 @extends('Layouts.layout')
 @section('content')
+<div class="modal fade" id="sendMessage" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				
+					<center>Send Message To Institute</center>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<div class="form-group inner-addon left-addon" >
+						 <i class="glyphicon glyphicon-user"></i>
+						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='InputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
+					</div>
+					<div class="form-group inner-addon left-addon">
+						<i class="glyphicon glyphicon-envelope"></i>
+						 <input type="email" class="form-control" name='InputEmail' id='MsgInputEmail'  placeholder='Enter Your E-Mail Address' required='required'/>
+					</div>
+					<div class="form-group">
+					  <label for="comment">Message:</label>
+					  <textarea class="form-control" rows="3" name='InputMessage' id="comment"></textarea>
+					</div>
+			</div>
+			<div class="modal-footer">
+				 <center><button type="submit" class="btn btn-primary">Send Message</button></center>
+				 </form>
+			</div>
+		</div>
+	</div>				
+</div>
 <div class="container" >
 	<div class="row clearfix">
 		<div class="col-md-12 col-xs-12 col-sm-12 column">
@@ -335,7 +444,7 @@
 	function show_contact (id) 
 	{
 		$('#show_contact'+id).empty();
-		$('#contact'+id).css('display','block');
+		$('#contact'+id).fadeIn(700);
 		// body...
 	}
 	function displayResults(results,start)
@@ -343,13 +452,14 @@
 		var linksContainer = $('#filter_data'),baseUrl;
 		for (var index=start; index<results.length; index++)
 		{
-	    var institute = results[index]['institute'];
-	    var institute_id =  results[index]['batch_institute_id'];
-	    var institute_photo_path = '/assets/images/institute/institute.gif';
-	    /*var institute_photo_exists = results[index]['institute_photo'];
-	    if(institute_photo_exists==1)
-	    {	institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}*/
+		    var institute = results[index]['institute'];
+		    var institute_id =  results[index]['batch_institute_id'];
+		    var institute_photo_path = '/assets/images/institute/institute.gif';
+		    /*var institute_photo_exists = results[index]['institute_photo'];
+		    if(institute_photo_exists==1)
+		    {	institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}*/
 			var batch = results[index]['batch'];
+			var batchID= results[index]['id'];
 			var price = results[index]['batch_price'];
 			var subcategory = results[index]['subcategory'];
 			var category =  results[index]['category'];
@@ -372,30 +482,29 @@
 						"<div class='row clearfix batch'>"+
 							"<div class='col-md-12 col-xs-12 col-sm-12 column' >"+
 								"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
-									"<span id='batch_name'>"+batch+"<br></span>"+
-									"<span class='inst_name'>"+institute+
-									".</span>"+
+									"<span id='batch_name'><a href='/batches/"+batchID+"' >"+batch+"<br></span></a>"+
+									"<span class='inst_name'>"+institute+".</span>"+
 								"</div>"+
 							"</div>"+
 						"</div>"+
 						"<div class='row clearfix batch'>"+
 							"<div class='col-md-12 col-xs-12 col-sm-12 column' style='margin-top:20px'>"+
-								"<div class='col-md-3 col-xs-12 col-sm-4 column'>"+
+								"<div class='col-md-3 col-xs-12 col-sm-12 column'>"+
 									"<center><img src='"+institute_photo_path+"' class='institute-profile-pic' ></ 	>"+
 								"</div>"+
 								"<div class='col-md-6 col-xs-12 col-sm-8 column'>"+
-									"<div id='inst_contact' class='col-md-5 col-xs-12 col-sm-4 column'><span style='display:none' id='contact"+index+"'><span id='cell-icon'>☎ </span>"+contact+"</span>"+
-										"<span id='show_contact"+index+"' onClick='show_contact("+index+")'><span id='cell-icon'>☎ </span>View Phone Number</span>"+
+									"<div id='inst_contact'  onClick='show_contact("+index+")' class='col-md-5 col-xs-12 col-sm-4 column'><span style='display:none' id='contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> "+contact+"</span>"+
+										"<span id='show_contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> View Phone Number</span>"+
 									"</div>"+
-									"<div id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
+									"<div href='#sendMessage' data-toggle='modal' id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
 									"<div id='inst_details' class='col-xs-12' >"+
 										"<div id='inst_type'><span id='hand-icon'>☛</span>Type: "+subcategory+", "+category+".</div>"+
 										"<div id='inst_price'><span id='hand-icon'>☛</span>Price:  ₹ "+price+"</div>"+
 										"<div id='inst_price'><span id='hand-icon'>☛</span>Address: "+locality+", "+location_name+"</div>"+
 									"</div>"+
 								"</div>"+
-								"<div class='col-md-3 col-xs-12 col-sm-5 column'>"+
-								"<div id='rating'><div id='rating-tittle'>Rating :</div><div class='inscore' ><span id='rating-value'>9.7</span></div></div>"+
+								"<div class='col-md-3 col-xs-12 col-sm-4 column' id='rating-schedule'>"+
+								"<div id='rating' ><div class='inscore' ><span id='rating-value'>9.7</span></div><div class='rating_starts'><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span></div></div>"+
 									"<div id='batch-schedule'><center>Batch Schedule</center><div id='day1' class='day'>M</div><div id='day2' class='day'>T</div><div id='day3' class='day'>W</div>"+
 									"<div id='day4' class='day'>T</div><div id='day5' class='day'>F</div><div id='day6' class='day'>S</div><div id='day7' class='day'>S</div></div>"+
 								"</div>"+

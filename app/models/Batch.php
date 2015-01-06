@@ -148,6 +148,8 @@ class Batch extends \Eloquent {
             ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
             ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
             ->Join('locations', 'locations.id', '=', 'localities.locality_location_id')
+            ->Join('comments','comments.comment_institute_id','=','institutes.id')
+            ->Join('users','users.id','=','comments.comment_user_id')
             ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
             ->get();
     }

@@ -74,7 +74,6 @@ Route::get('/categories/delete/{id}','CategoriesController@destroy');
 //Route for CommentsController
 Route::get('/comments','CommentsController@index');
 Route::get('/comments/create','CommentsController@create');
-Route::post('/comments/store','CommentsController@store');
 Route::get('/comments/{id}','CommentsController@show');
 Route::get('/comments/edit/{id}','CommentsController@edit');
 Route::post('/comments/update/{id}','CommentsController@update');
@@ -181,11 +180,11 @@ Route::get('/users/password/reset/{token}','RemindersController@getReset');
 Route::post('/users/password/reset/submit','RemindersController@postReset');
 
 Route::group(array('before' => "csrf"), function() {
+	Route::post('/comments/store','CommentsController@store');
 	Route::post('/users/login/submit','UsersController@postAuthenticate');
 	Route::post('/users/signup/submit','UsersController@postSignup');
 	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
-	Route::post('/supports/store', 'SupportController@store');
 });
 
 Route::get('/aboutus', function()

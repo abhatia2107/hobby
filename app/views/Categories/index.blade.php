@@ -61,7 +61,7 @@
 					@endif
 					</td>
 					<td>
-					@if(isset($data->deleted_at))
+					@if($data->deleted_at)
 						<a href="{{$tableName}}/enable/{{$data->id}}">
 							<button type="button" class="btn btn-info " input type="submit" value="Button">
 								<span class="glyphicon glyphicon-open"></span> 

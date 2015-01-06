@@ -27,6 +27,9 @@ class Admin extends \Eloquent {
 
 	public function getAllAdmins()
 	{
-		return DB::table('admins')->Join('users', 'admins.admin_user_id', '=', 'users.id')->get(['admins.id','admins.admin_user_id','users.user_first_name','users.user_last_name']);
+		return DB::table('admins')
+		->Join('users', 'admins.admin_user_id', '=', 'users.id')
+		->select('*','admins.id as id','admins.deleted_at as deleted_at','admins.created_at as created_at','admins.updated_at as updated_at')
+		->get();
 	}
 }

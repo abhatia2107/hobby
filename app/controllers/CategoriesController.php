@@ -11,6 +11,8 @@ class CategoriesController extends \BaseController {
 	 */
 	public function index()
 	{
+		$categories=$this->category->withTrashed();
+		dd($categories);
 		$tableName="$_SERVER[REQUEST_URI]";
 		return View::make('Categories.index',compact('tableName'));
 	}
@@ -118,10 +120,12 @@ class CategoriesController extends \BaseController {
 
 	public function disable($id)
 	{
-		$category=Category::find($id);	
-		//dd($category);
+		$category=Category::find($id);
+
+		// $category=$this->category->find($id);
 		if($category){
 			$category->delete();
+			$this->subcategory->disableSubcategoryForCategory($id);
 			return Redirect::to('/categories')->with('success',Lang::get('category.category_disabled'));
 		}
 		else{

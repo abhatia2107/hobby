@@ -114,7 +114,7 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		dd($batchDetails);
+		//dd($batchDetails);
 		return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays'));
 	}
 
@@ -142,6 +142,7 @@ class BatchesController extends \BaseController {
 				array_push($batch_class,$data);
 		}
 		$batchDetails['batch_class']=$batch_class;
+		// dd($batchDetails);
 		return View::make('Batches.create',compact('batchDetails','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
 	}
 

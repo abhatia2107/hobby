@@ -18,7 +18,7 @@ class BatchesTableSeeder extends Seeder {
                      'batch_start_time' =>$faker->time($format = 'H:i:s', $max = 'now'),
                      'batch_end_time' => $faker->time($format = 'H:i:s', $max = 'now'),
                      'batch_venue_id'=>$faker->randomNumber(1,30),
-                     'batch_difficulty_level' =>$faker->randomNumber(1,4),
+                     'batch_difficulty_level' =>$faker->randomNumber(0,3),
                      'batch_age_group' =>$faker->randomNumber(0,2),
                      'batch_gender_group' =>$faker->randomNumber(0,2),
                      'batch_price' =>$faker->randomNumber(1000,5000),

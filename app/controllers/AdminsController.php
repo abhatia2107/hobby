@@ -11,6 +11,7 @@ class AdminsController extends \BaseController {
 	public function index()
 	{
 		$admins=$this->admin->getAllAdmins();
+		// dd($admins);
 		$tableName="$_SERVER[REQUEST_URI]";
 		return View::make('Admins.index',compact('admins','tableName'));
 	}

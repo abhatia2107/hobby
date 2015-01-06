@@ -5,14 +5,9 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery.richtextarea.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-te-1.4.0.css">
     <style>
-    .img_requirement_span
-    {
-        position: absolute;
-    }
         .btn-file {
             position: relative;
             overflow: hidden;
-            font-size:20px;background-color:#3A8AF1;color:white;
         }
         .btn-file input[type=file] {
             position: absolute;
@@ -34,10 +29,6 @@
             font-size: 15px;
             font-weight: 100;
         }
-        .btn_save_div
-        {
-            width: 53%;
-        }
         .input1
          {
             font-size: 15px;
@@ -58,25 +49,6 @@
          {
             color:red;
          }
-         .img_requirement
-         {
-            font-size:10px;
-         }
-         .class_desc
-         {
-            background: url('/assets/images/batch/create/classdesc.PNG');
-            height:41px;
-         }
-         .targetaud
-         {
-            background: url('/assets/images/batch/create/targetaud.PNG');
-            height:41px;
-         }
-         .schedule
-         {
-            background: url('/assets/images/batch/create/schedule.PNG');
-            height:41px 
-         }
     </style>
 @stop
 
@@ -87,7 +59,7 @@
         <div class="row">
             <p  class="create_class">Create your Class
             </p>
-            <div class="col-lg-12 img-responsive" class="class_desc">
+            <div class="col-lg-12 img-responsive" style="background: url('/assets/images/batch/create/classdesc.PNG');height:41px ">
             </div>
         </div><br/>
         <div class="row">
@@ -146,13 +118,13 @@
             <div class="form-group">
                     <label class="col-sm-3 control-label label1">Photo Gallery</label>
                     <div class="col-sm-6">&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="btn btn-default btn-file" >
+                        <span class="btn btn-default btn-file" style="font-size:20px;background-color:#3A8AF1;color:white;">
                             Add Photos <input type="file" id="batch_photo" tabindex=18 name="batch_photo" value="@if(isset($batchDetails)){{$batchDetails->batch_photo}}@endif">
                         </span>&nbsp;&nbsp;
-                        <span class="img_requirement_span">
+                        <span style="position: absolute">
                             <div>
-                        <span class="img_requirement">1.Based on requirements</span><br/>
-                        <span class="img_requirement">2.Based on requirements</span>
+                        <span style="font-size:10px">1.Based on requirements</span><br/>
+                        <span style="font-size: 10px">2.Based on requirements</span>
                 </div></span>
 
             </div>
@@ -168,7 +140,7 @@
             </div>
         </div><br/><br/><br/>
         <div class="row">
-            <div class="col-lg-12 img-responsive" class="targetaud" >
+            <div class="col-lg-12 img-responsive" style="background: url('/assets/images/batch/create/targetaud.PNG');height:41px ">
             </div>
         </div><br/><br/>
         <div class="row">
@@ -222,7 +194,7 @@
         <br/><br/><br/>
         <div class="row">
 
-            <div class="col-lg-12 img-responsive" class="schedule">
+            <div class="col-lg-12 img-responsive" style="background: url('/assets/images/batch/create/schedule.PNG');height:41px ">
             </div>
         </div><br/><br/>
         <div class="row">
@@ -321,7 +293,7 @@
                 </div>
             </div>
         </div>
-        <div class="btn_save_div" >
+        <div  style="width: 53%">
             <button type="submit" tabindex=22 class="btn btn-primary"> @if(isset($batchDetails)) <i class="fa fa-save"></i> &nbsp; Save @else <i class="fa fa-plus"></i> &nbsp; Create @endif</button>
             <button type="reset" tabindex=23 class="btn btn-primary"><i class="fa fa-power-off"></i> &nbsp; Reset</button>
         </div>
@@ -393,7 +365,7 @@
                     <div class="row">
                         <div class="form-group">
                             <label for="venuename" class="col-sm-3 control-label ">Venue Name&nbsp;
-                                <span class="important_required">*</span>
+                                <span style="color:red">*</span>
                             </label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="venuename"  id="venuename">
@@ -402,7 +374,7 @@
                     </div><br/>
                     <div class="row">
                         <div class="form-group">
-                            <label for="city1" class="col-sm-3 control-label ">City&nbsp;<span class="important_required">*</span></label>
+                            <label for="city1" class="col-sm-3 control-label ">City&nbsp;<span style="color:red">*</span></label>
                             <div class="col-sm-8">
                                 <select  class="form-control " name="city1"  id="city1"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
                             </div>
@@ -410,7 +382,7 @@
                     </div><br/>
                     <div class="row">
                         <div class="form-group">
-                            <label for="locality" class="col-sm-3 control-label ">Locality&nbsp;<span class="important_required">*</span></label>
+                            <label for="locality" class="col-sm-3 control-label ">Locality&nbsp;<span style="color:red">*</span></label>
                             <div class="col-sm-8">
                                 <select  class="form-control " name="locality"  id="locality"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
                             </div>
@@ -418,7 +390,7 @@
                     </div><br/>
                     <div class="row">
                         <div class="form-group">
-                            <label for="address" class="col-sm-3 control-label ">Address&nbsp;<span class="important_required">*</span></label>
+                            <label for="address" class="col-sm-3 control-label ">Address&nbsp;<span style="color:red">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="address"  id="address">
                             </div>
@@ -426,7 +398,7 @@
                     </div><br/>
                     <div class="row">
                         <div class="form-group">
-                            <label for="pincode" class="col-sm-3 control-label ">pincode&nbsp;<span class="important_required">*</span></label>
+                            <label for="pincode" class="col-sm-3 control-label ">pincode&nbsp;<span style="color:red">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="pincode"  id="pincode">
                             </div>
@@ -434,7 +406,7 @@
                     </div><br/>
                     <div class="row">
                         <div class="form-group">
-                            <label for="mobile" class="col-sm-3 control-label ">mobile&nbsp;<span class="important_required">*</span></label>
+                            <label for="mobile" class="col-sm-3 control-label ">mobile&nbsp;<span style="color:red">*</span></label>
                             <div class="col-sm-8">
                                 <input type="tel"  class="form-control " name="mobile"  id="mobile">
                             </div>
@@ -442,7 +414,7 @@
                     </div><br/>
                     <div class="row">
                         <div class="form-group">
-                            <label for="landline" class="col-sm-3 control-label ">Email&nbsp;<span class="important_required">*</span></label>
+                            <label for="landline" class="col-sm-3 control-label ">Email&nbsp;<span style="color:red">*</span></label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="landline"  id="landline">
                             </div>

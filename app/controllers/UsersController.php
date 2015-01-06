@@ -167,6 +167,7 @@ class UsersController extends \BaseController {
 	{	
 		$remember=(Input::has('remember'))?true:false;
 		$credentials=$this->getCredentials();
+		// dd($credentials);
 		$userDetails=$this->user->where('email','=',Input::get('email'))->first();
 		if(!$userDetails)
 		{

@@ -42,7 +42,9 @@ class RemindersController extends Controller {
 	public function getReset($token = null)
 	{
 		if (is_null($token)) App::abort(404);
-		return View::make('Users.resetPassword')->with('token', $token);
+		$resetDetails=DB::table("password_reminder")->where("token",'=',$token)->get();
+		// dd($resetDetails[0]);
+		return View::make('Users.resetPassword',compact('resetDetails'));
 	}
 
 	/**
@@ -54,7 +56,7 @@ class RemindersController extends Controller {
 	{
 		//TO DO: Don't take email as input from user. Put it automatically.
         $credentials = Input::only(
-			'email', 'password', 'password_confirmation', 'token'
+			'email','password', 'password_confirmation', 'token'
 		);
 
 		$response = Password::reset($credentials, function($user, $password)
@@ -63,7 +65,7 @@ class RemindersController extends Controller {
 
 			$user->save();
 		});
-
+		// dd($credentials);
 		switch ($response)
 		{
 			case Password::INVALID_PASSWORD:

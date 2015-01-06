@@ -114,8 +114,14 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		//dd($batchDetails);
-		return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays'));
+		if($batchDetails)
+		{
+			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays'));
+		}
+		else
+		{
+			return View::make('Batches.batchNotFound');
+		}
 	}
 
 	/**

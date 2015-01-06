@@ -275,7 +275,7 @@
             <label for="comment">Review:</label>
             <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
           </div>
-          <?php if(!$loggedIn)
+          <?php if($loggedIn)
                 {
                   echo '<button type="submit" class="btn btn-primary">Submit</button>';
                 }

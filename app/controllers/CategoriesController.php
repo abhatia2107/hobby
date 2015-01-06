@@ -86,7 +86,6 @@ class CategoriesController extends \BaseController {
 	public function update($id)
 	{
 		$credentials=Input::all();
-	
 		$validator = Validator::make($credentials, Category::$rules);
 		if($validator->fails())
 		{

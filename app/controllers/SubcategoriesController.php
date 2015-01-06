@@ -11,6 +11,7 @@ class SubcategoriesController extends \BaseController {
 	public function index()
 	{
 		$subcategories=$this->subcategory->getAllSubcategories();
+		//dd($subcategories[0]);
 		$tableName="$_SERVER[REQUEST_URI]";
 		return View::make('Subcategories.index',compact('subcategories','tableName'));
 	}
@@ -96,54 +97,56 @@ class SubcategoriesController extends \BaseController {
 			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_already_failed'));
 	}
 
-	// TO DO: Category table should also be affected by this.
+	// TO DO: Subcategory table should also be affected by this.
 	public function enable($id)
 	{
-		$category=Category::withTrashed()->find($id);
-		if($category){
-			$categoryDisabled=Category::onlyTrashed()->find($id);
-			if($categoryDisabled){
-				$categoryDisabled->restore();	
-				return Redirect::to('/categories')->with('success',Lang::get('category.category_enabled'));
+		$subcategory=Subcategory::withTrashed()->find($id);
+		if($subcategory){
+			$subcategoryDisabled=Subcategory::onlyTrashed()->find($id);
+			if($subcategoryDisabled){
+				$this->category->increment_no($subcategory['subcategory_category_id']);
+				$subcategoryDisabled->restore();	
+				return Redirect::to('/subcategories')->with('success',Lang::get('subcategory.subcategory_enabled'));
 			}
 			else{
-					return Redirect::to('/categories')->with('failure',Lang::get('category.category_enable_failed'));
+					return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_enable_failed'));
 			}
 		}
 		else
-			return Redirect::to('/categories')->with('failure',Lang::get('category.category_user_not_exist'));
+			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_user_not_exist'));
 	}
 
 	public function disable($id)
 	{
-		$category=Category::find($id);	
-		//dd($category);
-		if($category){
-			$category->delete();
-			return Redirect::to('/categories')->with('success',Lang::get('category.category_disabled'));
+		$subcategory=Subcategory::find($id);	
+		if($subcategory){
+			$subcategory->delete();
+			$this->category->decrement_no($subcategory['subcategory_category_id']);
+			return Redirect::to('/subcategories')->with('success',Lang::get('subcategory.subcategory_disabled'));
 		}
 		else{
-			return Redirect::to('/categories')->with('failure',Lang::get('category.category_disable_failed'));
+			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_disable_failed'));
 		}
 	}
 
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /categories/{id}
+	 * DELETE /subcategories/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-		$category=Category::withTrashed()->find($id);
-		if($category){
-			$category->forceDelete();
-			return Redirect::to('/categories')->with('success',Lang::get('category.category_deleted'));
+		$subcategory=Subcategory::withTrashed()->find($id);
+		if($subcategory){
+			$subcategory->forceDelete();
+			$this->category->decrement_no($subcategory['subcategory_category_id']);
+			return Redirect::to('/subcategories')->with('success',Lang::get('subcategory.subcategory_deleted'));
 		}
 		else{
-			return Redirect::to('/categories')->with('failure',Lang::get('category.category_delete_failed'));
+			return Redirect::to('/subcategories')->with('failure',Lang::get('subcategory.subcategory_delete_failed'));
 		}
 	}
 

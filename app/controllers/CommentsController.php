@@ -36,12 +36,15 @@ class CommentsController extends \BaseController {
 		$credentials=Input::all();
 		$credentials['user_id']=Auth::id();
 		$validator = Validator::make($credentials, Comment::$rules);
-		if($validator->fails())
+		if(request::Ajax())
 		{
-			return Redirect::back()->withInput()->withErrors($validator);
+			if($validator->fails())
+			{
+				return Redirect::back()->withInput()->withErrors($validator);
+			}
+			$comment=Comment::create($credentials);
+			return Redirect::back()->with('success',Lang::get('comment.comment_updated'));
 		}
-		$comment=Comment::create($credentials);
-		return Redirect::back()->with('success',Lang::get('comment.comment_updated'));
 	}
 
 	/**

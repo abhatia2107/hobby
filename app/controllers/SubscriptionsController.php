@@ -10,7 +10,7 @@ class SubscriptionsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$subscriptions=Subscription::all();
+		$subscriptions=Subscription::withTrashed()->get();
 		$tableName="$_SERVER[REQUEST_URI]";
 		return View::make('Subscriptions.index',compact('subscriptions','tableName'));
 	}

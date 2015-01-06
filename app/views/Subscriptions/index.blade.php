@@ -53,11 +53,11 @@
 					@endif
 					<td>
 					<!-- Remove modal -->
-					<button class="btn btn-danger" data-toggle="modal" data-target="#removeModal">
+					<button class="btn btn-danger" data-toggle="modal" data-target="#removeModal{{$data->id}}">
 						<span class="glyphicon glyphicon-trash"></span>
 						Remove
 					</button>
-					<div id="removeModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+					<div id="removeModal{{$data->id}}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
 								<div class="modal-header">

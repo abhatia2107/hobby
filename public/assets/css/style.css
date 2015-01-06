@@ -4056,20 +4056,8 @@ body .gform_wrapper ul.gfield_checkbox li input[type=checkbox]:checked+label, bo
     font-size: 16px;
     margin-right: 8px;
 }
-.star-rating-label, .star-rating-stars, .star-rating:before, .stars span a:before {
-    display: inline-block;
-    vertical-align: middle;
-}
-.star-rating, .stars span a {
-    margin-right: 5px;
-    float: right;
-}
-.star-rating:before, .stars span a:before {
-    color: #b4bcc7;
-    font-size: 22px;
-    content: '\f1e0';
-    margin-top: -5px;
-}
+
+
 .widget-job_listing .ion-social-twitter:hover {
     background-color: #55acee;
 }

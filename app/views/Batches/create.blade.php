@@ -67,7 +67,7 @@ left: 30%;
         .input1
          {
             font-size: 15px;
-            height:32px;
+            /*height:32px;*/
          }
 @media(min-width:992px){
          #classInfo1

@@ -9,9 +9,11 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
+html{
+    overflow-x: hidden; 
+}
 body {
-  padding-top: 60px;
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 .content-div
 {
@@ -66,8 +68,8 @@ margin-top:-20px;
 .header_myaccount{
     padding-top: 15px;
     font-size: 15px;
-    width:50%;
-    padding-left:45px !important;
+    width:51%;
+    padding-left:41px !important;
     color:white;
 }
 .header_myaccount_a {
@@ -83,11 +85,13 @@ margin-top:-20px;
     padding-top: 15px;
     font-size: 15px;
     color:white;
+	width:47%;
 }
 .header_logout_a
 {
     color:white;
     text-decoration: none;
+	padding-left:22px;
 }
 .header_logout_a:hover
 {
@@ -7849,3 +7853,8 @@ body #OT_searchWrapperAll {
     color:white;margin-top:15px;
 }
 /*Footer CSS end*/
+
+/*Error Page ID*/
+#errorMsgPage{
+    min-height: 400px;
+}

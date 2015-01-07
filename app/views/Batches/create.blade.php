@@ -143,7 +143,7 @@ left: 30%;
         <div class="row row_padding">
             <div class="form-group">
                 <label for="batch_category_id" class="col-sm-3 col-md-3 control-label label1">Category<span class="important_required">*</span></label>
-                <div class="col-sm-3 col-md-2">
+                <div class="col-sm-3 col-md-3">
                     <select class="form-control input1"  id="batch_category_id" name="batch_category_id"required>
                         @foreach ($categories as $data)
                         <option value={{$data->id}}
@@ -158,7 +158,7 @@ left: 30%;
                         @endforeach
                     </select>
                 </div>
-                <label name="batch_subcategory_id" class="col-sm-3 col-md-3 control-label label1">Sub Category<span class="important_required">*</span></label>
+                <label name="batch_subcategory_id" class="col-sm-2 col-md-2 control-label label1">Sub Category<span class="important_required">*</span></label>
                 <div class="col-sm-3 col-md-3">
                     <select class="form-control input1" name="batch_subcategory_id" id="batch_subcategory_id">
                         @foreach ($all_subcategories as $data)

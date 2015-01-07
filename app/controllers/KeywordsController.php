@@ -81,6 +81,27 @@ class KeywordsController extends \BaseController {
 	{
 		$subcategories=explode(",",$subcategoriesString);
 		$localities=explode(",", $localitiesString);
+		$trials=explode(",", $trialString);
+		// TO DO: If any array is empty make a array corresponding to it with all venues,
+		// where condition for all the arrays will be applied in only one statement.  
+
+		if(!$subcategories[0])
+		{
+			$subcategory=$this->subcategory->getSubcategoryForCategory($category_id);
+			foreach ($subcategory as $data) {
+				array_push($subcategories, ($data->id));
+			}
+		}
+		if(!$localities[0])
+		{
+			$locality=$this->locality->getLocalityForLocation($location_id);
+			foreach ($locality as $data) {
+				array_push($localities, ($data->id));
+			}
+		}
+		
+		if
+
 		if(!$subcategories[0]&&!$localities[0]){
 			$chunk=$chunk*100;
 			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
@@ -98,7 +119,7 @@ class KeywordsController extends \BaseController {
 		}
 		else{
 			// dd($batchesForCategoryLocation);
-			return Response::make('Errors.pageNotFound', 404);
+			return View::make('Errors.pageNotFound');
 		}
 	}
 

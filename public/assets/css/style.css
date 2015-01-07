@@ -7842,3 +7842,8 @@ body #OT_searchWrapperAll {
     color:white;margin-top:15px;
 }
 /*Footer CSS end*/
+
+/*Error Page ID*/
+#errorMsgPage{
+    min-height: 400px;
+}

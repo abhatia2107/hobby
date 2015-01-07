@@ -1,6 +1,6 @@
 @extends('Layouts.layout')
 @section('content')
-    <div class="clearfix">
+    <div class="clearfix" id="errorMsgPage">
     	<h1>There's some issue we'll solve it soon. Stay in touch!!!</h1>
     	<h2>
 	    	Please take 2 minutes and drop a message at our feedback page about the issue.

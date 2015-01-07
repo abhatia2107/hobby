@@ -1,4 +1,6 @@
 @extends('Layouts.layout')
 @section('content')
-    We'll have a page here soon. Stay in touch.
+<div id="errorMsgPage">
+    We'll have a page here soon. Stay in touch.	
+</div>
 @stop

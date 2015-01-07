@@ -22,22 +22,22 @@
 	            <td>{{$data->email}}</td>
 	            <td>{{$data->user_contact_no}}</td>
 				<td>
-					@if($view)
-					<a href="{{$tableName}}/{{$data->id}}">
-						<button type="button" class="btn btn-success ">
-							<span class="glyphicon glyphicon-user"></span>
-							View
-						</button>
-					</a>
+					@if($data->user_subscription_token)
+						<a href="{{$tableName}}/unsubscribe/{{$data->id}}">
+							<button type="button" class="btn btn-info ">
+								<span class="glyphicon glyphicon-remove"></span>
+								Unsubscribe
+							</button>
+						</a>
 					@else
-						<a href="{{$tableName}}/edit/{{$data->id}}">
-							<button type="button" class="btn btn-success ">
-								<span class="glyphicon glyphicon-pencil"></span>
-								Edit
+						<a href="{{$tableName}}/subscribe/{{$data->id}}">
+							<button id="subscribe-button" type="button" class="btn btn-success ">
+								<span class="glyphicon glyphicon-open"></span>
+								Subscribe
 							</button>
 						</a>
 					@endif
-					</td>
+				</td>
 					<td>
 					@if(isset($data->deleted_at))
 						<a href="{{$tableName}}/enable/{{$data->id}}">

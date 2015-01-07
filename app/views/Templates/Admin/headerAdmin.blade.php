@@ -88,7 +88,7 @@
               <a href="/institutes"><i class="fa fa-fw fa-dashboard"></i> Institutes</a>
            </li>
            <li class="active">
-              <a href="/users"><i class="fa fa-fw fa-dashboard"></i> User</a>
+              <a href="/users"><i class="fa fa-fw fa-dashboard"></i> Users</a>
            </li>
            <li class="active">
               <a href="/categories"><i class="fa fa-fw fa-dashboard"></i> Categories</a>

@@ -3,7 +3,7 @@
 	return array(
 		
 		//login
-		"invalid_login"=>"Invalid login credentials",
+		"invalid_login"=>"Email or Password is incorrect. Please try again",
 
 		"user_not_registered"=>"This email ID had not been registered at our site. Sign-Up within minutes.",
 		

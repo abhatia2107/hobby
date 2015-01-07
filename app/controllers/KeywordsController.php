@@ -92,6 +92,7 @@ class KeywordsController extends \BaseController {
 				array_push($subcategories, ($data->id));
 			}
 		}
+		var_dump($subcategories);
 		if(!$localities[0])
 		{
 			$locality=$this->locality->getLocalitiesForLocation($location_id);

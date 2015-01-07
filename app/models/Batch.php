@@ -93,9 +93,12 @@ class Batch extends \Eloquent {
     }
     public function getBatchForFilter($subcategories,$localities,$trials,$chunk)
     {
+        var_dump($trials);
+        var_dump($subcategories);
+        var_dump($localities);
         $allBatches=DB::table('batches')
                         ->whereIn('batches.batch_trial',$trials)
-                        /*->whereIn('batches.batch_subcategory_id',$subcategories)
+                        ->whereIn('batches.batch_subcategory_id',$subcategories)
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->whereIn('venues.venue_locality_id',$localities)
@@ -106,8 +109,9 @@ class Batch extends \Eloquent {
                         ->skip($chunk)
                         ->take(100)
                         ->orderBy('institute_rating')
-                        */->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+                        ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->get();
+        return $allBatches;
     }
 
 /*    public function getBatchForFilter($subcategories,$localities,$chunk)

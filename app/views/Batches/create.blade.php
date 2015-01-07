@@ -56,7 +56,7 @@
         {
             font-size: 15px;
             font-weight: 100;
-			
+			text-align: left !important;
         }
         .btn_save_div
         {
@@ -342,7 +342,7 @@
         </div>
         <div class="row row_padding">
             <div class="form-group">
-                <label for="batch_trial" class="col-sm-3 control-label label1">Trial Availbale<span class="important_required">*</span></label>
+                <label for="batch_trial" class="col-sm-3 control-label label1">Trial Available<span class="important_required">*</span></label>
                 
                 <div class="col-sm-6">
                     <ul class="radio ul-without-bullets">

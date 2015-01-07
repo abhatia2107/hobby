@@ -13,6 +13,10 @@ body {
   padding-top: 60px;
   overflow-x: hidden;
 }
+.content-div
+{
+margin-top:-20px;
+}
 .header_img
 {
 	height:15px;

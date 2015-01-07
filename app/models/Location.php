@@ -11,7 +11,7 @@ class Location extends \Eloquent {
 	];
 
 	public static $rules = [		
-		'location'=>'required|alpha',
+		'location'=>'required',
 	];
 
  	public function updateLocation($credentials,$id)

@@ -3,8 +3,9 @@
 	<form role="form" method="POST" enctype="multipart/form-data" action="/users/password/reset/submit">
 		<div class="form-group">
 			<!-- <label>Email address</label> -->
-			<input type="hidden" name="token" value="{{ $token }}">
-			<!-- <input type="email" class="form-control"  placeholder="Enter email" name="email"> -->
+			<input type="hidden" name="token" value="{{ $resetDetails[0]->token }}">
+			<input type="hidden" name="csrf_token" value="{{csrf_token()}}" >
+			<input type="hidden" name="email" value="{{$resetDetails[0]->email}}">
 		</div>
 		<div class="form-group">
 			<label>New Password</label>

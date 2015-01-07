@@ -23,8 +23,8 @@ class CreateInstitutesTable extends Migration {
 			$table->string('institute_twitter',255)->nullable();
 			$table->longText('institute_description');
 			$table->decimal('institute_rating', 2, 1);
-			$table->boolean('institute_approved');
-			$table->boolean('institute_photo');
+			$table->boolean('institute_approved')->default(0);
+			$table->boolean('institute_photo')->default(0);
 			$table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

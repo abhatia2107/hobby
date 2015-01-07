@@ -26,9 +26,9 @@ class CreateUsersTable extends Migration {
 			$table->string('remember_token',255)->nullable();
 			$table->string('user_facebook_access_token',70)->nullable();
 			$table->string('user_confirmation_code',90);
-			$table->boolean('user_confirmed');
-			$table->boolean('user_subscription_token');
-	        $table->boolean('user_photo');
+			$table->boolean('user_confirmed')->default(0);
+			$table->boolean('user_subscription_token')->default(1);
+	        $table->boolean('user_photo')->default(0);
 	        $table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

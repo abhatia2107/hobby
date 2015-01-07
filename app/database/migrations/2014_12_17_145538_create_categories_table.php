@@ -15,7 +15,7 @@ class CreateCategoriesTable extends Migration {
 		Schema::create('categories', function($table){
 			$table->increments("id");
 			$table->string("category",50);
-			$table->integer("category_no_of_subcategories");
+			$table->integer("category_no_of_subcategories")->default(0);
 			$table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

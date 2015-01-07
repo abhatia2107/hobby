@@ -19,7 +19,7 @@ class CreateFeedbacksTable extends Migration {
 			$table->string('feedback_email');
 			$table->integer('feedback_user_id')->foreign('feedback_user_id')->references('id')->on('users');;
 			$table->text('feedback_description');
-			$table->boolean('feedback_read');
+			$table->boolean('feedback_read')->default(0);
 			$table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

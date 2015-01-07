@@ -107,7 +107,7 @@
     color: #0099FF;
     margin-left: 5px;
   }
-  .batch-deatails
+  .batch-details
   {
     margin-top: 10px;
   }
@@ -167,6 +167,7 @@
 @section('content')
 <?php
   $data = $batchDetails[0];
+  // dd($batchDetails);
   $instituteName = $data->institute;
   $instituteAddress = $data->venue_address;
   $instituteContact = $data->venue_contact_no;
@@ -177,7 +178,7 @@
   $ageGroup = $data->batch_age_group;
   $genderGroup = $data->batch_gender_group;
   $difficultyLevel = $data->batch_difficulty_level;
-  $trailClass = $data->batch_trial;
+  $trialClass = $data->batch_trial;
   $sessionsCount = $data->batch_no_of_classes_in_week;
   $batchDescription = $data->batch_comment;
   $batchAccomplishment = $data->batch_accomplishment;
@@ -200,7 +201,7 @@
               <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  '.$instituteContact}}</div>
             </div>
             <div class="col-sm-4 col-md-3">
-              <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" class="job_listing-rating-wrapper" title="4 Reviews">
+              <!-- <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" class="job_listing-rating-wrapper" title="4 Reviews">
                  <span class="job_listing-rating-stars">
                     <span class="stars-rating">
                     </span>
@@ -212,9 +213,9 @@
               </div>
               <span class="wp-job-manager-bookmarks-count">
                  15 Favorites  
-              </span>
+              </span> -->
               <div class="content-single-job_listing-actions-start">
-                 <button  class="btn btn-primary">Share</button>
+                 <!-- <button  class="btn btn-primary">Share</button> -->
                  <button class="btn btn-primary">Submit a Review</button>
               </div>
             </div>
@@ -231,19 +232,19 @@
     <div class="col-md-7 col-sm-12 col-xs-12 column ">
       <div id="sample-batch-details" class="sample-box col-md-12 col-sm-12 col-xs-12" >
         <div id='sample-batch-name'>{{$batchName}} Details</div>
-        <div id='batch-session-count' class="batch-deatails"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
+        <div id='batch-session-count' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
           Sessions per Week: {{$sessionsCount}}
         </div>
-        <div id='batch-openclass' class="batch-deatails"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-          Trail Class: {{$trial[$trailClass]}}
+        <div id='batch-openclass' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
+          Trial Class: {{$trial[$trialClass]}}
         </div>
-        <div id='batch-gender' class="batch-deatails"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
+        <div id='batch-gender' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
           Gender:{{' '.$gender_group[$genderGroup]}}
         </div>
-        <div id='batch-age-group' class="batch-deatails"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
+        <div id='batch-age-group' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
           Age Group: {{' '.$age_group[$ageGroup]}}
         </div>
-        <div id='batch-difficulty' class="batch-deatails"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
+        <div id='batch-difficulty' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
           Difficulty Level: {{' '.$difficulty_level[$difficultyLevel]}}
         </div>
         <div id='sample-batch-description' >

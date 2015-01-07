@@ -15,7 +15,7 @@ class CreateLocationsTable extends Migration {
 		Schema::create('locations', function($table){
 			$table->increments("id");
 			$table->string("location",255);
-			$table->integer("location_no_of_localities");
+			$table->integer("location_no_of_localities")->default(0);
 			$table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

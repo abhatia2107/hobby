@@ -210,7 +210,7 @@ left: 30%;
                 <label for="diflevel" class="col-sm-3 control-label label1">Difficulty Level<span class="important_required">*</span></label>
                 <div class="col-sm-8">
                     <ul class="radio ul-without-bullets" name="diflevel" id="diflevel">
-                        <?php $i=0; ?>
+                        <?php $i=1; ?>
                         @foreach($difficulty_level as $data)
 						<li>
                         <label>
@@ -229,7 +229,7 @@ left: 30%;
                 <div class="col-sm-8">
                     <ul class="radio" name="agegroup" id="agegroup">
                         
-						<?php $i=0; ?>
+						<?php $i=1; ?>
                         @foreach($age_group as $data)
 						<li>
                         <label >
@@ -248,7 +248,7 @@ left: 30%;
                 <label for="gengroup" class="col-sm-3 control-label label1">Target Gender Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
                     <ul class="radio" name="gengroup" id="gengroup">
-                        <?php $i=0; ?>
+                        <?php $i=1; ?>
                         @foreach($gender_group as $data)
 						<li>
                         <label>
@@ -348,7 +348,7 @@ left: 30%;
                 
                 <div class="col-sm-6">
                     <ul class="radio ul-without-bullets">
-                        <?php $i=0; ?>
+                        <?php $i=1; ?>
                         @foreach($trial as $data)
 						<li>
                         <label>

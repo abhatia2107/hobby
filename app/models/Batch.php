@@ -51,7 +51,6 @@ class Batch extends \Eloquent {
     public function getBatchForCategoryLocation($category_id,$location_id,$chunk)
     {
         $allBatches=DB::table('batches')
-        //                ->whereBetween('batches.id', array($chunk, $chunk+99))
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
@@ -91,11 +90,9 @@ class Batch extends \Eloquent {
                 ->orderBy('institute_rating')
                 ->get();
     }
+
     public function getBatchForFilter($subcategories,$localities,$trials,$chunk)
     {
-        var_dump($trials);
-        var_dump($subcategories);
-        var_dump($localities);
         $allBatches=DB::table('batches')
                         ->whereIn('batches.batch_trial',$trials)
                         ->whereIn('batches.batch_subcategory_id',$subcategories)
@@ -114,57 +111,13 @@ class Batch extends \Eloquent {
         return $allBatches;
     }
 
-/*    public function getBatchForFilter($subcategories,$localities,$chunk)
-    {
-        $allBatches=DB::table('batches')
-                        //->whereBetween('batches.id', array($chunk, $chunk+99))
-                        ->Join('institutes','institutes.id','=','batches.batch_institute_id')
-                        ->Join('categories','categories.id','=','batches.batch_category_id')
-                        ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
-                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
-                        ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
-                        ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
-                        ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at');
-        if(!$subcategories[0]&&!$localities[0]){
-            return $allBatches
-                ->orderBy('institute_rating')
-                ->get();
-        }
-
-        else if(!$localities[0]){
-            return $allBatches
-                ->whereIn('batches.batch_subcategory_id',$subcategories)
-                ->skip($chunk)
-                ->take(100)
-                ->orderBy('institute_rating')
-                ->get();
-        }
-
-        else if(!$subcategories[0]){
-            return $allBatches
-                ->whereIn('venues.venue_locality_id',$localities)
-                ->skip($chunk)
-                ->take(100)
-                ->orderBy('institute_rating')
-                ->get();
-        }
-        else{
-            return $allBatches
-                ->whereIn('batches.batch_subcategory_id',$subcategories)
-                ->whereIn('venues.venue_locality_id',$localities)
-                ->skip($chunk)
-                ->take(100)
-                ->orderBy('institute_rating')
-                ->get();
-        }
-    }
-*/
-
     public function getBatch($id)
     {
+        //For incrementing batch view when someone open, show page.
         DB::table('batches')
             ->where('batches.id','=',$id)
             ->increment('batch_view');
+
         return DB::table('batches')
             ->where('batches.id','=',$id)
             ->Join('institutes','institutes.id','=','batches.batch_institute_id')

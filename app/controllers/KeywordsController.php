@@ -46,18 +46,19 @@ class KeywordsController extends \BaseController {
 	 */
 	public function show($category_id,$location_id="0",$chunk="0")
 	{
+		//check count how many time page is viewed in filter page.
 		//For future filters
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		
 		//For display
-		if(!$category_id)
+		if(!$category_id){
 			$subcategoriesForCategory=$this->subcategory->all();
+		}
 		else
-			$subcategoriesForCategory =  $this->subcategory->getSubcategoryForCategory($category_id);
+			$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
 		if(!$location_id)
 			$localitiesForLocation = $this->locality->all();
 		else		
@@ -92,7 +93,7 @@ class KeywordsController extends \BaseController {
 				array_push($subcategories, ($data->id));
 			}
 		}
-		var_dump($subcategories);
+		// var_dump($subcategories);
 		if(!$localities[0])
 		{
 			$locality=$this->locality->getLocalitiesForLocation($location_id);
@@ -101,29 +102,30 @@ class KeywordsController extends \BaseController {
 			}
 		}
 		// dd($trials);
-		//0 is also a valid option.
 		if(!$trials[0])
 		{
-			$trials=$this->trial;
-			array_push($trials,0);
+			$trials=array(0,1,2,3,4,5);
 		}
 
-		/*if(!$subcategories[0]&&!$localities[0]&&!$trials[5]){
+		if(!$subcategories[0]&&!$localities[0]&&!$trials[0]){
 			$chunk=$chunk*100;
+			// dd("TEST");
 			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		}
-		else*/{
+		else{
 			$chunk=$chunk*100;
 			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$trials,$chunk);
 		}
 		if(Request::ajax()){
-			if($batchesForCategoryLocation)
+			if($batchesForCategoryLocation){
+				// var_dump($batchesForCategoryLocation);
 				return $batchesForCategoryLocation;
+			}
 			else
 				return $batchesForCategoryLocation="Empty";
 		}
 		else{
-			dd($batchesForCategoryLocation);
+			// dd($batchesForCategoryLocation);
 			return View::make('Errors.pageNotFound');
 		}
 	}

@@ -106,7 +106,6 @@ class BatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//check count how many time page is viewed.
 		$batchDetails= $this->batch->getBatch($id);
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;

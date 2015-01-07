@@ -46,12 +46,15 @@ class Subcategory extends \Eloquent {
 
 	public function getSubcategoriesForCategory($subcategory_category_id)
     {
-    	return DB::table('subcategories')->where('subcategory_category_id','=',$subcategory_category_id)->get();
+        if($subcategory_category_id!=0)
+            return Subcategory::where('subcategory_category_id',$subcategory_category_id)->get();
+        else
+            return Subcategory::all();
     }
 
     public function disableSubcategoriesForCategory($subcategory_category_id)
     {
-		$subcategory=Subcategory::where('subcategory_category_id', '=', $subcategory_category_id)->delete();
+		    $subcategory=Subcategory::where('subcategory_category_id', '=', $subcategory_category_id)->delete();
     }
     
     public function enableSubcategoriesForCategory($subcategory_category_id)

@@ -34,7 +34,7 @@ class Locality extends \Eloquent {
 	public function getLocalitiesForLocation($locality_location_id)
 	{
 		if($locality_location_id!=0)
-			return DB::table('localities')->where('locality_location_id','=',$locality_location_id)->get();
+	        return Locality::where('locality_location_id',$locality_location_id)->get();
 		else
 			return Locality::all();
 	}

@@ -12,7 +12,7 @@ class Category extends \Eloquent {
     ];
         
 	public static $rules = [
-		'category'=>'required|alpha',
+		'category'=>'required|regex: /^[a-zA-Z-&_]/',
 	];
 
 	public function updateCategory($credentials,$id)

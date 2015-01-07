@@ -56,7 +56,7 @@
         {
             font-size: 15px;
             font-weight: 100;
-			padding-left:100px;
+			
         }
         .btn_save_div
         {
@@ -290,12 +290,12 @@
             </div>
         </div>
         <div class="row row_padding">
-            <div class="form-group col-sm-5">
-                <label class="col-sm-8 label1" for="batch_no_of_classes_in_week">No Of Sessions
+            <div class="form-group ">
+                <label class="col-sm-3 col-md-3 control-label label1" for="batch_no_of_classes_in_week">No Of Sessions
                     <span class="important_required">*</span>
                 </label>
-            <div class="col-sm-4">
-                <select class="form-control" tabindex=7 id="batch_no_of_classes_in_week" name="batch_no_of_classes_in_week" required>
+                <div class="col-sm-3 col-md-2">
+                    <select class="form-control" tabindex=7 id="batch_no_of_classes_in_week" name="batch_no_of_classes_in_week" required>
    	                @for ($i = 1; $i < 8; $i++)
 	                    <option value={{$i}}
 	                        @if(isset($batchDetails))
@@ -307,12 +307,12 @@
 	                        {{$i}}
 	                    </option>
                     @endfor
-                </select>
-            </div>
-            </div>
-            <div class="col-sm-2 input1">Price</div>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" tabindex=8 id="batch_price" name="batch_price" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
+                    </select>
+                </div>
+                <label class="col-sm-3 col-md-3 control-label input1" for="batch_price">Price</label>
+                <div class="col-sm-3 col-md-3">
+                    <input type="text" class="form-control" tabindex=8 id="batch_price" name="batch_price" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
+                </div>
             </div>
         </div>
         <div class="row row_padding">

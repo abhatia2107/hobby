@@ -2767,7 +2767,7 @@ hr {
 ::selection {
     color: white;
     text-shadow: none;
-	background-color:blue;
+	background-color:cornflowerblue;
 }
 ::-moz-selection {
     color: blue;

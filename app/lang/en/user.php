@@ -9,6 +9,10 @@
 		
 		"welcome"=>"Welcome ,:name",
 		
+		"user_disabled_by_admin"=>"Sorry, you have been disabled by our admin. 
+		If you think there is some problem or it is a mistake. 
+		Just drop a mail at our feedback. Our team will look into it soon.",
+
 		"user_updated"=>"You have successfully updated your personal detail",
 
 		"user_update_failed"=>"Sorry, We are unable to update your personal detail",

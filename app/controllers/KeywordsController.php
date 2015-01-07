@@ -77,39 +77,43 @@ class KeywordsController extends \BaseController {
 		}
 	}
 
-	public function filter($subcategoriesString,$localitiesString,$category_id,$location_id,$chunk)
+	public function filter($subcategoriesString,$localitiesString,$trialsString,$category_id,$location_id,$chunk)
 	{
 		$subcategories=explode(",",$subcategoriesString);
 		$localities=explode(",", $localitiesString);
-		$trials=explode(",", $trialString);
+		$trials=explode(",", $trialsString);
 		// TO DO: If any array is empty make a array corresponding to it with all venues,
 		// where condition for all the arrays will be applied in only one statement.  
 
 		if(!$subcategories[0])
 		{
-			$subcategory=$this->subcategory->getSubcategoryForCategory($category_id);
+			$subcategory=$this->subcategory->getSubcategoriesForCategory($category_id);
 			foreach ($subcategory as $data) {
 				array_push($subcategories, ($data->id));
 			}
 		}
 		if(!$localities[0])
 		{
-			$locality=$this->locality->getLocalityForLocation($location_id);
+			$locality=$this->locality->getLocalitiesForLocation($location_id);
 			foreach ($locality as $data) {
 				array_push($localities, ($data->id));
 			}
 		}
-		
-		if
+		// dd($trials);
+		//0 is also a valid option.
+		if(!$trials[0])
+		{
+			$trials=$this->trial;
+			array_push($trials,0);
+		}
 
-		if(!$subcategories[0]&&!$localities[0]){
+		/*if(!$subcategories[0]&&!$localities[0]&&!$trials[5]){
 			$chunk=$chunk*100;
 			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
-		
 		}
-		else{
+		else*/{
 			$chunk=$chunk*100;
-			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
+			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$trials,$chunk);
 		}
 		if(Request::ajax()){
 			if($batchesForCategoryLocation)
@@ -118,7 +122,7 @@ class KeywordsController extends \BaseController {
 				return $batchesForCategoryLocation="Empty";
 		}
 		else{
-			// dd($batchesForCategoryLocation);
+			dd($batchesForCategoryLocation);
 			return View::make('Errors.pageNotFound');
 		}
 	}

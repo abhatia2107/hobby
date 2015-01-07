@@ -91,49 +91,23 @@ class Batch extends \Eloquent {
                 ->orderBy('institute_rating')
                 ->get();
     }
-    public function getBatchForFilter($subcategories,$localities,$chunk)
+    public function getBatchForFilter($subcategories,$localities,$trials,$chunk)
     {
         $allBatches=DB::table('batches')
-                        //->whereBetween('batches.id', array($chunk, $chunk+99))
+                        ->whereIn('batches.batch_trial',$trials)
+                        /*->whereIn('batches.batch_subcategory_id',$subcategories)
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
+                        ->whereIn('venues.venue_locality_id',$localities)
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
-                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
-                        ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at');
-        if(!$subcategories[0]&&!$localities[0]){
-            return $allBatches
-                ->orderBy('institute_rating')
-                ->get();
-        }
-
-        else if(!$localities[0]){
-            return $allBatches
-                ->whereIn('batches.batch_subcategory_id',$subcategories)
-                ->skip($chunk)
-                ->take(100)
-                ->orderBy('institute_rating')
-                ->get();
-        }
-
-        else if(!$subcategories[0]){
-            return $allBatches
-                ->whereIn('venues.venue_locality_id',$localities)
-                ->skip($chunk)
-                ->take(100)
-                ->orderBy('institute_rating')
-                ->get();
-        }
-        else{
-            return $allBatches
-                ->whereIn('batches.batch_subcategory_id',$subcategories)
-                ->whereIn('venues.venue_locality_id',$localities)
-                ->skip($chunk)
-                ->take(100)
-                ->orderBy('institute_rating')
-                ->get();
-        }
+                        ->skip($chunk)
+                        ->take(100)
+                        ->orderBy('institute_rating')
+                        */->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+                        ->get();
     }
 
 /*    public function getBatchForFilter($subcategories,$localities,$chunk)

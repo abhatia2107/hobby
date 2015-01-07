@@ -9,9 +9,12 @@
  * Licensed under the MIT license:
  * http://www.opensource.org/licenses/MIT
  */
+html{
+    overflow-x: hidden; 
+}
 body {
-  padding-top: 60px;
-  overflow-x: hidden;
+/*  padding-top: 60px;
+*/  overflow-x: hidden;
 }
 .header_img
 {

@@ -59,8 +59,9 @@ class UsersController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$userDetails=User::find($id);
-		return View::make('Users.show',compact('userDetails'));
+		return Redirect::to('users/changepassword');
+		// $userDetails=User::find($id);
+		// return View::make('Users.show',compact('userDetails'));
 	}
 
 	/**
@@ -198,6 +199,9 @@ class UsersController extends \BaseController {
 		$userDetails=$this->user->where('email','=',Input::get('email'))->first();
 		if(!$userDetails)
 		{
+			$userDetails=User::onlyTrashed()->where('email','=',Input::get('email'))->first();
+			if($userDetails)
+				return Redirect::back()->with('failure',Lang::get('user.user_disabled_by_admin'));
 			return Redirect::to('/users/signup')->with('failure',Lang::get('user.user_not_registered'));
 		}
 		/* To check whether the user has verified his/her email or not. */
@@ -235,7 +239,6 @@ class UsersController extends \BaseController {
 		return [
 			"email"=>Input::get('email'),
 			"password"=>Input::get('password'),
-			"user_confirmed"=>1,
 		];
 	}
 	/**
@@ -348,6 +351,7 @@ class UsersController extends \BaseController {
 	 */
 	public function getChangePassword()
 	{
+		// dd("G");
 		return View::make('Users.changePassword');
 	}
 	/**

@@ -1,6 +1,6 @@
 @extends('Layouts.layout')
 @section('content')
-    <form method="post" enctype="multipart/form-data" action="/users/update">
+    <form role="form" method="post" enctype="multipart/form-data" action="/users/changepassword/submit">
 		<div class="col-xs-12 col-sm-6">
 		<div class="form-group required">
 		<label for="InputPasswordnew"> Current Password<sup>*</sup> </label>

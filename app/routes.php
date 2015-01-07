@@ -164,11 +164,10 @@ Route::get('/venues/delete/{id}','VenuesController@destroy');
 Route::get('/users','UsersController@index');
 Route::get('/users/create','UsersController@create');
 Route::post('/users/store','UsersController@store');
-Route::get('/users/myaccount','UsersController@show');
+Route::get('/users/changepassword','UsersController@getChangePassword');
 Route::get('/users/edit','VenuesController@edit');
 Route::post('/users/update','UsersController@update');
 Route::get('/users/delete/{id}','UsersController@destroy');
-Route::get('/users/{id}','UsersController@show');
 Route::get('/users/login', 'UsersController@getLogin');
 Route::get('/users/logout','UsersController@getLogout');
 Route::get('/users/signup','UsersController@getSignUp');
@@ -177,10 +176,11 @@ Route::get('/users/disable/{id}','UsersController@disable');
 Route::get('/users/subscribe/{id}','UsersController@subscribe');
 Route::get('/users/unsubscribe/{id}','UsersController@unsubscribe');
 Route::get('/users/registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
-Route::get('/users/changepassword','UsersController@getChangePassword');
 Route::get('/users/password/remind','RemindersController@getRemind');
 Route::get('/users/password/reset/{token}','RemindersController@getReset');
 Route::post('/users/password/reset/submit','RemindersController@postReset');
+// Issues with this route. It get calls always.
+Route::get('/users/{id}','UsersController@show');
 
 Route::group(array('before' => "csrf"), function() {
 	Route::post('/comments/store','CommentsController@store');
@@ -236,6 +236,6 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}','Keywords
 
 // Route::get('/filter/categories/{category_id}/locations/{location_id}/keywords/{keyword?}','KeywordsController@show');
 
-Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id}/{location_id}/{chunk}','KeywordsController@filter');
+Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{category_id}/{location_id}/{chunk}','KeywordsController@filter');
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','KeywordsController@show');

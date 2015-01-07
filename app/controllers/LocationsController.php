@@ -105,7 +105,7 @@ class LocationsController extends \BaseController {
 		if($location){
 			$locationDisabled=Location::onlyTrashed()->find($id);
 			if($locationDisabled){
-				$this->locality->enableLocalityForLocation($id);
+				$this->locality->enableLocalitiesForLocation($id);
 				$locationDisabled->restore();	
 				return Redirect::to('/locations')->with('success',Lang::get('location.location_enabled'));
 			}
@@ -122,7 +122,7 @@ class LocationsController extends \BaseController {
 		$location=Location::find($id);	
 		//dd($location);
 		if($location){
-			$this->locality->disableLocalityForLocation($id);
+			$this->locality->disableLocalitiesForLocation($id);
 			$location->delete();
 			return Redirect::to('/locations')->with('success',Lang::get('location.location_disabled'));
 		}
@@ -143,7 +143,7 @@ class LocationsController extends \BaseController {
 	{
 		$location=Location::withTrashed()->find($id);
 		if($location){
-			$this->locality->deleteLocalityForLocation($id);
+			$this->locality->deleteLocalitiesForLocation($id);
 			$location->forceDelete();
 			return Redirect::to('/locations')->with('success',Lang::get('location.location_deleted'));
 		}

@@ -20,7 +20,7 @@ class BaseController extends Controller {
 	protected $difficulty_level=array("All","Beginners","Intermediate","Advanced");
 	protected $gender_group=array("Both","Male","Female");
 	protected $recurring=array("Not recurring","Weekly","Monthly","Yearly");
-	protected $trial=array("Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only in beginning of batch","Paid Trial only in beginning of batch");
+	protected $trial=array("Trial Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only in beginning of batch","Paid Trial only in beginning of batch");
 	protected $weekdays=array("monday","tuesday","wednesday","thursday","friday","saturday","Sunday");
 	
 	/**

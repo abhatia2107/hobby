@@ -69,7 +69,7 @@ margin-top:-20px;
     padding-top: 15px;
     font-size: 15px;
     width:51%;
-    padding-left:41px !important;
+    padding-left:4px !important;
     color:white;
 }
 .header_myaccount_a {

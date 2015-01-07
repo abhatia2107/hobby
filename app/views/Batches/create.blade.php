@@ -60,7 +60,9 @@
         }
         .btn_save_div
         {
-            width: 53%;
+            
+            position: relative;
+left: 30%;
         }
         .input1
          {
@@ -369,8 +371,8 @@
             </div>
         </div>
         <div class="btn_save_div" >
-            <button type="submit" tabindex=22 class="btn btn-primary"> @if(isset($batchDetails)) <i class="fa fa-save"></i>  Save @else <i class="fa fa-plus"></i>  Create @endif</button>
-            <button type="reset" tabindex=23 class="btn btn-primary"><i class="fa fa-power-off"></i> Reset</button>
+            <button type="submit" tabindex=22 class="btn btn-success btn-lg"> @if(isset($batchDetails)) <i class="fa fa-save"></i>  Save @else <i class="fa fa-plus"></i>  Create @endif</button>
+            <button type="reset" tabindex=23 class="btn btn-warning btn-lg"><i class="fa fa-power-off"></i> Reset</button>
         </div>
     </form>
 </div>

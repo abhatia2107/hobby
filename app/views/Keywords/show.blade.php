@@ -13,7 +13,9 @@
         -webkit-box-shadow: 0px 3px 0px -2px #0099FF;
             box-shadow: 0px 3px 0px -2px #0099FF;
              color: #333;
-
+font-family: "Times New Roman", Times, serif;
+font-size: 15px;
+font-weight: 100;
     }
     #filter_data
    	{
@@ -21,12 +23,15 @@
    		box-shadow: 0px 0px 4px #3366CC;-moz-box-shadow: 0px 0px 4px #3366CC;-webkit-box-shadow: 0px 0px 4px #3366CC;
    		margin-bottom: 20px;
    		 color: #333;
+   		 font-family: "Times New Roman", Times, serif;
+   		 font-size: 15px;
    	}
     #batch_name
     {
     	font-size: 22px;
     	font-weight: bold;
     	color: #0033CC;
+    	float: left;
     }
     #inst_tagline
     {
@@ -44,20 +49,39 @@
     	font-size: 16px;
     	font-weight: normal;
     	 color: #333;
+    	 clear: both;
+    	 float: left;
     }
     .filters
     {
-    	max-height: 155px;
+    	max-height: 104px;
     	overflow: auto;
     	 color: #333;
     }
     #browse-filter
     {
-    	
+    	margin-top: -20px;	
+    	font-family: "Times New Roman", Times, serif;
     }
+
     .filter2
     {
-    	line-height: 1em;
+    	line-height: 1.3em;
+
+    	font-family: "Times New Roman", Times, serif;
+    }
+      .filter3
+      {
+      	font-family: "Times New Roman", Times, serif;	
+      	line-height: 1.3em;
+      }
+    #filter-option-2
+    {
+    	    	margin-top: -60px;
+    }
+    .filter1
+    {
+    	line-height: 1.3em;
     }
     .sub
     {
@@ -66,6 +90,9 @@
     #browse-filter h4
     {
     	color:black;
+    	line-height: 0.3em;
+    	 font-family: "Times New Roman", Times, serif;
+   		 font-size: 20px;
     }
     #fiter-text 
     {
@@ -138,7 +165,7 @@
 	    color: #333;
 	    text-align: center;
 	    float: left;
-	    margin-left: 18px;
+	    margin-left: 14px;
 	    margin-bottom: 5px;
 	}
 	.rating_starts
@@ -166,6 +193,20 @@
 	{
 		margin-top: 10px;
 	}
+	#tag-icon
+	{
+		float:left;
+		font-weight: bolder;
+		font-size: 18px;
+		text-align: right;
+	}
+	#tag-icon .glyphicon
+	{
+		color: #0099FF;
+		font-size: 22px;
+		margin-right: 9px;
+	}
+
 	#hand-icon
 	{
 		color: #0099FF;
@@ -223,6 +264,7 @@
 	#batch-schedule
 	{
 		margin-top: 10px;
+		text-align: center;
 	}
 	.sendMessage a
 	{
@@ -237,6 +279,8 @@
 	#sendMessage 
 	{
 		border-radius: 5px;
+		 font-family: "Times New Roman", Times, serif;
+   		 font-size: 15px;
 	}
 	#sendMessage .modal-dialog
 	{
@@ -285,6 +329,22 @@
 	float: right;
 	font-size: 100px;
 }
+#close_model:hover
+{
+	color: black
+}
+#filter-tittle-name
+{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+	color: gray;
+}
+.breadcrumb
+{
+	background: white;
+	font-family: "Times New Roman", Times, serif;
+
+}
 
 </style>
 </head>
@@ -295,7 +355,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				 <button type="button" id='close_model' class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				
 					<center>Send Message To Institute</center>
 			</div>
@@ -308,6 +368,10 @@
 					<div class="form-group inner-addon left-addon">
 						<i class="glyphicon glyphicon-envelope"></i>
 						 <input type="email" class="form-control" name='InputEmail' id='MsgInputEmail'  placeholder='Enter Your E-Mail Address' required='required'/>
+					</div>
+					<div class="form-group inner-addon left-addon">
+						<i class="glyphicon glyphicon-phone"></i>
+						 <input type="phone" class="form-control" name='InputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
 					</div>
 					<div class="form-group">
 					  <label for="comment">Message:</label>
@@ -324,10 +388,20 @@
 <div class="container" >
 	<div class="row clearfix">
 		<div class="col-md-12 col-xs-12 col-sm-12 column">
+			<ul class="breadcrumb" style="background: white;">
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<?php $batchDet = $batchesForCategoryLocation[0]; ?>
+					<a href="javascript:void()">{{$batchDet->category}}</a>
+				</li>
+				<li></li>
+			</ul>
 			<div class="row clearfix">
 				<!--Start of filter division -->
-				<div class="col-md-3 col-xs-12 col-sm-3 column">
-					<h4>Filter Options</h4>
+				<div class="col-md-3 col-xs-12 col-sm-3 column" style="margin-top:-5px">
+					<span id='filter-tittle-name'>Filter By</span>
 					<div id="browse-filter">	
 						<h4>Sub Categories</h4> 
 						<ul class="list-unstyled filters filter1" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
@@ -339,15 +413,17 @@
 								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory); 
 							?>				
 							<li subcategory="{{$sub_id}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" class="SubCheckbox" />{{' '.$subcategory}}</label>
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" />{{' '.$subcategory}}</label>
 							</li>
 						 @endforeach
 						 </ul> 
+						 <hr>
 					</div>
 					<br>
-					<div id="browse-filter">	
+					<div id="browse-filter" >	
+						<div id="filter-option-2">
 						<h4>Locality</h4> 
-						<ul class="list-unstyled filters filter1" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+						<ul class="list-unstyled filters filter2" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 						@foreach ($localitiesForLocation as $localityData)
 							<?php 
 								$locality = $localityData->locality;
@@ -355,15 +431,26 @@
 								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $locality);
 							?>
 							<li subcategory="{{$loc_id}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox" />{{' '.$locality}}</label>
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" />{{' '.$locality}}</label>
+							</li> 
+						@endforeach
+						 </ul>
+						 </div> 
+						 <hr>
+					</div>
+					<div id="browse-filter">	
+						<h4>Trial Available</h4> 
+						<ul class="list-unstyled filters filter3" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+						@foreach ($trial as $index => $trialValue)
+							<li trial="{{$index}}" >								
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$index}}" type="checkbox" class="trialCheckbox filterCheckBox" />{{' '.$trialValue}}</label>
 							</li> 
 						@endforeach
 						 </ul> 
+						 <hr>
 					</div>
 				</div>
-				<div class="col-md-9 col-xs-11 col-sm-9 column" >
-					<center><h4>Results</h4></center>
-					
+				<div class="col-md-9 col-xs-11 col-sm-9 column" style=" font-family: "Times New Roman", Times, serif;" >
 					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><center><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</center></div>
@@ -377,6 +464,7 @@
 </body>
 <script type="text/javascript">
 	var result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
+	var trials = <?php echo json_encode( $trial ) ?>;
 	var categoryId = "<?php echo $category_id; ?>";
 	var locationId = "<?php echo $location_id; ?>";
 	var range = 10;
@@ -387,6 +475,9 @@
 	var resultCount = 0;
 	var sub_select = new Array();
 	var loc_select = new Array();
+	var filter_select = new Array();
+	var trial_select = new Array();
+
 	if(result.length==0)	
 	{
 		$('#loadMore').css('display','none');
@@ -410,13 +501,15 @@
 	}
 	displayResults(result,0);
 	LoadResult(0,20);
-	function LoadFilterResults(sub_select,loc_select,start)
+	function LoadFilterResults(sub_select,loc_select,trial_select,start)
 	{
 		resultRange = result.length;
 		if(sub_select.length==0)
 			sub_select=0;
 		if(loc_select.length==0)
-			loc_select=0;
+			locloc_select=0;
+		if(trial_select.length==0)
+			trial_select =0;
 		$.get("/filter/"+sub_select+"/"+loc_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
 		{
 			chunk++;
@@ -436,7 +529,7 @@
 				var count  = LoadResult(start,start+20);
 				if(count<10)
 				{
-					LoadFilterResults(sub_select,loc_select,0);
+					LoadFilterResults(sub_select,loc_select,trial_select,0);
 				}
 			}
 		});
@@ -471,6 +564,7 @@
 			var contact = results[index]['venue_contact_no'];
 			var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
 			var daysResult = new Array();
+			var trialID = results[index]['batch_trial'];
 			for(day = 0;day<7;day++)
 			{
 				var dayID = "batch_class_on_"+weekDays[day];
@@ -482,8 +576,13 @@
 						"<div class='row clearfix batch'>"+
 							"<div class='col-md-12 col-xs-12 col-sm-12 column' >"+
 								"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
-									"<span id='batch_name'><a href='/batches/"+batchID+"' >"+batch+"<br></span></a>"+
-									"<span class='inst_name'>"+institute+".</span>"+
+									"<div class='col-md-8 col-xs-12 col-sm-8 column'>"+
+										"<span id='batch_name'><a href='/batches/"+batchID+"' >"+batch+"</span></a>"+
+										"<br><span class='inst_name'>"+institute+".</span>"+
+									"</div>"+
+									"<div class='col-md-4 col-xs-12 col-sm-4 column'>"+
+										"<span id='tag-icon' ><span class='glyphicon glyphicon glyphicon-tags'></span>"+trials[trialID]+"</span>"+	
+									"</div>"+
 								"</div>"+
 							"</div>"+
 						"</div>"+
@@ -554,7 +653,7 @@
 					if(filterStatus)
 					{
 						//alert(sub_select+","+loc_select);
-						LoadFilterResults(sub_select,loc_select,resultRange);
+						LoadFilterResults(sub_select,loc_select,trial_select,resultRange);
 
 					}
 				}
@@ -576,13 +675,16 @@
 			//alert('yes');
 		//	alert(result.length);
 			$(linksContainer).empty();
-			sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-			loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
+			filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();
+			alert(filter_select.length);
 			//alert(sub_select+','+loc_select);
-			if(sub_select.length>0 || loc_select.length>0)
+			if(filter_select.length>0)
 			{
+				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
+				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
+				trial_select =  $('.trialCheckbox:checked').map(function(){return this.value;}).get(); 
 				chunk = 0;
-				LoadFilterResults(sub_select,loc_select,0);
+				LoadFilterResults(sub_select,loc_select,trial_select,0);
 			}
 			else
 			{

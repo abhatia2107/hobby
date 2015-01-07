@@ -233,6 +233,6 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}','Keywords
 
 // Route::get('/filter/categories/{category_id}/locations/{location_id}/keywords/{keyword?}','KeywordsController@show');
 
-Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id}/{location_id}/{chunk}','KeywordsController@filter');
+Route::get('/filter/{subcategoriesString}/{localitiesString}/{trailsString}/{category_id}/{location_id}/{chunk}','KeywordsController@filter');
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','KeywordsController@show');

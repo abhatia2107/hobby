@@ -1,5 +1,5 @@
 @section("header")
-	<div class="clearfix header_row1" >
+	<div class="clearfix header_row1" style="background:#3b5998" >
 		<div class=" col-sm-4 col-md-4  ">
 			<a class="navbar-brand" href="/">
 				<img src="/assets/images/logo.png" class="img-responsive header_img" alt="HOBBY">

@@ -77,10 +77,11 @@ class KeywordsController extends \BaseController {
 		}
 	}
 
-	public function filter($subcategoriesString,$localitiesString,$category_id,$location_id,$chunk)
+	public function filter($subcategoriesString,$localitiesString,$trailsString,$category_id,$location_id,$chunk)
 	{
 		$subcategories=explode(",",$subcategoriesString);
 		$localities=explode(",", $localitiesString);
+		$trails=explode(",", $trailsString);
 		if(!$subcategories[0]&&!$localities[0]){
 			$chunk=$chunk*100;
 			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);

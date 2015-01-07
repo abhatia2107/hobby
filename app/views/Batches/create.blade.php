@@ -67,13 +67,13 @@
             font-size: 15px;
             height:32px;
          }
-
+@media(min-width:992px){
          #classInfo1
          {
             margin-left: auto;
             margin-right: auto;
             width: 900px;
-         }
+         }}
          .create_class
          {
             font-size: 20px;

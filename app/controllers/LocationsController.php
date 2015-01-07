@@ -12,7 +12,9 @@ class LocationsController extends \BaseController {
 	{
 		$locations=Location::withTrashed()->get();
 		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Locations.index',compact('locations','tableName'));
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Locations.index',compact('locations','tableName','count','adminPanelListing'));
 	}
 
 	/**

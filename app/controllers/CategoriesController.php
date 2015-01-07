@@ -13,7 +13,9 @@ class CategoriesController extends \BaseController {
 	{
 		$categories=Category::withTrashed()->get();
 		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Categories.index',compact('categories','tableName'));
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Categories.index',compact('categories','tableName','count','adminPanelListing'));
 	}
 
 	/**

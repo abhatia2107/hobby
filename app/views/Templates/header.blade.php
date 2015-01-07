@@ -19,7 +19,12 @@
 			</form>
 		</div>
 		<?php
-			$id=Auth::id()
+			$id=Auth::id();
+			if($id)
+			{
+				$user=User::find($id);
+				$name=$user->user_first_name;
+			}
 		?>
 		@if(!$id)
 			<div class=" col-sm-3 col-md-3 ">
@@ -36,7 +41,7 @@
 			<div class=" col-sm-3 col-md-3 ">
 			<ul class="list-inline">
 			<li class="header_myaccount" >   
-			<a class="header_myaccount_a" href="/users/{{$id}}">My Account</a>
+			<a class="header_myaccount_a" href="/users/{{$id}}">{{$name}}'s Account</a>
 			</li>
 			<li class="header_logout" >
 			<a class="header_logout_a" href="/users/logout" >Logout</a>

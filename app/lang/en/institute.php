@@ -18,6 +18,10 @@
 		
 		"institute_disable_failed" => "You already have disabled the institute",
 		
+		"institute_disabled_by_admin"=>"Sorry, your institute have been disabled by our admin. 
+		If you think there is some problem or it is a mistake. 
+		Just drop a mail at our feedback. Our team will look into it soon.",
+
 		"institute_deleted"=>"Your institute have been deleted successfully",
 		
 		"institute_delete_failed" => "Sorry, No institute exist with this ID.",

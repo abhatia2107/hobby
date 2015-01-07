@@ -78,33 +78,17 @@
      <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
      <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-           <li class="active">
-              <a href="/admins/home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-           </li>
+              <li class="active">
+                <a href="/admins/home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+              </li>
            <li class="active">
               <a href="/batches/approve"><i class="fa fa-fw fa-dashboard"></i> Approval</a>
            </li>
-           <li class="active">
-              <a href="/institutes"><i class="fa fa-fw fa-dashboard"></i> Institutes</a>
+        @foreach($adminPanelListing as $key => $value)
+          <li class="active">
+              <a href="/{{$key}}"><i class="fa fa-fw fa-dashboard"></i> {{$value}} </a>
            </li>
-           <li class="active">
-              <a href="/users"><i class="fa fa-fw fa-dashboard"></i> Users</a>
-           </li>
-           <li class="active">
-              <a href="/categories"><i class="fa fa-fw fa-dashboard"></i> Categories</a>
-           </li><li class="active">
-              <a href="/subcategories"><i class="fa fa-fw fa-dashboard"></i> Sub-Categories</a>
-           </li>
-           <li class="active">
-              <a href="/locations"><i class="fa fa-fw fa-dashboard"></i> Locations</a>
-           </li><li class="active">
-              <a href="/localities"><i class="fa fa-fw fa-dashboard"></i> Localities</a>
-           </li>
-           <li class="active">
-              <a href="/subscriptions"><i class="fa fa-fw fa-dashboard"></i> Subscriptions</a>
-           </li><li class="active">
-              <a href="/feedbacks"><i class="fa fa-fw fa-dashboard"></i> Feedbacks</a>
-           </li>
+        @endforeach
             <li class="active">
               <a href="/admins"><i class="fa fa-fw fa-dashboard"></i> Main Admin</a>
            </li>

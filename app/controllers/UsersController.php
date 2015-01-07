@@ -18,8 +18,9 @@ class UsersController extends \BaseController {
 	{
 		$users=User::withTrashed()->get();
 		$tableName="$_SERVER[REQUEST_URI]";
-		// dd($users[0]);
-		return View::make('Users.index',compact('users','tableName'));
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Users.index',compact('users','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -118,7 +119,8 @@ class UsersController extends \BaseController {
 
 	public function disable($id)
 	{
-		$user=User::find($id);	
+		$user=User::find($id);
+			
 		// dd($user);
 		if($user){
 			$user->delete();

@@ -63,12 +63,12 @@
    </aside>
    <aside id="listify_widget_recent_listings-3" class="home-widget listify_widget_recent_listings">
       <hgroup class="home-widget-section-title">
-         <h2 class="home-widget-title">{{$homeLang['home_recent_title']}}</h2>
-         <h2 class="home-widget-description">{{$homeLang['home_recent_subtitle']}}</h2>
+         <h2 class="home-widget-title">{{$homeLang['home_featured_title']}}</h2>
+         <h2 class="home-widget-description">{{$homeLang['home_featured_subtitle']}}</h2>
       </hgroup>
       <ul class="job_listings">
-         @if(isset($recentBatches))
-            @foreach($recentBatches as $data)
+         @if(isset($featuredBatches))
+            @foreach($featuredBatches as $data)
                <li id="job_listing-685" class="post-685 job_listing type-job_listing status-publish has-post-thumbnail hentry col-xs-12 col-sm-6 col-md-4 style-grid" data-longitude="-79.4255347" data-latitude="43.6380835" data-color="#627e82" data-icon="ion-scissors" data-term="174" data-grid-columns="col-xs-12 col-sm-6 col-md-4">
                   <div class="content-box">
                      <a href="/batches/{{$data->id}}" class="job_listing-clickbox"></a>

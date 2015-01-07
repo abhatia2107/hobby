@@ -12,7 +12,9 @@ class FeedbacksController extends \BaseController {
 	{
 		$feedbacks=Feedback::all();
 		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Feedbacks.index',compact('feedbacks','tableName'));
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Feedbacks.index',compact('feedbacks','tableName','count','adminPanelListing'));
 	}
 
 	/**

@@ -12,7 +12,9 @@ class LocalitiesController extends \BaseController {
 	{
 		$localities=$this->locality->getAllLocalities();
 		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Localities.index',compact('localities','tableName'));
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Localities.index',compact('localities','tableName','count','adminPanelListing'));
 	}
 
 	/**

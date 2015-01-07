@@ -115,7 +115,7 @@ left: 30%;
 @section('content')
 <div class="container-fluid">
     <div id="classInfo1">
-    <form role="form" class="form-horizontal" id="classInfo">
+    <form role="form" class="form-horizontal" action="/batches/store" method="post" enctype="multipart/form-data" id="classInfo">
         
         <div class="row row_padding">
             <p  class="create_class">Create your Class
@@ -125,17 +125,18 @@ left: 30%;
         </div>
         <div class="row row_padding">
             <div class="form-group">
-                <label for="InputBatch" class="col-sm-3 control-label label1">Title<span class="important_required">*</span></label>
+                <label for="batch" class="col-sm-3 control-label label1">Title<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control input1" id="InputBatch" name="batch" value="@if(isset($batchDetails)){{$batchDetails->batch}}@else{{Input::old('batch')}}@endif" required>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="text" class="form-control input1" id="batch" name="batch" value="@if(isset($batchDetails)){{$batchDetails->batch}}@else{{Input::old('batch')}}@endif" required>
                 </div>
             </div>
         </div>
         <div class="row row_padding">
             <div class="form-group">
-                <label for="batch_tagline" class="col-sm-3 control-label label1">Tagline<span class="important_required">*</span></label>
+                <label for="batch_tagline" class="col-sm-3 control-label label1">Tagline</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" tabindex=2 title="Not more than 40 characters" maxlength="40" id="batch_tagline"  name="batch_tagline" value="@if(isset($batchDetails)){{$batchDetails->batch_tagline}}@else{{Input::old('batch_tagline')}}@endif" required>
+                    <input type="text" class="form-control" title="Not more than 40 characters" maxlength="40" id="batch_tagline"  name="batch_tagline" value="@if(isset($batchDetails)){{$batchDetails->batch_tagline}}@else{{Input::old('batch_tagline')}}@endif" required>
                 </div>
             </div>
         </div>
@@ -159,7 +160,7 @@ left: 30%;
                 </div>
                 <label name="batch_subcategory_id" class="col-sm-3 col-md-3 control-label label1">Sub Category<span class="important_required">*</span></label>
                 <div class="col-sm-3 col-md-3">
-                    <select class="form-control input1" tabindex=7 name="batch_subcategory_id" id="batch_subcategory_id" required>
+                    <select class="form-control input1" name="batch_subcategory_id" id="batch_subcategory_id">
                         @foreach ($all_subcategories as $data)
                         <option value={{$data->id}}
                             @if(isset($batchDetails))
@@ -180,7 +181,7 @@ left: 30%;
                     <label class="col-sm-3 control-label label1">Photo Gallery</label>
                     <div class="col-sm-6">
                         <span class="btn btn-default btn-file" >
-                            Add Photos <input type="file" id="batch_photo" tabindex=18 name="batch_photo" value="@if(isset($batchDetails)){{$batchDetails->batch_photo}}@endif">
+                            Add Photos <input type="file" id="batch_photo" name="batch_photo" value="@if(isset($batchDetails)){{$batchDetails->batch_photo}}@endif">
                         </span>
                         <span class="img_requirement_span">
                             <ul class="ul-without-bullets">
@@ -197,7 +198,7 @@ left: 30%;
             <div class="form-group">
                 <label for="batch_accomplishment" class="col-sm-3 control-label label1">What will participants achieve through this class?<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <textarea name="batch_accomplishment" id="batch_accomplishment" tabindex=21 class="jqte-test" >@if(isset($batchDetails)){{$batchDetails->batch_accomplishment}}@else{{Input::old('batch_accomplishment')}}@endif</textarea>
+                    <textarea name="batch_accomplishment" id="batch_accomplishment" =21 class="jqte-test" >@if(isset($batchDetails)){{$batchDetails->batch_accomplishment}}@else{{Input::old('batch_accomplishment')}}@endif</textarea>
                 </div>
             </div>
         </div>
@@ -214,7 +215,7 @@ left: 30%;
                         @foreach($difficulty_level as $data)
 						<li>
                         <label>
-                            <input name="batch_difficulty_level" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$i)?'checked':''}}@else{{"Input::old('batch_difficulty_level')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_difficulty_level" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$i)?'checked':''}}@else{{"Input::old('batch_difficulty_level')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                             <?php $i++; ?>
                         </label>
 						</li>
@@ -233,7 +234,7 @@ left: 30%;
                         @foreach($age_group as $data)
 						<li>
                         <label >
-                            <input name="batch_age_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$i)?'checked':''}}@else{{"Input::old('batch_age_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_age_group" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$i)?'checked':''}}@else{{"Input::old('batch_age_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                             <?php $i++; ?>
                         </label>
 						</li>
@@ -252,7 +253,7 @@ left: 30%;
                         @foreach($gender_group as $data)
 						<li>
                         <label>
-                            <input name="batch_gender_group" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$i)?'checked':''}}@else{{"Input::old('batch_gender_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_gender_group" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$i)?'checked':''}}@else{{"Input::old('batch_gender_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                             <?php $i++; ?>
                         </label>
 						</li>
@@ -272,7 +273,7 @@ left: 30%;
                 <label for="batch_venue_id" class="col-sm-3 control-label label1">Venue<span class="important_required">*</span></label>
                 
                 <div class="col-sm-6">
-                    <select class="form-control" tabindex=7 id="batch_venue_id" name="batch_venue_id" required>
+                    <select class="form-control" id="batch_venue_id" name="batch_venue_id" required>
                         @foreach ($all_venues as $data)
 	                        <option value={{$data->id}}
 	                            @if(isset($batchDetails))
@@ -297,7 +298,7 @@ left: 30%;
                     <span class="important_required">*</span>
                 </label>
                 <div class="col-sm-3 col-md-2">
-                    <select class="form-control" tabindex=7 id="batch_no_of_classes_in_week" name="batch_no_of_classes_in_week" required>
+                    <select class="form-control" id="batch_no_of_classes_in_week" name="batch_no_of_classes_in_week" required>
    	                @for ($i = 1; $i < 8; $i++)
 	                    <option value={{$i}}
 	                        @if(isset($batchDetails))
@@ -313,7 +314,7 @@ left: 30%;
                 </div>
                 <label class="col-sm-3 col-md-3 control-label input1" for="batch_price">Price</label>
                 <div class="col-sm-3 col-md-3">
-                    <input type="text" class="form-control" tabindex=8 id="batch_price" name="batch_price" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
+                    <input type="text" class="form-control" id="batch_price" name="batch_price" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
                 </div>
             </div>
         </div>
@@ -352,7 +353,7 @@ left: 30%;
                         @foreach($trial as $data)
 						<li>
                         <label>
-                            <input name="batch_trial" id="batch_trial" tabindex=13 value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$i)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_trial" id="batch_trial" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$i)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                             <?php $i++; ?>
                         </label>
 						</li>
@@ -366,18 +367,18 @@ left: 30%;
             <div class="form-group">
                 <label for="batch_comment" class="col-sm-3 control-label label1">Tell us more about your batch(Prerequisite required, anything else you wish to share)<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <textarea  class="jqte-test" name="batch_comment" id="batch_comment" tabindex=21  >@if(isset($batchDetails)){{$batchDetails->batch_comment}}@else{{Input::old('batch_comment')}}@endif</textarea>
+                    <textarea  class="jqte-test" name="batch_comment" id="batch_comment" =21  >@if(isset($batchDetails)){{$batchDetails->batch_comment}}@else{{Input::old('batch_comment')}}@endif</textarea>
                 </div>
             </div>
         </div>
         <div class="btn_save_div" >
-            <button type="submit" tabindex=22 class="btn btn-success btn-lg"> @if(isset($batchDetails)) <i class="fa fa-save"></i>  Save @else <i class="fa fa-plus"></i>  Create @endif</button>
-            <button type="reset" tabindex=23 class="btn btn-warning btn-lg"><i class="fa fa-power-off"></i> Reset</button>
+            <button type="submit" class="btn btn-success btn-lg"> @if(isset($batchDetails)) <i class="fa fa-save"></i>  Save @else <i class="fa fa-plus"></i>  Create @endif</button>
+            <button type="reset" class="btn btn-warning btn-lg"><i class="fa fa-power-off"></i> Reset</button>
         </div>
     </form>
 </div>
 </div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -428,7 +429,7 @@ left: 30%;
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal2" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form name="venueform" id="venueform" role="form">
@@ -525,7 +526,7 @@ left: 30%;
 @stop
 @section('pagejquery')
 <script type="text/javascript">
-	$(document).ready(function(){
+    $(document).ready(function(){
         $("#session1").change(function(e){
             if($("#session1").val()==1)
             {
@@ -541,7 +542,7 @@ left: 30%;
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-                InputBatch: {
+                batch: {
                     message: 'The title is not valid',
                     validators: {
                         notEmpty: {
@@ -559,19 +560,21 @@ left: 30%;
                     }
                 },
                 batch_tagline: {
-                    message: 'The pitch is not valid',
+                    message: 'The tagline is not valid',
                     validators: {
-                        notEmpty: {
-                            message: 'The  pitch is required and cannot be empty'
-                        },
-                        stringLength: {
-                            min: 3,
-
-                            message: 'The pitch must be more than 3  characters long'
-                        },
                         regexp: {
                             regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                            message: 'The  pitch can only consist of alphabets'
+                            message: 'The  tagline can only consist of alphabets'
+                        }
+                    }
+                },
+
+                batch_price: {
+                    message: 'The Price is not valid',
+                    validators: {
+                        regexp: {
+                            regexp: /^[0-9]/,
+                            message: 'The  Price can only consist of numbers.'
                         }
                     }
                 },
@@ -593,45 +596,6 @@ left: 30%;
                         }
                     }
                 },
-
-                time1: {
-                    message: 'The timings is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The timings are  required and cannot be empty'
-                        }
-
-                    }
-                },
-                time2: {
-                    message: 'The timings is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The timings are  required and cannot be empty'
-                        }
-
-                    }
-                },
-                date1: {
-                    message: 'The date is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The date are  required and cannot be empty'
-                        }
-
-                    }
-                },
-                date2: {
-                    message: 'The date is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The dates are  required and cannot be empty'
-                        }
-
-                    }
-                },
-
-                
             }
         });
         $('#venueform').bootstrapValidator({
@@ -659,40 +623,6 @@ left: 30%;
                         }
                     }
                 },
-                pitch: {
-                    message: 'The pitch is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The  pitch is required and cannot be empty'
-                        },
-                        stringLength: {
-                            min: 3,
-
-                            message: 'The pitch must be more than 3  characters long'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                            message: 'The  pitch can only consist of alphabets'
-                        }
-                    }
-                },
-                keywords: {
-                    message: 'The keywords is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The keywords is required and cannot be empty'
-                        },
-                        stringLength: {
-                            min: 3,
-
-                            message: 'The keywords must be more than 3  characters long'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                            message: 'The  keywords can only consist of alphabets'
-                        }
-                    }
-                },
                 textarea1: {
                     message: 'The text is not valid',
                     validators: {
@@ -710,56 +640,6 @@ left: 30%;
                         }
                     }
                 },
-                sessions: {
-                    message: 'The text is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The session is required and cannot be empty'
-                        },
-
-                        regexp: {
-                            regexp: /^[0-9]+$/,
-                            message: 'The sessions can contain only digits  '
-                        }
-                    }
-                },
-                time1: {
-                    message: 'The timings is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The timings are  required and cannot be empty'
-                        }
-
-                    }
-                },
-                time2: {
-                    message: 'The timings is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The timings are  required and cannot be empty'
-                        }
-
-                    }
-                },
-                date1: {
-                    message: 'The date is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The date are  required and cannot be empty'
-                        }
-
-                    }
-                },
-                date2: {
-                    message: 'The date is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The dates are  required and cannot be empty'
-                        }
-
-                    }
-                },
-
                 city: {
                     message: 'The city is not valid',
                     validators: {
@@ -800,16 +680,6 @@ left: 30%;
                         }
                     }
                 },
-                url: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The url is required and cannot be empty'
-                        },
-                        url: {
-                            message: 'The input is not a valid url address'
-                        }
-                    }
-                }
             }
         });
 

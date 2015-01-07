@@ -8,7 +8,7 @@
 	<body> <!--  style="background:white" class="home page page-id-6 page-template page-template-page-templates page-template-template-home page-template-page-templatestemplate-home-php custom-background template-home  directory-fields color-scheme-default footer- woocommerce-social-login listify-child wp-job-manager-categories-enabled wp-job-manager-categories-only" -->
 		<div > <!--  id="page" class="hfeed site" -->
 			<!--Header Section contains sign-in sign-up searchbox and logo -->
-			@if(isset($recentBatches))
+			@if(isset($featuredBatches))
 				<header class="layout_header" >
 					@include('Templates.headerHome')
 				</header>

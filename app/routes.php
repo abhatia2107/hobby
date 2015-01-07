@@ -81,6 +81,17 @@ Route::get('/comments/enable/{id}','CommentsController@enable');
 Route::get('/comments/disable/{id}','CommentsController@disable');
 Route::get('/comments/delete/{id}','CommentsController@destroy');
 
+//Route for FeaturesController
+Route::get('/features','FeaturesController@index');
+Route::get('/features/create','FeaturesController@create');
+Route::post('/features/store','FeaturesController@store');
+Route::get('/features/{id}','FeaturesController@show');
+Route::get('/features/edit/{id}','FeaturesController@edit');
+Route::post('/features/update/{id}','FeaturesController@update');
+Route::get('/features/enable/{id}','FeaturesController@enable');
+Route::get('/features/disable/{id}','FeaturesController@disable');
+Route::get('/features/delete/{id}','FeaturesController@destroy');
+
 //Route for FeedbacksController
 Route::get('/feedbacks','FeedbacksController@index');
 Route::get('/feedbacks/create','FeedbacksController@create');

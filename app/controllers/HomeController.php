@@ -15,20 +15,18 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public $count_recent=6;
-
 	public function showWelcome()
 	{
-		$recentBatches=$this->batch->getRecentBatches($this->count_recent);
-		//dd($recentBatches);
+		$featuredBatches=$this->feature->getFeaturedBatches();
+		// dd($featuredBatches);
 		$homeLang =Lang::get('home');
 		//dd($homeLang);
-		return View::make('Miscellaneous.home',compact('homeLang','recentBatches'));
+		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches'));
 	}
 
 	public function showAdminHome()
 	{
-		//dd($recentBatches);
+		//dd($featuredBatches);
 		$homeAdminLang =Lang::get('homeAdmin');
 		//dd($homeLang);
 		return View::make('Miscellaneous.Admin.home',compact('homeAdminLang'));

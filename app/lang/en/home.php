@@ -18,9 +18,9 @@ return array(
 
 	"home_category_subtitle"=>"See whats happening in your community, or find new citys to explore.",
 
-	"home_recent_title"=>"Recent Listings",
+	"home_featured_title"=>"Featured Listings",
 
-	"home_recent_subtitle"=>"Discover some of our best listings",
+	"home_featured_subtitle"=>"Discover some of our best listings",
 
 	"home_user_title"=>"Get The Exposure You Deserve (For users)",
 

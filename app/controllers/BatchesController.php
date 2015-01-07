@@ -1,7 +1,5 @@
 <?php
 
-use Carbon\Carbon;
-
 class BatchesController extends \BaseController {
 
 	/**
@@ -53,6 +51,8 @@ class BatchesController extends \BaseController {
 				$credentials['batch_class_on_'.$data]=1;
 	    	}
 		}
+		/*
+		//	Date validation code for future. 
 		$dateToday=date_create(Carbon::now()->toDateString());
 		$startDate=date_create($credentials['batch_start_date']);
 		$endDate=date_create($credentials['batch_end_date']);
@@ -72,6 +72,8 @@ class BatchesController extends \BaseController {
 		{	
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_startEndDateError'));		
 		}
+		*/
+		unset($credentials['csrf_token']);
 		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
 		if (Input::hasFile('batch_photo'))

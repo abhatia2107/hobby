@@ -23,7 +23,7 @@ class KeywordsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Keywords.create');
+		//
 	}
 
 	/**
@@ -32,9 +32,32 @@ class KeywordsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function search(/*$chunk="0"*/)
 	{
-		//
+		$keyword=Input::get('keyword');
+		$category_id=Input::get('category_id');
+		$location_id=Input::get('location_id');
+		$chunk=Input::get('chunk');
+		$age_group=$this->age_group;
+		$difficulty_level=$this->difficulty_level;
+		$gender_group=$this->gender_group;
+		$trial=$this->trial;
+		$weekdays=$this->weekdays;
+		if(!$category_id){
+			$subcategoriesForCategory=$this->subcategory->all();
+		}
+		else
+			$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
+		
+		if(!$location_id)
+			$localitiesForLocation = $this->locality->all();
+		else		
+			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
+		$chunk=$chunk*100;
+		
+		$batchesForCategoryLocation=$this->batch->search($keyword,$chunk);
+		// dd($batchesForCategoryLocation);
+		return View::make('Keywords.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
 
 	/**

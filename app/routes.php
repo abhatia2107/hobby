@@ -119,7 +119,7 @@ Route::get('/institutes/{id}','InstitutesController@show');
 //Route for KeywordsController
 Route::get('/keywords','KeywordsController@index');
 Route::get('/keywords/create','KeywordsController@create');
-Route::post('/keywords/store','KeywordsController@store');
+Route::get('/keywords/search/'/*{chunk}*/,'KeywordsController@search');
 Route::get('/keywords/edit/{id}','KeywordsController@edit');
 Route::post('/keywords/update/{id}','KeywordsController@update');
 Route::get('/keywords/delete/{id}','KeywordsController@destroy');

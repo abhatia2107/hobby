@@ -55,9 +55,13 @@
         <div class="large">
             <span>
                 <select name="venue_location_id" required="required">
-                    <!-- <option value="$venueDetails->venue_location_id"selected>@if(isset($venueDetails)){{$venueDetails['venue_location']}}@else{{Input::old('venue_location')}}@endif</option> -->
                     @foreach ($locations as $data)
-                        <option value="{{$data->location_id}}" selected="@if(isset($venueDetails)){{"selected"}}@else{{"unselected"}}@endif">
+                        <option value={{$data->location_id}}
+                            @if(isset($venueDetails))
+                            {{($venueDetails->venue_location_id==$data->location_id)?
+                            'selected="selected"':''}}
+                            @else{{"Input::old('venue_location_id')"}}
+                            @endif>
                             {{$data->location}}
                         </option>
                     @endforeach
@@ -73,9 +77,13 @@
         <div class="large">
             <span>
                 <select name="venue_locality_id" required="required">
-                    <!-- <option value="$venueDetails->venue_locality_id"selected>@if(isset($venueDetails)){{$venueDetails['venue_locality']}}@else{{Input::old('venue_locality')}}@endif</option> -->
                     @foreach ($localities as $data)
-                        <option value="{{$data->locality_id}}" selected="@if(isset($venueDetails)){{"selected"}}@else{{"unselected"}}@endif">
+                        <option value={{$data->locality_id}}
+                            @if(isset($venueDetails))
+                            {{($venueDetails->venue_locality_id==$data->locality_id)?
+                            'selected="selected"':''}}
+                            @else{{"Input::old('venue_locality_id')"}}
+                            @endif>
                             {{$data->locality}}
                         </option>
                     @endforeach

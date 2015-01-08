@@ -493,6 +493,7 @@ class UsersController extends \BaseController {
 		$history['oneDay'] = $this->user->getUserOneDay($date);
 		$history['active'] = $this->user->getUserActive();
 		$history['disabled'] = $this->user->getUserDisabled();
+		$history['subscription'] = $this->subscription->getSubscribe();
 		return $history;
 	}
 }

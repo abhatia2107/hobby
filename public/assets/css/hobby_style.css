@@ -107,6 +107,18 @@ body {
     }
 }
 
+
+@media (min-width:768px) {
+    .sample_page_home{
+        padding: 7em 0 8em;
+    }
+}
+@media (min-width:992px) {
+    .sample_page_home {
+        padding: 10em 0 11em;
+    }
+}
+
 }.home-widget-description, .home-widget-title {
     margin: 0;
     padding: 0;
@@ -265,11 +277,6 @@ figcaption {
     height: 34px;
     border-radius: 5px;
  }
-
-body a
-{
-  text-decoration: none;
-}
  .batch_recent_listings
  {
     background: url(/assets/images/home/recent_listing.jpg) 0 0;
@@ -362,7 +369,6 @@ span.stars span {
 .recent_listings-info a
 {
   color: white;
-  text-decoration: none;
   font-size: 24px;
       text-align: center;
 }

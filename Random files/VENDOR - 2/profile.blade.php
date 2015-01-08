@@ -1,107 +1,12 @@
 @extends('Layouts.layout')
 @section('pagestylesheet')
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script  src="jquery-ui-1.7.2.custom.min.js"></script>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="jquery-ui-1.7.2.custom.css" />
-    
-
-
-    <script  src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"></script>
-
-@stop
-    
-    <script type="text/javascript" >
-        $(document).ready(function(){
-            $('#personalInfo').bootstrapValidator({
-                message: 'This value is not valid',
-                feedbackIcons: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
-                fields: {
-                    username: {
-                        message: 'The username is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The username is required and cannot be empty'
-                            },
-                            stringLength: {
-                                min: 6,
-                                max: 30,
-                                message: 'The username must be more than 6 and less than 30 characters long'
-                            },
-                            regexp: {
-                                regexp: /^[a-zA-Z0-9_]+$/,
-                                message: 'The username can only consist of alphabetical, number and underscore'
-                            }
-                        }
-                    },
-                   
-                    institute_location_id: {
-                        
-                        validators: {
-                            notEmpty: {
-                                message: 'The city name is required and cannot be empty'
-                            }
-                        }
-                    },
-                    phone: {
-                        message: 'The number is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The mobile number is required and cannot be empty'
-                            },
-
-                            regexp: {
-                                regexp: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
-                                message: 'The phone number consists of 10 digits'
-                            }
-                        }
-                    },
-                    email: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The email is required and cannot be empty'
-                            },
-                            emailAddress: {
-                                message: 'The input is not a valid email address'
-                            }
-                        }
-                    },
-                    institute_website: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The url is required and cannot be empty'
-                            },
-                            url: {
-                                message: 'The input is not a valid url address'
-                            }
-                        }
-                    }
-                }
-            });
-
-            
-
-
-        });
-    </script>
     <style>
-	.update_required
-	{
-		color: white;font-size: 18px;border-radius: 4px;
+    .update_required
+    {
+        color: white;font-size: 18px;border-radius: 4px;
             background-color: #2274ef;
-	}
-	.important_required
+    }
+    .important_required
          {
             color:red;
          }
@@ -134,16 +39,20 @@
             cursor: inherit;
             display: block;
         }
-		.add_photo
-		{
-			font-size:20px;background-color:#3A8AF1;color:white;
-		}
-		@media(min-width:992px){
-		#personalInfo
-		{
-			margin-left: auto;margin-right: auto;width:50%;
-		}}
+        .add_photo
+        {
+            font-size:20px;background-color:#3A8AF1;color:white;
+        }
+        @media(min-width:992px){
+        #personalInfo
+        {
+            margin-left: auto;margin-right: auto;width:50%;
+        }}
     </style>
+
+    <link rel="stylesheet" type="text/css" href="jquery-ui-1.7.2.custom.css" />
+@stop
+
 
 @section('content')
     <div class="container-fluid">
@@ -248,4 +157,84 @@
             </div>
         </form>
     </div>
+@stop
+@section('pagestylesheet')
+    
+    <script type="text/javascript" >
+        $(document).ready(function(){
+            $('#personalInfo').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    username: {
+                        message: 'The username is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: 'The username is required and cannot be empty'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 30,
+                                message: 'The username must be more than 6 and less than 30 characters long'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_]+$/,
+                                message: 'The username can only consist of alphabetical, number and underscore'
+                            }
+                        }
+                    },
+                   
+                    institute_location_id: {
+                        
+                        validators: {
+                            notEmpty: {
+                                message: 'The city name is required and cannot be empty'
+                            }
+                        }
+                    },
+                    phone: {
+                        message: 'The number is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: 'The mobile number is required and cannot be empty'
+                            },
+
+                            regexp: {
+                                regexp: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
+                                message: 'The phone number consists of 10 digits'
+                            }
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The email is required and cannot be empty'
+                            },
+                            emailAddress: {
+                                message: 'The input is not a valid email address'
+                            }
+                        }
+                    },
+                    institute_website: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The url is required and cannot be empty'
+                            },
+                            url: {
+                                message: 'The input is not a valid url address'
+                            }
+                        }
+                    }
+                }
+            });
+
+            
+
+
+        });
+    </script>
 @stop

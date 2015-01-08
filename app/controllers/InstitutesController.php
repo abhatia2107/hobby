@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class InstitutesController extends \BaseController {
 
 	/**
@@ -25,9 +27,9 @@ class InstitutesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$institute=Institute::getInstituteforUser(Auth::id());
+		$instituteId=Institute::getInstituteforUser(Auth::id());
 		// dd($institute);
-		if(!($institute))
+		if(!($instituteId))
 			return View::make('Institutes.create');
 		else{
 			return Redirect::to('/institutes/'.$instituteId);
@@ -181,4 +183,12 @@ class InstitutesController extends \BaseController {
 		}
 	}
 
+	public function history()
+	{
+		$date=Carbon::now()->subDay();
+		$history['oneDay'] = $this->institute->getInstituteOneDay($date);
+		$history['active'] = $this->institute->getInstituteActive();
+		$history['disabled'] = $this->institute->getInstituteDisabled();
+		return $history;
+	}
 }

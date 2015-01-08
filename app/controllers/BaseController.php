@@ -34,6 +34,7 @@ class BaseController extends Controller {
 									'subscriptions' => 'Subscriptions',
 									'users' => 'Users', 
 								);
+
 	/**
 	 *Constructor to initialize the instance of Model User
 	 */

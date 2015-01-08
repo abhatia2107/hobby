@@ -32,7 +32,7 @@ class Batch extends \Eloquent {
         'batch_price'=>'numeric'
     ];
 
-   public function updateBatch($credentials,$id)
+    public function updateBatch($credentials,$id)
     {
         $updated=DB::table('batches')->where('id','=',$id)->update($credentials);
         /*$updated=true;*/
@@ -130,10 +130,54 @@ class Batch extends \Eloquent {
             ->get();
     }
  
+    public function getBatchActive()
+    {
+        return Batch::
+                where('batch_approved','=','1')
+                ->count(); 
+    }
+
+    public function getBatchDisabled()
+    {
+        return Batch::
+                onlyTrashed()
+                ->count();
+    }
+
     public function getPendingApprovals()
     {
         return Batch::
             where('batch_approved','=','0')
             ->count();
-    }      
+    } 
+
+    public function getPendingApprovalsOneDay($date)
+    {
+        return Batch::
+            where('batch_approved','=','0')
+            ->where('created_at','>',$date)
+            ->count();
+    }
+
+    public function getPendingBatches()
+    {
+        return Batch::
+            where('batch_approved','=','0')
+            ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+            ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+            ->get();
+    }    
+
+    public function approveBatch($id)
+    {
+        $updated=DB::table('batches')->where('id','=',$id)
+        ->update(array('batch_approved'=>1));
+        return $updated;
+    }  
+
+    public function getBatchOneDay($date)
+    {
+        return Batch::where('created_at','>',$date)->count();
+    }
+
 }

@@ -57,8 +57,11 @@ Route::group(array('before' => "auth|auth.institute"), function() {
 	Route::get('/batches/enable/{id}','BatchesController@enable');
 	Route::get('/batches/disable/{id}','BatchesController@disable');
 });
+Route::get('/batches/history','BatchesController@history');
+Route::get('/batches/approve/history','BatchesController@approvalHistory');
+Route::get('/batches/approve','BatchesController@pending');
+Route::get('/batches/approve/{id}','BatchesController@approve');
 Route::get('/batches/{id}','BatchesController@show');
-
 
 //Route for CategoriesController
 Route::get('/categories','CategoriesController@index');
@@ -83,79 +86,81 @@ Route::get('/comments/delete/{id}','CommentsController@destroy');
 
 //Route for FeaturesController
 Route::get('/features','FeaturesController@index');
-Route::get('/features/create','FeaturesController@create');
+Route::get('/features/create/{id}','FeaturesController@create');
 Route::post('/features/store','FeaturesController@store');
-Route::get('/features/{id}','FeaturesController@show');
 Route::get('/features/edit/{id}','FeaturesController@edit');
 Route::post('/features/update/{id}','FeaturesController@update');
 Route::get('/features/enable/{id}','FeaturesController@enable');
 Route::get('/features/disable/{id}','FeaturesController@disable');
 Route::get('/features/delete/{id}','FeaturesController@destroy');
+Route::get('/features/{id}','FeaturesController@show');
 
 //Route for FeedbacksController
 Route::get('/feedbacks','FeedbacksController@index');
 Route::get('/feedbacks/create','FeedbacksController@create');
 Route::post('/feedbacks/store','FeedbacksController@store');
-Route::get('/feedbacks/{id}','FeedbacksController@show');
 Route::get('/feedbacks/delete/{id}','FeedbacksController@destroy');
+Route::get('/feedbacks/{id}','FeedbacksController@show');
 
 //Route for InstitutesController
 Route::group(array('before' => "auth"), function() {
 Route::get('/institutes','InstitutesController@index');
 Route::get('/institutes/create','InstitutesController@create');
 Route::post('/institutes/store','InstitutesController@store');
-Route::get('/institutes/{id}','InstitutesController@show');
 Route::get('/institutes/edit/{id}','InstitutesController@edit');
 Route::post('/institutes/update/{id}','InstitutesController@update');
 Route::get('/institutes/enable/{id}','InstitutesController@enable');
 Route::get('/institutes/disable/{id}','InstitutesController@disable');
 Route::get('/institutes/delete/{id}','InstitutesController@destroy');
+Route::get('/institutes/history','InstitutesController@history');
+Route::get('/institutes/{id}','InstitutesController@show');
 });
+
 //Route for KeywordsController
 Route::get('/keywords','KeywordsController@index');
 Route::get('/keywords/create','KeywordsController@create');
 Route::post('/keywords/store','KeywordsController@store');
-Route::get('/keywords/{id}','KeywordsController@show');
 Route::get('/keywords/edit/{id}','KeywordsController@edit');
 Route::post('/keywords/update/{id}','KeywordsController@update');
 Route::get('/keywords/delete/{id}','KeywordsController@destroy');
+Route::get('/keywords/{id}','KeywordsController@show');
 
 //Route for LocalitiesController
 Route::get('/localities','LocalitiesController@index');
 Route::get('/localities/create','LocalitiesController@create');
 Route::post('/localities/store','LocalitiesController@store');
-Route::get('/localities/{id}','LocalitiesController@show');
 Route::get('/localities/edit/{id}','LocalitiesController@edit');
 Route::post('/localities/update/{id}','LocalitiesController@update');
 Route::get('/localities/enable/{id}','LocalitiesController@enable');
 Route::get('/localities/disable/{id}','LocalitiesController@disable');
 Route::get('/localities/delete/{id}','LocalitiesController@destroy');
+Route::get('/localities/{id}','LocalitiesController@show');
 
 //Route for LocationsController
 Route::get('/locations','LocationsController@index');
 Route::get('/locations/create','LocationsController@create');
 Route::post('/locations/store','LocationsController@store');
-Route::get('/locations/{id}','LocationsController@show');
 Route::get('/locations/edit/{id}','LocationsController@edit');
 Route::post('/locations/update/{id}','LocationsController@update');
 Route::get('/locations/enable/{id}','LocationsController@enable');
 Route::get('/locations/disable/{id}','LocationsController@disable');
 Route::get('/locations/delete/{id}','LocationsController@destroy');
+Route::get('/locations/{id}','LocationsController@show');
 
 //Route for SubcategoriesController
 Route::get('/subcategories','SubcategoriesController@index');
 Route::get('/subcategories/create','SubcategoriesController@create');
 Route::post('/subcategories/store','SubcategoriesController@store');
-Route::get('/subcategories/{id}','SubcategoriesController@show');
 Route::get('/subcategories/edit/{id}','SubcategoriesController@edit');
 Route::post('/subcategories/update/{id}','SubcategoriesController@update');
 Route::get('/subcategories/enable/{id}','SubcategoriesController@enable');
 Route::get('/subcategories/disable/{id}','SubcategoriesController@disable');
 Route::get('/subcategories/delete/{id}','SubcategoriesController@destroy');
+Route::get('/subcategories/{id}','SubcategoriesController@show');
 
 //Route for SubscriptionsController
 Route::get('/subscriptions','SubscriptionsController@index');
-Route::post('/subscriptions/{id}','SubscriptionsController@store');
+Route::post('/subscriptions','SubscriptionsController@store');
 Route::get('/subscriptions/enable/{id}','SubscriptionsController@enable');
 Route::get('/subscriptions/disable/{id}','SubscriptionsController@disable');
 Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
@@ -164,12 +169,12 @@ Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
 Route::get('/venues','VenuesController@index');
 Route::get('/venues/create','VenuesController@create');
 Route::post('/venues/store','VenuesController@store');
-Route::get('/venues/{id}','VenuesController@show');
 Route::get('/venues/edit/{id}','VenuesController@edit');
 Route::post('/venues/update/{id}','VenuesController@update');
 Route::get('/venues/enable/{id}','VenuesController@enable');
 Route::get('/venues/disable/{id}','VenuesController@disable');
 Route::get('/venues/delete/{id}','VenuesController@destroy');
+Route::get('/venues/{id}','VenuesController@show');
 
 //Route for UsersController
 Route::get('/users','UsersController@index');
@@ -190,7 +195,8 @@ Route::get('/users/registration/verify/{userId}/{confirmationCode}','UsersContro
 Route::get('/users/password/remind','RemindersController@getRemind');
 Route::get('/users/password/reset/{token}','RemindersController@getReset');
 Route::post('/users/password/reset/submit','RemindersController@postReset');
-// Issues with this route. It get calls always.
+Route::get('/users/history','UsersController@history');
+// Issues with the show route. It get calls always.
 Route::get('/users/{id}','UsersController@show');
 
 Route::group(array('before' => "csrf"), function() {

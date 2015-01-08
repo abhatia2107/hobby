@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class UsersController extends \BaseController {
 
 	/*
@@ -484,5 +486,13 @@ class UsersController extends \BaseController {
     	Auth::loginUsingId($id);
     	return Redirect::to('/')->with('success',Lang::get('user.welcome',array('name'=>$me['first_name'])));
 	}
-	
+
+	public function history()
+	{
+		$date=Carbon::now()->subDay();
+		$history['oneDay'] = $this->user->getUserOneDay($date);
+		$history['active'] = $this->user->getUserActive();
+		$history['disabled'] = $this->user->getUserDisabled();
+		return $history;
+	}
 }

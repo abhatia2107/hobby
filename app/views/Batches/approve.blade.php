@@ -6,56 +6,60 @@
 	          <th>S.No.</th>
 	          <th>Batch Name</th>
 	          <th>Institute Name</th>
-	          <th>Category</th>
 	          <th>Action</th>
 	       </tr>
 	    </thead>
 	    <tbody>
 	        <?php
 	        	$i=0; 
-	        	$view=1;
 	        ?>
-	        @foreach($features as $data)
+	        @foreach($batches as $data)
 	        <tr>
 	            <td>{{++$i}}</td>
 	            <td>{{$data->batch}}</td>
 	            <td>{{$data->institute}}</td>
-	            <td>{{$data->category}}</td>
 				<td>
-					@if($view)
-					<a href="{{$tableName}}/{{$data->id}}">
-						<button type="button" class="btn btn-success ">
+					<a href="/batches/{{$data->id}}">
+						<button type="button" class="btn btn-primary ">
 							<span class="glyphicon glyphicon-user"></span>
 							View
 						</button>
 					</a>
-					@else
-						<a href="{{$tableName}}/edit/{{$data->id}}">
-							<button type="button" class="btn btn-success ">
-								<span class="glyphicon glyphicon-pencil"></span>
-								Edit
-							</button>
-						</a>
-					@endif
-					</td>
-					<td>
+				</td>
+				<td>
+					<a href="/features/create/{{$data->id}}">
+						<button type="button" class="btn">
+							<span class="glyphicon glyphicon-star"></span>
+							Feature It
+						</button>
+					</a>
+				</td>
+				<td>
+					<a href="/batches/approve/{{$data->id}}">
+						<button type="button" class="btn btn-success ">
+							<span class="glyphicon glyphicon-pencil"></span>
+							Approve
+						</button>
+					</a>
+				</td>
+				<td>
 					@if($data->deleted_at)
-						<a href="{{$tableName}}/enable/{{$data->id}}">
+						<a href="/batches/enable/{{$data->id}}">
 							<button type="button" class="btn btn-info " input type="submit" value="Button">
 								<span class="glyphicon glyphicon-open"></span> 
 								Enable
 							</button>
 						</a>
 					@else
-						<a href="{{$tableName}}/disable/{{$data->id}}">
+						<a href="/batches/disable/{{$data->id}}">
 							<button type="button" class="btn btn-warning ">
 								<span class="glyphicon glyphicon-remove"></span> 
 								Disable
 							</button>
 						</a>
-					</td>
 					@endif
-					<td>
+				</td>
+				<td>
 					<!-- Remove modal -->
 					<button class="btn btn-danger" data-toggle="modal" data-target="#removeModal{{$data->id}}">
 						<span class="glyphicon glyphicon-trash"></span>
@@ -75,7 +79,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<a href="{{$tableName}}/delete/{{$data->id}}">
+									<a href="/batches/delete/{{$data->id}}">
 										<button type="button" class="btn btn-primary">
 											Remove
 										</button>

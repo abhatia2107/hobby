@@ -24,14 +24,19 @@ class FeaturesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($id)
 	{
-		//
+		$feature['feature_batch_id']=$id;
+		$created=Feature::create($feature);
+		if ($created) 
+			return Redirect::to('/features')->with('success',Lang::get('feature.feature_created'));
+		else
+			return Redirect::to('/features')->with('failure',Lang::get('feature.feature_already_failed'));
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /features
+	 * get /features
 	 *
 	 * @return Response
 	 */

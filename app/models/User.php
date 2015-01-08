@@ -99,4 +99,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->password;
 	}
 
+	public function getUserOneDay($date)
+	{
+		return User::where('created_at','>',$date)->count();
+	}
+
+	public function getUserActive()
+    {
+        return User::count();
+    }
+
+    public function getUserDisabled()
+    {
+        return User::onlyTrashed()->count();
+    }
 }

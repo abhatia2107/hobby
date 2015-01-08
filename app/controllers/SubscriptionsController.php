@@ -12,7 +12,9 @@ class SubscriptionsController extends \BaseController {
 	{
 		$subscriptions=Subscription::withTrashed()->get();
 		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Subscriptions.index',compact('subscriptions','tableName'));
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Subscriptions.index',compact('subscriptions','tableName','count','adminPanelListing'));
 	}
 
 	/**

@@ -11,9 +11,10 @@ class SubcategoriesController extends \BaseController {
 	public function index()
 	{
 		$subcategories=$this->subcategory->getAllSubcategories();
-		//dd($subcategories[0]);
 		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Subcategories.index',compact('subcategories','tableName'));
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Subcategories.index',compact('subcategories','tableName','count','adminPanelListing'));
 	}
 
 	/**

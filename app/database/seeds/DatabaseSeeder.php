@@ -29,6 +29,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('CommentsTableSeeder');
 		$this->command->info('Comments table seeded!');
 
+		$this->call('FeaturesTableSeeder');
+		$this->command->info('Features table seeded!');
+
 		$this->call('FeedbacksTableSeeder');
 		$this->command->info('Feedbacks table seeded!');
 

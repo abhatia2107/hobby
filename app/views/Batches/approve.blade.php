@@ -4,58 +4,62 @@
 	    <thead>
 	       <tr>
 	          <th>S.No.</th>
-	          <th>Name</th>
-	          <th>Email ID</th>
-	          <th>Contact No</th>
+	          <th>Batch Name</th>
+	          <th>Institute Name</th>
 	          <th>Action</th>
 	       </tr>
 	    </thead>
 	    <tbody>
 	        <?php
 	        	$i=0; 
-	        	$view=1;
 	        ?>
-	        @foreach($users as $data)
+	        @foreach($batches as $data)
 	        <tr>
 	            <td>{{++$i}}</td>
-	            <td>{{$data->user_first_name.' '.$data->user_last_name}}</td>
-	            <td>{{$data->email}}</td>
-	            <td>{{$data->user_contact_no}}</td>
+	            <td>{{$data->batch}}</td>
+	            <td>{{$data->institute}}</td>
 				<td>
-					@if($data->user_subscription_token)
-						<a href="{{$tableName}}/unsubscribe/{{$data->id}}">
-							<button type="button" class="btn btn-info ">
-								<span class="glyphicon glyphicon-remove"></span>
-								Unsubscribe
-							</button>
-						</a>
-					@else
-						<a href="{{$tableName}}/subscribe/{{$data->id}}">
-							<button id="subscribe-button" type="button" class="btn btn-success ">
-								<span class="glyphicon glyphicon-open"></span>
-								Subscribe
-							</button>
-						</a>
-					@endif
+					<a href="/batches/{{$data->id}}">
+						<button type="button" class="btn btn-primary ">
+							<span class="glyphicon glyphicon-user"></span>
+							View
+						</button>
+					</a>
 				</td>
-					<td>
-					@if(isset($data->deleted_at))
-						<a href="{{$tableName}}/enable/{{$data->id}}">
+				<td>
+					<a href="/features/create/{{$data->id}}">
+						<button type="button" class="btn">
+							<span class="glyphicon glyphicon-star"></span>
+							Feature It
+						</button>
+					</a>
+				</td>
+				<td>
+					<a href="/batches/approve/{{$data->id}}">
+						<button type="button" class="btn btn-success ">
+							<span class="glyphicon glyphicon-pencil"></span>
+							Approve
+						</button>
+					</a>
+				</td>
+				<td>
+					@if($data->deleted_at)
+						<a href="/batches/enable/{{$data->id}}">
 							<button type="button" class="btn btn-info " input type="submit" value="Button">
 								<span class="glyphicon glyphicon-open"></span> 
 								Enable
 							</button>
 						</a>
 					@else
-						<a href="{{$tableName}}/disable/{{$data->id}}">
+						<a href="/batches/disable/{{$data->id}}">
 							<button type="button" class="btn btn-warning ">
 								<span class="glyphicon glyphicon-remove"></span> 
 								Disable
 							</button>
 						</a>
-					</td>
 					@endif
-					<td>
+				</td>
+				<td>
 					<!-- Remove modal -->
 					<button class="btn btn-danger" data-toggle="modal" data-target="#removeModal{{$data->id}}">
 						<span class="glyphicon glyphicon-trash"></span>
@@ -75,7 +79,7 @@
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<a href="{{$tableName}}/delete/{{$data->id}}">
+									<a href="/batches/delete/{{$data->id}}">
 										<button type="button" class="btn btn-primary">
 											Remove
 										</button>

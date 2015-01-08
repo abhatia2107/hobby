@@ -10,7 +10,15 @@
 
 		<div class=" col-sm-3 col-md-3 ">
 			<ul class="list-inline">
-				@if(Auth::guest())
+				<?php
+					$id=Auth::id();
+					if($id)
+					{
+						$user=User::find($id);
+						$name=$user->user_first_name;
+					}
+				?>
+				@if(!$id)
 					<li class="header_signin" >   
 						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
 					</li>
@@ -18,11 +26,11 @@
 						<a  class="header_signup_a" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
 					</li>
 				@else
-					<li class="header_myaccount" >   
-					<a class="header_myaccount_a" href="/users/myaccount" >My Account</a>
+					<li class="header_myaccount" >
+						<a class="header_myaccount_a" href="/users/{{$id}}" >{{$name}}'s Account</a>
 					</li>
 					<li class="header_logout" >
-					<a class="header_logout_a" href="/users/logout" >Logout</a>
+						<a class="header_logout_a" href="/users/logout" >Logout</a>
 					</li>
 				@endif
 			</ul>

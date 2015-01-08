@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class InstitutesController extends \BaseController {
 
 	/**
@@ -12,8 +14,9 @@ class InstitutesController extends \BaseController {
 	{
 		$institutes=$this->institute->getAllInstitutes();
 		$tableName="$_SERVER[REQUEST_URI]";
-		//dd($institutes);
-		return View::make('Institutes.index',compact('institutes','tableName'));
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Institutes.index',compact('institutes','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -25,10 +28,12 @@ class InstitutesController extends \BaseController {
 	public function create()
 	{
 		$instituteId=Institute::getInstituteforUser(Auth::id());
-		if(is_null($instituteId))
+		// dd($institute);
+		if(!($instituteId))
 			return View::make('Institutes.create');
-		else
+		else{
 			return Redirect::to('/institutes/'.$instituteId);
+		}
 	}
 
 	/**
@@ -65,10 +70,15 @@ class InstitutesController extends \BaseController {
 	public function show($id)
 	{
 		//Allow admin to view data and put this check in filter file.
-		$instituteDetails=Institute::find($id);
+		$instituteDetails=Institute::withTrashed()->find($id);
+		// dd($instituteDetails);
 		$user_id=Auth::id();
-		if($instituteDetails['institute_user_id']!=$user_id)
+		if(($instituteDetails['institute_user_id']!=$user_id)&&(!$this->admin->checkIfAdmin($user_id)))
 			return Redirect::back()->with('failure',Lang::get('institute.institute_access_failed'));
+		if($instituteDetails['deleted_at'])
+		{
+			return Redirect::back()->with('failure',Lang::get('institute.institute_disabled_by_admin'));;
+		}
 		$location_id=$instituteDetails['institute_location_id'];
 		$locations=$this->location->all();
 		$institute_location=$locations->find($location_id);
@@ -173,4 +183,12 @@ class InstitutesController extends \BaseController {
 		}
 	}
 
+	public function history()
+	{
+		$date=Carbon::now()->subDay();
+		$history['oneDay'] = $this->institute->getInstituteOneDay($date);
+		$history['active'] = $this->institute->getInstituteActive();
+		$history['disabled'] = $this->institute->getInstituteDisabled();
+		return $history;
+	}
 }

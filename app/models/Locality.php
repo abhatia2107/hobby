@@ -33,7 +33,10 @@ class Locality extends \Eloquent {
 
 	public function getLocalitiesForLocation($locality_location_id)
 	{
-		return DB::table('localities')->where('locality_location_id','=',$locality_location_id)->get();
+		if($locality_location_id!=0)
+	        return Locality::where('locality_location_id',$locality_location_id)->get();
+		else
+			return Locality::all();
 	}
 
 	public function getAllLocalities()
@@ -47,17 +50,17 @@ class Locality extends \Eloquent {
         ->get();
 	}
 
-	public function disableLocalityForLocation($locality_location_id)
+	public function disableLocalitiesForLocation($locality_location_id)
     {
 		$locality=Locality::where('locality_location_id', '=', $locality_location_id)->delete();
     }
     
-    public function enableLocalityForLocation($locality_location_id)
+    public function enableLocalitiesForLocation($locality_location_id)
     {
 		$locality=Locality::withTrashed()->where('locality_location_id', '=', $locality_location_id)->restore();
     }
 
-    public function deleteLocalityForLocation($locality_location_id)
+    public function deleteLocalitiesForLocation($locality_location_id)
     {
 		Locality::withTrashed()->where('locality_location_id', '=', $locality_location_id)->forceDelete();
     }

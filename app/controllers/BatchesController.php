@@ -53,12 +53,14 @@ class BatchesController extends \BaseController {
 				$credentials['batch_class_on_'.$data]=1;
 	    	}
 		}
+		/*
+		//	Date validation code for future. 
 		$dateToday=date_create(Carbon::now()->toDateString());
 		$startDate=date_create($credentials['batch_start_date']);
 		$endDate=date_create($credentials['batch_end_date']);
 		$user_id=Auth::id();
-		$batch_institute_id=$this->institute->getInstituteforUser($user_id);
-		$credentials['batch_institute_id']=$batch_institute_id;
+		$batch_batch_id=$this->batch->getBatchforUser($user_id);
+		$credentials['batch_batch_id']=$batch_batch_id;
 		$validator = Validator::make($credentials, Batch::$rules);
 		if($validator->fails())
 		{
@@ -72,6 +74,8 @@ class BatchesController extends \BaseController {
 		{	
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_startEndDateError'));		
 		}
+		*/
+		unset($credentials['csrf_token']);
 		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
 		if (Input::hasFile('batch_photo'))
@@ -106,7 +110,6 @@ class BatchesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//check count how many time page is viewed.
 		$batchDetails= $this->batch->getBatch($id);
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
@@ -117,11 +120,11 @@ class BatchesController extends \BaseController {
 		if($batchDetails)
 		{
 			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays'));
-		}
+		}/*
 		else
 		{
 			return View::make('Batches.batchNotFound');
-		}
+		}*/
 	}
 
 	/**
@@ -170,7 +173,7 @@ class BatchesController extends \BaseController {
 				$credentials['batch_class_on_'.$data]=1;
 	    	}
 		}
-		$credentials['batch_institute_id']=1;
+		$credentials['batch_batch_id']=1;
 		$dateToday=date_create(Carbon::now()->toDateString());
 		$startDate=date_create($credentials['batch_start_date']);
 		$endDate=date_create($credentials['batch_end_date']);
@@ -220,6 +223,38 @@ class BatchesController extends \BaseController {
 		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
 	}
+	
+	public function enable($id)
+	{
+		$batch=Batch::withTrashed()->find($id);
+		if($batch){
+			$batchDisabled=Batch::onlyTrashed()->find($id);
+			if($batchDisabled){
+				$batchDisabled->restore();	
+				return Redirect::back()->with('success',Lang::get('batch.batch_enabled'));
+			}
+			else{
+					return Redirect::back()->with('failure',Lang::get('batch.batch_enable_failed'));
+			}
+		}
+		else
+			return Redirect::back()->with('failure',Lang::get('batch.batch_not_exist'));
+	}
+
+	public function disable($id)
+	{
+		$batch=Batch::find($id);	
+		//dd($batch);
+		if($batch){
+			$batch->delete();
+			return Redirect::back()->with('success',Lang::get('batch.batch_disabled'));
+		}
+		else{
+			return Redirect::back()->with('failure',Lang::get('batch.batch_disable_failed'));
+		}
+	}
+
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /batches/{id}
@@ -229,11 +264,52 @@ class BatchesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$deleted=Batch::destroy($id);
-		if($deleted)
-			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_deleted'));
-		else
-			return Redirect::to('/batches')->with('failure',Lang::get('batch.batch_delete_failed'));
+		$batch=Batch::withTrashed()->find($id);
+		if($batch){
+			$batch->forceDelete();
+			return Redirect::back()->with('success',Lang::get('batch.batch_deleted'));
+		}
+		else{
+			return Redirect::back()->with('failure',Lang::get('batch.batch_delete_failed'));
+		}
 	}
+
+
+	public function pending()
+	{
+		$batches=$this->batch->getPendingBatches();	
+		$tableName="$_SERVER[REQUEST_URI]";
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Batches.approve',compact('batches','tableName','count','adminPanelListing'));
+	}
+
+	public function approve($id)
+	{
+		$approved=$this->batch->ApproveBatch($id);
+		if($approved)
+			return Redirect::back()->with('success',Lang::get('batch.batch_approved'));
+		else
+			return Redirect::to()->with('failure',Lang::get('batch.batch_approve_failed'));
+	}
+
+	public function history()
+	{
+		$date=Carbon::now()->subDay();
+		$history['oneDay'] = $this->batch->getBatchOneDay($date);
+		$history['active'] = $this->batch->getBatchActive();
+		$history['disabled'] = $this->batch->getBatchDisabled();
+		return $history;
+	}
+
+	public function approvalHistory()
+	{
+		$date=Carbon::now()->subDay();
+		$history['oneDay'] = $this->batch->getPendingApprovalsOneDay($date);
+		$history['approved'] = $this->batch->getBatchActive();
+		$history['disabled'] = $this->batch->getBatchDisabled();
+		return $history;
+	}
+
 
 }

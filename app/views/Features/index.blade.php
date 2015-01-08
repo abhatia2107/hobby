@@ -4,9 +4,9 @@
 	    <thead>
 	       <tr>
 	          <th>S.No.</th>
-	          <th>Name</th>
-	          <th>Email ID</th>
-	          <th>Contact No</th>
+	          <th>Batch Name</th>
+	          <th>Institute Name</th>
+	          <th>Category</th>
 	          <th>Action</th>
 	       </tr>
 	    </thead>
@@ -15,31 +15,31 @@
 	        	$i=0; 
 	        	$view=1;
 	        ?>
-	        @foreach($users as $data)
+	        @foreach($features as $data)
 	        <tr>
 	            <td>{{++$i}}</td>
-	            <td>{{$data->user_first_name.' '.$data->user_last_name}}</td>
-	            <td>{{$data->email}}</td>
-	            <td>{{$data->user_contact_no}}</td>
+	            <td>{{$data->batch}}</td>
+	            <td>{{$data->institute}}</td>
+	            <td>{{$data->category}}</td>
 				<td>
-					@if($data->user_subscription_token)
-						<a href="{{$tableName}}/unsubscribe/{{$data->id}}">
-							<button type="button" class="btn btn-info ">
-								<span class="glyphicon glyphicon-remove"></span>
-								Unsubscribe
-							</button>
-						</a>
+					@if($view)
+					<a href="{{$tableName}}/{{$data->id}}">
+						<button type="button" class="btn btn-success ">
+							<span class="glyphicon glyphicon-user"></span>
+							View
+						</button>
+					</a>
 					@else
-						<a href="{{$tableName}}/subscribe/{{$data->id}}">
-							<button id="subscribe-button" type="button" class="btn btn-success ">
-								<span class="glyphicon glyphicon-open"></span>
-								Subscribe
+						<a href="{{$tableName}}/edit/{{$data->id}}">
+							<button type="button" class="btn btn-success ">
+								<span class="glyphicon glyphicon-pencil"></span>
+								Edit
 							</button>
 						</a>
 					@endif
-				</td>
+					</td>
 					<td>
-					@if(isset($data->deleted_at))
+					@if($data->deleted_at)
 						<a href="{{$tableName}}/enable/{{$data->id}}">
 							<button type="button" class="btn btn-info " input type="submit" value="Button">
 								<span class="glyphicon glyphicon-open"></span> 

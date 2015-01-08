@@ -5,7 +5,7 @@ class BatchesTableSeeder extends Seeder {
        public function run()
        {
               $faker = Faker\Factory::create();
-              foreach(range(1,40000) as $index)
+              foreach(range(1,1000) as $index)
               {            
                      DB::table('batches')->insert(array(
                      'batch' => $faker->Name,
@@ -18,11 +18,11 @@ class BatchesTableSeeder extends Seeder {
                      'batch_start_time' =>$faker->time($format = 'H:i:s', $max = 'now'),
                      'batch_end_time' => $faker->time($format = 'H:i:s', $max = 'now'),
                      'batch_venue_id'=>$faker->randomNumber(1,30),
-                     'batch_difficulty_level' =>$faker->randomNumber(0,3),
-                     'batch_age_group' =>$faker->randomNumber(0,2),
-                     'batch_gender_group' =>$faker->randomNumber(0,2),
+                     'batch_difficulty_level' =>$faker->randomNumber(1,4),
+                     'batch_age_group' =>$faker->randomNumber(1,3),
+                     'batch_gender_group' =>$faker->randomNumber(1,3),
                      'batch_price' =>$faker->randomNumber(1000,5000),
-                     'batch_recurring' =>$faker->randomNumber(0,3),
+                     'batch_recurring' =>$faker->randomNumber(1,4),
                      'batch_approved' =>$faker->boolean(),
                      'batch_no_of_classes_in_week' =>$faker->randomNumber(1,7),
                      'batch_class_on_monday'=>$faker->boolean(),
@@ -32,7 +32,7 @@ class BatchesTableSeeder extends Seeder {
                      'batch_class_on_friday'=>$faker->boolean(),
                      'batch_class_on_saturday'=>$faker->boolean(),
                      'batch_class_on_sunday'=>$faker->boolean(),
-                     'batch_trial' =>$faker->randomNumber(0,4),
+                     'batch_trial' =>$faker->randomNumber(1,5),
                      'batch_comment'=>$faker->lexify(),
                      'batch_tagline'=>$faker->lexify(),
                      'batch_photo'=>"0",

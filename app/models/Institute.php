@@ -43,8 +43,24 @@ class Institute extends \Eloquent {
         return DB::table('institutes')->whereIn('institutes.id',$id)->Join('venues', 'institutes.id', '=', 'venues.venue_institute_id')->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')->Join('locations', 'locations.id', '=', 'venues.venue_location_id')->get();
     }
 
+    //Don't convert it to non-static, it's called in filters.php statically.
     public static function getInstituteforUser($institute_user_id)
     {
         return DB::table('institutes')->where('institute_user_id',$institute_user_id)->pluck('id');
-    } 
+    }
+
+    public function getInstituteOneDay($date)
+    {
+        return Institute::where('created_at','>',$date)->count();
+    }
+
+    public function getInstituteActive()
+    {
+        return Institute::count();
+    }
+
+    public function getInstituteDisabled()
+    {
+        return Institute::onlyTrashed()->count();
+    }
 }

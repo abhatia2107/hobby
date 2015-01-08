@@ -146,5 +146,7 @@ nav li #login-content {
   top: 2px;
   right: 2px;
 }
-
+#subscribe-button{
+    min-width: 123px;
+}
 /*Admin Panel CSS end*/

@@ -36,4 +36,14 @@ class Admin extends \Eloquent {
 		->select('*','admins.id as id','admins.deleted_at as deleted_at','admins.created_at as created_at','admins.updated_at as updated_at')
 		->get();
 	}
+
+	public function checkIfAdmin($id)
+	{
+		$admin=DB::select("SELECT * FROM admins WHERE admin_user_id = $id AND deleted_at IS NULL");
+		if($admin){
+			return true;
+		}
+		else
+			return false;
+	}
 }

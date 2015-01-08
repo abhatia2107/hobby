@@ -20,11 +20,16 @@ class Subscription extends \Eloquent {
 	];
  	
  	public function getUnsubscribe()
- 	{
- 		return DB::table('subscriptions')
+    {
+        return DB::table('subscriptions')
             ->onlyTrashed()
             ->get();
- 	}
+    }
+
+    public function getSubscribe()
+    {
+        return Subscriptions::count();
+    }
 
  	public function subscribe($credentials)
  	{

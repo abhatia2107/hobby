@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class UsersController extends \BaseController {
 
 	/*
@@ -16,9 +18,11 @@ class UsersController extends \BaseController {
 	//Not going use now. But can use it in future, in admin panel.
 	public function index()
 	{
-		$users=User::all();
+		$users=User::withTrashed()->get();
 		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Users.index',compact('users','tableName'));
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Users.index',compact('users','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -56,11 +60,11 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show()
+	public function show($id)
 	{
-		$id=Auth::id();
-		$userDetails=User::find($id);
-		return View::make('Users.show',compact('userDetails'));
+		return Redirect::to('users/changepassword');
+		// $userDetails=User::find($id);
+		// return View::make('Users.show',compact('userDetails'));
 	}
 
 	/**
@@ -98,12 +102,11 @@ class UsersController extends \BaseController {
 			return Redirect::to('/users')->with('failure',Lang::get('user.user_already_failure'));
 	}
 
-
 	public function enable($id)
 	{
-		$user=Institute::withTrashed()->find($id);
+		$user=User::withTrashed()->find($id);
 		if($user){
-			$userDisabled=Institute::onlyTrashed()->find($id);
+			$userDisabled=User::onlyTrashed()->find($id);
 			if($userDisabled){
 				$userDisabled->restore();	
 				return Redirect::to('/users')->with('success',Lang::get('user.user_enabled'));
@@ -118,18 +121,47 @@ class UsersController extends \BaseController {
 
 	public function disable($id)
 	{
-		$user=Institute::find($id);	
-		//dd($user);
+		$user=User::find($id);
+			
+		// dd($user);
 		if($user){
 			$user->delete();
 			return Redirect::to('/users')->with('success',Lang::get('user.user_disabled'));
 		}
 		else{
-			return Redirect::to('/users')->with('failure',Lang::get('user.user_disable_failed'));
+			return Redirect::back()->with('failure',Lang::get('user.user_disable_failed'));
 		}
 	}
 
+	public function subscribe($id)
+	{
+		$user=User::find($id);
+		if($user)
+		{
+			$user->user_subscription_token=true;
+			$user->save();
+			return Redirect::back()->with('success',Lang::get('user.user_subscribed'));
+		}
+		else
+		{
+			return Redirect::back()->with('failure',Lang::get('user.user_not_exist'));
+		}
+	}
 
+	public function unsubscribe($id)
+	{
+		$user=User::find($id);
+		if($user)
+		{
+			$user->user_subscription_token=true;
+			$user->save();
+			return Redirect::back()->with('success',Lang::get('user.user_unsubscribed'));
+		}
+		else
+		{
+			return Redirect::back()->with('failure',Lang::get('user.user_not_exist'));
+		}
+	}
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /users/{id}
@@ -139,7 +171,7 @@ class UsersController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$user=Institute::withTrashed()->find($id);
+		$user=User::withTrashed()->find($id);
 		if($user){
 			$user->forceDelete();
 			return Redirect::to('/users')->with('success',Lang::get('user.user_deleted'));
@@ -171,6 +203,9 @@ class UsersController extends \BaseController {
 		$userDetails=$this->user->where('email','=',Input::get('email'))->first();
 		if(!$userDetails)
 		{
+			$userDetails=User::onlyTrashed()->where('email','=',Input::get('email'))->first();
+			if($userDetails)
+				return Redirect::back()->with('failure',Lang::get('user.user_disabled_by_admin'));
 			return Redirect::to('/users/signup')->with('failure',Lang::get('user.user_not_registered'));
 		}
 		/* To check whether the user has verified his/her email or not. */
@@ -208,7 +243,6 @@ class UsersController extends \BaseController {
 		return [
 			"email"=>Input::get('email'),
 			"password"=>Input::get('password'),
-			"user_confirmed"=>1,
 		];
 	}
 	/**
@@ -280,7 +314,7 @@ class UsersController extends \BaseController {
 			{
     			$message->to($email,$name)->subject($subject);
 			});
-			return Redirect::to('/')->with('success',Lang::get('user.register_success'));
+			return Redirect::to('/')->with('success',Lang::get('user.user_signup_success'));
 		}	
 	}
 	/**
@@ -321,6 +355,7 @@ class UsersController extends \BaseController {
 	 */
 	public function getChangePassword()
 	{
+		// dd("G");
 		return View::make('Users.changePassword');
 	}
 	/**
@@ -451,5 +486,14 @@ class UsersController extends \BaseController {
     	Auth::loginUsingId($id);
     	return Redirect::to('/')->with('success',Lang::get('user.welcome',array('name'=>$me['first_name'])));
 	}
-	
+
+	public function history()
+	{
+		$date=Carbon::now()->subDay();
+		$history['oneDay'] = $this->user->getUserOneDay($date);
+		$history['active'] = $this->user->getUserActive();
+		$history['disabled'] = $this->user->getUserDisabled();
+		$history['subscription'] = $this->subscription->getSubscribe();
+		return $history;
+	}
 }

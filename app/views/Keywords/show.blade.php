@@ -213,7 +213,7 @@
 					<br>
 					<div id="browse-filter" class="filter-option-2">	
 						<h4>Locality</h4> 
-						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-loc"> 
+						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 							@foreach ($localitiesForLocation as $localityData)
 								<?php 
 									$locality = $localityData->locality;
@@ -228,7 +228,7 @@
 					</div>
 					<div id="browse-filter" class="filter-option-3">	
 						<h4>Trial Available</h4> 
-						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-trial"> 
+						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 						@foreach ($trial as $index => $trialValue)
 							<li trial="{{$index}}" >								
 							 	 <label class="sub"><input autocomplete="off" style="" value="{{$index}}" type="checkbox" class="trialCheckbox filterCheckBox" />{{' '.$trialValue}}</label>
@@ -295,10 +295,11 @@
 		if(sub_select.length==0)
 			sub_select=0;
 		if(loc_select.length==0)
-			locloc_select=0;
+			loc_select=0;
 		if(trial_select.length==0)
 			trial_select =0;
-		$.get("/filter/"+sub_select+"/"+loc_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
+		//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
+		$.get("/filter/"+sub_select+"/"+loc_select+"/"+trial_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
 		{
 			chunk++;
 			loadFilters = true;	
@@ -466,21 +467,24 @@
 		//	alert(result.length);
 			$(linksContainer).empty();
 			filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();
-			alert(filter_select.length);
+			//alert(filter_select.length);
 			//alert(sub_select+','+loc_select);
 			if(filter_select.length>0)
 			{
 				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
 				trial_select =  $('.trialCheckbox:checked').map(function(){return this.value;}).get(); 
+				//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
 				chunk = 0;
 				LoadFilterResults(sub_select,loc_select,trial_select,0);
 			}
 			else
 			{
+
 				chunk = 0;
 				$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 				{
+					alert(response);
 					if(response == "Empty")
 					{
 						$('#loadMore').css('display','none');

@@ -81,11 +81,11 @@
    </div>
 </div>
 <div id="batch_recent_listings" class="batch_recent_listings">
-   <h1>{{$homeLang['home_recent_title']}}</h1>
-   <h2>{{$homeLang['home_recent_subtitle']}}</h2><br>
+   <h1>{{$homeLang['home_featured_title']}}</h1>
+   <h2>{{$homeLang['home_featured_subtitle']}}</h2><br>
    <div class="recent_listings container">
-       @if(isset($recentBatches))
-         @foreach($recentBatches as $data)
+       @if(isset($featuredBatches))
+         @foreach($featuredBatches as $data)
             <div id="" class="col-xs-12 col-sm-4 col-md-3">
                <div class="recent_listings-item">
                   <div>

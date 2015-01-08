@@ -468,7 +468,7 @@ font-weight: 100;
 	var categoryId = "<?php echo $category_id; ?>";
 	var locationId = "<?php echo $location_id; ?>";
 	var range = 10;
-	var filterResultCount = 0;
+	var filterRestultCount = 0;
 	var filterStatus=false;
 	var loadFilters = false;
 	var chunk = 1;
@@ -510,10 +510,8 @@ font-weight: 100;
 			locloc_select=0;
 		if(trial_select.length==0)
 			trial_select =0;
-		// alert(trial_select);
 		$.get("/filter/"+sub_select+"/"+loc_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
 		{
-			// alert("response");
 			chunk++;
 			loadFilters = true;	
 			if(response == "Empty")
@@ -564,13 +562,12 @@ font-weight: 100;
 			var subcategoryID = results[index]['batch_subcategory_id'];
 			var localityID = results[index]['venue_locality_id'];
 			var contact = results[index]['venue_contact_no'];
-			//Don't define weekdays array here. Take it from backend.
-			var weekdays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
+			var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
 			var daysResult = new Array();
 			var trialID = results[index]['batch_trial'];
-			for(day = 1;day<8;day++)
+			for(day = 0;day<7;day++)
 			{
-				var dayID = "batch_class_on_"+weekdays[day];
+				var dayID = "batch_class_on_"+weekDays[day];
 				daysResult[day] = results[index][dayID];
 			}
 			$(linksContainer).append("<li subcategory='"+subcategoryID+"' locality='"+localityID+"' class='batch"+index+"' id='batchInfo' style='display:none'>"+
@@ -614,11 +611,11 @@ font-weight: 100;
 					"</div>"+
 				"</div>"+
 				"</div><hr></li>");
-				for(day=1;day<8;day++)
+				for(day=0;day<7;day++)
 				{
 					if(daysResult[day]==1)
 					{
-						$('.batch'+index+' #day'+(day)).css('opacity','1');
+						$('.batch'+index+' #day'+(day+1)).css('opacity','1');
 					}
 				}				
 	    }
@@ -679,7 +676,7 @@ font-weight: 100;
 		//	alert(result.length);
 			$(linksContainer).empty();
 			filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();
-			// alert(filter_select.length);
+			alert(filter_select.length);
 			//alert(sub_select+','+loc_select);
 			if(filter_select.length>0)
 			{

@@ -32,7 +32,7 @@ class KeywordsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function search(/*$chunk="0"*/)
+	public function search()
 	{
 		$keyword=Input::get('keyword');
 		$category_id=Input::get('category_id');
@@ -69,6 +69,7 @@ class KeywordsController extends \BaseController {
 	 */
 	public function show($category_id,$location_id="0",$chunk="0")
 	{
+		// dd("test");
 		//check count how many time page is viewed in filter page.
 		//For future filters
 		$age_group=$this->age_group;
@@ -76,6 +77,7 @@ class KeywordsController extends \BaseController {
 		$gender_group=$this->gender_group;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
+		
 		//For display
 		if(!$category_id){
 			$subcategoriesForCategory=$this->subcategory->all();
@@ -148,7 +150,7 @@ class KeywordsController extends \BaseController {
 				return $batchesForCategoryLocation="Empty";
 		}
 		else{
-			// dd($batchesForCategoryLocation);
+			dd($batchesForCategoryLocation);
 			return View::make('Errors.pageNotFound');
 		}
 	}

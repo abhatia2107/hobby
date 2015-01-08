@@ -507,10 +507,10 @@ font-weight: 100;
 		if(sub_select.length==0)
 			sub_select=0;
 		if(loc_select.length==0)
-			locloc_select=0;
+			loc_select=0;
 		if(trial_select.length==0)
 			trial_select =0;
-		$.get("/filter/"+sub_select+"/"+loc_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
+		$.get("/filter/"+sub_select+"/"+loc_select+"/"+trial_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
 		{
 			chunk++;
 			loadFilters = true;	

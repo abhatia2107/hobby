@@ -61,7 +61,7 @@ Route::get('/batches/history','BatchesController@history');
 Route::get('/batches/approve/history','BatchesController@approvalHistory');
 Route::get('/batches/approve','BatchesController@pending');
 Route::get('/batches/approve/{id}','BatchesController@approve');
-Route::get('/batches/{id}','BatchesController@show');
+// Route::get('/batches/{id}','BatchesController@show');
 
 //Route for CategoriesController
 Route::get('/categories','CategoriesController@index');
@@ -127,7 +127,7 @@ Route::get('/keywords/search','KeywordsController@search');
 Route::get('/keywords/edit/{id}','KeywordsController@edit');
 Route::post('/keywords/update/{id}','KeywordsController@update');
 Route::get('/keywords/delete/{id}','KeywordsController@destroy');
-Route::get('/keywords/{id}','KeywordsController@show');
+// Route::get('/keywords/{id}','KeywordsController@show');
 
 //Route for LocalitiesController
 Route::get('/localities','LocalitiesController@index');

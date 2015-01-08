@@ -100,6 +100,10 @@ Route::get('/feedbacks','FeedbacksController@index');
 Route::get('/feedbacks/create','FeedbacksController@create');
 Route::post('/feedbacks/store','FeedbacksController@store');
 Route::get('/feedbacks/delete/{id}','FeedbacksController@destroy');
+Route::get('/feedbacks/read/{id}','FeedbacksController@read');
+Route::get('/feedbacks/unread/{id}','FeedbacksController@unread');
+Route::get('/feedbacks/done/{id}','FeedbacksController@done');
+Route::get('/feedbacks/undone/{id}','FeedbacksController@undone');
 Route::get('/feedbacks/{id}','FeedbacksController@show');
 
 //Route for InstitutesController
@@ -119,7 +123,7 @@ Route::get('/institutes/{id}','InstitutesController@show');
 //Route for KeywordsController
 Route::get('/keywords','KeywordsController@index');
 Route::get('/keywords/create','KeywordsController@create');
-Route::get('/keywords/search/'/*{chunk}*/,'KeywordsController@search');
+Route::get('/keywords/search','KeywordsController@search');
 Route::get('/keywords/edit/{id}','KeywordsController@edit');
 Route::post('/keywords/update/{id}','KeywordsController@update');
 Route::get('/keywords/delete/{id}','KeywordsController@destroy');

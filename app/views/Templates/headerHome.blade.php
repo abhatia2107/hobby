@@ -15,7 +15,8 @@
 					if($id)
 					{
 						$user=User::find($id);
-						$name=$user->user_first_name;
+						if($user)
+							$name=$user->user_first_name;
 					}
 				?>
 				@if(!$id)
@@ -27,7 +28,14 @@
 					</li>
 				@else
 					<li class="header_myaccount" >
-						<a class="header_myaccount_a" href="/users/{{$id}}" >{{$name}}'s Account</a>
+						<a class="header_myaccount_a" href="/users/{{$id}}" >
+							@if($user)
+								{{$name}}'s 
+							@else
+								My
+							@endif
+							Account
+						</a>
 					</li>
 					<li class="header_logout" >
 						<a class="header_logout_a" href="/users/logout" >Logout</a>

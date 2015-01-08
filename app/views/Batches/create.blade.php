@@ -115,8 +115,8 @@ left: 30%;
 @section('content')
 <div class="container-fluid">
     <div id="classInfo1">
-    <form role="form" class="form-horizontal" action="/batches/store" method="post" enctype="multipart/form-data" id="classInfo">
-        
+    <form role="form" class="form-horizontal" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" id="classInfo">
+          
         <div class="row row_padding">
             <p  class="create_class">Create your Class
             </p>

@@ -77,7 +77,64 @@ class FeedbacksController extends \BaseController {
 	public function show($id)
 	{
 		$feedbackDetails=Feedback::find($id);
+		if(!$feedbackDetails->feedback_read){
+			$feedbackDetails->feedback_read=true;
+			$feedbackDetails->save();
+		}
 		return View::make('Feedbacks.show',compact('feedbackDetails'));
+	}
+
+	public function read($id)
+	{
+		$feedback= Feedback::find($id);
+		$feedback->feedback_read=true;
+		$updated=$feedback->save();
+		if ($updated) 
+			return Redirect::to('/feedbacks')->with('success',Lang::get('feedback.feedback_read'));
+		else
+			return Redirect::to('/feedbacks')->with('failed',Lang::get('feedback.feedback_read_failed'));
+	}
+
+	public function unread($id)
+	{
+		$feedback= Feedback::find($id);
+		$feedback->feedback_read=false;
+		$updated=$feedback->save();
+		if ($updated) 
+			return Redirect::to('/feedbacks')->with('success',Lang::get('feedback.feedback_unread'));
+		else
+			return Redirect::to('/feedbacks')->with('failed',Lang::get('feedback.feedback_unread_failed'));
+	}
+
+	public function undone($id)
+	{
+		$feedback=User::onlyTrashed()->find($id);
+		if($feedback){
+			$feedbackDisabled=User::onlyTrashed()->find($id);
+			if($feedbackDisabled){
+				$feedbackDisabled->restore();	
+				return Redirect::to('/feedbacks')->with('success',Lang::get('feedback.feedback_undone'));
+			}
+			else{
+					return Redirect::to('/feedbacks')->with('failure',Lang::get('feedback.feedback_undone_failed'));
+			}
+		}
+		else
+			return Redirect::to('/feedbacks')->with('failure',Lang::get('feedback.feedback_not_exist'));
+	}
+
+	public function done($id)
+	{
+		// TO DO: delete() not updating deleted_at timestamps in table.
+		$feedback=User::find($id);
+		// dd($feedback);
+		if($feedback){
+			$deleted=$feedback->delete();
+			return Redirect::to('/feedbacks')->with('success',Lang::get('feedback.feedback_done'));
+		}
+		else{
+			return Redirect::back()->with('failure',Lang::get('feedback.feedback_done_failed'));
+		}
 	}
 
 	/**

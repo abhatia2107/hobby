@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/admins/home">Admin Portal</a>
+        <a class="navbar-brand" href="/" target="_blank">Hobby</a>
      </div>
      <!-- Top Menu Items -->
      <ul class="nav-ul nav navbar-right top-nav">

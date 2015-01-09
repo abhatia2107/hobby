@@ -33,6 +33,7 @@ class BatchesTableSeeder extends Seeder {
                      'batch_class_on_saturday'=>$faker->boolean(),
                      'batch_class_on_sunday'=>$faker->boolean(),
                      'batch_trial' =>$faker->randomNumber(1,5),
+                     'batch_user_id'=>$faker->unique()->randomNumber(1,1000),
                      'batch_comment'=>$faker->lexify(),
                      'batch_tagline'=>$faker->lexify(),
                      'batch_photo'=>"0",

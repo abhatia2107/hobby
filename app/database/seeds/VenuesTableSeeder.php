@@ -6,7 +6,7 @@ class VenuesTableSeeder extends Seeder {
        {
               $faker = Faker\Factory::create();
               $faker->addProvider(new Faker\Provider\en_GB\Address($faker));
-              foreach(range(1,30) as $index)
+              foreach(range(1,1000) as $index)
               { 
                      DB::table('venues')->insert(array(
                      'venue'=>$faker->name,
@@ -16,8 +16,8 @@ class VenuesTableSeeder extends Seeder {
                      'venue_email'=>$faker->email,
                      'venue_address' =>$faker->address,
                      'venue_contact_no' =>$faker->phoneNumber,
-                     'venue_user_id'=>$faker->randomDigitNotNull,
-                     'venue_institute_id'=>$faker->randomDigitNotNull,
+                     'venue_user_id'=>$faker->unique()->randomNumber(1,1000),
+                     'venue_institute_id'=>$faker->randomNumber(1,1000),
                      'venue_latitude'=>$faker->latitude,
                      'venue_longitude'=>$faker->longitude,
                      ));

@@ -43,15 +43,8 @@ class Batch extends \Eloquent {
         return Batch::where('id','=',$id)->pluck('category');
     }
 
-    public function getBatchForInstitute($batch_institute_id)
-    {
-        return Batch::whereIn('batch_institute_id',$batch_institute_id)->get();
-    }
-    
     public function getBatchForCategoryLocation($category_id,$location_id,$chunk)
     {
-        dd($category_id);
-        var_dump($location_id);
         //See join->on in detail from /docs/queries and improve this query.
         $allBatches=Batch::
                         Join('institutes','institutes.id','=','batches.batch_institute_id')
@@ -113,6 +106,29 @@ class Batch extends \Eloquent {
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->get();
         return $allBatches;
+    }
+
+    public function search($keyword,$chunk)
+    {
+        $allBatches=Batch::
+            Join('institutes','institutes.id','=','batches.batch_institute_id')
+            ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
+            ->Join('categories','categories.id','=','batches.batch_category_id')
+            ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
+            ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+            ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+            ->where('batch','LIKE','%'.$keyword.'%')
+            ->orWhere('institute','LIKE','%'.$keyword.'%')
+            ->orWhere('locality','LIKE','%'.$keyword.'%')
+            ->orWhere('location','LIKE','%'.$keyword.'%')
+            ->orWhere('category','LIKE','%'.$keyword.'%')
+            ->orWhere('subcategory','LIKE','%'.$keyword.'%')
+            ->orderBy('institute_rating','desc')
+            ->skip($chunk)
+            ->take(100)
+            ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+            ->get();
+       return ($allBatches);
     }
 
     public function getBatch($id)
@@ -184,48 +200,44 @@ class Batch extends \Eloquent {
         return Batch::where('created_at','>',$date)->count();
     }
 
-    public function search($keyword,$chunk)
+    public function getBatchesForInstitute($batch_institute_id)
     {
-/*        return DB::select("Select * from `batches` 
-        inner join `institutes` on  `institutes`.`id` = `batches`.`batch_institute_id`
-        inner join `venues` on `venues`.`id` = `batches`.`batch_venue_id`
-        inner join `localities` on `localities`.`id` = `venues`.`venue_locality_id`
-        inner join `locations` on `locations`.`id` = `venues`.`venue_location_id`
-        inner join `categories` on `categories`.`id` = `batches`.`batch_category_id`
-        inner join `subcategories` on `subcategories`.`id` = `batches`.`batch_subcategory_id`
-
-        where
-
-        `batches`.`batch` like '%west%'
-        OR `institutes`.`institute` like '%west%'
-        OR `localities`.`locality` like '%west%'
-        OR `locations`.`location` like '%west%'
-        OR `categories`.`category` like '%west%'
-        OR `subcategories`.`subcategory` like '%west%'
-LIMIT 0 , 100
-");
-*/
-                    $allBatches=Batch::
-                        Join('institutes','institutes.id','=','batches.batch_institute_id')
-                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
+        return Batch::where('batch_institute_id',$batch_institute_id)
+                        ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
+                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
-                        ->where('batch','LIKE','%'.$this->keyword.'%')
-                        ->orWhere('institute','LIKE','%'.$this->keyword.'%')
-                        ->orWhere('locality','LIKE','%'.$this->keyword.'%')
-                        ->orWhere('location','LIKE','%'.$this->keyword.'%')
-                        ->orWhere('category','LIKE','%'.$this->keyword.'%')
-                        ->orWhere('subcategory','LIKE','%'.$this->keyword.'%')
-                        ->skip($chunk)
-                        ->take(100)
-                        // ->orderBy('institute_rating')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
-                        
-                        ->get()
-                        ->toarray();
-       dd ($allBatches);
+                        ->get();
+    }
+    
+    public static function getInstituteForBatch($id)
+    {
+        $batch = Batch::withTrashed()->find($id);
+        if($batch)
+        {
+            if(is_null($batch->deleted_at))
+               return $batch->batch_institute_id;
+            else
+                return null;
+        }
+        else
+            return false;
+    }
+
+    public static function getUserforBatch($id)
+    {
+        $batch= Batch::withTrashed()->find($id);
+        if($batch){
+            if(is_null($batch->deleted_at))
+                return $batch->batch_user_id;
+            else
+                return null;
+        }
+        else
+            return false;
     }
 
 }

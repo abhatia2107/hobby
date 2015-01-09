@@ -27,7 +27,7 @@
 					</a>
 				</td>
 				<td>
-					<a href="/features/create/{{$data->id}}">
+					<a href="/features/store/{{$data->id}}">
 						<button type="button" class="btn">
 							<span class="glyphicon glyphicon-star"></span>
 							Feature It

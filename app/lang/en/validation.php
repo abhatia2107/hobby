@@ -103,4 +103,5 @@ return array(
 
 	'attributes' => array(),
 
+	'permission_denied' => "You don't have permission to view this page.",
 );

@@ -17,13 +17,14 @@ class CreateBatchesTable extends Migration {
 			$table->string('batch',50);
 			$table->integer('batch_category_id')->foreign('batch_category_id')->references('id')->on('categories');
 			$table->integer('batch_subcategory_id')->foreign('batch_subcategory_id')->references('id')->on('subcategories');
-			$table->longText('batch_accomplishment')->nullable();
+			$table->integer('batch_user_id')->foreign('batch_user_id')->references('id')->on('users');
 			$table->integer('batch_institute_id')->foreign('batch_institute_id')->references('id')->on('institutes');
+			$table->integer('batch_venue_id')->foreign('batch_venue_id')->references('id')->on('venues');
+			$table->longText('batch_accomplishment')->nullable();
 			$table->date('batch_start_date')->nullable();
 			$table->date('batch_end_date')->nullable();
 			$table->time('batch_start_time')->nullable();
 			$table->time('batch_end_time')->nullable();
-			$table->integer('batch_venue_id')->foreign('batch_venue_id')->references('id')->on('venues');
 			$table->integer('batch_difficulty_level')->default(0);
 			$table->integer('batch_age_group')->default(0);
 			$table->integer('batch_gender_group')->default(0);

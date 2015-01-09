@@ -93,42 +93,6 @@ class AdminsController extends \BaseController {
 		return Redirect::to('/users/'.$adminDetails['admin_user_id']);
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /admins/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		$adminDetails=Admin::find($id);
-		return View::make('Admins.create',compact('adminDetails'));
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /admins/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		$credentials=Input::all();
-	
-		$validator = Validator::make($credentials, Admin::$rules);
-		if($validator->fails())
-		{
-			return Redirect::back()->withInput()->withErrors($validator);
-		}
-		$updated=$this->admin->updateAdmin($credentials,$id);
-		if ($updated) 
-			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_updated'));
-		else
-			return Redirect::to('/admins')->with('failure',Lang::get('admin.admin_already_failed'));
-	}
-
 	public function enable($id)
 	{
 		$admin=Admin::withTrashed()->find($id);

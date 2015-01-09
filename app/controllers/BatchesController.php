@@ -5,19 +5,6 @@ use Carbon\Carbon;
 class BatchesController extends \BaseController {
 
 	/**
-	 * Display a listing of the resource.
-	 * GET /batches
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$batches=Batch::all();
-		$tableName="$_SERVER[REQUEST_URI]";
-		return View::make('Batches.index',compact('batches','tableName'));
-	}
-
-	/**
 	 * Show the form for creating a new resource.
 	 * GET /batches/create
 	 *

@@ -1,0 +1,382 @@
+html{
+  overflow-x: hidden;
+}
+body {
+  overflow-x: hidden;
+  font-family: "Times New Roman", Times, serif;
+  margin: 0 0;
+}
+.header_img
+{
+    height:15px;
+}
+.header_location_dropdown
+{
+    margin-top: 0px;
+    font-size:10px;
+    height:37px;
+    width:100% !important;
+}
+.header_signin
+{
+    padding-top: 15px;
+    font-size: 15px;
+    width:50%;
+    padding-left:45px !important;
+    color:white;
+}
+.header_signup
+{
+    padding-top: 15px;
+    font-size: 15px;   
+    color:white;
+}
+.header_signin_a {
+    color:white;
+    text-decoration:none;
+}
+.header_signin_a:hover {
+    color:white;
+    text-decoration:none;
+}
+.header_signup_a {
+    color:white;
+    text-decoration:none;
+}
+.header_signup_a:hover {
+    color:white;
+    text-decoration:none;
+}
+.header_myaccount{
+    padding-top: 15px;
+    font-size: 15px;
+    width:50%;
+    padding-left:45px !important;
+    color:white;
+}
+.header_myaccount_a {
+    color:white;
+    text-decoration:none;
+}
+.header_myaccount_a:hover {
+    color:white;
+    text-decoration:none;
+}
+.header_logout
+{
+    padding-top: 15px;
+    font-size: 15px;
+    color:white;
+}
+.header_logout_a
+{
+    color:white;
+    text-decoration: none;
+}
+.header_logout_a:hover
+{
+    color:white;
+    text-decoration: none;
+}
+.header_search_button{
+    height: 34px;
+    margin-top: 1px;
+    font-size: 18px !important;
+    padding-top: 5px !important;"
+}
+.header_row1{
+    background-color: #3396d1;
+}
+.layout_header{
+    font-family: 'Montserrat', sans-serif;";
+}
+.homepage-cover{
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.navbar{
+    border-radius: 0px;
+    width: 100%;
+}
+@media (min-width:768px) {
+    .homepage-cover {
+        padding: 7em 0 8em;
+    }
+}
+@media (min-width:992px) {
+    .homepage-cover {
+        padding: 10em 0 11em;
+    }
+}
+
+
+@media (min-width:768px) {
+    .sample_page_home{
+        padding: 7em 0 8em;
+    }
+}
+@media (min-width:992px) {
+    .sample_page_home {
+        padding: 10em 0 11em;
+    }
+}
+
+}.home-widget-description, .home-widget-title {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.home-widget-title {
+    font-size: 20px;
+}
+.homepage-cover select, .homepage-cover input
+{
+    width: 97%;
+}
+.homepage-cover button
+{
+    width:65%;
+}
+.home-cover-title
+{
+    margin-bottom: 40px;
+}
+.homepage-cover h1{
+    font-size: 35px;
+    color:white;
+    font-weight: bold;
+}
+.homepage-cover h2{
+    font-size: 25px;
+    color:white;
+    font-weight: bold;
+}
+
+.category-list-items
+{
+    height: 250px;
+    border-radius: 4px;
+    overflow: hidden;
+    float: left;
+    margin-top: 0px;
+    padding: 10px;
+}
+
+.overlay-slider {
+  width: 100% !important;
+  height: 100% !important;
+   margin-top: -20px;
+  top:0;
+  left:0;
+    background: url("/assets/images/home/institute.jpg") 0 -490px;
+}
+
+.home-category-type {
+  position:relative;
+  overflow:hidden;
+  background:black;
+  height: 170px;
+  margin-bottom:30px;
+    margin-top:7;
+      border-radius: 9px;
+    border:4px solid;
+    border-color: lightgray;
+}
+
+
+.home-category-type img {
+  width:100%;
+  height: 170px;
+}
+
+figcaption {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  opacity: .85;
+  text-align: center;
+  background: lightgray;
+    font-weight: bolder;
+
+  padding-top: 25%;
+
+}
+.photo_caption
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  color: skyblue;
+  z-index: 1000;
+  text-align: center;
+  margin-top: 25%;
+  font-weight: bolder;
+  color: white;
+  font-size: 24px;
+}
+
+.home-category-type:hover figcaption  {
+  display: block;
+}
+
+
+.categories_container
+{
+    text-align: center;
+}
+
+.categories_container a, .categories_container a:hover
+{
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+}
+
+.categories_container  h1
+{
+    font-size: 35px;
+    color:#333;
+    font-weight: bold;
+}
+
+.categories_container h2
+{
+    font-size: 25px;
+    color:#333;
+    font-weight: bold;
+}
+
+.batch_recent_listings h1
+{
+  font-size: 35px;
+  color:#fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.batch_recent_listings h2
+{
+  font-size: 25px;
+  color:#fff;
+  font-weight: normal;
+  text-align: center;
+}
+
+.batch_recent_listings
+{
+  color: white;
+}
+
+ body select
+ {
+    height: 34px;
+    border-radius: 5px;
+ }
+ .batch_recent_listings
+ {
+    background: url(/assets/images/home/recent_listing.jpg) 0 0;
+    width: 100%;
+    margin-top: 50px;
+    padding-top: 2px;
+    padding-bottom: 50px;
+ }
+
+.active-rating .glyphicon
+{
+  color: orange;
+  font-weight: bolder;
+}
+
+.star-rating .glyphicon
+{
+  color: gray;
+  font-weight: bolder;
+}
+
+.recent_listings-item {
+  position:relative;
+  overflow:hidden;
+  background:black;
+  height: 200px;
+  margin-bottom:30px;
+    margin-top:7px;
+      border-radius: 7px;
+    border:2px solid;
+    border-color: lightgray;
+}
+
+.recent_listings-item header
+{
+  margin-left: 10px;
+   background-color: rgba(0, 0, 0, 0.7);
+   font-weight: lighter;
+   font-size: 15px;
+}
+
+.recent_listings-item img {
+  z-index: 1;
+  width:100%;
+  height: 170px;
+}
+.recent_listings-info
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  color: skyblue;
+  z-index: 1000;
+  text-align: left;
+  font-weight: normal;
+  color: white;
+  font-size: 14px;
+}
+
+.recent_listing_rating
+{
+  margin-top:5px;
+  float: right;
+  text-align: center;
+}
+
+
+span.stars, span.stars span {
+    display: block;
+    background: url(/assets/images/sample/star.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+span.stars span {
+    background-position: 0 0; 
+}
+
+.recent_listings-info .contact_address_info
+{
+  bottom:0;
+  position: absolute;
+  width: 100%;
+}
+
+.recent_listings-info a
+{
+  color: white;
+  font-size: 24px;
+      text-align: center;
+}
+
+.recent_listings-info footer
+{
+  text-align: center;
+}

@@ -13,70 +13,63 @@
 
 Route::get('/', 'HomeController@showWelcome');
 
-Route::get('/admins/home', 'HomeController@showAdminHome');
+Route::get('/admin', 'HomeController@showAdminHome');
 
 /*
-
-Route::resource('admins', 'AdminsController');
-Route::resource('batches', 'BatchesController');
-Route::resource('categories', 'CategoriesController');
-Route::resource('comments', 'CommentsController');
-Route::resource('feedbacks', 'FeedbacksController',[
-    'except' => ['edit']
-]);
-
-Route::resource('institutes', 'InstitutesController');
-Route::resource('keywords', 'KeywordsController');
-Route::resource('localities', 'LocalitiesController');
-Route::resource('locations', 'LocationsController');
-Route::resource('subcategories', 'SubcategoriesController');
-Route::resource('subscriptions', 'SubscriptionsController');
-Route::resource('users', 'UsersController');
-Route::resource('venues', 'VenuesController');
-
-*/
-//Route for AdminsController
+	Routes for Main Admin section of admin panel.
+	Only Main Admin is allowed access here.  
+ */
+Route::group(array('before' => "auth|admin|mainAdmin"), function() {
 Route::get('/admins','AdminsController@index');
-Route::get('/admins/create','AdminsController@create');
 Route::post('/admins/store','AdminsController@store');
-Route::get('/admins/{id}','AdminsController@show');
-Route::get('/admins/edit/{id}','AdminsController@edit');
-Route::post('/admins/update/{id}','AdminsController@update');
 Route::get('/admins/enable/{id}','AdminsController@enable');
 Route::get('/admins/disable/{id}','AdminsController@disable');
 Route::get('/admins/delete/{id}','AdminsController@destroy');
+Route::get('/admins/{id}','AdminsController@show');
+});
 
-Route::group(array('before' => "auth|auth.institute"), function() {
-	//Route for BatchesController
-	Route::get('/batches','BatchesController@index');
+/*
+	Routes for BatchesController
+	There are different type of check required for every route.
+ */
+Route::group(array('before' => "auth|institute-or-admin"), function() {
 	Route::get('/batches/create','BatchesController@create');
 	Route::post('/batches/store','BatchesController@store');
+});
+
+Route::group(array('before' => "auth|institute|batchOwn"), function() {	
 	Route::get('/batches/edit/{id}','BatchesController@edit');
 	Route::post('/batches/update/{id}','BatchesController@update');
-	Route::get('/batches/delete/{id}','BatchesController@destroy');
-	Route::get('/batches/enable/{id}','BatchesController@enable');
 	Route::get('/batches/disable/{id}','BatchesController@disable');
 });
-Route::get('/batches/history','BatchesController@history');
-Route::get('/batches/approve/history','BatchesController@approvalHistory');
-Route::get('/batches/approve','BatchesController@pending');
-Route::get('/batches/approve/{id}','BatchesController@approve');
-// Route::get('/batches/{id}','BatchesController@show');
+
+Route::group(array('before' => "auth|admin"), function() {	
+	Route::get('/batches/enable/{id}','BatchesController@enable');
+	Route::get('/batches/delete/{id}','BatchesController@destroy');
+	Route::get('/batches/history','BatchesController@history');
+	Route::get('/batches/approve/history','BatchesController@approvalHistory');
+	Route::get('/batches/approve','BatchesController@pending');
+	Route::get('/batches/approve/{id}','BatchesController@approve');
+});
+
+Route::get('/batches/{id}','BatchesController@show');
 
 //Route for CategoriesController
-Route::get('/categories','CategoriesController@index');
-Route::get('/categories/create','CategoriesController@create');
-Route::post('/categories/store','CategoriesController@store');
-Route::get('/categories/{id}','CategoriesController@show');
-Route::get('/categories/edit/{id}','CategoriesController@edit');
-Route::post('/categories/update/{id}','CategoriesController@update');
-Route::get('/categories/enable/{id}','CategoriesController@enable');
-Route::get('/categories/disable/{id}','CategoriesController@disable');
-Route::get('/categories/delete/{id}','CategoriesController@destroy');
+Route::group(array('before' => "auth|admin"), function() {	
+	Route::get('/categories','CategoriesController@index');
+	Route::post('/categories/store','CategoriesController@store');
+	Route::post('/categories/update/{id}','CategoriesController@update');
+	Route::get('/categories/enable/{id}','CategoriesController@enable');
+	Route::get('/categories/disable/{id}','CategoriesController@disable');
+	Route::get('/categories/delete/{id}','CategoriesController@destroy');
+	Route::get('/categories/{id}','CategoriesController@show');
+});
 
+/*
+Filters to applied here soon.
+ */
 //Route for CommentsController
 Route::get('/comments','CommentsController@index');
-Route::get('/comments/create','CommentsController@create');
 Route::get('/comments/{id}','CommentsController@show');
 Route::get('/comments/edit/{id}','CommentsController@edit');
 Route::post('/comments/update/{id}','CommentsController@update');
@@ -85,121 +78,126 @@ Route::get('/comments/disable/{id}','CommentsController@disable');
 Route::get('/comments/delete/{id}','CommentsController@destroy');
 
 //Route for FeaturesController
-Route::get('/features','FeaturesController@index');
-Route::get('/features/create/{id}','FeaturesController@create');
-Route::post('/features/store','FeaturesController@store');
-Route::get('/features/edit/{id}','FeaturesController@edit');
-Route::post('/features/update/{id}','FeaturesController@update');
-Route::get('/features/enable/{id}','FeaturesController@enable');
-Route::get('/features/disable/{id}','FeaturesController@disable');
-Route::get('/features/delete/{id}','FeaturesController@destroy');
-Route::get('/features/{id}','FeaturesController@show');
+Route::group(array('before' => "auth|admin"), function() {	
+	Route::get('/features','FeaturesController@index');
+	Route::post('/features/store/{id}','FeaturesController@store');
+	Route::get('/features/enable/{id}','FeaturesController@enable');
+	Route::get('/features/disable/{id}','FeaturesController@disable');
+	Route::get('/features/delete/{id}','FeaturesController@destroy');
+	Route::get('/features/{id}','FeaturesController@show');
+});
+
 
 //Route for FeedbacksController
-Route::get('/feedbacks','FeedbacksController@index');
 Route::get('/feedbacks/create','FeedbacksController@create');
-Route::post('/feedbacks/store','FeedbacksController@store');
-Route::get('/feedbacks/delete/{id}','FeedbacksController@destroy');
-Route::get('/feedbacks/read/{id}','FeedbacksController@read');
-Route::get('/feedbacks/unread/{id}','FeedbacksController@unread');
-Route::get('/feedbacks/done/{id}','FeedbacksController@done');
-Route::get('/feedbacks/undone/{id}','FeedbacksController@undone');
-Route::get('/feedbacks/{id}','FeedbacksController@show');
+Route::post('/feedbacks/store','FeedbacksController@store');	
+
+Route::group(array('before' => "auth|admin"), function() {	
+	Route::get('/feedbacks','FeedbacksController@index');
+	Route::get('/feedbacks/delete/{id}','FeedbacksController@destroy');
+	Route::get('/feedbacks/read/{id}','FeedbacksController@read');
+	Route::get('/feedbacks/unread/{id}','FeedbacksController@unread');
+	Route::get('/feedbacks/done/{id}','FeedbacksController@done');
+	Route::get('/feedbacks/undone/{id}','FeedbacksController@undone');
+	Route::get('/feedbacks/{id}','FeedbacksController@show');
+});
 
 //Route for InstitutesController
-Route::group(array('before' => "auth"), function() {
-Route::get('/institutes','InstitutesController@index');
-Route::get('/institutes/create','InstitutesController@create');
-Route::post('/institutes/store','InstitutesController@store');
+Route::group(array('before'=>"auth|instituteNotOwn"),function(){
+	Route::get('/institutes/create','InstitutesController@create');
+	Route::post('/institutes/store','InstitutesController@store');
+});
+
+Route::group(array('before' => "auth|instituteOwn"), function() {
 Route::get('/institutes/edit/{id}','InstitutesController@edit');
 Route::post('/institutes/update/{id}','InstitutesController@update');
-Route::get('/institutes/enable/{id}','InstitutesController@enable');
 Route::get('/institutes/disable/{id}','InstitutesController@disable');
-Route::get('/institutes/delete/{id}','InstitutesController@destroy');
-Route::get('/institutes/history','InstitutesController@history');
 Route::get('/institutes/{id}','InstitutesController@show');
 });
 
-//Route for KeywordsController
-Route::get('/keywords','KeywordsController@index');
-Route::get('/keywords/create','KeywordsController@create');
-Route::get('/keywords/search','KeywordsController@search');
-Route::get('/keywords/edit/{id}','KeywordsController@edit');
-Route::post('/keywords/update/{id}','KeywordsController@update');
-Route::get('/keywords/delete/{id}','KeywordsController@destroy');
-// Route::get('/keywords/{id}','KeywordsController@show');
+Route::group(array('before' => "auth|admin"), function() {
+	Route::get('/institutes','InstitutesController@index');
+	Route::get('/institutes/enable/{id}','InstitutesController@enable');
+	Route::get('/institutes/delete/{id}','InstitutesController@destroy');
+	Route::get('/institutes/history','InstitutesController@history');
 
-//Route for LocalitiesController
-Route::get('/localities','LocalitiesController@index');
-Route::get('/localities/create','LocalitiesController@create');
-Route::post('/localities/store','LocalitiesController@store');
-Route::get('/localities/edit/{id}','LocalitiesController@edit');
-Route::post('/localities/update/{id}','LocalitiesController@update');
-Route::get('/localities/enable/{id}','LocalitiesController@enable');
-Route::get('/localities/disable/{id}','LocalitiesController@disable');
-Route::get('/localities/delete/{id}','LocalitiesController@destroy');
-Route::get('/localities/{id}','LocalitiesController@show');
 
-//Route for LocationsController
-Route::get('/locations','LocationsController@index');
-Route::get('/locations/create','LocationsController@create');
-Route::post('/locations/store','LocationsController@store');
-Route::get('/locations/edit/{id}','LocationsController@edit');
-Route::post('/locations/update/{id}','LocationsController@update');
-Route::get('/locations/enable/{id}','LocationsController@enable');
-Route::get('/locations/disable/{id}','LocationsController@disable');
-Route::get('/locations/delete/{id}','LocationsController@destroy');
-Route::get('/locations/{id}','LocationsController@show');
+	//Route for LocalitiesController
+	Route::get('/localities','LocalitiesController@index');
+	Route::post('/localities/store','LocalitiesController@store');
+	Route::post('/localities/update/{id}','LocalitiesController@update');
+	Route::get('/localities/enable/{id}','LocalitiesController@enable');
+	Route::get('/localities/disable/{id}','LocalitiesController@disable');
+	Route::get('/localities/delete/{id}','LocalitiesController@destroy');
+	Route::get('/localities/{id}','LocalitiesController@show');
 
-//Route for SubcategoriesController
-Route::get('/subcategories','SubcategoriesController@index');
-Route::get('/subcategories/create','SubcategoriesController@create');
-Route::post('/subcategories/store','SubcategoriesController@store');
-Route::get('/subcategories/edit/{id}','SubcategoriesController@edit');
-Route::post('/subcategories/update/{id}','SubcategoriesController@update');
-Route::get('/subcategories/enable/{id}','SubcategoriesController@enable');
-Route::get('/subcategories/disable/{id}','SubcategoriesController@disable');
-Route::get('/subcategories/delete/{id}','SubcategoriesController@destroy');
-Route::get('/subcategories/{id}','SubcategoriesController@show');
+	//Route for LocationsController
+	Route::get('/locations','LocationsController@index');
+	Route::post('/locations/store','LocationsController@store');
+	Route::post('/locations/update/{id}','LocationsController@update');
+	Route::get('/locations/enable/{id}','LocationsController@enable');
+	Route::get('/locations/disable/{id}','LocationsController@disable');
+	Route::get('/locations/delete/{id}','LocationsController@destroy');
+	Route::get('/locations/{id}','LocationsController@show');
 
-//Route for SubscriptionsController
-Route::get('/subscriptions','SubscriptionsController@index');
+	//Route for SubcategoriesController
+	Route::get('/subcategories','SubcategoriesController@index');
+	Route::post('/subcategories/store','SubcategoriesController@store');
+	Route::post('/subcategories/update/{id}','SubcategoriesController@update');
+	Route::get('/subcategories/enable/{id}','SubcategoriesController@enable');
+	Route::get('/subcategories/disable/{id}','SubcategoriesController@disable');
+	Route::get('/subcategories/delete/{id}','SubcategoriesController@destroy');
+	Route::get('/subcategories/{id}','SubcategoriesController@show');
+
+
+	//Route for SubscriptionsController
+	Route::get('/subscriptions','SubscriptionsController@index');
+	Route::get('/subscriptions/enable/{id}','SubscriptionsController@enable');
+	Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
+});
+
 Route::post('/subscriptions','SubscriptionsController@store');
-Route::get('/subscriptions/enable/{id}','SubscriptionsController@enable');
-Route::get('/subscriptions/disable/{id}','SubscriptionsController@disable');
-Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
+Route::get('/subscriptions/disable/{id}',array('before'=>'subscriptionOwn', 'uses'=>'SubscriptionsController@disable'));
+
+Route::group(array('before' => "auth|institute"), function() {
+	Route::get('/venues/create','VenuesController@create');
+	Route::post('/venues/store','VenuesController@store');
+	Route::get('/venues','VenuesController@index');
+});
 
 //Route for VenuesController
-Route::get('/venues','VenuesController@index');
-Route::get('/venues/create','VenuesController@create');
-Route::post('/venues/store','VenuesController@store');
-Route::get('/venues/edit/{id}','VenuesController@edit');
-Route::post('/venues/update/{id}','VenuesController@update');
-Route::get('/venues/enable/{id}','VenuesController@enable');
-Route::get('/venues/disable/{id}','VenuesController@disable');
-Route::get('/venues/delete/{id}','VenuesController@destroy');
-Route::get('/venues/{id}','VenuesController@show');
+Route::group(array('before' => "auth|institute|venueOwn"), function() {
+	Route::get('/venues/edit/{id}','VenuesController@edit');
+	Route::post('/venues/update/{id}','VenuesController@update');
+	Route::get('/venues/delete/{id}','VenuesController@destroy');
+});
+
 
 //Route for UsersController
-Route::get('/users','UsersController@index');
-Route::get('/users/create','UsersController@create');
-Route::post('/users/store','UsersController@store');
+Route::group(array('before' => "auth|admin"), function() {
+	Route::get('/users','UsersController@index');
+	Route::get('/users/enable/{id}','UsersController@enable');
+	Route::get('/users/disable/{id}','UsersController@disable');
+	Route::get('/users/delete/{id}','UsersController@destroy');
+	Route::get('/users/history','UsersController@history');
+});
+
+Route::group(array('before' => "auth"), function() {
 Route::get('/users/changepassword','UsersController@getChangePassword');
 Route::get('/users/edit','VenuesController@edit');
 Route::post('/users/update','UsersController@update');
-Route::get('/users/delete/{id}','UsersController@destroy');
-Route::get('/users/login', 'UsersController@getLogin');
 Route::get('/users/logout','UsersController@getLogout');
-Route::get('/users/signup','UsersController@getSignUp');
-Route::get('/users/enable/{id}','UsersController@enable');
-Route::get('/users/disable/{id}','UsersController@disable');
 Route::get('/users/subscribe/{id}','UsersController@subscribe');
+});
+
 Route::get('/users/unsubscribe/{id}','UsersController@unsubscribe');
+Route::get('/users/login', 'UsersController@getLogin');
+Route::get('/users/signup','UsersController@getSignUp');
 Route::get('/users/registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
 Route::get('/users/password/remind','RemindersController@getRemind');
 Route::get('/users/password/reset/{token}','RemindersController@getReset');
 Route::post('/users/password/reset/submit','RemindersController@postReset');
-Route::get('/users/history','UsersController@history');
+
 // Issues with the show route. It get calls always.
 Route::get('/users/{id}','UsersController@show');
 
@@ -225,38 +223,28 @@ Route::get('/terms', function()
 {
 	return View::make('Miscellaneous.terms');
 });
+
 Route::get('/contactus', function()
 {
 	return View::make('Miscellaneous.contactus');
 });
-
-Route::get('/subscribed', function()
-{
-	return View::make('Miscellaneous.message');
-});
-
 
 Route::get('/hello', function()
 {
 	return View::make('Miscellaneous.hello');
 });
 
-Route::get('/dummy', function()
-{
-	return View::make('Templates.headerAdmin');
-});
-
 //Routes for user, to be modified later
-
-Route::get('/update/personaldetail','UsersController@getUpdatePersonalDetail');
-Route::post('/update/personaldetail/submit','UsersController@postUpdatePersonalDetail');
+/*
 Route::get('login/fb','UsersController@loginFb');
 Route::get('/login/fb/callback','UsersController@loginFbCallback');
 
-Route::get('/filter/categories/{category_id}/locations/{location_id?}','KeywordsController@show');
+*/
 
-// Route::get('/filter/categories/{category_id}/locations/{location_id}/keywords/{keyword?}','KeywordsController@show');
+Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
-Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{category_id}/{location_id}/{chunk}','KeywordsController@filter');
+Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','FiltersController@show');
 
-Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','KeywordsController@show');
+Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{category_id}/{location_id}/{chunk}','FiltersController@filter');
+
+Route::get('/filter/search','FiltersController@search');

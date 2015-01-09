@@ -1,10 +1,7 @@
 @extends('Layouts.layout')
 @section('pagestylesheet')
-
-    <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.7.2.custom.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery.richtextarea.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-te-1.4.0.css">
-    <script type="text/javascript" src="/assets/js/jquery-te-1.4.0.min.js"></script>
     <style>
 	
 	.ul-without-bullets
@@ -519,7 +516,6 @@ left: 30%;
 </div>
 @stop
 @section('pagejavascript')
-<script type="text/javascript" src="/assets/js/jquery-ui-1.7.2.custom.min.js"></script>
 <script type="text/javascript"  src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
 <script type="text/javascript" src="jquery-te-1.4.0.min.js" charset="utf-8"></script>
 <script type="text/javascript"  src="/assets/js/jquery.richtextarea.min.js"></script>

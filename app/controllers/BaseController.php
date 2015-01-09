@@ -9,7 +9,6 @@ class BaseController extends Controller {
 	protected $featured;
 	protected $feedback;
 	protected $institute;
-	protected $keyword;
 	protected $locality;
 	protected $location;
 	protected $subcategory;
@@ -21,7 +20,7 @@ class BaseController extends Controller {
 	protected $difficulty_level=array(1 => "All","Beginners","Intermediate","Advanced");
 	protected $gender_group=array(1 => "Both","Male","Female");
 	protected $recurring=array(1 => "Not recurring","Weekly","Monthly","Yearly");
-	protected $trial=array(1 => "Trial Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only in beginning of batch","Paid Trial only in beginning of batch");
+	protected $trial=array(1 => "Trial Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only at batch start","Paid Trial only at batch start");
 	protected $weekdays=array(1 => "monday","tuesday","wednesday","thursday","friday","saturday","Sunday");
 	protected $adminPanelList=array(
 									'categories' => 'Categories', 
@@ -39,7 +38,7 @@ class BaseController extends Controller {
 	 *Constructor to initialize the instance of Model User
 	 */
 
-	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject,Feature $featureObject, Feedback $feedbackObject, Institute $instituteObject, Keyword $keywordObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
+	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Feature $featureObject, Feedback $feedbackObject, Institute $instituteObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
 	{
 		$this->admin = $adminObject;
 		$this->batch = $batchObject;
@@ -48,7 +47,6 @@ class BaseController extends Controller {
 		$this->feature = $featureObject;
 		$this->feedback = $feedbackObject;
 		$this->institute = $instituteObject;
-		$this->keyword = $keywordObject;
 		$this->locality=$localityObject;
 		$this->location = $locationObject;
 		$this->subcategory = $subcategoryObject;

@@ -27,13 +27,7 @@ class InstitutesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$instituteId=Institute::getInstituteforUser(Auth::id());
-		// dd($institute);
-		if(!($instituteId))
-			return View::make('Institutes.create');
-		else{
-			return Redirect::to('/institutes/'.$instituteId);
-		}
+		return View::make('Institutes.create');
 	}
 
 	/**
@@ -69,21 +63,13 @@ class InstitutesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//Allow admin to view data and put this check in filter file.
 		$instituteDetails=Institute::withTrashed()->find($id);
-		// dd($instituteDetails);
-		$user_id=Auth::id();
-		if(($instituteDetails['institute_user_id']!=$user_id)&&(!$this->admin->checkIfAdmin($user_id)))
-			return Redirect::back()->with('failure',Lang::get('institute.institute_access_failed'));
 		if($instituteDetails['deleted_at'])
 		{
 			return Redirect::back()->with('failure',Lang::get('institute.institute_disabled_by_admin'));;
 		}
-		$location_id=$instituteDetails['institute_location_id'];
-		$locations=$this->location->all();
-		$institute_location=$locations->find($location_id);
-		$instituteDetails['institute_location']=$institute_location['location'];
-		return View::make('Institutes.show',compact('instituteDetails'));
+		$batchDetails=$this->batch->getBatchesForInstitute($id);
+		return View::make('Institutes.show',compact('instituteDetails','batchDetails'));
 	}
 
 	/**

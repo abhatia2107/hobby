@@ -27,9 +27,46 @@ class Venue extends \Eloquent {
         return ($updated);
     } 
 
-    public function getVenueForInstitute($venue_institute_id)
+    public function getVenueForInstitute($institute_id)
     {
-        return DB::table('venues')->whereIn('venue_institute_id',$venue_institute_id)->get();
+        return Venue::where('venue_institute_id',$institute_id)
+		        	->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+		            ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+		            ->get();
     }
     
+    public function getVenueForUser($user_id)
+    {
+	    return Venue::where('venue_user_id',$user_id)
+	        	->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+	            ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+	            ->get();
+    }
+
+    public static function getUserforVenue($id)
+    {
+        $venue= Venue::withTrashed()->find($id);
+        if($venue){
+            if(is_null($venue->deleted_at))
+                return $venue->venue_user_id;
+            else
+                return null;
+        }
+        else
+            return false;
+    }
+
+    public static function getInstituteforVenue($id)
+    {
+        $venue= Venue::withTrashed()->find($id);
+        if($venue){
+            if(is_null($venue->deleted_at))
+                return $venue->venue_institute_id;
+            else
+                return null;
+        }
+        else
+            return false;
+    }
+
 }

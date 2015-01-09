@@ -11,7 +11,8 @@
     <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.11.2.min.css" id="jquery-ui-style-css" media="all">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrapValidator.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <!--<link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/hobby_style.css">
     <script src="/assets/js/jquery-1.11.2.min.js"></script>
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
     <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>

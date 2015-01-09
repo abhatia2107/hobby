@@ -38,9 +38,6 @@ class DatabaseSeeder extends Seeder {
 		$this->call('InstitutesTableSeeder');
         $this->command->info('Institutes table seeded!');
 
-		$this->call('KeywordsTableSeeder');
-		$this->command->info('Keywords table seeded!');
-
 		$this->call('LocationsTableSeeder');
 		$this->command->info('Locations table seeded!');
 		

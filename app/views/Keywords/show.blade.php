@@ -3,348 +3,141 @@
 <head>
 	<title></title>
 	<style type="text/css">
-	body
-	{
-		background:white
-	}
-    #batchInfo
-    {
-      background: white;border:0px solid;margin-bottom: 15px;border-color: skyblue;
-        -webkit-box-shadow: 0px 3px 0px -2px #0099FF;
-            box-shadow: 0px 3px 0px -2px #0099FF;
-             color: #333;
-font-family: "Times New Roman", Times, serif;
-font-size: 15px;
-font-weight: 100;
+    #batchInfo 
+    { 	
+    	background: white;border:0px solid;margin-bottom: 15px;border-color: skyblue;-webkit-box-shadow: 0px 3px 0px -2px #0099FF;
+      	box-shadow: 0px 3px 0px -2px #0099FF;color: #333;font-family: "Times New Roman", Times, serif; font-size: 15px;font-weight: 100;
     }
-    #filter_data
-   	{
-   		padding-top: 10px;
-   		box-shadow: 0px 0px 4px #3366CC;-moz-box-shadow: 0px 0px 4px #3366CC;-webkit-box-shadow: 0px 0px 4px #3366CC;
-   		margin-bottom: 20px;
-   		 color: #333;
-   		 font-family: "Times New Roman", Times, serif;
-   		 font-size: 15px;
+    #filter_data 
+    {
+    	box-shadow: 0px 0px 4px #3366CC;-15px-moz-box-shadow: 0px 0px 4px #3366CC;-15px-webkit-box-shadow: 0px 0px 4px #3366CC;
+   		margin-bottom: 20px; padding-top: 10px;color: #333; font-family: "Times New Roman", Times, serif;font-size: 15px;
    	}
-    #batch_name
-    {
-    	font-size: 22px;
-    	font-weight: bold;
-    	color: #0033CC;
-    	float: left;
-    }
-    #inst_tagline
-    {
-    	font-size: 14px;
-    	font-weight: normal;
-    	 color: #333;
-    }
-    #inst_rating
-    {
-    	margin-top: 10px;
 
-    }
-    .inst_name
-    {
-    	font-size: 16px;
-    	font-weight: normal;
-    	 color: #333;
-    	 clear: both;
-    	 float: left;
-    }
-    .filters
-    {
-    	max-height: 104px;
-    	overflow: auto;
-    	 color: #333;
-    }
-    #browse-filter
-    {
-    	margin-top: -20px;	
-    	font-family: "Times New Roman", Times, serif;
-    }
+    #batch_name	{ font-size: 22px; font-weight: bold;	color: #0033CC;  float: left;    }
 
-    .filter2
-    {
-    	line-height: 1.3em;
+    #inst_tagline { font-size: 14px;  font-weight: normal; color: #333; }
 
-    	font-family: "Times New Roman", Times, serif;
-    }
-      .filter3
-      {
-      	font-family: "Times New Roman", Times, serif;	
-      	line-height: 1.3em;
-      }
-    #filter-option-2
-    {
-    	    	margin-top: -60px;
-    }
-    .filter1
-    {
-    	line-height: 1.3em;
-    }
-    .sub
-    {
-    	cursor: pointer;
-    }
-    #browse-filter h4
-    {
-    	color:black;
-    	line-height: 0.3em;
-    	 font-family: "Times New Roman", Times, serif;
-   		 font-size: 20px;
-    }
-    #fiter-text 
-    {
-    	font-weight: lighter;
-    	margin-top: -17px;
-    	margin-left: 16px;
-    }
-    .resultsMessage
-    {
-    	font-size:20px;
-    	background: lightgray;
-    	height: 40px;
-    	padding:5px;
-    }
-    #noResults
-   	{
-   		display: none;
-   	}
-   	.location-icon
-   	{
-   		width:12px;height: 17px;
-   		margin-top: -4px;
-   		margin-right: 5px;
-   	}
-   	#inst_contact
-   	{
-   		min-width:175px;
-   		height:30px;
-   		border: 1px solid;
-   		padding:3px;
-   		border-color: #0099FF;
-   		border-radius: 4px;
-   		float: left;
-   		text-align: center;
-   		margin-right:5px;
-   		margin-top: 2px;
-   	}
-   	#inst_contact:hover
-   	{
-   		background: #E8E8E8  ;
-   		cursor: pointer;
-   	}
-   	#inst_message:hover
-   	{
-   		background: #E8E8E8  ;
-   		cursor: pointer;
-   	}
-   	#inst_message
-   	{
-   		margin-top: 2px;
-   		min-width:130px;
-   		height:30px;
-   		border: 1px solid;
-   		padding:3px;
-   		border-color: #0099FF;
-   		border-radius: 4px;
-   		float: left;
-   		text-align: center;
-   	}
-   	.inscore {
-   			border-radius: 50%;
-		border: 4px solid;
-		border-color:#FF8000;
-		vertical-align: middle;
-	    width: 45px;
-	    height: 45px;
-	    padding: 5px 5px 5px 5px; 
-	    font-size: 19px;
-	    font-weight: bold;
-	    color: #333;
-	    text-align: center;
-	    float: left;
-	    margin-left: 14px;
-	    margin-bottom: 5px;
-	}
-	.rating_starts
-	{
-		clear:both;
-		color: #FF8000;
-		margin-top:10px;
-	}
-	#rating
-	{
-		margin-top: -6px;
-		margin-left: 42px;
-	}
-	#rating-tittle
-	{
-		text-align: center;
-		float:left;
-		margin-top: 10px;
-	}
-	#inst_type
-	{
-		margin-top: 10px;
-	}
-	#inst_price
-	{
-		margin-top: 10px;
-	}
-	#tag-icon
-	{
-		float:left;
-		font-weight: bolder;
-		font-size: 18px;
-		text-align: right;
-	}
-	#tag-icon .glyphicon
-	{
-		color: #0099FF;
-		font-size: 22px;
-		margin-right: 9px;
-	}
+    .inst_name	{  font-size: 16px; font-weight: normal; color: #333; clear: both; float: left; }
 
-	#hand-icon
-	{
-		color: #0099FF;
-		margin-right: 5px;
+    .filters 	{  max-height: 106px; overflow: auto;	color: #333;  line-height: 1em;   }
+
+    #browse-filter   {  font-family: "Times New Roman", Times, serif; font-weight: lighter;   }
+
+    #browse-filter label {font-weight: lighter;}
+
+    #browse-filter li {line-height: 0em}
+
+    .filter-option-2	 {  margin-top: -30px;	font-weight: normal;   }
+
+    .filter-option-1	 {  margin-top: 20px;	font-weight: normal;   }
+
+    .sub			     {  cursor: pointer; }
+
+    #browse-filter h4   
+    { 	color:black;line-height: 0.3em;font-family: "Times New Roman", Times, serif;font-size: 20px; }
+
+    #fiter-text	{ font-weight: lighter;  margin-top: -17px; margin-left: 16px;  }
+
+    .resultsMessage	{ font-size:20px;  background: lightgray;  height: 40px;	padding:5px;  }
+
+    #noResults	 {	display: none; 	}
+
+   	.location-icon  { width:12px;height: 17px;margin-top: -4px;margin-right: 5px; }
+
+   	#inst_contact	
+   	{	
+   		min-width:175px; height:30px; border: 1px solid;padding:3px;border-color: #0099FF;
+   		border-radius: 4px;float: left;text-align: center;margin-right:5px;margin-top: 2px;
+   	}
+
+   	#inst_contact:hover	{	background: #E8E8E8; cursor: pointer; }
+
+   	#inst_message:hover	{	background: #E8E8E8  ;	cursor: pointer;  }
+
+   	#inst_message  
+   	{
+   		margin-top: 2px;min-width:130px;height:30px;border: 1px solid;padding:3px;border-color: #0099FF;
+   		border-radius: 4px;	float: left; text-align: center;
+   	}
+   	.inscore 
+   	{
+   		border-radius: 50%;border: 4px solid;border-color:#FF8000;vertical-align: middle;width: 45px;
+	    height: 45px;padding: 5px 5px 5px 5px;font-size: 19px;font-weight: bold;color: #333;
+	    text-align: center; float: left; margin-left: 14px; margin-bottom: 5px;
 	}
-	#cell-icon
-	{
-		color: #0099FF;
-		font-size: 0.9em;
-	}
-		#msg-icon
-	{
-		color: #0099FF;
-		font-size: 0.9em;
-	}
+	.rating_starts	{	clear:both;color: #FF8000;margin-top:10px;	}
+
+	#rating	{	margin-top: -6px;	margin-left: 42px;	}
+
+	#rating-tittle	{	text-align: center;	float:left;	margin-top: 10px;	}
+
+	#inst_type	{	margin-top: 10px;	}
+
+	#inst_price	{	margin-top: 10px;	}
+
+	#tag-icon	{	float:left;	font-weight: bolder;font-size: 18px;text-align: right;}
+
+	#tag-icon .glyphicon	{	color: #0099FF;	font-size: 22px;	margin-right: 9px;	}
+
+	#hand-icon	{	color: #0099FF;	margin-right: 5px;	}
+
+	#cell-icon	{	color: #0099FF;	font-size: 0.9em;	}
+
+	#msg-icon	{	color: #0099FF;	font-size: 0.9em;	}
+
 	.day
 	{
-		padding: 1px;
-		padding-top:0px;
-		width:20px;
-		height:23px;
-		border: 1px solid;
-		border-color: #0099FF;
-		margin-left: 4px;
-		float:left;
-		text-align: center;
-		opacity: .20;
-		margin-top: 11px;
+		padding: 1px;padding-top:0px;width:20px;height:23px;border: 1px solid;border-color: #0099FF;
+		margin-left: 4px;float:left;text-align: center;	opacity: .20;margin-top: 11px;
 	}
-	#contact
-	{
-		display: none;
-	}
+
+	#contact	{	display: none;	}
+
 	.institute-profile-pic 
 	{
-		width:146px;
-		height: 145px;
-		border-radius: 50%;
-		border: 5px solid;
-		border-color:#0099FF;
-		vertical-align: middle;
-		margin-top: -9px;
-		margin-bottom: 10px;
+		width:146px;height: 145px;border-radius: 50%;border: 5px solid;border-color:#0099FF;
+		vertical-align: middle;margin-top: -9px;margin-bottom: 10px;
 	}
-	.institute-profile-pic img 
-	{
-		width:140px;
-		height: 140px;
-	}
-	#inst_details
-	{
-		margin-top: 7px;
-		margin-bottom: 10px;
-	}
-	#batch-schedule
-	{
-		margin-top: 10px;
-		text-align: center;
-	}
-	.sendMessage a
-	{
-		color: #333;
-	}
+	.institute-profile-pic img {	width:140px;	height: 140px;	}
 
-	@media screen and (min-width: 768px) {
-	
-	#sendMessage .modal-dialog  {width:430px;}
+	#inst_details	{	margin-top: 7px;margin-bottom: 10px;	}
 
-	}
-	#sendMessage 
-	{
-		border-radius: 5px;
-		 font-family: "Times New Roman", Times, serif;
-   		 font-size: 15px;
-	}
-	#sendMessage .modal-dialog
-	{
-		margin-top:7%;
-	}
-	#sendMessage .modal-header
-	{
-		font-size: 22px;
-		color: #333333;
-		font-weight: bolder;
-		font-family: serif;
-	}
-	#rating-schedule
-	{
-		float: right;
-	}
-	#MsgInputName
-	{
-		background: 
-	}
-	.inner-addon { 
-    position: relative; 
-}
+	#batch-schedule	{	margin-top: 10px;text-align: center;	}
 
-/* style icon */
-.inner-addon .glyphicon {
-  position: absolute;
-  padding: 8px;
-  pointer-events: none;
-}
+	.sendMessage a	{	color: #333;	}
 
-/* align icon */
-.left-addon .glyphicon  { left:  0px;}
-.right-addon .glyphicon { right: 0px;}
+	@media screen and (min-width: 768px) {	#sendMessage .modal-dialog  { width:430px; }  }
 
-/* add padding  */
-.left-addon input  { padding-left:  30px; }
-.right-addon input { padding-right: 30px; }
-#offerMessage
-{
-	float: right;
-	margin-top: -60px;
-}
-#offerMessage .glyphicon
-{
-	float: right;
-	font-size: 100px;
-}
-#close_model:hover
-{
-	color: black
-}
-#filter-tittle-name
-{
-	font-family: "Times New Roman", Times, serif;
-	font-size: 20px;
-	color: gray;
-}
-.breadcrumb
-{
-	background: white;
-	font-family: "Times New Roman", Times, serif;
+	#sendMessage {	border-radius: 5px; font-family: "Times New Roman", Times, serif; font-size: 15px; }
 
-}
+	#sendMessage .modal-dialog { margin-top:7%;	}
+
+	#sendMessage .modal-header {font-size: 22px;color: #333333;font-weight: bolder;font-family: serif; }
+
+	#rating-schedule {	float: right; }
+
+	.inner-addon { 	position: relative; }
+
+	.inner-addon .glyphicon {  position: absolute;  padding: 8px;  pointer-events: none; }
+
+	.left-addon .glyphicon  { left:  0px;}
+
+	.right-addon .glyphicon { right: 0px;}
+
+	.left-addon input  { padding-left:  30px; }
+
+	.right-addon input { padding-right: 30px; }
+
+	#offerMessage { float: right; margin-top: -60px; }
+
+	#offerMessage .glyphicon { float: right; font-size: 100px;	}
+
+	#close_model:hover { color: black }
+
+	#filter-tittle-name { font-family: "Times New Roman", Times, serif; font-size: 20px; color: gray; }
+
+	.breadcrumb { background: white; font-family: "Times New Roman", Times, serif; }
 
 </style>
 </head>
@@ -400,47 +193,42 @@ font-weight: 100;
 			</ul>
 			<div class="row clearfix">
 				<!--Start of filter division -->
-				<div class="col-md-3 col-xs-12 col-sm-3 column" style="margin-top:-5px">
+				<div class="col-md-3 col-xs-12 col-sm-3 column" style="margin-top:-15px">
 					<span id='filter-tittle-name'>Filter By</span>
-					<div id="browse-filter">	
+					<div id="browse-filter" class="filter-option-1">	
 						<h4>Sub Categories</h4> 
-						<ul class="list-unstyled filters filter1" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
-						
-						@foreach ($subcategoriesForCategory as $subcategoryData)
-							<?php
-								$subcategory = $subcategoryData->subcategory;
-								$sub_id = $subcategoryData->id;
-								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $subcategory); 
-							?>				
-							<li subcategory="{{$sub_id}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" />{{' '.$subcategory}}</label>
-							</li>
-						 @endforeach
+						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 	
+							@foreach ($subcategoriesForCategory as $subcategoryData)
+								<?php
+									$subcategory = $subcategoryData->subcategory;
+									$sub_id = $subcategoryData->id;
+								?>				
+								<li subcategory="{{$sub_id}}" >								
+								 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" />{{' '.$subcategory}}</label>
+								</li>
+							 @endforeach
 						 </ul> 
 						 <hr>
 					</div>
 					<br>
-					<div id="browse-filter" >	
-						<div id="filter-option-2">
+					<div id="browse-filter" class="filter-option-2">	
 						<h4>Locality</h4> 
-						<ul class="list-unstyled filters filter2" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
-						@foreach ($localitiesForLocation as $localityData)
-							<?php 
-								$locality = $localityData->locality;
-								$loc_id = $localityData->id;
-								$class = preg_replace('/[^A-Za-z0-9\-]/', '', $locality);
-							?>
-							<li subcategory="{{$loc_id}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" />{{' '.$locality}}</label>
-							</li> 
-						@endforeach
+						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+							@foreach ($localitiesForLocation as $localityData)
+								<?php 
+									$locality = $localityData->locality;
+									$loc_id = $localityData->id;
+								?>
+								<li subcategory="{{$loc_id}}" >								
+								 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" />{{' '.$locality}}</label>
+								</li> 
+							@endforeach
 						 </ul>
-						 </div> 
 						 <hr>
 					</div>
-					<div id="browse-filter">	
+					<div id="browse-filter" class="filter-option-3">	
 						<h4>Trial Available</h4> 
-						<ul class="list-unstyled filters filter3" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 						@foreach ($trial as $index => $trialValue)
 							<li trial="{{$index}}" >								
 							 	 <label class="sub"><input autocomplete="off" style="" value="{{$index}}" type="checkbox" class="trialCheckbox filterCheckBox" />{{' '.$trialValue}}</label>
@@ -510,6 +298,7 @@ font-weight: 100;
 			loc_select=0;
 		if(trial_select.length==0)
 			trial_select =0;
+		//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
 		$.get("/filter/"+sub_select+"/"+loc_select+"/"+trial_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
 		{
 			chunk++;
@@ -624,7 +413,8 @@ font-weight: 100;
 		var linksContainer = $('#filter_data'),baseUrl;
 		window.onscroll = function(ev)
 		{
-			if ((window.innerHeight + window.scrollY) == $(document).height())
+			  var height = $(document).height();  
+            if($(window).scrollTop() + $(window).height() > height-100) 
 			{
 				resultRange = result.length;
 				if(range>=resultRange)
@@ -658,7 +448,8 @@ font-weight: 100;
 					}
 				}
 				else
-				{	LoadResult(range,range+10);	}
+				{	
+					LoadResult(range,range+10);	}
 
 			}
 		}
@@ -676,21 +467,24 @@ font-weight: 100;
 		//	alert(result.length);
 			$(linksContainer).empty();
 			filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();
-			alert(filter_select.length);
+			//alert(filter_select.length);
 			//alert(sub_select+','+loc_select);
 			if(filter_select.length>0)
 			{
 				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
 				trial_select =  $('.trialCheckbox:checked').map(function(){return this.value;}).get(); 
+				//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
 				chunk = 0;
 				LoadFilterResults(sub_select,loc_select,trial_select,0);
 			}
 			else
 			{
+
 				chunk = 0;
 				$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 				{
+					alert(response);
 					if(response == "Empty")
 					{
 						$('#loadMore').css('display','none');

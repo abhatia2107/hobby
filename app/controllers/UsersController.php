@@ -358,12 +358,6 @@ class UsersController extends \BaseController {
 		// dd("G");
 		return View::make('Users.changePassword');
 	}
-	/**
-	*This function is to get all the current logged in user details which is passed to
-	*the 'View' in the form of 'userPersonalDetail'.
-	*@param Redirect to view 
-	*/
-
 
 	/**
 	 * Logic for changing the password

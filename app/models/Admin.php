@@ -23,12 +23,6 @@ class Admin extends \Eloquent {
 		'admin_user_id'=>'unique:admins,admin_user_id',
 	];
 
-	public function updateAdmin($credentials,$id)
-	{
-		$updated=DB::table('admins')->where('id','=',$id)->update($credentials);
-		return ($updated);
-	}
-
 	public function getAllAdmins()
 	{
 		return DB::table('admins')
@@ -39,7 +33,7 @@ class Admin extends \Eloquent {
 
 	public function checkIfAdmin($id)
 	{
-		$admin=DB::select("SELECT * FROM admins WHERE admin_user_id = $id AND deleted_at IS NULL");
+		$admin=Admin::where('admin_user_id', '=', $id);
 		if($admin){
 			return true;
 		}

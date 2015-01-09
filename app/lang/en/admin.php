@@ -29,4 +29,5 @@ return array(
 		"admin_email_mismatch"=>"Email doesn't match our records for the user id.",
 	
 		"admin_mail_subject"=>"You're promoted as admin of Hobby."
+
 	);

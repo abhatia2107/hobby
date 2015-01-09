@@ -16,7 +16,7 @@ class Subscription extends \Eloquent {
     protected $dates = ['deleted_at'];
 
 	public static $rules = [		
-		'subscription_email'=>'required|email',
+		'subscription_email'=>'required|email|unique:subscriptions',
 	];
  	
  	public function getUnsubscribe()

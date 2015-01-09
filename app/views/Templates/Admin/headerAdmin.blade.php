@@ -79,7 +79,7 @@
      <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
               <li class="active">
-                <a href="/admins/home"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                <a href="/admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
               </li>
            <li class="active">
               <a href="/batches/approve"><i class="fa fa-fw fa-dashboard"></i> Approval</a>

@@ -20,29 +20,18 @@ class FeaturesController extends \BaseController {
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /features/create
+	 * GET /features/store
 	 *
 	 * @return Response
 	 */
-	public function create($id)
+	public function store($id)
 	{
 		$feature['feature_batch_id']=$id;
 		$created=Feature::create($feature);
-		if ($created) 
+		if ($created)
 			return Redirect::to('/features')->with('success',Lang::get('feature.feature_created'));
 		else
 			return Redirect::to('/features')->with('failure',Lang::get('feature.feature_already_failed'));
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 * get /features
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
 	}
 
 	/**

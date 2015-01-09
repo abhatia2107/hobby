@@ -1,37 +1,8 @@
 <?php
 
-class KeywordsController extends \BaseController {
+class FiltersController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /keywords
-	 *
-	 * @return Response
-	 */
 	
-	public function index()
-	{
-		$venues=Venue::all();
-		return View::make('Keywords.index',compact('venues'));
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /keywords/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /keywords
-	 *
-	 * @return Response
-	 */
 	public function search()
 	{
 		$keyword=Input::get('keyword');
@@ -54,22 +25,17 @@ class KeywordsController extends \BaseController {
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$chunk=$chunk*100;
-		
 		$batchesForCategoryLocation=$this->batch->search($keyword,$chunk);
-		// dd($batchesForCategoryLocation);
-		return View::make('Keywords.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+		$batchesArray=$batchesForCategoryLocation->toarray();
+		if(empty($batchesArray))
+		{
+			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+		}
+			return View::make('Keywords.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
 
-	/**
-	 * Display the specified resource.
-	 * GET /keywords/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($category_id,$location_id="0",$chunk="0")
 	{
-		// dd("test");
 		//check count how many time page is viewed in filter page.
 		//For future filters
 		$age_group=$this->age_group;
@@ -91,7 +57,6 @@ class KeywordsController extends \BaseController {
 		$chunk=$chunk*100;
 		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		if(Request::ajax()){
-		//	dd($batchesForCategoryLocation);
 			if($batchesForCategoryLocation)
 				return $batchesForCategoryLocation;
 			else
@@ -108,7 +73,7 @@ class KeywordsController extends \BaseController {
 		$subcategories=explode(",",$subcategoriesString);
 		$localities=explode(",", $localitiesString);
 		$trials=explode(",", $trialsString);
-		// TO DO: If any array is empty make a array corresponding to it with all venues,
+		// TO DO: If any array is empty make a array corresponding to it with all entries,
 		// where condition for all the arrays will be applied in only one statement.  
 
 		if(!$subcategories[0])
@@ -134,7 +99,6 @@ class KeywordsController extends \BaseController {
 
 		if(!$subcategories[0]&&!$localities[0]&&!$trials[0]){
 			$chunk=$chunk*100;
-			// dd("TEST");
 			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		}
 		else{
@@ -143,52 +107,15 @@ class KeywordsController extends \BaseController {
 		}
 		if(Request::ajax()){
 			if($batchesForCategoryLocation){
-				// var_dump($batchesForCategoryLocation);
 				return $batchesForCategoryLocation;
 			}
 			else
 				return $batchesForCategoryLocation="Empty";
 		}
 		else{
-			dd($batchesForCategoryLocation);
+			// dd($batchesForCategoryLocation);
 			return View::make('Errors.pageNotFound');
 		}
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 * GET /keywords/{id}/edit
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 * PUT /keywords/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 * DELETE /keywords/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 	

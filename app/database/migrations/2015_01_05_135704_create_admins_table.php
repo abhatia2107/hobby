@@ -15,7 +15,7 @@ class CreateAdminsTable extends Migration {
 		Schema::create('admins', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('admin_user_id')->foreign('admin_user_id')->references('id')->on('users');
+			$table->integer('admin_user_id')->unique()->foreign('admin_user_id')->references('id')->on('users');
 	        $table->softDeletes();
 	        $table->timestamps();
 		});

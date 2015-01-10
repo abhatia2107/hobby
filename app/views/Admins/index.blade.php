@@ -47,7 +47,7 @@
 	            <td>{{$data->user_contact_no}}</td>
 				<td>
 					@if($view)
-					<a href="{{$tableName}}/{{$data->id}}">
+					<a href="{{$tableName}}/show/{{$data->id}}">
 						<button type="button" class="btn btn-success ">
 							<span class="glyphicon glyphicon-user"></span>
 							View

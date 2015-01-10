@@ -32,6 +32,13 @@ class Batch extends \Eloquent {
         'batch_price'=>'numeric'
     ];
 
+    public static $rulesMessage = [
+        'msgInputName' => 'required',
+        'msgInputEmail'=>'required|email',
+        'msgInputNumber'=>'required|regex:/[0-9]{10,11}/',
+        'msgInputMessage'=>'required',
+    ];
+
     public function updateBatch($credentials,$id)
     {
         $updated=Batch::where('id','=',$id)->update($credentials);
@@ -282,5 +289,6 @@ class Batch extends \Eloquent {
         else
             return false;
     }
+
 
 }

@@ -63,8 +63,6 @@ class UsersController extends \BaseController {
 	public function show($id)
 	{
 		return Redirect::to('users/changepassword');
-		// $userDetails=User::find($id);
-		// return View::make('Users.show',compact('userDetails'));
 	}
 
 	/**
@@ -191,10 +189,6 @@ class UsersController extends \BaseController {
 
 	public function getLogin()
 	{
-        if(Auth::check())
-		{
- 	 		return Redirect::to("/");
- 		}
 		return View::make('Users.login');
 	}
 

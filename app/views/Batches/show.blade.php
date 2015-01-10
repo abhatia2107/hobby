@@ -166,25 +166,25 @@
 @extends('Layouts.layout')
 @section('content')
 <?php
-  $data = $batchDetails[0];
-  // dd($batchDetails);
-  $instituteName = $data->institute;
-  $instituteAddress = $data->venue_address;
-  $instituteContact = $data->venue_contact_no;
-  $instituteID = $data->batch_institute_id;
-  $batchName = $data->batch;
-  $category = $data->category;
-  $subcategory = $data->subcategory;
-  $ageGroup = $data->batch_age_group;
-  $genderGroup = $data->batch_gender_group;
-  $difficultyLevel = $data->batch_difficulty_level;
-  $trialClass = $data->batch_trial;
-  $sessionsCount = $data->batch_no_of_classes_in_week;
-  $batchDescription = $data->batch_comment;
-  $batchAccomplishment = $data->batch_accomplishment;
-  $instituteDetails = $data->institute_description;
-  $facebookLink = $data->institute_fblink;
-  $twitterLink = $data->institute_twitter;
+  foreach ($batchDetails as $data) {
+    $instituteName = $data->institute;
+    $instituteAddress = $data->venue_address;
+    $instituteContact = $data->venue_contact_no;
+    $instituteID = $data->batch_institute_id;
+    $batchName = $data->batch;
+    $category = $data->category;
+    $subcategory = $data->subcategory;
+    $ageGroup = $data->batch_age_group;
+    $genderGroup = $data->batch_gender_group;
+    $difficultyLevel = $data->batch_difficulty_level;
+    $trialClass = $data->batch_trial;
+    $sessionsCount = $data->batch_no_of_classes_in_week;
+    $batchDescription = $data->batch_comment;
+    $batchAccomplishment = $data->batch_accomplishment;
+    $instituteDetails = $data->institute_description;
+    $facebookLink = $data->institute_fblink;
+    $twitterLink = $data->institute_twitter;    
+  }
   $loggedIn = Auth::id();
 ?>
 

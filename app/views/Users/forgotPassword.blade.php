@@ -1,8 +1,8 @@
 @extends('Layouts.layout')
 @section('content')
 
-	<div class="row">
-		<div class="col-lg-9 col-md-9 col-sm-7">
+	<div class="row forgot_password">
+		<div class="col-lg-12 col-md-8 col-sm-12">
 			<h1 class="section-title-inner"> 
 				<span> 
 					<i class="fa fa-unlock-alt"> </i> 
@@ -10,7 +10,7 @@
 				</span> 
 			</h1>
 			<div class="row userInfo">
-				<div class="col-xs-12 col-sm-12">
+				<div class="col-xs-12 col-sm-12 col-md-5">
 					<p> To reset your password, enter the email address which you use to login. We will then send you a link to change the password </p>
 					<form role="form" method="POST" action="/users/password/remind/submit">
 						<div class="form-group">

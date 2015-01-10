@@ -24,7 +24,7 @@
 	            <td>{{$data->feedback_subject}}</td>
 	            <td>{{$data->feedback_email}}</td>
 	            <td>
-					<a href="{{$tableName}}/{{$data->id}}">
+					<a href="{{$tableName}}/show/{{$data->id}}">
 						<button type="button" class="btn btn-success ">
 							<span class="glyphicon glyphicon-user"></span>
 							View

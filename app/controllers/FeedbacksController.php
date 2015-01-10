@@ -43,7 +43,7 @@ class FeedbacksController extends \BaseController {
 		    $credentials['feedback_user_id']=Auth::id(); 
 		}
 		//dd($credentials);
-		$validator = Validator::make($credentials, Feedback::$rules);
+		$validator = Validator::make($credentials, Feedback::$rulesAdmin);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);

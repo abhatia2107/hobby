@@ -28,7 +28,7 @@
 					</li>
 				@else
 					<li class="header_myaccount" >
-						<a class="header_myaccount_a" href="/users/{{$id}}" >
+						<a class="header_myaccount_a" href="/users/show/{{$id}}" >
 							@if($user)
 								{{$name}}'s 
 							@else

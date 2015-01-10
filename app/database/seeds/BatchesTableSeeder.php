@@ -12,6 +12,7 @@ class BatchesTableSeeder extends Seeder {
                      'batch_category_id'=>$faker->randomDigitNotNull,
                      'batch_subcategory_id'=>$faker->randomNumber(1,30),
                      'batch_accomplishment' =>$faker->text(),
+                     'batch_user_id'=>$faker->unique()->randomNumber(1,1000),
                      'batch_institute_id'=>$faker->randomNumber(1,30),
                      'batch_start_date' =>$faker->date($format = 'Y-m-d', $max = 'now'),
                      'batch_end_date' => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -33,7 +34,6 @@ class BatchesTableSeeder extends Seeder {
                      'batch_class_on_saturday'=>$faker->boolean(),
                      'batch_class_on_sunday'=>$faker->boolean(),
                      'batch_trial' =>$faker->randomNumber(1,5),
-                     'batch_user_id'=>$faker->unique()->randomNumber(1,1000),
                      'batch_comment'=>$faker->lexify(),
                      'batch_tagline'=>$faker->lexify(),
                      'batch_photo'=>"0",
@@ -41,4 +41,3 @@ class BatchesTableSeeder extends Seeder {
               }
        }
 }
-?>

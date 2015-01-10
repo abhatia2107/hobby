@@ -118,14 +118,16 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		if($batchDetails)
+		if(!is_null($batchDetails))
 		{
+			$institute_id=$batchDetails[0]->batch_institute_id;
+			$comments=$this->comment->getCommentForInstitute($institute_id);
 			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays'));
-		}/*
+		}
 		else
 		{
-			return View::make('Batches.batchNotFound');
-		}*/
+			App::abort(404);
+		}
 	}
 
 	/**
@@ -313,4 +315,39 @@ class BatchesController extends \BaseController {
 	}
 
 
+
+	public function sendMessage()
+	{
+		$credentials=Input::all();
+		$validator = Validator::make($credentials, Batch::$rulesMessage);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		//To user
+		$email=$credentials['msgInputEmail'];
+		$name=$credentials['msgInputName'];
+		$subject=Lang::get('message.message_emailSubjectRecieved');
+		Mail::queue('Emails.message.messageRecieved', $credentials, function($message) use ($email,$name,$subject)
+		{
+			$message->to($email,$name)->subject($subject);
+		});
+
+		//To vendor.
+		$email=$credentials['venue_email'];
+		$name=$credentials['institute'];
+		$subject=Lang::get('message.message_subject',array("batch"=>$credentials['batch']));
+		Mail::later(120,'Emails.message.sendMessage', $credentials, function($message) use ($email,$name,$subject)
+		{
+			$message->to($email,$name)->subject($subject);
+		});
+
+		return Redirect::back()->with('success',Lang::get('message.message_sent',array("institute"=>$credentials['institute'])));
+	}
+
+	public function increment($id)
+	{
+        Batch::where('batches.id','=',$id)->increment('batch_view');
+	}
 }

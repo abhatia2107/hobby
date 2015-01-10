@@ -15,12 +15,12 @@ class Feedback extends \Eloquent {
 
     protected $dates = ['deleted_at'];
     
-    public static $rules = [
+    public static $rulesAdmin = [
         'feedback_email'=>'email',
     	'feedback_subject'=>'required',
 	    'feedback_description'=>'required',
     ];
-    
+
     public function getUnreadFeedback()
     {
         return DB::table('feedbacks')

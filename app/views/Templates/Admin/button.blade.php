@@ -2,7 +2,7 @@
 <!-- Bug: $data coming as 1st data only. It's not dynamic depending on for loop-->
 	<td>
 		@if($view)
-		<a href="{{$tableName}}/{{$data->id}}">
+		<a href="{{$tableName}}/show/{{$data->id}}">
 			<button type="button" class="btn btn-success ">
 				<span class="glyphicon glyphicon-user"></span>
 				View

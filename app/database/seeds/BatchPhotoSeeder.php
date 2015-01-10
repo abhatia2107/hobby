@@ -14,4 +14,3 @@ class BatchPhotoSeeder extends Seeder {
               }
        }
 }
-?>

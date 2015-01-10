@@ -21,5 +21,14 @@ class Comment extends \Eloquent {
         $updated=DB::table('comment')->where('id','=',$id)->update($credentials);
         return ($updated);
     } 
-            
+    
+    public function getCommentForInstitute($institute_id)
+    {
+        $comments= Comment::where('comment_institute_id','=',$institute_id)
+                        ->Join('users', 'users.id', '=', 'comments.comment_user_id')
+                        ->select('comments.*','users.user_first_name','users.user_last_name')
+                        ->get();
+        return $comments;
+    }
+
 }

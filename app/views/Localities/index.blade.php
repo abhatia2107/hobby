@@ -63,12 +63,35 @@
 						</button>
 					</a>
 					@else
-						<a href="{{$tableName}}/edit/{{$data->id}}">
+						<a  class="edit-trigger">
 							<button type="button" class="btn btn-success ">
 								<span class="glyphicon glyphicon-pencil"></span>
 								Edit
 							</button>
 						</a>
+						<div class="edit-content">
+							<form  action="{{$tableName}}/update/{{$data->id}}" enctype="multipart/form-data" method="post">
+								<fieldset id="inputs">
+					                <div class="form-group required">
+										<label>Location <sup>*</sup> </label>
+										<select class="form-control" name="subcategory_category_id" required>
+											@foreach ($locations as $locationData)
+												<option value={{$categoryData->id}}>
+													{{$locationData->location}}
+												</option>
+											@endforeach
+										</select>
+									</div>
+									<div class="form-group required">
+										<input type="text" name="subcategory" placeholder="Sub-Category Name"  required>
+									</div>
+								</fieldset>
+								<fieldset id="actions">
+									<input type="submit" class="btn btn-success"id="submit" value="Submit">
+									<input type="button" class="btn btn-danger cancel2" id="cancel" value="Cancel">
+								</fieldset>
+							</form>
+						</div>
 					@endif
 					</td>
 					<td>

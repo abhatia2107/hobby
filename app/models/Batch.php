@@ -108,7 +108,7 @@ class Batch extends \Eloquent {
         return $allBatches;
     }
 
-    public function search($keyword,$chunk)
+    public function search($keyword,$category_id,$location_id,$chunk)
     {
         $allBatches=Batch::
             Join('institutes','institutes.id','=','batches.batch_institute_id')
@@ -116,18 +116,34 @@ class Batch extends \Eloquent {
             ->Join('categories','categories.id','=','batches.batch_category_id')
             ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
             ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
-            ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+            ->Join('locations', 'locations.id', '=', 'venues.venue_location_id');
+        if($category_id)
+        {
+            $allBatches=$allBatches
+            ->where('batch_category_id','=',$category_id);
+        }
+        if($location_id)
+        {
+            $allBatches=$allBatches->where('venue_location_id','=',$location_id);
+        }
+
+        $allBatches
+        ->where(function($query) use ($keyword)
+        {
+            $query
             ->where('batch','LIKE','%'.$keyword.'%')
             ->orWhere('institute','LIKE','%'.$keyword.'%')
             ->orWhere('locality','LIKE','%'.$keyword.'%')
             ->orWhere('location','LIKE','%'.$keyword.'%')
             ->orWhere('category','LIKE','%'.$keyword.'%')
-            ->orWhere('subcategory','LIKE','%'.$keyword.'%')
-            ->orderBy('institute_rating','desc')
-            ->skip($chunk)
-            ->take(100)
-            ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
-            ->get();
+            ->orWhere('subcategory','LIKE','%'.$keyword.'%');
+        });
+            $allBatches=$allBatches
+                    ->orderBy('institute_rating','desc')
+                    ->skip($chunk)
+                    ->take(100)
+                    ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+                    ->get();
        return ($allBatches);
     }
 

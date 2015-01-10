@@ -4,6 +4,9 @@
 		
 		"subscribed"=>"You have been successfully subscribed",
 
+		"unsubscribed"=>"You have been successfully unsubscribed",
+
+
 		"subscriptionFailed"=>"Your subscription has failed",
 		
 		"wrongemailid"=>"You have entered a wrong Email_id",

@@ -149,4 +149,16 @@ nav li #login-content {
 #subscribe-button{
     min-width: 123px;
 }
+
+.edit-content
+{
+  display: none;
+  position: absolute;
+  z-index: 999;    
+  background: #fff;
+  background-image: linear-gradient(top, #fff, #eee);  
+  padding: 15px;
+  box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
+  border-radius: 3px 0 3px 3px;
+}
 /*Admin Panel CSS end*/

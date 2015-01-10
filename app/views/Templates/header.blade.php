@@ -12,7 +12,7 @@
 		</div>
 			
 		<div class="col-sm-6 col-md-6" >
-			<form class="navbar-form" action="/filter/search" method="get" role="search">
+			<form class="navbar-form" action="/filters/search" method="get" role="search">
 				<div class="input-group search-box">
 					<input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword" >
 					<input type="hidden" name="category_id" value="0">

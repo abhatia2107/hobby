@@ -53,12 +53,25 @@
 						</button>
 					</a>
 					@else
-						<a href="{{$tableName}}/edit/{{$data->id}}">
+						<a  class="edit-trigger">
 							<button type="button" class="btn btn-success ">
 								<span class="glyphicon glyphicon-pencil"></span>
 								Edit
 							</button>
 						</a>
+						<div class="edit-content">
+							<form  action="{{$tableName}}/update/{{$data->id}}" enctype="multipart/form-data" method="post">
+								<fieldset id="inputs">
+									<div class="form-group required">
+										<input type="text" name="location" placeholder="Location Name"  required>
+									</div>
+								</fieldset>
+								<fieldset id="actions">
+									<input type="submit" class="btn btn-success"id="submit" value="Submit">
+									<input type="button" class="btn btn-danger cancel2" id="cancel" value="Cancel">
+								</fieldset>
+							</form>
+						</div>
 					@endif
 					</td>
 					<td>

@@ -148,14 +148,21 @@ class UsersController extends \BaseController {
 		}
 	}
 
-	public function unsubscribe($id)
+	public function unsubscribe($email,$id)
 	{
 		$user=User::find($id);
 		if($user)
 		{
-			$user->user_subscription_token=true;
-			$user->save();
-			return Redirect::back()->with('success',Lang::get('user.user_unsubscribed'));
+			if($user->email==$email)
+			{
+				$user->user_subscription_token=false;
+				$user->save();
+				return Redirect::back()->with('success',Lang::get('user.user_unsubscribed'));
+			}
+			else
+			{
+				return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
+			}
 		}
 		else
 		{

@@ -16,7 +16,6 @@
 	}
 	#agegroup
 	{
-		
 
     list-style-type: none;
 
@@ -143,15 +142,14 @@ left: 30%;
                 <div class="col-sm-3 col-md-3">
                     <select class="form-control input1"  id="batch_category_id" name="batch_category_id"required>
                         @foreach ($categories as $data)
-                        <option value={{$data->id}}
-                            @if(isset($batchDetails))
-                            {{($batchDetails->batch_category_id==$data->id)?
-                            'selected="selected"':''}}
-                            @else{{"Input::old('batch_category_id')"}}
-                            @endif>
-                            {{$data->category}}
-                        </option>
-
+                            <option value={{$data->id}}
+                                @if(isset($batchDetails))
+                                {{($batchDetails->batch_category_id==$data->id)?
+                                'selected="selected"':''}}
+                                @else{{"Input::old('batch_category_id')"}}
+                                @endif>
+                                {{$data->category}}
+                            </option>
                         @endforeach
                     </select>
                 </div>

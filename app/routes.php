@@ -20,12 +20,12 @@ Route::get('/admin', 'HomeController@showAdminHome');
 	Only Main Admin is allowed access here.  
  */
 Route::group(array('before' => "auth|admin|mainAdmin"), function() {
-Route::get('/admins','AdminsController@index');
-Route::post('/admins/store','AdminsController@store');
-Route::get('/admins/enable/{id}','AdminsController@enable');
-Route::get('/admins/disable/{id}','AdminsController@disable');
-Route::get('/admins/delete/{id}','AdminsController@destroy');
-Route::get('/admins/{id}','AdminsController@show');
+	Route::get('/admins','AdminsController@index');
+	Route::post('/admins/store','AdminsController@store');
+	Route::get('/admins/enable/{id}','AdminsController@enable');
+	Route::get('/admins/disable/{id}','AdminsController@disable');
+	Route::get('/admins/delete/{id}','AdminsController@destroy');
+	Route::get('/admins/{id}','AdminsController@show');
 });
 
 /*
@@ -37,7 +37,7 @@ Route::group(array('before' => "auth|institute-or-admin"), function() {
 	Route::post('/batches/store','BatchesController@store');
 });
 
-Route::group(array('before' => "auth|institute|batchOwn"), function() {	
+Route::group(array('before' => "auth|institute-or-admin|batchOwn-or-admin"), function() {	
 	Route::get('/batches/edit/{id}','BatchesController@edit');
 	Route::post('/batches/update/{id}','BatchesController@update');
 	Route::get('/batches/disable/{id}','BatchesController@disable');
@@ -69,13 +69,18 @@ Route::group(array('before' => "auth|admin"), function() {
 Filters to applied here soon.
  */
 //Route for CommentsController
-Route::get('/comments','CommentsController@index');
+Route::group(array('before' => "auth|commentOwn-or-admin"), function() {	
+	Route::get('/comments/edit/{id}','CommentsController@edit');
+	Route::post('/comments/update/{id}','CommentsController@update');
+	Route::get('/comments/disable/{id}','CommentsController@disable');	
+});
+
+Route::group(array('before' => "auth|admin"), function() {	
+	Route::get('/comments','CommentsController@index');
+	Route::get('/comments/enable/{id}','CommentsController@enable');
+	Route::get('/comments/delete/{id}','CommentsController@destroy');
+});
 Route::get('/comments/{id}','CommentsController@show');
-Route::get('/comments/edit/{id}','CommentsController@edit');
-Route::post('/comments/update/{id}','CommentsController@update');
-Route::get('/comments/enable/{id}','CommentsController@enable');
-Route::get('/comments/disable/{id}','CommentsController@disable');
-Route::get('/comments/delete/{id}','CommentsController@destroy');
 
 //Route for FeaturesController
 Route::group(array('before' => "auth|admin"), function() {	
@@ -103,16 +108,9 @@ Route::group(array('before' => "auth|admin"), function() {
 });
 
 //Route for InstitutesController
-Route::group(array('before'=>"auth|instituteNotOwn"),function(){
+Route::group(array('before'=>"auth|instituteNotOwn-or-admin"),function(){
 	Route::get('/institutes/create','InstitutesController@create');
 	Route::post('/institutes/store','InstitutesController@store');
-});
-
-Route::group(array('before' => "auth|instituteOwn"), function() {
-Route::get('/institutes/edit/{id}','InstitutesController@edit');
-Route::post('/institutes/update/{id}','InstitutesController@update');
-Route::get('/institutes/disable/{id}','InstitutesController@disable');
-Route::get('/institutes/{id}','InstitutesController@show');
 });
 
 Route::group(array('before' => "auth|admin"), function() {
@@ -120,8 +118,17 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/institutes/enable/{id}','InstitutesController@enable');
 	Route::get('/institutes/delete/{id}','InstitutesController@destroy');
 	Route::get('/institutes/history','InstitutesController@history');
+});
+
+Route::group(array('before' => "auth|instituteOwn-or-admin"), function() {
+	Route::get('/institutes/edit/{id}','InstitutesController@edit');
+	Route::post('/institutes/update/{id}','InstitutesController@update');
+	Route::get('/institutes/disable/{id}','InstitutesController@disable');
+	Route::get('/institutes/{id}','InstitutesController@show');
+});
 
 
+Route::group(array('before' => "auth|admin"), function() {
 	//Route for LocalitiesController
 	Route::get('/localities','LocalitiesController@index');
 	Route::post('/localities/store','LocalitiesController@store');
@@ -153,20 +160,21 @@ Route::group(array('before' => "auth|admin"), function() {
 	//Route for SubscriptionsController
 	Route::get('/subscriptions','SubscriptionsController@index');
 	Route::get('/subscriptions/enable/{id}','SubscriptionsController@enable');
+	Route::get('/subscriptions/disable/{id}','SubscriptionsController@disable');
 	Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
 });
 
 Route::post('/subscriptions','SubscriptionsController@store');
-Route::get('/subscriptions/disable/{id}',array('before'=>'subscriptionOwn', 'uses'=>'SubscriptionsController@disable'));
+Route::get('/subscriptions/unsubscribe/{email}/{id}', 'SubscriptionsController@disable');
 
-Route::group(array('before' => "auth|institute"), function() {
+Route::group(array('before' => "auth|institute-or-admin"), function() {
 	Route::get('/venues/create','VenuesController@create');
 	Route::post('/venues/store','VenuesController@store');
 	Route::get('/venues','VenuesController@index');
 });
 
 //Route for VenuesController
-Route::group(array('before' => "auth|institute|venueOwn"), function() {
+Route::group(array('before' => "auth|institute-or-admin|venueOwn-or-admin"), function() {
 	Route::get('/venues/edit/{id}','VenuesController@edit');
 	Route::post('/venues/update/{id}','VenuesController@update');
 	Route::get('/venues/delete/{id}','VenuesController@destroy');
@@ -183,14 +191,18 @@ Route::group(array('before' => "auth|admin"), function() {
 });
 
 Route::group(array('before' => "auth"), function() {
-Route::get('/users/changepassword','UsersController@getChangePassword');
-Route::get('/users/edit','VenuesController@edit');
-Route::post('/users/update','UsersController@update');
-Route::get('/users/logout','UsersController@getLogout');
-Route::get('/users/subscribe/{id}','UsersController@subscribe');
+	Route::get('/users/changepassword','UsersController@getChangePassword');
+	Route::get('/users/edit','VenuesController@edit');
+	Route::post('/users/update','UsersController@update');
+	Route::get('/users/logout','UsersController@getLogout');
+	Route::get('/users/subscribe/{id}','UsersController@subscribe');
 });
 
-Route::get('/users/unsubscribe/{id}','UsersController@unsubscribe');
+/*  To verify that unsubscribe request came from a valid email only,
+ 	we check user id and email both.
+ */
+Route::get('/users/unsubscribe/{email}/{id}','UsersController@unsubscribe');
+
 Route::get('/users/login', 'UsersController@getLogin');
 Route::get('/users/signup','UsersController@getSignUp');
 Route::get('/users/registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
@@ -207,6 +219,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/signup/submit','UsersController@postSignup');
 	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
+	Route::post('/filters/sendMessage','FiltersController@sendMessage');
 });
 
 Route::get('/aboutus', function()
@@ -247,4 +260,5 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chu
 
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{category_id}/{location_id}/{chunk}','FiltersController@filter');
 
-Route::get('/filter/search','FiltersController@search');
+Route::get('/filters/search','FiltersController@search');
+

@@ -48,7 +48,7 @@ App::after(function($request, $response)
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (Auth::id()) return Redirect::to('/');
 });
 
 
@@ -85,7 +85,7 @@ Route::filter('csrf', function()
 });
 
 // To check if a user own the batch, he's trying to edit.
-Route::filter('batchOwn',function()
+function batchOwn()
 {
 	$user_id=Auth::id();
 	$batch_id=Request::segment(3);
@@ -98,10 +98,10 @@ Route::filter('batchOwn',function()
 	{
 		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
 	}
-});
+}
 
 // To check if a user own the comment, he's trying to edit.
-Route::filter('commentOwn',function()
+function commentOwn()
 {
 	$user_id=Auth::id();
 	$comment_id=Request::segment(3);
@@ -110,10 +110,10 @@ Route::filter('commentOwn',function()
 	{
 		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
 	}
-});
+}
 
 // To check if a user has not added institute.
-Route::filter('institute', function()
+function institute()
 {
 	$user_id=Auth::id();
 	$institute_id=Institute::getInstituteforUser($user_id);
@@ -125,10 +125,10 @@ Route::filter('institute', function()
 	{
 		return Redirect::to('/institutes/create');
 	}
-});
+}
 
 // To check if a user own the institute, he's trying to edit.
-Route::filter('instituteOwn',function()
+function instituteOwn()
 {
 	$user_id=Auth::id();
 	$institute_id=Request::segment(3);
@@ -141,10 +141,10 @@ Route::filter('instituteOwn',function()
 	{
 		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
 	}
-});
+}
 
 // To check if a user has added institute.
-Route::filter('instituteNotOwn', function()
+function instituteNotOwn()
 {
 	$id=Auth::id();
 	$institute_id=Institute::getInstituteforUser($id);
@@ -156,10 +156,10 @@ Route::filter('instituteNotOwn', function()
 	{
 		return Redirect::to('/institutes/'.$institute_id);
 	}
-});
+}
 
 // To check if a user own the venue, he's trying to edit.
-Route::filter('venueOwn',function()
+function venueOwn()
 {
 	$user_id=Auth::id();
 	$venue_id=Request::segment(3);
@@ -172,8 +172,7 @@ Route::filter('venueOwn',function()
 	{
 		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
 	}
-});
-
+}
 
 // To check if user is an admin or not.
 Route::filter('admin',function()
@@ -183,6 +182,16 @@ Route::filter('admin',function()
 	if(!count($admin))
 		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
 });
+
+
+// To check if user is an admin or not.
+function admin()
+{
+	$id=Auth::id();
+	$admin=Admin::where('admin_user_id','=',$id)->get()->toarray();
+	if(!count($admin))
+		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
+}
 
 // To check if user is main admin or not. There will be 2 main admins, with id->1,2. 
 Route::filter('mainAdmin',function()
@@ -202,12 +211,43 @@ Route::filter('subscriptionOwn',function()
 
 });
 
+Route::filter('batchOwn-or-admin', function () 
+{
+    $value = call_user_func('batchOwn');
+   	$admin=call_user_func('admin');
+    if (($value)&&($admin)) 
+    	return $value;
+});
+
 
 Route::filter('institute-or-admin', function () 
 {
-    $value = call_user_func('institute');
-    if ($value) 
+    $value = call_user_func('institute');    
+   	$admin=call_user_func('admin');
+    if (($value)&&($admin)) 
     	return $value;
-    else 
-    	return call_user_func('admin');
+});
+
+Route::filter('instituteOwn-or-admin', function () 
+{
+    $value = call_user_func('instituteOwn');    
+   	$admin=call_user_func('admin');
+    if (($value)&&($admin)) 
+    	return $value;
+});
+
+Route::filter('instituteNotOwn-or-admin', function () 
+{
+    $value = call_user_func('instituteNotOwn');
+   	$admin=call_user_func('admin');
+    if (($value)&&($admin)) 
+    	return $value;
+});
+
+Route::filter('venueOwn-or-admin', function () 
+{
+    $value = call_user_func('venueOwn');    
+   	$admin=call_user_func('admin');
+    if (($value)&&($admin)) 
+    	return $value;
 });

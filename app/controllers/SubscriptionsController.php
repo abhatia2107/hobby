@@ -45,6 +45,27 @@ class SubscriptionsController extends \BaseController {
 		$subscription=Subscription::create($credentianls);
 	}
 
+	public function unsubscribe($email,$id)
+	{
+		$subscription=Subscription::find($id);
+		if($subscription)
+		{
+			if($subscription->subscription_email==$email)
+			{
+				$subscription->delete();
+				return Redirect::back()->with('success',Lang::get('subscription.unsubscribed'));
+			}
+			else
+			{
+				return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
+			}
+		}
+		else
+		{
+			return Redirect::back()->with('failure',Lang::get('subscription.subscription_not_exist'));
+		}
+	}
+
 	public function enable($id)
 	{
 		$subscription=Subscription::withTrashed()->find($id);

@@ -28,7 +28,7 @@ class Subscription extends \Eloquent {
 
     public function getSubscribe()
     {
-        return Subscriptions::count();
+        return Subscription::count();
     }
 
  	public function subscribe($credentials)

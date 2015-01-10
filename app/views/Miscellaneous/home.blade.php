@@ -9,7 +9,7 @@
             <h2>{{$homeLang['home_subtitle']}}</h2>
          </div>
          <div  data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">   
-            <form action="/filter/search" method="get" role="form">
+            <form action="/filters/search" method="get" role="form">
                <div class="row">
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group" >
@@ -18,7 +18,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group" >
-                        <select name="categories" id="search_categories" class="postform element-select" >
+                        <select name="category_id" id="search_categories" class="postform element-select" >
                            <option value="0">{{$homeLang['home_category']}}</option>
                            @if(isset($categories))
                               @foreach($categories as $data)
@@ -30,7 +30,7 @@
                   </div>
                   <div class="col-md-3 col-sm-3">
                      <div class="form-group" >
-                        <select name="locations" id="search_locations" class="postform">
+                        <select name="location_id" id="search_locations" class="postform">
                            <option value="0">{{$homeLang['home_location']}}</option>
                            @if(isset($locations))
                               @foreach($locations as $data)

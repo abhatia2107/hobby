@@ -153,7 +153,8 @@
 					<center>Send Message To Institute</center>
 			</div>
 			<div class="modal-body">
-				<form role="form">
+				<form action="/filters/sendMessage" method="post" enctype="multipart/form-data" role="form">
+					<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
 					<div class="form-group inner-addon left-addon" >
 						 <i class="glyphicon glyphicon-user"></i>
 						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='InputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>

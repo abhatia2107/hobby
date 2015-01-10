@@ -20,14 +20,24 @@
     <script  src="/assets/js/bootstrapValidator-0.5.3.min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>   
     <script>
+
         $(document).ready(function(){
-            $('#cancel1').click(function(){
+            
+            $('.edit-trigger').click(function(){
+            $(this).next('.edit-content').slideToggle();
+            $(this).toggleClass('active');
+            
+        });
+            $('#cancel').click(function(){
                 $('#login-content').toggle();
+               
+            });
+            $('.cancel2').click(function(){
+                $('.edit-content').slideUp();
             });
           $('.login-trigger').click(function(){
             $(this).next('#login-content').slideToggle();
             $(this).toggleClass('active');          
-            
             if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
               else $(this).find('span').html('&#x25BC;')
             })

@@ -117,11 +117,4 @@ class FiltersController extends \BaseController {
 			return View::make('Errors.pageNotFound');
 		}
 	}
-
-
-	public function sendMessage()
-	{
-		dd(Input::all());
-	}
-	
 }

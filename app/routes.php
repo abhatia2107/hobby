@@ -56,6 +56,7 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/batches/approve/{id}','BatchesController@approve');
 });
 
+Route::get('/batches/increment/{id}','BatchesController@increment');
 Route::get('/batches/show/{id}','BatchesController@show');
 
 //Route for CategoriesController
@@ -198,6 +199,7 @@ Route::group(array('before' => "auth"), function() {
 	Route::post('/users/update','UsersController@update');
 	Route::get('/users/logout','UsersController@getLogout');
 	Route::get('/users/subscribe/{id}','UsersController@subscribe');
+	Route::get('/users/show/{id}','UsersController@show');
 });
 
 /*  To verify that unsubscribe request came from a valid email only,
@@ -205,13 +207,13 @@ Route::group(array('before' => "auth"), function() {
  */
 Route::get('/users/unsubscribe/{email}/{id}','UsersController@unsubscribe');
 
-Route::get('/users/login', 'UsersController@getLogin');
-Route::get('/users/signup','UsersController@getSignUp');
-Route::get('/users/registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
-Route::get('/users/password/remind','RemindersController@getRemind');
-Route::get('/users/password/reset/{token}','RemindersController@getReset');
-
-Route::get('/users/show/{id}','UsersController@show');
+Route::group(array('before' => "guest-or-admin"), function() {
+	Route::get('/users/login', 'UsersController@getLogin');
+	Route::get('/users/signup','UsersController@getSignUp');
+	Route::get('/users/registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
+	Route::get('/users/password/remind','RemindersController@getRemind');
+	Route::get('/users/password/reset/{token}','RemindersController@getReset');
+});
 
 Route::group(array('before' => "csrf"), function() {
 	Route::post('/comments/store','CommentsController@store');
@@ -219,7 +221,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/signup/submit','UsersController@postSignup');
 	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
-	Route::post('/filters/sendMessage','FiltersController@sendMessage');
+	Route::post('/batches/sendMessage','BatchesController@sendMessage');
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
 });
 

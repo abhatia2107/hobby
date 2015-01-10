@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.gmail.com',
+	'host' => 'smtp.bindaasjodi.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'abhishekcool1243@gmail.com', 'name' => 'Abhishek Bhatia'),
+	'from' => array('address' => 'hr@bindaasjodi.com', 'name' => 'Bindass Jodi'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'abhishekcool1243',
+	'username' => 'hr@bindaasjodi.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => 'AdlakhA#147',
+	'password' => 'Hanumangarh@335513',
 
 	/*
 	|--------------------------------------------------------------------------

@@ -26,6 +26,10 @@
             text-align: center;
             pointer-events: none;
         }
+        .forgot_password
+        {
+            margin-left: 1px;
+        }
         .footer-wrapper
         {
             position:absolute;

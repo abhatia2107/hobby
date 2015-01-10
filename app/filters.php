@@ -35,24 +35,6 @@ App::after(function($request, $response)
 |
 */
 
-/*
-|--------------------------------------------------------------------------
-| Guest Filter
-|--------------------------------------------------------------------------
-|
-| The "guest" filter is the counterpart of the authentication filters as
-| it simply checks that the current user is not logged in. A redirect
-| response will be issued if they are, which you may freely change.
-|
-*/
-
-Route::filter('guest', function()
-{
-	if (Auth::id()) 
-		return Redirect::to('/')->with('failure',Lang::get('validation.signup'));
-});
-
-
 Route::filter('auth', function()
 {
 	if (!(Auth::id()))
@@ -61,7 +43,7 @@ Route::filter('auth', function()
 		{
 			return Response::make('Unauthorized', 401);
 		}
-		return Redirect::guest('/users/login')->with('failure',Lang::get('validation.login'));
+		return Redirect::guest('/users/login')->with('failure',Lang::get('routingFilter.login'));
 	}
 });
 
@@ -97,7 +79,7 @@ function batchOwn()
 	}
 	if($user_id!=$batch_user_id)
 	{
-		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
+		return Redirect::to('/')->with('failure',Lang::get('routingFilter.permission_denied'));
 	}
 }
 
@@ -109,8 +91,26 @@ function commentOwn()
 	$comment_user_id=Comment::getUserforComment($comment_id);
 	if($user_id!=$comment_user_id)
 	{
-		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
+		return Redirect::to('/')->with('failure',Lang::get('routingFilter.permission_denied'));
 	}
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Guest Filter
+|--------------------------------------------------------------------------
+|
+| The "guest" filter is the counterpart of the authentication filters as
+| it simply checks that the current user is not logged in. A redirect
+| response will be issued if they are, which you may freely change.
+|
+*/
+
+function guest()
+{
+	if (Auth::id()) 
+		return Redirect::to('/')->with('success',Lang::get('routingFilter.already_login'));
 }
 
 // To check if a user has not added institute.
@@ -140,7 +140,7 @@ function instituteOwn()
 	}
 	if($user_id!=$institute_user_id)
 	{
-		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
+		return Redirect::to('/')->with('failure',Lang::get('routingFilter.permission_denied'));
 	}
 }
 
@@ -171,7 +171,7 @@ function venueOwn()
 	}
 	if($user_id!=$venue_user_id)
 	{
-		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
+		return Redirect::to('/')->with('failure',Lang::get('routingFilter.permission_denied'));
 	}
 }
 
@@ -181,7 +181,7 @@ Route::filter('admin',function()
 	$id=Auth::id();
 	$admin=Admin::where('admin_user_id','=',$id)->get()->toarray();
 	if(!count($admin))
-		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
+		return Redirect::to('/')->with('failure',Lang::get('routingFilter.permission_denied'));
 });
 
 
@@ -200,7 +200,7 @@ Route::filter('mainAdmin',function()
 	$id=Auth::id();
 	$admin=Admin::where('admin_user_id','=',$id)->get()->toarray();
 	if(($admin[0]['id']!=1)&&($admin[0]['id']!=2))
-		return Redirect::to('/admin')->with('failure',Lang::get('validation.permission_denied'));
+		return Redirect::to('/admin')->with('failure',Lang::get('routingFilter.permission_denied'));
 });
 
 Route::filter('batchOwn-or-admin', function () 
@@ -211,6 +211,13 @@ Route::filter('batchOwn-or-admin', function ()
     	return $value;
 });
 
+Route::filter('guest-or-admin', function () 
+{
+    $value = call_user_func('guest');    
+   	$admin=call_user_func('admin');
+    if (($value)&&($admin)) 
+    	return $value;
+});
 
 Route::filter('institute-or-admin', function () 
 {

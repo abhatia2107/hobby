@@ -62,10 +62,10 @@ class Institute extends \Eloquent {
     public static function getInstituteforUser($institute_user_id)
     {
         $institute=Institute::withTrashed()
-            ->where('institute_user_id',$institute_user_id)->get();
+            ->where('institute_user_id',$institute_user_id)->first();
         if($institute){
-            if(is_null($institute[0]->deleted_at))
-                return $institute[0]->id;
+            if(is_null($institute->deleted_at))
+                return $institute->id;
             else
                 return null;
         }

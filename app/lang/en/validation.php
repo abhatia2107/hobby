@@ -103,9 +103,4 @@ return array(
 
 	'attributes' => array(),
 
-	'login' =>  'Please login first to view this page.',
-
-	'signup' => 'You need to signup first to view this page.',
-
-	'permission_denied' => "You don't have permission to view this page.",
 );

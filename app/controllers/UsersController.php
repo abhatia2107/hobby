@@ -189,10 +189,6 @@ class UsersController extends \BaseController {
 
 	public function getLogin()
 	{
-        if(Auth::check())
-		{
- 	 		return Redirect::to("/");
- 		}
 		return View::make('Users.login');
 	}
 

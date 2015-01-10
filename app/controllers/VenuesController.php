@@ -10,7 +10,8 @@ class VenuesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$user_id=Auth::id();
+		//$user_id=Auth::id();
+		$user_id=1;
 		$venues=$this->venue->getVenueForUser($user_id);
 		return View::make('Venues.index',compact('venues'));
 	}

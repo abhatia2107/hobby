@@ -14,9 +14,6 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AdminsTableSeeder');
         $this->command->info('Admins table seeded!');
 
- 		$this->call('BatchKeywordSeeder');
- 		$this->command->info('Batch Keyword seeded!');
-
 		$this->call('BatchPhotoSeeder');
 		$this->command->info('Batch Photo seeded!');
 

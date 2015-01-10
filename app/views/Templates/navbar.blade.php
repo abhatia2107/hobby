@@ -1,6 +1,6 @@
 @section("navbar")
     <div class="row" >
-        <div class=" col-sm-12 col-md-12 ">
+        <div class=" col-sm-12 col-md-12">
             <nav class="navbar navbar-inverse" >
                 <div class="container-fluid">
                     <a class="navbar-brand btn btn-primary navbar-right" href="/institutes/create">Host Panel</a>

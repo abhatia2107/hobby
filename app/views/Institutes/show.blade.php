@@ -1,142 +1,27 @@
-@extends("Layouts.layout")
-@section("pagestylesheet")
-<style type="text/css">
-	.home_vendor_page
-	{
-		width: 100%;
-		background-image: url(/assets/images/sb.png);
-		margin-top: -20px;
-		font-family: "Times New Roman", Times, serif;
-		padding-top: 10px;
-		padding-bottom: 40px;
-		color: #333;
-
-	}
-	.vendor_institute_details
-	{
-		 background-color: #ffffff;
-		 -moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-		 box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-				-webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5); 
-				border-radius: 5px;
-				padding: 10px 20px 20px 20px;
-
-
-	}
-	.vendor_venue_list
-	{
-		 background-color: #ffffff;
-		 -moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-		 box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-				-webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5); 
-				border-radius: 5px;
-			margin-top: 40px;
-	}
-	.vendor_institute_details h1
-	{
-		text-align: left;
-		font-size: 35px;
-		color: #333;
-	}
-	.vendor_institute_details .glyphicon
-	{
-		color:#333;
-		font-size: 20px;
-		font-weight: bolder;
-		margin-right: 10px;
-		width: 20px;
-		margin-top: 5px;
-	}
-	#institute_header
-	{
-		border-bottom:2px dashed;
-		
-	}
-	#institute_details_box
-	{
-		padding-top: 25px;
-	}
-	li
-	{
-		list-style-type: none;
-		line-height: 2.5em
-	}
-	.vendor_institute_batches
-	{
-		margin-top: 30px;
-		background-color: white;
-		box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-		-moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-				-webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5); 
-				border-radius: 5px;
-	}
-	.vendor_institute_batches .day
-	{
-		margin-top: 8px;
-	}
-	.vendor_batches_title
-	{
-		margin-top: 20px;
-		text-align: center;
-		font-size: 20px;
-		font-weight: bolder;
-		border-bottom-color: skyblue;
-		border-bottom:2px dashed;
-	}
-	.weekday
-	{
-		margin-top: -6px;
-	}
-	.vendor_batchInfo
-	{
-		
-    }
-    .edit_delete_buttons
-    {
-    	clear: both;
-    	margin-top: 0px;
-    	float: left;
-    	margin-left: 35px;
-    }
-
-</style>
-@stop
+@extends("Layouts.layout") 
 @section("content")
-
-<div class="modal fade" id="sendMessage" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				 <button type="button" id='close_model' class="close" data-dismiss="modal" aria-hidden="true">×</button>				
-					<center>Send Message To Institute</center>
-			</div>
-			<div class="modal-body">
-				<form role="form">
-					<div class="form-group inner-addon left-addon" >
-						 <i class="glyphicon glyphicon-user"></i>
-						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='InputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
-					</div>
-					<div class="form-group inner-addon left-addon">
-						<i class="glyphicon glyphicon-envelope"></i>
-						 <input type="email" class="form-control" name='InputEmail' id='MsgInputEmail'  placeholder='Enter Your E-Mail Address' required='required'/>
-					</div>
-					<div class="form-group inner-addon left-addon">
-						<i class="glyphicon glyphicon-phone"></i>
-						 <input type="phone" class="form-control" name='InputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
-					</div>
-					<div class="form-group">
-					  <label for="comment">Message:</label>
-					  <textarea class="form-control" rows="3" name='InputMessage' id="comment"></textarea>
-					</div>
-					<div class="modal-footer">
-						 <center><button type="submit" class="btn btn-primary">Send Message</button></center>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>				
-</div>
 <div class="home_vendor_page">
+	<nav class="navbar navbar-inverse" id="vendorNavBar">
+	    <div class="container-fluid">
+		    <div class="navbar-header">
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#vendorNavbar">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>                
+			    </button>
+		    </div>
+		    <div class="collapse navbar-collapse" id="vendorNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active" ><a href="" >Institute Profile</a></li>
+					<li><a href="/batches">My Classes</a></li>
+					<li><a href="/venues">My Venues</a></li>
+				</ul>
+		      	<ul class="nav navbar-nav navbar-right">
+		        	<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+		      	</ul>
+		    </div>
+		</div>
+	</nav>
 	<div class="container vendor_institute_details">
 		<div class="col-md-12 col-xs-12 col-sm-12 column" id="institute_header">
 			<div class="col-md-11 col-xs-12 col-sm-8 column">

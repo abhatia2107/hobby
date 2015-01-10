@@ -95,20 +95,7 @@
                   <div class="recent_listings-info">
                      <div class="recent_listing_rating">
                         <span class="stars">{{$data->institute_rating}}</span>
-                        <!--
-                        <span class="active-rating">
-                           @for($i=0;$i<floor($data->institute_rating);$i++)
-                              <span class="glyphicon glyphicon-star"></span>
-                           @endfor
-                        </span>
-                        <span class="star-rating">
-                           @for($i = floor($data->institute_rating); $i <= 4; $i++)
-                              <span id='active-rating' class="glyphicon glyphicon-star"></span>
-                           @endfor
-                        </span>
-                        -->
                      </div>
-                
                   <div class="contact_address_info">   
                      <header>
                         <div>
@@ -119,7 +106,7 @@
                         </div>
                      </header>
                      <footer>
-                        <a href="/batches/{{$data->id}}" >{{$data->batch}}</a>
+                        <a href="/batches/show/{{$data->id}}" >{{$data->batch}}</a>
                      </footer>
                   </div>
                

@@ -10,7 +10,7 @@ class UsersTableSeeder extends Seeder {
               DB::table('users')->insert(array(
               'user_first_name' => "Jatin",
               'user_last_name' => "Bansal",
-              'email' => "jatinbansal7@gmail.com"
+              'email' => "jatinbansal7@gmail.com",
               'user_contact_no' => "9885890640",
               'password' => Hash::make('jatin'),
               'user_gender'=>"male",
@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder {
               DB::table('users')->insert(array(
               'user_first_name' => "Abhishek",
               'user_last_name' => "Bhatia",
-              'email' => "abhatia2107@gmail.com"
+              'email' => "abhatia2107@gmail.com",
               'user_contact_no' => "9729725987",
               'password' => Hash::make('abhishek'),
               'user_gender'=>"male",

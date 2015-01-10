@@ -48,7 +48,8 @@ App::after(function($request, $response)
 
 Route::filter('guest', function()
 {
-	if (Auth::id()) return Redirect::to('/');
+	if (Auth::id()) 
+		return Redirect::to('/')->with('failure',Lang::get('validation.signup'));
 });
 
 
@@ -60,7 +61,7 @@ Route::filter('auth', function()
 		{
 			return Response::make('Unauthorized', 401);
 		}
-		return Redirect::guest('/users/login');
+		return Redirect::guest('/users/login')->with('failure',Lang::get('validation.login'));
 	}
 });
 
@@ -121,6 +122,7 @@ function institute()
 	{
 		return Redirect::to('/')->with('failure',Lang::get('institute.institute_disabled_by_admin'));
 	}
+	dd($institute_id);
 	if(!$institute_id)
 	{
 		return Redirect::to('/institutes/create');
@@ -190,7 +192,7 @@ function admin()
 	$id=Auth::id();
 	$admin=Admin::where('admin_user_id','=',$id)->get()->toarray();
 	if(!count($admin))
-		return Redirect::to('/')->with('failure',Lang::get('validation.permission_denied'));
+		return Redirect::to('/');
 }
 
 // To check if user is main admin or not. There will be 2 main admins, with id->1,2. 
@@ -200,15 +202,6 @@ Route::filter('mainAdmin',function()
 	$admin=Admin::where('admin_user_id','=',$id)->get()->toarray();
 	if(($admin[0]['id']!=1)&&($admin[0]['id']!=2))
 		return Redirect::to('/admin')->with('failure',Lang::get('validation.permission_denied'));
-});
-
-/*
-To check if subscription request is coming from valid email.
-To be done later on basis of a subscriptionID, email ID combo.
- */
-Route::filter('subscriptionOwn',function()
-{
-
 });
 
 Route::filter('batchOwn-or-admin', function () 
@@ -231,6 +224,7 @@ Route::filter('institute-or-admin', function ()
 Route::filter('instituteOwn-or-admin', function () 
 {
     $value = call_user_func('instituteOwn');    
+    // dd($value);
    	$admin=call_user_func('admin');
     if (($value)&&($admin)) 
     	return $value;

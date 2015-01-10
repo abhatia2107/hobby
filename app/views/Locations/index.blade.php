@@ -46,7 +46,7 @@
 		        <td>{{$data->location_no_of_localities}}</td>
 		   		<td>
 					@if($view)
-					<a href="{{$tableName}}/{{$data->id}}">
+					<a href="{{$tableName}}/show/{{$data->id}}">
 						<button type="button" class="btn btn-success ">
 							<span class="glyphicon glyphicon-user"></span>
 							View

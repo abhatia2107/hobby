@@ -3,6 +3,20 @@
 	<head>
 		@include('Templates.head')
 	    @yield('pagestylesheet')
+	    <style type="text/css">
+	        .form-control-feedback {
+	            position: absolute;
+	            top: 0;
+	            right: 11px;
+	            z-index: 2;
+	            display: block;
+	            width: 34px;
+	            height: 34px;
+	            line-height: 34px;
+	            text-align: center;
+	            pointer-events: none;
+	            }
+	    </style>
 	</head>
 	
 	<body> <!--  style="background:white" class="home page page-id-6 page-template page-template-page-templates page-template-template-home page-template-page-templatestemplate-home-php custom-background template-home  directory-fields color-scheme-default footer- woocommerce-social-login listify-child wp-job-manager-categories-enabled wp-job-manager-categories-only" -->

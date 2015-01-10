@@ -13,7 +13,9 @@
 
 Route::get('/', 'HomeController@showWelcome');
 
-Route::get('/admin', 'HomeController@showAdminHome');
+
+//To allow access only to admin.
+Route::get('/admin',array('before' => "auth|admin", 'HomeController@showAdminHome'));
 
 /*
 	Routes for Main Admin section of admin panel.
@@ -25,16 +27,16 @@ Route::group(array('before' => "auth|admin|mainAdmin"), function() {
 	Route::get('/admins/enable/{id}','AdminsController@enable');
 	Route::get('/admins/disable/{id}','AdminsController@disable');
 	Route::get('/admins/delete/{id}','AdminsController@destroy');
-	Route::get('/admins/{id}','AdminsController@show');
+	Route::get('/admins/show/{id}','AdminsController@show');
 });
 
 /*
 	Routes for BatchesController
 	There are different type of check required for every route.
  */
-	Route::get('/batches/create','BatchesController@create');
 Route::group(array('before' => "auth|institute-or-admin"), function() {
 	Route::get('/batches','BatchesController@index');
+	Route::get('/batches/create','BatchesController@create');
 	Route::post('/batches/store','BatchesController@store');
 });
 
@@ -54,7 +56,7 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/batches/approve/{id}','BatchesController@approve');
 });
 
-Route::get('/batches/{id}','BatchesController@show');
+Route::get('/batches/show/{id}','BatchesController@show');
 
 //Route for CategoriesController
 Route::group(array('before' => "auth|admin"), function() {	
@@ -64,12 +66,9 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/categories/enable/{id}','CategoriesController@enable');
 	Route::get('/categories/disable/{id}','CategoriesController@disable');
 	Route::get('/categories/delete/{id}','CategoriesController@destroy');
-	Route::get('/categories/{id}','CategoriesController@show');
+	Route::get('/categories/show/{id}','CategoriesController@show');
 });
 
-/*
-Filters to applied here soon.
- */
 //Route for CommentsController
 Route::group(array('before' => "auth|commentOwn-or-admin"), function() {	
 	Route::get('/comments/edit/{id}','CommentsController@edit');
@@ -82,7 +81,7 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/comments/enable/{id}','CommentsController@enable');
 	Route::get('/comments/delete/{id}','CommentsController@destroy');
 });
-Route::get('/comments/{id}','CommentsController@show');
+Route::get('/comments/show/{id}','CommentsController@show');
 
 //Route for FeaturesController
 Route::group(array('before' => "auth|admin"), function() {	
@@ -91,7 +90,7 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/features/enable/{id}','FeaturesController@enable');
 	Route::get('/features/disable/{id}','FeaturesController@disable');
 	Route::get('/features/delete/{id}','FeaturesController@destroy');
-	Route::get('/features/{id}','FeaturesController@show');
+	Route::get('/features/show/{id}','FeaturesController@show');
 });
 
 
@@ -106,7 +105,7 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/feedbacks/unread/{id}','FeedbacksController@unread');
 	Route::get('/feedbacks/done/{id}','FeedbacksController@done');
 	Route::get('/feedbacks/undone/{id}','FeedbacksController@undone');
-	Route::get('/feedbacks/{id}','FeedbacksController@show');
+	Route::get('/feedbacks/show/{id}','FeedbacksController@show');
 });
 
 //Route for InstitutesController
@@ -126,11 +125,12 @@ Route::group(array('before' => "auth|instituteOwn-or-admin"), function() {
 	Route::get('/institutes/edit/{id}','InstitutesController@edit');
 	Route::post('/institutes/update/{id}','InstitutesController@update');
 	Route::get('/institutes/disable/{id}','InstitutesController@disable');
-	Route::get('/institutes/{id}','InstitutesController@show');
+	Route::get('/institutes/show/{id}','InstitutesController@show');
 });
 
 
 Route::group(array('before' => "auth|admin"), function() {
+
 	//Route for LocalitiesController
 	Route::get('/localities','LocalitiesController@index');
 	Route::post('/localities/store','LocalitiesController@store');
@@ -138,7 +138,7 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/localities/enable/{id}','LocalitiesController@enable');
 	Route::get('/localities/disable/{id}','LocalitiesController@disable');
 	Route::get('/localities/delete/{id}','LocalitiesController@destroy');
-	Route::get('/localities/{id}','LocalitiesController@show');
+	Route::get('/localities/show/{id}','LocalitiesController@show');
 
 	//Route for LocationsController
 	Route::get('/locations','LocationsController@index');
@@ -147,7 +147,7 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/locations/enable/{id}','LocationsController@enable');
 	Route::get('/locations/disable/{id}','LocationsController@disable');
 	Route::get('/locations/delete/{id}','LocationsController@destroy');
-	Route::get('/locations/{id}','LocationsController@show');
+	Route::get('/locations/show/{id}','LocationsController@show');
 
 	//Route for SubcategoriesController
 	Route::get('/subcategories','SubcategoriesController@index');
@@ -156,7 +156,7 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/subcategories/enable/{id}','SubcategoriesController@enable');
 	Route::get('/subcategories/disable/{id}','SubcategoriesController@disable');
 	Route::get('/subcategories/delete/{id}','SubcategoriesController@destroy');
-	Route::get('/subcategories/{id}','SubcategoriesController@show');
+	Route::get('/subcategories/show/{id}','SubcategoriesController@show');
 
 
 	//Route for SubscriptionsController
@@ -210,10 +210,8 @@ Route::get('/users/signup','UsersController@getSignUp');
 Route::get('/users/registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
 Route::get('/users/password/remind','RemindersController@getRemind');
 Route::get('/users/password/reset/{token}','RemindersController@getReset');
-Route::post('/users/password/reset/submit','RemindersController@postReset');
 
-// Issues with the show route. It get calls always.
-Route::get('/users/{id}','UsersController@show');
+Route::get('/users/show/{id}','UsersController@show');
 
 Route::group(array('before' => "csrf"), function() {
 	Route::post('/comments/store','CommentsController@store');
@@ -222,6 +220,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
 	Route::post('/filters/sendMessage','FiltersController@sendMessage');
+	Route::post('/users/password/reset/submit','RemindersController@postReset');
 });
 
 Route::get('/aboutus', function()

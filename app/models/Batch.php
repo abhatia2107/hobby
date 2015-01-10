@@ -43,9 +43,17 @@ class Batch extends \Eloquent {
         return Batch::where('id','=',$id)->pluck('category');
     }
 
-    public function getBatchForInstitute($batch_institute_id)
+   public function getBatchForInstitute($batch_institute_id)
     {
-        return Batch::whereIn('batch_institute_id',$batch_institute_id)->get();
+    return Batch::where('batch_institute_id',$batch_institute_id)
+    ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+    ->Join('categories','categories.id','=','batches.batch_category_id')
+    ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
+    ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
+    ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+    ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+    ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+    ->get();
     }
     
     public function getBatchForCategoryLocation($category_id,$location_id,$chunk)

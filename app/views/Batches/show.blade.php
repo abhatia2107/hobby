@@ -188,10 +188,10 @@
   $loggedIn = Auth::id();
 ?>
 
-<div id="page" class="hfeed site">
+<div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
   <div id="content" class="site-content">
     <div class="single_job_listing" itemscope="" itemtype="http://schema.org/LocalBusiness"  data-grid-columns="col-xs-12 col-sm-6">
-      <div style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);" class="listing-cover content-single-job_listing-hero has-image">
+      <div class="listing-cover content-single-job_listing-hero has-image">
         <div class="content-single-job_listing-hero-wrapper cover-wrapper container">
           <div class="content-single-job_listing-hero-inner row">
             <div class="col-sm-8 col-md-9">

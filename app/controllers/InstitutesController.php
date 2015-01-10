@@ -72,9 +72,9 @@ class InstitutesController extends \BaseController {
 		//Allow admin to view data and put this check in filter file.
 		$instituteDetails=Institute::withTrashed()->find($id);
 		// dd($instituteDetails);
-		$user_id=Auth::id();
-		if(($instituteDetails['institute_user_id']!=$user_id)&&(!$this->admin->checkIfAdmin($user_id)))
-			return Redirect::back()->with('failure',Lang::get('institute.institute_access_failed'));
+		//$user_id=Auth::id();
+		//if(($instituteDetails['institute_user_id']!=$user_id)&&(!$this->admin->checkIfAdmin($user_id)))
+		//	return Redirect::back()->with('failure',Lang::get('institute.institute_access_failed'));
 		if($instituteDetails['deleted_at'])
 		{
 			return Redirect::back()->with('failure',Lang::get('institute.institute_disabled_by_admin'));;
@@ -83,9 +83,9 @@ class InstitutesController extends \BaseController {
 		$locations=$this->location->all();
 		$institute_location=$locations->find($location_id);
 		$instituteDetails['institute_location']=$institute_location['location'];
-		return View::make('Institutes.show',compact('instituteDetails'));
+		$batchDetails=$this->batch->getBatchForInstitute($id);
+		return View::make('Institutes.show',compact('instituteDetails','batchDetails'));
 	}
-
 	/**
 	 * Show the form for editing the specified resource.
 	 * GET /institutes/{id}/edit

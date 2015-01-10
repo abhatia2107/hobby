@@ -28,8 +28,18 @@ class Venue extends \Eloquent {
     } 
 
     public function getVenueForInstitute($venue_institute_id)
-    {
-        return DB::table('venues')->whereIn('venue_institute_id',$venue_institute_id)->get();
-    }
-    
+	{
+		return Venue::where('venue_institute_id',$venue_institute_id)
+		->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+		->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+		->get();
+	}
+	public function getVenueForUser($user_id)
+	{
+		return Venue::where('venue_user_id',$user_id)
+		->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+		->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+		->get();
+	}
+	    
 }

@@ -8,7 +8,6 @@ class VenuesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-
 	public function index()
 	{
 		$user_id=Auth::id();

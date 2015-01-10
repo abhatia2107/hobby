@@ -373,7 +373,7 @@ left: 30%;
     </form>
 </div>
 </div>
-<div class="modal fade" id="myModal" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="myModal" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -423,7 +423,7 @@ left: 30%;
             </form>
         </div>
     </div>
-</div>
+</div> -->
 <div class="modal fade" id="myModal2" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -514,8 +514,8 @@ left: 30%;
 </div>
 @stop
 @section('pagejavascript')
-<script type="text/javascript"  src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-<script type="text/javascript" src="jquery-te-1.4.0.min.js" charset="utf-8"></script>
+<script type="text/javascript"  src="/assets/js/moment-2.8.4.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 <script type="text/javascript"  src="/assets/js/jquery.richtextarea.min.js"></script>
 @stop
 @section('pagejquery')

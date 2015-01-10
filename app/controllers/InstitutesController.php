@@ -68,10 +68,8 @@ class InstitutesController extends \BaseController {
 		{
 			return Redirect::back()->with('failure',Lang::get('institute.institute_disabled_by_admin'));;
 		}
-		$batchDetails=$this->batch->getBatchesForInstitute($id);
-		return View::make('Institutes.show',compact('instituteDetails','batchDetails'));
+		return View::make('Institutes.show',compact('instituteDetails'));
 	}
-
 	/**
 	 * Show the form for editing the specified resource.
 	 * GET /institutes/{id}/edit

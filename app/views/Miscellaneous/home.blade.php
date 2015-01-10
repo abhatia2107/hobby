@@ -151,4 +151,6 @@
     $('span.stars').stars();
    });
 </script>
+<br>
+<br>
 @stop

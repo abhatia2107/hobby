@@ -32,10 +32,12 @@ Route::group(array('before' => "auth|admin|mainAdmin"), function() {
 	Routes for BatchesController
 	There are different type of check required for every route.
  */
-Route::group(array('before' => "auth|institute-or-admin"), function() {
 	Route::get('/batches/create','BatchesController@create');
+Route::group(array('before' => "auth|institute-or-admin"), function() {
+	Route::get('/batches','BatchesController@index');
 	Route::post('/batches/store','BatchesController@store');
 });
+
 
 Route::group(array('before' => "auth|institute-or-admin|batchOwn-or-admin"), function() {	
 	Route::get('/batches/edit/{id}','BatchesController@edit');

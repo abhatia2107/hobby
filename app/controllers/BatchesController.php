@@ -4,6 +4,19 @@ use Carbon\Carbon;
 
 class BatchesController extends \BaseController {
 
+	public function index()
+	{
+		$age_group=$this->age_group;
+		$difficulty_level=$this->difficulty_level;
+		$gender_group=$this->gender_group;
+		$trial=$this->trial;
+		$weekdays=$this->weekdays;
+		
+		$user_id=Auth::id();
+		$batchDetails=$this->batch->getBatchesForUser($user_id);
+		return View::make('Batches.index',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchDetails'));
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 * GET /batches/create

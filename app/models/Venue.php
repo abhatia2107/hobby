@@ -68,5 +68,4 @@ class Venue extends \Eloquent {
         else
             return false;
     }
-
 }

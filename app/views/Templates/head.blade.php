@@ -13,11 +13,26 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrapValidator.min.css"/>
     <!--<link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
     <link rel="stylesheet" type="text/css" href="/assets/css/hobby_style.css">
-    <script src="/assets/js/bootstrapValidator-0.5.3.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script> 
     <script src="/assets/js/jquery-1.11.2.min.js"></script>
     <script src="/assets/js/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrapValidator-0.5.3.min.js"></script>
     <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
     <script  src="/assets/js/jquery-ui-1.7.2.custom.min.js"></script>
-    <script src="/assets/js/home.js"></script>  
+    <script src="/assets/js/home.js"></script>
+    <style type="text/css">
+        .form-control-feedback {
+position: absolute;
+top: 0;
+right: 11px;
+z-index: 2;
+display: block;
+width: 34px;
+height: 34px;
+line-height: 34px;
+text-align: center;
+pointer-events: none;
+}
+
+    </style>
 @show

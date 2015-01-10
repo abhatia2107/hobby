@@ -122,7 +122,6 @@ function institute()
 	{
 		return Redirect::to('/')->with('failure',Lang::get('institute.institute_disabled_by_admin'));
 	}
-	dd($institute_id);
 	if(!$institute_id)
 	{
 		return Redirect::to('/institutes/create');

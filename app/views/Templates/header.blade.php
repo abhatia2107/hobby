@@ -50,7 +50,7 @@
 			<div class=" col-sm-3 col-md-3 ">
 			<ul class="list-inline">
 			<li class="header_myaccount" >   
-			<a class="header_myaccount_a" href="/users/{{$id}}">
+			<a class="header_myaccount_a" href="/users/show/{{$id}}">
 				@if($user)
 					{{$name}}'s 
 				@else

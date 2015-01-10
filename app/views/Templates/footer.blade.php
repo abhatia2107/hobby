@@ -1,5 +1,5 @@
 @section("footer")
-<footer class="site-footer-widgets" >
+<div class="site-footer-widgets" >
                <div class="container">
                   <div class="row">
                      <div class="footer-widget-column col-xs-12 col-sm-12 col-lg-5">
@@ -96,6 +96,6 @@
                      Copyright Hobby 2014. All Rights Reserved  
                </div>
             </div>
-</footer>
+</div>
 
 @show

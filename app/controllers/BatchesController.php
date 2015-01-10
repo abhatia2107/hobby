@@ -12,7 +12,8 @@ class BatchesController extends \BaseController {
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
 		
-		$user_id=Auth::id();
+		//$user_id=Auth::id();
+		$user_id = 3;
 		$batchDetails=$this->batch->getBatchesForUser($user_id);
 		return View::make('Batches.index',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchDetails'));
 	}

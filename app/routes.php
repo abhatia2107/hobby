@@ -13,7 +13,6 @@
 
 Route::get('/', 'HomeController@showWelcome');
 
-
 //To allow access only to admin.
 Route::get('/admin',array('before' => "auth|admin", 'HomeController@showAdminHome'));
 
@@ -56,10 +55,12 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/batches/approve/{id}','BatchesController@approve');
 });
 
+
 Route::get('/batches/increment/{id}','BatchesController@increment');
 Route::get('/batches/show/{id}','BatchesController@show');
 
 //Route for CategoriesController
+
 Route::group(array('before' => "auth|admin"), function() {	
 	Route::get('/categories','CategoriesController@index');
 	Route::post('/categories/store','CategoriesController@store');
@@ -95,9 +96,11 @@ Route::group(array('before' => "auth|admin"), function() {
 });
 
 
+
 //Route for FeedbacksController
 Route::get('/feedbacks/create','FeedbacksController@create');
 Route::post('/feedbacks/store','FeedbacksController@store');	
+
 
 Route::group(array('before' => "auth|admin"), function() {	
 	Route::get('/feedbacks','FeedbacksController@index');
@@ -167,24 +170,26 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
 });
 
+
 Route::post('/subscriptions','SubscriptionsController@store');
 Route::get('/subscriptions/unsubscribe/{email}/{id}', 'SubscriptionsController@disable');
 
-Route::group(array('before' => "auth|institute-or-admin"), function() {
-	Route::get('/venues/create','VenuesController@create');
-	Route::post('/venues/store','VenuesController@store');
-	Route::get('/venues','VenuesController@index');
-});
+// Route::group(array('before' => "auth|institute-or-admin"), function() {
+Route::get('/venues/create','VenuesController@create');
+Route::post('/venues/store','VenuesController@store');
+Route::get('/venues','VenuesController@index');
+// });
 
 //Route for VenuesController
-Route::group(array('before' => "auth|institute-or-admin|venueOwn-or-admin"), function() {
-	Route::get('/venues/edit/{id}','VenuesController@edit');
-	Route::post('/venues/update/{id}','VenuesController@update');
-	Route::get('/venues/delete/{id}','VenuesController@destroy');
-});
+// Route::group(array('before' => "auth|institute-or-admin|venueOwn-or-admin"), function() {
+Route::get('/venues/edit/{id}','VenuesController@edit');
+Route::post('/venues/update/{id}','VenuesController@update');
+Route::get('/venues/delete/{id}','VenuesController@destroy');
+// });
 
 
 //Route for UsersController
+
 Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/users','UsersController@index');
 	Route::get('/users/enable/{id}','UsersController@enable');
@@ -205,6 +210,7 @@ Route::group(array('before' => "auth"), function() {
 /*  To verify that unsubscribe request came from a valid email only,
  	we check user id and email both.
  */
+
 Route::get('/users/unsubscribe/{email}/{id}','UsersController@unsubscribe');
 
 Route::group(array('before' => "guest-or-admin"), function() {
@@ -214,6 +220,7 @@ Route::group(array('before' => "guest-or-admin"), function() {
 	Route::get('/users/password/remind','RemindersController@getRemind');
 	Route::get('/users/password/reset/{token}','RemindersController@getReset');
 });
+
 
 Route::group(array('before' => "csrf"), function() {
 	Route::post('/comments/store','CommentsController@store');
@@ -225,29 +232,30 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
 });
 
+
 Route::get('/aboutus', function()
 {
-	return View::make('Miscellaneous.aboutus');
+return View::make('Miscellaneous.aboutus');
 });
 
 Route::get('/support', function()
 {
-	return View::make('Miscellaneous.support');
+return View::make('Miscellaneous.support');
 });
 
 Route::get('/terms', function()
 {
-	return View::make('Miscellaneous.terms');
+return View::make('Miscellaneous.terms');
 });
 
 Route::get('/contactus', function()
 {
-	return View::make('Miscellaneous.contactus');
+return View::make('Miscellaneous.contactus');
 });
 
 Route::get('/hello', function()
 {
-	return View::make('Miscellaneous.hello');
+return View::make('Miscellaneous.hello');
 });
 
 //Routes for user, to be modified later
@@ -264,4 +272,3 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chu
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{category_id}/{location_id}/{chunk}','FiltersController@filter');
 
 Route::get('/filters/search','FiltersController@search');
-

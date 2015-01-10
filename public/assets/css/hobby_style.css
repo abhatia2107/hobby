@@ -401,6 +401,12 @@ span.stars span {
    z-index: 1000009;
 }
 
+#vendorNavBar
+{
+  margin-top: -70px;
+        position: relative;
+}
+
 
 
 /* filter page style sheet*/
@@ -541,3 +547,133 @@ span.stars span {
   #filter-tittle-name { font-family: "Times New Roman", Times, serif; font-size: 20px; color: gray; }
 
   .breadcrumb { background: white; font-family: "Times New Roman", Times, serif; }
+
+
+
+  /*vendor page style sheet */
+    .home_vendor_page
+  {
+    width: 100%;
+    background-image: url(/assets/images/sb.png);
+    
+    font-family: "Times New Roman", Times, serif;
+        padding-top: 50px;
+    padding-bottom: 40px;
+    color: #333;
+   
+  }
+  .vendor_institute_details
+  {
+     background-color: #ffffff;
+     -moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+     box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+        -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5); 
+        border-radius: 5px;
+        padding: 10px 20px 20px 20px;
+  }
+  .vendor_venue_list
+  {
+     background-color: #ffffff;
+     -moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+     box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+        -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5); 
+        border-radius: 5px;
+      margin-top: 40px;
+  }
+  .vendor_institute_details h1
+  {
+    text-align: left;
+    font-size: 35px;
+    color: #333;
+  }
+  .vendor_institute_details .glyphicon
+  {
+    color:#333;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-right: 10px;
+    width: 20px;
+    margin-top: 5px;
+  }
+  #institute_header
+  {
+    border-bottom:2px dashed;
+    
+  }
+  #institute_details_box
+  {
+    padding-top: 25px;
+  }
+  li
+  {
+    list-style-type: none;
+    line-height: 2.5em
+  }
+  .vendor_institute_batches
+  {
+    margin-top: 30px;
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+    -moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+        -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5); 
+        border-radius: 5px;
+  }
+  .vendor_institute_batches .day
+  {
+    margin-top: 8px;
+  }
+  .vendor_batches_title
+  {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bolder;
+    border-bottom-color: skyblue;
+    border-bottom:2px dashed;
+  }
+  .weekday
+  {
+    margin-top: -6px;
+  }
+  .vendor_batchInfo
+  {
+    
+    }
+    .edit_delete_buttons
+    {
+      clear: both;
+      margin-top: 0px;
+      float: left;
+      margin-left: 35px;
+    }
+
+    .venues_list
+    {
+      height: 250px;
+      background-color: white;
+      -webkit-box-shadow: 0 0 2px #333;
+        box-shadow: 0 0 2px #333;
+      margin: 10px 10px;
+      padding: 7px;
+
+    }
+     .venues_list_tittle
+     {
+        text-align: center;
+        font-size: 22px;
+        font-weight: 500;
+        color: #333;
+        padding-top: 5px;
+     }
+  .venues_list_container
+  {
+    padding: 0 20px 50px 20px;
+  }
+  .venue button
+  {
+    height: 25px;
+    border-radius: 2px;
+    padding-top: 2px;
+    width: 100px;
+
+  }

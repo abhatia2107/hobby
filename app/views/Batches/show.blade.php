@@ -308,17 +308,17 @@
         <ul class="listify-gallery-images">
           <li class="gallery-preview-image" >
              <a data-toggle="modal" data-target="#myModal">
-                <img src="https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/11/306-150x150.jpg">
+               
              </a>
           </li>
           <li class="gallery-preview-image" >
              <a data-toggle="modal" data-target="#myModal">
-                <img src="https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/11/306-150x150.jpg">
+               
              </a>
           </li>
           <li class="gallery-preview-image" >
              <a data-toggle="modal" data-target="#myModal">
-                <img src="https://demo.astoundify.com/listify/wp-content/uploads/sites/39/2014/11/306-150x150.jpg">
+                
              </a>
           </li>
         </ul>  </center>              

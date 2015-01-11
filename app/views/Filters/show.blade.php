@@ -10,9 +10,9 @@
 			<div class="modal-body">
 				<form action="/batches/sendMessage" method="post" enctype="multipart/form-data" role="form">
 					<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
-					<input type="hidden" name="batch" value="{{"TEST"}}">
-					<input type="hidden" name="venue_email" value="{{"abhatia2107@gmail.com"}}">
-					<input type="hidden" name="institute" value="{{"TEST"}}">
+					<input type="hidden" id='SendMessageBatchID' name="batch" value="{{"TEST"}}">
+					<input type="hidden" id='SendMessageVenueEMail' name="venue_email" value="{{"abhatia2107@gmail.com"}}">
+					<input type="hidden" id='SendMessageInstituteID' name="institute" value="{{"TEST"}}">
 					<div class="form-group inner-addon left-addon" >
 						 <i class="glyphicon glyphicon-user"></i>
 						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
@@ -124,7 +124,7 @@
 		var loc_select = new Array();
 		var filter_select = new Array();
 		var trial_select = new Array();
-
+		navActive('NavItem'+categoryId);
 		if(result.length==0)	
 		{
 			$('#loadMore').css('display','none');
@@ -145,6 +145,7 @@
 			range = end;
 			if(range>index) range=index;
 			return index;
+
 		}
 		displayResults(result,0);
 		LoadResult(0,20);
@@ -207,6 +208,8 @@
 				var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
 				var daysResult = new Array();
 				var trialID = results[index]['batch_trial'];
+				var institute_rating = results[index]['institute_rating'];
+				var venue_email = results[index]['venue_email'];
 				for(day = 0;day<7;day++)
 				{
 					var dayID = "batch_class_on_"+weekDays[day];
@@ -234,10 +237,10 @@
 										"<center><img src='"+institute_photo_path+"' class='institute-profile-pic' ></ 	>"+
 									"</div>"+
 									"<div class='col-md-6 col-xs-12 col-sm-8 column'>"+
-										"<div id='inst_contact'  onClick='show_contact("+index+")' class='col-md-5 col-xs-12 col-sm-4 column'><span style='display:none' id='contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> "+contact+"</span>"+
+										"<div id='inst_contact'  onClick='show_contact("+index+")' class='col-md-5 col-xs-12 col-sm-4 column'><span style='display:none' value='"+batchID+"' id='contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> "+contact+"</span>"+
 											"<span id='show_contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> View Phone Number</span>"+
 										"</div>"+
-										"<div href='#sendMessage' data-toggle='modal' id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
+										"<div data-target='#sendMessage' onClick='sendMessage("+batchID+","+institute_id+")' data-toggle='modal' id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
 										"<div id='inst_details' class='col-xs-12' >"+
 											"<div id='inst_type'><span id='hand-icon'>☛</span>Type: "+subcategory+", "+category+".</div>"+
 											"<div id='inst_price'><span id='hand-icon'>☛</span>Price:  ₹ "+price+"</div>"+
@@ -245,7 +248,8 @@
 										"</div>"+
 									"</div>"+
 									"<div class='col-md-3 col-xs-12 col-sm-4 column' id='rating-schedule'>"+
-									"<div id='rating' ><div class='inscore' ><span id='rating-value'>9.7</span></div><div class='rating_starts'><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span></div></div>"+
+									"<div class='inscore' style='margin-left:64px;'><div id='rating-value'>"+institute_rating+"</div></div><br>"+
+											"<span style='clear:both;margin-left:46px;position:relative' class='stars'>"+institute_rating+"</span>"+
 										"<div id='batch-schedule'><center>Batch Schedule</center><div id='day1' class='day'>M</div><div id='day2' class='day'>T</div><div id='day3' class='day'>W</div>"+
 										"<div id='day4' class='day'>T</div><div id='day5' class='day'>F</div><div id='day6' class='day'>S</div><div id='day7' class='day'>S</div></div>"+
 									"</div>"+
@@ -259,8 +263,9 @@
 						{
 							$('.batch'+index+' #day'+(day+1)).css('opacity','1');
 						}
-					}				
+					}		
 		    }
+		    $('span.stars').stars();	
 		}
 		$(document).ready(function() {
 			var linksContainer = $('#filter_data'),baseUrl;
@@ -330,6 +335,9 @@
 					//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
 					chunk = 0;
 					LoadFilterResults(sub_select,loc_select,trial_select,0);
+					//reloadStars();
+
+
 				}
 				else
 				{
@@ -337,7 +345,7 @@
 					chunk = 0;
 					$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 					{
-						alert(response);
+						//alert(response);
 						if(response == "Empty")
 						{
 							$('#loadMore').css('display','none');

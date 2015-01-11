@@ -95,12 +95,9 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/features/show/{id}','FeaturesController@show');
 });
 
-
-
 //Route for FeedbacksController
 Route::get('/feedbacks/create','FeedbacksController@create');
 Route::post('/feedbacks/store','FeedbacksController@store');	
-
 
 Route::group(array('before' => "auth|admin"), function() {	
 	Route::get('/feedbacks','FeedbacksController@index');
@@ -174,18 +171,18 @@ Route::group(array('before' => "auth|admin"), function() {
 Route::post('/subscriptions','SubscriptionsController@store');
 Route::get('/subscriptions/unsubscribe/{email}/{id}', 'SubscriptionsController@disable');
 
-// Route::group(array('before' => "auth|institute-or-admin"), function() {
+Route::group(array('before' => "auth|institute-or-admin"), function() {
 Route::get('/venues/create','VenuesController@create');
 Route::post('/venues/store','VenuesController@store');
 Route::get('/venues','VenuesController@index');
-// });
+});
 
 //Route for VenuesController
-// Route::group(array('before' => "auth|institute-or-admin|venueOwn-or-admin"), function() {
+Route::group(array('before' => "auth|institute-or-admin|venueOwn-or-admin"), function() {
 Route::get('/venues/edit/{id}','VenuesController@edit');
 Route::post('/venues/update/{id}','VenuesController@update');
 Route::get('/venues/delete/{id}','VenuesController@destroy');
-// });
+});
 
 
 //Route for UsersController

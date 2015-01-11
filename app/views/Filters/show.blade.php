@@ -10,9 +10,10 @@
 			<div class="modal-body">
 				<form action="/batches/sendMessage" method="post" enctype="multipart/form-data" role="form">
 					<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
-					<input type="hidden" id='SendMessageBatchID' name="batch" value="{{"TEST"}}">
-					<input type="hidden" id='SendMessageVenueEMail' name="venue_email" value="{{"abhatia2107@gmail.com"}}">
-					<input type="hidden" id='SendMessageInstituteID' name="institute" value="{{"TEST"}}">
+					<input type="hidden" name="batch">
+					<input type="hidden" name="email">
+					<input type="hidden" name="institute">
+
 					<div class="form-group inner-addon left-addon" >
 						 <i class="glyphicon glyphicon-user"></i>
 						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
@@ -203,6 +204,7 @@
 				var tagline =results[index]['batch_tagline'];
 				var subcategoryID = results[index]['batch_subcategory_id'];
 				var localityID = results[index]['venue_locality_id'];
+				var email = results[index]['venue_email'];
 				var contact = results[index]['venue_contact_no'];
 				var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
 				var daysResult = new Array();
@@ -239,7 +241,7 @@
 										"<div id='inst_contact'  onClick='show_contact("+index+")' class='col-md-5 col-xs-12 col-sm-4 column'><span style='display:none' value='"+batchID+"' id='contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> "+contact+"</span>"+
 											"<span id='show_contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> View Phone Number</span>"+
 										"</div>"+
-										"<div data-target='#sendMessage' onClick='sendMessage("+batchID+","+institute_id+")' data-toggle='modal' id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
+										"<div href='#sendMessage' data-toggle='modal' data-email="+email+" data-institute="+institute+" data-batch="+batch+" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
 										"<div id='inst_details' class='col-xs-12' >"+
 											"<div id='inst_type'><span id='hand-icon'>☛</span>Type: "+subcategory+", "+category+".</div>"+
 											"<div id='inst_price'><span id='hand-icon'>☛</span>Price:  ₹ "+price+"</div>"+
@@ -266,6 +268,18 @@
 		    }
 		  	$('span.stars').stars();
 		}
+				//triggered when modal is about to be shown
+		$('#sendMessage').on('show.bs.modal', function(e) {
+
+		    //get data-id attribute of the clicked element
+		    var batch = $(e.relatedTarget).data('batch');
+		    var email = $(e.relatedTarget).data('email');
+		    var institute = $(e.relatedTarget).data('institute');
+		    //populate the textbox
+		    $(e.currentTarget).find('input[name="batch"]').val(batch);
+		    $(e.currentTarget).find('input[name="email"]').val(email);
+		    $(e.currentTarget).find('input[name="institute"]').val(institute);
+		});
 		$(document).ready(function() {
 			var linksContainer = $('#filter_data'),baseUrl;
 			window.onscroll = function(ev)

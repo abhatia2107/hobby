@@ -34,7 +34,8 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		return View::make('Batches.create',compact('all_subcategories','all_venues','difficulty_level','age_group','gender_group','trial','weekdays'));
+		$localities=$this->locality->all();
+		return View::make('Batches.create',compact('all_subcategories','all_venues','difficulty_level','age_group','gender_group','trial','weekdays','localities'));
 	}
 
 	/**
@@ -335,7 +336,7 @@ class BatchesController extends \BaseController {
 		});
 
 		//To vendor.
-		$email=$credentials['venue_email'];
+		$email=$credentials['email'];
 		$name=$credentials['institute'];
 		$subject=Lang::get('message.message_subject',array("batch"=>$credentials['batch']));
 		Mail::later(120,'Emails.message.sendMessage', $credentials, function($message) use ($email,$name,$subject)

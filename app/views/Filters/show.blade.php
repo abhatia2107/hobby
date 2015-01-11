@@ -145,7 +145,6 @@
 			range = end;
 			if(range>index) range=index;
 			return index;
-
 		}
 		displayResults(result,0);
 		LoadResult(0,20);
@@ -191,9 +190,9 @@
 			    var institute = results[index]['institute'];
 			    var institute_id =  results[index]['batch_institute_id'];
 			    var institute_photo_path = '/assets/images/institute/institute.gif';
-			    /*var institute_photo_exists = results[index]['institute_photo'];
+			    var institute_photo_exists = results[index]['institute_photo'];
 			    if(institute_photo_exists==1)
-			    {	institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}*/
+			    {	institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}
 				var batch = results[index]['batch'];
 				var batchID= results[index]['id'];
 				var price = results[index]['batch_price'];
@@ -263,15 +262,15 @@
 						{
 							$('.batch'+index+' #day'+(day+1)).css('opacity','1');
 						}
-					}		
+					}	
 		    }
-		    $('span.stars').stars();	
+		  	$('span.stars').stars();
 		}
 		$(document).ready(function() {
 			var linksContainer = $('#filter_data'),baseUrl;
 			window.onscroll = function(ev)
 			{
-				  var height = $(document).height();  
+				var height = $(document).height();  
 	            if($(window).scrollTop() + $(window).height() > height-100) 
 				{
 					resultRange = result.length;
@@ -299,53 +298,36 @@
 							});
 						}
 						if(filterStatus)
-						{
-							//alert(sub_select+","+loc_select);
+						{							
 							LoadFilterResults(sub_select,loc_select,trial_select,resultRange);
-
 						}
 					}
 					else
 					{	
-						LoadResult(range,range+10);	}
-
+						LoadResult(range,range+10);	
+					}
 				}
 			}
-			$("#filter-sub input").click(function () {
-				//e.preventDefault();
-				//e.stopPropagation();
-				//	e.preventDefault();
-				//	alert('yes');
+			$("#filter-sub input").click(function () {		
 				filterStatus = true;
 				$('#loadMore').css('display','block');
 				$('#noResults').css('display','none');
-				result = [];
-				//result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
-				//alert('yes');
-			//	alert(result.length);
 				$(linksContainer).empty();
-				filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();
-				//alert(filter_select.length);
-				//alert(sub_select+','+loc_select);
+				result = [];				
+				filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();			
 				if(filter_select.length>0)
 				{
 					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
-					trial_select =  $('.trialCheckbox:checked').map(function(){return this.value;}).get(); 
-					//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
+					trial_select =  $('.trialCheckbox:checked').map(function(){return this.value;}).get(); 					
 					chunk = 0;
-					LoadFilterResults(sub_select,loc_select,trial_select,0);
-					//reloadStars();
-
-
+					LoadFilterResults(sub_select,loc_select,trial_select,0);					
 				}
 				else
 				{
-
 					chunk = 0;
 					$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
-					{
-						//alert(response);
+					{						
 						if(response == "Empty")
 						{
 							$('#loadMore').css('display','none');
@@ -366,5 +348,4 @@
 			});
 		});
 	</script>
-
 @stop

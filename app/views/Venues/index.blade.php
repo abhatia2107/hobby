@@ -32,30 +32,12 @@
 					<div class="venues_list">
 						<div class="venues_list_tittle">{{$data->venue}}</div>
 						<br>
-						<address><h4><b>Address: </b></h4>{{$data->venue_address}}
-									{{$data->locality}}, {{$data->location}}
-						</address>
-						<address><b>Contact No.: </b>{{$data->venue_contact_no}}
-						</address>
-						<div class="venue">
-							<center>
-							<button type="submit" class="btn btn-primary">Edit</button>
-							<button type="submit" class="btn btn-primary">Delete</button>
-							</center>
-						</div>
-					</div>
-				</div>  		
-		   	@endforeach      
-		   	   	@foreach($venues as $index => $data)
-				<div class="col-md-4 col-xs-12 col-sm-4">
-					<div class="venues_list">
-						<div class="venues_list_tittle">{{$data->venue}}</div>
+						<div class="venue_info"><span class='tag'>Address: </span>{{$data->venue_address}}, {{$data->locality}}, {{$data->location}}, {{$data->venue_pincode}}</div>
+						<div class="venue_info"><span class='tag'>Contact No.: </span>{{$data->venue_contact_no}}</div>
+						<div class="venue_info"><span class='tag'>E-Mail: </span>{{$data->venue_email}}</div>
+						<div class="venue_info"><span class='tag'>Land Mark: </span>{{$data->venue_landmark}}</div>
+					
 						<br>
-						<address><h4><b>Address: </b></h4>{{$data->venue_address}}
-									{{$data->locality}}, {{$data->location}}
-						</address>
-						<address><b>Contact No.: </b>{{$data->venue_contact_no}}
-						</address>
 						<div class="venue">
 							<center>
 							<button type="submit" class="btn btn-primary">Edit</button>
@@ -65,16 +47,17 @@
 					</div>
 				</div>  		
 		   	@endforeach
-		      	@foreach($venues as $index => $data)
+		   		@foreach($venues as $index => $data)
 				<div class="col-md-4 col-xs-12 col-sm-4">
 					<div class="venues_list">
 						<div class="venues_list_tittle">{{$data->venue}}</div>
 						<br>
-						<address><h4><b>Address: </b></h4>{{$data->venue_address}}
-									{{$data->locality}}, {{$data->location}}
-						</address>
-						<address><b>Contact No.: </b>{{$data->venue_contact_no}}
-						</address>
+						<div class="venue_info"><span class='tag'>Address: </span>{{$data->venue_address}}, {{$data->locality}}, {{$data->location}}, {{$data->venue_pincode}}</div>
+						<div class="venue_info"><span class='tag'>Contact No.: </span>{{$data->venue_contact_no}}</div>
+						<div class="venue_info"><span class='tag'>E-Mail: </span>{{$data->venue_email}}</div>
+						<div class="venue_info"><span class='tag'>Land Mark: </span>{{$data->venue_landmark}}</div>
+					
+						<br>
 						<div class="venue">
 							<center>
 							<button type="submit" class="btn btn-primary">Edit</button>
@@ -83,7 +66,27 @@
 						</div>
 					</div>
 				</div>  		
-		   	@endforeach  
+		   	@endforeach
+			@foreach($venues as $index => $data)
+				<div class="col-md-4 col-xs-12 col-sm-4">
+					<div class="venues_list">
+						<div class="venues_list_tittle">{{$data->venue}}</div>
+						<br>
+						<div class="venue_info"><span class='tag'>Address: </span>{{$data->venue_address}}, {{$data->locality}}, {{$data->location}}, {{$data->venue_pincode}}</div>
+						<div class="venue_info"><span class='tag'>Contact No.: </span>{{$data->venue_contact_no}}</div>
+						<div class="venue_info"><span class='tag'>E-Mail: </span>{{$data->venue_email}}</div>
+						<div class="venue_info"><span class='tag'>Land Mark: </span>{{$data->venue_landmark}}</div>
+					
+						<br>
+						<div class="venue">
+							<center>
+							<button type="submit" class="btn btn-primary">Edit</button>
+							<button type="submit" class="btn btn-primary">Delete</button>
+							</center>
+						</div>
+					</div>
+				</div>  		
+		   	@endforeach
 		</div>
 	</div>
 </div>

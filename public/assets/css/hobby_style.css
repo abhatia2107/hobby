@@ -6,6 +6,10 @@ body {
   font-family: "Times New Roman", Times, serif;
   margin: 0 0;
 }
+body li
+{
+  list-style-type: none;
+}
 .header_img
 {
     height:15px;
@@ -604,11 +608,6 @@ span.stars span {
   {
     padding-top: 25px;
   }
-  li
-  {
-    list-style-type: none;
-    line-height: 2.5em
-  }
   .vendor_institute_batches
   {
     margin-top: 30px;
@@ -621,6 +620,7 @@ span.stars span {
   .vendor_institute_batches .day
   {
     margin-top: 8px;
+    height: 20px;
   }
   .vendor_batches_title
   {
@@ -631,10 +631,6 @@ span.stars span {
     border-bottom-color: skyblue;
     border-bottom:2px dashed;
   }
-  .weekday
-  {
-    margin-top: -6px;
-  }
   .vendor_batchInfo
   {
     
@@ -642,19 +638,33 @@ span.stars span {
     .edit_delete_buttons
     {
       clear: both;
-      margin-top: 0px;
+      margin-top: 10px;
       float: left;
-      margin-left: 35px;
+      margin-left: 12px;
+      
+    }
+      .edit_delete_buttons button
+    {
+     height: 25px;
+    border-radius: 2px;
+    padding-top: 2px;
+    width: 70px;
+    margin-left: 5px;
+
+      
     }
 
     .venues_list
     {
-      height: 250px;
+      height: 270px;
       background-color: white;
       -webkit-box-shadow: 0 0 2px #333;
         box-shadow: 0 0 2px #333;
       margin: 10px 10px;
       padding: 7px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-bottom: 20px;
 
     }
      .venues_list_tittle
@@ -669,6 +679,13 @@ span.stars span {
   {
     padding: 0 20px 50px 20px;
   }
+  .venue
+  {
+      bottom:20px;
+  position: absolute;
+  width: 100%;
+  left: -2px;
+  }
   .venue button
   {
     height: 25px;
@@ -676,4 +693,16 @@ span.stars span {
     padding-top: 2px;
     width: 100px;
 
+  }
+
+  .venue_info
+  {
+    margin-top: 7px;
+    font-size: 14px;
+  }
+  .tag
+  {
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 5px;
   }

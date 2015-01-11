@@ -16,7 +16,7 @@
                         <ul class="nav navbar-nav">
                         @if(isset($categories))
                             @foreach($categories as $data)
-                                <li ><a href="/filter/categories/{{$data->id}}/locations/@if(isset($location_id)){{$location_id}}@endif">{{$data->category}}</a></li>
+                                <li id='NavItem{{$data->id}}' ><a href="/filter/categories/{{$data->id}}/locations/@if(isset($location_id)){{$location_id}}@endif">{{$data->category}}</a></li>
                             @endforeach
                         @endif
                         </ul>

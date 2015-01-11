@@ -13,8 +13,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">
-                            <label for="user_first_name" class="col-sm-3 control-label ">First Name&nbsp;
-                                <span class="required">*</span>
+                            <label for="user_first_name" class="col-sm-3 control-label ">First Name<span class="required">*</span>
                             </label>
                             <div class="col-sm-8">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -24,9 +23,7 @@
                     </div><br>
                     <div class="row">
                         <div class="form-group">
-                            <label for="user_last_name"  class="col-sm-3 control-label ">Last Name&nbsp;
-
-                            </label>
+                            <label for="user_last_name"  class="col-sm-3 control-label ">Last Name</label>
                             <div class="col-sm-8">
                                 <input type="text"  class="form-control " name="user_last_name"  id="user_last_name" value="@if(isset($userDetails)){{$userDetails->user_last_name}}@else{{Input::old('user_last_name')}}@endif">
                             </div>
@@ -34,8 +31,7 @@
                     </div><br>
                     <div class="row">
                         <div class="form-group">
-                            <label for="email" class="col-sm-3 control-label ">Email&nbsp;
-                                <span class="required">*</span>
+                            <label for="email" class="col-sm-3 control-label ">Email<span class="required">*</span>
                             </label>
                             <div class="col-sm-8">
                                 <input type="email"  placeholder="mymail@example.com" class="form-control " name="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
@@ -52,8 +48,7 @@
                     </div><br>
                     <div class="row">
                         <div class="form-group">
-                            <label for="password" class="col-sm-3 control-label ">Password&nbsp;
-                                <span class="required">*</span>
+                            <label for="password" class="col-sm-3 control-label ">Password<span class="required">*</span>
                             </label>
                             <div class="col-sm-8">
                                 <input type="password" class="form-control " name="password"  id="password">
@@ -62,8 +57,7 @@
                     </div><br>
                     <div class="row">
                         <div class="form-group">
-                            <label for="password_confirmation" class="col-sm-3 control-label ">Confirm Password&nbsp;
-                                <span class="required">*</span>
+                            <label for="password_confirmation" class="col-sm-3 control-label ">Confirm Password<span class="required">*</span>
                             </label>
                             <div class="col-sm-8">
                                 <input type="password"   class="form-control " name="password_confirmation"  id="password_confirmation">
@@ -79,7 +73,7 @@
                         </label>
                     </div>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>

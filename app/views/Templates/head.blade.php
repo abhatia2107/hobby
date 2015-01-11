@@ -33,8 +33,8 @@
         .footer-wrapper
         {
             position:absolute;
-             width:100%;
-              background-color:black;
+            width:100%;
+            background-color:black;
         }
         .content-div
         {

@@ -205,49 +205,60 @@ Route::filter('mainAdmin',function()
 
 Route::filter('batchOwn-or-admin', function () 
 {
-    $value = call_user_func('batchOwn');
    	$admin=call_user_func('admin');
+   	if(!$admin)
+   		return ;
+    $value = call_user_func('batchOwn');
     if (($value)&&($admin)) 
     	return $value;
 });
 
 Route::filter('guest-or-admin', function () 
 {
-    $value = call_user_func('guest');    
    	$admin=call_user_func('admin');
+   	if(!$admin)
+   		return ;
+    $value = call_user_func('guest');    
     if (($value)&&($admin)) 
     	return $value;
 });
 
 Route::filter('institute-or-admin', function () 
 {
-    $value = call_user_func('institute');    
    	$admin=call_user_func('admin');
+   	if(!$admin)
+   		return ;
+    $value = call_user_func('institute');    
     if (($value)&&($admin)) 
     	return $value;
 });
 
 Route::filter('instituteOwn-or-admin', function () 
 {
-    $value = call_user_func('instituteOwn');    
-    // dd($value);
    	$admin=call_user_func('admin');
+   	if(!$admin)
+   		return ;
+    $value = call_user_func('instituteOwn');    
     if (($value)&&($admin)) 
     	return $value;
 });
 
 Route::filter('instituteNotOwn-or-admin', function () 
 {
-    $value = call_user_func('instituteNotOwn');
    	$admin=call_user_func('admin');
+   	if(!$admin)
+   		return ;
+    $value = call_user_func('instituteNotOwn');
     if (($value)&&($admin)) 
     	return $value;
 });
 
 Route::filter('venueOwn-or-admin', function () 
 {
-    $value = call_user_func('venueOwn');    
    	$admin=call_user_func('admin');
+   	if(!$admin)
+   		return ;
+	$value = call_user_func('venueOwn');    
     if (($value)&&($admin)) 
     	return $value;
 });

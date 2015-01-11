@@ -42,6 +42,7 @@ class VenuesController extends \BaseController {
 		$credentials['venue_institute_id']=$venue_institute_id;
 		$credentials['venue_user_id']=$venue_user_id;
 		$validator = Validator::make($credentials, Venue::$rules);
+		unset($credentials['csrf_token']);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator)->with('failure',Lang::get('venue.venue_create_failed'));

@@ -34,7 +34,8 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		return View::make('Batches.create',compact('all_subcategories','all_venues','difficulty_level','age_group','gender_group','trial','weekdays'));
+		$localities=$this->locality->all();
+		return View::make('Batches.create',compact('all_subcategories','all_venues','difficulty_level','age_group','gender_group','trial','weekdays','localities'));
 	}
 
 	/**

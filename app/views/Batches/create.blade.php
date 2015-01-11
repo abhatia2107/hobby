@@ -6,19 +6,15 @@
 	
 	.ul-without-bullets
 	{
-		
-	list-style-type: none;
-	
+    	list-style-type: none;	
 	}
 	#gengroup
 	{
-	list-style-type: none;
+	   list-style-type: none;
 	}
 	#agegroup
 	{
-
-    list-style-type: none;
-
+        list-style-type: none;
 	}
 	.row_padding
 	{
@@ -28,83 +24,82 @@
     {
         position: absolute;
     }
-        .btn-file {
-            position: relative;
-            overflow: hidden;
-            font-size:20px;background-color:#3A8AF1;color:white;
-        }
-        .btn-file input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            min-width: 100%;
-            min-height: 100%;
-            font-size: 100px;
-            text-align: right;
-            filter: alpha(opacity=0);
-            opacity: 0;
-            outline: none;
-            background: blue;
-            cursor: inherit;
-            display: block;
-        }
-        .label1
-        {
-            font-size: 15px;
-            font-weight: 100;
-			text-align: left !important;
-        }
-        .btn_save_div
-        {
-            
-            position: relative;
-left: 30%;
-        }
-        .input1
-         {
-            font-size: 15px;
-            /*height:32px;*/
-         }
-@media(min-width:992px){
-         #classInfo1
-         {
-            margin-left: auto;
-            margin-right: auto;
-            width: 900px;
-         }}
-         .create_class
-         {
-            font-size: 20px;
-                font-weight: 600;
-         }
-         .important_required
-         {
-            color:red;
-         }
-         .img_requirement
-         {
-            font-size:10px;
-         }
-         .class_desc
-         {
-            background: url('/assets/images/batch/create/classdesc.PNG');
-            height:41px;
-         }
-         .targetaud
-         {
-            background: url('/assets/images/batch/create/targetaud.PNG');
-            height:41px;
-         }
-         .schedule
-         {
-            background: url('/assets/images/batch/create/schedule.PNG');
-            height:41px 
-         }
-			.radio_data
-			{
-				position:relative;
-				top:-7px;
-			}
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+        font-size:20px;background-color:#3A8AF1;color:white;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: blue;
+        cursor: inherit;
+        display: block;
+    }
+    .label1
+    {
+        font-size: 15px;
+        font-weight: 100;
+		text-align: left !important;
+    }
+    .btn_save_div
+    {
+        position: relative;
+        left: 30%;
+    }
+    .input1
+    {
+        font-size: 15px;
+        /*height:32px;*/
+    }
+    @media(min-width:992px){
+    #classInfo1
+    {
+        margin-left: auto;
+        margin-right: auto;
+        width: 900px;
+    }}
+    .create_class
+    {
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .important_required
+    {
+        color:red;
+    }
+    .img_requirement
+    {
+        font-size:10px;
+    }
+    .class_desc
+    {
+        background: url('/assets/images/batch/create/classdesc.PNG');
+        height:41px;
+    }
+    .targetaud
+    {
+        background: url('/assets/images/batch/create/targetaud.PNG');
+        height:41px;
+    }
+    .schedule
+    {
+        background: url('/assets/images/batch/create/schedule.PNG');
+        height:41px 
+    }
+	.radio_data
+	{
+		position:relative;
+		top:-7px;
+	}
     </style>
 @stop
 
@@ -193,7 +188,7 @@ left: 30%;
             <div class="form-group">
                 <label for="batch_accomplishment" class="col-sm-3 control-label label1">What will participants achieve through this class?<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <textarea name="batch_accomplishment" id="batch_accomplishment" =21 class="jqte-test" >@if(isset($batchDetails)){{$batchDetails->batch_accomplishment}}@else{{Input::old('batch_accomplishment')}}@endif</textarea>
+                    <textarea name="batch_accomplishment" id="batch_accomplishment" class="jqte-test" >@if(isset($batchDetails)){{$batchDetails->batch_accomplishment}}@else{{Input::old('batch_accomplishment')}}@endif</textarea>
                 </div>
             </div>
         </div>
@@ -315,8 +310,9 @@ left: 30%;
         </div>
         <div class="row row_padding">
             <div class="form-group">
-                <label  class="col-sm-3 control-label label1">Batch have Classes on
-                    <span class="important_required">*</span></label>
+                <label  class="col-sm-3 control-label label1">
+                    Batch have Classes on<span class="important_required">*</span>
+                </label>
 
                 <div class="col-sm-6">
 				<ul class="ul-without-bullets">
@@ -373,144 +369,9 @@ left: 30%;
     </form>
 </div>
 </div>
-<!-- <div class="modal fade" id="myModal" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-            </div>
-            <form name="weekform" id="weekform" role="form">
-                <div class="modal-body">
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="weekrepeat" class="col-sm-3 control-label ">Repeats every<span class="important_required">*</span></label>
-                            <div class="col-sm-8">
-                                <select  class="form-control " name="weekrepeat"  id="weekrepeat"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="endsafter" class="col-sm-3 control-label ">Ends After<span class="important_required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="date"  class="form-control " name="endsafter"  id="endsafter">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label  class="col-sm-3 control-label ">Batches Start On<span class="important_required">*</span></label>
-                            <div class="col-sm-8">
-                                Sun<input  type="checkbox" value="1"  id="sun">
-                                Mon<input  type="checkbox" value="2"  id="mon">
-                                Tue<input  type="checkbox" value="3"  id="tue">
-                                Wed<input  type="checkbox" value="4"  id="wed">
-                                Thu<input  type="checkbox" value="5"  id="thu">
-                                Fri<input  type="checkbox" value="6"  id="fri">
-                                Sat<input  type="checkbox" value="7"  id="sat">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->
-<div class="modal fade" id="myModal2" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form name="venueform" id="venueform" role="form">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel1">Add a Venue</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="venuename" class="col-sm-3 control-label ">Venue Name
-                                <span class="important_required">*</span>
-                            </label>
-                            <div class="col-sm-8">
-                                <input type="text"  class="form-control " name="venuename"  id="venuename">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="city1" class="col-sm-3 control-label ">City<span class="important_required">*</span></label>
-                            <div class="col-sm-8">
-                                <select  class="form-control " name="city1"  id="city1"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="locality" class="col-sm-3 control-label ">Locality<span class="important_required">*</span></label>
-                            <div class="col-sm-8">
-                                <select  class="form-control " name="locality"  id="locality"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="address" class="col-sm-3 control-label ">Address<span class="important_required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="text"  class="form-control " name="address"  id="address">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="pincode" class="col-sm-3 control-label ">pincode<span class="important_required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="text"  class="form-control " name="pincode"  id="pincode">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="mobile" class="col-sm-3 control-label ">mobile<span class="important_required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="tel"  class="form-control " name="mobile"  id="mobile">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="landline" class="col-sm-3 control-label ">Email<span class="important_required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="text"  class="form-control " name="landline"  id="landline">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row_padding">
-                        <div class="form-group">
-                            <label for="comments" class="col-sm-3 control-label ">Landmark</label>
-                            <div class="col-sm-8">
-                                <textarea   class="form-control " name="comments"  id="comments"></textarea>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="modal fade" id="myModal2" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    @include('Modals.venue')
 </div>
 @stop
 @section('pagejavascript')
@@ -548,17 +409,8 @@ left: 30%;
                             message: 'The title must be more than 6 and less than 30 characters long'
                         },
                         regexp: {
-                            regexp: /^[a-zA-Z0-9_]+$/,
-                            message: 'The username can only consist of alphabetical, number and underscore'
-                        }
-                    }
-                },
-                batch_tagline: {
-                    message: 'The tagline is not valid',
-                    validators: {
-                        regexp: {
-                            regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                            message: 'The  tagline can only consist of alphabets'
+                            regexp: /^[a-zA-Z0-9 _-]+$/,
+                            message: 'The username can only consist of alphabetical, number,dash and underscore'
                         }
                     }
                 },
@@ -585,99 +437,15 @@ left: 30%;
                             message: 'The description must be more than 6  characters long'
                         },
                         regexp: {
-                            regexp: /^[a-zA-Z0-9_]+$/,
-                            message: 'The description can only consist of alphabetical, number and underscore'
+                            regexp: /^[a-zA-Z0-9 _-]+$/,
+                            message: 'The description can only consist of alphabetical, numbers,dash and underscore'
                         }
                     }
                 },
             }
         });
-        $('#venueform').bootstrapValidator({
-            message: 'This value is not valid',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                venuename: {
-                    message: 'The name is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The venue is required and cannot be empty'
-                        },
-                        stringLength: {
-                            min: 3,
-                            max: 30,
-                            message: 'The venue name must be more than 3 and less than 30 characters long'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z]+$/,
-                            message: 'The venue can only consist of alphabets'
-                        }
-                    }
-                },
-                textarea1: {
-                    message: 'The text is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The description is required and cannot be empty'
-                        },
-                        stringLength: {
-                            min: 6,
-
-                            message: 'The description must be more than 6  characters long'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z0-9_]+$/,
-                            message: 'The description can only consist of alphabetical, number and underscore'
-                        }
-                    }
-                },
-                city: {
-                    message: 'The city is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The city name is required and cannot be empty'
-                        },
-                        stringLength: {
-                            min: 3,
-                            max: 30,
-                            message: 'The city must be more than 3 and less than 30 characters long'
-                        },
-                        regexp: {
-                            regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
-                            message: 'The city name can only consist of alphabets'
-                        }
-                    }
-                },
-                mobile: {
-                    message: 'The number is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The mobile number is required and cannot be empty'
-                        },
-
-                        regexp: {
-                            regexp: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
-                            message: 'The phone number consists of 10 digits'
-                        }
-                    }
-                },
-                email: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The email is required and cannot be empty'
-                        },
-                        emailAddress: {
-                            message: 'The input is not a valid email address'
-                        }
-                    }
-                },
-            }
-        });
-
     });
+
 </script>
 <script>
     $('.jqte-test').jqte();

@@ -13,7 +13,9 @@ class VenuesController extends \BaseController {
 		//$user_id=Auth::id();
 		$user_id=1;
 		$venues=$this->venue->getVenueForUser($user_id);
-		return View::make('Venues.index',compact('venues'));
+		$localities=$this->locality->all();
+
+		return View::make('Venues.index',compact('venues','localities'));
 	}
 
 	/**

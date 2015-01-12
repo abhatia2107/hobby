@@ -662,8 +662,7 @@ span.stars span {
         box-shadow: 0 0 2px #333;
       margin: 10px 10px;
       padding: 7px;
-      overflow-x: hidden;
-      overflow-y: auto;
+      overflow: hidden;
       padding-bottom: 20px;
 
     }
@@ -706,3 +705,9 @@ span.stars span {
     font-weight: 600;
     margin-right: 5px;
   }
+
+
+body  button::-moz-focus-inner {
+  border: 0;
+}
+element { outline: none; }

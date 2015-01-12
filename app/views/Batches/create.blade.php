@@ -3,7 +3,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery.richtextarea.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-te-1.4.0.css">
     <style>
-	
 	.ul-without-bullets
 	{
     	list-style-type: none;	

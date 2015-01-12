@@ -241,7 +241,7 @@
 										"<div id='inst_contact'  onClick='show_contact("+index+")' class='col-md-5 col-xs-12 col-sm-4 column'><span style='display:none' value='"+batchID+"' id='contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> "+contact+"</span>"+
 											"<span id='show_contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> View Phone Number</span>"+
 										"</div>"+
-										"<div href='#sendMessage' data-toggle='modal' data-email="+email+" data-institute="+institute+" data-batch="+batch+" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
+										"<div href='#sendMessage' data-toggle='modal' data-batch="+batch+" data-email="+email+" data-institute="+institute+" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
 										"<div id='inst_details' class='col-xs-12' >"+
 											"<div id='inst_type'><span id='hand-icon'>☛</span>Type: "+subcategory+", "+category+".</div>"+
 											"<div id='inst_price'><span id='hand-icon'>☛</span>Price:  ₹ "+price+"</div>"+
@@ -268,7 +268,7 @@
 		    }
 		  	$('span.stars').stars();
 		}
-				//triggered when modal is about to be shown
+		//triggered when modal is about to be shown
 		$('#sendMessage').on('show.bs.modal', function(e) {
 
 		    //get data-id attribute of the clicked element

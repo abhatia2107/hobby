@@ -4,6 +4,7 @@
 @stop
 
 @section('content')
+	@include('Templates.navbarVendor')
     @include('Modals.venue')
 @stop
 

@@ -26,12 +26,10 @@ class HomeController extends BaseController {
 
 	public function showAdminHome()
 	{
-		//dd($featuredBatches);
 		$homeAdminLang =Lang::get('homeAdmin');
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		//dd($homeLang);
 		return View::make('Miscellaneous.Admin.home',compact('homeAdminLang','tableName','count','adminPanelListing'));
 	}
 

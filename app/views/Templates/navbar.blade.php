@@ -24,9 +24,5 @@
                 </div>
             </nav>
         </div>
-        <!--Just In CaSe
-        <div class= "col-sm-2 col-md-2 ">
-            <button class="btn btn-lg navbar_submit_listing" >Submit Listing</button>
-        </div>-->
     </div>
 @show

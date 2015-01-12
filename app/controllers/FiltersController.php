@@ -31,7 +31,7 @@ class FiltersController extends \BaseController {
 		{
 			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
-			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
 
 	public function show($category_id,$location_id="0",$chunk="0")
@@ -63,7 +63,11 @@ class FiltersController extends \BaseController {
 				return $batchesForCategoryLocation="Empty";
 		}
 		else{
-			// dd($batchesForCategoryLocation);
+			if(empty($batchesArray))
+			{
+				$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+			}
+		// dd($batchesForCategoryLocation);
 			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 		}
 	}

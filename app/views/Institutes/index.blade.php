@@ -5,7 +5,6 @@
 	       <tr>
 	          <th>S.No.</th>
 	          <th>Name</th>
-	          <th>Location</th>
 	          <th>Action</th>
 	       </tr>
 	    </thead>
@@ -18,7 +17,6 @@
 	        <tr>
 	            <td>{{++$i}}</td>
 	            <td>{{$data->institute}}</td>
-	            <td>{{$data->location}}</td>
 				<td>
 					@if($view)
 					<a href="{{$tableName}}/show/{{$data->id}}">

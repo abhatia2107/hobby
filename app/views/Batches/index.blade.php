@@ -1,61 +1,46 @@
 @extends("Layouts.layout")
 @section("content")
-<div class="modal fade" id="sendMessage" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-	<div class="modal-dialog">
+<div class="modal fade" id="sendMessage" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				 <button type="button" id='close_model' class="close" data-dismiss="modal" aria-hidden="true">×</button>				
+				<button type="button" id='close_model' class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<center>Send Message To Institute</center>
 			</div>
 			<div class="modal-body">
-				<form role="form">
+				<form action="/batches/sendMessage" method="post" enctype="multipart/form-data" role="form">
+					<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+					<input type="hidden" name="batch">
+					<input type="hidden" name="email">
+					<input type="hidden" name="institute">
+
 					<div class="form-group inner-addon left-addon" >
 						 <i class="glyphicon glyphicon-user"></i>
-						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='InputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
+						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
 					</div>
 					<div class="form-group inner-addon left-addon">
 						<i class="glyphicon glyphicon-envelope"></i>
-						 <input type="email" class="form-control" name='InputEmail' id='MsgInputEmail'  placeholder='Enter Your E-Mail Address' required='required'/>
+						 <input type="email" class="form-control" name='msgInputEmail' id='MsgInputEmail'  placeholder='Enter Your E-Mail Address' required='required'/>
 					</div>
 					<div class="form-group inner-addon left-addon">
 						<i class="glyphicon glyphicon-phone"></i>
-						 <input type="phone" class="form-control" name='InputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
+						 <input type="phone" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
 					</div>
 					<div class="form-group">
 					  <label for="comment">Message:</label>
-					  <textarea class="form-control" rows="3" name='InputMessage' id="comment"></textarea>
+					  <textarea class="form-control" rows="3" name='msgInputMessage' id="comment"></textarea>
 					</div>
 					<div class="modal-footer">
-						 <center><button type="submit" class="btn btn-primary">Send Message</button></center>
+						 <button type="submit" class="btn btn-primary">Send Message</button>
 					</div>
-				</form>
+				 </form>
 			</div>
 		</div>
 	</div>				
 </div>
 	<div class="home_vendor_page">
-			<nav class="navbar navbar-inverse" id="vendorNavBar">
-	    <div class="container-fluid">
-		    <div class="navbar-header">
-			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#vendorNavbar">
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>                
-			    </button>
-		    </div>
-		    <div class="collapse navbar-collapse" id="vendorNavbar">
-				<ul class="nav navbar-nav">
-					<li ><a href="/institutes/1" >Institute Profile</a></li>
-					<li class="active"><a href="">My Classes</a></li>
-					<li><a href="/venues">My Venues</a></li>
-				</ul>
-		      	<ul class="nav navbar-nav navbar-right">
-		        	<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-		      	</ul>
-		    </div>
-		</div>
-	</nav>
+		@include('Templates.navbarVendor')
 		<?php $days = array("day1" => "M","day2" => "T","day3" => "W", "day4" => "T","day5" => "F","day6" => "S","day7" => "S"); ?>
 		<div class="container">
 			<div class="col-md-1 col-xs-12 col-sm-12">
@@ -64,6 +49,7 @@
 				<div class="vendor_batches_title">
 			   		<h1>My Batches</h1>
 			   	</div><br><br>
+			   	<a href="/batches/create">Add</a>
 			   	<ul class="list-unstyled container" id="vendor_batches_list" >
 		         @foreach($batchDetails as $index => $data)
 		         	<?php 
@@ -94,7 +80,7 @@
 											<span class="inst_name">{{$data->institute}}</span>
 										</div>
 										<div class="col-md-4 col-xs-12 col-sm-4 column">
-											<span id="tag-icon"><span class="glyphicon glyphicon glyphicon-tags"></span>{{$data->batch_trial}}</span>	
+											<span id="tag-icon"><span class="glyphicon glyphicon glyphicon-tags"></span>{{$trial[$data->batch_trial]}}</span>	
 										</div>
 									</div>
 								</div>
@@ -108,7 +94,7 @@
 										<div id="inst_contact"  onClick="show_contact({{$index}})" class="col-md-5 col-xs-12 col-sm-4 column"><div style="display:none;" id="contact{{$index}}"><span id="cell-icon" class="glyphicon glyphicon-phone-alt"></span>{{' '.$data->venue_contact_no}}</div>
 											<div id="show_contact{{$index}}"><span id="cell-icon" class="glyphicon glyphicon-phone-alt"></span> View Phone Number</div>
 										</div>
-										<div  href="#sendMessage" data-toggle="modal" id="inst_message" class="col-md-4 col-xs-12 col-sm-4 column"><div ><div id="msg-icon" style="margin-right:5px;"class="glyphicon glyphicon-envelope"></div>Send Message</div></div>
+										<div href='#sendMessage' data-toggle='modal' data-batch="{{$data->batch}}" data-email="{{$data->venue_email}}" data-institute="{{$data->institute}}" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>
 										<div id="inst_details" class="col-xs-12">
 											<div id="inst_type" ><span id="hand-icon">☛</span>Type: {{$data->subcategory}}, {{$data->category}}</div>
 											<div id="inst_price" ><span id="hand-icon">☛</span>Price:  ₹ {{$data->batch_price}}</div>
@@ -127,8 +113,8 @@
 										@endforeach
 										</div><br>
 										<div class="edit_delete_buttons ">
-											<button onClick="" type="submit" class="btn btn-primary">Edit</button>
-											<button onClick="" type="submit" class="btn btn-primary">Delete</button>
+											<button onClick="" type="submit" class="btn btn-primary"><a href="/batches/edit/{{$data->id}}">Edit</a></button
+											<button onClick="" type="submit" class="btn btn-primary"><a href="/batches/disable/{{$data->id}}">Delete</a></button>
 										</div>
 									</div>
 								</div>
@@ -176,7 +162,20 @@
 		{
 			$('#loadmorebutton').css('display','none');
 		}
-		
+	
+		//triggered when modal is about to be shown
+		$('#sendMessage').on('show.bs.modal', function(e) {
+
+		    //get data-id attribute of the clicked element
+		    var batch = $(e.relatedTarget).data('batch');
+		    var email = $(e.relatedTarget).data('email');
+		    var institute = $(e.relatedTarget).data('institute');
+		    //populate the textbox
+		    $(e.currentTarget).find('input[name="batch"]').val(batch);
+		    $(e.currentTarget).find('input[name="email"]').val(email);
+		    $(e.currentTarget).find('input[name="institute"]').val(institute);
+		});
+			
 	}
 	function moreBatches()
 	{

@@ -32,6 +32,7 @@ class Venue extends \Eloquent {
         return Venue::where('venue_institute_id',$institute_id)
 		        	->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
 		            ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+                    ->select('*','venues.id as id','venues.deleted_at as deleted_at','venues.created_at as created_at','venues.updated_at as updated_at')
 		            ->get();
     }
     
@@ -40,6 +41,7 @@ class Venue extends \Eloquent {
 	    return Venue::where('venue_user_id',$user_id)
 	        	->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
 	            ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+                ->select('*','venues.id as id','venues.deleted_at as deleted_at','venues.created_at as created_at','venues.updated_at as updated_at')
 	            ->get();
     }
 

@@ -1,7 +1,7 @@
 @section('venue')
     <div class="modal-dialog">
         <div class="modal-content">
-            <form name="venueform" action="@if(isset($venueDetails)){{"/venues/update/$venueDetails->venue_id"}}@else{{"/venues/store"}}@endif" method="post" enctype="multipart/form-data" id="venueform" role="form">
+            <form name="venueform" action="@if(isset($venueDetails)){{"/venues/update/$venueDetails->id"}}@else{{"/venues/store"}}@endif" method="post" enctype="multipart/form-data" id="venueform" role="form">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
@@ -54,15 +54,15 @@
                                 City<span class="important_required">*</span>
                             </label>
                             <div class="col-sm-8">
-                                <select name="venue_location_id"  class="form-control" id="venue_location_id" required="required">
-                                    @foreach ($locations as $data)
-                                        <option value={{$data->location_id}}
+                                <select name="venue_location_id"  class="form-control" id="venue_location_id">
+                                    @foreach ($locations as $locationData)
+                                        <option value={{$locationData->id}}
                                             @if(isset($venueDetails))
-                                            {{($venueDetails->venue_location_id==$data->location_id)?
+                                            {{($venueDetails->venue_location_id==$locationData->id)?
                                             'selected="selected"':''}}
                                             @else{{"Input::old('venue_location_id')"}}
                                             @endif>
-                                            {{$data->location}}
+                                            {{$locationData->location}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -75,15 +75,15 @@
                                 Locality<span class="important_required">*</span>
                             </label>
                             <div class="col-sm-8">
-                                <select name="venue_locality_id" class="form-control" id="venue_locality_id" required="required">
-                                    @foreach ($localities as $data)
-                                        <option value={{$data->locality_id}}
+                                <select name="venue_locality_id" class="form-control" id="venue_locality_id">
+                                    @foreach ($localities as $localityData)
+                                        <option value={{$localityData->id}}
                                             @if(isset($venueDetails))
-                                            {{($venueDetails->venue_locality_id==$data->locality_id)?
+                                            {{($venueDetails->venue_locality_id==$localityData->id)?
                                             'selected="selected"':''}}
                                             @else{{"Input::old('venue_locality_id')"}}
                                             @endif>
-                                            {{$data->locality}}
+                                            {{$localityData->locality}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -141,10 +141,6 @@
                                     max: 30,
                                     message: 'The venue name must be more than 3 and less than 30 characters long'
                                 },
-                                regexp: {
-                                    regexp: /^[a-zA-Z]+$/,
-                                    message: 'The venue can only consist of alphabets'
-                                }
                             }
                         },
                         venue_address: {
@@ -185,7 +181,7 @@
                                 },
 
                                 regexp: {
-                                    regexp: /^[0-9]$/,
+                                    regexp: /^[0-9]{6}$/,
                                     message: 'The pincode consists of 6 digits'
                                 }
                             }
@@ -194,8 +190,6 @@
                 });
 
             </script>
-
-
         </div>
     </div>
 @show

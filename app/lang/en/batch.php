@@ -2,7 +2,7 @@
 
 return array(
 		
-		"batch_created"=>"Your batch have been added successfully",
+		"batch_created"=>"Your batch have been added successfully, it is currently in verification process.",
 		
 		"batch_create_failed" => "Sorry, We are unable to add the batch",
 		

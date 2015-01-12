@@ -1,169 +1,171 @@
-<style type="text/css">
-  #page
-  {
-    width: 100%;
-    margin-top: -20px;
-
-  }
-</style>
-<style type="text/css">
-
-  #sample-institute-name
-  {
-    font-size: 40px;
-    font-weight: bold;
-  }
-  #sample-batch-type
-  {
-    font-size: 22px;
-    font-weight: normal;
-    margin-bottom: 5px;
-  }
-  #sample-institute-address
-  {
-    font-size: 22px;
-    font-weight: normal;
-    margin-bottom: 5px;
-  }
-  #sample-institute-contact
-  {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  #sample-institute-contact .glyphicon
-  {
-    font-size: 19px;
-    font-weight: normal;  
-  }
-  #sample-batch-name
-  {
-    font-size: 30px;
-    font-weight: normal; 
-
-    -webkit-box-shadow: 0px 3px 0px -2px #0099FF;
-    box-shadow: 0px 3px 0px -2px #0099FF;
-    text-align: center;
-    font-weight: bold;
-  }
-  #secondary
-  {
-    box-shadow: 1px 1px 10px rgba(0,0,0,0.5);-moz-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-    font-size: 20px;
-    margin-left: 50px;
-    padding:20px 30px 20px 30px;
-  }
-  #sample-batch-details
-  {
-    font-size: 20px;
-    padding:20px 60px 20px 60px;
-
-    margin-bottom: 50px;
-        padding-bottom: 50px;
-
-  }
-
-  #comments
-  {
-    clear: both;
-    margin-top: 50px;
-    font-size: 20px;
-    padding:20px 60px 20px 60px;
-    width: 100%;
-    margin-bottom: 50px;
-    padding-bottom: 40px;
-
-  }
-  #sample-details 
-  {
-      font-size: 18px;
-  }
-  #blog-container
-  {
-    background:#f0f3f6;width:100%;
-  }
-  .sample-box
-  {
-    background: white;
-    margin-top: 30px;
-    box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
-    border-radius: 7px;
-  }
-  .sample-box-small
-  {
-    background: white;
-    margin-top: 30px;
-    padding:20px 30px 40px 30px;
-    box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
-    border-radius: 7px;
-  }
-
-  #pin-icon
-  {
-    font-size: 20px;
-    color: #0099FF;
-    margin-left: 5px;
-  }
-  .batch-details
-  {
-    margin-top: 10px;
-  }
-  #sample-batch-description
-  {
-    margin-top: 30px;
-  }
-  #sample-batch-accomplishment
-  {
-    margin-top: 30px;
-  }
-  #sample-social-profiles
-  {
-    margin-top: 40px;
-  }
-  #sample-demo-model
-  {
-    margin-top: 40px;
-  }
- .rating {
-      overflow: hidden;
-      display: inline-block;
-  }
-  .rating-input {
-      float: right;
-      width: 16px;
-      height: 16px;
-      padding: 0;
-      margin: 0 0 0 -16px;
-      opacity: 0;
-  }
- .rating-star {
-      position: relative;
-      float: right;
-      display: block;
-      width: 16px;
-      height: 16px;
-      background: url(/assets/images/sample/star.png) 0 -16px;
-  }
-
-  .rating-star:hover,
-  .rating-star:hover ~ .rating-star,
-  .rating-input:checked ~ .rating-star {
-      background-position: 0 0;
-  }
-  #sample-social-profiles img
-  {
-      width: 50px;
-      height: 53px;
-      margin-right: 5px;
-  }
-
-
-
-</style> 
 @extends('Layouts.layout')
+@section('pagestylesheet')
+  <style type="text/css">
+    #page
+    {
+      width: 100%;
+      margin-top: -20px;
+
+    }
+  </style>
+  <style type="text/css">
+
+    #sample-institute-name
+    {
+      font-size: 40px;
+      font-weight: bold;
+    }
+    #sample-batch-type
+    {
+      font-size: 22px;
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+    #sample-institute-address
+    {
+      font-size: 22px;
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+    #sample-institute-contact
+    {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    #sample-institute-contact .glyphicon
+    {
+      font-size: 19px;
+      font-weight: normal;  
+    }
+    #sample-batch-name
+    {
+      font-size: 30px;
+      font-weight: normal; 
+
+      -webkit-box-shadow: 0px 3px 0px -2px #0099FF;
+      box-shadow: 0px 3px 0px -2px #0099FF;
+      text-align: center;
+      font-weight: bold;
+    }
+    #secondary
+    {
+      box-shadow: 1px 1px 10px rgba(0,0,0,0.5);-moz-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+      -webkit-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+      font-size: 20px;
+      margin-left: 50px;
+      padding:20px 30px 20px 30px;
+    }
+    #sample-batch-details
+    {
+      font-size: 20px;
+      padding:20px 60px 20px 60px;
+
+      margin-bottom: 50px;
+          padding-bottom: 50px;
+
+    }
+
+    #comments
+    {
+      clear: both;
+      margin-top: 50px;
+      font-size: 20px;
+      padding:20px 60px 20px 60px;
+      width: 100%;
+      margin-bottom: 50px;
+      padding-bottom: 40px;
+
+    }
+    #sample-details 
+    {
+        font-size: 18px;
+    }
+    #blog-container
+    {
+      background:#f0f3f6;width:100%;
+    }
+    .sample-box
+    {
+      background: white;
+      margin-top: 30px;
+      box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
+      -webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
+      border-radius: 7px;
+    }
+    .sample-box-small
+    {
+      background: white;
+      margin-top: 30px;
+      padding:20px 30px 40px 30px;
+      box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
+      -webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
+      border-radius: 7px;
+    }
+
+    #pin-icon
+    {
+      font-size: 20px;
+      color: #0099FF;
+      margin-left: 5px;
+    }
+    .batch-details
+    {
+      margin-top: 10px;
+    }
+    #sample-batch-description
+    {
+      margin-top: 30px;
+    }
+    #sample-batch-accomplishment
+    {
+      margin-top: 30px;
+    }
+    #sample-social-profiles
+    {
+      margin-top: 40px;
+    }
+    #sample-demo-model
+    {
+      margin-top: 40px;
+    }
+   .rating {
+        overflow: hidden;
+        display: inline-block;
+    }
+    .rating-input {
+        float: right;
+        width: 16px;
+        height: 16px;
+        padding: 0;
+        margin: 0 0 0 -16px;
+        opacity: 0;
+    }
+   .rating-star {
+        position: relative;
+        float: right;
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: url(/assets/images/sample/star.png) 0 -16px;
+    }
+
+    .rating-star:hover,
+    .rating-star:hover ~ .rating-star,
+    .rating-input:checked ~ .rating-star {
+        background-position: 0 0;
+    }
+    #sample-social-profiles img
+    {
+        width: 50px;
+        height: 53px;
+        margin-right: 5px;
+    }
+
+
+
+  </style> 
+@stop
 @section('content')
 <?php
   foreach ($batchDetails as $data) {
@@ -350,6 +352,8 @@
       </div>
    </form>
 </div>
+@stop
+@section('pagejquery')
 <script type="text/javascript">
   $(document).ready(function () 
   {

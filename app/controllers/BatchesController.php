@@ -10,12 +10,12 @@ class BatchesController extends \BaseController {
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
 		$trial=$this->trial;
+		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$weekdays=$this->weekdays;
-		
-		//$user_id=Auth::id();
-		$user_id = 3;
+		$user_id=Auth::id();
 		$batchDetails=$this->batch->getBatchesForUser($user_id);
-		return View::make('Batches.index',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchDetails'));
+		$institute_id=$this->institute->getInstituteforUser($user_id);
+		return View::make('Batches.index',compact('age_group','batchDetails','difficulty_level','gender_group','institute_id','trial','weekdays'));
 	}
 
 	/**
@@ -27,15 +27,19 @@ class BatchesController extends \BaseController {
 	public function create()
 	{
 		$all_subcategories=$this->subcategory->all();
-		$all_venues=$this->venue->all();
+		$user_id=Auth::id();
+		$venuesForUser=$this->venue->getVenueForUser($user_id);
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
+		//Locations are being send for venue create form which will be called up in the modal of venue.
+		$localities=$this->locality->all();
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
+		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
+		$institute_id=$this->institute->getInstituteforUser($user_id);
 		$weekdays=$this->weekdays;
-		$localities=$this->locality->all();
-		return View::make('Batches.create',compact('all_subcategories','all_venues','difficulty_level','age_group','gender_group','trial','weekdays','localities'));
+		return View::make('Batches.create',compact('all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','trial','weekdays'));
 	}
 
 	/**
@@ -55,19 +59,23 @@ class BatchesController extends \BaseController {
 				$credentials['batch_class_on_'.$data]=1;
 	    	}
 		}
+		$user_id=Auth::id();
+		$batch_institute_id=Institute::getInstituteforUser($user_id);
+		$credentials['batch_institute_id']=$batch_institute_id;
+		$validator = Validator::make($credentials, Batch::$rules);
+		unset($credentials['csrf_token']);
+		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
+			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
+		unset($credentials["batch_class"]);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
 		/*
 		//	Date validation code for future. 
 		$dateToday=date_create(Carbon::now()->toDateString());
 		$startDate=date_create($credentials['batch_start_date']);
 		$endDate=date_create($credentials['batch_end_date']);
-		$user_id=Auth::id();
-		$batch_batch_id=$this->batch->getBatchforUser($user_id);
-		$credentials['batch_batch_id']=$batch_batch_id;
-		$validator = Validator::make($credentials, Batch::$rules);
-		if($validator->fails())
-		{
-			return Redirect::back()->withInput()->withErrors($validator);
-		}
 		if(($dateToday >= $startDate)||($dateToday >= $endDate))
 		{
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_currentDateError'));
@@ -77,25 +85,20 @@ class BatchesController extends \BaseController {
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_startEndDateError'));		
 		}
 		*/
-		unset($credentials['csrf_token']);
-		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
-			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
-		if (Input::hasFile('batch_photo'))
+		/*if (Input::hasFile('batch_photo'))
 		{
 
-		   	/**for long file name **/
+		   	// for long file name 
 		   	$extension = Input::file('batch_photo')->getClientOriginalExtension();
 		   	$name = Input::file('batch_photo')->getClientOriginalName();
 		   	$imageName = $this->getImageName($name,$extension);
-		   	$credentianls['batch_photo']=$imageName;
+		   	$credentials['batch_photo']=$imageName;
 
 		   	$fileName = $maxEventId.'.'.$extension;
 		   	$thumbnailFile=Input::file('batch_photo');
 		   	$thumbnailFile->move($destinationPathForThumbnail,$fileName);
-			
-		}
-		unset($credentials["batch_class"]);
-		unset($credentials["batch_photo"]);
+			$credentials["batch_photo"]=1;
+		}*/
 		$batch=Batch::create($credentials);
 		if($batch) 
 			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_created'));
@@ -140,14 +143,18 @@ class BatchesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
+		$user_id=Auth::id();
 		$age_group=$this->age_group;
 		$all_subcategories=$this->subcategory->all();
-		$all_venues=$this->venue->all();
 		$batchDetails=Batch::find($id);
+		$venuesForUser=$this->venue->getVenueForUser($user_id);
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
-		$recurring=$this->recurring;
+		//Locations are being send for venue create form which will be called up in the modal of venue.
+		$localities=$this->locality->all();
+		// $recurring=$this->recurring;
 		$trial=$this->trial;
+		$institute_id=$batchDetails->batch_institute_id;
 		$weekdays=$this->weekdays;
 		$batch_class=array();
 		foreach($this->weekdays as $data){
@@ -156,7 +163,7 @@ class BatchesController extends \BaseController {
 		}
 		$batchDetails['batch_class']=$batch_class;
 		// dd($batchDetails);
-		return View::make('Batches.create',compact('batchDetails','all_subcategories','all_venues','difficulty_level','age_group','gender_group','recurring','trial','weekdays'));
+		return View::make('Batches.create',compact('batchDetails','all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','trial','weekdays'));
 	}
 
 	/**
@@ -177,15 +184,17 @@ class BatchesController extends \BaseController {
 				$credentials['batch_class_on_'.$data]=1;
 	    	}
 		}
-		$credentials['batch_batch_id']=1;
-		$dateToday=date_create(Carbon::now()->toDateString());
-		$startDate=date_create($credentials['batch_start_date']);
-		$endDate=date_create($credentials['batch_end_date']);
+		$user_id=Auth::id();
+		$batch_institute_id=Institute::getInstituteforUser($user_id);
+		$credentials['batch_institute_id']=$batch_institute_id;
 		$validator = Validator::make($credentials, Batch::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
+		/*$dateToday=date_create(Carbon::now()->toDateString());
+		$startDate=date_create($credentials['batch_start_date']);
+		$endDate=date_create($credentials['batch_end_date']);
 		if(($dateToday >= $startDate)||($dateToday >= $endDate))
 		{
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_currentDateError'));
@@ -193,11 +202,12 @@ class BatchesController extends \BaseController {
 		if($startDate > $endDate)
 		{	
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_startEndDateError'));		
-		}
+		}*/
 		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
 		unset($credentials["batch_class"]);
-		unset($credentials["batch_photo"]);
+		unset($credentials['csrf_token']);
+		// unset($credentials["batch_photo"]);
 		$updated=$this->batch->updateBatch($credentials,$id);
 		if ($updated) 
 			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_updated'));
@@ -206,27 +216,6 @@ class BatchesController extends \BaseController {
 
 	}
 
-	public function validationBeforeSavingBatch($credentials)
-	{
-		$dateToday=date_create(Carbon::now()->toDateString());
-		$startDate=date_create($credentials['batch_start_date']);
-		$endDate=date_create($credentials['batch_end_date']);
-		$validator = Validator::make($credentials, Batch::$rules);
-		if($validator->fails())
-		{
-			return Redirect::back()->withInput()->withErrors($validator);
-		}
-		if(($dateToday >= $startDate)||($dateToday >= $endDate))
-		{
-			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_currentDateError'));
-		}
-		if($startDate > $endDate)
-		{	
-			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_startEndDateError'));		
-		}
-		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
-			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
-	}
 	
 	public function enable($id)
 	{
@@ -314,8 +303,6 @@ class BatchesController extends \BaseController {
 		$history['disabled'] = $this->batch->getBatchDisabled();
 		return $history;
 	}
-
-
 
 	public function sendMessage()
 	{

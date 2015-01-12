@@ -64,11 +64,13 @@ class InstitutesController extends \BaseController {
 	public function show($id)
 	{
 		$instituteDetails=Institute::withTrashed()->find($id);
+		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
+		$institute_id=$instituteDetails['id'];
 		if($instituteDetails['deleted_at'])
 		{
 			return Redirect::back()->with('failure',Lang::get('institute.institute_disabled_by_admin'));;
 		}
-		return View::make('Institutes.show',compact('instituteDetails'));
+		return View::make('Institutes.show',compact('instituteDetails','institute_id'));
 	}
 	/**
 	 * Show the form for editing the specified resource.
@@ -80,14 +82,13 @@ class InstitutesController extends \BaseController {
 	public function edit($id)
 	{
 		$instituteDetails=Institute::find($id);
-		$user_id=Auth::id();
-		if($instituteDetails['institute_user_id']!=$user_id)
-			return Redirect::to('/')->with('failure',Lang::get('institute.institute_access_failed'));
 		$location_id=$instituteDetails['institute_location_id'];
 		$locations=$this->location->all();
 		$institute_location=$locations->find($location_id);
 		$instituteDetails['institute_location']=$institute_location['location'];
-		return View::make('Institutes.create',compact('instituteDetails'));
+		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
+		$institute_id=$id;
+		return View::make('Institutes.create',compact('instituteDetails','institute_id'));
 	}
 
 	/**
@@ -103,8 +104,7 @@ class InstitutesController extends \BaseController {
 		$credentials=Input::all();
 		$credentials['institute_user_id']=$user_id;
 		$credentials['institute_url']=$credentials['institute'].$credentials['institute_user_id'];
-		/*dd($credentials['institute_website']);
-		*/$validator = Validator::make($credentials, Institute::$rules);
+		$validator = Validator::make($credentials, Institute::$rules);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);

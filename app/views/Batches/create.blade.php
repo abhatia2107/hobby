@@ -104,6 +104,7 @@
 
 @section('content')
 <div class="container-fluid">
+    @include('Templates.navbarVendor')
     <div id="classInfo1">
     <form role="form" class="form-horizontal" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" id="classInfo">
           
@@ -126,7 +127,7 @@
             <div class="form-group">
                 <label for="batch_tagline" class="col-sm-3 control-label label1">Tagline</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" title="Not more than 40 characters" maxlength="40" id="batch_tagline"  name="batch_tagline" value="@if(isset($batchDetails)){{$batchDetails->batch_tagline}}@else{{Input::old('batch_tagline')}}@endif" required>
+                    <input type="text" class="form-control" title="Not more than 40 characters" maxlength="40" id="batch_tagline"  name="batch_tagline" value="@if(isset($batchDetails)){{$batchDetails->batch_tagline}}@else{{Input::old('batch_tagline')}}@endif">
                 </div>
             </div>
         </div>
@@ -263,7 +264,7 @@
                 
                 <div class="col-sm-6">
                     <select class="form-control" id="batch_venue_id" name="batch_venue_id" required>
-                        @foreach ($all_venues as $data)
+                        @foreach ($venuesForUser as $data)
 	                        <option value={{$data->id}}
 	                            @if(isset($batchDetails))
 	                            {{($batchDetails->batch_venue_id==$data->id)?
@@ -357,7 +358,7 @@
             <div class="form-group">
                 <label for="batch_comment" class="col-sm-3 control-label label1">Tell us more about your batch(Prerequisite required, anything else you wish to share)<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <textarea  class="jqte-test" name="batch_comment" id="batch_comment" =21  >@if(isset($batchDetails)){{$batchDetails->batch_comment}}@else{{Input::old('batch_comment')}}@endif</textarea>
+                    <textarea  class="jqte-test" name="batch_comment" id="batch_comment" >@if(isset($batchDetails)){{$batchDetails->batch_comment}}@else{{Input::old('batch_comment')}}@endif</textarea>
                 </div>
             </div>
         </div>
@@ -403,9 +404,9 @@
                             message: 'The title is required and cannot be empty'
                         },
                         stringLength: {
-                            min: 6,
+                            min: 1,
                             max: 30,
-                            message: 'The title must be more than 6 and less than 30 characters long'
+                            message: 'The title must be more than 1 and less than 30 characters long'
                         },
                         regexp: {
                             regexp: /^[a-zA-Z0-9 _-]+$/,

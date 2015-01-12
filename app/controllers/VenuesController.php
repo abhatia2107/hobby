@@ -10,12 +10,17 @@ class VenuesController extends \BaseController {
 	 */
 	public function index()
 	{
-		//$user_id=Auth::id();
-		$user_id=1;
+		$user_id=Auth::id();
+		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$venues=$this->venue->getVenueForUser($user_id);
+<<<<<<< HEAD
 		$localities=$this->locality->all();
 
 		return View::make('Venues.index',compact('venues','localities'));
+=======
+		$institute_id=$this->institute->getInstituteforUser($user_id);
+		return View::make('Venues.index',compact('institute_id','venues'));
+>>>>>>> 34da218c41ab422d0b44bf7b81e71374602da7de
 	}
 
 	/**
@@ -26,8 +31,11 @@ class VenuesController extends \BaseController {
 	 */
 	public function create()
 	{
+		$user_id=Auth::id();
 		$localities=$this->locality->all();
-		return View::make('Venues.create',compact('localities'));
+		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
+		$institute_id=$this->institute->getInstituteforUser($user_id);
+		return View::make('Venues.create',compact('institute_id','localities'));
 	}
 
 	/**
@@ -40,7 +48,6 @@ class VenuesController extends \BaseController {
 	{
 		$credentials=Input::all();
 		$venue_user_id=Auth::id();
-		$venue_institute_id=$this->institute->getInstituteforUser($venue_user_id);
 		$credentials['venue_institute_id']=$venue_institute_id;
 		$credentials['venue_user_id']=$venue_user_id;
 		$validator = Validator::make($credentials, Venue::$rules);
@@ -56,22 +63,6 @@ class VenuesController extends \BaseController {
 			return Redirect::back()->withInput()->with('failure',Lang::get('venue.venue_create_failed'));	
 	}
 
-	/**
-	 * Display the specified resource.
-	 * GET /venues/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		$venueDetails=Venue::find($id);
-		$location_id=$venueDetails['venue_location_id'];
-		$locations=$this->location->all();
-		$venue_location=$locations->find($location_id);
-		$venueDetails['venue_location']=$venue_location['location'];
-		return View::make('Venues.show',compact('venueDetails'));
-	}
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -82,19 +73,20 @@ class VenuesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$user_id=Auth::id();
 		$venueDetails=Venue::find($id);
-		if($user_id!=$venueDetails['venue_user_id'])
-			return Redirect::to('/venues')->with('failure',Lang::get('venue.venue_not_authorize'));
 		$location_id=$venueDetails['venue_location_id'];
 		$locality_id=$venueDetails['venue_locality_id'];
+		//Don't remove locations from here,
+		//as it is being used to find the location of venue in this method only.
 		$locations=$this->location->all();
 		$localities=$this->locality->all();
+		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
+		$institute_id=$venueDetails->venue_institute_id;
 		$venue_location=$locations->find($location_id);
 		$venue_locality=$localities->find($locality_id);
 		$venueDetails['venue_location']=$venue_location;
 		$venueDetails['venue_locality']=$venue_locality;
-		return View::make('Venues.create',compact('venueDetails','locations','localities'));
+		return View::make('Venues.create',compact('institute_id','localities','locations','venueDetails'));
 	}
 
 	/**
@@ -107,10 +99,12 @@ class VenuesController extends \BaseController {
 	public function update($id)
 	{
 		$credentials=Input::all();
+		// dd($credentials);
 		$venue_user_id=Auth::id();
 		$venue_institute_id=$this->institute->getInstituteforUser($venue_user_id);
 		$credentials['venue_institute_id']=$venue_institute_id;
 		$credentials['venue_user_id']=$venue_user_id;
+		unset($credentials['csrf_token']);
 		$validator = Validator::make($credentials, Venue::$rules);
 		if($validator->fails())
 		{

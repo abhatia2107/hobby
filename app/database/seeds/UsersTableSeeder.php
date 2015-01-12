@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder {
               'user_last_name' => "Bansal",
               'email' => "jatinbansal7@gmail.com",
               'user_contact_no' => "9885890640",
-              'password' => Hash::make('jatin'),
+              'password' => Hash::make('jatinbansal'),
               'user_gender'=>"male",
               'user_confirmed' =>true,
               'user_subscription_token' =>true,

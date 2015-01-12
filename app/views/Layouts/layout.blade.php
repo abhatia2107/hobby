@@ -30,7 +30,6 @@
 			</div>
 			<!-- Error and success messages -->
 			@include('Templates.message')
-			
 			<div class="content-div"><!--  id="content" class="site-content" -->
 				@yield('content')
 			</div>

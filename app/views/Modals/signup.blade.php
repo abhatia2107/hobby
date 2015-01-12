@@ -1,14 +1,14 @@
 @section("signup")
 <div class="modal-dialog">
         <div class="modal-content">
-            <form name="signUp" id="signUp" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
+            <form name="signUp" class="signUp" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                     </button>
                     <h4 class="modal-title" id="myModalLabel1">Sign-Up</h4>
-                    <a href="/users/login">Already a member? Login</a>
+                    <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -81,7 +81,7 @@
      <script type="text/javascript">
             $(document).ready(function(){
                     
-                $('#signUp').bootstrapValidator({
+                $('.signUp').bootstrapValidator({
                     message: 'This value is not valid',
                     feedbackIcons: {
                         valid: 'glyphicon glyphicon-ok',

@@ -21,7 +21,7 @@ class BaseController extends Controller {
 	protected $gender_group=array(1 => "Both","Male","Female");
 	protected $recurring=array(1 => "Not recurring","Weekly","Monthly","Yearly");
 	protected $trial=array(1 => "Trial Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only at batch start","Paid Trial only at batch start");
-	protected $weekdays=array(1 => "monday","tuesday","wednesday","thursday","friday","saturday","Sunday");
+	protected $weekdays=array(1 => "monday","tuesday","wednesday","thursday","friday","saturday","sunday");
 	protected $adminPanelList=array(
 									'categories' => 'Categories', 
 									'features' => 'Features', 

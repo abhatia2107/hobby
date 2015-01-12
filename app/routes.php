@@ -14,7 +14,9 @@
 Route::get('/', 'HomeController@showWelcome');
 
 //To allow access only to admin.
-Route::get('/admin',array('before' => "auth|admin", 'HomeController@showAdminHome'));
+Route::group(array('before' => "auth|admin"), function() {
+	Route::get('/admin','HomeController@showAdminHome');
+});
 
 /*
 	Routes for Main Admin section of admin panel.

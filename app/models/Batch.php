@@ -79,7 +79,7 @@ class Batch extends \Eloquent {
             return $allBatches
                 ->skip($chunk)
                 ->take(100)
-                ->orderBy('institute_rating')
+                ->orderBy('institute_rating','desc')
                 ->get();
 
         else if(!$location_id)
@@ -87,7 +87,7 @@ class Batch extends \Eloquent {
                 ->where('batches.batch_category_id','=',$category_id)
                 ->skip($chunk)
                 ->take(100)
-                ->orderBy('institute_rating')
+                ->orderBy('institute_rating','desc')
                 ->get();
 
         else if(!$category_id)
@@ -95,7 +95,7 @@ class Batch extends \Eloquent {
                 ->where('venues.venue_location_id','=',$location_id)
                 ->skip($chunk)
                 ->take(100)
-                ->orderBy('institute_rating')
+                ->orderBy('institute_rating','desc')
                 ->get();
 
         else
@@ -104,7 +104,7 @@ class Batch extends \Eloquent {
                 ->where('venues.venue_location_id','=',$location_id)
                 ->skip($chunk)
                 ->take(100)
-                ->orderBy('institute_rating')
+                ->orderBy('institute_rating','desc')
                 ->get();
     }
 
@@ -122,7 +122,7 @@ class Batch extends \Eloquent {
                         ->whereIn('batches.batch_subcategory_id',$subcategories)
                         ->skip($chunk)
                         ->take(100)
-                        ->orderBy('institute_rating')
+                        ->orderBy('institute_rating','desc')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->get();
         return $allBatches;
@@ -246,6 +246,7 @@ class Batch extends \Eloquent {
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+                        ->orderBy('batches.created_at','desc')
                         ->get();
     }
 
@@ -259,6 +260,7 @@ class Batch extends \Eloquent {
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+                        ->orderBy('batches.created_at','desc')
                         ->get();
         return $batches;
     }

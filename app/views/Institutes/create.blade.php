@@ -57,6 +57,10 @@
 
 
 @section('content')
+        @if(isset($instituteDetails))
+            @include('Templates.navbarVendor')
+        @endif
+<div class="container">
     <div class="container-fluid">
         <form role="form"  id="instituteInfo" enctype="multipart/form-data"  action="@if(isset($instituteDetails)){{"/institutes/update/$instituteDetails->id"}}@else{{"/institutes/store"}}@endif" method="post">
             <div class="row">
@@ -111,7 +115,7 @@
                     <div class="col-sm-6 col-xs-12">
                         <div class="c1 form-group">
                             <label class="label_size" for="url">Website</label>
-                            <input type="url" class="form-control" placeholder="http://" id="institute_website" name="institute_website" value="@if(isset($instituteDetails)){{$instituteDetails->institute_website}}@else{{Input::old('institute_website')}}@endif"/>
+                            <input class="form-control" placeholder="http://" id="institute_website" name="institute_website" value="@if(isset($instituteDetails)){{$instituteDetails->institute_website}}@else{{Input::old('institute_website')}}@endif"/>
                         </div>
                     </div>
             </div>
@@ -120,13 +124,13 @@
                 <div class="col-sm-6 col-xs-12">
                     <div class="c1 form-group">
                         <label  class="label_size" for="facebook">Facebook Page</label>
-                        <input type="url" class="form-control " placeholder="http://" name="institute_fblink" value="@if(isset($instituteDetails)){{$instituteDetails->institute_fblink}}@else{{Input::old('institute_fblink')}}@endif" id="institute_fblink">
+                        <input class="form-control " placeholder="http://" name="institute_fblink" value="@if(isset($instituteDetails)){{$instituteDetails->institute_fblink}}@else{{Input::old('institute_fblink')}}@endif" id="institute_fblink">
                     </div>
                 </div>
                 <div class="col-sm-6 col-xs-12">
                     <div class="c1 form-group" >
                         <label class="label_size" for="twitter">Twitter Profile</label>
-                        <input type="url" class="form-control" placeholder="http://" name="institute_twitter" value="@if(isset($instituteDetails)){{$instituteDetails->institute_twitter}}@else{{Input::old('institute_twitter')}}@endif" id="institute_twitter">
+                        <input class="form-control" placeholder="http://" name="institute_twitter" value="@if(isset($instituteDetails)){{$instituteDetails->institute_twitter}}@else{{Input::old('institute_twitter')}}@endif" id="institute_twitter">
                     </div>
                 </div>
             </div>
@@ -136,6 +140,7 @@
             </div>  
         </form>
     </div>
+</div>
 @stop
 
 @section('pagejavascript')

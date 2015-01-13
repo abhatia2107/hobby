@@ -14,16 +14,16 @@
 					<input type="hidden" name="email">
 					<input type="hidden" name="institute">
 
-					<div class="form-group inner-addon left-addon" >
-						 <i class="glyphicon glyphicon-user"></i>
+					<div class="form-group inner-addon" >
+						 <i class="glyphicon glyphicon-user left-addon"></i>
 						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
 					</div>
-					<div class="form-group inner-addon left-addon">
-						<i class="glyphicon glyphicon-envelope"></i>
+					<div class="form-group inner-addon">
+						<i class="glyphicon glyphicon-envelope left-addon"></i>
 						 <input type="email" class="form-control" name='msgInputEmail' id='MsgInputEmail'  placeholder='Enter Your E-Mail Address' required='required'/>
 					</div>
-					<div class="form-group inner-addon left-addon">
-						<i class="glyphicon glyphicon-phone"></i>
+					<div class="form-group inner-addon">
+						<i class="glyphicon glyphicon-phone left-addon"></i>
 						 <input type="phone" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
 					</div>
 					<div class="form-group">

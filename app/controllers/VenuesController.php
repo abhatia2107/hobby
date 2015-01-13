@@ -13,14 +13,9 @@ class VenuesController extends \BaseController {
 		$user_id=Auth::id();
 		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$venues=$this->venue->getVenueForUser($user_id);
-<<<<<<< HEAD
-		$localities=$this->locality->all();
-
-		return View::make('Venues.index',compact('venues','localities'));
-=======
 		$institute_id=$this->institute->getInstituteforUser($user_id);
-		return View::make('Venues.index',compact('institute_id','venues'));
->>>>>>> 34da218c41ab422d0b44bf7b81e71374602da7de
+		$localities=$this->locality->all();
+		return View::make('Venues.index',compact('institute_id','venues','localities'));
 	}
 
 	/**

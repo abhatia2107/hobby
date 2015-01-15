@@ -43,6 +43,7 @@ class VenuesController extends \BaseController {
 	{
 		$credentials=Input::all();
 		$venue_user_id=Auth::id();
+		$venue_institute_id=Institute::getInstituteforUser($venue_user_id);
 		$credentials['venue_institute_id']=$venue_institute_id;
 		$credentials['venue_user_id']=$venue_user_id;
 		$validator = Validator::make($credentials, Venue::$rules);
@@ -96,7 +97,7 @@ class VenuesController extends \BaseController {
 		$credentials=Input::all();
 		// dd($credentials);
 		$venue_user_id=Auth::id();
-		$venue_institute_id=$this->institute->getInstituteforUser($venue_user_id);
+		$venue_institute_id=Institute::getInstituteforUser($venue_user_id);
 		$credentials['venue_institute_id']=$venue_institute_id;
 		$credentials['venue_user_id']=$venue_user_id;
 		unset($credentials['csrf_token']);

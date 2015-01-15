@@ -1,6 +1,5 @@
 @extends("Layouts.layout")
 @section("content")
-
 <div class="modal fade" id="sendMessage" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 		<div class="modal-content">
@@ -15,16 +14,16 @@
 					<input type="hidden" name="email">
 					<input type="hidden" name="institute">
 
-					<div class="form-group inner-addon left-addon" >
-						 <i class="glyphicon glyphicon-user"></i>
+					<div class="form-group inner-addon" >
+						 <i class="glyphicon glyphicon-user left-addon"></i>
 						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
 					</div>
-					<div class="form-group inner-addon left-addon">
-						<i class="glyphicon glyphicon-envelope"></i>
+					<div class="form-group inner-addon">
+						<i class="glyphicon glyphicon-envelope left-addon"></i>
 						 <input type="email" class="form-control" name='msgInputEmail' id='MsgInputEmail'  placeholder='Enter Your E-Mail Address' required='required'/>
 					</div>
-					<div class="form-group inner-addon left-addon">
-						<i class="glyphicon glyphicon-phone"></i>
+					<div class="form-group inner-addon">
+						<i class="glyphicon glyphicon-phone left-addon"></i>
 						 <input type="phone" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
 					</div>
 					<div class="form-group">
@@ -32,7 +31,7 @@
 					  <textarea class="form-control" rows="3" name='msgInputMessage' id="comment"></textarea>
 					</div>
 					<div class="modal-footer">
-						 <button type="submit" class="btn btn-primary">Send Message</button>
+						 <center><button type="submit" class="btn btn-primary">Send Message</button></center>
 					</div>
 				 </form>
 			</div>
@@ -43,14 +42,14 @@
 		@include('Templates.navbarVendor')
 		<?php $days = array("day1" => "M","day2" => "T","day3" => "W", "day4" => "T","day5" => "F","day6" => "S","day7" => "S"); ?>
 		<div class="container">
-			<div class="col-md-1 col-xs-12 col-sm-12">
+			<div class="col-md-1 col-xs-12 col-sm-1">
 			</div>
-			<div class="vendor_institute_batches col-md-10 col-xs-12 col-sm-12">
+			<div class="vendor_institute_batches col-md-10 col-xs-12 col-sm-11">
 				<div class="vendor_batches_title">
 			   		<h1>My Batches</h1>
 			   	</div><br><br>
 			   	<a href="/batches/create">Add</a>
-			   	<ul class="list-unstyled container" id="vendor_batches_list" >
+			   	<ul class="list-unstyled" id="vendor_batches_list" >
 		         @foreach($batchDetails as $index => $data)
 		         	<?php 
 		         		if($data->institute_photo)
@@ -71,7 +70,7 @@
 						}
 		         	?>
 		         	<li class='batch{{$index}}' id='mybatch' style='display:none' >
-			     		<div class="col-md-9 col-xs-12 col-sm-12 column">
+			     		<div class="col-md-12 col-xs-12 col-sm-12 column">
 							<div class="row clearfix">
 								<div class="col-md-12 col-xs-12 col-sm-12 column">
 									<div class="col-md-12 col-xs-12 col-sm-12 column">
@@ -112,8 +111,8 @@
 											<div id="{{$key}}" class="day">{{$day}}</div>
 										@endforeach
 										</div><br>
-										<div class="edit_delete_buttons ">
-											<button onClick="" type="submit" class="btn btn-primary"><a href="/batches/edit/{{$data->id}}">Edit</a></button
+										<div class="edit_delete_buttons">
+											<button onClick="" type="submit" class="btn btn-primary"><a href="/batches/edit/{{$data->id}}">Edit</a></button>
 											<button onClick="" type="submit" class="btn btn-primary"><a href="/batches/disable/{{$data->id}}">Delete</a></button>
 										</div>
 									</div>
@@ -137,7 +136,6 @@
 		    <center><button onClick="moreBatches()" type="submit" name="update_results" class="btn btn-primary" id='loadmorebutton'>More Batches</button></center>
 		    <br><br>
 		</div>
-		</li>
 	</div>
 @stop
 @section('pagejquery')

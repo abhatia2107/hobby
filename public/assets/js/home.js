@@ -17,6 +17,10 @@
         $(this).html($span);
     });
    }
+    $(function() 
+    {
+      $('span.stars').stars();
+    });
    function show_contact (id) 
   {
     $('#show_contact'+id).empty();

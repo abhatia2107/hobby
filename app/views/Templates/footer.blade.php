@@ -1,6 +1,6 @@
 @section("footer")
 <div class="site-footer-widgets" >
-               <div class="container">
+    <div class="container">
                   <div class="row">
                      <div class="footer-widget-column col-xs-12 col-sm-12 col-lg-5">
                         <aside id="text-2" class="footer-widget widget_text">

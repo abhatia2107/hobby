@@ -14,7 +14,8 @@ class VenuesController extends \BaseController {
 		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$venues=$this->venue->getVenueForUser($user_id);
 		$institute_id=$this->institute->getInstituteforUser($user_id);
-		return View::make('Venues.index',compact('institute_id','venues'));
+		$localities=$this->locality->all();
+		return View::make('Venues.index',compact('institute_id','venues','localities'));
 	}
 
 	/**

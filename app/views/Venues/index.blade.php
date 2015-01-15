@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="vendor_institute_batches venues_list_container col-md-12 col-xs-12 col-sm-12">
 				<div class="vendor_batches_title">
-		   			<a href="/venues/create">Add</a>
+		   			<a data-toggle="modal" data-target="#venueCreate">Add</a>
 			   		<h1>My Venues</h1>
 			   	</div><br/><br/>
 			   	@foreach($venues as $data)
@@ -30,4 +30,8 @@
 			</div>
 		</div>
 	</div>
+    <div class="modal fade" id="venueCreate" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   @include('Modals.venue')
+</div>
 @stop
+

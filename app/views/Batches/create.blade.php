@@ -1,9 +1,6 @@
 @extends('Layouts.layout')
 @section('pagestylesheet')
-    <link rel="stylesheet" type="text/css" href="/assets/css/jquery.richtextarea.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/jquery-te-1.4.0.css">
     <style>
-	
 	.ul-without-bullets
 	{
     	list-style-type: none;	
@@ -279,7 +276,7 @@
                     </select>
                 </div>
                 <div class="col-sm-3">
-                    <a data-target="#myModal2" data-toggle="modal">Add a venue</a>
+                    <a data-target="#venueCreate" data-toggle="modal">Add a venue</a>
                 </div>
             </div>
         </div>
@@ -371,14 +368,9 @@
 </div>
 </div>
 
-<div class="modal fade" id="myModal2" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="venueCreate" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     @include('Modals.venue')
 </div>
-@stop
-@section('pagejavascript')
-<script type="text/javascript"  src="/assets/js/moment-2.8.4.min.js"></script>
-<script type="text/javascript" src="/assets/js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
-<script type="text/javascript"  src="/assets/js/jquery.richtextarea.min.js"></script>
 @stop
 @section('pagejquery')
 <script type="text/javascript">

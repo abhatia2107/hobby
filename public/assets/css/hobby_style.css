@@ -2,7 +2,7 @@ html{
   overflow-x: hidden;
 }
 body {
-  overflow-x: hidden;
+  overflow-x: hidden; 
   font-family: "Times New Roman", Times, serif;
   margin: 0 0;
 }
@@ -102,6 +102,7 @@ body li
 .navbar{
     border-radius: 0px;
     width: 100%;
+    padding-right: 20px;
 }
 @media (min-width:768px) {
     .homepage-cover {
@@ -113,15 +114,20 @@ body li
         padding: 10em 0 11em;
     }
 }
+@media (min-width:992px) {
+body,html {
+   overflow-x: hidden; 
+   margin-right: 0px;
+}
 
 @media (min-width:768px) {
 body,html {
-  overflow-x: hidden;
+   overflow-x: hidden; 
 }
 }
 @media (min-width:320px) {
 body,html {
-  overflow-x: hidden;
+    overflow-x: hidden; 
 }
 }
 
@@ -532,15 +538,17 @@ span.stars span {
 
   .inner-addon {  position: relative; }
 
-  .inner-addon .glyphicon {  position: absolute;  padding: 8px;  pointer-events: none; }
+  .inner-addon .glyphicon {  position: absolute; pointer-events: none;}
+
+  .inner-addon .left-addon {padding: 8px;}
 
   .left-addon .glyphicon  { left:  0px;}
 
   .right-addon .glyphicon { right: 0px;}
 
-  .left-addon input  { padding-left:  30px; }
+  .inner-addon input  { padding-left:  30px;padding-right: 0px; }
 
-  .right-addon input { padding-right: 30px; }
+
 
   #offerMessage { float: right; margin-top: -60px; }
 
@@ -631,10 +639,6 @@ span.stars span {
     border-bottom-color: skyblue;
     border-bottom:2px dashed;
   }
-  .vendor_batchInfo
-  {
-    
-    }
     .edit_delete_buttons
     {
       clear: both;
@@ -650,8 +654,11 @@ span.stars span {
     padding-top: 2px;
     width: 70px;
     margin-left: 5px;
-
-      
+    color: white;
+    }
+    .edit_delete_buttons a
+    {
+      color: white;
     }
 
     .venues_list
@@ -662,8 +669,7 @@ span.stars span {
         box-shadow: 0 0 2px #333;
       margin: 10px 10px;
       padding: 7px;
-      overflow-x: hidden;
-      overflow-y: auto;
+      overflow: hidden;
       padding-bottom: 20px;
 
     }
@@ -706,3 +712,14 @@ span.stars span {
     font-weight: 600;
     margin-right: 5px;
   }
+  .footer-wrapper
+  {
+    width: 100%;
+  }
+
+
+  @media screen and (min-width: 768px) {  #venueCreate .modal-dialog  { width:430px; }  }
+#venueCreate .modal-dialog { margin-top:3%; }
+#venueCreate .modal-header {height: 50px;padding-top: 0px;}
+#venueCreate .modal-footer {height: 55px;padding-top: 10px;}
+#venueCreate .modal-body {padding-bottom: 0px;}

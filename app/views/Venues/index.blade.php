@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="vendor_institute_batches venues_list_container col-md-12 col-xs-12 col-sm-12">
 				<div class="vendor_batches_title">
-		   			<a data-toggle="modal" data-target="#venueCreate">Add</a>
+		   			<button class="btn btn-primary" data-toggle="modal" data-target="#venueCreate">Add Venue</button>
 			   		<h1>My Venues</h1>
 			   	</div><br/><br/>
 			   	@foreach($venues as $data)

@@ -1,6 +1,9 @@
 html{
   overflow-x: hidden;
 }
+.modal-open{
+padding-right: 0px !important;
+}
 body {
   overflow-x: hidden; 
   font-family: "Times New Roman", Times, serif;
@@ -699,6 +702,11 @@ span.stars span {
     padding-top: 2px;
     width: 100px;
 
+  }
+  .home_vendor_page a
+  {
+    color: white;
+    text-decoration: none;
   }
 
   .venue_info

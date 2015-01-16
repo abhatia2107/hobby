@@ -5,7 +5,7 @@
     <meta name="author" content="Abhishek">
     <meta property="og:image" content="/assets/images/home/banner.jpg">
     <title>Hobby</title>
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css">

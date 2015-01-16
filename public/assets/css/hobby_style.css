@@ -569,7 +569,7 @@ span.stars span {
     .home_vendor_page
   {
     width: 100%;
-    background-image: url(/assets/images/sb.png);
+    background: url(/assets/images/sb.png);
     
     font-family: "Times New Roman", Times, serif;
         padding-top: 50px;

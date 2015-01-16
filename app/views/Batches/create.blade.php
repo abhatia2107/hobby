@@ -101,8 +101,9 @@
 @stop
 
 @section('content')
-<div class="container-fluid">
+<div class="home_vendor_page" id="createBactch" style="background: white;">
     @include('Templates.navbarVendor')
+    <div class="container-fluid">
     <div id="classInfo1">
     <form role="form" class="form-horizontal" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" id="classInfo">
           
@@ -365,6 +366,7 @@
             <button type="reset" class="btn btn-warning btn-lg"><i class="fa fa-power-off"></i> Reset</button>
         </div>
     </form>
+</div>
 </div>
 </div>
 

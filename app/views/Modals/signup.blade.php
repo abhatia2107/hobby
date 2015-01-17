@@ -10,6 +10,7 @@
                     <h4 class="modal-title" id="myModalLabel1">Sign-Up</h4>
                     <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
                 </div>
+                <a href="/login/fb">Signin Via Facebook</a>
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">
@@ -43,6 +44,14 @@
                             <label for="user_contact_no" class="col-sm-3 control-label ">Mobile Number<span class="required">*</span></label>
                             <div class="col-sm-8">
                                 <input type="tel" class="form-control " name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="user_location" class="col-sm-3 control-label ">City<span class="required">*</span></label>
+                            <div class="col-sm-8">
+                                <input type="tel" class="form-control " name="user_location"  id="user_location" value="@if(isset($userDetails)){{$userDetails->user_location}}@else{{Input::old('user_location')}}@endif">
                             </div>
                         </div>
                     </div><br>
@@ -117,7 +126,19 @@
                             }
                         }
                     },
-
+                    user_location: {
+                        message: 'City is not valid',
+                        validators: {
+                            notEmpty: {
+                                message: 'City is required and cannot be empty',
+                            },
+                            stringLength: {
+                                min: 2,
+                                max: 25,
+                                message: 'City must be more than 2 and less than 25 characters long'
+                            },
+                        }
+                    },
                     password: {
                         message: 'The password is not valid',
                         validators: {
@@ -130,8 +151,8 @@
                                 message: 'The password must be more than 8 and less than 20 characters long'
                             },
                             regexp: {
-                                regexp: /^[a-zA-Z0-9!@#$%&_]+$/,
-                                message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,%,&,_'
+                                regexp: /^[a-zA-Z0-9!@#$-%&_]+$/,
+                                message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,-,%,&,_'
                             }
                         }
                     },
@@ -147,8 +168,8 @@
                                 message: 'The password must be more than 8 and less than 20 characters long'
                             },
                             regexp: {
-                                regexp: /^[a-zA-Z0-9!@#$%&_]+$/,
-                                message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,%,&,_'
+                                regexp: /^[a-zA-Z0-9!@#$-%&_]+$/,
+                                message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,-,%,&,_'
                             },
                             identical: {
                                 field: 'password',

@@ -2,6 +2,19 @@
 
 use Carbon\Carbon;
 
+use Facebook\FacebookSession;
+use Facebook\FacebookRedirectLoginHelper;
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
+use Facebook\GraphLocation;
+use Facebook\GraphSessionInfo;
+use Facebook\FacebookAuthorizationException;
+use Facebook\FacebookRequestException;
+
+
+session_start();
+
+
 class UsersController extends \BaseController {
 
 	/*
@@ -15,7 +28,7 @@ class UsersController extends \BaseController {
 	|
 	*/
 	
-	//Not going use now. But can use it in future, in admin panel.
+	
 	public function index()
 	{
 		$users=User::withTrashed()->get();
@@ -23,34 +36,6 @@ class UsersController extends \BaseController {
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
 		return View::make('Users.index',compact('users','tableName','count','adminPanelListing'));
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /users/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		return View::make('Users.create');
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /users
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		$credentianls=Input::all();
-		$validator = Validator::make($credentianls, User::$rules);
-		if($validator->fails())
-		{
-			return Redirect::back()->withInput()->withErrors($validator);
-		}
-		$user=User::create($credentianls);
 	}
 
 	/**
@@ -311,9 +296,9 @@ class UsersController extends \BaseController {
 			];
 			/*Confirmation mail is to be send to the newly registerd user*/
 			$subject="Welcome to Hobby";
-			Mail::later(15,'Emails.welcome', $data, function($message) use ($email,$name,$subject)
+			Mail::later(15,'Emails.welcome', $data, function($userssage) use ($email,$name,$subject)
 			{
-    			$message->to($email,$name)->subject($subject);
+    			$userssage->to($email,$name)->subject($subject);
 			});
 			return Redirect::to('/')->with('success',Lang::get('user.user_signup_success'));
 		}	
@@ -390,97 +375,102 @@ class UsersController extends \BaseController {
 		}
 	}
 
-	/**
+		/**
 	*This Is Used To Login Via Facebook
-	*Uses Facebook API and call to facebook.com
+	*Uses Facebook API and call to facebook.com 
 	*@param 
 	*@return Route
 	*/
+	
 	public function loginFb()
 	{
-		$facebook = new Facebook(Config::get('facebook'));
-    	$params = array(
-        'redirect_uri' => url('/login/fb/callback'),
-        'scope' => 'email',
-    	);
-    	return Redirect::to($facebook->getLoginUrl($params));
+		FacebookSession::setDefaultApplication(Config::get('facebook.appId'),Config::get('facebook.secret'));
+	    $helper = new FacebookRedirectLoginHelper(url('/login/fb/callback'));
+	    $loginUrl = $helper->getLoginUrl( array('scope' => 'user_birthday, email, user_location, publish_actions' ));
+	    return Redirect::to($loginUrl);
 	}
-	/**
-	*This function is called when user is authenticated by facebook
-	*This function also contains the logic of storing uniqe user to db.
-	*@param 
-	*@return Route
-	*/
-	public function loginFbCallback()
-	{
-		$code = Input::get('code');
-    	if (strlen($code) == 0) 
-    	{
-    		return Redirect::to('/')->with('failure', Lang::get('user.error_fb_comm'));
+
+	public function loginFbCallback(){
+		FacebookSession::setDefaultApplication(Config::get('facebook.appId'),Config::get('facebook.secret'));
+	    $helper = new FacebookRedirectLoginHelper(url('/login/fb/callback'));
+		// try {
+		  $session = $helper->getSessionFromRedirect();
+		/*} catch(FacebookRequestException $ex) {
+		  // When Facebook returns an error
+		} catch(\Exception $ex) {
+			dd("test");
+		  // When validation fails or other local issues
+		}
+		*/
+		
+		if ($session) {
+		  	// Logged in
+			$object = (new FacebookRequest(
+		    $session, 'GET', '/me'
+	    	))->execute()->getGraphObject();
+    		// dd($object);
+	    	$userFb = $object->cast(GraphUser::className())->asArray();
+	 		// $location=$user->getLocation()->asArray()['name'];
+	 		// $city=explode(',',$location)[0];
+	 		// dd($city);
+	 		// dd($userFb);
+	 		$user_fb_id=$userFb['id'];
+	    	$user=$this->user->getUid($user_fb_id);
+	    	if(!$user)
+	    	{
+	    		// dd(false);
+	    		$profileData['user_fb_id']=$user_fb_id;
+	    		$profileData['user_first_name']=$userFb['first_name'];
+	    		$profileData['user_last_name']=$userFb['last_name'];
+    			$profileData['email']=$userFb['email'];
+    			$profileData['user_location']=$userFb['location']->name;
+    			$profileData['user_confirmed']=true;
+    			$checkEmail=Validator::make(array("email"=>$userFb['email']),User::$fbRules);
+	    		// dd($checkEmail->fails());
+	    		if($checkEmail->fails())
+	    		{
+					// dd($profileData);
+					$user=User::where('email','=',$userFb['email'])
+					// dd($user->get()->toArray());
+					->update($profileData);
+	    		}
+	    		else
+	    		{
+	    			User::create($profileData);
+	    		}
+	    		try {
+				    $response = (new FacebookRequest(
+				      $session, 'POST', '/me/feed', array(
+				        'link' => 'www.hobby.com',
+				        'message' => 'User provided message'
+				      )
+				    ))->execute()->getGraphObject();
+
+				    // $msg= "Posted with id: " . $response->getProperty('id');
+
+				} catch(FacebookRequestException $e) {
+
+				    echo "Exception occured, code: " . $e->getCode();
+				    echo " with message: " . $e->getMessage();
+
+			    } 
+    			// dd($msg);
+    		}
+	    	/*$accessToken=$session->getAccessToken();
+    	 	$longLivedAccessToken = $accessToken->extend();
+	    	dd($longLivedAccessToken);
+	    	$this->user->where('user_fb_id','=',$user_fb_id)->update(array('user_facebook_access_token'=>$longLivedAccessToken));
+	    	*/
+	    	$id=$this->user->getUid($user_fb_id);
+	    	Auth::loginUsingId($id);
+    		return Redirect::to('/')->with('success','Welcome '.$userFb['first_name'].' '.$userFb['last_name']);
     	}
-
-    	$facebook = new Facebook(Config::get('facebook'));
-    	$uid = $facebook->getUser();
-
-    	if ($uid == 0) return Redirect::to('/')->with('failure', Lang::get('user.error'));
-    	/** $me contains all the user information in the form of associative array **/
-    	$me = $facebook->api('/me');
- 		
-    	$user=$this->user->getUid($uid);
-    	/*Check Whether user exist in database with the current uid*/
-    	if($user)
-    	{
-
-    	}
-    	/* If the user is new, then with new facbook UID , corresponding details will be added into database*/
     	else
     	{
-    		
-    		$profiledata['user_fb_id']=$uid;
-    		$profiledata['user_first_name']=$me['first_name'];
-    		$profiledata['user_last_name']=$me['last_name'];
-    		$profiledata['email']=$me['email'];
-    		$profiledata['user_confirmed']=1;
-    		if(isset($me['username']))
-    		{
-    			$profiledata['user_username']=$me['username'];
-    			
-    		}
-    		$checkEmail=Validator::make(array("email"=>$me['email']),User::$uniqueEmail);
-    		if($checkEmail->fails())
-    		{
-    			if(isset($me['username']))
-    			{
-    				$user=$this->user->where('email','=',$me['email'])->update(array(
-    						"user_fb_id"=>$uid,
-    						"user_username"=>$me['username'],
-    					));
-    			}
-    			else
-    			{
-    				
-    				$user=$this->user->where('email','=',$me['email'])->update(array(
-    						"user_fb_id"=>$uid,
-    					));
-    			}
-    		}
-    		else
-    		{
-    			User::create($profiledata);
-    			$model = User::where('user_fb_id', '=',$uid)->firstOrFail();
-    			
-    		}
-    		//$companyname['company_id']=$model->users_id;
-			//Company::create($companyname);
+			return Redirect::to('/')->with('failure',Lang::get('user.user_permission_failed'));		
     	}
-
-    	$profiledata['user_access_token']=$facebook->getAccessToken();
-    	$this->user->where('user_fb_id','=',$uid)->update($profiledata);
-    	$id=$this->user->getUid($uid);
-    	$id=$id[0]->id;
-    	Auth::loginUsingId($id);
-    	return Redirect::to('/')->with('success',Lang::get('user.welcome',array('name'=>$me['first_name'])));
 	}
+
 
 	public function history()
 	{

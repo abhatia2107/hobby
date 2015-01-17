@@ -218,6 +218,10 @@ Route::group(array('before' => "guest-or-admin"), function() {
 	Route::get('/users/registration/verify/{userId}/{confirmationCode}','UsersController@getEmailVerify');
 	Route::get('/users/password/remind','RemindersController@getRemind');
 	Route::get('/users/password/reset/{token}','RemindersController@getReset');
+	//Routes for facebook signin of user
+
+	Route::get('/login/fb','UsersController@loginFb');
+	Route::get('/login/fb/callback','UsersController@loginFbCallback');
 });
 
 
@@ -257,12 +261,6 @@ Route::get('/hello', function()
 return View::make('Miscellaneous.hello');
 });
 
-//Routes for user, to be modified later
-/*
-Route::get('login/fb','UsersController@loginFb');
-Route::get('/login/fb/callback','UsersController@loginFbCallback');
-
-*/
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
@@ -271,3 +269,5 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chu
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{category_id}/{location_id}/{chunk}','FiltersController@filter');
 
 Route::get('/filters/search','FiltersController@search');
+
+

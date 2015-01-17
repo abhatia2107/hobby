@@ -20,8 +20,10 @@
 							<br/>
 							<div class="venue">
 								<center>
-									<button type="submit" class="btn btn-primary"><a href="/venues/edit/{{$data->id}}">Edit</a></button>
-									<button class="btn btn-primary"><a  href="/venues/delete/{{$data->id}}">Delete</a></button>
+									
+									<a href="/venues/edit/{{$data->id}}"><button type="submit" class="btn btn-primary">Edit</button></a>
+									<!-- </button> -->
+									<a href="/venues/delete/{{$data->id}}"><button class="btn btn-primary">Delete</button></a>
 								</center>
 							</div>
 						</div>

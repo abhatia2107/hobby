@@ -112,8 +112,8 @@
 										@endforeach
 										</div><br>
 										<div class="edit_delete_buttons">
-											<button onClick="" type="submit" class="btn btn-primary"><a href="/batches/edit/{{$data->id}}">Edit</a></button>
-											<button onClick="" type="submit" class="btn btn-primary"><a href="/batches/disable/{{$data->id}}">Delete</a></button>
+											<a href="/batches/edit/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Edit</button></a>
+											<a href="/batches/disable/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Delete</button></a>
 										</div>
 									</div>
 								</div>

@@ -44,6 +44,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	    'user_confirmed'=>'boolean',                   
 	];
 	
+	public static $fbRules=[
+		'email'=>'unique:users,email',
+	];
+
 	public static $rulesChangePassword=[
 		'current_password'=>'required',
 		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
@@ -74,7 +78,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	];
 	public function getUid($uid)
 	{
-		return DB::select('select * from users where user_fb_id=?',array($uid));
+		// var_dump($uid);
+		$user= User::where('user_fb_id','=',$uid)->get(array('id'))->toArray();
+		// dd($user);
+		if($user)
+			return $user[0]['id'];
+		else
+			return null;
 	}
 	/**
 	*Function To Get 'user_id' From Users Table 

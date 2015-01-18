@@ -731,3 +731,20 @@ span.stars span {
 #venueCreate .modal-header {height: 50px;padding-top: 0px;}
 #venueCreate .modal-footer {height: 55px;padding-top: 10px;}
 #venueCreate .modal-body {padding-bottom: 0px;}
+
+#instituteEdit
+{
+  text-align:center
+}
+
+#instituteEdit .glyphicon
+{
+  font-size: 13px;
+  margin-right: 3px;
+}
+
+#instituteEdit button
+{
+  padding: 0px 10px 0px 05px;
+  height: 30px;
+}

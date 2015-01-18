@@ -75,7 +75,7 @@
 								<div class="col-md-12 col-xs-12 col-sm-12 column">
 									<div class="col-md-12 col-xs-12 col-sm-12 column">
 										<div class="col-md-8 col-xs-12 col-sm-8 column">
-											<span id="batch_name"> <a href="/batches/batchID">{{$data->batch}} </a> </span>
+											<span id="batch_name"> <a href="/batches/batchID" >{{$data->batch}} </a> </span>
 											<span class="inst_name">{{$data->institute}}</span>
 										</div>
 										<div class="col-md-4 col-xs-12 col-sm-4 column">
@@ -90,10 +90,10 @@
 										<center><img src="{{$institute_photo_path}}" class="institute-profile-pic"></center>
 									</div>
 									<div class="col-md-6 col-xs-12 col-sm-8 column">
-										<div id="inst_contact"  onClick="show_contact({{$index}})" class="col-md-5 col-xs-12 col-sm-4 column"><div style="display:none;" id="contact{{$index}}"><span id="cell-icon" class="glyphicon glyphicon-phone-alt"></span>{{' '.$data->venue_contact_no}}</div>
-											<div id="show_contact{{$index}}"><span id="cell-icon" class="glyphicon glyphicon-phone-alt"></span> View Phone Number</div>
+										<div id="inst_contact"  onClick="show_contact({{$index}})" class="col-md-5 col-xs-12 col-sm-4 column"><div style="display:none;" id="contact{{$index}}"><span id="cell-icon" style="margin-top:3px;" class="glyphicon glyphicon-phone-alt"></span>{{' '.$data->venue_contact_no}}</div>
+											<div id="show_contact{{$index}}"><span id="cell-icon" style="margin-top:3px;" class="glyphicon glyphicon-phone-alt"></span> View Phone Number</div>
 										</div>
-										<div href='#sendMessage' data-toggle='modal' data-batch="{{$data->batch}}" data-email="{{$data->venue_email}}" data-institute="{{$data->institute}}" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>
+										<div href='#sendMessage' data-toggle='modal' data-batch="{{$data->batch}}" data-email="{{$data->venue_email}}" data-institute="{{$data->institute}}" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' style="margin-top:3px;" class='glyphicon glyphicon-envelope'></i> Send Message</div>
 										<div id="inst_details" class="col-xs-12">
 											<div id="inst_type" ><span id="hand-icon">☛</span>Type: {{$data->subcategory}}, {{$data->category}}</div>
 											<div id="inst_price" ><span id="hand-icon">☛</span>Price:  ₹ {{$data->batch_price}}</div>
@@ -134,17 +134,18 @@
 		         @endforeach    
 		    	</ul>
 		    <center><button onClick="moreBatches()" type="submit" name="update_results" class="btn btn-primary" id='loadmorebutton'>More Batches</button></center>
-		    <br><br>
+		    
 		</div>
 	</div>
+	<br><br>
 @stop
 @section('pagejquery')
 <script type="text/javascript">
 	var range = 0;
-	displayList(0,1);
-	var batchedCount = $("#vendor_batches_list li").length;
+	displayList(0,1);	
 	function displayList(start,end)
 	{
+		var batchCount = $("#vendor_batches_list li").length;
 		var index = 0;
 		$("#vendor_batches_list li").each(function () 
 		{	
@@ -156,10 +157,12 @@
 			index++;
 		});
 		range = end;
-		if(range>=batchedCount)
+		if(range>=batchCount)
 		{
 			$('#loadmorebutton').css('display','none');
+
 		}
+
 	
 		//triggered when modal is about to be shown
 		$('#sendMessage').on('show.bs.modal', function(e) {

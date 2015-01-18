@@ -26,8 +26,10 @@
 				<li><span class="glyphicon fa fa-fw fa-twitter"></span><a href="{{$instituteDetails->institute_twitter}}">{{$instituteDetails->institute_twitter}}</a></li>
 				<li><span class="glyphicon fa fa-w fa-facebook"></span><a href="{{$instituteDetails->institute_fblink}}">{{$instituteDetails->institute_fblink}}</a></li>
 			</div>
-
-			<a href="/institutes/edit/{{$instituteDetails->id}}">Edit</a>
+		</div>
+		<br/>
+		<div id="instituteEdit">
+				<a style='color:blue;' href="/institutes/edit/{{$instituteDetails->id}}"><i class="glyphicon glyphicon-pencil"></i>Edit</a>
 		</div>
 	</div>
 </div>

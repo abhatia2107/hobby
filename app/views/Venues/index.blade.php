@@ -20,7 +20,7 @@
 							<br/>
 							<div class="venue">
 								<center>
-									<button type="submit" class="btn btn-primary"><a href="/venues/edit/{{$data->id}}">Edit</a></button>
+									<a href="/venues/edit/{{$data->id}}"><button type="submit" class="btn btn-primary">Edit</button></a>
 									<button class="btn btn-primary"><a  href="/venues/delete/{{$data->id}}">Delete</a></button>
 								</center>
 							</div>
@@ -33,5 +33,8 @@
     <div class="modal fade" id="venueCreate" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    @include('Modals.venue')
 </div>
+<script type="text/javascript">
+	 navActive('navbar-vendor-venues');
+</script>
 @stop
 

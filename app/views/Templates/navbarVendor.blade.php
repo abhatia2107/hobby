@@ -10,10 +10,10 @@
         </div>
         <div class="collapse navbar-collapse" id="vendorNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="/institutes/show/{{$institute_id}}">Institute Profile</a></li>
-                <li><a href="/batches">My Batches</a></li>
-                <li><a href="/venues">My Venues</a></li>
-                <li><a href="/batches/create">Create a Batch</a></li>
+                <li id="navbar-vendor-profile"><a href="/institutes/show/{{$institute_id}}">Institute Profile</a></li>
+                <li id="navbar-vendor-batches"><a href="/batches">My Batches</a></li>
+                <li id="navbar-vendor-venues"><a href="/venues">My Venues</a></li>
+                <li id="navbar-vendor-createBatch"><a href="/batches/create">Create a Batch</a></li>
             </ul>
         </div>
     </div>

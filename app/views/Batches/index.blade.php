@@ -184,5 +184,6 @@
    	{
    	  $('span.stars').stars();
    	});
+	 navActive('navbar-vendor-batches');
 </script>
 @stop

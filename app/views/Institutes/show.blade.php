@@ -31,4 +31,7 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	 navActive('navbar-vendor-profile');
+</script>
 @stop

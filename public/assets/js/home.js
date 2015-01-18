@@ -41,7 +41,7 @@
   }
   function navActive(navID)
   {
-       $('#'+navID).addClass("active");
+    $('#'+navID).addClass("active");
   }
 
   

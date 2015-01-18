@@ -24,7 +24,7 @@
     .btn-file {
         position: relative;
         overflow: hidden;
-        font-size:20px;background-color:#3A8AF1;color:white;
+        font-size:20px;background:#3A8AF1;color:white;
     }
     .btn-file input[type=file] {
         position: absolute;
@@ -95,7 +95,7 @@
 	.radio_data
 	{
 		position:relative;
-		top:-7px;
+		top:1px;
 	}
     </style>
 @stop
@@ -163,7 +163,6 @@
                     </select>
                 </div>
             </div>
-
         </div>
         <div class="row ">
             <div class="form-group">
@@ -369,14 +368,16 @@
 </div>
 </div>
 </div>
-
 <div class="modal fade" id="venueCreate" ="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     @include('Modals.venue')
 </div>
+
+</script>
 @stop
 @section('pagejquery')
 <script type="text/javascript">
     $(document).ready(function(){
+        navActive('navbar-vendor-createBatch');
         $("#session1").change(function(e){
             if($("#session1").val()==1)
             {

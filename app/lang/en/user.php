@@ -40,6 +40,8 @@
 
 		"user_password_change_failed"=>"Your current password is incorrect",
 
+		"user_permission_failed"=>"We're unable to get permission from your Facebook account.",
+
 		//admin
 		"user_enabled"=>"Your user have been enabled successfully",
 		

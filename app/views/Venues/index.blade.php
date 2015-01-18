@@ -21,7 +21,8 @@
 							<div class="venue">
 								<center>
 									<a href="/venues/edit/{{$data->id}}"><button type="submit" class="btn btn-primary">Edit</button></a>
-									<button class="btn btn-primary"><a  href="/venues/delete/{{$data->id}}">Delete</a></button>
+									<!-- </button> -->
+									<a href="/venues/delete/{{$data->id}}"><button class="btn btn-primary">Delete</button></a>
 								</center>
 							</div>
 						</div>

@@ -10,6 +10,7 @@
                     <h4 class="modal-title" id="myModalLabel2">Login</h4>
                     Not a member yet? <a href="#" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Sign Up</a>
                 </div>
+                <a href="/login/fb">Signin Via Facebook</a>
                 <div class="modal-body" >
                     <div class="clearfix">
                         <div class="form-group">
@@ -80,8 +81,8 @@
                                         message: 'The password must be more than 8 and less than 20 characters long'
                                     },
                                     regexp: {
-                                        regexp: /^[a-zA-Z0-9!@#$%&_]+$/,
-                                        message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,%,&,_'
+                                        regexp: /^[a-zA-Z0-9!@#$-%&_]+$/,
+                                        message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,-,%,&,_'
                                     }
                                 }
                             },

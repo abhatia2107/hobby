@@ -7,16 +7,16 @@
          <div>
             <h1>{{$homeLang['home_title']}}</h1>
             <h2>{{$homeLang['home_subtitle']}}</h2>
-         </div>
+         </div><br>
          <div  data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">   
             <form action="/filters/search" method="get" role="form">
                <div class="row">
-                  <div class="col-md-3 col-sm-3">
+                  <div class="col-md-4 col-sm-3">
                      <div class="form-group" >
-                        <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='keyword' id='search_keywords' placeholder='{{$homeLang['home_keyword']}}' />
+                        <input type="text" class="form-control"  name='keyword' id='search_keywords' placeholder='{{$homeLang['home_keyword']}}' />
                      </div>
                   </div>
-                  <div class="col-md-3 col-sm-3">
+                  <div class="col-md-4 col-sm-3">
                      <div class="form-group" >
                         <select name="category_id" id="search_categories" class="postform element-select" >
                            <option value="0">{{$homeLang['home_category']}}</option>
@@ -28,7 +28,7 @@
                         </select>
                      </div>
                   </div>
-                  <div class="col-md-3 col-sm-3">
+                  <!--<div class="col-md-3 col-sm-3">
                      <div class="form-group" >
                         <select name="location_id" id="search_locations" class="postform">
                            <option value="0">{{$homeLang['home_location']}}</option>
@@ -39,7 +39,7 @@
                            @endif
                         </select>
                      </div>
-                  </div>
+                  </div> -->
                   <input type="hidden" name="chunk" value="0">
                   <div class="col-md-3 col-sm-3">
                      <button type="submit" class="btn btn-primary">{{$homeLang['home_search_button_text']}}</button>
@@ -57,14 +57,6 @@
    <div class="row" id='category-list-items'>
       @if(isset($categories))
          @foreach($categories as $data)
-           <!-- <div class="category-list-items col-xs-12 col-sm-6 col-md-3 column">
-               <div class="overlay-image">
-               <div class="col-xs-12 col-sm-6 col-md-12 home_category_image">
-                  <img src="/assets/images/home/category.jpg">
-                  <a href="/categories/{{$data->id}}" class="cover-wrapper">{{$data->category}}</a>
-               </div>
-               </div>
-            </div>-->
             <div class="col-xs-12 col-sm-4 col-md-3 column">
             <div class="home-category-type">
                <a style="cursor:pointer" href='/filter/categories/{{$data->id}}/locations/0'><div class="photo_caption">{{$data->category}}</div></a>

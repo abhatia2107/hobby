@@ -1,106 +1,89 @@
 @section("login")
 <div class="modal-dialog">
-        <div class="modal-content">
-            <form name="login" class="login" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel2">Login</h4>
+    <div class="modal-content">
+        <form name="login" class="login" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
+            <div class="modal-header">
+                <div type="button" class="close" title="Close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </div>
+                <h3 class="modal-title" id="myModalLabel2">LogIn</h3>
+            </div>
+            <div class="modal-body" >
+                <div class="sign_up_opt">
                     Not a member yet? <a href="#" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Sign Up</a>
                 </div>
-                <a href="/login/fb">Signin Via Facebook</a>
-                <div class="modal-body" >
-                    <div class="clearfix">
-                        <div class="form-group">
-                            <label for="email" class="col-sm-3 control-label ">Email&nbsp;
-                                <span class="required">*</span>
-                            </label>
-                            <div class="col-sm-8">
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="email"  id="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="clearfix">
-                        <div class="form-group">
-                            <label for="password" class="col-sm-3 control-label ">Password&nbsp;
-                                <span class="required">*</span>
-                            </label>
-                            <div class="col-sm-8">
-                                <input type="password"   class="form-control " name="password"  id="password">
-                            </div>
-                        </div>
-                    </div>
-                        <div class="clearfix">
-                            <div class="form-group">
-                                <div>
-                                    <div class="checkbox login-remember">
-                                        <label class="col-sm-4 control-label">
-                                            <input name="remember"  value="forever" checked="checked" type="checkbox">
-                                            Remember Me 
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                            </div>
-                            <div class="col-md-4">
-                                <a href="/users/password/remind">Forgot Your Password</a>
-                            </div>
-                        </div>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="form-group inner-addon" >
+                     <i class="glyphicon glyphicon-envelope left-addon"></i>
+                     <input type="email"  placeholder="Enter Your E-Mail ID (mymail@mail.com)" class="form-control " name="email"  id="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Sign In</button>
+                <div class="form-group inner-addon">
+                    <i class="glyphicon glyphicon-lock left-addon"></i>
+                     <input type="password" class="form-control " name="password" placeholder="Enter Your Password" id="password">
                 </div>
-            </form>
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    
-                    $('.login').bootstrapValidator({
-                        message: 'This value is not valid',
-                        feedbackIcons: {
-                            valid: 'glyphicon glyphicon-ok',
-                            invalid: 'glyphicon glyphicon-remove',
-                            validating: 'glyphicon glyphicon-refresh'
-                        },
-                        fields: {
-
-                            password: {
-                                message: 'The password is not valid',
-                                validators: {
-                                    notEmpty: {
-                                        message: 'The password is required and cannot be empty'
-                                    },
-                                    stringLength: {
-                                        min: 8,
-                                        max: 20,
-                                        message: 'The password must be more than 8 and less than 20 characters long'
-                                    },
-                                    regexp: {
-                                        regexp: /^[a-zA-Z0-9!@#$-%&_]+$/,
-                                        message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,-,%,&,_'
-                                    }
-                                }
-                            },
-
-                            email: {
-                                validators: {
-                                    notEmpty: {
-                                        message: 'The email is required and cannot be empty'
-                                    },
-                                    emailAddress: {
-                                        message: 'The input is not a valid email address'
-                                    }
-                                }
-                            }
-                        }
-                    });
-                });
-            </script>
-        </div>
+                <div class="row">
+                    <div class="form-group rememberMe col-md-6 col-sm-6 col-xs-6">                               
+                        <label class="control-label">
+                            <input name="remember"  value="forever" checked="checked" type="checkbox">
+                            Remember Me 
+                        </label>                                                             
+                    </div>                
+                    <div class="forgetPassword col-md-6 col-sm-6 col-xs-6">
+                        <a href="/users/password/remind">Forgot Password?</a>
+                    </div>
+                </div>
+                <div class="signin_button"><button type="submit" class="btn btn-primary">LogIn</button></div>
+            </div>
+            <div class="modal-footer">
+                <center>                 
+                <a href="/login/fb"><img height="35px" src="/assets/images/login_facebook.png"></a>
+                </center>
+            </div>
+        </form>
     </div>
+</div>
+<script type="text/javascript" >
+    $(document).ready(function(){
+        
+        $('.login').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+
+                password: {
+                    message: 'The password is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'The password is required and cannot be empty'
+                        },
+                        stringLength: {
+                            min: 8,
+                            max: 20,
+                            message: 'The password must be more than 8 and less than 20 characters long'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9!@#$-%&_]+$/,
+                            message: 'The password can only consist of alphabetical, number and following special symbol !,@,#,$,-,%,&,_'
+                        }
+                    }
+                },
+
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The email is required and cannot be empty'
+                        },
+                        emailAddress: {
+                            message: 'The input is not a valid email address'
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
 @show

@@ -26,8 +26,7 @@ class FiltersController extends \BaseController {
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$chunk=$chunk*100;
 		$batchesForCategoryLocation=$this->batch->search($keyword,$category_id,$location_id,$chunk);
-		$batchesArray=$batchesForCategoryLocation->toarray();
-		if(empty($batchesArray))
+		if(empty($batchesForCategoryLocation->toarray()))
 		{
 			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
@@ -63,7 +62,7 @@ class FiltersController extends \BaseController {
 				return $batchesForCategoryLocation="Empty";
 		}
 		else{
-			if(empty($batchesArray))
+			if(empty($batchesForCategoryLocation->toArray()))
 			{
 				$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 			}

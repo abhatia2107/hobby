@@ -291,6 +291,4 @@ class Batch extends \Eloquent {
         else
             return false;
     }
-
-
 }

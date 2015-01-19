@@ -1,14 +1,13 @@
 @section("navbar")
 <nav class="navbar navbar-inverse" >
     <div class="container-fluid">
-        <a class="navbar-brand btn btn-primary navbar-right" href="/batches">Host Panel</a>
-        <div class="navbar-header">
+        <a class="btn btn-primary navbar-right" href="/batches">Host Panel</a>
+        <div class="navbar-header min-button">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>                
-            </button>
-            
+            </button>   
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">

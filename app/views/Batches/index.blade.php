@@ -46,7 +46,7 @@
 			</div>
 			<div class="vendor_institute_batches col-md-10 col-xs-12 col-sm-11">
 				<div class="vendor_batches_title">
-					<button class="btn btn-primary"><a href="/batches/create">Add a Batch</a></button>
+					<a href="/batches/create"><button class="btn btn-primary">Add a Batch</button></a>
 			   		<h1>My Batches</h1>
 			   	</div><br><br>
 			   	<ul class="list-unstyled" id="vendor_batches_list" >

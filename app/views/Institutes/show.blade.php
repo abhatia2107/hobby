@@ -8,7 +8,7 @@
 				<h1>{{" ".$instituteDetails->institute}}</h1>
 			</div>
 			<div class="col-md-1 col-xs-12 col-sm-4 column">
-				<div class="inscore"><span id="rating-value">{{$instituteDetails->institute_rating}}</span></div><br>
+				<div class="inscore"><span id="rating-value">{{$instituteDetails->institute_rating}}</span></div>
 				<span style="clear:both;position:relative"class="stars">{{$instituteDetails->institute_rating}}</span>
 			</div>
 		</div>
@@ -27,7 +27,6 @@
 				<li><span class="glyphicon fa fa-w fa-facebook"></span><a href="{{$instituteDetails->institute_fblink}}">{{$instituteDetails->institute_fblink}}</a></li>
 			</div>
 		</div>
-		<br/>
 		<div id="instituteEdit">
 				<a style='color:blue;' href="/institutes/edit/{{$instituteDetails->id}}"><i class="glyphicon glyphicon-pencil"></i>Edit</a>
 		</div>

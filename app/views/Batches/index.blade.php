@@ -5,7 +5,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" id='close_model' class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<center>Send Message To Institute</center>
+					Send Message To Institute
 			</div>
 			<div class="modal-body">
 				<form action="/batches/sendMessage" method="post" enctype="multipart/form-data" role="form">
@@ -31,7 +31,7 @@
 					  <textarea class="form-control" rows="3" name='msgInputMessage' id="comment"></textarea>
 					</div>
 					<div class="modal-footer">
-						 <center><button type="submit" class="btn btn-primary">Send Message</button></center>
+						 <button type="submit" class="btn btn-primary">Send Message</button>
 					</div>
 				 </form>
 			</div>
@@ -41,14 +41,14 @@
 	<div class="home_vendor_page">
 		@include('Templates.navbarVendor')
 		<?php $days = array("day1" => "M","day2" => "T","day3" => "W", "day4" => "T","day5" => "F","day6" => "S","day7" => "S"); ?>
-		<div class="container">
+		<div class="container" id="vendor_institute_batches">
 			<div class="col-md-1 col-xs-12 col-sm-1">
 			</div>
 			<div class="vendor_institute_batches col-md-10 col-xs-12 col-sm-11">
 				<div class="vendor_batches_title">
 					<a href="/batches/create"><button class="btn btn-primary">Add a Batch</button></a>
 			   		<h1>My Batches</h1>
-			   	</div><br><br>
+			   	</div>
 			   	<ul class="list-unstyled" id="vendor_batches_list" >
 		         @foreach($batchDetails as $index => $data)
 		         	<?php 
@@ -102,7 +102,7 @@
 									</div>
 									<div class="col-md-3 col-xs-12 col-sm-4 column" id="rating-schedule" style="">
 										<div id='rating' style="margin-left:50px;">
-											<div class="inscore" style="margin-left:18px;"><div id="rating-value">{{$data->institute_rating}}</div></div><br>
+											<div class="inscore" style="margin-left:18px;"><div id="rating-value">{{$data->institute_rating}}</div></div>
 											<span style="clear:both;position:relative"class="stars">{{$data->institute_rating}}</span>
 										</div>
 										<div style="margin-left:43px;margin-top:17px">Batch Schedule</div>
@@ -110,7 +110,7 @@
 										@foreach($days as $key => $day)
 											<div id="{{$key}}" class="day">{{$day}}</div>
 										@endforeach
-										</div><br>
+										</div>
 										<div class="edit_delete_buttons">
 											<a href="/batches/edit/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Edit</button></a>
 											<a href="/batches/disable/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Delete</button></a>
@@ -133,11 +133,9 @@
 						</li>
 		         @endforeach    
 		    	</ul>
-		    <center><button onClick="moreBatches()" type="submit" name="update_results" class="btn btn-primary" id='loadmorebutton'>More Batches</button></center>
-		    
+		    <div id='loadmorebutton'><button onClick="moreBatches()" type="submit" name="update_results" class="btn btn-primary">More Batches</button></div>
 		</div>
 	</div>
-	<br><br>
 @stop
 @section('pagejquery')
 <script type="text/javascript">

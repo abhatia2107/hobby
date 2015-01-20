@@ -19,75 +19,15 @@ body li
 }
 .header_location_dropdown
 {
-    margin-top: 0px;
+    margin-top: 6px;
     font-size:10px;
     height:37px;
     width:100% !important;
 }
-.header_signin
-{
-    padding-top: 15px;
-    font-size: 15px;
-    width:50%;
-    padding-left:45px !important;
-    color:white;
-}
-.header_signup
-{
-    padding-top: 15px;
-    font-size: 15px;   
-    color:white;
-}
-.header_signin_a {
-    color:white;
-    text-decoration:none;
-}
-.header_signin_a:hover {
-    color:white;
-    text-decoration:none;
-}
-.header_signup_a {
-    color:white;
-    text-decoration:none;
-}
-.header_signup_a:hover {
-    color:white;
-    text-decoration:none;
-}
-.header_myaccount{
-    padding-top: 15px;
-    font-size: 15px;
-    width:50%;
-    padding-left:45px !important;
-    color:white;
-}
-.header_myaccount_a {
-    color:white;
-    text-decoration:none;
-}
-.header_myaccount_a:hover {
-    color:white;
-    text-decoration:none;
-}
-.header_logout
-{
-    padding-top: 15px;
-    font-size: 15px;
-    color:white;
-}
-.header_logout_a
-{
-    color:white;
-    text-decoration: none;
-}
-.header_logout_a:hover
-{
-    color:white;
-    text-decoration: none;
-}
+
 .header_search_button{
     height: 34px;
-    margin-top: 1px;
+    margin-top: 0px;
     font-size: 18px !important;
     padding-top: 5px !important;"
 }
@@ -106,6 +46,20 @@ body li
     border-radius: 0px;
     width: 100%;
     padding-right: 20px;
+}
+.navbar-right
+{
+  margin-right: -25px !important;
+  margin-top: 7px;
+}
+.navbar-right 
+{
+  padding-top: 7px;
+  height: 35px !important;
+}
+.min-button
+{
+  float: right;
 }
 @media (min-width:768px) {
     .homepage-cover {
@@ -461,7 +415,7 @@ span.stars span {
 
     #fiter-text { font-weight: lighter;  margin-top: -17px; margin-left: 16px;  }
 
-    .resultsMessage { font-size:20px;  background: lightgray;  height: 40px;  padding:5px;  }
+    .resultsMessage { font-size:20px;  background: lightgray;  height: 40px;  padding:5px; text-align: center;  }
 
     #noResults   {  display: none;  }
 
@@ -526,6 +480,8 @@ span.stars span {
   #inst_details { margin-top: 7px;margin-bottom: 10px;  }
 
   #batch-schedule { margin-top: 10px;text-align: center;  }
+
+  #batch-schedule-title {text-align: center;}
 
   .sendMessage a  { color: #333;  }
 
@@ -628,6 +584,10 @@ span.stars span {
         -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5); 
         border-radius: 5px;
   }
+  #vendor_institute_batches
+  {
+    padding-bottom: 50px;
+  }
   .vendor_institute_batches .day
   {
     margin-top: 8px;
@@ -641,6 +601,11 @@ span.stars span {
     font-weight: bolder;
     border-bottom-color: skyblue;
     border-bottom:2px dashed;
+  }
+
+  #vendor_batches_list
+  {
+    margin-top: 20px;
   }
     .edit_delete_buttons
     {
@@ -805,4 +770,41 @@ span.stars span {
 {
   padding: 0px 10px 0px 05px;
   height: 30px;
+}
+.required
+{
+  color: red;
+}
+.userInfoListing
+{
+  text-align: right;
+  font-size: 18px;
+  padding-top: 13px;
+}
+.MainHeaderUserInfo
+{
+  padding-right: 30px;
+  text-align: right;
+   font-size: 18px !important;
+}
+.MainHeaderUserInfo a,.userInfoListing a
+{
+  text-decoration: none;
+  color: white;
+}
+.login-singup
+{
+  padding-right: 10px;
+}
+.modal-header, .modal-footer, #loadmorebutton, .venues-list-buttons
+{
+  text-align: center;
+}
+#loadmorebutton, .results-container
+{
+  padding-bottom: 20px;
+}
+.venues-list-container
+{
+  margin-top: 20px;
 }

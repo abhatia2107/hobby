@@ -11,7 +11,7 @@
 			</a>
 		</div>
 			
-		<div class="col-sm-6 col-md-6" >
+		<div class="col-sm-6 col-md-6">
 			<form class="navbar-form" action="/filters/search" method="get" role="search">
 				<div class="input-group search-box">
 					<input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword" >
@@ -36,37 +36,28 @@
 			}
 		?>
 		@if(!$id)
-			<div class=" col-sm-3 col-md-3 ">
-				<ul class="list-inline">
-					<li class="header_signin" >   
-						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
-					</li>
-					<li class="header_signup">
-						<a  class="header_signup_a" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>
-					</li>
-				</ul>
+			<div class=" col-sm-3 col-md-3 userInfoListing" >
+				<div class="login-singup">
+					<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">LogIn</a>
+					&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a  class="header_signup_a" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>					
+				</div>
 			</div>
 		@else
-			<div class=" col-sm-3 col-md-3 ">
-			<ul class="list-inline">
-			<li class="header_myaccount" >   
+			<div class=" col-sm-3 col-md-3 userInfoListing ">			 
 			<a class="header_myaccount_a" href="/users/show/{{$id}}">
 				@if($user)
 					{{$name}}'s 
 				@else
 					My
 				@endif
-				Account
-			</a>
-			</li>
-			<li class="header_logout" >
-			<a class="header_logout_a" href="/users/logout" >Logout</a>
-			</li>
-			</ul>
+				Account 
+			</a>&nbsp;|&nbsp;
+			<a class="header_logout_a" href="/users/logout" >Logout</a>			
 			</div>		
 		@endif
 			
-		<div class=" col-sm-1 col-md-1 ">
+		<div class="col-sm-1 col-md-1">
 			<select  name="location_id" class="header_location_dropdown">
 				@if(isset($locations))
 					@foreach ($locations as $data)

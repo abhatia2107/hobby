@@ -7,23 +7,19 @@
 				<div class="vendor_batches_title">
 		   			<button class="btn btn-primary" data-toggle="modal" data-target="#venueCreate">Add Venue</button>
 			   		<h1>My Venues</h1>
-			   	</div><br/><br/>
+			   	</div>
 			   	@foreach($venues as $data)
-					<div class="col-md-4 col-xs-12 col-sm-4">
+					<div class="col-md-4 col-xs-12 col-sm-4 venues-list-container">
 						<div class="venues_list">
-							<div class="venues_list_tittle">{{$data->venue}}</div>
-							<br/>
-							<div class="venue_info"><span class='tag'>Address: </span>{{$data->venue_address}}, {{$data->locality}}, {{$data->location}}, {{$data->venue_pincode}}</div>
+							<div class="venues_list_tittle">{{$data->venue}}</div>							
+							<div class="venue_info venues-list-container"><span class='tag'>Address: </span>{{$data->venue_address}}, {{$data->locality}}, {{$data->location}}, {{$data->venue_pincode}}</div>
 							<div class="venue_info"><span class='tag'>Contact No.: </span>{{$data->venue_contact_no}}</div>
 							<div class="venue_info"><span class='tag'>E-Mail: </span>{{$data->venue_email}}</div>
-							<div class="venue_info"><span class='tag'>Land Mark: </span>{{$data->venue_landmark}}</div>
-							<br/>
-							<div class="venue">
-								<center>
+							<div class="venue_info"><span class='tag'>Land Mark: </span>{{$data->venue_landmark}}</div>					
+							<div class="venue venues-list-buttons">							
 									<a href="/venues/edit/{{$data->id}}"><button type="submit" class="btn btn-primary">Edit</button></a>
 									<!-- </button> -->
-									<a href="/venues/delete/{{$data->id}}"><button class="btn btn-primary">Delete</button></a>
-								</center>
+									<a href="/venues/delete/{{$data->id}}"><button class="btn btn-primary">Delete</button></a>								
 							</div>
 						</div>
 					</div>  		

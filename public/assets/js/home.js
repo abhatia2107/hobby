@@ -43,5 +43,9 @@
   {
     $('#'+navID).addClass("active");
   }
+  function refreshForm(formId)
+  {
+        $(formId).load(document.URL  + ' '+formId); 
+  }
 
   

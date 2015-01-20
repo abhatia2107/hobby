@@ -1,14 +1,14 @@
 @section("login")
-<div class="modal-dialog">
+<div class="modal-dialog" id="loginForm">
     <div class="modal-content">
         <form name="login" class="login" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
             <div class="modal-header">
-                <div type="button" class="close" title="Close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
+                <div type="button" class="close" title="Close"  data-dismiss="modal">
+                    <span onClick="refreshForm('#loginForm')" aria-hidden="true">&times;</span>
                 </div>
                 <h3 class="modal-title" id="myModalLabel2">LogIn</h3>
             </div>
-            <div class="modal-body" >
+            <div class="modal-body">
                 <div class="sign_up_opt">
                     Not a member yet? <a href="#" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Sign Up</a>
                 </div>
@@ -34,10 +34,8 @@
                 </div>
                 <div class="signin_button"><button type="submit" class="btn btn-primary">LogIn</button></div>
             </div>
-            <div class="modal-footer">
-                <center>                 
-                <a href="/login/fb"><img height="35px" src="/assets/images/login_facebook.png"></a>
-                </center>
+            <div class="modal-footer">                               
+                <a href="/login/fb"><img height="35px" src="/assets/images/login_facebook.png"></a>                
             </div>
         </form>
     </div>

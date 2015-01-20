@@ -1,12 +1,11 @@
 @section('venue')
 <!--<div class="modal fade" id="venueCreate" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="venueCreateForm">
         <div class="modal-content">
             <form name="venueform" action="@if(isset($venueDetails)){{"/venues/update/$venueDetails->id"}}@else{{"/venues/store"}}@endif" method="post" enctype="multipart/form-data" id="venueform" role="form">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
+                        <span onClick="refreshForm('#venueCreateForm')" aria-hidden="true" title="close">&times;</span>                        
                     </button>
                     <div class="title"><center>
                         <h3>

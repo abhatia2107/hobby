@@ -38,6 +38,6 @@
 			</footer>		
 	    @yield('pagejavascript')	    
 	    <!--this page specific jquery-->
-	    @yield('pagejquery')
+	    @yield('pagejquery')	   
 	</body>
 </html>

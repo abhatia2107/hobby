@@ -5,7 +5,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" id='close_model' class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<center>Send Message To Institute</center>
+					Send Message To Institute
 			</div>
 			<div class="modal-body">
 				<form action="/batches/sendMessage" method="post" enctype="multipart/form-data" role="form">
@@ -69,8 +69,7 @@
 							 @endforeach
 						 </ul> 
 						 <hr>
-					</div>
-					<br>
+					</div>			
 					<div id="browse-filter" class="filter-option-2">	
 						<h4>Locality</h4> 
 						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
@@ -98,11 +97,11 @@
 						 <hr>
 					</div>
 				</div>
-				<div class="col-md-9 col-xs-11 col-sm-9 column" style=" font-family: "Times New Roman", Times, serif;" >
+				<div class="col-md-9 col-xs-11 col-sm-9 column results-container" >
 					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
-					<div id="loadMore" class='resultsMessage'><center><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</center></div>
-					<div id="noResults" class='resultsMessage' ><center>No More results to display.</center></div><br><br>
+					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div>
+					<div id="noResults" class='resultsMessage' >No More results to display.</div>
 				</div><!--end of results info -->
 			</div>
 		</div>
@@ -224,7 +223,7 @@
 									"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
 										"<div class='col-md-8 col-xs-12 col-sm-8 column'>"+
 											"<span id='batch_name'><a href='/batches/show/"+batchID+"' >"+batch+"</span></a>"+
-											"<br><span class='inst_name'>"+institute+".</span>"+
+											"<span class='inst_name'>"+institute+".</span>"+
 										"</div>"+
 										"<div class='col-md-4 col-xs-12 col-sm-4 column'>"+
 											"<span id='tag-icon' ><span class='glyphicon glyphicon glyphicon-tags'></span>"+trials[trialID]+"</span>"+	
@@ -249,9 +248,9 @@
 										"</div>"+
 									"</div>"+
 									"<div class='col-md-3 col-xs-12 col-sm-4 column' id='rating-schedule'>"+
-									"<div class='inscore' style='margin-left:64px;'><div id='rating-value'>"+institute_rating+"</div></div><br>"+
+									"<div class='inscore' style='margin-left:64px;'><div id='rating-value'>"+institute_rating+"</div></div>"+
 											"<span style='clear:both;margin-left:46px;position:relative' class='stars'>"+institute_rating+"</span>"+
-										"<div id='batch-schedule'><center>Batch Schedule</center><div id='day1' class='day'>M</div><div id='day2' class='day'>T</div><div id='day3' class='day'>W</div>"+
+										"<div id='batch-schedule'><div id='batch-schedule-title'>Batch Schedule</div><div id='day1' class='day'>M</div><div id='day2' class='day'>T</div><div id='day3' class='day'>W</div>"+
 										"<div id='day4' class='day'>T</div><div id='day5' class='day'>F</div><div id='day6' class='day'>S</div><div id='day7' class='day'>S</div></div>"+
 									"</div>"+
 							"</div>"+

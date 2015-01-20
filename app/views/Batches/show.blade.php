@@ -161,6 +161,30 @@
         height: 53px;
         margin-right: 5px;
     }
+    .samplePageInfo
+    {
+      background: rgba(0, 0, 0, 0.4);
+      color: white;
+    }
+    .submitReviewButton
+    {
+      text-align: center;   
+      padding-bottom: 10px;  
+    }
+    @media (min-width:768px) {
+    .submitReviewButton {
+        padding: 4.5em 0 2em;
+    }
+}
+  .social-profiles-container
+  {
+    margin-top: 15px;
+    text-align: center;
+  }
+  .details-container
+  {
+    margin-top: 15px;
+  }
 
 
 
@@ -192,35 +216,18 @@
 
 <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
   <div id="content" class="site-content">
-    <div class="single_job_listing" itemscope="" itemtype="http://schema.org/LocalBusiness"  data-grid-columns="col-xs-12 col-sm-6">
-      <div class="listing-cover content-single-job_listing-hero has-image">
-        <div class="content-single-job_listing-hero-wrapper cover-wrapper container">
-          <div class="content-single-job_listing-hero-inner row">
-            <div class="col-sm-8 col-md-9">
-              <div id='sample-institute-name'>{{$instituteName}}</div>
-              <div id='sample-batch-type'>{{'  '.$subcategory}},{{' '.$category}}</div>
-              <div id='sample-institute-address'><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$instituteAddress}}</div>
-              <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  '.$instituteContact}}</div>
-            </div>
-            <div class="col-sm-4 col-md-3">
-              <!-- <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" class="job_listing-rating-wrapper" title="4 Reviews">
-                 <span class="job_listing-rating-stars">
-                    <span class="stars-rating">
-                    </span>
-                 </span>
-                 <span class="job_listing-rating-count">
-                    <span itemprop="reviewCount">4</span> 
-                    Reviews  
-                 </span>
-              </div>
-              <span class="wp-job-manager-bookmarks-count">
-                 15 Favorites  
-              </span> -->
-              <div class="content-single-job_listing-actions-start">
-                 <!-- <button  class="btn btn-primary">Share</button> -->
-                 <button class="btn btn-primary">Submit a Review</button>
-              </div>
-            </div>
+    <div class="samplePageInfo cover-wrapper ">
+      <div class="container">
+        <div class="col-sm-10 col-md-10">
+          <div id='sample-institute-name'>{{$instituteName}}</div>
+          <div id='sample-batch-type'>{{'  '.$subcategory}},{{' '.$category}}</div>
+          <div id='sample-institute-address'><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$instituteAddress}}</div>
+          <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  '.$instituteContact}}</div>
+        </div>
+        <div class="col-sm-2 col-md-2">
+          <div class="submitReviewButton">
+             <!-- <button  class="btn btn-primary">Share</button> -->
+             <a id="SubmitReviewButton" class="btn btn-primary">Submit a Review</a>
           </div>
         </div>
       </div>
@@ -250,18 +257,17 @@
           Difficulty Level: {{' '.$difficulty_level[$difficultyLevel]}}
         </div>
         <div id='sample-batch-description' >
-          <div id='sample-batch-name'>Batch Description</div><br>
-          <p id='sample-details'>{{$batchDescription}}</p>
+          <div id='sample-batch-name'>Batch Description</div>
+          <p id='sample-details' class="details-container">{{$batchDescription}}</p>
         </div>
         <div id="sample-batch-accomplishment">
-          <div id='sample-batch-name'>Accomplishment</div><br>
-           <p id='sample-details'> {{$batchAccomplishment}}</p>
+          <div id='sample-batch-name'>Accomplishment</div>
+           <p id='sample-details' class="details-container"> {{$batchAccomplishment}}</p>
         </div>
       </div>
-      <br>
       <div id="comments" class="sample-box">
-        <div id='sample-batch-name'>Write a Review</div><br>
-        <form  action='/comments/store/' method='post' enctype="multipart/form-data" method="post" id="commentform" class="comment-form" novalidate="">
+        <div id='sample-batch-name'>Write a Review</div>
+        <form  action='/comments/store/' method='post' id="commentsForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
           <div class="form-group" id='rating-input'>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="comment_institute_id" value="{{$instituteID}}">
@@ -284,29 +290,29 @@
                 }
                 else
                 {
-                  echo '<button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-primary">Submit</button>';
+                  echo '<button type="button" data-toggle="modal" data-target="#loginModal" id="submit-btn" class="btn btn-primary">Submit</button>';
                 }
           ?>
-
         </form>               
       </div>
     </div>
    
     <div class='col-md-4 col-sm-12 col-xs-12 column'>
       <div class="sample-box-small" id='institute-details'>
-         <div id='sample-batch-name'>Institute Details</div><br>
-         <span id='sample-details'>{{$instituteDetails}}</span>    
+         <div id='sample-batch-name'>Institute Details</div>
+         <span id='sample-details' class="details-container">{{$instituteDetails}}</span>    
       </div>
      <div id='sample-social-profiles' class="sample-box-small">
-       <div id='sample-batch-name'>Social Profiles</div><br><center>
-          <a href="{{$facebookLink}}" class="sample-social-twitter"><img src="/assets/images/sample/twitter.jpg"></a>
-          <a href="http://facebook.com/Astoundify" class="sample-social-facebook"><img src="/assets/images/sample/facebook.jpg"></a>
+       <div id='sample-batch-name'>Social Profiles</div>
+          <div class="social-profiles-container">
+            <a href="{{$twitterLink}}" class="sample-social-twitter"><img src="/assets/images/sample/twitter.jpg"></a>
+            <a href="{{$facebookLink}}" class="sample-social-facebook"><img src="/assets/images/sample/facebook.jpg"></a>
          <!-- <a href="https://plus.google.com/" class="sample-social-googleplus"><img height="42px" src="/assets/images/sample/googleplus.jpg"></a>
           <a href="http://linkedin.com/Astoundify" class="sample-social-linkedin"><img src="/assets/images/sample/linkedin.jpg"></a></center> -->
+          </div>
       </div>
       <div id='sample-demo-model'  class="sample-box-small">
-        <div id='sample-batch-name'>Gallery</div><br>
-        <center>
+        <div id='sample-batch-name'>Gallery</div>     
         <ul class="listify-gallery-images">
           <li class="gallery-preview-image" >
              <a data-toggle="modal" data-target="#myModal">
@@ -323,47 +329,37 @@
                 
              </a>
           </li>
-        </ul>  </center>              
+        </ul>              
       </div>
     </div>
      <div class="col-md-1 column"></div>
   </div>
   </div>
 </div>
-<div id="sharing_email" style="display: none;">
-   <form action="" method="post">
-      <label for="target_email">Send to Email Address</label>
-      <input name="target_email" id="target_email" value="" type="email">
-      <label for="source_name">Your Name</label>
-      <input name="source_name" id="source_name" value="" type="text">
-      <label for="source_email">Your Email Address</label>
-      <input name="source_email" id="source_email" value="" type="email">
-      <img style="float: right; display: none" class="loading" src="https://demo.astoundify.com/listify/wp-content/plugins/jetpack/modules/sharedaddy/images/loading.gif" alt="loading" height="16" width="16">
-      <input value="Send Email" class="sharing_send" type="submit">
-      <a href="#cancel" class="sharing_cancel">Cancel</a>
-      <div class="errors errors-1" style="display: none;">
-         Post was not sent - check your email addresses!  
-      </div>
-      <div class="errors errors-2" style="display: none;">
-         Email check failed, please try again 
-      </div>
-      <div class="errors errors-3" style="display: none;">
-         Sorry, your blog cannot share posts by email.  
-      </div>
-   </form>
-</div>
 @stop
 @section('pagejquery')
 <script type="text/javascript">
   $(document).ready(function () 
   {
-      var categoryId = "<?php echo $loggedIn; ?>";
-     
+      var categoryId = "<?php echo $loggedIn; ?>";     
       $('.rating-input').attr('checked', false);
-     /* $('.rating').click(function(){
-        sub_select = $('.rating-input:checked').map(function(){return this.value;}).get();
-        alert(sub_select);
-      });*/
+      $('#commentsForm').click(function(e)
+      {
+        if(categoryId=="")
+        {
+          e.preventDefault();
+          e.stopPropagation();
+          $('#loginModal').modal('show') ;
+        }
+      });
+  });
+  $(function() {
+    $('#SubmitReviewButton').bind('click', function(event) {
+      $('html, body').stop().animate({
+        'scrollTop' : $("#submit-btn").position().top + 85
+      }, 1000, 'easeInOutExpo');
+      event.preventDefault();
+    });
   });
 </script>
 @stop

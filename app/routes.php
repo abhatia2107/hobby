@@ -270,4 +270,6 @@ Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{cat
 
 Route::get('/filters/search','FiltersController@search');
 
+Route::get('/prices','PricesController@create');
 
+Route::post('/prices','PricesController@store');

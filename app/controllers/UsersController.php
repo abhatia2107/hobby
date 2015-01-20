@@ -423,7 +423,9 @@ class UsersController extends \BaseController {
 	    		$profileData['user_first_name']=$userFb['first_name'];
 	    		$profileData['user_last_name']=$userFb['last_name'];
     			$profileData['email']=$userFb['email'];
-    			$profileData['user_location']=$userFb['location']->name;
+    			if(isset($userFb['location'])) {
+	    			$profileData['user_location']=$userFb['location']->name;
+    			}
     			$profileData['user_confirmed']=true;
     			$checkEmail=Validator::make(array("email"=>$userFb['email']),User::$fbRules);
 	    		// dd($checkEmail->fails());

@@ -98,6 +98,7 @@
 		top:1px;
 	}
     </style>
+    <link type="text/css" rel="stylesheet" href="/assets/css/jquery-te-1.4.0.css">
 @stop
 
 @section('content')
@@ -372,7 +373,9 @@
     @include('Modals.venue')
 </div>
 
-</script>
+@stop
+@section('pagejavascript')
+    <script type="text/javascript" src="/assets/js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 @stop
 @section('pagejquery')
 <script type="text/javascript">

@@ -22,27 +22,37 @@
                                  <li id="menu-item-248" class=" ">
                                     <span class="glyphicon glyphicon-dashboard" style="color:white" aria-hidden="true">
                                     </span>
-                                    <a href="/feedbacks/create" class="footer_links">Feedback</a>
+                                    <a href="/feedbacks/create" class="footer_links">
+                                       Feedback
+                                    </a>
                                  </li>
                                  <li id="menu-item-249" class=" ">
                                     <span class="glyphicon glyphicon-list-alt" style="color:white" aria-hidden="true">
                                     </span>
-                                    <a href="/terms" class="footer_links">Terms Of Use</a>
+                                    <!-- <a href="/terms" class="footer_links"> -->
+                                       Terms Of Use
+                                    <!-- </a> -->
                                  </li>
                                  <li id="menu-item-250" class=" ">
                                     <span class="glyphicon glyphicon-question-sign" style="color:white" aria-hidden="true">
                                     </span>
-                                    <a href="/aboutus" class="footer_links">About Hobby</a>
+                                    <!-- <a href="/aboutus" class="footer_links"> -->
+                                       About Hobby
+                                    <!-- </a> -->
                                  </li>
                                  <li id="menu-item-251" class=" ">
                                     <span class="glyphicon glyphicon-globe" style="color:white" aria-hidden="true">
                                     </span>
-                                    <a href="/blog" class="footer_links">Hobby Blog</a>
+                                    <!-- <a href="/blog" class="footer_links"> -->
+                                       Hobby Blog
+                                    <!-- </a> -->
                                  </li>
                                  <li id="menu-item-252" class=" ">
                                     <span class="glyphicon glyphicon-user" style="color:white" aria-hidden="true">
                                     </span>
-                                    <a href="/careers" class="footer_links">Careers</a>
+                                    <!-- <a href="/careers" class="footer_links"> -->
+                                       Careers
+                                    <!-- </a> -->
                                  </li>
                               </ul>
                            </div>
@@ -93,7 +103,7 @@
                </div>
                <div class="container">
                <div class=" copyright" >
-                     Copyright Hobby 2014. All Rights Reserved  
+                     Copyright Hobby 2015. All Rights Reserved  
                </div>
             </div>
 </div>

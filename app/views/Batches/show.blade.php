@@ -211,7 +211,6 @@
     $facebookLink = $data->institute_fblink;
     $twitterLink = $data->institute_twitter;    
   }
-  $loggedIn = Auth::id();
 ?>
 
 <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
@@ -284,15 +283,11 @@
             <label for="comment">Review:</label>
             <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
           </div>
-          <?php if($loggedIn)
-                {
-                  echo '<button type="submit" class="btn btn-primary">Submit</button>';
-                }
-                else
-                {
-                  echo '<button type="button" data-toggle="modal" data-target="#loginModal" id="submit-btn" class="btn btn-primary">Submit</button>';
-                }
-          ?>
+          @if($loggedIn)
+            <button type="submit" class="btn btn-primary">Submit</button>              
+          @else
+            <button type="button" data-toggle="modal" data-target="#loginModal" id="submit-btn" class="btn btn-primary">Submit</button>           
+          @endif
         </form>               
       </div>
     </div>

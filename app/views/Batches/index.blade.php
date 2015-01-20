@@ -45,9 +45,14 @@
 			<div class="col-md-1 col-xs-12 col-sm-1">
 			</div>
 			<div class="vendor_institute_batches col-md-10 col-xs-12 col-sm-11">
-				<div class="vendor_batches_title">
-					<a href="/batches/create"><button class="btn btn-primary">Add a Batch</button></a>
-			   		<h1>My Batches</h1>
+				<div class="vendor_batches_title col-md-12 col-xs-12 col-sm-12">					
+					<div class="col-md-4 col-sm-2 col-xs-12"></div> 
+					<div id="batches_title" class="col-md-4 col-xs-12 col-sm-6">
+			   			My Batches
+			   		</div>
+			   		<div id="addButton" class="col-md-4 col-xs-12 col-sm-4">
+			   			<a href="/batches/create"><button class="btn btn-primary">Add a Batch</button></a>
+			   		</div>
 			   	</div>
 			   	<ul class="list-unstyled" id="vendor_batches_list" >
 		         @foreach($batchDetails as $index => $data)

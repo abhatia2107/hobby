@@ -20,6 +20,11 @@
     $(function() 
     {
       $('span.stars').stars();
+      $('#hostPanelLogin').click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $('#loginModal').modal('show') ;
+      });
     });
    function show_contact (id) 
   {
@@ -46,6 +51,10 @@
   function refreshForm(formId)
   {
         $(formId).load(document.URL  + ' '+formId); 
+  }
+  function preventActive(e)
+  {
+   
   }
 
   

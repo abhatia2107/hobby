@@ -9,7 +9,7 @@
                     <h4 class="modal-title" id="myModalLabel1">Sign-Up</h4>
                     <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
                 </div>
-                <a href="/login/fb">Signin Via Facebook</a>
+                <center><a href="/login/fb"><img height="40px" style="margin-top:14px;" src="/assets/images/signup-with-facebook.png"></a></center>
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">
@@ -79,8 +79,7 @@
                             <input name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
                             I agree to <a href="/terms">terms and conditions.</a>
                         </label>
-                    </div>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>                    
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>

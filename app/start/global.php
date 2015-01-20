@@ -89,5 +89,7 @@ require app_path().'/filters.php';
 $categories = Category::all();
 $locations = Location::all();
 $mainAdminId = 1;
+$loggedIn = Auth::id();
 View::share('categories', $categories);
 View::share('locations',$locations);
+View::share('loggedIn',$loggedIn);

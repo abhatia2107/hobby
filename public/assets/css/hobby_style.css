@@ -601,8 +601,19 @@ span.stars span {
     font-weight: bolder;
     border-bottom-color: skyblue;
     border-bottom:2px dashed;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
   }
+  #batches_title
+  {
+    font-size: 40px;
 
+  }
+  #addButton
+  {
+    text-align: right;
+    padding-top: 14px;
+  }
   #vendor_batches_list
   {
     margin-top: 20px;
@@ -806,4 +817,8 @@ span.stars span {
 .venues-list-container
 {
   margin-top: 20px;
+}
+.addBatchButton
+{
+  text-align: center;
 }

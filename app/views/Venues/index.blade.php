@@ -3,10 +3,15 @@
 	<div class="home_vendor_page">
 		@include('Templates.navbarVendor')
 		<div class="container">
-			<div class="vendor_institute_batches venues_list_container col-md-12 col-xs-12 col-sm-12">
-				<div class="vendor_batches_title">
-		   			<button class="btn btn-primary" data-toggle="modal" data-target="#venueCreate">Add Venue</button>
-			   		<h1>My Venues</h1>
+			<div class="vendor_institute_batches venues_list_container col-md-12 col-xs-12 col-sm-12">				
+			   	<div class="vendor_batches_title col-md-12 col-xs-12 col-sm-12">					
+					<div class="col-md-4 col-sm-2 col-xs-12"></div> 
+					<div id="batches_title" class="col-md-4 col-xs-12 col-sm-6">
+			   			My Venues
+			   		</div>
+			   		<div id="addButton" class="col-md-4 col-xs-12 col-sm-4">
+			   			<button class="btn btn-primary" data-toggle="modal" data-target="#venueCreate">Add Venue</button>
+			   		</div>
 			   	</div>
 			   	@foreach($venues as $data)
 					<div class="col-md-4 col-xs-12 col-sm-4 venues-list-container">

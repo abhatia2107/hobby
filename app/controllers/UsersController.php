@@ -443,7 +443,7 @@ class UsersController extends \BaseController {
 	    		try {
 				    $response = (new FacebookRequest(
 				      $session, 'POST', '/me/feed', array(
-				        'link' => 'www.hobby.com',
+				        'link' => 'www.'.Lang::get('ViewsLang/home.home_name').'.com',
 				        'message' => 'User provided message'
 				      )
 				    ))->execute()->getGraphObject();

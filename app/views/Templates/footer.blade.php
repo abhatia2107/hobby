@@ -56,34 +56,34 @@
                                  <li id="menu-item-325" class=" ">
                                     <i class="fa fa-fw fa-twitter" style="">
                                     </i>
-                                    <a class="footer_links" href="http://twitter.com/hobby">
+                                    <!-- <a class="footer_links" href="http://twitter.com/hobby"> -->
                                        Twitter
-                                    </a>
+                                    <!-- </a> -->
                                  </li>
                                  <li id="menu-item-326" class=" ">
                                     <i class="fa fa-w fa-facebook"></i>
-                                    <a class="footer_links" href="http://facebook.com/hobby">
+                                    <!-- <a class="footer_links" href="http://facebook.com/hobby"> -->
                                        Facebook
-                                    </a>
+                                    <!-- </a> -->
                                  </li>
                                  <li id="menu-item-327" class=" ">
                                     <i class="fa fa-fw fa-google-plus" ></i>
-                                    <a class="footer_links" href="http://plus.google.com/hobby">
+                                    <!-- <a class="footer_links" href="http://plus.google.com/hobby"> -->
                                        Google+
-                                    </a>
+                                    <!-- </a> -->
                                  </li>
                                  <li id="menu-item-328" class="">
                                     <i class="fa fa-fw fa-instagram" ></i>
-                                    <a href="http://instagram.com/hobby" class="footer_links">
+                                    <!-- <a href="http://instagram.com/hobby" class="footer_links"> -->
                                        Instagram
-                                    </a>
+                                    <!-- </a> -->
                                  </li>
                                  <li id="menu-item-329" class="">
                                     <i class="fa fa-fw fa-vimeo-square" >
                                     </i>
-                                    <a class="footer_links" href="http://vimeo.com/hobby">
+                                    <!-- <a class="footer_links" href="http://vimeo.com/hobby"> -->
                                        Vimeo
-                                    </a>
+                                    <!-- </a> -->
                                  </li>
                               </ul>
                            </div>

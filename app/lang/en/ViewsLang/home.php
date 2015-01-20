@@ -2,6 +2,8 @@
 
 return array(
 
+	"home_name"=>"hobbyix",
+
 	"home_title"=>"Search Your City",
 
 	"home_subtitle"=>"Hobby helps you find out whats happening in your city, Let's explore.",

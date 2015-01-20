@@ -19,8 +19,8 @@ class HomeController extends BaseController {
 	{
 		$featuredBatches=$this->feature->getFeaturedBatches();
 		// dd($featuredBatches);
-		$homeLang =Lang::get('home');
-		//dd($homeLang);
+		$homeLang =Lang::get('ViewsLang/home');
+		// dd($homeLang);
 		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches'));
 	}
 

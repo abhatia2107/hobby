@@ -74,16 +74,16 @@
 								<fieldset id="inputs">
 					                <div class="form-group required">
 										<label>Location <sup>*</sup> </label>
-										<select class="form-control" name="subcategory_category_id" required>
+										<select class="form-control" name="locality_location_id" required>
 											@foreach ($locations as $locationData)
-												<option value={{$categoryData->id}}>
+												<option value={{$locationData->id}}>
 													{{$locationData->location}}
 												</option>
 											@endforeach
 										</select>
 									</div>
 									<div class="form-group required">
-										<input type="text" name="subcategory" placeholder="Sub-Category Name"  required>
+										<input type="text" name="locality" placeholder="Location Name"  required>
 									</div>
 								</fieldset>
 								<fieldset id="actions">

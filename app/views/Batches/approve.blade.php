@@ -19,7 +19,7 @@
 	            <td>{{$data->batch}}</td>
 	            <td>{{$data->institute}}</td>
 				<td>
-					<a href="/batches/{{$data->id}}">
+					<a href="/batches/show/{{$data->id}}">
 						<button type="button" class="btn btn-primary ">
 							<span class="glyphicon glyphicon-user"></span>
 							View

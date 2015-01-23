@@ -46,7 +46,10 @@
 					<a href="/">Home</a>
 				</li>
 				<li>
-					<?php $batchDet = $batchesForCategoryLocation[0]; ?>
+					<?php
+						if(isset($batchesForCategoryLocation)) 
+							$batchDet = $batchesForCategoryLocation[0];
+					?>
 					<a href="javascript:void()">{{$batchDet->category}}</a>
 				</li>
 				<li></li>

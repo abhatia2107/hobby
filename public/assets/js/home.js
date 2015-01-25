@@ -52,9 +52,4 @@
   {
         $(formId).load(document.URL  + ' '+formId); 
   }
-  function preventActive(e)
-  {
-   
-  }
-
   

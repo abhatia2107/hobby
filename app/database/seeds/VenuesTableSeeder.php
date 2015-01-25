@@ -10,7 +10,7 @@ class VenuesTableSeeder extends Seeder {
               { 
                      DB::table('venues')->insert(array(
                      'venue'=>$faker->name,
-                     'venue_location_id' =>1
+                     'venue_location_id' =>1,
                      'venue_locality_id'=>$faker->randomNumber(1,15),
                      'venue_pincode'=>$faker->postcode,
                      'venue_email'=>$faker->email,

@@ -9,7 +9,7 @@ class BatchesTableSeeder extends Seeder {
               {            
                      DB::table('batches')->insert(array(
                      'batch' => $faker->Name,
-                     'batch_category_id'=>$faker->randomNumber(1,10)
+                     'batch_category_id'=>$faker->randomNumber(1,10),
                      'batch_subcategory_id'=>$faker->randomNumber(1,30),
                      'batch_accomplishment' =>$faker->text(),
                      'batch_user_id'=>$faker->unique()->randomNumber(1,1000),

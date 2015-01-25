@@ -45,9 +45,8 @@
 				<li>
 					<a href="/">Home</a>
 				</li>
-				<li>
-					<?php $batchDet = $batchesForCategoryLocation[0]; ?>
-					<a href="javascript:void()">{{$batchDet->category}}</a>
+				<li>					
+					<a href="javascript:void()">{{$categories[$category_id-1]->category}}</a>
 				</li>
 				<li></li>
 			</ul>

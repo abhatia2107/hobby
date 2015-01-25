@@ -34,8 +34,8 @@
                              <input type="phone" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Contact Number' required/>
                         </div>
                         <div class="form-group inner-addon ">
-                                    <select name="venue_location_id"  class="form-control" id="venue_location_id">
-                                    <option> Select City</option>
+                                    <select name="venue_location_id"  class="form-control" id="venue_location_id" required="required">
+                                    <option disabled="disabled"> Select City</option>
                                         @foreach ($locations as $locationData)
                                             <option value={{$locationData->id}}
                                                 @if(isset($venueDetails))
@@ -49,9 +49,9 @@
                                     </select>
                                 
                         </div>
-                        <div class="form-group inner-addon left-addon">
-                            <select name="venue_locality_id" class="form-control" id="venue_locality_id">
-                                 <option> Select Locality</option>
+                        <div class="form-group inner-addon">
+                            <select name="venue_locality_id" class="form-control" id="venue_locality_id" required="required">
+                                 <option disabled="disabled"> Select Locality</option>
                                     @foreach ($localities as $localityData)
                                         <option value={{$localityData->id}}
                                             @if(isset($venueDetails))

@@ -106,8 +106,7 @@
     @include('Templates.navbarVendor')
     <div class="container-fluid">
     <div id="classInfo1">
-    <form role="form" class="form-horizontal" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" id="classInfo">
-          
+    <form role="form" class="form-horizontal" id="classInfo" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" >          
         <div class="row row_padding">
             <p  class="create_class">Create your Class
             </p>
@@ -135,7 +134,8 @@
             <div class="form-group">
                 <label for="batch_category_id" class="col-sm-3 col-md-3 control-label label1">Category<span class="important_required">*</span></label>
                 <div class="col-sm-3 col-md-3">
-                    <select class="form-control input1"  id="batch_category_id" name="batch_category_id"required>
+                    <select class="form-control" id="batch_category_id" name="batch_category_id" required="required">
+                        <option disabled="disabled"> Select Category</option>
                         @foreach ($categories as $data)
                             <option value={{$data->id}}
                                 @if(isset($batchDetails))
@@ -148,20 +148,21 @@
                         @endforeach
                     </select>
                 </div>
-                <label name="batch_subcategory_id" class="col-sm-2 col-md-2 control-label label1">Sub Category<span class="important_required">*</span></label>
-                <div class="col-sm-3 col-md-3">
-                    <select class="form-control input1" name="batch_subcategory_id" id="batch_subcategory_id">
-                        @foreach ($all_subcategories as $data)
-                        <option value={{$data->id}}
+                <label for="batch_subcategory_id" class="col-sm-2 col-md-2 control-label label1">Sub Category<span class="important_required">*</span></label>
+                <div class="col-sm-3 col-md-3">                                
+                    <select class="form-control" name="batch_subcategory_id" id="batch_subcategory_id" required >
+                        <option disabled="disabled"> Select Sub Category</option>                        
+                        @foreach ($all_subcategories as $data)                        
+                        <option category-id="{{$data->subcategory_category_id}}" class="{{$data->id}}" value={{$data->id}}
                             @if(isset($batchDetails))
                             {{($batchDetails->batch_subcategory_id==$data->id)?
                             'selected="selected"':''}}
                             @else{{"Input::old('batch_subcategory_id')"}}
                             @endif>
-                            {{$data->subcategory}}
-                        </option>
+                            {{$data->subcategory}} 
+                        </option>                        
                         @endforeach
-                    </select>
+                    </select>                    
                 </div>
             </div>
         </div>
@@ -217,8 +218,7 @@
             <div class="form-group">
                 <label for="agegroup" class="col-sm-3 control-label label1">Target Age Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <ul class="radio" name="agegroup" id="agegroup">
-                        
+                    <ul class="radio" name="agegroup" id="agegroup">                        
 						<?php $i=1; ?>
                         @foreach($age_group as $data)
 						<li>
@@ -287,7 +287,7 @@
                     <span class="important_required">*</span>
                 </label>
                 <div class="col-sm-3 col-md-2">
-                    <select class="form-control" id="batch_no_of_classes_in_week" name="batch_no_of_classes_in_week" required>
+                    <select class="form-control" id="batch_no_of_classes_in_week" name="batch_no_of_classes_in_week" required="required">
    	                @for ($i = 1; $i < 8; $i++)
 	                    <option value={{$i}}
 	                        @if(isset($batchDetails))
@@ -379,7 +379,32 @@
 @stop
 @section('pagejquery')
 <script type="text/javascript">
-    $(document).ready(function(){
+    var allSubcategories = <?php echo json_encode($all_subcategories) ?>;
+    function filterSubcategories(categoryID)
+    {        
+        var subcategories = allSubcategories.filter(function(array){                        
+                       return array.subcategory_category_id ==  categoryID ;            
+        });        
+        var linksContainer = $('#batch_subcategory_id'),baseUrl;
+        for(subcategory in subcategories)
+        {
+            var subcategoryID = subcategories[subcategory]['id'];
+            var subcategory = subcategories[subcategory]['subcategory'];
+            $("<option></option>")
+                .attr("value",subcategoryID)
+                .attr("class",subcategoryID)
+                .text(subcategory)
+                .appendTo(linksContainer);
+        }
+    }
+    $(document).ready(function(){  
+        var batchCount = $("#subcategory_list li").length ;       
+        $('#batch_category_id').change(function () 
+        {
+            var categoryID = $(this).val();            
+            $('#batch_subcategory_id').empty();  
+            filterSubcategories(categoryID);            
+        })
         navActive('navbar-vendor-createBatch');
         $("#session1").change(function(e){
             if($("#session1").val()==1)
@@ -422,8 +447,19 @@
                             message: 'The  Price can only consist of numbers.'
                         }
                     }
+                }, 
+                batch_category_id: {
+                    message: 'Please Select Category',
+                    validators:{
+                        required: true
+                    }
                 },
-
+                batch_subcategory_id: {
+                    message: 'Please Select Sub Category',
+                    validators:{
+                        required: true
+                    }
+                },
                 batch_accomplishment: {
                     message: 'The text is not valid',
                     validators: {

@@ -822,3 +822,9 @@ span.stars span {
 {
   text-align: center;
 }
+
+
+/*Error Page ID*/
+#errorMsgPage{
+    min-height: 400px;
+}

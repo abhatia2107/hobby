@@ -296,9 +296,9 @@ class UsersController extends \BaseController {
 			];
 			/*Confirmation mail is to be send to the newly registerd user*/
 			$subject="Welcome to Hobby";
-			Mail::later(15,'Emails.welcome', $data, function($userssage) use ($email,$name,$subject)
+			Mail::later(15,'Emails.welcome', $data, function($message) use ($email,$name,$subject)
 			{
-    			$userssage->to($email,$name)->subject($subject);
+				$message->to($email,$name)->subject($subject);
 			});
 			return Redirect::to('/')->with('success',Lang::get('user.user_signup_success'));
 		}	

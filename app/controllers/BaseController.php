@@ -37,7 +37,7 @@ class BaseController extends Controller {
 								);
 
 	/**
-	 *Constructor to initialize the instance of Model User
+	 *Constructor to initialize the instance of all Models.
 	 */
 
 	public function __construct()
@@ -58,8 +58,24 @@ class BaseController extends Controller {
 		$this->venue = new Venue;
 	}
 
-
-	
+	/*public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Feature $featureObject, Feedback $feedbackObject, Institute $instituteObject, Locality $localityObject, Location $locationObject, Schedule $scheduleObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
+	{
+		$this->admin = $adminObject;
+		$this->batch = $batchObject;
+		$this->category = $categoryObject;
+		$this->comment = $commentObject;
+		$this->feature = $featureObject;
+		$this->feedback = $feedbackObject;
+		$this->institute = $instituteObject;
+		$this->locality=$localityObject;
+		$this->location = $locationObject;
+		$this->schedule = $scheduleObject;
+		$this->subcategory = $subcategoryObject;
+		$this->subscription = $subscriptionObject;
+		$this->user = $userObject;
+		$this->venue = $venueObject;
+	}
+	*/
 	/**
 	 * Setup the layout used by the controller.
 	 *

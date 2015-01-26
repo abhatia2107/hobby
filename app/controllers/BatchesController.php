@@ -1,14 +1,15 @@
 <?php
-
+/*
 use Carbon\Carbon;
-
+*/
 class BatchesController extends \BaseController {
 
 	protected $schedulesControllerObject;
 
 	public function __construct()
 	{
-		$this->schedulesControllerObject=new SchedulesController;
+		$this->schedulesControllerObject=new SchedulesController; 
+		parent::__construct();
 	}
 
 	public function index()

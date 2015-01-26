@@ -97,6 +97,26 @@
 		position:relative;
 		top:1px;
 	}
+    .checkbox_data
+    {
+        position:relative;
+        top:-2px;
+    }
+    #scheduleContainer h4
+    {
+        text-align: center;
+        font-size: 22px;
+        margin: 0 0;
+    }
+    #scheduleContainer label
+    {
+        font-weight: normal;
+        cursor: pointer;
+    }
+    .addschedule
+    {
+         text-align: center;
+    }
     </style>
     <link type="text/css" rel="stylesheet" href="/assets/css/jquery-te-1.4.0.css">
 @stop
@@ -251,18 +271,37 @@
                 </div>
             </div>
         </div>
+        <div class="row row_padding">
+            <div class="form-group">
+                <label for="batch_trial" class="col-sm-3 control-label label1">Trial Available<span class="important_required">*</span></label>
+                
+                <div class="col-sm-6">
+                    <ul class="radio ul-without-bullets">
+                        <?php $i=1; ?>
+                        @foreach($trial as $data)
+                        <li>
+                        <label>
+                            <input name="batch_trial" id="batch_trial" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$i)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <?php $i++; ?>
+                        </label>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
         
         <div class="row row_padding">
-
             <div class="col-lg-12 img-responsive schedule">
             </div>
         </div>
+    <div id="scheduleContainer">
         <div class="row row_padding">
-            <div class="form-group">
-                <label for="batch_venue_id" class="col-sm-3 control-label label1">Venue<span class="important_required">*</span></label>
-                
+            <h4>Shedule 1</h4>
+            <div class="form-group" style="padding-top:30px;">
+                <label for="batch_venue_id" class="col-sm-3 control-label label1">Venue<span class="important_required">*</span></label>                
                 <div class="col-sm-6">
-                    <select class="form-control" id="batch_venue_id" name="batch_venue_id" required>
+                    <select class="form-control" id="batch_venue_id" name="schedule[0][batch_venue_id]" required>
                         @foreach ($venuesForUser as $data)
 	                        <option value={{$data->id}}
 	                            @if(isset($batchDetails))
@@ -287,7 +326,7 @@
                     <span class="important_required">*</span>
                 </label>
                 <div class="col-sm-3 col-md-2">
-                    <select class="form-control" id="batch_no_of_classes_in_week" name="batch_no_of_classes_in_week" required="required">
+                    <select class="form-control" id="batch_no_of_classes_in_week" name="schedule[0][batch_no_of_classes_in_week]" required="required">
    	                @for ($i = 1; $i < 8; $i++)
 	                    <option value={{$i}}
 	                        @if(isset($batchDetails))
@@ -303,7 +342,7 @@
                 </div>
                 <label class="col-sm-3 col-md-3 control-label input1" for="batch_price">Price</label>
                 <div class="col-sm-3 col-md-3">
-                    <input type="text" class="form-control" id="batch_price" name="batch_price" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
+                    <input type="text" class="form-control" id="batch_price" name="schedule[0][batch_price]" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
                 </div>
             </div>
         </div>
@@ -315,43 +354,30 @@
 
                 <div class="col-sm-6">
 				<ul class="ul-without-bullets">
-				
                     @foreach($weekdays as $data)
 					<li>
+                        <label>
                         <input type="checkbox" name="batch_class[]" value="{{$data}}"
                         @if(isset($batchDetails))
                             <?php if(in_array($data, $batchDetails->batch_class)): echo 'checked="checked"'; endif; ?>
                         @else
                             {{Input::old('batch_class[]')}}
                         @endif/>
+                        <span class="checkbox_data">
                         <?php
                             echo ucfirst($data);
                         ?>
+                        </span>
+                        </label>
 						</li>
                     @endforeach
 					</ul>
                 </div>
             </div>
         </div>
-        <div class="row row_padding">
-            <div class="form-group">
-                <label for="batch_trial" class="col-sm-3 control-label label1">Trial Available<span class="important_required">*</span></label>
-                
-                <div class="col-sm-6">
-                    <ul class="radio ul-without-bullets">
-                        <?php $i=1; ?>
-                        @foreach($trial as $data)
-						<li>
-                        <label>
-                            <input name="batch_trial" id="batch_trial" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$i)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
-                            <?php $i++; ?>
-                        </label>
-						</li>
-                        @endforeach
-                    </ul>
-                </div>
-
-            </div>
+    </div>
+        <div class='addschedule'>
+            <button class='btn btn-primary addschedule' id="addschedule-btn" onclick="addSchedule()"> + Add Schedule</button>
         </div>
         <div class="row row_padding">
             <div class="form-group">
@@ -380,6 +406,180 @@
 @section('pagejquery')
 <script type="text/javascript">
     var allSubcategories = <?php echo json_encode($all_subcategories) ?>;
+    var venuesForUser = <?php echo json_encode($venuesForUser) ?>;
+    var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
+    var scheduleCount = 1;
+    function ucfirst(string)
+    {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+    function addSchedule()
+    {
+        //alert(scheduleCount);
+        var linksContainer = $('#scheduleContainer'),baseUrl;
+        $('#scheduleContainer').append("<hr><h4>Schedule "+(scheduleCount+1)+"</h4>");
+        $("<div></div>")
+        .attr("class","row row_padding")
+        .attr("id","schedule"+scheduleCount)
+        .append
+        (
+            $("<div></div>")
+                .attr("class","form-group")
+                .append
+                (
+                    $("<label></label>")
+                    .attr("class","col-sm-3 control-label label1")
+                    .text("Venue")
+                    .append
+                    (
+                        $("<span></span>")
+                        .attr("class","important_required")
+                        .text("*")
+                    )                      
+                ) 
+                .append
+                (
+                    $("<div></div>")
+                    .attr("class","col-sm-6")
+                    .append
+                    ( 
+                        $("<select required></select>")  
+                        .attr("class","form-control")
+                        .attr("id","batch_venue_id")
+                        .attr("name","schedule["+scheduleCount+"][batch_venue_id]")
+                    )
+                )
+        )
+        .appendTo(linksContainer);
+         $("<div></div>")
+        .attr("class","row row_padding")
+        .attr("id","schedule"+scheduleCount)
+        .append
+        (
+            $("<div></div>")
+                .attr("class","form-group")
+                .append
+                (
+                    $("<label></label>")
+                    .attr("class","col-sm-3 control-label label1")
+                    .text("No Of Sessions")
+                    .append
+                    (
+                        $("<span></span>")
+                        .attr("class","important_required")
+                        .text("*")
+                    )                      
+                ) 
+                .append
+                (
+                    $("<div></div>")
+                    .attr("class","col-sm-3 col-md-2")
+                    .append
+                    ( 
+                        $("<select required></select>")  
+                        .attr("class","form-control")
+                        .attr("id","batch_no_of_classes_in_week")
+                        .attr("name","schedule["+scheduleCount+"][batch_no_of_classes_in_week]")                       
+                    )
+                )
+                .append
+                (
+                    $("<label></label>")
+                    .attr("class","col-sm-3 col-md-3 control-label input1")
+                    .text("Price")                                    
+                )
+                .append
+                (
+                    $("<div></div>")
+                    .attr("class","col-sm-3 col-md-3")
+                    .append
+                    ( 
+                        $("<input required/>")  
+                        .attr("type","text")
+                        .attr("class","form-control")
+                        .attr("id","batch_price")
+                        .attr("name","schedule["+scheduleCount+"][batch_price]")                       
+                    )
+                ) 
+        )
+        .appendTo(linksContainer);  
+        $("<div></div>")
+        .attr("class","row row_padding")
+        .attr("id","schedule"+scheduleCount)
+        .append
+        (
+            $("<div></div>")
+                .attr("class","form-group")
+                .append
+                (
+                    $("<label></label>")
+                    .attr("class","col-sm-3 control-label label1")
+                    .text("Batch have Classes on")
+                    .append
+                    (
+                        $("<span></span>")
+                        .attr("class","important_required")
+                        .text("*")
+                    )                      
+                ) 
+                .append
+                (
+                    $("<div></div>")
+                    .attr("class","col-sm-6")
+                    .append
+                    ( 
+                        $("<ul></ul>")  
+                        .attr("class","ul-without-bullets")
+                        .attr("id","batch_week_days")
+                    )
+                )
+        )
+        .appendTo(linksContainer);       
+        var venuesContainer = $("#schedule"+scheduleCount+" #batch_venue_id"),baseUrl;
+        for(var key in venuesForUser)
+        {
+            var venueID = venuesForUser[key]['id'];
+            var venue = venuesForUser[key]['venue'];
+            $("<option></option>")
+                .attr("value",venueID)                
+                .text(venue)
+                .appendTo(venuesContainer);
+        }
+        var classesInWeekContainer = $("#schedule"+scheduleCount+" #batch_no_of_classes_in_week"),baseUrl;
+        for(var key=1;key<=7;key++)
+        {
+            $("<option></option>")
+                .attr("value",key)                
+                .text(key)
+                .appendTo(classesInWeekContainer);
+        }
+        var weekDaysContainer = $("#schedule"+scheduleCount+" #batch_week_days"),baseUrl;
+        for(var key in weekDays)
+        {
+           // alert('yes');
+            var day = ucfirst(weekDays[key]);
+            $("<li></li>")
+            .append
+            (
+                $("<label></label>")
+                .append
+                (
+                    $("<input type='checkbox' required/>")      
+                    .attr("value",weekDays[key])   
+                    .attr("name","batch_class[]")       
+                )
+                .append
+                (
+                     $("<span></span>")
+                     .attr("class","checkbox_data")
+                        .text(' '+day)             
+                )
+            )
+            .appendTo(weekDaysContainer);      
+                     
+        }
+        scheduleCount++;
+    }
     function filterSubcategories(categoryID)
     {        
         var subcategories = allSubcategories.filter(function(array){                        
@@ -398,7 +598,11 @@
         }
     }
     $(document).ready(function(){  
-        var batchCount = $("#subcategory_list li").length ;       
+        var batchCount = $("#subcategory_list li").length ; 
+        $('#addschedule-btn').click(function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        })
         $('#batch_category_id').change(function () 
         {
             var categoryID = $(this).val();            

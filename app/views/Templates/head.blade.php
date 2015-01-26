@@ -13,35 +13,6 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrapValidator.min.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/css/hobby_style.css">
     <!--<link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
-    <style type="text/css">
-        .form-control-feedback {
-            position: absolute;
-            top: 0;
-            right: 11px;
-            z-index: 2;
-            display: block;
-            width: 34px;
-            height: 34px;
-            line-height: 34px;
-            text-align: center;
-            pointer-events: none;
-        }
-        .forgot_password
-        {
-            margin-left: 1px;
-        }
-        .footer-wrapper
-        {
-            position:absolute;
-            width:100%;
-            background-color:black;
-        }
-        .content-div
-        {
-            min-height:330px;
-            height:auto !important;
-        }
-    </style>
 
     <script src="/assets/js/jquery-1.11.2.min.js"></script>
     <script src="/assets/js/jquery-2.1.1.min.js"></script>

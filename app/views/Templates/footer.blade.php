@@ -1,111 +1,41 @@
 @section("footer")
-<div class="site-footer-widgets" >
-    <div class="container">
-                  <div class="row">
-                     <div class="footer-widget-column col-xs-12 col-sm-12 col-lg-5">
-                        <aside id="text-2" class="footer-widget widget_text">
-                           <div class="textwidget">
-                              <p>
-                                 At Hobby our purpose is to help people find great local businesses like dentists, hair stylists and mechanics. Go Explore!
-                              </p>
-                              <p>
-                                 Proudly Made in India
-                              </p>
-                           </div>
-                        </aside>
-                     </div>
-                     <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-3 col-lg-offset-1">
-                        <aside id="nav_menu-2" class="footer-widget widget_nav_menu">
-                           <h1 class="footer-widget-title">About Hobby</h1>
-                           <div class="menu-need-help-menu-container">
-                              <ul id="menu-need-help-menu" class="menu">
-                                 <li id="menu-item-248" class=" ">
-                                    <span class="glyphicon glyphicon-dashboard" style="color:white" aria-hidden="true">
-                                    </span>
-                                    <a href="/feedbacks/create" class="footer_links">
-                                       Feedback
-                                    </a>
-                                 </li>
-                                 <li id="menu-item-249" class=" ">
-                                    <span class="glyphicon glyphicon-list-alt" style="color:white" aria-hidden="true">
-                                    </span>
-                                    <!-- <a href="/terms" class="footer_links"> -->
-                                       Terms Of Use
-                                    <!-- </a> -->
-                                 </li>
-                                 <li id="menu-item-250" class=" ">
-                                    <span class="glyphicon glyphicon-question-sign" style="color:white" aria-hidden="true">
-                                    </span>
-                                    <!-- <a href="/aboutus" class="footer_links"> -->
-                                       About Hobby
-                                    <!-- </a> -->
-                                 </li>
-                                 <li id="menu-item-251" class=" ">
-                                    <span class="glyphicon glyphicon-globe" style="color:white" aria-hidden="true">
-                                    </span>
-                                    <!-- <a href="/blog" class="footer_links"> -->
-                                       Hobby Blog
-                                    <!-- </a> -->
-                                 </li>
-                                 <li id="menu-item-252" class=" ">
-                                    <span class="glyphicon glyphicon-user" style="color:white" aria-hidden="true">
-                                    </span>
-                                    <!-- <a href="/careers" class="footer_links"> -->
-                                       Careers
-                                    <!-- </a> -->
-                                 </li>
-                              </ul>
-                           </div>
-                        </aside>
-                     </div>
-                     <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-3">
-                        <aside id="nav_menu-3" class="footer-widget widget_nav_menu">
-                           <h1 class="footer-widget-title">Stay Connected</h1>
-                           <div class="menu-social-widget-menu-container">
-                              <ul id="menu-social-widget-menu" class="menu">
-                                 <li id="menu-item-325" class=" ">
-                                    <i class="fa fa-fw fa-twitter" style="">
-                                    </i>
-                                    <!-- <a class="footer_links" href="http://twitter.com/hobby"> -->
-                                       Twitter
-                                    <!-- </a> -->
-                                 </li>
-                                 <li id="menu-item-326" class=" ">
-                                    <i class="fa fa-w fa-facebook"></i>
-                                    <!-- <a class="footer_links" href="http://facebook.com/hobby"> -->
-                                       Facebook
-                                    <!-- </a> -->
-                                 </li>
-                                 <li id="menu-item-327" class=" ">
-                                    <i class="fa fa-fw fa-google-plus" ></i>
-                                    <!-- <a class="footer_links" href="http://plus.google.com/hobby"> -->
-                                       Google+
-                                    <!-- </a> -->
-                                 </li>
-                                 <li id="menu-item-328" class="">
-                                    <i class="fa fa-fw fa-instagram" ></i>
-                                    <!-- <a href="http://instagram.com/hobby" class="footer_links"> -->
-                                       Instagram
-                                    <!-- </a> -->
-                                 </li>
-                                 <li id="menu-item-329" class="">
-                                    <i class="fa fa-fw fa-vimeo-square" >
-                                    </i>
-                                    <!-- <a class="footer_links" href="http://vimeo.com/hobby"> -->
-                                       Vimeo
-                                    <!-- </a> -->
-                                 </li>
-                              </ul>
-                           </div>
-                        </aside>
-                     </div>
-                  </div>
-               </div>
-               <div class="container">
-               <div class=" copyright" >
-                     Copyright Hobby 2015. All Rights Reserved  
-               </div>
-            </div>
-</div>
-
+<div class="container">
+   <div class="row">
+      <div class="footer-widget-column col-xs-12 col-sm-12 col-lg-5">
+         <div class="textwidget">
+            <p>
+               At Hobby our purpose is to help people find great local businesses like dentists, hair stylists and mechanics. Go Explore!
+            </p>
+            <p>Proudly Made in India</p>
+         </div>
+         <div class="copyright_text">
+            Copyright Hobby 2015. All Rights Reserved  
+         </div>
+      </div>
+      <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-3 col-lg-offset-1">
+         <h1 class="footer-widget-title">About Hobby</h1>
+         <div class="menu-need-help-menu-container">
+            <ul id="menu-need-help-menu" class="menu">                                 
+               <li><span class="glyphicon glyphicon-dashboard"></span><a href="/feedbacks/create">Feedback</a></li>
+               <li><span class="glyphicon glyphicon-list-alt"></span><a href-link="/terms">Terms Of Use</a></li>
+               <li><span class="glyphicon glyphicon-question-sign"></span><a href-link="/aboutus">About Hobby</a></li>
+               <li><span class="glyphicon glyphicon-globe"></span><a href-link="/blog">Hobby Blog</a></li>
+               <li><span class="glyphicon glyphicon-user"></span><a href-link="/careers">Careers</a></li>                           
+            </ul>
+         </div>
+      </div>
+      <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-3">
+         <h1 class="footer-widget-title">Stay Connected</h1>
+         <div class="menu-social-widget-menu-container">
+            <ul id="menu-social-widget-menu" class="menu">                                 
+               <li><span class="glyphicon fa fa-fw fa-twitter"></span><a href-link="$adminAccounts->twitter_link">Twitter</a></li>
+               <li><span class="glyphicon fa fa-w fa-facebook"></span><a href-link="$adminAccounts->facebook_link">Facebook</a></li>
+               <li><span class="glyphicon fa fa-fw fa-google-plus"></span><a href-link="$adminAccounts->google_plus_link">Google+</a></li>
+               <li><span class="glyphicon fa fa-fw fa-instagram"></span><a href-link="$adminAccounts->instagram_link">Instagram</a></li>
+               <li><span class="glyphicon fa fa-fw fa-vimeo-square"></span><a href-link="$adminAccounts->vimeo_link">Vimeo</a></li>                           
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>            
 @show

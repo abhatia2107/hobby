@@ -63,7 +63,7 @@
 									$sub_id = $subcategoryData->id;
 								?>				
 								<li subcategory="{{$sub_id}}" >								
-								 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" />{{' '.$subcategory}}</label>
+								 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$subcategory}}</span></label>
 								</li>
 							 @endforeach
 						 </ul> 
@@ -78,7 +78,7 @@
 									$loc_id = $localityData->id;
 								?>
 								<li subcategory="{{$loc_id}}" >								
-								 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" />{{' '.$locality}}</label>
+								 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$locality}}</span></label>
 								</li> 
 							@endforeach
 						 </ul>
@@ -89,7 +89,7 @@
 						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 						@foreach ($trial as $index => $trialValue)
 							<li trial="{{$index}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$index}}" type="checkbox" class="trialCheckbox filterCheckBox" />{{' '.$trialValue}}</label>
+							 	 <label class="sub"><input autocomplete="off" style="" value="{{$index}}" type="checkbox" class="trialCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$trialValue}}</span></label>
 							</li> 
 						@endforeach
 						 </ul> 
@@ -324,11 +324,11 @@
 				filterStatus = true;
 				$('#loadMore').css('display','block');
 				$('#noResults').css('display','none');
-				$(linksContainer).empty();
 				result = [];				
 				filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();			
 				if(filter_select.length>0)
 				{
+					$(linksContainer).empty();
 					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
 					trial_select =  $('.trialCheckbox:checked').map(function(){return this.value;}).get(); 					
@@ -337,8 +337,9 @@
 				}
 				else
 				{
-					chunk = 0;
-					$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
+					//chunk = 0;
+					location.reload(true);
+					/*$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 					{						
 						if(response == "Empty")
 						{
@@ -355,7 +356,7 @@
 							LoadResult(0,20);
 						}
 						chunk++;	
-					});
+					});*/
 				}
 			});
 		});

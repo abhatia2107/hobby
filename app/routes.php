@@ -256,12 +256,6 @@ Route::get('/contactus', function()
 return View::make('Miscellaneous.contactus');
 });
 
-Route::get('/hello', function()
-{
-	return View::make('test');
-});
-
-
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','FiltersController@show');
@@ -269,11 +263,3 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chu
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{category_id}/{location_id}/{chunk}','FiltersController@filter');
 
 Route::get('/filters/search','FiltersController@search');
-
-Route::get('/schedules/edit/{batch_id}','SchedulesController@edit');
-
-Route::post('/schedules/update/{batch_id}','SchedulesController@update');
-
-Route::get('/schedules','SchedulesController@create');
-
-Route::post('/schedules','SchedulesController@store');

@@ -24,11 +24,8 @@ class SchedulesController extends \BaseController {
 	 */
 	public function store($schedule_arr, $batch_id)
 	{
-		// $schedule_arr=Input::get('schedule');
-		// dd($schedule_arr);
 		foreach ($schedule_arr as $i => $schedule) {
 			$credentials=$schedule;
-			// dd($schedule);
 			foreach($this->weekdays as $data){
 				$credentials['schedule_class_on_'.$data]=0;
 			}
@@ -38,7 +35,6 @@ class SchedulesController extends \BaseController {
 			{
 				$errors=$validator->messages();
 			}
-			// dd($errors);
 			if(!empty($credentials['schedule_class'])){
 				foreach($credentials['schedule_class'] as $data){
 					$credentials['schedule_class_on_'.$data]=1;
@@ -47,10 +43,8 @@ class SchedulesController extends \BaseController {
 			else{
 				$errors->class=Lang::get('batch.batch_class_empty');
 			}
-			// dd($errors);
 			if(!empty((array)$errors))
 				return $errors;
-			// dd($credentials);
 			$credentials['schedule_batch_id']=$batch_id;
 			unset($credentials["schedule_class"]);
 			Schedule::create($credentials);
@@ -89,16 +83,7 @@ class SchedulesController extends \BaseController {
 			}
 			$scheduleForBatch[$key]['schedule_class']=$schedule_class;
 		}
-		// dd ($scheduleForBatch);
-		$weekdays=$this->weekdays;
-		$trial=$this->trial;
-		$schedule_session_month=$this->schedule_session_month;
-		$batchDetails=Batch::find($batch_id);
-		$batchDetails->schedule=$scheduleForBatch;
-		// $schedule=$scheduleForBatch;
-		// dd($batchDetails);
-		return View::make('schedule',compact('batchDetails','schedule','schedule_session_month','trial','weekdays'));
-		// return $scheduleForBatch;
+		return $scheduleForBatch;
 	}
 
 	/**
@@ -108,15 +93,10 @@ class SchedulesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(/*$schedule_arr,*/ $batch_id)
+	public function update($schedule_arr, $batch_id)
 	{
-		$schedule_arr=Input::get('schedule');
-		// $batch_id=1012;
-		// dd($schedule_arr);
 		foreach ($schedule_arr as $i => $schedule) {			
 			$credentials=$schedule;
-			// dd($credentials);
-			// dd($schedule);
 			foreach($this->weekdays as $data){
 				$credentials['schedule_class_on_'.$data]=0;
 			}
@@ -126,7 +106,6 @@ class SchedulesController extends \BaseController {
 			{
 				$errors=$validator->messages();
 			}
-			// dd($errors);
 			if(!empty($credentials['schedule_class'])){
 				foreach($credentials['schedule_class'] as $data){
 					$credentials['schedule_class_on_'.$data]=1;
@@ -137,11 +116,8 @@ class SchedulesController extends \BaseController {
 			}
 			if(!empty((array)$errors))
 				return $errors;
-			// dd($errors);
-			// dd($credentials);
 			$credentials['schedule_batch_id']=$batch_id;
 			unset($credentials["schedule_class"]);
-			// dd($credentials);
 			$this->schedule->updateSchedule($credentials);
 		}
 	}
@@ -153,9 +129,12 @@ class SchedulesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($batch_id)
 	{
-		//
+		$schedule=Schedule::withTrashed()->where($schedule_batch_id,'=',$batch_id);
+		if($schedule){
+			$schedule->forceDelete();
+		}
 	}
 
 }

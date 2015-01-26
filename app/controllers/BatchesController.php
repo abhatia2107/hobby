@@ -4,6 +4,13 @@ use Carbon\Carbon;
 
 class BatchesController extends \BaseController {
 
+	protected $schedulesControllerObject;
+
+	public function __construct()
+	{
+		$this->schedulesControllerObject=new SchedulesController;
+	}
+
 	public function index()
 	{
 		$age_group=$this->age_group;
@@ -93,8 +100,7 @@ class BatchesController extends \BaseController {
 		unset($credentials['schedule']);
 		$batch=Batch::create($credentials);
 		$batch_id=$batch->id;
-		$schedule=new SchedulesController;
-		$errors=$schedule->store($schedule_arr,$batch_id);
+		$errors=$this->schedulesControllerObject->store($schedule_arr,$batch_id);
 		if(!empty((array)$errors))
 		{
 			$batch=Batch::find($batch_id);
@@ -158,8 +164,7 @@ class BatchesController extends \BaseController {
 		$trial=$this->trial;
 		$institute_id=$batchDetails->batch_institute_id;
 		$weekdays=$this->weekdays;
-		$schedule=new SchedulesController;
-		$scheduleForBatch=$schedule->edit($id);
+		$scheduleForBatch=$this->schedulesControllerObject->edit($id);
 		// dd($batchDetails);
 		// dd($scheduleForBatch['0']['id']);
 		$batchDetails->schedule=$scheduleForBatch;
@@ -200,7 +205,6 @@ class BatchesController extends \BaseController {
 		// unset($credentials["batch_photo"]);
 		$schedule_arr=$credentials['schedule'];
 		unset($credentials['schedule']);
-		$schedule=new SchedulesController;
 		$errors=$schedule->update($schedule_arr,$id);
 		if(!empty((array)$errors))
 		{
@@ -255,6 +259,7 @@ class BatchesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+		$this->schedulesControllerObject->destroy($id);
 		$batch=Batch::withTrashed()->find($id);
 		if($batch){
 			$batch->forceDelete();

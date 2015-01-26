@@ -6,7 +6,7 @@ return array(
 		
 		"batch_create_failed" => "Sorry, We are unable to add the batch",
 		
-		"batch_no_of_class_error"=>"Number of classes should be equal to number of days selected",
+		"batch_class_empty"=>"You must fill the days on which class happens.",
 
 		"batch_updated"=>"Your batch have been updated successfully",
 		

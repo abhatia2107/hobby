@@ -258,7 +258,7 @@ return View::make('Miscellaneous.contactus');
 
 Route::get('/hello', function()
 {
-return View::make('Miscellaneous.hello');
+	return View::make('test');
 });
 
 
@@ -270,6 +270,10 @@ Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{cat
 
 Route::get('/filters/search','FiltersController@search');
 
-Route::get('/prices','PricesController@create');
+Route::get('/schedules/edit/{batch_id}','SchedulesController@edit');
 
-Route::post('/prices','PricesController@store');
+Route::post('/schedules/update/{batch_id}','SchedulesController@update');
+
+Route::get('/schedules','SchedulesController@create');
+
+Route::post('/schedules','SchedulesController@store');

@@ -11,6 +11,7 @@ class BaseController extends Controller {
 	protected $institute;
 	protected $locality;
 	protected $location;
+	protected $schedule;
 	protected $subcategory;
 	protected $subscription;
 	protected $user;
@@ -20,6 +21,7 @@ class BaseController extends Controller {
 	protected $difficulty_level=array(1 => "All","Beginners","Intermediate","Advanced");
 	protected $gender_group=array(1 => "Both","Male","Female");
 	protected $recurring=array(1 => "Not recurring","Weekly","Monthly","Yearly");
+	protected $schedule_session_month=array("Session","Month");
 	protected $trial=array(1 => "Trial Not Available","Free Trial any time walk-in","Paid Trial any time walk-in","Free Trial only at batch start","Paid Trial only at batch start");
 	protected $weekdays=array(1 => "monday","tuesday","wednesday","thursday","friday","saturday","sunday");
 	protected $adminPanelList=array(
@@ -38,21 +40,22 @@ class BaseController extends Controller {
 	 *Constructor to initialize the instance of Model User
 	 */
 
-	public function __construct(Admin $adminObject, Batch $batchObject, Category $categoryObject, Comment $commentObject, Feature $featureObject, Feedback $feedbackObject, Institute $instituteObject, Locality $localityObject, Location $locationObject, Subcategory $subcategoryObject, Subscription $subscriptionObject, User $userObject, Venue $venueObject)
+	public function __construct()
 	{
-		$this->admin = $adminObject;
-		$this->batch = $batchObject;
-		$this->category = $categoryObject;
-		$this->comment = $commentObject;
-		$this->feature = $featureObject;
-		$this->feedback = $feedbackObject;
-		$this->institute = $instituteObject;
-		$this->locality=$localityObject;
-		$this->location = $locationObject;
-		$this->subcategory = $subcategoryObject;
-		$this->subscription = $subscriptionObject;
-		$this->user = $userObject;
-		$this->venue = $venueObject;
+		$this->admin = new Admin;
+		$this->batch = new Batch;
+		$this->category = new Category;
+		$this->comment = new Comment;
+		$this->feature = new Feature;
+		$this->feedback = new Feedback;
+		$this->institute = new Institute;
+		$this->locality= new Locality;
+		$this->location = new Location;
+		$this->schedule = new Schedule;
+		$this->subcategory = new Subcategory;
+		$this->subscription = new Subscription;
+		$this->user = new User;
+		$this->venue = new Venue;
 	}
 
 

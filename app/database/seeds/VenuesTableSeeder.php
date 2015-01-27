@@ -16,6 +16,7 @@ class VenuesTableSeeder extends Seeder {
                      'venue_email'=>$faker->email,
                      'venue_address' =>$faker->address,
                      'venue_contact_no' =>$faker->phoneNumber,
+                     'venue_alternate_contact_no' =>$faker->phoneNumber,
                      'venue_user_id'=>$faker->unique()->randomNumber(1,1000),
                      'venue_institute_id'=>$faker->randomNumber(1,1000),
                      'venue_landmark'=>$faker->streetName,

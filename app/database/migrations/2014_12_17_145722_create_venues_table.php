@@ -24,6 +24,7 @@ class CreateVenuesTable extends Migration {
 			$table->string('venue_pincode',6);
 			$table->string('venue_email',50);
 			$table->string('venue_contact_no',10);
+			$table->string('venue_alternate_contact_no',10)->nullable();
 			$table->string('venue_latitude',50)->nullable();
 			$table->string('venue_longitude',50)->nullable();
 			$table->softDeletes();

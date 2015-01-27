@@ -27,11 +27,15 @@
                         </div>
                         <div class="form-group inner-addon ">
                             <i class="glyphicon glyphicon-envelope left-addon"></i>
-                            <input type="email" class="form-control" name='msgInputEmail' id='MsgInputEmail'  placeholder='Enter E-Mail Address For Venue' required/>
+                            <input type="email" class="form-control" name='venue_email' id='venue_email'  placeholder='Enter E-Mail Address For Venue' required/>
                         </div>
                        <div class="form-group inner-addon">
                             <i class="glyphicon glyphicon-phone left-addon"></i>
-                             <input type="phone" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Contact Number' required/>
+                             <input type="phone" class="form-control" name='venue_contact_no' id='venue_contact_no'  placeholder='Enter Contact Number' required/>
+                        </div>
+                       <div class="form-group inner-addon">
+                            <i class="glyphicon glyphicon-phone left-addon"></i>
+                             <input type="phone" class="form-control" name='venue_alternate_contact_no' id='venue_alternate_contact_no'  placeholder='Enter Alternate Contact Number'/>
                         </div>
                         <div class="form-group inner-addon ">
                                     <select name="venue_location_id"  class="form-control" id="venue_location_id" required="required">
@@ -91,49 +95,58 @@
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+            validating: 'glyphicon glyphicon-refresh',
         },
         fields: {
             venue: {
                 message: 'The name is not valid',
                 validators: {
                     notEmpty: {
-                        message: 'The venue is required and cannot be empty'
+                        message: 'The venue is required and cannot be empty',
                     },
                     stringLength: {
                         min: 3,
                         max: 30,
-                        message: 'The venue name must be more than 3 and less than 30 characters long'
+                        message: 'The venue name must be more than 3 and less than 30 characters long',
                     },
                 }
             },
             venue_address: {
                 validators: {
                     notEmpty: {
-                        message: "The address is required and cannot be empty."
+                        message: "The address is required and cannot be empty.",
                     },
                 }
             },
             venue_contact_no: {
-                message: 'The contact number is not valid',
+                message: 'The contact number should contain 10 digits only.',
                 validators: {
                     notEmpty: {
-                        message: 'The mobile number is required and cannot be empty'
+                        message: 'The mobile number is required and cannot be empty',
                     },
 
                     regexp: {
-                        regexp: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
-                        message: 'The phone number consists of 10 digits'
+                        regexp: /^[0-9]{10}$/,
+                        message: 'The phone number consists of 10 digits',
+                    }
+                }
+            },
+             venue_alternate_contact_no: {
+                message: 'The contact number should contain 10 digits only.',
+                validators: {
+                    regexp: {
+                        regexp: /^[0-9]{10}$/,
+                        message: 'The phone number consists of 10 digits',
                     }
                 }
             },
             venue_email: {
                 validators: {
                     notEmpty: {
-                        message: 'The email is required and cannot be empty'
+                        message: 'The email is required and cannot be empty',
                     },
                     emailAddress: {
-                        message: 'The input is not a valid email address'
+                        message: 'The input is not a valid email address',
                     }
                 }
             },
@@ -141,12 +154,12 @@
                 message: 'The pincode is not valid',
                 validators: {
                     notEmpty: {
-                        message: 'The pincode is required and cannot be empty'
+                        message: 'The pincode is required and cannot be empty',
                     },
 
                     regexp: {
                         regexp: /^[0-9]{6}$/,
-                        message: 'The pincode consists of 6 digits'
+                        message: 'The pincode consists of 6 digits',
                     }
                 }
             },

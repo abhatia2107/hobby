@@ -20,14 +20,6 @@ class Batch extends \Eloquent {
         'batch_institute_id'=>'required',
         'batch_venue_id'=>'required',
         'batch_approved'=>'boolean',
-        'batch_no_of_classes_in_week'=>'required',
-        'batch_class_on_monday'=>'required',
-        'batch_class_on_tuesday'=>'required',
-        'batch_class_on_wednesday'=>'required',
-        'batch_class_on_thursday'=>'required',
-        'batch_class_on_friday'=>'required',
-        'batch_class_on_saturday'=>'required',
-        'batch_class_on_sunday'=>'required',
         'batch_trial'=>'required',
         'batch_price'=>'numeric'
     ];
@@ -50,24 +42,12 @@ class Batch extends \Eloquent {
         return Batch::where('id','=',$id)->pluck('category');
     }
 
-    public function getBatchForInstitute($batch_institute_id)
-    {
-        return Batch::where('batch_institute_id',$batch_institute_id)
-        ->Join('institutes','institutes.id','=','batches.batch_institute_id')
-        ->Join('categories','categories.id','=','batches.batch_category_id')
-        ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
-        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
-        ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
-        ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
-        ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
-        ->get();
-    }
-    
     public function getBatchForCategoryLocation($category_id,$location_id,$chunk)
     {
         //See join->on in detail from /docs/queries and improve this query.
         $allBatches=Batch::
                         Join('institutes','institutes.id','=','batches.batch_institute_id')
+                        ->Join('schedules', 'schedules.schedule_batch_id','=','batches.id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
@@ -112,6 +92,7 @@ class Batch extends \Eloquent {
     {
         $allBatches=Batch::
                         Join('institutes','institutes.id','=','batches.batch_institute_id')
+                        ->Join('schedules', 'schedules.schedule_batch_id','=','batches.id')
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
@@ -132,6 +113,7 @@ class Batch extends \Eloquent {
     {
         $allBatches=Batch::
             Join('institutes','institutes.id','=','batches.batch_institute_id')
+            ->Join('schedules', 'schedules.schedule_batch_id','=','batches.id')
             ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
             ->Join('categories','categories.id','=','batches.batch_category_id')
             ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
@@ -177,6 +159,7 @@ class Batch extends \Eloquent {
         return Batch::
             where('batches.id','=',$id)
             ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+            ->Join('schedules', 'schedules.schedule_batch_id','=','batches.id')
             ->Join('categories','categories.id','=','batches.batch_category_id')
             ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
             ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
@@ -240,6 +223,7 @@ class Batch extends \Eloquent {
     {
         return Batch::where('batch_institute_id',$batch_institute_id)
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+                        ->Join('schedules', 'schedules.schedule_batch_id','=','batches.id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
@@ -254,6 +238,7 @@ class Batch extends \Eloquent {
     {
         $batches= Batch::where('batch_user_id','=',$batch_user_id)
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+                        ->Join('schedules', 'schedules.schedule_batch_id','=','batches.id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')

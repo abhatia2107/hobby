@@ -194,7 +194,7 @@
 			    {	institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}
 				var batch = results[index]['batch'];
 				var batchID= results[index]['id'];
-				var price = results[index]['batch_price'];
+				var price = results[index]['batch_single_price'];
 				var subcategory = results[index]['subcategory'];
 				var category =  results[index]['category'];
 				var location_name = results[index]['location'];

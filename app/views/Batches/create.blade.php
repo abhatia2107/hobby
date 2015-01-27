@@ -112,17 +112,30 @@
     {
         font-weight: normal;
         cursor: pointer;
+        line-height: 0;
+    }
+    #scheduleContainer li
+    {
+        line-height: 0;
     }
     .addschedule
     {
          text-align: center;
+    }
+    #createBatch
+    {
+        background:white;
+    }
+    #scheduleStrat
+    {
+       padding-top:30px
     }
     </style>
     <link type="text/css" rel="stylesheet" href="/assets/css/jquery-te-1.4.0.css">
 @stop
 
 @section('content')
-<div class="home_vendor_page" id="createBactch" style="background: white;">
+<div class="home_vendor_page" id="createBatch">
     @include('Templates.navbarVendor')
     <div class="container-fluid">
     <div id="classInfo1">
@@ -195,7 +208,7 @@
                         </span>
                         <span class="img_requirement_span">
                             <ul class="ul-without-bullets">
-							<li>
+                            <li>
                         <span class="img_requirement">1.Based on requirements</span></li>
                         <li><span class="img_requirement">2.Based on requirements</span></li>
                 </ul></span>
@@ -221,14 +234,12 @@
                 <label for="diflevel" class="col-sm-3 control-label label1">Difficulty Level<span class="important_required">*</span></label>
                 <div class="col-sm-8">
                     <ul class="radio ul-without-bullets" name="diflevel" id="diflevel">
-                        <?php $i=1; ?>
-                        @foreach($difficulty_level as $data)
-						<li>
+                        @foreach($difficulty_level as $key => $data)
+                        <li>
                         <label>
-                            <input name="batch_difficulty_level" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$i)?'checked':''}}@else{{"Input::old('batch_difficulty_level')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
-                            <?php $i++; ?>
+                            <input name="batch_difficulty_level" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$key)?'checked':''}}@else{{"Input::old('batch_difficulty_level')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                         </label>
-						</li>
+                        </li>
                         @endforeach
                     </ul>
                 </div>
@@ -238,17 +249,15 @@
             <div class="form-group">
                 <label for="agegroup" class="col-sm-3 control-label label1">Target Age Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <ul class="radio" name="agegroup" id="agegroup">                        
-						<?php $i=1; ?>
-                        @foreach($age_group as $data)
-						<li>
+                    <ul class="radio" name="agegroup" id="agegroup">
+                        @foreach($age_group as $key => $data)
+                        <li>
                         <label >
-                            <input name="batch_age_group" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$i)?'checked':''}}@else{{"Input::old('batch_age_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
-                            <?php $i++; ?>
+                            <input name="batch_age_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$key)?'checked':''}}@else{{"Input::old('batch_age_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                         </label>
-						</li>
+                        </li>
                         @endforeach
-						
+                        
                     </ul>
                 </div>
             </div>
@@ -258,31 +267,10 @@
                 <label for="gengroup" class="col-sm-3 control-label label1">Target Gender Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
                     <ul class="radio" name="gengroup" id="gengroup">
-                        <?php $i=1; ?>
                         @foreach($gender_group as $data)
-						<li>
-                        <label>
-                            <input name="batch_gender_group" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$i)?'checked':''}}@else{{"Input::old('batch_gender_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
-                            <?php $i++; ?>
-                        </label>
-						</li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row row_padding">
-            <div class="form-group">
-                <label for="batch_trial" class="col-sm-3 control-label label1">Trial Available<span class="important_required">*</span></label>
-                
-                <div class="col-sm-6">
-                    <ul class="radio ul-without-bullets">
-                        <?php $i=1; ?>
-                        @foreach($trial as $data)
                         <li>
                         <label>
-                            <input name="batch_trial" id="batch_trial" value={{$i}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$i)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
-                            <?php $i++; ?>
+                            <input name="batch_gender_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$key)?'checked':''}}@else{{"Input::old('batch_gender_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -295,23 +283,21 @@
             <div class="col-lg-12 img-responsive schedule">
             </div>
         </div>
-    <div id="scheduleContainer">
         <div class="row row_padding">
-            <h4>Shedule 1</h4>
-            <div class="form-group" style="padding-top:30px;">
-                <label for="batch_venue_id" class="col-sm-3 control-label label1">Venue<span class="important_required">*</span></label>                
+            <div class="form-group">
+                <label for="batch_venue_id" class="col-sm-3 control-label label1">Venue<span class="important_required">*</span></label>
                 <div class="col-sm-6">
-                    <select class="form-control" id="batch_venue_id" name="schedule[0][batch_venue_id]" required>
+                    <select class="form-control" id="batch_venue_id" name="batch_venue_id" required>
                         @foreach ($venuesForUser as $data)
-	                        <option value={{$data->id}}
-	                            @if(isset($batchDetails))
-	                            {{($batchDetails->batch_venue_id==$data->id)?
-	                            'selected="selected"':''}}
-	                            @else
-	                            	{{"Input::old('batch_venue_id')"}}
-	                            @endif>
-	                            {{$data->venue}}
-	                        </option>
+                            <option value={{$data->id}}
+                                @if(isset($batchDetails))
+                                {{($batchDetails->batch_venue_id==$data->id)?
+                                'selected="selected"':''}}
+                                @else
+                                    {{"Input::old('batch_venue_id')"}}
+                                @endif>
+                                {{$data->venue}}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -322,64 +308,29 @@
         </div>
         <div class="row row_padding">
             <div class="form-group ">
-                <label class="col-sm-3 col-md-3 control-label label1" for="batch_no_of_classes_in_week">No Of Sessions
-                    <span class="important_required">*</span>
-                </label>
-                <div class="col-sm-3 col-md-2">
-                    <select class="form-control" id="batch_no_of_classes_in_week" name="schedule[0][batch_no_of_classes_in_week]" required="required">
-   	                @for ($i = 1; $i < 8; $i++)
-	                    <option value={{$i}}
-	                        @if(isset($batchDetails))
-		                        {{($batchDetails->batch_no_of_classes_in_week==$i)?
-		                        'selected="selected"':''}}
-	                        @else
-	                        	{{"Input::old('batch_no_of_classes_in_week')"}}
-	                        @endif>
-	                        {{$i}}
-	                    </option>
-                    @endfor
-                    </select>
-                </div>
-                <label class="col-sm-3 col-md-3 control-label input1" for="batch_price">Price</label>
+                <label for="batch_single_price" class="col-sm-3 control-label label1">Price for a Single Class</label>
                 <div class="col-sm-3 col-md-3">
-                    <input type="text" class="form-control" id="batch_price" name="schedule[0][batch_price]" value="@if(isset($batchDetails)){{$batchDetails->batch_price}}@else{{Input::old('batch_price')}}@endif">
+                    <input type="text" class="form-control" id="batch_single_price" name="batch_single_price" value="@if(isset($batchDetails)){{$batchDetails->batch_single_price}}@else{{Input::old('batch_single_price')}}@endif">
                 </div>
             </div>
         </div>
         <div class="row row_padding">
             <div class="form-group">
-                <label  class="col-sm-3 control-label label1">
-                    Batch have Classes on<span class="important_required">*</span>
-                </label>
-
+                <label for="batch_trial" class="col-sm-3 control-label label1">Trial Available<span class="important_required">*</span></label>
                 <div class="col-sm-6">
-				<ul class="ul-without-bullets">
-                    @foreach($weekdays as $data)
-					<li>
+                    <ul class="radio ul-without-bullets">
+                        @foreach($trial as $key => $data)
+                        <li>
                         <label>
-                        <input type="checkbox" name="batch_class[]" value="{{$data}}"
-                        @if(isset($batchDetails))
-                            <?php if(in_array($data, $batchDetails->batch_class)): echo 'checked="checked"'; endif; ?>
-                        @else
-                            {{Input::old('batch_class[]')}}
-                        @endif/>
-                        <span class="checkbox_data">
-                        <?php
-                            echo ucfirst($data);
-                        ?>
-                        </span>
+                            <input name="batch_trial" id="batch_trial" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$key)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                         </label>
-						</li>
-                    @endforeach
-					</ul>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-        <div class='addschedule'>
-            <button class='btn btn-primary addschedule' id="addschedule-btn" onclick="addSchedule()"> + Add Schedule</button>
-        </div>
-        <div class="row row_padding">
+         <div class="row row_padding">
             <div class="form-group">
                 <label for="batch_comment" class="col-sm-3 control-label label1">Tell us more about your batch(Prerequisite required, anything else you wish to share)</label>
                 <div class="col-sm-8">
@@ -387,7 +338,160 @@
                 </div>
             </div>
         </div>
-        <div class="btn_save_div" >
+        <div class="row row_padding">
+            <div class="col-lg-12 img-responsive schedule">
+            </div>
+        </div>
+        <div id="scheduleContainer">
+        @if(isset($batchDetails))
+            @foreach ($batchDetails->schedule as $j => $scheduleData)
+            <div class="row row_padding">
+                <h4>Shedule {{$j+1}}</h4>
+                <div class="form-group" id="scheduleStrat">
+                    @if(isset($batchDetails))
+                        <input type="hidden" name="schedule[{{$j}}][id]" value="{{$scheduleData['id']}}">
+                    @endif        
+                    <label class="col-sm-3 col-md-3 control-label label1" for="schedule_session_month">Sessions/Months
+                        <span class="important_required">*</span>
+                    </label>
+                    <div class="col-sm-3 col-md-3">
+                        <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required>
+                            @if(isset($schedule_session_month))
+                            @foreach ($schedule_session_month as $key => $data)
+                                <option value={{$key}}
+                                    @if(isset($batchDetails))
+                                        {{($scheduleData['schedule_session_month']==$key)?
+                                        'selected="selected"':''}}
+                                    @else
+                                        {{Input::old("schedule[$j][schedule_session_month]")}}
+                                    @endif>
+                                    {{$data}}
+                                </option>
+                            @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    
+                    <label class="col-sm-3 col-md-3 control-label label1" for="schedule_number">No Of Sessions/Months
+                        <span class="important_required">*</span>
+                    </label>
+                    <div class="col-sm-3 col-md-3">
+                        <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="row row_padding">
+                <div class="form-group">
+                    <label for="schedule_price" class="col-sm-3 control-label label1">Price<span class="important_required">*</span></label>
+                    <div class="col-sm-3 col-md-3">
+                        <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="row row_padding">
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label label1">
+                        Batch have Classes on<span class="important_required">*</span>
+                    </label>
+                    <div class="col-sm-6">
+                        <ul class="ul-without-bullets">
+                            @foreach($weekdays as $data)
+                                <li>
+                                    <label>
+                                    <input type="checkbox" name="schedule[{{$j}}][schedule_class][]" value="{{$data}}"
+                                    @if(isset($batchDetails))
+                                        @if(in_array($data, $scheduleData['schedule_class']))
+                                            {{'checked="checked"'}}
+                                        @endif
+                                    @else
+                                        {{Input::old("schedule[$j][schedule_class][]")}}
+                                    @endif/>
+                                    <span class="checkbox_data">{{ucfirst($data)}}</span>
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        @else
+        @for ($j = 0; $j < 1; $j++)    
+            <div class="row row_padding">
+                <h4>Shedule {{$j+1}}</h4>
+                <div class="form-group" id="scheduleStrat">  
+                    @if(isset($batchDetails))
+                        <input type="hidden" name="schedule[{{$j}}][id]" value="{{$scheduleData['id']}}">
+                    @endif        
+                    <label class="col-sm-3 col-md-3 control-label label1" for="schedule_session_month">Sessions/Months
+                        <span class="important_required">*</span>
+                    </label>
+                    <div class="col-sm-3 col-md-3">
+                        <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required>
+                            @if(isset($schedule_session_month))
+                            @foreach ($schedule_session_month as $key => $data)
+                                <option value={{$key}}
+                                    @if(isset($batchDetails))
+                                        {{($scheduleData['schedule_session_month']==$key)?
+                                        'selected="selected"':''}}
+                                    @else
+                                        {{Input::old("schedule[$j][schedule_session_month]")}}
+                                    @endif>
+                                    {{$data}}
+                                </option>
+                            @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    <label class="col-sm-3 col-md-3 control-label label1" for="schedule_number">No Of Sessions/Months
+                        <span class="important_required">*</span>
+                    </label>
+                    <div class="col-sm-3 col-md-3">
+                        <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="row row_padding">
+                <div class="form-group">
+                    <label for="schedule_price" class="col-sm-3 control-label label1">Price<span class="important_required">*</span></label>
+                    <div class="col-sm-3 col-md-3">
+                        <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif">
+                    </div>
+                </div>
+            </div>
+             <div class="row row_padding">
+                <div class="form-group ">
+                    <label  class="col-sm-3 control-label label1">
+                        Batch have Classes on<span class="important_required">*</span>
+                    </label>
+                    <div class="col-sm-6">
+                        <ul class="ul-without-bullets">
+                            @foreach($weekdays as $data)
+                                <li>
+                                    <label>
+                                    <input type="checkbox" name="schedule[{{$j}}][schedule_class][]" value="{{$data}}"
+                                    @if(isset($batchDetails))
+                                        @if(in_array($data, $scheduleData['schedule_class']))
+                                            {{'checked="checked"'}}
+                                        @endif
+                                    @else
+                                        {{Input::old("schedule[$j][schedule_class][]")}}
+                                    @endif/>
+                                    <span class="checkbox_data">{{ucfirst($data)}}</span>
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endfor
+        @endif
+        <div class='addschedule'>
+            <button class='btn btn-primary addschedule' id="addschedule-btn" onclick="addSchedule()"> + Add Schedule</button>
+        </div><hr/>
+        <div class="btn_save_div" style="margin-top:20px;">
             <button type="submit" class="btn btn-success btn-lg"> @if(isset($batchDetails)) <i class="fa fa-save"></i>  Save @else <i class="fa fa-plus"></i>  Create @endif</button>
             <button type="reset" class="btn btn-warning btn-lg"><i class="fa fa-power-off"></i> Reset</button>
         </div>
@@ -406,7 +510,7 @@
 @section('pagejquery')
 <script type="text/javascript">
     var allSubcategories = <?php echo json_encode($all_subcategories) ?>;
-    var venuesForUser = <?php echo json_encode($venuesForUser) ?>;
+    var scheduleSessions = ["Session", "Month"];
     var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
     var scheduleCount = 1;
     function ucfirst(string)
@@ -429,7 +533,8 @@
                 (
                     $("<label></label>")
                     .attr("class","col-sm-3 control-label label1")
-                    .text("Venue")
+                    .attr("for","schedule_session_month")
+                    .text("Sessions/Months")
                     .append
                     (
                         $("<span></span>")
@@ -440,15 +545,41 @@
                 .append
                 (
                     $("<div></div>")
-                    .attr("class","col-sm-6")
+                    .attr("class","col-sm-3")
                     .append
                     ( 
                         $("<select required></select>")  
                         .attr("class","form-control")
-                        .attr("id","batch_venue_id")
-                        .attr("name","schedule["+scheduleCount+"][batch_venue_id]")
+                        .attr("id","schedule_session_month")
+                        .attr("name","schedule["+scheduleCount+"][schedule_session_month]")
                     )
                 )
+                .append
+                (
+                    $("<label></label>")
+                    .attr("class","col-sm-3 control-label label1")
+                    .attr("for","schedule_number")
+                    .text("No Of Sessions/Months")
+                    .append
+                    (
+                        $("<span></span>")
+                        .attr("class","important_required")
+                        .text("*")
+                    )                      
+                ) 
+                .append
+                (
+                    $("<div></div>")
+                    .attr("class","col-sm-3")
+                    .append
+                    ( 
+                        $("<input required/>") 
+                        .attr("type","text") 
+                        .attr("class","form-control")
+                        .attr("id","schedule_number")
+                        .attr("name","schedule["+scheduleCount+"][schedule_number]")
+                    )
+                )            
         )
         .appendTo(linksContainer);
          $("<div></div>")
@@ -461,32 +592,15 @@
                 .append
                 (
                     $("<label></label>")
+                    .attr("for","schedule_price")
                     .attr("class","col-sm-3 control-label label1")
-                    .text("No Of Sessions")
+                    .text("Price")
                     .append
                     (
                         $("<span></span>")
                         .attr("class","important_required")
                         .text("*")
-                    )                      
-                ) 
-                .append
-                (
-                    $("<div></div>")
-                    .attr("class","col-sm-3 col-md-2")
-                    .append
-                    ( 
-                        $("<select required></select>")  
-                        .attr("class","form-control")
-                        .attr("id","batch_no_of_classes_in_week")
-                        .attr("name","schedule["+scheduleCount+"][batch_no_of_classes_in_week]")                       
-                    )
-                )
-                .append
-                (
-                    $("<label></label>")
-                    .attr("class","col-sm-3 col-md-3 control-label input1")
-                    .text("Price")                                    
+                    )                                    
                 )
                 .append
                 (
@@ -497,10 +611,10 @@
                         $("<input required/>")  
                         .attr("type","text")
                         .attr("class","form-control")
-                        .attr("id","batch_price")
-                        .attr("name","schedule["+scheduleCount+"][batch_price]")                       
+                        .attr("id","schedule_price")
+                        .attr("name","schedule["+scheduleCount+"][schedule_price]")                       
                     )
-                ) 
+                )
         )
         .appendTo(linksContainer);  
         $("<div></div>")
@@ -535,28 +649,18 @@
                 )
         )
         .appendTo(linksContainer);       
-        var venuesContainer = $("#schedule"+scheduleCount+" #batch_venue_id"),baseUrl;
-        for(var key in venuesForUser)
+        var SessionContainer = $("#schedule"+scheduleCount+" #schedule_session_month"),baseUrl;
+        for(var key in scheduleSessions)
         {
-            var venueID = venuesForUser[key]['id'];
-            var venue = venuesForUser[key]['venue'];
-            $("<option></option>")
-                .attr("value",venueID)                
-                .text(venue)
-                .appendTo(venuesContainer);
-        }
-        var classesInWeekContainer = $("#schedule"+scheduleCount+" #batch_no_of_classes_in_week"),baseUrl;
-        for(var key=1;key<=7;key++)
-        {
+            var data = scheduleSessions[key];
             $("<option></option>")
                 .attr("value",key)                
-                .text(key)
-                .appendTo(classesInWeekContainer);
+                .text(data)
+                .appendTo(SessionContainer);
         }
         var weekDaysContainer = $("#schedule"+scheduleCount+" #batch_week_days"),baseUrl;
         for(var key in weekDays)
         {
-           // alert('yes');
             var day = ucfirst(weekDays[key]);
             $("<li></li>")
             .append
@@ -564,15 +668,16 @@
                 $("<label></label>")
                 .append
                 (
-                    $("<input type='checkbox' required/>")      
+                    $("<input required/>")      
+                    .attr("type","checkbox")
                     .attr("value",weekDays[key])   
-                    .attr("name","batch_class[]")       
+                    .attr("name","schedule["+scheduleCount+"][schedule_class][]")       
                 )
                 .append
                 (
-                     $("<span></span>")
-                     .attr("class","checkbox_data")
-                        .text(' '+day)             
+                    $("<span></span>")
+                    .attr("class","checkbox_data")
+                    .text(' '+day)             
                 )
             )
             .appendTo(weekDaysContainer);      
@@ -643,7 +748,7 @@
                     }
                 },
 
-                batch_price: {
+                batch_single_price: {
                     message: 'The Price is not valid',
                     validators: {
                         regexp: {
@@ -688,8 +793,6 @@
 </script>
 <script>
     $('.jqte-test').jqte();
-
-    // settings of status
     var jqteStatus = true;
     $(".status").click(function()
     {

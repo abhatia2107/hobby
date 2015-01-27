@@ -41,8 +41,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('LocalitiesTableSeeder');
 		$this->command->info('Localites table seeded!');
 
-		$this->call('PricesTableSeeder');
-        $this->command->info('Prices table seeded!');
+		$this->call('SchedulesTableSeeder');
+        $this->command->info('Schedules table seeded!');
 
 		$this->call('UsersTableSeeder');
         $this->command->info('Users table seeded!');

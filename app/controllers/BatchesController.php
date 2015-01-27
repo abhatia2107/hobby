@@ -1,8 +1,16 @@
 <?php
-
+/*
 use Carbon\Carbon;
-
+*/
 class BatchesController extends \BaseController {
+
+	protected $schedulesControllerObject;
+
+	public function __construct()
+	{
+		$this->schedulesControllerObject=new SchedulesController; 
+		parent::__construct();
+	}
 
 	public function index()
 	{
@@ -35,11 +43,12 @@ class BatchesController extends \BaseController {
 		//Locations are being send for venue create form which will be called up in the modal of venue.
 		$localities=$this->locality->all();
 		// $recurring=$this->recurring;
+		$schedule_session_month=$this->schedule_session_month;
 		$trial=$this->trial;
 		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$institute_id=$this->institute->getInstituteforUser($user_id);
 		$weekdays=$this->weekdays;
-		return View::make('Batches.create',compact('all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','trial','weekdays'));
+		return View::make('Batches.create',compact('all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','schedule_session_month','trial','weekdays'));
 	}
 
 	/**
@@ -51,22 +60,11 @@ class BatchesController extends \BaseController {
 	public function store()
 	{
 		$credentials=Input::all();
-		foreach($this->weekdays as $data){
-			$credentials['batch_class_on_'.$data]=0;
-		}
-		if(!empty($credentials['batch_class'])){
-			foreach($credentials['batch_class'] as $data){
-				$credentials['batch_class_on_'.$data]=1;
-	    	}
-		}
 		$user_id=Auth::id();
 		$batch_institute_id=Institute::getInstituteforUser($user_id);
 		$credentials['batch_institute_id']=$batch_institute_id;
 		$validator = Validator::make($credentials, Batch::$rules);
 		unset($credentials['csrf_token']);
-		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
-			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
-		unset($credentials["batch_class"]);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
@@ -99,7 +97,17 @@ class BatchesController extends \BaseController {
 		   	$thumbnailFile->move($destinationPathForThumbnail,$fileName);
 			$credentials["batch_photo"]=1;
 		}*/
+		$schedule_arr=$credentials['schedule'];
+		unset($credentials['schedule']);
 		$batch=Batch::create($credentials);
+		$batch_id=$batch->id;
+		$errors=$this->schedulesControllerObject->store($schedule_arr,$batch_id);
+		if(!empty((array)$errors))
+		{
+			$batch=Batch::find($batch_id);
+			$batch->forceDelete();
+			return Redirect::back()->withInput()->withErrors($errors);
+		}
 		if($batch) 
 			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_created'));
 		else
@@ -153,17 +161,16 @@ class BatchesController extends \BaseController {
 		//Locations are being send for venue create form which will be called up in the modal of venue.
 		$localities=$this->locality->all();
 		// $recurring=$this->recurring;
+		$schedule_session_month=$this->schedule_session_month;
 		$trial=$this->trial;
 		$institute_id=$batchDetails->batch_institute_id;
 		$weekdays=$this->weekdays;
-		$batch_class=array();
-		foreach($this->weekdays as $data){
-			if($batchDetails['batch_class_on_'.$data])
-				array_push($batch_class,$data);
-		}
-		$batchDetails['batch_class']=$batch_class;
+		$scheduleForBatch=$this->schedulesControllerObject->edit($id);
 		// dd($batchDetails);
-		return View::make('Batches.create',compact('batchDetails','all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','trial','weekdays'));
+		// dd($scheduleForBatch['0']['id']);
+		$batchDetails->schedule=$scheduleForBatch;
+		// dd($batchDetails);
+		return View::make('Batches.create',compact('batchDetails','all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities', 'schedule_session_month','trial','weekdays'));
 	}
 
 	/**
@@ -176,14 +183,6 @@ class BatchesController extends \BaseController {
 	public function update($id)
 	{
 		$credentials=Input::all();
-		foreach($this->weekdays as $data){
-			$credentials['batch_class_on_'.$data]=0;
-		}
-		if(!empty($credentials['batch_class'])){
-			foreach($credentials['batch_class'] as $data){
-				$credentials['batch_class_on_'.$data]=1;
-	    	}
-		}
 		$user_id=Auth::id();
 		$batch_institute_id=Institute::getInstituteforUser($user_id);
 		$credentials['batch_institute_id']=$batch_institute_id;
@@ -203,11 +202,15 @@ class BatchesController extends \BaseController {
 		{	
 			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_startEndDateError'));		
 		}*/
-		if($credentials['batch_no_of_classes_in_week']!=count($credentials['batch_class']))
-			return Redirect::back()->withInput()->with('failure',Lang::get('batch.batch_no_of_class_error'));
-		unset($credentials["batch_class"]);
 		unset($credentials['csrf_token']);
 		// unset($credentials["batch_photo"]);
+		$schedule_arr=$credentials['schedule'];
+		unset($credentials['schedule']);
+		$errors=$schedule->update($schedule_arr,$id);
+		if(!empty((array)$errors))
+		{
+			return Redirect::back()->withInput()->withErrors($errors);
+		}
 		$updated=$this->batch->updateBatch($credentials,$id);
 		if ($updated) 
 			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_updated'));
@@ -257,6 +260,7 @@ class BatchesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
+		$this->schedulesControllerObject->destroy($id);
 		$batch=Batch::withTrashed()->find($id);
 		if($batch){
 			$batch->forceDelete();

@@ -183,8 +183,8 @@
                             },
 
                             regexp: {
-                                regexp: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
-                                message: 'The mobile number consists of 10 digits'
+                                regexp: /^[0-9]{10}$/,
+                                message: 'The mobile number consists of 10 digits. Skip adding +91 or 0'
                             }
                         }
                     },

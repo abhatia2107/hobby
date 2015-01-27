@@ -16,9 +16,10 @@ class Venue extends \Eloquent {
 		'venue_locality_id'=>'required|numeric',
 		'venue_pincode'=>'regex:/[0-9]{6}/',
 		'venue_address'=>'required',
-		'venue_email'=>'required|email',
-		'venue_contact_no'=>'regex:/[0-9]{10,11}/',
-		'venue_user_id'=>'required|numeric',
+		'venue_email'=>'required|email|unique:venues',
+		'venue_contact_no'=>'required|unique:venues|unique:venues,venue_alternate_contact_no|regex:/[0-9]{10}/',
+		'venue_alternate_contact_no'=>'different:venue_contact_no|unique:venues|unique:venues,venue_contact_no|regex:/[0-9]{10}/',
+        'venue_user_id'=>'required|numeric',
 		'venue_institute_id'=>'required|numeric',
 	];	
  	public function updateVenue($credentials,$id)

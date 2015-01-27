@@ -108,6 +108,10 @@
         font-size: 22px;
         margin: 0 0;
     }
+    #scheduleContainer .control-label
+    {
+        margin-top:10px;
+    }
     #scheduleContainer label
     {
         font-weight: normal;
@@ -129,6 +133,17 @@
     #scheduleStrat
     {
        padding-top:30px
+    }
+    #removeScheduleButton
+    {
+        float: right;
+        color: red;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    #PriceForSingleClass
+    {
+        display: none;
     }
     </style>
     <link type="text/css" rel="stylesheet" href="/assets/css/jquery-te-1.4.0.css">
@@ -307,14 +322,6 @@
             </div>
         </div>
         <div class="row row_padding">
-            <div class="form-group ">
-                <label for="batch_single_price" class="col-sm-3 control-label label1">Price for a Single Class</label>
-                <div class="col-sm-3 col-md-3">
-                    <input type="text" class="form-control" id="batch_single_price" name="batch_single_price" value="@if(isset($batchDetails)){{$batchDetails->batch_single_price}}@else{{Input::old('batch_single_price')}}@endif">
-                </div>
-            </div>
-        </div>
-        <div class="row row_padding">
             <div class="form-group">
                 <label for="batch_trial" class="col-sm-3 control-label label1">Trial Available<span class="important_required">*</span></label>
                 <div class="col-sm-6">
@@ -327,6 +334,14 @@
                         </li>
                         @endforeach
                     </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row row_padding" id="PriceForSingleClass">
+            <div class="form-group ">
+                <label for="batch_single_price" class="col-sm-3 control-label label1">Price for a Single Class</label>
+                <div class="col-sm-3 col-md-3">
+                    <input type="text" class="form-control" id="batch_single_price" name="batch_single_price" value="@if(isset($batchDetails)){{$batchDetails->batch_single_price}}@else{{Input::old('batch_single_price')}}@endif">
                 </div>
             </div>
         </div>
@@ -378,12 +393,8 @@
                     <div class="col-sm-3 col-md-3">
                         <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif">
                     </div>
-                </div>
-            </div>
-            <div class="row row_padding">
-                <div class="form-group">
-                    <label for="schedule_price" class="col-sm-3 control-label label1">Price<span class="important_required">*</span></label>
-                    <div class="col-sm-3 col-md-3">
+                    <label for="schedule_price" class="col-md-1 control-label label1">Price<span class="important_required">*</span></label>
+                    <div class="col-sm-2 col-md-2">
                         <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif">
                     </div>
                 </div>
@@ -423,10 +434,10 @@
                     @if(isset($batchDetails))
                         <input type="hidden" name="schedule[{{$j}}][id]" value="{{$scheduleData['id']}}">
                     @endif        
-                    <label class="col-sm-3 col-md-3 control-label label1" for="schedule_session_month">Sessions/Months
+                    <label class="col-sm-3 col-md-2 control-label label1" for="schedule_session_month">Sessions/Months
                         <span class="important_required">*</span>
                     </label>
-                    <div class="col-sm-3 col-md-3">
+                    <div class="col-sm-3 col-md-2">
                         <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required>
                             @if(isset($schedule_session_month))
                             @foreach ($schedule_session_month as $key => $data)
@@ -446,15 +457,11 @@
                     <label class="col-sm-3 col-md-3 control-label label1" for="schedule_number">No Of Sessions/Months
                         <span class="important_required">*</span>
                     </label>
-                    <div class="col-sm-3 col-md-3">
-                        <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif">
+                    <div class="col-sm-3 col-md-2">
+                        <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" >
                     </div>
-                </div>
-            </div>
-            <div class="row row_padding">
-                <div class="form-group">
-                    <label for="schedule_price" class="col-sm-3 control-label label1">Price<span class="important_required">*</span></label>
-                    <div class="col-sm-3 col-md-3">
+                    <label for="schedule_price" class="col-md-1 control-label label1">Price<span class="important_required">*</span></label>
+                    <div class="col-sm-2 col-md-2">
                         <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif">
                     </div>
                 </div>
@@ -517,112 +524,127 @@
     {
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
+    function removeSchedule(id)
+    {
+        $("#schedule"+id).remove();
+        scheduleCount--;
+    }
     function addSchedule()
     {
         //alert(scheduleCount);
         var linksContainer = $('#scheduleContainer'),baseUrl;
-        $('#scheduleContainer').append("<hr><h4>Schedule "+(scheduleCount+1)+"</h4>");
+        
+        //        "<span id='' onclick='removeSchedule("+scheduleCount+")'>X</span></h4>");
         $("<div></div>")
-        .attr("class","row row_padding")
         .attr("id","schedule"+scheduleCount)
+        .append("<hr/>")
         .append
         (
-            $("<div></div>")
-                .attr("class","form-group")
-                .append
-                (
-                    $("<label></label>")
-                    .attr("class","col-sm-3 control-label label1")
-                    .attr("for","schedule_session_month")
-                    .text("Sessions/Months")
-                    .append
-                    (
-                        $("<span></span>")
-                        .attr("class","important_required")
-                        .text("*")
-                    )                      
-                ) 
-                .append
-                (
-                    $("<div></div>")
-                    .attr("class","col-sm-3")
-                    .append
-                    ( 
-                        $("<select required></select>")  
-                        .attr("class","form-control")
-                        .attr("id","schedule_session_month")
-                        .attr("name","schedule["+scheduleCount+"][schedule_session_month]")
-                    )
-                )
-                .append
-                (
-                    $("<label></label>")
-                    .attr("class","col-sm-3 control-label label1")
-                    .attr("for","schedule_number")
-                    .text("No Of Sessions/Months")
-                    .append
-                    (
-                        $("<span></span>")
-                        .attr("class","important_required")
-                        .text("*")
-                    )                      
-                ) 
-                .append
-                (
-                    $("<div></div>")
-                    .attr("class","col-sm-3")
-                    .append
-                    ( 
-                        $("<input required/>") 
-                        .attr("type","text") 
-                        .attr("class","form-control")
-                        .attr("id","schedule_number")
-                        .attr("name","schedule["+scheduleCount+"][schedule_number]")
-                    )
-                )            
+            $("<h4></h4>")
+            .text("Schedule "+(scheduleCount+1))
+            .append
+            (
+                $("<span></span>")
+                .attr("id","removeScheduleButton")
+                .attr("onClick","removeSchedule("+scheduleCount+")")
+                .attr("title","Remove Schedule")
+                .text("X")
+            )
         )
-        .appendTo(linksContainer);
-         $("<div></div>")
-        .attr("class","row row_padding")
-        .attr("id","schedule"+scheduleCount)
         .append
         (
             $("<div></div>")
-                .attr("class","form-group")
-                .append
-                (
-                    $("<label></label>")
-                    .attr("for","schedule_price")
-                    .attr("class","col-sm-3 control-label label1")
-                    .text("Price")
+            .attr("class","row row_padding")
+            .append
+            (
+                $("<div></div>")
+                    .attr("class","form-group")
                     .append
                     (
-                        $("<span></span>")
-                        .attr("class","important_required")
-                        .text("*")
-                    )                                    
-                )
-                .append
-                (
-                    $("<div></div>")
-                    .attr("class","col-sm-3 col-md-3")
+                        $("<label></label>")
+                        .attr("class","col-sm-2 control-label label1")
+                        .attr("for","schedule_session_month")
+                        .text("Sessions/Months")
+                        .append
+                        (
+                            $("<span></span>")
+                            .attr("class","important_required")
+                            .text("*")
+                        )                      
+                    ) 
                     .append
-                    ( 
-                        $("<input required/>")  
-                        .attr("type","text")
-                        .attr("class","form-control")
-                        .attr("id","schedule_price")
-                        .attr("name","schedule["+scheduleCount+"][schedule_price]")                       
+                    (
+                        $("<div></div>")
+                        .attr("class","col-sm-2")
+                        .append
+                        ( 
+                            $("<select required></select>")  
+                            .attr("class","form-control")
+                            .attr("id","schedule_session_month")
+                            .attr("name","schedule["+scheduleCount+"][schedule_session_month]")
+                        )
                     )
-                )
+                    .append
+                    (
+                        $("<label></label>")
+                        .attr("class","col-sm-3 control-label label1")
+                        .attr("for","schedule_number")
+                        .text("No Of Sessions/Months")
+                        .append
+                        (
+                            $("<span></span>")
+                            .attr("class","important_required")
+                            .text("*")
+                        )                      
+                    ) 
+                    .append
+                    (
+                        $("<div></div>")
+                        .attr("class","col-md-2")
+                        .append
+                        ( 
+                            $("<input required/>") 
+                            .attr("type","text") 
+                            .attr("class","form-control")
+                            .attr("id","schedule_number")
+                            .attr("name","schedule["+scheduleCount+"][schedule_number]")
+                        )
+                    ) 
+                    .append
+                    (
+                        $("<label></label>")
+                        .attr("for","schedule_price")
+                        .attr("class","col-sm-1 control-label label1")
+                        .text("Price")
+                        .append
+                        (
+                            $("<span></span>")
+                            .attr("class","important_required")
+                            .text("*")
+                        )                                    
+                    )
+                    .append
+                    (
+                        $("<div></div>")
+                        .attr("class","col-sm-3 col-md-2")
+                        .append
+                        ( 
+                            $("<input required/>")  
+                            .attr("type","text")
+                            .attr("class","form-control")
+                            .attr("id","schedule_price")
+                            .attr("name","schedule["+scheduleCount+"][schedule_price]")                       
+                        )
+                    )           
+            )
         )
-        .appendTo(linksContainer);  
-        $("<div></div>")
-        .attr("class","row row_padding")
-        .attr("id","schedule"+scheduleCount)
         .append
         (
             $("<div></div>")
+            .attr("class","row row_padding")
+            .append
+            (
+                $("<div></div>")
                 .attr("class","form-group")
                 .append
                 (
@@ -647,8 +669,9 @@
                         .attr("id","batch_week_days")
                     )
                 )
+            )
         )
-        .appendTo(linksContainer);       
+        .appendTo(linksContainer);    
         var SessionContainer = $("#schedule"+scheduleCount+" #schedule_session_month"),baseUrl;
         for(var key in scheduleSessions)
         {
@@ -703,7 +726,18 @@
         }
     }
     $(document).ready(function(){  
-        var batchCount = $("#subcategory_list li").length ; 
+        var batchCount = $("#subcategory_list li").length ;
+        $("input:radio[name=batch_trial]").click(function() {
+            var value = $(this).val();
+            if(value==3||value==5)
+            {
+                $("#PriceForSingleClass").show();
+            }
+            else
+            {
+                $("#PriceForSingleClass").hide();
+            }
+        });
         $('#addschedule-btn').click(function(e){
             e.preventDefault();
             e.stopPropagation();

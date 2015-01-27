@@ -116,9 +116,9 @@
 											<div id="{{$key}}" class="day">{{$day}}</div>
 										@endforeach
 										</div>
-										<div class="edit_delete_buttons">
-											<a href="/batches/edit/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Edit</button></a>
-											<a href="/batches/disable/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Delete</button></a>
+										<div class="edit_delete_buttons col-md-12 col-sm-12">
+											<a class="col-md-6 col-sm-6" href="/batches/edit/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Edit</button></a>
+											<a class="col-md-6 col-sm-6" href="/batches/disable/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Delete</button></a>
 										</div>
 									</div>
 								</div>

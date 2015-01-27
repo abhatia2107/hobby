@@ -144,9 +144,8 @@
 @stop
 
 @section('pagejavascript')
-<script type="text/javascript"  src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-<script type="text/javascript" src="jquery-te-1.4.0.min.js" charset="utf-8"></script>
 <script type="text/javascript"  src="/assets/js/jquery.richtextarea.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 
 @stop
 @section('pagejquery')
@@ -174,29 +173,6 @@
                             },
                         }
                     },
-                   phone: {
-                        message: 'The number is not valid',
-                        validators: {
-                            notEmpty: {
-                                message: 'The mobile number is required and cannot be empty'
-                            },
-
-                            regexp: {
-                                regexp: /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
-                                message: 'The phone number consists of 10 digits'
-                            }
-                        }
-                    },
-                    email: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The email is required and cannot be empty'
-                            },
-                            emailAddress: {
-                                message: 'The input is not a valid email address'
-                            }
-                        }
-                    },
                     institute_website: {
                         validators: {
                             notEmpty: {
@@ -213,15 +189,13 @@
         });
     </script>
 
-    <script>
-        $('.jqte-test').jqte();
-
-        // settings of status
-        var jqteStatus = true;
-        $(".status").click(function()
-        {
-            jqteStatus = jqteStatus ? false : true;
-            $('.jqte-test').jqte({"status" : jqteStatus})
-        });
-    </script>
+<script>
+    $('.jqte-test').jqte();
+    var jqteStatus = true;
+    $(".status").click(function()
+    {
+        jqteStatus = jqteStatus ? false : true;
+        $('.jqte-test').jqte({"status" : jqteStatus})
+    });
+</script>
 @stop

@@ -27,15 +27,15 @@
                         </div>
                         <div class="form-group inner-addon ">
                             <i class="glyphicon glyphicon-envelope left-addon"></i>
-                            <input type="email" class="form-control" name='venue_email' id='venue_email'  placeholder='Enter E-Mail Address For Venue' required/>
+                            <input type="email" class="form-control" name='venue_email' id='venue_email'  placeholder='Enter E-Mail Address For Venue' value="@if(isset($venueDetails)){{$venueDetails->venue_email}}@else{{Input::old('venue_email')}}@endif" required/>
                         </div>
                        <div class="form-group inner-addon">
                             <i class="glyphicon glyphicon-phone left-addon"></i>
-                             <input type="phone" class="form-control" name='venue_contact_no' id='venue_contact_no'  placeholder='Enter Contact Number' required/>
+                             <input type="phone" class="form-control" name='venue_contact_no' id='venue_contact_no'  placeholder='Enter Contact Number' value="@if(isset($venueDetails)){{$venueDetails->venue_contact_no}}@else{{Input::old('venue_contact_no')}}@endif" required/>
                         </div>
                        <div class="form-group inner-addon">
                             <i class="glyphicon glyphicon-phone left-addon"></i>
-                             <input type="phone" class="form-control" name='venue_alternate_contact_no' id='venue_alternate_contact_no'  placeholder='Enter Alternate Contact Number'/>
+                             <input type="phone" class="form-control" name='venue_alternate_contact_no' id='venue_alternate_contact_no'  placeholder='Enter Alternate Contact Number' value="@if(isset($venueDetails)){{$venueDetails->venue_alternate_contact_no}}@else{{Input::old('venue_alternate_contact_no')}}@endif"/>
                         </div>
                         <div class="form-group inner-addon ">
                                     <select name="venue_location_id"  class="form-control" id="venue_location_id" required="required">
@@ -51,8 +51,8 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                
                         </div>
+                                
                         <div class="form-group inner-addon">
                             <select name="venue_locality_id" class="form-control" id="venue_locality_id" required="required">
                                  <option disabled="disabled"> Select Locality</option>

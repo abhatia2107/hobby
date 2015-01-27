@@ -26,6 +26,12 @@ return array(
 		
 		"batch_delete_failed" => "Sorry, We are unable to delete the batch",
 		
+		"batch_approved"=>"This batch have been approved successfully.",
+		
+		"batch_not_approved"=>"This batch is not approved until now, it is still under consideration.",
+		
+		"batch_approve_failed"=>"Sorry, we are unable to approve this batch.",
+		
 		"batch_currentDateError"=>"Your batch does not start on a valid date",
 		
 		"batch_startEndDateError"=>"End date can not be less than start date",

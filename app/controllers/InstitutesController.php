@@ -63,10 +63,11 @@ class InstitutesController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$instituteDetails=Institute::withTrashed()->find($id);
-		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
+		$instituteDetails=$this->institute->getInstitute($id);
+		//For the navbar of vendor panel. 
+		//It is being used in layout file to show this navbar.
 		$institute_id=$instituteDetails['id'];
-		if($instituteDetails['deleted_at'])
+		if($instituteDetails->deleted_at)
 		{
 			return Redirect::back()->with('failure',Lang::get('institute.institute_disabled_by_admin'));;
 		}
@@ -111,9 +112,9 @@ class InstitutesController extends \BaseController {
 		}
 		$updated=$this->institute->updateInstitute($credentials,$id);
 		if ($updated) 
-			return Redirect::to('/institutes')->with('success',Lang::get('institute.institute_updated'));
+			return Redirect::to('/institutes/'.$updated->id)->with('success',Lang::get('institute.institute_updated'));
 		else
-			return Redirect::to('/institutes')->with('failed',Lang::get('institute.institute_already_failed'));
+			return Redirect::to('/institutes/'.$updated->id)->with('failed',Lang::get('institute.institute_already_failed'));
 	}
 
 

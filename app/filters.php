@@ -67,6 +67,16 @@ Route::filter('csrf', function()
 	}
 });
 
+function approved()
+{
+	$batch_id=Request::segment(3);
+	$approved=Batch::isBatchApproved($batch_id);
+	if(!$approved)
+	{
+		return Redirect::to('/')->with('failure',Lang::get('batch.batch_not_approved'));
+	}
+}
+
 // To check if a user own the batch, he's trying to edit.
 function batchOwn()
 {
@@ -201,6 +211,16 @@ Route::filter('mainAdmin',function()
 	$admin=Admin::where('admin_user_id','=',$id)->get()->toarray();
 	if(($admin[0]['id']!=1)&&($admin[0]['id']!=2))
 		return Redirect::to('/admin')->with('failure',Lang::get('routingFilter.permission_denied'));
+});
+
+Route::filter('approved-or-admin', function () 
+{
+   	$admin=call_user_func('admin');
+   	if(!$admin)
+   		return ;
+    $value = call_user_func('approved');
+    if (($value)&&($admin)) 
+    	return $value;
 });
 
 Route::filter('batchOwn-or-admin', function () 

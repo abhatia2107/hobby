@@ -418,7 +418,7 @@
         @else
         @for ($j = 0; $j < 1; $j++)    
             <div class="row row_padding">
-                <h4>Shedule {{$j+1}}</h4>
+                <h4>Schedule {{$j+1}}</h4>
                 <div class="form-group" id="scheduleStrat">  
                     @if(isset($batchDetails))
                         <input type="hidden" name="schedule[{{$j}}][id]" value="{{$scheduleData['id']}}">

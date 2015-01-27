@@ -1,7 +1,7 @@
 @section("footer")
 <div class="container">
    <div class="row">
-      <div class="footer-widget-column col-xs-12 col-sm-12 col-lg-5">
+      <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-5">
          <div class="textwidget">
             <p>
                At Hobby our purpose is to help people find great local businesses like dentists, hair stylists and mechanics. Go Explore!
@@ -12,7 +12,7 @@
             Copyright Hobby 2015. All Rights Reserved  
          </div>
       </div>
-      <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-3 col-lg-offset-1">
+      <div class="footer-widget-column col-xs-12 col-sm-3 col-lg-3 col-lg-offset-1">
          <h1 class="footer-widget-title">About Hobby</h1>
          <div class="menu-need-help-menu-container">
             <ul id="menu-need-help-menu" class="menu">                                 
@@ -24,7 +24,7 @@
             </ul>
          </div>
       </div>
-      <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-3">
+      <div class="footer-widget-column col-xs-12 col-sm-3 col-lg-3">
          <h1 class="footer-widget-title">Stay Connected</h1>
          <div class="menu-social-widget-menu-container">
             <ul id="menu-social-widget-menu" class="menu">                                 

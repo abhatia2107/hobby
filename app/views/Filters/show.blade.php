@@ -322,8 +322,8 @@
 			}
 			$("#filter-sub input").click(function () {		
 				filterStatus = true;
-				$('#loadMore').css('display','block');
-				$('#noResults').css('display','none');
+				$('#loadMore').show();
+				$('#noResults').hide();
 				result = [];				
 				filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();			
 				if(filter_select.length>0)

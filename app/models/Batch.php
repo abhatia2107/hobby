@@ -21,7 +21,8 @@ class Batch extends \Eloquent {
         'batch_venue_id'=>'required',
         'batch_approved'=>'boolean',
         'batch_trial'=>'required',
-        'batch_price'=>'numeric'
+        'batch_single_price'=>'numeric',
+
     ];
 
     public static $rulesMessage = [

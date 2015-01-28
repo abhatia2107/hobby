@@ -60,6 +60,7 @@ class BatchesController extends \BaseController {
 	public function store()
 	{
 		$credentials=Input::all();
+		// dd($credentials);
 		$user_id=Auth::id();
 		$batch_institute_id=Institute::getInstituteforUser($user_id);
 		$credentials['batch_user_id']=$batch_institute_id;

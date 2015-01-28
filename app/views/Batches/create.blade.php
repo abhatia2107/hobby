@@ -1,22 +1,23 @@
+
 @extends('Layouts.layout')
 @section('pagestylesheet')
     <style>
-	.ul-without-bullets
-	{
-    	list-style-type: none;	
-	}
-	#gengroup
-	{
-	   list-style-type: none;
-	}
-	#agegroup
-	{
+    .ul-without-bullets
+    {
+        list-style-type: none;  
+    }
+    #gengroup
+    {
+       list-style-type: none;
+    }
+    #agegroup
+    {
         list-style-type: none;
-	}
-	.row_padding
-	{
-		padding-top:30px;
-	}
+    }
+    .row_padding
+    {
+        padding-top:30px;
+    }
     .img_requirement_span
     {
         position: absolute;
@@ -45,7 +46,7 @@
     {
         font-size: 15px;
         font-weight: 100;
-		text-align: left !important;
+        text-align: left !important;
     }
     .btn_save_div
     {
@@ -92,11 +93,11 @@
         background: url('/assets/images/batch/create/schedule.PNG');
         height:41px 
     }
-	.radio_data
-	{
-		position:relative;
-		top:1px;
-	}
+    .radio_data
+    {
+        position:relative;
+        top:1px;
+    }
     .checkbox_data
     {
         position:relative;
@@ -189,7 +190,9 @@
                                 @if(isset($batchDetails))
                                 {{($batchDetails->batch_category_id==$data->id)?
                                 'selected="selected"':''}}
-                                @else{{"Input::old('batch_category_id')"}}
+                                @else{{""}}
+                                {{((Input::old('batch_category_id'))==$data->id)?
+                                'selected="selected"':''}}
                                 @endif>
                                 {{$data->category}}
                             </option>
@@ -205,7 +208,9 @@
                             @if(isset($batchDetails))
                             {{($batchDetails->batch_subcategory_id==$data->id)?
                             'selected="selected"':''}}
-                            @else{{"Input::old('batch_subcategory_id')"}}
+                            @else
+                            {{((Input::old('batch_subcategory_id'))==$data->id)?
+                            'selected="selected"':''}}
                             @endif>
                             {{$data->subcategory}} 
                         </option>                        
@@ -252,7 +257,7 @@
                         @foreach($difficulty_level as $key => $data)
                         <li>
                         <label>
-                            <input name="batch_difficulty_level" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$key)?'checked':''}}@else{{"Input::old('batch_difficulty_level')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_difficulty_level" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$key)?'checked':''}}@else{{(Input::old('batch_difficulty_level')==$key)?'checked':''}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -268,7 +273,7 @@
                         @foreach($age_group as $key => $data)
                         <li>
                         <label >
-                            <input name="batch_age_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$key)?'checked':''}}@else{{"Input::old('batch_age_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_age_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$key)?'checked':''}}@else{{(Input::old('batch_age_group')==$key)?'checked':''}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -285,7 +290,7 @@
                         @foreach($gender_group as $data)
                         <li>
                         <label>
-                            <input name="batch_gender_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$key)?'checked':''}}@else{{"Input::old('batch_gender_group')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_gender_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$key)?'checked':''}}@else{{(Input::old('batch_gender_group')==$key)?'checked':''}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -309,7 +314,8 @@
                                 {{($batchDetails->batch_venue_id==$data->id)?
                                 'selected="selected"':''}}
                                 @else
-                                    {{"Input::old('batch_venue_id')"}}
+                                {{(Input::old('batch_venue_id')==$data->id)?
+                                'selected="selected"':''}}
                                 @endif>
                                 {{$data->venue}}
                             </option>
@@ -329,7 +335,7 @@
                         @foreach($trial as $key => $data)
                         <li>
                         <label>
-                            <input name="batch_trial" id="batch_trial" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$key)?'checked':''}}@else{{"Input::old('batch_trial')"}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_trial" id="batch_trial" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$key)?'checked':''}}@else{{(Input::old('batch_trial')==$key)?'checked':''}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -378,7 +384,8 @@
                                         {{($scheduleData['schedule_session_month']==$key)?
                                         'selected="selected"':''}}
                                     @else
-                                        {{Input::old("schedule[$j][schedule_session_month]")}}
+                                    {{(Input::old("schedule[$j][schedule_session_month]")==$data->id)?
+                                    'selected="selected"':''}}
                                     @endif>
                                     {{$data}}
                                 </option>
@@ -415,7 +422,9 @@
                                             {{'checked="checked"'}}
                                         @endif
                                     @else
-                                        {{Input::old("schedule[$j][schedule_class][]")}}
+                                        @if(in_array($data, (Input::old("schedule[$j][schedule_class][]"))))
+                                            {{'checked="checked"'}}
+                                        @endif
                                     @endif/>
                                     <span class="checkbox_data">{{ucfirst($data)}}</span>
                                     </label>
@@ -438,7 +447,7 @@
                         <span class="important_required">*</span>
                     </label>
                     <div class="col-sm-3 col-md-2">
-                        <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required>
+                        <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required\>
                             @if(isset($schedule_session_month))
                             @foreach ($schedule_session_month as $key => $data)
                                 <option value={{$key}}
@@ -446,7 +455,8 @@
                                         {{($scheduleData['schedule_session_month']==$key)?
                                         'selected="selected"':''}}
                                     @else
-                                        {{Input::old("schedule[$j][schedule_session_month]")}}
+                                        {{((Input::old("schedule"))==$key)?
+                                        'selected="selected"':''}}
                                     @endif>
                                     {{$data}}
                                 </option>
@@ -458,11 +468,11 @@
                         <span class="important_required">*</span>
                     </label>
                     <div class="col-sm-3 col-md-2">
-                        <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" >
+                        <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" required\>
                     </div>
                     <label for="schedule_price" class="col-md-1 control-label label1">Price<span class="important_required">*</span></label>
                     <div class="col-sm-2 col-md-2">
-                        <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif">
+                        <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif" required\>
                     </div>
                 </div>
             </div>
@@ -482,7 +492,9 @@
                                             {{'checked="checked"'}}
                                         @endif
                                     @else
-                                        {{Input::old("schedule[$j][schedule_class][]")}}
+                                        @if(in_array($data, array('test')))
+                                            {{'checked="checked"'}}
+                                        @endif
                                     @endif/>
                                     <span class="checkbox_data">{{ucfirst($data)}}</span>
                                     </label>

@@ -45,7 +45,9 @@
                                                 @if(isset($venueDetails))
                                                 {{($venueDetails->venue_location_id==$locationData->id)?
                                                 'selected="selected"':''}}
-                                                @else{{"Input::old('venue_location_id')"}}
+                                                @else
+                                                {{((Input::old('venue_location_id'))==$locationData->id)?
+                                                'selected="selected"':''}}
                                                 @endif>
                                                 {{$locationData->location}}
                                             </option>
@@ -61,7 +63,9 @@
                                             @if(isset($venueDetails))
                                             {{($venueDetails->venue_locality_id==$localityData->id)?
                                             'selected="selected"':''}}
-                                            @else{{"Input::old('venue_locality_id')"}}
+                                            @else
+                                            {{((Input::old('venue_locality_id'))==$localityData->id)?
+                                            'selected="selected"':''}}
                                             @endif>
                                             {{$localityData->locality}}
                                         </option>

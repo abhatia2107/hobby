@@ -426,8 +426,15 @@ span.stars span {
 
     #inst_contact 
     { 
-      min-width:175px; height:30px; border: 1px solid;padding:3px;border-color: #0099FF;
-      border-radius: 4px;float: left;text-align: center;margin-right:5px;margin-top: 2px;
+      /*min-width:155px;*/ border: 1px solid;padding:3px 3px 3px 3px;border-color: #0099FF;
+      border-radius: 4px;float: left;text-align: center;margin-right:3px;margin-top: 2px;font-size: 13px;
+      max-width:105px;min-width: 105px;
+    }
+    #inst_session_price 
+    { 
+      /*min-width:155px;*/ border: 1px solid;padding:3px 3px 3px 3px;border-color: #0099FF;
+      border-radius: 4px;float: left;text-align: center;margin-right:5px;margin-top: 2px;font-size: 0.85em;
+      max-width:94px;min-width: 94px;background-color:  #E0FFD6;font-weight: bold;
     }
 
     #inst_contact:hover { background: #E8E8E8; cursor: pointer; }
@@ -436,16 +443,16 @@ span.stars span {
 
     #inst_message  
     {
-      margin-top: 2px;min-width:130px;height:30px;border: 1px solid;padding:3px;border-color: #0099FF;
-      border-radius: 4px; float: left; text-align: center;
+      margin-top: 2px;max-width:105px;min-width: 105px;border: 1px solid;padding:3px;border-color: #0099FF;font-size: 13px;
+      border-radius: 4px; float: left; text-align: center;margin-right: 3px;
     }
     .inscore 
     {
       border-radius: 50%;border: 4px solid;border-color:#FF8000;vertical-align: middle;width: 45px;
       height: 45px;padding: 5px 5px 5px 5px;font-size: 19px;font-weight: bold;color: #333;
-      text-align: center; float: left; margin-left: 14px; margin-bottom: 5px;
+      text-align: center; float: left; margin-left: 18px; margin-bottom: 7px;
   }
-  .rating_starts  { clear:both;color: #FF8000;margin-top:10px;  }
+  .rating_starts  { clear:both;color: #FF8000;margin-top:0px;  }
 
   #rating { margin-top: -6px; margin-left: 42px;  }
 
@@ -453,7 +460,7 @@ span.stars span {
 
   #inst_type  { margin-top: 10px; }
 
-  #inst_price { margin-top: 10px; }
+  #inst_price { margin-top: 4px; }
 
   #tag-icon { float:left; font-weight: bolder;font-size: 18px;text-align: right;}
 
@@ -467,8 +474,8 @@ span.stars span {
 
   .day
   {
-    padding: 1px;padding-top:0px;width:20px;height:23px;border: 1px solid;border-color: #0099FF;
-    margin-left: 4px;float:left;text-align: center; opacity: .20;margin-top: 11px;
+    padding: 0px;padding-top:0px;width:18px;height:20px;border: 1px solid;border-color: #0099FF;
+    margin-left: 4px;float:left;text-align: center; opacity: .20;margin-top: 0px;
   }
 
   #contact  { display: none;  }
@@ -482,9 +489,23 @@ span.stars span {
 
   #inst_details { margin-top: 7px;margin-bottom: 10px;  }
 
-  #batch-schedule { margin-top: 10px;text-align: center;  }
+  #batch-schedule { margin-top: -2px;text-align: center;  }
 
-  #batch-schedule-title {text-align: center;}
+  #batch-schedule-title {text-align: left;margin-top: 7px;}
+  #starsValue { clear:both;position:relative;}
+  .price_for_single_class {margin-top: 12px !important;}
+  #price_schedule_container{
+      border-top: 0px dotted;border-bottom: 0px solid;margin-bottom: 7px;margin-top: 3px;padding-bottom: 5px;
+  }
+  .price_schedule {}
+  #schedulePrice,#scheduleWeekDays {margin-top: 4px}
+  #horizontalLine {border-bottom:0px dotted;margin-top: -10px;}
+  #scheduleWeekDays{float: right;margin-right: 7px;}
+  #schedulePrice{margin-left: 15px;}
+  @media screen and (min-width: 992px) {.inscore {margin-left: 45%;margin-top:-7px; } }
+  @media screen and (min-width: 768px) {.inscore {margin-top:-7px; } }
+
+  @media screen and (min-width: 992px) { #starsValue { margin-left:36% !important;}}
 
   .sendMessage a  { color: #333;  }
 
@@ -496,7 +517,6 @@ span.stars span {
 
   #sendMessage .modal-header {font-size: 22px;color: #333333;font-weight: bolder;font-family: serif; }
 
-  #rating-schedule {  float: right; }
 
   .inner-addon {  position: relative; }
 
@@ -593,7 +613,7 @@ span.stars span {
   }
   .vendor_institute_batches .day
   {
-    margin-top: 8px;
+    margin-top: 0px;
     height: 20px;
   }
   .vendor_batches_title

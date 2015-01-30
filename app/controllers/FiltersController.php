@@ -41,8 +41,7 @@ class FiltersController extends \BaseController {
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
 		$trial=$this->trial;
-		$weekdays=$this->weekdays;
-		
+		$weekdays=$this->weekdays;		
 		//For display
 		if(!$category_id){
 			$subcategoriesForCategory=$this->subcategory->all();

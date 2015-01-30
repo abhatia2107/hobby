@@ -12,7 +12,7 @@
 | shown, which includes a detailed stack trace during debug.
 |
 */
-
+/*
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
@@ -36,3 +36,4 @@ App::fatal(function($exception)
    	Log::error($exception); 
    	return View::make('Errors.fatal');
 });
+*/

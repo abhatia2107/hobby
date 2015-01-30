@@ -28,6 +28,18 @@ class Institute extends \Eloquent {
             ->select('*','institutes.id as id','institutes.deleted_at as deleted_at','institutes.created_at as created_at','institutes.updated_at as updated_at')
             ->get());
     }
+    public function getInstitute($id)
+    {
+        $instituteDetails=Institute::
+            withTrashed()
+            ->where('institutes.id','=',$id)
+            ->Join('users','users.id','=','institutes.institute_user_id')
+            ->select('institutes.*','users.user_location','users.user_contact_no')
+            ->get();
+            // dd($instituteDetails);
+            if(!empty((array)($instituteDetails[0])))
+                return $instituteDetails[0];
+    }
 
     public function updateInstitute($credentials,$id)
     {

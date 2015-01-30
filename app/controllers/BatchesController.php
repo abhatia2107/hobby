@@ -60,8 +60,10 @@ class BatchesController extends \BaseController {
 	public function store()
 	{
 		$credentials=Input::all();
+		// dd($credentials);
 		$user_id=Auth::id();
 		$batch_institute_id=Institute::getInstituteforUser($user_id);
+		$credentials['batch_user_id']=$batch_institute_id;
 		$credentials['batch_institute_id']=$batch_institute_id;
 		$validator = Validator::make($credentials, Batch::$rules);
 		unset($credentials['csrf_token']);
@@ -206,7 +208,7 @@ class BatchesController extends \BaseController {
 		// unset($credentials["batch_photo"]);
 		$schedule_arr=$credentials['schedule'];
 		unset($credentials['schedule']);
-		$errors=$schedule->update($schedule_arr,$id);
+		$errors=$this->schedulesControllerObject->update($schedule_arr,$id);
 		if(!empty((array)$errors))
 		{
 			return Redirect::back()->withInput()->withErrors($errors);

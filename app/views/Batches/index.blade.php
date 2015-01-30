@@ -101,7 +101,7 @@
 										<div href='#sendMessage' data-toggle='modal' data-batch="{{$data->batch}}" data-email="{{$data->venue_email}}" data-institute="{{$data->institute}}" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' style="margin-top:3px;" class='glyphicon glyphicon-envelope'></i> Send Message</div>
 										<div id="inst_details" class="col-xs-12">
 											<div id="inst_type" ><span id="hand-icon">☛</span>Type: {{$data->subcategory}}, {{$data->category}}</div>
-											<div id="inst_price" ><span id="hand-icon">☛</span>Price:  ₹ {{$data->batch_price}}</div>
+											<div id="inst_price" ><span id="hand-icon">☛</span>Price:  ₹ {{$data->batch_single_price}}</div>
 											<div id="inst_price"><span id="hand-icon">☛</span>Address: {{$data->locality}}, {{$data->location}}</div>
 										</div>
 									</div>

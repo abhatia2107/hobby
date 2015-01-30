@@ -57,9 +57,10 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/batches/approve/{id}','BatchesController@approve');
 });
 
-
-Route::get('/batches/increment/{id}','BatchesController@increment');
-Route::get('/batches/show/{id}','BatchesController@show');
+Route::group(array('before' => "approved-or-admin"), function() {	
+	Route::get('/batches/increment/{id}','BatchesController@increment');
+	Route::get('/batches/show/{id}','BatchesController@show');
+});
 
 //Route for CategoriesController
 

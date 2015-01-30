@@ -21,7 +21,8 @@ class Batch extends \Eloquent {
         'batch_venue_id'=>'required',
         'batch_approved'=>'boolean',
         'batch_trial'=>'required',
-        'batch_price'=>'numeric'
+        'batch_single_price'=>'numeric',
+
     ];
 
     public static $rulesMessage = [
@@ -53,7 +54,8 @@ class Batch extends \Eloquent {
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
-                        ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at');
+                        ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+                        ->where('batches.batch_approved','=','1');
         
         if(!$category_id&&!$location_id)
             return $allBatches
@@ -98,6 +100,7 @@ class Batch extends \Eloquent {
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
                         ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+                        ->where('batches.batch_approved','=','1')
                         ->whereIn('venues.venue_locality_id',$localities)
                         ->whereIn('batches.batch_trial',$trials)
                         ->whereIn('batches.batch_subcategory_id',$subcategories)
@@ -118,7 +121,8 @@ class Batch extends \Eloquent {
             ->Join('categories','categories.id','=','batches.batch_category_id')
             ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
             ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
-            ->Join('locations', 'locations.id', '=', 'venues.venue_location_id');
+            ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+            ->where('batches.batch_approved','=','1');
         if($category_id)
         {
             $allBatches=$allBatches
@@ -158,6 +162,7 @@ class Batch extends \Eloquent {
 
         return Batch::
             where('batches.id','=',$id)
+            ->where('batches.batch_approved','=','1')
             ->Join('institutes','institutes.id','=','batches.batch_institute_id')
             ->Join('schedules', 'schedules.schedule_batch_id','=','batches.id')
             ->Join('categories','categories.id','=','batches.batch_category_id')
@@ -222,6 +227,7 @@ class Batch extends \Eloquent {
     public function getBatchesForInstitute($batch_institute_id)
     {
         return Batch::where('batch_institute_id',$batch_institute_id)
+                        ->where('batches.batch_approved','=','1')
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('schedules', 'schedules.schedule_batch_id','=','batches.id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
@@ -237,6 +243,7 @@ class Batch extends \Eloquent {
     public function getBatchesForUser($batch_user_id)
     {
         $batches= Batch::where('batch_user_id','=',$batch_user_id)
+                        ->where('batches.batch_approved','=','1')
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('schedules', 'schedules.schedule_batch_id','=','batches.id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
@@ -273,6 +280,15 @@ class Batch extends \Eloquent {
             else
                 return null;
         }
+        else
+            return false;
+    }
+
+    public static function isBatchApproved($id)
+    {
+        $batch=Batch::find($id);
+        if($batch->batch_approved)
+            return true;
         else
             return false;
     }

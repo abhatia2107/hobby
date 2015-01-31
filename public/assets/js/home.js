@@ -49,7 +49,8 @@
     $('#'+navID).addClass("active");
   }
   function refreshForm(formId)
-  {
-        $(formId).load(document.URL  + ' '+formId); 
+  { 
+       $(formId)[0].reset();
+       $(formId).bootstrapValidator('resetForm', true);
   }
   

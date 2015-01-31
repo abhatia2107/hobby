@@ -1,7 +1,7 @@
 @section("login")
-<div class="modal-dialog" id="loginForm">
+<div class="modal-dialog" >
     <div class="modal-content">
-        <form name="login" class="login" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
+        <form name="login" class="login" id="loginForm" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
             <div class="modal-header">
                 <div type="button" class="close" title="Close"  data-dismiss="modal">
                     <span onClick="refreshForm('#loginForm')" aria-hidden="true">&times;</span>
@@ -12,10 +12,10 @@
                 <div class="sign_up_opt">
                     Not a member yet? <a href="#" data-toggle="modal" data-target="#signupModal" data-dismiss="modal">Sign Up</a>
                 </div>
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="csrf_token" id="hiddenCSRF" value="{{ csrf_token() }}">
                 <div class="form-group inner-addon" >
                      <i class="glyphicon glyphicon-envelope left-addon"></i>
-                     <input type="email"  placeholder="Enter Your E-Mail ID (mymail@mail.com)" class="form-control " name="email"  id="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
+                     <input type="email"  placeholder="Enter Your E-Mail ID (mymail@mail.com)" class="form-control " name="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
                 </div>
                 <div class="form-group inner-addon">
                     <i class="glyphicon glyphicon-lock left-addon"></i>

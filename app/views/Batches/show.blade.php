@@ -279,14 +279,14 @@
                <label for="rating" style="float:right;margin-right:20px;margin-top:-7px">Rate this Batch:</label>
             </span>                                                            
           </div>  
-          <div class="form-group">
+          <div class="form-group" id="ReviewForm">
             <label for="comment">Review:</label>
             <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
           </div>
           @if($loggedIn)
             <button type="submit" class="btn btn-primary">Submit</button>              
           @else
-            <button type="button" data-toggle="modal" data-target="#loginModal" id="submit-btn" class="btn btn-primary">Submit</button>           
+            <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-primary">Submit</button>           
           @endif
         </form>               
       </div>
@@ -350,9 +350,10 @@
   });
   $(function() {
     $('#SubmitReviewButton').bind('click', function(event) {
+      var height = $("#ReviewForm").position().top + 200;
       $('html, body').stop().animate({
-        'scrollTop' : $("#submit-btn").position().top + 85
-      }, 1000, 'easeInOutExpo');
+       scrollTop : height
+      }, 1000, 'easeInOutSine');
       event.preventDefault();
     });
   });

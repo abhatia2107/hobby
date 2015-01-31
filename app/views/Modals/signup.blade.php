@@ -86,8 +86,7 @@
         </div>
     </div>
      <script type="text/javascript">
-            $(document).ready(function(){
-                    
+            $(document).ready(function(){     
                 $('.signUp').bootstrapValidator({
                     message: 'This value is not valid',
                     feedbackIcons: {

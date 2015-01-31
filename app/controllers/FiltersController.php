@@ -30,6 +30,7 @@ class FiltersController extends \BaseController {
 		{
 			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
+		// dd($batchesForCategoryLocation[0]->schedules->all());
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
 
@@ -41,8 +42,7 @@ class FiltersController extends \BaseController {
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
 		$trial=$this->trial;
-		$weekdays=$this->weekdays;
-		
+		$weekdays=$this->weekdays;		
 		//For display
 		if(!$category_id){
 			$subcategoriesForCategory=$this->subcategory->all();

@@ -111,8 +111,8 @@
 	<script type="text/javascript">
 		var result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
 		var trials = <?php echo json_encode( $trial ) ?>;
-		var categoryId = "<?php echo $category_id; ?>";
-		var locationId = "<?php echo $location_id; ?>";
+		var categoryId = "{{$category_id}}";
+		var locationId = "{{$location_id}}";
 		var range = 10;
 		var filterRestultCount = 0;
 		var filterStatus=false;
@@ -128,6 +128,78 @@
 		{
 			$('#loadMore').css('display','none');
 			$('#noResults').css('display','block');
+		}
+		function multiScheduleAdder(batchIndex,scheduleIndex,Price,Schedule)
+		{
+			var PriceScheduleContainer = $('.batch'+batchIndex+' #price_schedule_container'),baseUrl;
+			var DayCode = ["","M", "T", "W","T","F","S","S"];
+			$("<div></div>")
+			.attr("class","col-md-12 col-xs-12 col-sm-12 row")
+			.append
+			(
+				$("<div></div>")
+				.attr("id","price_schedule"+scheduleIndex)
+				.attr("class","price_schedule")
+				.append
+				(
+					$("<div></div>")
+					.attr("class","col-md-6 col-xs-12 col-sm-6 column")
+					.append
+					(
+						$("<div></div>")
+						.attr("class","col-md-12 col-xs-12 col-sm-12 column")
+						.attr("id","schedulePrice")
+					)
+				)
+				.append
+				(
+					$("<div></div>")
+					.attr("class","col-md-6 col-xs-12 col-sm-6 column")
+					.append
+					(
+						$("<div></div>")
+						.attr("id","scheduleWeekDays")		
+					)
+					
+				)
+			)
+			.appendTo(PriceScheduleContainer);
+			var ScheduleContainer = $(".batch"+batchIndex+" #price_schedule"+scheduleIndex+" #scheduleWeekDays");
+			var PriceContainer = $(".batch"+batchIndex+" #price_schedule"+scheduleIndex+" #schedulePrice");
+			$("<span></span>")
+			.attr("id","")
+			.append
+			(
+				$("<span></span>")
+				.attr("id","hand-icon")
+				.text("☛")
+			)
+			.append
+			(
+				$("<span></span>")
+				.text("Price: ₹ "+Price+" / 3 Sessions")
+			)
+			.appendTo(PriceContainer);
+			for(var day=1;day<=7;day++)
+			{
+				$("<div></div>")
+				.attr("id","day"+day)
+				.attr("class","day")
+				.text(DayCode[day])
+				.appendTo(ScheduleContainer);
+			}
+			$("<div></div>")
+			.attr("id","horizontalLine")
+			.append("")
+			.appendTo(PriceScheduleContainer);
+				/*for(var day=0;day<7;day++)
+				{
+					if(daysResult[day]==1)
+					{
+						$('.batch'+index+' #day'+(day+1)).css('opacity','1');
+					}
+				}	*/
+
 		}
 		function LoadResult(start,end)
 		{
@@ -163,8 +235,8 @@
 				loadFilters = true;	
 				if(response == "Empty")
 				{
-					$('#loadMore').css('display','none');
-					$('#noResults').css('display','block');
+					$('#loadMore').hide();
+					$('#noResults').show();
 				}
 				else
 				{
@@ -186,12 +258,12 @@
 			var linksContainer = $('#filter_data'),baseUrl;
 			for (var index=start; index<results.length; index++)
 			{
-			    var institute = results[index]['institute'];
-			    var institute_id =  results[index]['batch_institute_id'];
-			    var institute_photo_path = '/assets/images/institute/institute.gif';
-			    var institute_photo_exists = results[index]['institute_photo'];
-			    if(institute_photo_exists==1)
-			    {	institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}
+			   var institute = results[index]['institute'];
+			   var institute_id =  results[index]['batch_institute_id'];
+			   var institute_photo_path = '/assets/images/institute/institute.gif';
+			   var institute_photo_exists = results[index]['institute_photo'];
+			   if(institute_photo_exists==1)
+			   { institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}
 				var batch = results[index]['batch'];
 				var batchID= results[index]['id'];
 				var price = results[index]['batch_single_price'];
@@ -204,7 +276,7 @@
 				var localityID = results[index]['venue_locality_id'];
 				var email = results[index]['venue_email'];
 				var contact = results[index]['venue_contact_no'];
-				var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
+				var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];				
 				var daysResult = new Array();
 				var trialID = results[index]['batch_trial'];
 				var institute_rating = results[index]['institute_rating'];
@@ -214,55 +286,250 @@
 					var dayID = "batch_class_on_"+weekDays[day];
 					daysResult[day] = results[index][dayID];
 				}
-				$(linksContainer).append("<li subcategory='"+subcategoryID+"' locality='"+localityID+"' class='batch"+index+"' id='batchInfo' style='display:none'>"+
-					"<div class='row clearfix batch' >"+
-						"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
-							"<div class='row clearfix batch'>"+
-								"<div class='col-md-12 col-xs-12 col-sm-12 column' >"+
-									"<div class='col-md-12 col-xs-12 col-sm-12 column'>"+
-										"<div class='col-md-8 col-xs-12 col-sm-8 column'>"+
-											"<span id='batch_name'><a href='/batches/show/"+batchID+"' >"+batch+"</span></a>"+
-											"<span class='inst_name'>"+institute+".</span>"+
-										"</div>"+
-										"<div class='col-md-4 col-xs-12 col-sm-4 column'>"+
-											"<span id='tag-icon' ><span class='glyphicon glyphicon glyphicon-tags'></span>"+trials[trialID]+"</span>"+	
-										"</div>"+
-									"</div>"+
-								"</div>"+
-							"</div>"+
-							"<div class='row clearfix batch'>"+
-								"<div class='col-md-12 col-xs-12 col-sm-12 column' style='margin-top:20px'>"+
-									"<div class='col-md-3 col-xs-12 col-sm-12 column'>"+
-										"<center><img src='"+institute_photo_path+"' class='institute-profile-pic' ></ 	>"+
-									"</div>"+
-									"<div class='col-md-6 col-xs-12 col-sm-8 column'>"+
-										"<div id='inst_contact'  onClick='show_contact("+index+")' class='col-md-5 col-xs-12 col-sm-4 column'><span style='display:none' value='"+batchID+"' id='contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> "+contact+"</span>"+
-											"<span id='show_contact"+index+"'><span id='cell-icon' class='glyphicon glyphicon-phone-alt'></span> View Phone Number</span>"+
-										"</div>"+
-										"<div href='#sendMessage' data-toggle='modal' data-batch="+batch+" data-email="+email+" data-institute="+institute+" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>"+
-										"<div id='inst_details' class='col-xs-12' >"+
-											"<div id='inst_type'><span id='hand-icon'>☛</span>Type: "+subcategory+", "+category+".</div>"+
-											"<div id='inst_price'><span id='hand-icon'>☛</span>Price:  ₹ "+price+"</div>"+
-											"<div id='inst_price'><span id='hand-icon'>☛</span>Address: "+locality+", "+location_name+"</div>"+
-										"</div>"+
-									"</div>"+
-									"<div class='col-md-3 col-xs-12 col-sm-4 column' id='rating-schedule'>"+
-									"<div class='inscore' style='margin-left:64px;'><div id='rating-value'>"+institute_rating+"</div></div>"+
-											"<span style='clear:both;margin-left:46px;position:relative' class='stars'>"+institute_rating+"</span>"+
-										"<div id='batch-schedule'><div id='batch-schedule-title'>Batch Schedule</div><div id='day1' class='day'>M</div><div id='day2' class='day'>T</div><div id='day3' class='day'>W</div>"+
-										"<div id='day4' class='day'>T</div><div id='day5' class='day'>F</div><div id='day6' class='day'>S</div><div id='day7' class='day'>S</div></div>"+
-									"</div>"+
-							"</div>"+
-						"</div>"+
-					"</div>"+
-					"</div><hr></li>");
-					for(day=0;day<7;day++)
-					{
-						if(daysResult[day]==1)
-						{
-							$('.batch'+index+' #day'+(day+1)).css('opacity','1');
-						}
-					}	
+				$("<li style='display:none'></li>")
+				.attr("subcategory",subcategoryID)
+				.attr("locality",localityID)
+				.attr("class","batch"+index)
+				.attr("id","batchInfo")
+				.append
+				(
+					$("<div></div>")
+					.attr("class","row clearfix batch")
+					.append
+					(		
+						$("<div></div>")
+						.attr("class","col-md-12 col-xs-12 col-sm-12 column")
+						.append
+						(
+							$("<div></div>")
+							.attr("class","row clearfix batch")
+							.append
+							(
+								$("<div></div>")
+								.attr("class","col-md-12 col-xs-12 col-sm-12 column")
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-8 col-xs-12 col-sm-8 column")
+									.append
+									(
+										$("<span></span>")
+										.attr("id","batch_name")
+										.append
+										(
+											$("<a></a>")
+											.prop("href","/batches/show/"+batchID)
+											.text(batch)
+										)									
+									)
+									.append
+									(
+										$("<span></span>")
+										.attr("class","inst_name")
+										.text(institute)
+									)	
+								)
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
+									.append
+									(
+										$("<span></span>")
+										.attr("id","tag-icon")							
+										.append
+										(
+											$("<span></span>")
+											.attr("class","glyphicon glyphicon glyphicon-tags")	
+										)
+										.append
+										(
+											$("<span></span>")
+											.text(trials[trialID])
+										)																	
+									)
+								)
+							)
+						)
+					)
+				)
+				.append
+				(
+					$("<div></div>")
+					.attr("class","row clearfix batch")
+					.append
+					(
+						$("<div style='margin-top:20px'></div>")
+						.attr("class","col-md-12 col-xs-12 col-sm-12 column")
+						.append
+						(
+							$("<div></div>")
+							.attr("class","col-md-3 col-xs-12 col-sm-12 column")
+							.append
+							(
+								$("<center></center>")
+								.append
+								(
+									$("<img/>")
+									.prop("src",institute_photo_path)
+									.attr("class",'institute-profile-pic')
+								)
+							)
+						)
+						.append
+						(
+							$("<div></div>")
+							.attr("class","col-md-9 col-xs-12 col-sm-12 column")
+							.append
+							(
+								$("<div></div>")
+								.attr("class","col-md-7 col-xs-12 col-sm-9 column")
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
+									.attr("id","inst_contact")
+									.attr("onClick","show_contact("+index+")")
+									.append
+									(
+										$("<span></span>")
+										.attr("id","cell-icon")
+										.attr("class","glyphicon glyphicon-phone-alt")
+									)
+									.append
+									(
+										$("<span style='display:none'></span>")
+										.attr("id","contact"+index)
+										.attr("value",batchID)
+										.text(" "+contact)									
+									)
+									.append
+									(
+										$("<span></span>")
+										.attr("id","show_contact"+index)
+										.text(" View Number")								
+									)
+								)
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
+									.attr("id","inst_message")
+									.attr("href","#sendMessage")
+									.attr("data-toggle","modal")
+									.attr("data-batch",batch)
+									.attr("data-email",email)
+									.attr("data-institute",institute)
+									.append
+									(
+										$("<span></span>")
+										.attr("id","cell-icon")
+										.attr("class","glyphicon glyphicon-envelope")
+									)
+									.append
+									(
+										$("<span></span>")
+										.text(" Send Message")
+									)
+								)
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
+									.attr("id","inst_session_price")
+									.append
+									(
+										$("<span></span>")
+										.attr("id","show_contact"+index)
+										.text("₹1234 / Session")								
+									)
+								)
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-12 col-xs-12 col-sm-12 column")
+									.append
+									(
+										$("<div></div>")
+										.attr("id","inst_type")
+										.append
+										(
+											$("<span></span>")
+											.attr("id","hand-icon")
+											.text("☛")
+										)
+										.append
+										(
+											$("<span></span>")											
+											.text("Type: "+subcategory+", "+category+".")
+										)
+									)
+									.append
+									(
+										$("<div></div>")
+										.attr("id","inst_price")
+										.append
+										(
+											$("<span></span>")
+											.attr("id","hand-icon")
+											.text("☛")
+										)
+										.append
+										(
+											$("<span></span>")											
+											.text("Address: "+locality+", "+location_name)
+										)
+									)
+								)
+							)
+							.append
+							(
+								$("<div></div>")
+								.attr("class","col-md-5 col-xs-12 col-sm-3 column")
+								.attr("id","rating-schedule")								
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-12")		
+									.append
+									(
+										$("<div></div>")
+										.attr("class","inscore col-md-8 col-xs-12 col-sm-3 column")									
+										.append
+										(
+											$("<div></div>")										
+											.attr("id","rating-value")
+										)
+										.text(institute_rating)
+									)
+									.append
+									(
+										$("<span></span>")
+										.attr("class","stars")
+										.attr("id","starsValue")
+										.text(institute_rating)	
+									)
+																												
+								)
+							)							
+							.append
+							(
+								$("<div></div>")
+								.attr("class","row")
+								.attr("id","price_schedule_container")																												
+							)
+						)
+					)
+				)
+				.appendTo(linksContainer);								
+				for(var scheduleIndex=1;scheduleIndex<=2;scheduleIndex++)
+				{
+					var scheduleObject=results[index]['schedules'][scheduleIndex];
+					// dd(scheduleObject);
+					// var price_for_schedule=scheduleObject->price;
+					// // alert(price_for_schedule);
+					multiScheduleAdder(index,scheduleIndex,price,"Schedule");
+				}						
 		    }
 		  	$('span.stars').stars();
 		}

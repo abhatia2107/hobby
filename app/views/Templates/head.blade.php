@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="description" content="Hobbyix Website">
-    <meta name="author" content="Abhishek">
+    <meta name="author" content="Abhishek Bhatia, HariKrishna Salver">
     <meta property="og:image" content="/assets/images/home/banner.jpg">
     <title>Hobbyix</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">

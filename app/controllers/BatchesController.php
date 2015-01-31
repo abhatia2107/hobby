@@ -63,7 +63,7 @@ class BatchesController extends \BaseController {
 		// dd($credentials);
 		$user_id=Auth::id();
 		$batch_institute_id=Institute::getInstituteforUser($user_id);
-		$credentials['batch_user_id']=$batch_institute_id;
+		$credentials['batch_user_id']=$user_id;
 		$credentials['batch_institute_id']=$batch_institute_id;
 		$validator = Validator::make($credentials, Batch::$rules);
 		unset($credentials['csrf_token']);

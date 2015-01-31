@@ -9,8 +9,7 @@
 			<a class="navbar-brand" href="/">
 				<img src="/assets/images/logo.png" class="img-responsive header_img" alt="HOBBY">
 			</a>
-		</div>
-			
+		</div>			
 		<div class="col-sm-6 col-md-6">
 			<form class="navbar-form" action="/filters/search" method="get" role="search">
 				<div class="input-group search-box">

@@ -21,6 +21,11 @@ class Institute extends \Eloquent {
         // 'institute_website'=>'active_url',
         'institute_description'=>'required',
     ];
+    
+    /*public function batches()
+    {
+        return $this->hasMany('Batch','batch_institute_id');
+    }*/
 
     public function getAllInstitutes()
     {

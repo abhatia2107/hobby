@@ -111,8 +111,8 @@
 	<script type="text/javascript">
 		var result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
 		var trials = <?php echo json_encode( $trial ) ?>;
-		var categoryId = "<?php echo $category_id; ?>";
-		var locationId = "<?php echo $location_id; ?>";
+		var categoryId = "{{$category_id}}";
+		var locationId = "{{$location_id}}";
 		var range = 10;
 		var filterRestultCount = 0;
 		var filterStatus=false;
@@ -524,6 +524,10 @@
 				.appendTo(linksContainer);								
 				for(var scheduleIndex=1;scheduleIndex<=2;scheduleIndex++)
 				{
+					var scheduleObject=results[index]['schedules'][scheduleIndex];
+					// dd(scheduleObject);
+					// var price_for_schedule=scheduleObject->price;
+					// // alert(price_for_schedule);
 					multiScheduleAdder(index,scheduleIndex,price,"Schedule");
 				}						
 		    }

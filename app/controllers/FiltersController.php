@@ -30,6 +30,7 @@ class FiltersController extends \BaseController {
 		{
 			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
+		// dd($batchesForCategoryLocation[0]->schedules->all());
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
 

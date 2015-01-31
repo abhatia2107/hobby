@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.bindaasjodi.com',
+	'host' => 'box.hobbyix.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'hr@bindaasjodi.com', 'name' => 'Bindass Jodi'),
+	'from' => array('address' => 'admin@hobbyix.com', 'name' => 'Hobbyix'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'hr@bindaasjodi.com',
+	'username' => 'admin@hobbyix.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => 'Hanumangarh@335513',
+	'password' => 'projecthobby',
 
 	/*
 	|--------------------------------------------------------------------------

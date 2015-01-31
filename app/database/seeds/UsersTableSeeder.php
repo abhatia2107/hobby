@@ -31,6 +31,18 @@ class UsersTableSeeder extends Seeder {
               'user_subscription_token' =>true,
               ));
               
+              DB::table('users')->insert(array(
+              'user_first_name' => "Harikrishna",
+              'user_last_name' => "Salver",
+              'email' => "76hari@gmail.com",
+              'user_contact_no' => "9494059837",
+              'password' => Hash::make('harikrishna'),
+              'user_location'=>"Basar",
+              'user_gender'=>"male",
+              'user_confirmed' =>true,
+              'user_subscription_token' =>true,
+              ));
+              
               foreach(range(1,30) as $index)
               {
                      DB::table('users')->insert(array(

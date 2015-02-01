@@ -4,7 +4,7 @@
     <meta name="description" content="Hobbyix Website">
     <meta name="author" content="Abhishek Bhatia, HariKrishna Salver">
     <meta property="og:image" content="/assets/images/home/banner.jpg">
-    <title>Hobby</title>
+    <title>Hobbyix</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css">

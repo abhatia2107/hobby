@@ -1,7 +1,7 @@
 @section("signup")
-<div class="modal-dialog" id="signUpForm">
+<div class="modal-dialog">
         <div class="modal-content">
-            <form name="signUp" class="signUp" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
+            <form name="signUp" class="signUp" id="signUpForm" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span onClick="refreshForm('#signUpForm')" aria-hidden="true" title="close">&times;</span>                

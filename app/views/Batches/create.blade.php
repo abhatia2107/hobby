@@ -239,7 +239,7 @@
         </div>
         <div class="row row_padding">
             <div class="form-group">
-                <label for="batch_accomplishment" class="col-sm-3 control-label label1">What will participants achieve through this class?<span class="important_required">*</span></label>
+                <label for="batch_accomplishment" class="col-sm-3 control-label label1">What will participants achieve through this class?</label>
                 <div class="col-sm-8">
                     <textarea name="batch_accomplishment" id="batch_accomplishment" class="jqte-test" >@if(isset($batchDetails)){{$batchDetails->batch_accomplishment}}@else{{Input::old('batch_accomplishment')}}@endif</textarea>
                 </div>
@@ -251,13 +251,13 @@
         </div>
         <div class="row row_padding">
             <div class="form-group">
-                <label for="diflevel" class="col-sm-3 control-label label1">Difficulty Level<span class="important_required">*</span></label>
+                <label for="batch_difficulty_level" class="col-sm-3 control-label label1">Difficulty Level<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <ul class="radio ul-without-bullets" name="diflevel" id="diflevel">
+                    <ul class="radio ul-without-bullets" name="batch_difficulty_level"/>
                         @foreach($difficulty_level as $key => $data)
                         <li>
                         <label>
-                            <input name="batch_difficulty_level" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$key)?'checked':''}}@else{{(Input::old('batch_difficulty_level')==$key)?'checked':''}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_difficulty_level" id="batch_difficulty_level" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$key)?'checked':''}}@else{{(Input::old('batch_difficulty_level')==$key)?'checked':''}}@endif type="radio"/><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -267,13 +267,13 @@
         </div>
         <div class="row row_padding">
             <div class="form-group">
-                <label for="agegroup" class="col-sm-3 control-label label1">Target Age Group<span class="important_required">*</span></label>
+                <label for="batch_age_group" class="col-sm-3 control-label label1">Target Age Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <ul class="radio" name="agegroup" id="agegroup">
+                    <ul class="radio ul-without-bullets" name="batch_age_group"/>
                         @foreach($age_group as $key => $data)
                         <li>
                         <label >
-                            <input name="batch_age_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$key)?'checked':''}}@else{{(Input::old('batch_age_group')==$key)?'checked':''}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_age_group" id="batch_age_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$key)?'checked':''}}@else{{(Input::old('batch_age_group')==$key)?'checked':''}}@endif type="radio" /><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -284,13 +284,13 @@
         </div>
         <div class="row row_padding">
             <div class="form-group">
-                <label for="gengroup" class="col-sm-3 control-label label1">Target Gender Group<span class="important_required">*</span></label>
+                <label for="batch_gender_group" class="col-sm-3 control-label label1">Target Gender Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <ul class="radio" name="gengroup" id="gengroup">
+                    <ul class="radio ul-without-bullets" name="batch_gender_group" />
                         @foreach($gender_group as $data)
                         <li>
                         <label>
-                            <input name="batch_gender_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$key)?'checked':''}}@else{{(Input::old('batch_gender_group')==$key)?'checked':''}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_gender_group" id="batch_gender_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$key)?'checked':''}}@else{{(Input::old('batch_gender_group')==$key)?'checked':''}}@endif type="radio" /><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -331,11 +331,11 @@
             <div class="form-group">
                 <label for="batch_trial" class="col-sm-3 control-label label1">Trial Available<span class="important_required">*</span></label>
                 <div class="col-sm-6">
-                    <ul class="radio ul-without-bullets">
+                    <ul class="radio ul-without-bullets" name="batch_trial">
                         @foreach($trial as $key => $data)
                         <li>
                         <label>
-                            <input name="batch_trial" id="batch_trial" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$key)?'checked':''}}@else{{(Input::old('batch_trial')==$key)?'checked':''}}@endif type="radio" ><span class="radio_data">{{$data}}</span>
+                            <input name="batch_trial" id="batch_trial" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$key)?'checked':''}}@else{{(Input::old('batch_trial')==$key)?'checked':''}}@endif type="radio"/><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -345,9 +345,9 @@
         </div>
         <div class="row row_padding" id="PriceForSingleClass">
             <div class="form-group ">
-                <label for="batch_single_price" class="col-sm-3 control-label label1">Price for a Single Class</label>
+                <label for="batch_single_price" class="col-sm-3 control-label label1">Price for a Single Class<span class="important_required">*</span></label>
                 <div class="col-sm-3 col-md-3">
-                    <input type="text" class="form-control" id="batch_single_price" name="batch_single_price" value="@if(isset($batchDetails)){{$batchDetails->batch_single_price}}@else{{Input::old('batch_single_price')}}@endif">
+                    <input type="text" class="form-control" id="batch_single_price" name="batch_single_price" value="@if(isset($batchDetails)){{$batchDetails->batch_single_price}}@else{{Input::old('batch_single_price')}}@endif" required/>
                 </div>
             </div>
         </div>
@@ -797,6 +797,9 @@
                 batch_single_price: {
                     message: 'The Price is not valid',
                     validators: {
+                        notEmpty: {
+                            message: 'The description is required and cannot be empty'
+                        },
                         regexp: {
                             regexp: /^[0-9]/,
                             message: 'The  Price can only consist of numbers.'
@@ -804,13 +807,13 @@
                     }
                 }, 
                 batch_category_id: {
-                    message: 'Please Select Category',
+                    message: 'Please select Category',
                     validators:{
                         required: true
                     }
                 },
                 batch_subcategory_id: {
-                    message: 'Please Select Sub Category',
+                    message: 'Please select Sub Category',
                     validators:{
                         required: true
                     }
@@ -818,9 +821,9 @@
                 batch_accomplishment: {
                     message: 'The text is not valid',
                     validators: {
-                        notEmpty: {
+                        /*notEmpty: {
                             message: 'The description is required and cannot be empty'
-                        },
+                        },*/
                         stringLength: {
                             min: 6,
 
@@ -831,7 +834,25 @@
                             message: 'The description can only consist of alphabetical, numbers,dash and underscore'
                         }
                     }
+                },/*
+                batch_difficulty_level: {
+                    message: 'Please select difficulty level',
+                    validators:{
+                        required: true
+                    }
                 },
+                batch_age_group: {
+                    message: 'Please select age group',
+                    validators:{
+                        required: true
+                    }
+                },
+                batch_gender_group: {
+                    message: 'Please select gender group',
+                    validators:{
+                        required: true
+                    }
+                },*/
             }
         });
     });

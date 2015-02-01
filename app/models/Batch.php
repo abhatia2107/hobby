@@ -17,7 +17,9 @@ class Batch extends \Eloquent {
         'batch'=>'required',
         'batch_category_id'=>'required',
         'batch_subcategory_id'=>'required',
-        'batch_institute_id'=>'required',
+        'batch_difficulty_level'=>'required',
+        'batch_age_group'=>'required',
+        'batch_gender_group'=>'required',
         'batch_venue_id'=>'required',
         'batch_approved'=>'boolean',
         'batch_trial'=>'required',
@@ -248,7 +250,7 @@ class Batch extends \Eloquent {
     public function getBatchesForUser($batch_user_id)
     {
         $batches= Batch::where('batch_user_id','=',$batch_user_id)
-                        ->where('batches.batch_approved','=','1')
+                        // ->where('batches.batch_approved','=','1')
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('categories','categories.id','=','batches.batch_category_id')
                         ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')

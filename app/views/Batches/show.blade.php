@@ -83,7 +83,8 @@
     }
     #blog-container
     {
-      background:#f0f3f6;width:100%;
+      background:#f0f3f6;
+      width:100%;
     }
     .sample-box
     {

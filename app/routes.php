@@ -264,3 +264,5 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chu
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{category_id}/{location_id}/{chunk}','FiltersController@filter');
 
 Route::get('/filters/search','FiltersController@search');
+
+Route::get('/test','UsersController@testEmail');

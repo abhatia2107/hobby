@@ -75,18 +75,21 @@
 		         		<div class="row">
 		     				<div class="col-md-12 col-xs-12 col-sm-12 column" id="batch_status">
 			     				<span id="batch_status_result{{$aprovedValue}}" class="btn">Batch Status: {{$aprovedStatus[$aprovedValue]}}</span>
-			     			</div>
+			     				<span class="edit_delete_buttons">
+									<a class="glyphicon glyphicon-edit" title="Edit Details" href="/batches/edit/{{$data->id}}"></a>
+									<a class="glyphicon glyphicon-trash"  title="Delete Batch" href="/batches/disable/{{$data->id}}"></a>
+								</span>
+			     			</div>			     			
 			     		</div>
 			     		<div class="col-md-12 col-xs-12 col-sm-12 column">
-			     			
-							<div class="row clearfix">
+							<div class="row">
 								<div class="col-md-12 col-xs-12 col-sm-12 column">
 									<div class="col-md-12 col-xs-12 col-sm-12 column">
-										<div class="col-md-8 col-xs-12 col-sm-8 column">
+										<div class="col-md-8 col-xs-12 col-sm-7 column">
 											<span id="batch_name"><a href="/batches/show/{{$data->id}}">{{$data->batch}} </a></span>
 											<span class="inst_name">{{$data->institute}}</span>
 										</div>
-										<div class="col-md-4 col-xs-12 col-sm-4 column">
+										<div class="col-md-4 col-xs-12 col-sm-5 column">
 											<span id="tag-icon"><span class="glyphicon glyphicon glyphicon-tags"></span><span class="trail_avail">{{$trial[$data->batch_trial]}}</span></span>	
 										</div>
 									</div>
@@ -181,10 +184,7 @@
 										<div class="row" style="margin-top:-10px">
 											<div class="col-md-2 col-sm-4 col-xs-0"></div> 
 											<div class="col-md-4 col-xs-12 col-sm-5 column" id="rating-schedule">											
-												<div class="edit_delete_buttons col-md-12 col-sm-12 col-xs-12">
-													<a class="col-md-6 col-sm-5 col-xs-5" href="/batches/edit/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Edit</button></a>
-													<a class="col-md-6 col-sm-5 col-xs-5" href="/batches/disable/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Delete</button></a>
-												</div>
+									
 											</div>
 										</div>
 									</div>

@@ -650,24 +650,25 @@ span.stars span {
   }
     .edit_delete_buttons
     {
-      clear: both;
-      margin-top: 10px;
-      float: left;
+      right:35px;
+      float: right;
+      position: absolute;
+      margin-top: 6px;
     }
-      .edit_delete_buttons button
+    .edit_delete_buttons .glyphicon
     {
-     height: 25px;
-    border-radius: 2px;
-    padding-top: 2px;
-    width: 75px;
-    margin-left: -10px;
-    color: white;
+      margin-left: 10px;
+      color:black;
+      font-size: 22px;
     }
-    .edit_delete_buttons a
+    .edit_delete_buttons .glyphicon-edit
     {
-      color: white;
+      color: #3aa54c;
     }
-
+    .edit_delete_buttons .glyphicon-trash
+    {
+      color: #FF6600;
+    }
     .venues_list
     {
       height: 270px;
@@ -943,11 +944,11 @@ span.stars span {
 }
 #batch_status .btn
 {
-  font-size: 17px !important;
+  font-size: 18px !important;
 }
 #batch_status_result0, #batch_status_result1
 {
-   padding: 5px 9px 7px 9px;
+   padding: 5px 9px 6px 9px;
    background-color: #3aa54c;
    border-radius: 5px;
    font-weight: bold;

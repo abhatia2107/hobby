@@ -933,27 +933,30 @@ span.stars span {
 {
   color: #3c763d;
 }
-#batch_status
+#batch_status 
 {
-  font-size: 18px;
+  font-size: 18px !important;
   font-weight: normal;
-  text-align:right;
-  margin-top: -10px;
+  text-align:center;
+  margin-top: 0px;
   margin-bottom: 7px;
- 
+}
+#batch_status .btn
+{
+  font-size: 17px !important;
 }
 #batch_status_result0, #batch_status_result1
 {
-   border:1px solid;
-   padding: 2px 7px 3px 7px;
-    border-color:#0099FF; 
-   background-color: #B7FFB7;
+   padding: 5px 9px 7px 9px;
+   background-color: #3aa54c;
    border-radius: 5px;
-   color: #000;
+   font-weight: bold;
+   color: white;
+   min-width: 210px;
 }
 #batch_status_result0
 { 
-   background-color: #FFFFA9 !important;
+   background-color: #FF6600 !important;
 }
 .trail_avail 
 {

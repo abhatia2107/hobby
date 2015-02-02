@@ -68,16 +68,17 @@
 		         		}
 		         		$weekDays = array("monday", "tuesday", "wednesday","thursday","friday","saturday","sunday");
 		         		$daysResult = array();
-		         		$aprovedStatus =  array("Pending","Aproved");
+		         		$aprovedStatus =  array("Pending ","Approved");
 		         		$aprovedValue = $data->batch_approved;
 		         	?>
 		         	<li class='batch{{$index}}' id='mybatch' style='display:none' >
-			     		<div class="col-md-12 col-xs-12 col-sm-12 column">
-			     			<div class="row">
-			     				<div class="col-md-12 col-xs-12 col-sm-12 column" id="batch_status">
-			     					<span id="batch_status_result{{$aprovedValue}}">Batch Status: {{$aprovedStatus[$aprovedValue]}}</span>
-			     				</div>
+		         		<div class="row">
+		     				<div class="col-md-12 col-xs-12 col-sm-12 column" id="batch_status">
+			     				<span id="batch_status_result{{$aprovedValue}}" class="btn">Batch Status: {{$aprovedStatus[$aprovedValue]}}</span>
 			     			</div>
+			     		</div>
+			     		<div class="col-md-12 col-xs-12 col-sm-12 column">
+			     			
 							<div class="row clearfix">
 								<div class="col-md-12 col-xs-12 col-sm-12 column">
 									<div class="col-md-12 col-xs-12 col-sm-12 column">

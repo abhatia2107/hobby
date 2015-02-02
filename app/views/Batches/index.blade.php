@@ -68,11 +68,6 @@
 		         		}
 		         		$weekDays = array("monday", "tuesday", "wednesday","thursday","friday","saturday","sunday");
 		         		$daysResult = array();
-		         		for($day = 0;$day<7;$day++)
-						{
-								$dayID = "batch_class_on_".$weekDays[$day];
-								$daysResult[$day] = $data->$dayID;
-						}
 		         	?>
 		         	<li class='batch{{$index}}' id='mybatch' style='display:none' >
 			     		<div class="col-md-12 col-xs-12 col-sm-12 column">
@@ -94,46 +89,100 @@
 									<div class="col-md-3 col-xs-12 col-sm-12 column">
 										<center><img src="{{$institute_photo_path}}" class="institute-profile-pic"></center>
 									</div>
-									<div class="col-md-6 col-xs-12 col-sm-8 column">
-										<div id="inst_contact"  onClick="show_contact({{$index}})" class="col-md-5 col-xs-12 col-sm-4 column"><div style="display:none;" id="contact{{$index}}"><span id="cell-icon" style="margin-top:3px;" class="glyphicon glyphicon-phone-alt"></span>{{' '.$data->venue_contact_no}}</div>
-											<div id="show_contact{{$index}}"><span id="cell-icon" style="margin-top:3px;" class="glyphicon glyphicon-phone-alt"></span> View Phone Number</div>
+									<div class="col-md-9 col-xs-12 col-sm-12 column">
+										<div class="col-md-7 col-xs-12 col-sm-9 column">
+											<div id="inst_contact"  onClick="show_contact({{$index}})" class="col-md-5 col-xs-12 col-sm-4 column"><div style="display:none;" id="contact{{$index}}"><span id="cell-icon" class="glyphicon glyphicon-phone-alt"></span>{{' '.$data->venue_contact_no}}</div>
+												<div id="show_contact{{$index}}"><span id="cell-icon" class="glyphicon glyphicon-phone-alt"></span> View Number</div>
+											</div>
+											<div href='#sendMessage' data-toggle='modal' data-batch="{{$data->batch}}" data-email="{{$data->venue_email}}" data-institute="{{$data->institute}}" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' class='glyphicon glyphicon-envelope'></i> Send Message</div>
+											<div id='inst_session_price' style='padding-top:4px' class='col-md-4 col-xs-12 col-sm-4 column'>{{'₹'.$data->batch_single_price.' / Session'}}</div>
+											<div id="inst_details" class="col-xs-12">
+												<div id="inst_type" ><span id="hand-icon">☛</span>Type: {{$data->subcategory}}, {{$data->category}}</div>												
+												<div id="inst_price"><span id="hand-icon">☛</span>Address: {{$data->locality}}, {{$data->location}}</div>
+											</div>
 										</div>
-										<div href='#sendMessage' data-toggle='modal' data-batch="{{$data->batch}}" data-email="{{$data->venue_email}}" data-institute="{{$data->institute}}" id='inst_message' class='col-md-4 col-xs-12 col-sm-4 column'><i id='msg-icon' style="margin-top:3px;" class='glyphicon glyphicon-envelope'></i> Send Message</div>
-										<div id="inst_details" class="col-xs-12">
-											<div id="inst_type" ><span id="hand-icon">☛</span>Type: {{$data->subcategory}}, {{$data->category}}</div>
-											<div id="inst_price" ><span id="hand-icon">☛</span>Price:  ₹ {{$data->batch_single_price}}</div>
-											<div id="inst_price"><span id="hand-icon">☛</span>Address: {{$data->locality}}, {{$data->location}}</div>
+										<div class="col-md-5 col-xs-12 col-sm-3 column" id="rating-schedule">
+											<div class="col-md-12">
+												<div class="inscore col-md-8 col-xs-12 col-sm-3 column">
+													<div id="rating-value">{{$data->institute_rating}}</div>
+												</div>
+												<span id="starsValue" class="stars">{{$data->institute_rating}}</span>
+											</div>											
+										</div>
+										<div class="row" id="price_schedule_container">
+											<div class="col-md-12 col-xs-12 col-sm-12 row" style="margin-top:-10px;">
+											<?php $MyBatchSchedules = $data->schedules; ?>
+											@foreach($MyBatchSchedules as $scheduleIndex => $Schedule)
+												<?php
+													$Price = $Schedule->schedule_price;
+													$sessionMonthCount = $Schedule->schedule_number;
+													$indentifySessionMonth = $Schedule->schedule_session_month;
+													$seperator = " / ";
+													$sessionMonth = " Sessions";
+													if($sessionMonthCount==1)
+														$sessionMonth = " Session";
+													if($indentifySessionMonth==1)
+													{
+														$sessionMonth = " Months";
+														if($sessionMonthCount==1)
+															$sessionMonth = " Month";
+													}
+													if($sessionMonthCount==0)
+													{
+														$sessionMonth = "";
+														$seperator = "";
+														$sessionMonthCount = "";
+													}
+													for($day = 0;$day<7;$day++)
+													{
+															$dayID = "schedule_class_on_".$weekDays[$day];
+															$daysResult[$day] = $Schedule->$dayID;
+													}
+												?>
+												<div class="price_schedule" id="price_schedule{{$scheduleIndex}}">
+													<div class="col-md-6 col-xs-12 col-sm-6 column" >
+														<div class="col-md-12 col-xs-12 col-sm-12 column" id="schedulePrice">
+															<span id="hand-icon">☛</span>Price: ₹ {{$Price.$seperator.$sessionMonthCount.$sessionMonth}}
+														</div>
+													</div>
+													<div class="col-md-6 col-xs-12 col-sm-6 column">
+														<div  id="scheduleWeekDays">
+															<div class="alldays" style="margin-left:6px;">
+															@foreach($days as $key => $day)
+																<div id="{{$key}}" class="day">{{$day}}</div>
+															@endforeach
+															</div>
+														</div>
+													</div>
+												</div>
+												<script type="text/javascript">
+													var daysResult = <?php echo json_encode( $daysResult ) ?>;
+													var index = "<?php echo $index; ?>";
+													var scheduleIndex = <?php echo $scheduleIndex; ?>;
+													for(day=0;day<7;day++)
+													{
+														if(daysResult[day]==1)
+														{
+															$(".batch"+index+" #price_schedule"+scheduleIndex+" #scheduleWeekDays"+" #day"+(day+1)).css('opacity','1');
+														}
+													}	
+												</script>
+											@endforeach
+											</div>
+										</div>
+										<div class="row" style="margin-top:-10px">
+											<div class="col-md-2 col-sm-4 col-xs-0"></div> 
+											<div class="col-md-4 col-xs-12 col-sm-5 column" id="rating-schedule">											
+												<div class="edit_delete_buttons col-md-12 col-sm-12 col-xs-12">
+													<a class="col-md-6 col-sm-5 col-xs-5" href="/batches/edit/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Edit</button></a>
+													<a class="col-md-6 col-sm-5 col-xs-5" href="/batches/disable/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Delete</button></a>
+												</div>
+											</div>
 										</div>
 									</div>
-									<div class="col-md-3 col-xs-12 col-sm-4 column" id="rating-schedule" style="">
-										<div id='rating' style="margin-left:50px;">
-											<div class="inscore" style="margin-left:18px;"><div id="rating-value">{{$data->institute_rating}}</div></div>
-											<span style="clear:both;position:relative"class="stars">{{$data->institute_rating}}</span>
-										</div>
-										<div style="margin-left:43px;margin-top:17px">Batch Schedule</div>
-										<div class="alldays" style="margin-left:6px;">
-										@foreach($days as $key => $day)
-											<div id="{{$key}}" class="day">{{$day}}</div>
-										@endforeach
-										</div>
-										<div class="edit_delete_buttons col-md-12 col-sm-12">
-											<a class="col-md-6 col-sm-6" href="/batches/edit/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Edit</button></a>
-											<a class="col-md-6 col-sm-6" href="/batches/disable/{{$data->id}}"><button onClick="" type="submit" class="btn btn-primary">Delete</button></a>
-										</div>
-									</div>
+									
 								</div>
 							</div>
-							<script type="text/javascript">
-								var daysResult = <?php echo json_encode( $daysResult ) ?>;
-								var index = "<?php echo $index; ?>";
-								for(day=0;day<7;day++)
-								{
-									if(daysResult[day]==1)
-									{
-										$('.batch'+index+' #day'+(day+1)).css('opacity','1');
-									}
-								}	
-							</script>
 							<hr>
 						</li>
 		         @endforeach    

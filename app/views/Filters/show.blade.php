@@ -16,7 +16,7 @@
 
 					<div class="form-group inner-addon" >
 						 <i class="glyphicon glyphicon-user left-addon"></i>
-						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
+						 <input type="text" class="form-control" name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
 					</div>
 					<div class="form-group inner-addon">
 						<i class="glyphicon glyphicon-envelope left-addon"></i>
@@ -106,11 +106,21 @@
 		</div>
 	</div>
 </div>
+@foreach ($batchesForCategoryLocation as $index => $batchesData)
+	<?php
+		$Schedules[$index] = $batchesData->schedules;
+	?>
+@endforeach
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
 		var result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
+		var Schedules = <?php echo json_encode( $Schedules ) ?>;
 		var trials = <?php echo json_encode( $trial ) ?>;
+		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
+		var daysResult = new Array();				
+		//alert(Schedules[2][0]['schedule_price']);
+
 		var categoryId = "{{$category_id}}";
 		var locationId = "{{$location_id}}";
 		var range = 10;
@@ -129,10 +139,35 @@
 			$('#loadMore').css('display','none');
 			$('#noResults').css('display','block');
 		}
-		function multiScheduleAdder(batchIndex,scheduleIndex,Price,Schedule)
+		function multiScheduleAdder(batchIndex,scheduleIndex,Schedule)
 		{
+			for(var day = 0;day<7;day++)
+			{
+				var dayID = "schedule_class_on_"+weekDays[day];
+				daysResult[day] = Schedule[dayID];
+			}
+			//alert(Schedule['schedule_price']);
 			var PriceScheduleContainer = $('.batch'+batchIndex+' #price_schedule_container'),baseUrl;
 			var DayCode = ["","M", "T", "W","T","F","S","S"];
+			var Price = Schedule['schedule_price'];
+			var sessionMonthCount = Schedule['schedule_number'];
+			var indentifySessionMonth = Schedule['schedule_session_month'];
+			var seperator = " / ";
+			var sessionMonth = " Sessions";
+			if(sessionMonthCount==1)
+				sessionMonth = " Session";
+			if(indentifySessionMonth==1)
+			{
+				sessionMonth = " Months";
+				if(sessionMonthCount==1)
+					sessionMonth = " Month";
+			}
+			if(sessionMonthCount==0)
+			{
+				sessionMonth = "";
+				seperator = "";
+				sessionMonthCount = "";
+			}
 			$("<div></div>")
 			.attr("class","col-md-12 col-xs-12 col-sm-12 row")
 			.append
@@ -177,7 +212,7 @@
 			.append
 			(
 				$("<span></span>")
-				.text("Price: ₹ "+Price+" / 3 Sessions")
+				.text("Price: ₹ "+Price+seperator+sessionMonthCount+sessionMonth)
 			)
 			.appendTo(PriceContainer);
 			for(var day=1;day<=7;day++)
@@ -192,13 +227,13 @@
 			.attr("id","horizontalLine")
 			.append("")
 			.appendTo(PriceScheduleContainer);
-				/*for(var day=0;day<7;day++)
+			for(var day=0;day<7;day++)
+			{
+				if(daysResult[day]==1)
 				{
-					if(daysResult[day]==1)
-					{
-						$('.batch'+index+' #day'+(day+1)).css('opacity','1');
-					}
-				}	*/
+					$(".batch"+batchIndex+" #price_schedule"+scheduleIndex+" #scheduleWeekDays"+" #day"+(day+1)).css('opacity','1');
+				}
+			}
 
 		}
 		function LoadResult(start,end)
@@ -258,12 +293,13 @@
 			var linksContainer = $('#filter_data'),baseUrl;
 			for (var index=start; index<results.length; index++)
 			{
-			   var institute = results[index]['institute'];
-			   var institute_id =  results[index]['batch_institute_id'];
-			   var institute_photo_path = '/assets/images/institute/institute.gif';
-			   var institute_photo_exists = results[index]['institute_photo'];
-			   if(institute_photo_exists==1)
-			   { institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}
+				//alert(results.length);
+			   	var institute = results[index]['institute'];
+			   	var institute_id =  results[index]['batch_institute_id'];
+			   	var institute_photo_path = '/assets/images/institute/institute.gif';
+			   	var institute_photo_exists = results[index]['institute_photo'];
+			   	if(institute_photo_exists==1)
+			   	{ institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}
 				var batch = results[index]['batch'];
 				var batchID= results[index]['id'];
 				var price = results[index]['batch_single_price'];
@@ -276,16 +312,9 @@
 				var localityID = results[index]['venue_locality_id'];
 				var email = results[index]['venue_email'];
 				var contact = results[index]['venue_contact_no'];
-				var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];				
-				var daysResult = new Array();
 				var trialID = results[index]['batch_trial'];
 				var institute_rating = results[index]['institute_rating'];
 				var venue_email = results[index]['venue_email'];
-				for(day = 0;day<7;day++)
-				{
-					var dayID = "batch_class_on_"+weekDays[day];
-					daysResult[day] = results[index][dayID];
-				}
 				$("<li style='display:none'></li>")
 				.attr("subcategory",subcategoryID)
 				.attr("locality",localityID)
@@ -440,8 +469,7 @@
 									.append
 									(
 										$("<span></span>")
-										.attr("id","show_contact"+index)
-										.text("₹1234 / Session")								
+										.text("₹"+price+" / Session")								
 									)
 								)
 								.append
@@ -522,20 +550,28 @@
 					)
 				)
 				.appendTo(linksContainer);								
-				for(var scheduleIndex=1;scheduleIndex<=2;scheduleIndex++)
+				for(var I=0; I<Schedules[index].length && I<2; I++)
 				{
-					var scheduleObject=results[index]['schedules'][scheduleIndex];
-					// dd(scheduleObject);
-					// var price_for_schedule=scheduleObject->price;
-					// // alert(price_for_schedule);
-					multiScheduleAdder(index,scheduleIndex,price,"Schedule");
-				}						
+					var Schedule = Schedules[index][I];
+					multiScheduleAdder(index,I,Schedule);
+				}
+				if(Schedules[index].length>2)						
+				{
+					var ScheduleContainer = $(".batch"+index+" #price_schedule1 #scheduleWeekDays");
+					$("<a></a>")
+					.attr("id","moreScheduleButton")
+					.attr("class","glyphicon glyphicon-plus")
+					.attr("title","More Schedules")
+					.prop("href","/batches/show/"+batchID)
+					.appendTo(ScheduleContainer);
+					//moreScheduleButton();
+				}
 		    }
 		  	$('span.stars').stars();
 		}
 		//triggered when modal is about to be shown
-		$('#sendMessage').on('show.bs.modal', function(e) {
-
+		$('#sendMessage').on('show.bs.modal', function(e) 
+		{
 		    //get data-id attribute of the clicked element
 		    var batch = $(e.relatedTarget).data('batch');
 		    var email = $(e.relatedTarget).data('email');
@@ -545,7 +581,8 @@
 		    $(e.currentTarget).find('input[name="email"]').val(email);
 		    $(e.currentTarget).find('input[name="institute"]').val(institute);
 		});
-		$(document).ready(function() {
+		$(document).ready(function() 
+		{
 			var linksContainer = $('#filter_data'),baseUrl;
 			window.onscroll = function(ev)
 			{
@@ -587,7 +624,8 @@
 					}
 				}
 			}
-			$("#filter-sub input").click(function () {		
+			$("#filter-sub input").click(function () 
+			{		
 				filterStatus = true;
 				$('#loadMore').show();
 				$('#noResults').hide();

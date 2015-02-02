@@ -155,7 +155,7 @@
     @include('Templates.navbarVendor')
     <div class="container-fluid">
     <div id="classInfo1">
-    <form role="form" class="form-horizontal" id="classInfo" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" >          
+    <form role="form" name="batchCreateForm" onsubmit="return(validate());" class="form-horizontal" id="classInfo" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" >          
         <div class="row row_padding">
             <p  class="create_class">Create your Class
             </p>
@@ -180,9 +180,9 @@
             </div>
         </div>
         <div class="row row_padding">
-            <div class="form-group">
+            <div class="">
                 <label for="batch_category_id" class="col-sm-3 col-md-3 control-label label1">Category<span class="important_required">*</span></label>
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-3 col-md-3 form-group">
                     <select class="form-control" id="batch_category_id" name="batch_category_id" required="required">
                         <option disabled="disabled"> Select Category</option>
                         @foreach ($categories as $data)
@@ -200,7 +200,7 @@
                     </select>
                 </div>
                 <label for="batch_subcategory_id" class="col-sm-2 col-md-2 control-label label1">Sub Category<span class="important_required">*</span></label>
-                <div class="col-sm-3 col-md-3">                                
+                <div class="col-sm-3 col-md-3 form-group">                                
                     <select class="form-control" name="batch_subcategory_id" id="batch_subcategory_id" required >
                         <option disabled="disabled"> Select Sub Category</option>                        
                         @foreach ($all_subcategories as $data)                        
@@ -347,7 +347,7 @@
             <div class="form-group ">
                 <label for="batch_single_price" class="col-sm-3 control-label label1">Price for a Single Class<span class="important_required">*</span></label>
                 <div class="col-sm-3 col-md-3">
-                    <input type="text" class="form-control" id="batch_single_price" name="batch_single_price" value="@if(isset($batchDetails)){{$batchDetails->batch_single_price}}@else{{Input::old('batch_single_price')}}@endif" required/>
+                    <input type="text" class="form-control" id="batch_single_price" name="batch_single_price" value="@if(isset($batchDetails)){{$batchDetails->batch_single_price}}@else{{Input::old('batch_single_price')}}@endif"/>
                 </div>
             </div>
         </div>
@@ -375,8 +375,8 @@
                     <label class="col-sm-3 col-md-3 control-label label1" for="schedule_session_month">Sessions/Months
                         <span class="important_required">*</span>
                     </label>
-                    <div class="col-sm-3 col-md-3">
-                        <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required>
+                    <div class="col-sm-3 col-md-3 form-group">
+                        <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required="required">
                             @if(isset($schedule_session_month))
                             @foreach ($schedule_session_month as $key => $data)
                                 <option value={{$key}}
@@ -398,11 +398,11 @@
                         <span class="important_required">*</span>
                     </label>
                     <div class="col-sm-3 col-md-3">
-                        <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif">
+                        <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" required="required" />
                     </div>
                     <label for="schedule_price" class="col-md-1 control-label label1">Price<span class="important_required">*</span></label>
                     <div class="col-sm-2 col-md-2">
-                        <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif">
+                        <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif" required="required" />
                     </div>
                 </div>
             </div>
@@ -437,17 +437,17 @@
         @endforeach
         @else
         @for ($j = 0; $j < 1; $j++)    
-            <div class="row row_padding">
+            <div class="row row_padding" id="multiScheduleForm{{$j}}">
                 <h4>Schedule {{$j+1}}</h4>
-                <div class="form-group" id="scheduleStrat">  
+                <div id="scheduleStrat">  
                     @if(isset($batchDetails))
                         <input type="hidden" name="schedule[{{$j}}][id]" value="{{$scheduleData['id']}}">
                     @endif        
                     <label class="col-sm-3 col-md-2 control-label label1" for="schedule_session_month">Sessions/Months
                         <span class="important_required">*</span>
                     </label>
-                    <div class="col-sm-3 col-md-2">
-                        <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required\>
+                    <div class=" col-sm-3 col-md-2">
+                        <select class="form-control" id="schedule_session_month{{$j}}" name="schedule[{{$j}}][schedule_session_month]" required>
                             @if(isset($schedule_session_month))
                             @foreach ($schedule_session_month as $key => $data)
                                 <option value={{$key}}
@@ -467,12 +467,12 @@
                     <label class="col-sm-3 col-md-3 control-label label1" for="schedule_number">No Of Sessions/Months
                         <span class="important_required">*</span>
                     </label>
-                    <div class="col-sm-3 col-md-2">
-                        <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" required\>
+                    <div class="col-sm-3 col-md-2 form-group" id="schedule_number_container{{$j}}">
+                        <input type="text" class="form-control" id="schedule_number{{$j}}" onkeyup="validateScheduleFields({{$j}},'schedule_number')" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" />
                     </div>
                     <label for="schedule_price" class="col-md-1 control-label label1">Price<span class="important_required">*</span></label>
-                    <div class="col-sm-2 col-md-2">
-                        <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif" required\>
+                    <div class="col-sm-2 col-md-2 form-group" id="schedule_price_container{{$j}}">
+                        <input type="text" class="form-control" id="schedule_price{{$j}}" onkeyup="validateScheduleFields({{$j}},'schedule_price')"name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif" />
                     </div>
                 </div>
             </div>
@@ -570,11 +570,11 @@
             .append
             (
                 $("<div></div>")
-                    .attr("class","form-group")
+                    .attr("class","")
                     .append
                     (
                         $("<label></label>")
-                        .attr("class","col-sm-2 control-label label1")
+                        .attr("class","col-sm-2 control-label label1 ")
                         .attr("for","schedule_session_month")
                         .text("Sessions/Months")
                         .append
@@ -587,12 +587,12 @@
                     .append
                     (
                         $("<div></div>")
-                        .attr("class","col-sm-2")
+                        .attr("class","col-sm-2 form-group")
                         .append
                         ( 
                             $("<select required></select>")  
                             .attr("class","form-control")
-                            .attr("id","schedule_session_month")
+                            .attr("id","schedule_session_month"+scheduleCount)
                             .attr("name","schedule["+scheduleCount+"][schedule_session_month]")
                         )
                     )
@@ -612,13 +612,15 @@
                     .append
                     (
                         $("<div></div>")
-                        .attr("class","col-md-2")
+                        .attr("class","col-md-2 form-group")
+                        .attr("id","schedule_number_container"+scheduleCount)
                         .append
                         ( 
-                            $("<input required/>") 
-                            .attr("type","text") 
+                            $("<input required />") 
+                            .attr("type","text")
+                            .attr("onkeyup","validateScheduleFields("+scheduleCount+",'schedule_number')")
                             .attr("class","form-control")
-                            .attr("id","schedule_number")
+                            .attr("id","schedule_number"+scheduleCount)
                             .attr("name","schedule["+scheduleCount+"][schedule_number]")
                         )
                     ) 
@@ -638,13 +640,15 @@
                     .append
                     (
                         $("<div></div>")
-                        .attr("class","col-sm-3 col-md-2")
+                        .attr("class","col-sm-3 col-md-2 form-group")
+                        .attr("id","schedule_price_container"+scheduleCount)
                         .append
                         ( 
-                            $("<input required/>")  
+                            $("<input required />")  
                             .attr("type","text")
+                            .attr("onkeyup","validateScheduleFields("+scheduleCount+",'schedule_price')")
                             .attr("class","form-control")
-                            .attr("id","schedule_price")
+                            .attr("id","schedule_price"+scheduleCount)
                             .attr("name","schedule["+scheduleCount+"][schedule_price]")                       
                         )
                     )           
@@ -684,7 +688,7 @@
             )
         )
         .appendTo(linksContainer);    
-        var SessionContainer = $("#schedule"+scheduleCount+" #schedule_session_month"),baseUrl;
+        var SessionContainer = $("#schedule"+scheduleCount+" #schedule_session_month"+scheduleCount),baseUrl;
         for(var key in scheduleSessions)
         {
             var data = scheduleSessions[key];
@@ -741,13 +745,15 @@
         var batchCount = $("#subcategory_list li").length ;
         $("input:radio[name=batch_trial]").click(function() {
             var value = $(this).val();
-            if(value==3||value==5)
+            if(value==3)
             {
                 $("#PriceForSingleClass").show();
+                $("#batch_single_price").attr("required","true");
             }
             else
             {
                 $("#PriceForSingleClass").hide();
+                $("#batch_single_price").attr("required","false");
             }
         });
         $('#addschedule-btn').click(function(e){
@@ -818,6 +824,12 @@
                         required: true
                     }
                 },
+                schedule_number:{
+                    message: 'Please enter No of Sessions/Months',
+                    validators:{
+                        required: true
+                    }
+                },
                 batch_accomplishment: {
                     message: 'The text is not valid',
                     validators: {
@@ -856,6 +868,67 @@
             }
         });
     });
+    function validate()
+    {
+        var Result = true;
+        for(var i=0;i<scheduleCount;i++)
+        {
+            var scheduleNumber = $('#schedule_number'+i).val();
+            var schedulePrice = $('#schedule_price'+i).val();
+            var scheduleNumberMessage = $('#schedule_number_container'+i),baseUrl;
+            var schedulePriceMessage = $('#schedule_price_container'+i),baseUrl;
+          //  alert(scheduleNumber);
+            if(scheduleNumber=="")
+            {
+                $('#schedule_number_validation_message'+i).remove();
+                $('<span></span>')
+                .attr("id","schedule_number_validation_message"+i)
+                .attr("class","batchCreateFormError")
+                .text("Please fill this required field.")
+                .appendTo(scheduleNumberMessage);
+                Result = false;
+            }
+            if(schedulePrice=="")
+            {
+                $('#schedule_price_validation_message'+i).remove();
+                $('<span></span>')
+                .attr("id","schedule_price_validation_message"+i)
+                .attr("class","batchCreateFormError")
+                .text("Please fill this required field.")
+                .appendTo(schedulePriceMessage);
+                Result = false;
+            }
+        }
+        return Result;
+    }
+    function validateScheduleFields(divid,divName)
+    {
+        var inputValue = $('#'+divName+divid).val();
+        var divisionContainer = $('#'+divName+'_container'+divid),baseUrl;
+        var valid = "glyphicon glyphicon-ok";
+        var invalid = "glyphicon glyphicon-remove";
+        if(isNaN(inputValue) || inputValue<1)
+        {    
+            $('#'+divName+"_validation_message"+divid).remove();
+            $('#'+divName+'_container'+divid+' .glyphicon-ok').remove();
+            $('<span></span>')
+            .attr("id",divName+"_validation_message"+divid)
+            .attr("class","batchCreateFormError")
+            .text("Should be a number and grater than 0")
+            .appendTo(divisionContainer);
+            $('<span></span>')
+            .attr("class",invalid+" right-addon")
+            .appendTo(divisionContainer);
+        }
+        else
+        {
+            $('#'+divName+"_validation_message"+divid).remove();
+            $('#'+divName+'_container'+divid+' .glyphicon-remove').remove();
+            $('<span></span>')
+            .attr("class",valid+" right-addon")
+            .appendTo(divisionContainer);
+        }
+    }
 
 </script>
 <script>

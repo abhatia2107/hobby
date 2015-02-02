@@ -12,7 +12,7 @@
 | shown, which includes a detailed stack trace during debug.
 |
 */
-
+/*
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
@@ -22,7 +22,6 @@ App::error(function(Exception $exception, $code)
 App::error(function(InvalidUserException $exception)
 {
     Log::error($exception);
-
     return 'Sorry! Something is wrong with this account!';
 });
 
@@ -36,3 +35,4 @@ App::fatal(function($exception)
    	Log::error($exception); 
    	return View::make('Errors.fatal');
 });
+*/

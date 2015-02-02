@@ -21,7 +21,7 @@ class BatchesTableSeeder extends Seeder {
                      'batch_single_price' =>$faker->randomNumber(1000,5000),
                      'batch_recurring' =>$faker->randomNumber(1,4),
                      'batch_approved' =>$faker->boolean(),
-                     'batch_trial' =>$faker->randomNumber(1,5),
+                     'batch_trial' =>$faker->randomNumber(1,3),
                      'batch_comment'=>$faker->lexify(),
                      'batch_tagline'=>$faker->lexify(),
                      'batch_photo'=>"0",

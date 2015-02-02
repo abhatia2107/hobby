@@ -255,20 +255,6 @@ class UsersController extends \BaseController {
 		return View::make('Users.signup');
 	}
 
-	public function testEmail()
-	{
-		$data=[
-			'name'=>'Abhishek',
-			'confirmationcode'=>'123',
-			'userId'=>'1',
-			];
-			
-		Mail::later(15,'Emails.welcome', $data, function($message)
-		{
-			$message->to('abhatia@mailinator.com','Abhishek')->subject('test');
-		});	
-	}
-
 	/**
 	*Function to add new user to the database.
 	*

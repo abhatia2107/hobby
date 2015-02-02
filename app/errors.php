@@ -22,7 +22,6 @@ App::error(function(Exception $exception, $code)
 App::error(function(InvalidUserException $exception)
 {
     Log::error($exception);
-
     return 'Sorry! Something is wrong with this account!';
 });
 

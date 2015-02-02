@@ -265,4 +265,3 @@ Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{cat
 
 Route::get('/filters/search','FiltersController@search');
 
-Route::get('/test','UsersController@testEmail');

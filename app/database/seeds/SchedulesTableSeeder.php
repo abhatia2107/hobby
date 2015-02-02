@@ -8,10 +8,9 @@ class SchedulesTableSeeder extends Seeder {
 	public function run()
 	{
 		$faker = Faker::create();
-
 		foreach(range(1, 1000) as $index)
 		{
-			Schedule::create([
+			DB::table('schedules')->insert(array(
 				'schedule_batch_id'=>$faker->unique()->randomNumber(1,1000),
 				'schedule_price' =>$faker->randomNumber(1000,5000),
 				'schedule_start_date' =>$faker->date($format = 'Y-m-d', $max = 'now'),
@@ -28,7 +27,7 @@ class SchedulesTableSeeder extends Seeder {
 				'schedule_class_on_friday'=>$faker->boolean(),
 				'schedule_class_on_saturday'=>$faker->boolean(),
 				'schedule_class_on_sunday'=>$faker->boolean(),
-			]);
+			));
 		}
 	}
 

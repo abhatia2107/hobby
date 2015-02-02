@@ -27,7 +27,7 @@ class Schedule extends \Eloquent {
 
     public function getScheduleForBatch($batch_id)
     {
-        $scheduleForBatch= Schedule::where('schedule_batch_id',$batch_id)
+        $scheduleForBatch=Schedule::where('schedule_batch_id',$batch_id)
         ->get()
         ->toArray();
         return $scheduleForBatch;

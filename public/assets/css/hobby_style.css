@@ -464,9 +464,9 @@ span.stars span {
 
   #inst_price { margin-top: 4px; }
 
-  #tag-icon { float:left; font-weight: bolder;font-size: 18px;text-align: right;}
+  #tag-icon { float:left; font-weight: bolder;font-size: 18px;text-align: right;margin-top: 10px;}
 
-  #tag-icon .glyphicon  { color: #0099FF; font-size: 22px;  margin-right: 9px;  }
+  #tag-icon .glyphicon  { color: #0099FF; font-size: 18px;  margin-right: 9px;  }
 
   #hand-icon  { color: #0099FF; margin-right: 5px;  }
 
@@ -932,5 +932,31 @@ span.stars span {
 #classInfo .glyphicon-ok
 {
   color: #3c763d;
+}
+#batch_status
+{
+  font-size: 18px;
+  font-weight: normal;
+  text-align:right;
+  margin-top: -10px;
+  margin-bottom: 7px;
+ 
+}
+#batch_status_result0, #batch_status_result1
+{
+   border:1px solid;
+   padding: 2px 7px 3px 7px;
+    border-color:#0099FF; 
+   background-color: #B7FFB7;
+   border-radius: 5px;
+   color: #000;
+}
+#batch_status_result0
+{ 
+   background-color: #FFFFA9 !important;
+}
+.trail_avail 
+{
+  font-weight: normal;
 }
 

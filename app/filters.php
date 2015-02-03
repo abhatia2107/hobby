@@ -82,7 +82,7 @@ function batchOwn()
 {
 	$user_id=Auth::id();
 	$batch_id=Request::segment(3);
-	$batch_user_id=Batch::getUserforCommentforBatch($batch_id);
+	$batch_user_id=Batch::getUserforBatch($batch_id);
 	if(is_null($batch_user_id))
 	{
 		return Redirect::to('/')->with('failure',Lang::get('batch.batch_disabled_by_admin'));

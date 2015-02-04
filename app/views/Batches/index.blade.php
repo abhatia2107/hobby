@@ -152,12 +152,12 @@
 												?>
 												<div class="price_schedule" id="price_schedule{{$scheduleIndex}}">
 													<div class="col-md-6 col-xs-12 col-sm-6 column" >
-														<div class="col-md-12 col-xs-12 col-sm-12 column" id="schedulePrice">
+														<div class="col-md-12 col-xs-12 col-sm-12 column" style="margin-top:5px;"id="schedulePrice">
 															<span id="hand-icon">☛</span>Price: ₹ {{$Price.$seperator.$sessionMonthCount.$sessionMonth}}
 														</div>
 													</div>
 													<div class="col-md-6 col-xs-12 col-sm-6 column">
-														<div  id="scheduleWeekDays">
+														<div style="margin-top:1px;" id="scheduleWeekDays">
 															<div class="alldays" style="margin-left:6px;">
 															@foreach($days as $key => $day)
 																<div id="{{$key}}" class="day">{{$day}}</div>

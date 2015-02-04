@@ -1,4 +1,3 @@
-
 @extends('Layouts.layout')
 @section('pagestylesheet')
     <style>
@@ -253,11 +252,11 @@
             <div class="form-group">
                 <label for="batch_difficulty_level" class="col-sm-3 control-label label1">Difficulty Level<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <ul class="radio ul-without-bullets" name="batch_difficulty_level"/>
+                    <ul class="radio ul-without-bullets" name="batch_difficulty_level" id="batchDifficultyLevel">
                         @foreach($difficulty_level as $key => $data)
                         <li>
                         <label>
-                            <input name="batch_difficulty_level" id="batch_difficulty_level" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$key)?'checked':''}}@else{{(Input::old('batch_difficulty_level')==$key)?'checked':''}}@endif type="radio"/><span class="radio_data">{{$data}}</span>
+                            <input name="batch_difficulty_level" class="batchDifficultyLevel" id="batch_difficulty_level" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_difficulty_level==$key)?'checked':''}}@else{{(Input::old('batch_difficulty_level')==$key)?'checked':''}}@endif type="radio" onClick="removeErrorMessage('#batchDifficultyLevelValidationMessageContainer')" /><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -269,11 +268,11 @@
             <div class="form-group">
                 <label for="batch_age_group" class="col-sm-3 control-label label1">Target Age Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <ul class="radio ul-without-bullets" name="batch_age_group"/>
+                    <ul class="radio ul-without-bullets" name="batch_age_group" id="batchAgeGroup">
                         @foreach($age_group as $key => $data)
                         <li>
                         <label >
-                            <input name="batch_age_group" id="batch_age_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$key)?'checked':''}}@else{{(Input::old('batch_age_group')==$key)?'checked':''}}@endif type="radio" /><span class="radio_data">{{$data}}</span>
+                            <input name="batch_age_group" class="batchAgeGroup" id="batch_age_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$key)?'checked':''}}@else{{(Input::old('batch_age_group')==$key)?'checked':''}}@endif type="radio" onClick="removeErrorMessage('#batchAgeGroupValidationMessageContainer')"/><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -286,11 +285,11 @@
             <div class="form-group">
                 <label for="batch_gender_group" class="col-sm-3 control-label label1">Target Gender Group<span class="important_required">*</span></label>
                 <div class="col-sm-8">
-                    <ul class="radio ul-without-bullets" name="batch_gender_group" />
+                    <ul class="radio ul-without-bullets" name="batch_gender_group" id="batchGenderGroup">
                         @foreach($gender_group as $data)
                         <li>
                         <label>
-                            <input name="batch_gender_group" id="batch_gender_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$key)?'checked':''}}@else{{(Input::old('batch_gender_group')==$key)?'checked':''}}@endif type="radio" /><span class="radio_data">{{$data}}</span>
+                            <input name="batch_gender_group" class="batchGenderGroup" id="batch_gender_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_gender_group==$key)?'checked':''}}@else{{(Input::old('batch_gender_group')==$key)?'checked':''}}@endif type="radio" onClick="removeErrorMessage('#batchGenderGroupValidationMessageContainer')" /><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -331,11 +330,11 @@
             <div class="form-group">
                 <label for="batch_trial" class="col-sm-3 control-label label1">Trial Available<span class="important_required">*</span></label>
                 <div class="col-sm-6">
-                    <ul class="radio ul-without-bullets" name="batch_trial">
+                    <ul class="radio ul-without-bullets" name="batch_trial" id="batch_trial_container">
                         @foreach($trial as $key => $data)
                         <li>
                         <label>
-                            <input name="batch_trial" id="batch_trial" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$key)?'checked':''}}@else{{(Input::old('batch_trial')==$key)?'checked':''}}@endif type="radio"/><span class="radio_data">{{$data}}</span>
+                            <input name="batch_trial" id="batch_trial" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_trial==$key)?'checked':''}}@else{{(Input::old('batch_trial')==$key)?'checked':''}}@endif type="radio" onClick="removeErrorMessage('#batch_trial_error_message')"/><span class="radio_data">{{$data}}</span>
                         </label>
                         </li>
                         @endforeach
@@ -482,11 +481,11 @@
                         Batch have Classes on<span class="important_required">*</span>
                     </label>
                     <div class="col-sm-6">
-                        <ul class="ul-without-bullets">
+                        <ul class="ul-without-bullets" id="schedule_batch_weekdays_container{{$j}}">
                             @foreach($weekdays as $data)
                                 <li>
                                     <label>
-                                    <input type="checkbox" name="schedule[{{$j}}][schedule_class][]" value="{{$data}}"
+                                    <input type="checkbox" id="schedule_batch_weekdays{{$j}}" name="schedule[{{$j}}][schedule_class][]" value="{{$data}}"
                                     @if(isset($batchDetails))
                                         @if(in_array($data, $scheduleData['schedule_class']))
                                             {{'checked="checked"'}}
@@ -495,7 +494,7 @@
                                         @if(in_array($data, array('test')))
                                             {{'checked="checked"'}}
                                         @endif
-                                    @endif/>
+                                    @endif  onClick="removeErrorMessage('#schedule_batch_weekdays_validation_message{{$j}}')"/>
                                     <span class="checkbox_data">{{ucfirst($data)}}</span>
                                     </label>
                                 </li>
@@ -540,6 +539,10 @@
     {
         $("#schedule"+id).remove();
         scheduleCount--;
+    }
+    function removeErrorMessage(tagetAudienceID)
+    {
+        $(tagetAudienceID).remove(); 
     }
     function addSchedule()
     {
@@ -681,8 +684,8 @@
                     .append
                     ( 
                         $("<ul></ul>")  
-                        .attr("class","ul-without-bullets")
-                        .attr("id","batch_week_days")
+                        .attr("class","ul-without-bullets batch_week_days")
+                        .attr("id","schedule_batch_weekdays_container"+scheduleCount)
                     )
                 )
             )
@@ -697,7 +700,7 @@
                 .text(data)
                 .appendTo(SessionContainer);
         }
-        var weekDaysContainer = $("#schedule"+scheduleCount+" #batch_week_days"),baseUrl;
+        var weekDaysContainer = $("#schedule"+scheduleCount+" .batch_week_days"),baseUrl;
         for(var key in weekDays)
         {
             var day = ucfirst(weekDays[key]);
@@ -710,7 +713,8 @@
                     $("<input required/>")      
                     .attr("type","checkbox")
                     .attr("value",weekDays[key])   
-                    .attr("name","schedule["+scheduleCount+"][schedule_class][]")       
+                    .attr("name","schedule["+scheduleCount+"][schedule_class][]")
+                    .attr("onClick","removeErrorMessage('#schedule_batch_weekdays_validation_message"+scheduleCount+"')")       
                 )
                 .append
                 (
@@ -871,33 +875,67 @@
     function validate()
     {
         var Result = true;
+        var targetAudienceFiledsValues = new Array();
+        var scheduleFiledsValues = new Array();
+        var targetAudienceErrorMessage = ["Please select difficulty level.","Please select age group.","Please select gender group."];
+        var targetAudienceContainer = ["batchDifficultyLevel","batchAgeGroup","batchGenderGroup"];
+        var scheduleContainers = ["schedule_number","schedule_price","schedule_batch_weekdays"];
+        var batchTrailAvailable = $('#batch_trial:checked').val();
+        targetAudienceFiledsValues[0] = $('.batchDifficultyLevel:checked').val();
+        targetAudienceFiledsValues[1] = $('.batchAgeGroup:checked').val();
+        targetAudienceFiledsValues[2] = $('.batchGenderGroup:checked').val();
+        var scheduleErrorMessage = ["Please fill this required field.","Please fill this required field.","Plase select week days"];
         for(var i=0;i<scheduleCount;i++)
         {
+            scheduleFiledsValues[0] = $('#schedule_number'+i).val();
+            scheduleFiledsValues[1] = $('#schedule_number'+i).val();
+            scheduleFiledsValues[2] = $('#schedule_batch_weekdays'+i+':checked').val()
             var scheduleNumber = $('#schedule_number'+i).val();
-            var schedulePrice = $('#schedule_price'+i).val();
+            var schedulePrice = $('#schedule_number'+i).val();
             var scheduleNumberMessage = $('#schedule_number_container'+i),baseUrl;
             var schedulePriceMessage = $('#schedule_price_container'+i),baseUrl;
-          //  alert(scheduleNumber);
-            if(scheduleNumber=="")
+            for(var filedsIndex=0;filedsIndex<3;filedsIndex++)
             {
-                $('#schedule_number_validation_message'+i).remove();
+                var scheduleFiledsValue = scheduleFiledsValues[filedsIndex];
+                var scheduleMessageContainer = $('#'+scheduleContainers[filedsIndex]+'_container'+i),baseUrl;
+                var scheduleErrorMessageContainer = scheduleContainers[filedsIndex]+'_validation_message'+i;
+                if(scheduleFiledsValue=="" || scheduleFiledsValue==undefined)
+                {
+                    $('#'+scheduleErrorMessageContainer).remove();
+                    $('<span></span>')
+                    .attr("id",scheduleErrorMessageContainer)
+                    .attr("class","batchCreateFormError")
+                    .text(scheduleErrorMessage[filedsIndex])
+                    .appendTo(scheduleMessageContainer);
+                    Result = false;
+                }
+            }
+        }
+        for(var i=0;i<3;i++)
+        {
+            var targetFiedlValue = targetAudienceFiledsValues[i];
+            var targetContainer = targetAudienceContainer[i];
+            if(targetFiedlValue==undefined || targetFiedlValue=="")
+            {      
+                $('#'+targetContainer+'ValidationMessageContainer').remove();
                 $('<span></span>')
-                .attr("id","schedule_number_validation_message"+i)
+                .attr("id",targetContainer+"ValidationMessageContainer")
                 .attr("class","batchCreateFormError")
-                .text("Please fill this required field.")
-                .appendTo(scheduleNumberMessage);
+                .text(targetAudienceErrorMessage[i])
+                .appendTo($('#'+targetContainer),baseUrl);
                 Result = false;
             }
-            if(schedulePrice=="")
-            {
-                $('#schedule_price_validation_message'+i).remove();
-                $('<span></span>')
-                .attr("id","schedule_price_validation_message"+i)
-                .attr("class","batchCreateFormError")
-                .text("Please fill this required field.")
-                .appendTo(schedulePriceMessage);
-                Result = false;
-            }
+        }
+        if(batchTrailAvailable=="" || batchTrailAvailable==undefined)
+        {
+            var batchTrailAvailableContainer = $('#batch_trial_container'),baseUrl;
+            $('#batch_trial_error_message').remove();
+            $('<span></span>')
+            .attr("id","batch_trial_error_message")
+            .attr("class","batchCreateFormError")
+            .text("Plase select trial available option")
+            .appendTo(batchTrailAvailableContainer);
+            Result = false;   
         }
         return Result;
     }

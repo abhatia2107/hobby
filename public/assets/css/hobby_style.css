@@ -477,7 +477,7 @@ span.stars span {
   .day
   {
     padding: -2px 0 0 0;width:18px;height:19px;border: 1px solid;border-color: #0099FF;
-    margin-left: 4px;float:left;text-align: center; opacity: .20;margin-top: 0px;font-size: 13px;
+    margin-left: 4px;float:left;text-align: center; opacity: .20;margin-top: -2px;font-size: 13px;
   }
 
   #contact  { display: none;  }

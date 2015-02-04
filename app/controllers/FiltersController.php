@@ -28,7 +28,6 @@ class FiltersController extends \BaseController {
 		$batchesForCategoryLocation=$this->batch->search($keyword,$category_id,$location_id,$chunk);
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
-			return $batchesForCategoryLocation="Empty";
 			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		// dd($batchesForCategoryLocation[0]->schedules->all());
@@ -65,7 +64,6 @@ class FiltersController extends \BaseController {
 		else{
 			if(empty($batchesForCategoryLocation->toArray()))
 			{
-				return $batchesForCategoryLocation="Empty";
 				$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 			}
 		// dd($batchesForCategoryLocation[0]->schedules[0]);

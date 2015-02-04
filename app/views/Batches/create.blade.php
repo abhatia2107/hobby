@@ -510,7 +510,7 @@
             <button class='btn btn-primary addschedule' id="addschedule-btn" onclick="addSchedule()"> + Add Schedule</button>
         </div><hr/>
         <div class="btn_save_div" style="margin-top:20px;">
-            <button type="submit" class="btn btn-success btn-lg"> @if(isset($batchDetails)) <i class="fa fa-save"></i>  Save @else <i class="fa fa-plus"></i>  Create @endif</button>
+            <button type="submit" id="createBatchButton" class="btn btn-success btn-lg"> @if(isset($batchDetails)) <i class="fa fa-save"></i>  Save @else <i class="fa fa-plus"></i>  Create @endif</button>
             <button type="reset" class="btn btn-warning btn-lg"><i class="fa fa-power-off"></i> Reset</button>
         </div>
     </form>
@@ -937,6 +937,8 @@
             .appendTo(batchTrailAvailableContainer);
             Result = false;   
         }
+        $('#createBatchButton').attr("disabled", "disabled");
+        $('#createBatchButton').removeAttr('disabled');
         return Result;
     }
     function validateScheduleFields(divid,divName)

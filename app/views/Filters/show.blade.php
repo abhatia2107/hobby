@@ -172,6 +172,8 @@
 				seperator = "";
 				sessionMonthCount = "";
 			}
+			var ContainerDistinct = $(".batch"+batchIndex+" #price_schedule"+scheduleIndex);
+			ContainerDistinct.remove();
 			$("<div></div>")
 			.attr("class","col-md-12 col-xs-12 col-sm-12 row")
 			.append
@@ -600,7 +602,6 @@
 						{
 							$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 							{
-								alert(response);
 								if(response == "Empty")
 								{
 									$('#loadMore').css('display','none');

@@ -712,6 +712,7 @@
                 (
                     $("<input required/>")      
                     .attr("type","checkbox")
+                    .attr("id","schedule_batch_weekdays"+scheduleCount)
                     .attr("value",weekDays[key])   
                     .attr("name","schedule["+scheduleCount+"][schedule_class][]")
                     .attr("onClick","removeErrorMessage('#schedule_batch_weekdays_validation_message"+scheduleCount+"')")       
@@ -724,7 +725,6 @@
                 )
             )
             .appendTo(weekDaysContainer);      
-                     
         }
         scheduleCount++;
     }
@@ -875,6 +875,7 @@
     function validate()
     {
         var Result = true;
+        var Focus = false;
         var targetAudienceFiledsValues = new Array();
         var scheduleFiledsValues = new Array();
         var targetAudienceErrorMessage = ["Please select difficulty level.","Please select age group.","Please select gender group."];
@@ -885,6 +886,48 @@
         targetAudienceFiledsValues[1] = $('.batchAgeGroup:checked').val();
         targetAudienceFiledsValues[2] = $('.batchGenderGroup:checked').val();
         var scheduleErrorMessage = ["Please fill this required field.","Please fill this required field.","Plase select week days"];
+        for(var i=0;i<3;i++)
+        {
+            var targetFiedlValue = targetAudienceFiledsValues[i];
+            var targetContainer = targetAudienceContainer[i];
+            if(targetFiedlValue==undefined || targetFiedlValue=="")
+            {      
+                $('#'+targetContainer+'ValidationMessageContainer').remove();
+                $('<span></span>')
+                .attr("id",targetContainer+"ValidationMessageContainer")
+                .attr("class","batchCreateFormError")
+                .text(targetAudienceErrorMessage[i])
+                .appendTo($('#'+targetContainer),baseUrl);
+                Result = false;
+                if(!Focus)
+                {
+                    var height = $('#'+targetContainer).position().top + 700;
+                    $('html, body').stop().animate({
+                        scrollTop : height
+                    }, 1000, 'easeInOutExpo');
+                    Focus = true;
+                }
+            }
+        }
+        if(batchTrailAvailable=="" || batchTrailAvailable==undefined)
+        {
+            var batchTrailAvailableContainer = $('#batch_trial_container'),baseUrl;
+            $('#batch_trial_error_message').remove();
+            $('<span></span>')
+            .attr("id","batch_trial_error_message")
+            .attr("class","batchCreateFormError")
+            .text("Plase select trial available option")
+            .appendTo(batchTrailAvailableContainer);
+            Result = false;
+            if(!Focus)
+            {
+                var height = batchTrailAvailableContainer.position().top + 1200;
+                $('html, body').stop().animate({
+                    scrollTop : height
+                }, 1000, 'easeInOutExpo');
+                Focus = true;
+            }
+        }
         for(var i=0;i<scheduleCount;i++)
         {
             scheduleFiledsValues[0] = $('#schedule_number'+i).val();
@@ -909,33 +952,15 @@
                     .appendTo(scheduleMessageContainer);
                     Result = false;
                 }
+                if(!Focus)
+                {
+                    var height = scheduleMessageContainer.position().top + 700;
+                    $('html, body').stop().animate({
+                        scrollTop : height
+                    }, 1000, 'easeInOutExpo');
+                    Focus = true;
+                }
             }
-        }
-        for(var i=0;i<3;i++)
-        {
-            var targetFiedlValue = targetAudienceFiledsValues[i];
-            var targetContainer = targetAudienceContainer[i];
-            if(targetFiedlValue==undefined || targetFiedlValue=="")
-            {      
-                $('#'+targetContainer+'ValidationMessageContainer').remove();
-                $('<span></span>')
-                .attr("id",targetContainer+"ValidationMessageContainer")
-                .attr("class","batchCreateFormError")
-                .text(targetAudienceErrorMessage[i])
-                .appendTo($('#'+targetContainer),baseUrl);
-                Result = false;
-            }
-        }
-        if(batchTrailAvailable=="" || batchTrailAvailable==undefined)
-        {
-            var batchTrailAvailableContainer = $('#batch_trial_container'),baseUrl;
-            $('#batch_trial_error_message').remove();
-            $('<span></span>')
-            .attr("id","batch_trial_error_message")
-            .attr("class","batchCreateFormError")
-            .text("Plase select trial available option")
-            .appendTo(batchTrailAvailableContainer);
-            Result = false;   
         }
         $('#createBatchButton').attr("disabled", "disabled");
         $('#createBatchButton').removeAttr('disabled');
@@ -946,6 +971,7 @@
         var inputValue = $('#'+divName+divid).val();
         var divisionContainer = $('#'+divName+'_container'+divid),baseUrl;
         var valid = "glyphicon glyphicon-ok";
+        
         var invalid = "glyphicon glyphicon-remove";
         if(isNaN(inputValue) || inputValue<1)
         {    

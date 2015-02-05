@@ -46,7 +46,11 @@
 					<a href="/">Home</a>
 				</li>
 				<li>					
-					<a href="javascript:void()">{{$categories[$category_id-1]->category}}</a>
+					@if($category_id==0)
+						<a href="javascript:void()">{{'All'}}</a>
+					@else
+						<a href="javascript:void()">{{$categories[$category_id-1]->category}}</a>
+					@endif
 				</li>
 				<li></li>
 			</ul>

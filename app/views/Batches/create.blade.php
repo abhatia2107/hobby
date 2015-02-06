@@ -145,6 +145,45 @@
     {
         display: none;
     }
+    .CategorySelectOption .labelCategory
+    {
+        margin-left: -15px;
+        font-weight: normal;
+        text-align: left;
+    }
+    .CategorySelectOption select
+    {
+        margin-left: 21px;
+    }
+    .CategorySelectOption .labelSubCat
+    {
+        margin-left: 51px;
+    }
+    #scheduleStrat .lebelSession
+    {
+        margin-left: -15px;
+    }
+    #scheduleStrat .lebelSessionNum
+    {
+        margin-left: 25px;
+    }
+    #scheduleStrat .lebelSessionPrice
+    {
+        margin-left: 47px;
+    }
+    #lebelSessionNum
+    {
+        margin-left: 53px;
+    }
+    #lebelSessionPrice
+    {
+        margin-left: 48px;
+        float:left;
+    }
+    .SessionSelect
+    {
+        margin-left: 14px;
+    }
     </style>
     <link type="text/css" rel="stylesheet" href="/assets/css/jquery-te-1.4.0.css">
 @stop
@@ -179,8 +218,8 @@
             </div>
         </div>
         <div class="row row_padding">
-            <div class="">
-                <label for="batch_category_id" class="col-sm-3 col-md-3 control-label label1">Category<span class="important_required">*</span></label>
+            <div class="CategorySelectOption">
+                <label for="batch_category_id" class="col-sm-3 col-md-3 control-label labelCategory">Category<span class="important_required">*</span></label>
                 <div class="col-sm-3 col-md-3 form-group">
                     <select class="form-control" id="batch_category_id" name="batch_category_id" required="required">
                         <option disabled="disabled"> Select Category</option>
@@ -198,7 +237,7 @@
                         @endforeach
                     </select>
                 </div>
-                <label for="batch_subcategory_id" class="col-sm-2 col-md-2 control-label label1">Sub Category<span class="important_required">*</span></label>
+                <label for="batch_subcategory_id" class="col-sm-2 col-md-2 control-label label1 labelSubCat">Sub Category<span class="important_required">*</span></label>
                 <div class="col-sm-3 col-md-3 form-group">                                
                     <select class="form-control" name="batch_subcategory_id" id="batch_subcategory_id" required >
                         <option disabled="disabled"> Select Sub Category</option>                        
@@ -248,7 +287,7 @@
             <div class="col-lg-12 col-md-10 col-sm-10 targetaud" >
             </div>
         </div>
-        <div class="row row_padding">
+        <div class="row row_padding" id="targetAudience">
             <div class="form-group">
                 <label for="batch_difficulty_level" class="col-sm-3 control-label label1">Difficulty Level<span class="important_required">*</span></label>
                 <div class="col-sm-8">
@@ -345,8 +384,8 @@
         <div class="row row_padding" id="PriceForSingleClass">
             <div class="form-group ">
                 <label for="batch_single_price" class="col-sm-3 control-label label1">Price for a Single Class<span class="important_required">*</span></label>
-                <div class="col-sm-3 col-md-3">
-                    <input type="text" class="form-control" id="batch_single_price" name="batch_single_price" value="@if(isset($batchDetails)){{$batchDetails->batch_single_price}}@else{{Input::old('batch_single_price')}}@endif"/>
+                <div class="col-sm-3 col-md-3" id="batch_single_price_container">
+                    <input type="text" class="form-control" id="batch_single_price" onkeyup="validateScheduleFields('','batch_single_price')" name="batch_single_price" value="@if(isset($batchDetails)){{$batchDetails->batch_single_price}}@else{{Input::old('batch_single_price')}}@endif" />
                 </div>
             </div>
         </div>
@@ -367,14 +406,14 @@
             @foreach ($batchDetails->schedule as $j => $scheduleData)
             <div class="row row_padding">
                 <h4>Schedule {{$j+1}}</h4>
-                <div class="form-group" id="scheduleStrat">
+                <div id="scheduleStrat">
                     @if(isset($batchDetails))
                         <input type="hidden" name="schedule[{{$j}}][id]" value="{{$scheduleData['id']}}">
                     @endif        
-                    <label class="col-sm-3 col-md-3 control-label label1" for="schedule_session_month">Sessions/Months
+                    <label class="col-sm-3 col-md-2 control-label label1 lebelSession" for="schedule_session_month">Sessions/Months
                         <span class="important_required">*</span>
                     </label>
-                    <div class="col-sm-3 col-md-3 form-group">
+                    <div class="col-sm-3 col-md-2 form-group">
                         <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required="required">
                             @if(isset($schedule_session_month))
                             @foreach ($schedule_session_month as $key => $data)
@@ -393,14 +432,14 @@
                         </select>
                     </div>
                     
-                    <label class="col-sm-3 col-md-3 control-label label1" for="schedule_number">No Of Sessions/Months
+                    <label class="col-sm-3 col-md-3 control-label label1 lebelSessionNum" for="schedule_number">No Of Sessions/Months
                         <span class="important_required">*</span>
                     </label>
-                    <div class="col-sm-3 col-md-3">
+                    <div class="col-sm-3 col-md-2 form-group">
                         <input type="text" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" required="required" />
                     </div>
-                    <label for="schedule_price" class="col-md-1 control-label label1">Price<span class="important_required">*</span></label>
-                    <div class="col-sm-2 col-md-2">
+                    <label for="schedule_price" class="col-md-1 control-label label1 lebelSessionPrice">Price<span class="important_required">*</span></label>
+                    <div class="col-sm-2 col-md-2 form-group">
                         <input type="text" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif" required="required" />
                     </div>
                 </div>
@@ -436,16 +475,16 @@
         @endforeach
         @else
         @for ($j = 0; $j < 1; $j++)    
-            <div class="row row_padding" id="multiScheduleForm{{$j}}">
+            <div class="row row_padding" id="multiScheduleForm{{$j}}" class="scheduleStrat">
                 <h4>Schedule {{$j+1}}</h4>
                 <div id="scheduleStrat">  
                     @if(isset($batchDetails))
                         <input type="hidden" name="schedule[{{$j}}][id]" value="{{$scheduleData['id']}}">
                     @endif        
-                    <label class="col-sm-3 col-md-2 control-label label1" for="schedule_session_month">Sessions/Months
+                    <label class="col-sm-3 col-md-2 control-label label1 lebelSession" for="schedule_session_month">Sessions/Months
                         <span class="important_required">*</span>
                     </label>
-                    <div class=" col-sm-3 col-md-2">
+                    <div class="col-sm-3 col-md-2 form-group">
                         <select class="form-control" id="schedule_session_month{{$j}}" name="schedule[{{$j}}][schedule_session_month]" required>
                             @if(isset($schedule_session_month))
                             @foreach ($schedule_session_month as $key => $data)
@@ -463,15 +502,15 @@
                             @endif
                         </select>
                     </div>
-                    <label class="col-sm-3 col-md-3 control-label label1" for="schedule_number">No Of Sessions/Months
+                    <label class="col-sm-3 col-md-3 control-label label1 lebelSessionNum" for="schedule_number">No Of Sessions/Months
                         <span class="important_required">*</span>
                     </label>
                     <div class="col-sm-3 col-md-2 form-group" id="schedule_number_container{{$j}}">
                         <input type="text" class="form-control" id="schedule_number{{$j}}" onkeyup="validateScheduleFields({{$j}},'schedule_number')" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" />
                     </div>
-                    <label for="schedule_price" class="col-md-1 control-label label1">Price<span class="important_required">*</span></label>
-                    <div class="col-sm-2 col-md-2 form-group" id="schedule_price_container{{$j}}">
-                        <input type="text" class="form-control" id="schedule_price{{$j}}" onkeyup="validateScheduleFields({{$j}},'schedule_price')"name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif" />
+                    <label for="schedule_price" class="col-md-1 col-sm-2 control-label label1 lebelSessionPrice" style="float:left">Price<span class="important_required">*</span></label>
+                    <div class="col-sm-3 col-md-2 form-group" id="schedule_price_container{{$j}}">
+                        <input type="text" class="form-control" id="schedule_price{{$j}}" onkeyup="validateScheduleFields({{$j}},'schedule_price')" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif" />
                     </div>
                 </div>
             </div>
@@ -531,6 +570,7 @@
     var scheduleSessions = ["Session", "Month"];
     var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
     var scheduleCount = 1;
+    var batchSinglePriceEnable = false;
     function ucfirst(string)
     {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -573,88 +613,91 @@
             .append
             (
                 $("<div></div>")
-                    .attr("class","")
+                .attr("class","")
+                .attr("id","scheduleStrat")
+                .append
+                (
+                    $("<label></label>")
+                    .attr("class","col-sm-2 control-label label1 lebelSession")
+                    .attr("for","schedule_session_month")
+                    .text("Sessions/Months")
                     .append
                     (
-                        $("<label></label>")
-                        .attr("class","col-sm-2 control-label label1 ")
-                        .attr("for","schedule_session_month")
-                        .text("Sessions/Months")
-                        .append
-                        (
-                            $("<span></span>")
-                            .attr("class","important_required")
-                            .text("*")
-                        )                      
-                    ) 
+                        $("<span></span>")
+                        .attr("class","important_required")
+                        .text("*")
+                    )                      
+                ) 
+                .append
+                (
+                    $("<div></div>")
+                    .attr("class","col-sm-3 col-md-2 form-group")
                     .append
-                    (
-                        $("<div></div>")
-                        .attr("class","col-sm-2 form-group")
-                        .append
-                        ( 
-                            $("<select required></select>")  
-                            .attr("class","form-control")
-                            .attr("id","schedule_session_month"+scheduleCount)
-                            .attr("name","schedule["+scheduleCount+"][schedule_session_month]")
-                        )
+                    ( 
+                        $("<select required></select>")  
+                        .attr("class","form-control SessionSelect")
+                        .attr("id","schedule_session_month"+scheduleCount)
+                        .attr("name","schedule["+scheduleCount+"][schedule_session_month]")
                     )
+                )
+                .append
+                (
+                    $("<label></label>")
+                    .attr("class","col-sm-3 control-label label1")
+                    .attr("id","lebelSessionNum")
+                    .attr("for","schedule_number")
+                    .text("No Of Sessions/Months")
                     .append
                     (
-                        $("<label></label>")
-                        .attr("class","col-sm-3 control-label label1")
-                        .attr("for","schedule_number")
-                        .text("No Of Sessions/Months")
-                        .append
-                        (
-                            $("<span></span>")
-                            .attr("class","important_required")
-                            .text("*")
-                        )                      
-                    ) 
+                        $("<span></span>")
+                        .attr("class","important_required")
+                        .text("*")
+                    )                      
+                ) 
+                .append
+                (
+                    $("<div></div>")
+                    .attr("class","col-sm-3 col-md-2 form-group")
+                    .attr("id","schedule_number_container"+scheduleCount)
                     .append
-                    (
-                        $("<div></div>")
-                        .attr("class","col-md-2 form-group")
-                        .attr("id","schedule_number_container"+scheduleCount)
-                        .append
-                        ( 
-                            $("<input required />") 
-                            .attr("type","text")
-                            .attr("onkeyup","validateScheduleFields("+scheduleCount+",'schedule_number')")
-                            .attr("class","form-control")
-                            .attr("id","schedule_number"+scheduleCount)
-                            .attr("name","schedule["+scheduleCount+"][schedule_number]")
-                        )
-                    ) 
-                    .append
-                    (
-                        $("<label></label>")
-                        .attr("for","schedule_price")
-                        .attr("class","col-sm-1 control-label label1")
-                        .text("Price")
-                        .append
-                        (
-                            $("<span></span>")
-                            .attr("class","important_required")
-                            .text("*")
-                        )                                    
+                    ( 
+                        $("<input required />") 
+                        .attr("type","text")
+                        .attr("onkeyup","validateScheduleFields("+scheduleCount+",'schedule_number')")
+                        .attr("class","form-control")
+                        .attr("id","schedule_number"+scheduleCount)
+                        .attr("name","schedule["+scheduleCount+"][schedule_number]")
                     )
+                ) 
+                .append
+                (
+                    $("<label></label>")
+                    .attr("for","schedule_price")
+                    .attr("class","col-sm-1 control-label label1")
+                    .attr("id","lebelSessionPrice")
+                    .text("Price")
                     .append
                     (
-                        $("<div></div>")
-                        .attr("class","col-sm-3 col-md-2 form-group")
-                        .attr("id","schedule_price_container"+scheduleCount)
-                        .append
-                        ( 
-                            $("<input required />")  
-                            .attr("type","text")
-                            .attr("onkeyup","validateScheduleFields("+scheduleCount+",'schedule_price')")
-                            .attr("class","form-control")
-                            .attr("id","schedule_price"+scheduleCount)
-                            .attr("name","schedule["+scheduleCount+"][schedule_price]")                       
-                        )
-                    )           
+                        $("<span></span>")
+                        .attr("class","important_required")
+                        .text("*")
+                    )                                    
+                )
+                .append
+                (
+                    $("<div></div>")
+                    .attr("class","col-sm-3 col-md-2 form-group")
+                    .attr("id","schedule_price_container"+scheduleCount)
+                    .append
+                    ( 
+                        $("<input required />")  
+                        .attr("type","text")
+                        .attr("onkeyup","validateScheduleFields("+scheduleCount+",'schedule_price')")
+                        .attr("class","form-control")
+                        .attr("id","schedule_price"+scheduleCount)
+                        .attr("name","schedule["+scheduleCount+"][schedule_price]")                       
+                    )
+                )           
             )
         )
         .append
@@ -746,18 +789,21 @@
         }
     }
     $(document).ready(function(){  
-        var batchCount = $("#subcategory_list li").length ;
         $("input:radio[name=batch_trial]").click(function() {
             var value = $(this).val();
             if(value==3)
             {
+                batchSinglePriceEnable = true;
                 $("#PriceForSingleClass").show();
-                $("#batch_single_price").attr("required","true");
+                //$("#batch_single_price").attr("required","true");
+               // $("#batch_single_price").attr("type","text");
             }
             else
             {
+                batchSinglePriceEnable  = false;
                 $("#PriceForSingleClass").hide();
-                $("#batch_single_price").attr("required","false");
+                //$("#batch_single_price").attr("required","false");
+               // $("#batch_single_price").attr("type","hidden");
             }
         });
         $('#addschedule-btn').click(function(e){
@@ -803,19 +849,6 @@
                         }
                     }
                 },
-
-                batch_single_price: {
-                    message: 'The Price is not valid',
-                    validators: {
-                        notEmpty: {
-                            message: 'The description is required and cannot be empty'
-                        },
-                        regexp: {
-                            regexp: /^[0-9]/,
-                            message: 'The  Price can only consist of numbers.'
-                        }
-                    }
-                }, 
                 batch_category_id: {
                     message: 'Please select Category',
                     validators:{
@@ -885,7 +918,7 @@
         targetAudienceFiledsValues[0] = $('.batchDifficultyLevel:checked').val();
         targetAudienceFiledsValues[1] = $('.batchAgeGroup:checked').val();
         targetAudienceFiledsValues[2] = $('.batchGenderGroup:checked').val();
-        var scheduleErrorMessage = ["Please fill this required field.","Please fill this required field.","Plase select week days"];
+        var scheduleErrorMessage = ["Please fill this field properly.","Please fill this field properly.","Plase select week days"];
         for(var i=0;i<3;i++)
         {
             var targetFiedlValue = targetAudienceFiledsValues[i];
@@ -901,10 +934,7 @@
                 Result = false;
                 if(!Focus)
                 {
-                    var height = $('#'+targetContainer).position().top + 700;
-                    $('html, body').stop().animate({
-                        scrollTop : height
-                    }, 1000, 'easeInOutExpo');
+                    $('.'+targetAudienceContainer[i]).focus();
                     Focus = true;
                 }
             }
@@ -921,11 +951,28 @@
             Result = false;
             if(!Focus)
             {
-                var height = batchTrailAvailableContainer.position().top + 1200;
-                $('html, body').stop().animate({
-                    scrollTop : height
-                }, 1000, 'easeInOutExpo');
+                $('#batch_trial').focus();
                 Focus = true;
+            }
+        }
+        if(batchSinglePriceEnable)
+        {
+            var batchSinglePrice = $('#batch_single_price').val();
+            var PriceForSingleClassContainer = $('#batch_single_price_container'),baseUrl;
+            if(batchSinglePrice=="" || isNaN(batchSinglePrice) || batchSinglePrice<1)
+            {
+                $('#batch_single_price_validation_message').remove();
+                $('<span></span>')
+                .attr("id","batch_single_price_validation_message")
+                .attr("class","batchCreateFormError")
+                .text("Please fill this field properly.")
+                .appendTo(PriceForSingleClassContainer);
+                if(!Focus)
+                {
+                    $('#batch_single_price').focus();
+                    Focus = true;
+                } 
+                Result = false;
             }
         }
         for(var i=0;i<scheduleCount;i++)
@@ -940,9 +987,13 @@
             for(var filedsIndex=0;filedsIndex<3;filedsIndex++)
             {
                 var scheduleFiledsValue = scheduleFiledsValues[filedsIndex];
+                var scheduleFiledsValueDuplicate = scheduleFiledsValue;
+                if(filedsIndex==2)
+                        scheduleFiledsValueDuplicate = 4;
                 var scheduleMessageContainer = $('#'+scheduleContainers[filedsIndex]+'_container'+i),baseUrl;
                 var scheduleErrorMessageContainer = scheduleContainers[filedsIndex]+'_validation_message'+i;
-                if(scheduleFiledsValue=="" || scheduleFiledsValue==undefined)
+                if( scheduleFiledsValue=="" || scheduleFiledsValue==undefined || 
+                    isNaN(scheduleFiledsValueDuplicate) || scheduleFiledsValueDuplicate<0 )
                 {
                     $('#'+scheduleErrorMessageContainer).remove();
                     $('<span></span>')
@@ -951,14 +1002,11 @@
                     .text(scheduleErrorMessage[filedsIndex])
                     .appendTo(scheduleMessageContainer);
                     Result = false;
-                }
-                if(!Focus)
-                {
-                    var height = scheduleMessageContainer.position().top + 700;
-                    $('html, body').stop().animate({
-                        scrollTop : height
-                    }, 1000, 'easeInOutExpo');
-                    Focus = true;
+                    if(!Focus)
+                    {
+                        $('#'+scheduleContainers[filedsIndex]+i).focus();
+                        Focus = true;
+                    }
                 }
             }
         }

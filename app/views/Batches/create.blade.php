@@ -145,6 +145,10 @@
     {
         display: none;
     }
+    .CategorySelectOption
+    {
+        text-align: center;
+    }
     .CategorySelectOption .labelCategory
     {
         margin-left: -15px;
@@ -911,14 +915,14 @@
         var Focus = false;
         var targetAudienceFiledsValues = new Array();
         var scheduleFiledsValues = new Array();
-        var targetAudienceErrorMessage = ["Please select difficulty level.","Please select age group.","Please select gender group."];
+        var targetAudienceErrorMessage = ["Please select difficulty level","Please select age group","Please select gender group"];
         var targetAudienceContainer = ["batchDifficultyLevel","batchAgeGroup","batchGenderGroup"];
         var scheduleContainers = ["schedule_number","schedule_price","schedule_batch_weekdays"];
         var batchTrailAvailable = $('#batch_trial:checked').val();
         targetAudienceFiledsValues[0] = $('.batchDifficultyLevel:checked').val();
         targetAudienceFiledsValues[1] = $('.batchAgeGroup:checked').val();
         targetAudienceFiledsValues[2] = $('.batchGenderGroup:checked').val();
-        var scheduleErrorMessage = ["Please fill this field properly.","Please fill this field properly.","Plase select week days"];
+        var scheduleErrorMessage = ["Please fill this field properly","Please fill this field properly","Please select days"];
         for(var i=0;i<3;i++)
         {
             var targetFiedlValue = targetAudienceFiledsValues[i];
@@ -946,7 +950,7 @@
             $('<span></span>')
             .attr("id","batch_trial_error_message")
             .attr("class","batchCreateFormError")
-            .text("Plase select trial available option")
+            .text("Please select available trial option")
             .appendTo(batchTrailAvailableContainer);
             Result = false;
             if(!Focus)
@@ -965,7 +969,7 @@
                 $('<span></span>')
                 .attr("id","batch_single_price_validation_message")
                 .attr("class","batchCreateFormError")
-                .text("Please fill this field properly.")
+                .text("Please fill this field properly")
                 .appendTo(PriceForSingleClassContainer);
                 if(!Focus)
                 {
@@ -978,7 +982,7 @@
         for(var i=0;i<scheduleCount;i++)
         {
             scheduleFiledsValues[0] = $('#schedule_number'+i).val();
-            scheduleFiledsValues[1] = $('#schedule_number'+i).val();
+            scheduleFiledsValues[1] = $('#schedule_price'+i).val();
             scheduleFiledsValues[2] = $('#schedule_batch_weekdays'+i+':checked').val()
             var scheduleNumber = $('#schedule_number'+i).val();
             var schedulePrice = $('#schedule_number'+i).val();
@@ -1028,7 +1032,7 @@
             $('<span></span>')
             .attr("id",divName+"_validation_message"+divid)
             .attr("class","batchCreateFormError")
-            .text("Should be a number and grater than 0")
+            .text("Should be a number and greater than 0")
             .appendTo(divisionContainer);
             $('<span></span>')
             .attr("class",invalid+" right-addon")

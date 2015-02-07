@@ -731,7 +731,7 @@ span.stars span {
 
 
 @media screen and (min-width: 992px) {  #venueCreate .modal-dialog  { width:430px; }  }
-#venueCreate .modal-dialog { margin-top:3%; }
+#venueCreate .modal-dialog { margin-top:1%; }
 #venueCreate .modal-header {height: 50px;padding-top: 0px;}
 #venueCreate .modal-footer {height: 55px;padding-top: 10px;}
 #venueCreate .modal-body {padding-bottom: 0px;}

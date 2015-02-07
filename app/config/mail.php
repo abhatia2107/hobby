@@ -27,8 +27,9 @@ return array(
 	| the Mailgun mail service which will provide reliable deliveries.
 	|
 	*/
-
-	'host' => 'box.hobbyix.com',
+	
+	'host' => '128.199.126.61',
+	// 'host' => 'box.hobbyix.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'admin@hobbyix.com', 'name' => 'Hobbyix'),
+	'from' => array('address' => 'services@hobbyix.com', 'name' => 'Hobbyix'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +81,7 @@ return array(
 	|
 	*/
 
-	'username' => 'admin@hobbyix.com',
+	'username' => 'services@hobbyix.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +94,7 @@ return array(
 	|
 	*/
 
-	'password' => 'projecthobby',
+	'password' => 'servicehobbyix',
 
 	/*
 	|--------------------------------------------------------------------------

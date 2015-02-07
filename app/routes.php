@@ -170,7 +170,6 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
 });
 
-
 Route::post('/subscriptions','SubscriptionsController@store');
 Route::get('/subscriptions/unsubscribe/{email}/{id}', 'SubscriptionsController@disable');
 

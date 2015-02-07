@@ -111,8 +111,19 @@ class BatchesController extends \BaseController {
 			$batch->forceDelete();
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
-		if($batch) 
+		if($batch) {
+			$user=User::find(Auth::id())->toArray();
+			$email=$user['email'];
+			$name=$user['user_first_name'];
+			$subject="Batch ".$credentials['batch']. " Addition Confirmation";
+			$data['name']=$name;
+			$data['batch']=$credentials['batch'];
+			Mail::later(15,'Emails.batch.create', $data, function($message) use ($email,$name,$subject)
+			{
+				$message->to($email,$name)->subject($subject);
+			});
 			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_created'));
+		}
 		else
 			return Redirect::to('/batches')->with('failure',Lang::get('batch.batch_create_failed'));
 	}

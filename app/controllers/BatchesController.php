@@ -22,6 +22,7 @@ class BatchesController extends \BaseController {
 		$weekdays=$this->weekdays;
 		$user_id=Auth::id();
 		$batchDetails=$this->batch->getBatchesForUser($user_id);
+		// dd($batchDetails[1]->schedules->all());
 		$institute_id=$this->institute->getInstituteforUser($user_id);
 		//dd($batchDetails[2]);
 		return View::make('Batches.index',compact('age_group','batchDetails','difficulty_level','gender_group','institute_id','trial','weekdays'));
@@ -102,6 +103,7 @@ class BatchesController extends \BaseController {
 		}*/
 		$schedule_arr=$credentials['schedule'];
 		unset($credentials['schedule']);
+		// dd($schedule_arr);
 		$batch=Batch::create($credentials);
 		$batch_id=$batch->id;
 		$errors=$this->schedulesControllerObject->store($schedule_arr,$batch_id);
@@ -115,7 +117,7 @@ class BatchesController extends \BaseController {
 			$user=User::find(Auth::id())->toArray();
 			$email=$user['email'];
 			$name=$user['user_first_name'];
-			$subject="Batch ".$credentials['batch']. " Addition Confirmation";
+			$subject=Lang::get('batch.batch_create_mail',array("batch"=>$credentials['batch']));
 			$data['name']=$name;
 			$data['batch']=$credentials['batch'];
 			Mail::later(15,'Emails.batch.create', $data, function($message) use ($email,$name,$subject)

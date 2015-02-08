@@ -6,9 +6,9 @@ return array(
 		
 		"feedback_create_failed" => "Sorry, We are unable to add the feedback",
 		
-		"feedback_email"=>"abhatia2107@gmail.com",
+		"feedback_email"=>"abhishek.bhatia@hobbyix.com",
 
-		"feedback_email_name"=>"Feedback Hobby",
+		"feedback_email_name"=>"Feedback Hobbyix",
 
 		"feedback_emailSubjectRecieved"=>"Thank you for your feedback.",
 

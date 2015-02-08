@@ -8,7 +8,7 @@ return array(
 		
 		"message_email"=>"abhatia2107@gmail.com",
 
-		"message_email_name"=>"Feedback Hobby",
+		"message_email_name"=>"Feedback Hobbyix",
 
 		"message_subject"=>"Enquiry about :batch",
 

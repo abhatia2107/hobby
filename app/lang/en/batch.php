@@ -6,6 +6,8 @@ return array(
 		
 		"batch_create_failed" => "Sorry, We are unable to add the batch",
 		
+		"batch_create_mail"=>"Batch :batch Addition Confirmation",
+
 		"batch_class_empty"=>"You must fill the days on which class happens.",
 
 		"batch_updated"=>"Your batch have been updated successfully",

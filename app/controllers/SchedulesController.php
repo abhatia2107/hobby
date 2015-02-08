@@ -24,8 +24,12 @@ class SchedulesController extends \BaseController {
 	 */
 	public function store($schedule_arr, $batch_id)
 	{
+		// var_dump($batch_id);
+		// dd($schedule_arr);
 		foreach ($schedule_arr as $i => $schedule) {
 			$credentials=$schedule;
+			// dd($schedule);
+			$credentials['schedule_no_of_classes_in_week']=0;
 			foreach($this->weekdays as $data){
 				$credentials['schedule_class_on_'.$data]=0;
 			}
@@ -37,6 +41,7 @@ class SchedulesController extends \BaseController {
 			}
 			if(!empty($credentials['schedule_class'])){
 				foreach($credentials['schedule_class'] as $data){
+					$credentials['schedule_no_of_classes_in_week']++;
 					$credentials['schedule_class_on_'.$data]=1;
 		    	}
 			}
@@ -47,6 +52,7 @@ class SchedulesController extends \BaseController {
 				return $errors;
 			$credentials['schedule_batch_id']=$batch_id;
 			unset($credentials["schedule_class"]);
+			// dd($credentials);
 			Schedule::create($credentials);
 		}
 	}

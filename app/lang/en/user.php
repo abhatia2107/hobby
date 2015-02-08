@@ -30,6 +30,8 @@
 
 		"user_signup_failed"=>"Sorry, We are unable to add the user",
 
+		"user_signup_mail_subject"=>"Welcome to Hobbyix",
+
 		"email_verification_failed"=>"Sorry you are not an authorized user, Sign-Up within 2 minutes.",
 
 		"email_already_verified"=>"Your email has been already verified.",

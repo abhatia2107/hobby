@@ -20,11 +20,6 @@ class Schedule extends \Eloquent {
         'schedule_class_on_sunday'=>'required',
     ];
 
-    public function schedule()
-    {
-        return $this->belongsTo('Batch','schedule_batch_id');
-    }
-
     public function getScheduleForBatch($batch_id)
     {
         $scheduleForBatch=Schedule::where('schedule_batch_id',$batch_id)

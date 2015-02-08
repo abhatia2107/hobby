@@ -7,7 +7,7 @@
 	<div class="clearfix header_row1">
 		<div class=" col-sm-2 col-md-2  ">
 			<a class="navbar-brand" href="/">
-				<img src="/assets/images/logo.png" class="img-responsive header_img" alt="HOBBY">
+				<img src="/assets/images/logo.png" class="img-responsive header_img" alt="HOBBYIX">
 			</a>
 		</div>			
 		<div class="col-sm-6 col-md-6">

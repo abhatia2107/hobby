@@ -10,6 +10,7 @@
 
 		<div class=" col-sm-5 col-md-5 MainHeaderUserInfo">		
 			<div class="userInfoListing ">
+				<a class="btn btn-primary " href="/batches">Host Panel</a>
 				<?php
 					$id=Auth::id();
 					if($id)
@@ -37,6 +38,7 @@
 					<a class="header_logout_a" href="/users/logout" >Logout</a>							
 				@endif
 			</div>
+
 		</div>
 	</div>
 @show

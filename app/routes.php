@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', 'HomeController@showWelcome');
+Route::get('/', 'HomeController@showDummyWelcome');
 
 //To allow access only to admin.
 Route::group(array('before' => "auth|admin"), function() {
+	Route::get('/original', 'HomeController@showWelcome');
 	Route::get('/admin','HomeController@showAdminHome');
 });
 
@@ -236,7 +237,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
 });
 
-// Route::group(array('before' => "admin"), function() {
+Route::group(array('before' => "admin"), function() {
 
 Route::get('/aboutus', function()
 {
@@ -266,4 +267,4 @@ Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{cat
 
 Route::get('/filters/search','FiltersController@search');
 
-// });
+});

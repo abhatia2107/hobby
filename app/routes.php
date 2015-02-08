@@ -57,7 +57,8 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/batches/approve/{id}','BatchesController@approve');
 });
 
-Route::group(array('before' => "approved-or-admin"), function() {	
+// Route::group(array('before' => "approved-or-admin"), function() {
+Route::group(array('before' => "admin"), function() {
 	Route::get('/batches/increment/{id}','BatchesController@increment');
 	Route::get('/batches/show/{id}','BatchesController@show');
 });
@@ -235,6 +236,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
 });
 
+// Route::group(array('before' => "admin"), function() {
 
 Route::get('/aboutus', function()
 {
@@ -264,3 +266,4 @@ Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{cat
 
 Route::get('/filters/search','FiltersController@search');
 
+// });

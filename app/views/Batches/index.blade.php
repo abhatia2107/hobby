@@ -122,7 +122,11 @@
 										</div>
 										<div class="row" id="price_schedule_container">
 											<div class="col-md-12 col-xs-12 col-sm-12 row" style="margin-top:-10px;">
-											<?php $MyBatchSchedules = $data->schedules; ?>
+											@if(isset($batchesData->schedules))
+												$MyBatchSchedules = $data->schedules;
+											@else
+												$MyBatchSchedules = null;
+											@endif
 											@foreach($MyBatchSchedules as $scheduleIndex => $Schedule)
 												<?php
 													$Price = $Schedule->schedule_price;

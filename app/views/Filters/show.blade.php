@@ -111,18 +111,20 @@
 	</div>
 </div>
 @foreach ($batchesForCategoryLocation as $index => $batchesData)
-	<?php
-		$Schedules[$index] = $batchesData->schedules;
-	?>
+	@if(isset($batchesData->schedules))
+		{{$Schedules[$index] = $batchesData->schedules}}
+	@else
+		{{$Schedules[$index] = null}}
+	@endif
 @endforeach
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
-		var result = <?php echo json_encode( $batchesForCategoryLocation ) ?>;
-		var Schedules = <?php echo json_encode( $Schedules ) ?>;
-		var trials = <?php echo json_encode( $trial ) ?>;
+		var result = {{json_encode( $batchesForCategoryLocation ) }}
+		var Schedules =@if(isset($Schedules))json_encode( $Schedules ) @else null @endif
+		var trials = {{json_encode( $trial )}}
 		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
-		var daysResult = new Array();				
+		var daysResult = new Arra@();				
 		//alert(Schedules[2][0]['schedule_price']);
 
 		var categoryId = "{{$category_id}}";

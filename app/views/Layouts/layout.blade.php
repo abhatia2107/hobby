@@ -8,10 +8,11 @@
 	<body> <!--  style="background:white" class="home page page-id-6 page-template page-template-page-templates page-template-template-home page-template-page-templatestemplate-home-php custom-background template-home  directory-fields color-scheme-default footer- woocommerce-social-login listify-child wp-job-manager-categories-enabled wp-job-manager-categories-only" -->
 		 <!--  id="page" class="hfeed site" -->
 			<!--Header Section contains sign-in sign-up searchbox and logo -->			
+			{{--
 			<header class="layout_header" >
 				@include('Templates.headerHome')
 			</header>
-			{{--
+			--}}
 			@if(isset($featuredBatches))
 				<header class="layout_header" >
 					@include('Templates.headerHome')
@@ -24,7 +25,6 @@
 			@if(isset($categories))
 				@include('Templates.navbar')
 			@endif
-			--}}
 			<!--sign-In pop up modal-->
 			<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				@include('Modals.login')

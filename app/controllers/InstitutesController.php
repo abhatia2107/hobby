@@ -49,7 +49,7 @@ class InstitutesController extends \BaseController {
 		$created=Institute::create($credentials);
 		//dd($created->id);
 		if ($created)
-			return Redirect::intended('/institutes/'.$created->id)->with('success',Lang::get('institute.institute_created'));
+			return Redirect::intended('/institutes/show/'.$created->id)->with('success',Lang::get('institute.institute_created'));
 		else
 			return Redirect::back()->withInput()->with('failure',Lang::get('institute.institute_create_failed'));
 	}
@@ -112,9 +112,9 @@ class InstitutesController extends \BaseController {
 		}
 		$updated=$this->institute->updateInstitute($credentials,$id);
 		if ($updated) 
-			return Redirect::to('/institutes/'.$updated->id)->with('success',Lang::get('institute.institute_updated'));
+			return Redirect::to('/institutes/show/'.$updated->id)->with('success',Lang::get('institute.institute_updated'));
 		else
-			return Redirect::to('/institutes/'.$updated->id)->with('failed',Lang::get('institute.institute_already_failed'));
+			return Redirect::to('/institutes/show/'.$updated->id)->with('failed',Lang::get('institute.institute_already_failed'));
 	}
 
 

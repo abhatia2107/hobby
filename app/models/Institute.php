@@ -15,7 +15,7 @@ class Institute extends \Eloquent {
 	public static $rules = [		
 		'institute'=>'required',
         'institute_user_id'=>'required|numeric',
-        'institute_url'=>'required',
+        // 'institute_url'=>'required',
         //TO DO: Institute_website is active_url have error.
         //It gives error on correct url also.
         // 'institute_website'=>'active_url',

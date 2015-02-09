@@ -22,8 +22,9 @@ class BatchesController extends \BaseController {
 		$weekdays=$this->weekdays;
 		$user_id=Auth::id();
 		$batchDetails=$this->batch->getBatchesForUser($user_id);
-		// dd($batchDetails[1]->schedules->all());
+		// dd($batchDetails[0]->schedules->all());
 		$institute_id=$this->institute->getInstituteforUser($user_id);
+		// dd($institute_id);
 		//dd($batchDetails[2]);
 		return View::make('Batches.index',compact('age_group','batchDetails','difficulty_level','gender_group','institute_id','trial','weekdays'));
 	}

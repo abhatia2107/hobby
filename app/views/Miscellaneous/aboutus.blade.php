@@ -9,7 +9,7 @@
         <div class="col-xs-12 col-sm-12">
           <h1 class="title-big text-center section-title-style2">
             <span >
-              About us
+              About Hobbyix
             </span>
           </h1>
           

@@ -47,7 +47,7 @@ class InstitutesController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 		$created=Institute::create($credentials);
-		//dd($created->id);
+		// dd($created->id);
 		if ($created)
 			return Redirect::intended('/institutes/show/'.$created->id)->with('success',Lang::get('institute.institute_created'));
 		else
@@ -111,10 +111,12 @@ class InstitutesController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 		$updated=$this->institute->updateInstitute($credentials,$id);
-		if ($updated) 
-			return Redirect::to('/institutes/show/'.$updated->id)->with('success',Lang::get('institute.institute_updated'));
+		// dd($updated);
+		if ($updated) {
+			return Redirect::to('/institutes/show/'.$id)->with('success',Lang::get('institute.institute_updated'));
+		}
 		else
-			return Redirect::to('/institutes/show/'.$updated->id)->with('failed',Lang::get('institute.institute_already_failed'));
+			return Redirect::to('/institutes/show/'.$id)->with('failed',Lang::get('institute.institute_already_failed'));
 	}
 
 

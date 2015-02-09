@@ -36,15 +36,15 @@
 		?>
 		@if(!$id)
 			<div class=" col-sm-3 col-md-3 userInfoListing" >
-				<div class="login-singup">
-					<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">LogIn</a>
+				<div class="login-signup">
+					<a href="#" data-toggle="modal" data-target="#loginModal">Log In</a>
 					&nbsp;&nbsp;|&nbsp;&nbsp;
-					<a  class="header_signup_a" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>					
+					<a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>					
 				</div>
 			</div>
 		@else
 			<div class=" col-sm-3 col-md-3 userInfoListing ">			 
-			<a class="header_myaccount_a" href="/users/show/{{$id}}">
+			<a href="/users/show/{{$id}}">
 				@if($user)
 					{{$name}}'s 
 				@else
@@ -52,7 +52,7 @@
 				@endif
 				Account 
 			</a>&nbsp;|&nbsp;
-			<a class="header_logout_a" href="/users/logout" >Logout</a>			
+			<a href="/users/logout" >Logout</a>			
 			</div>		
 		@endif
 			

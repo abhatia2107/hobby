@@ -173,16 +173,6 @@
                             },
                         }
                     },
-                    institute_website: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The url is required and cannot be empty'
-                            },
-                            url: {
-                                message: 'The input is not a valid url address'
-                            }
-                        }
-                    }
                 }
             });
 

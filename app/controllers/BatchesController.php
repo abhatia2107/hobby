@@ -147,6 +147,7 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
+		dd($batchDetails);
 		if(!is_null($batchDetails))
 		{
 			$institute_id=$batchDetails[0]->batch_institute_id;

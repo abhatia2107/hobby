@@ -95,10 +95,13 @@ class VenuesController extends \BaseController {
 	public function update($id)
 	{
 		$credentials=Input::all();
+		$oldVenue=Venue::find($id);
 		// dd($credentials);
-		$venue_user_id=Auth::id();
-		$venue_institute_id=Institute::getInstituteforUser($venue_user_id);
+		// dd($oldVenue->venue_user_id);
+		$venue_user_id=$oldVenue->venue_user_id;
+		$venue_institute_id=$oldVenue->venue_institute_id;
 		$credentials['venue_institute_id']=$venue_institute_id;
+		// dd($credentials['venue_institute_id']);
 		$credentials['venue_user_id']=$venue_user_id;
 		unset($credentials['csrf_token']);
 		$validator = Validator::make($credentials, Venue::$rules);

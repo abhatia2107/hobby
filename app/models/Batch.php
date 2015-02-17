@@ -169,7 +169,7 @@ class Batch extends \Eloquent {
         where('batches.id','=',$id)
         ->increment('batch_view');
 
-        return Batch::
+        $batch= Batch:://find($id)
             where('batches.id','=',$id)
             ->where('batches.batch_approved','=','1')
             ->Join('institutes','institutes.id','=','batches.batch_institute_id')
@@ -180,6 +180,8 @@ class Batch extends \Eloquent {
             ->Join('locations', 'locations.id', '=', 'localities.locality_location_id')
             ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
             ->get();
+
+        return $batch;
     }
  
     public function getBatchActive()

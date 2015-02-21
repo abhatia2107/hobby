@@ -2,21 +2,22 @@
 @section('content')
 <div class="overlay-slider">
 <div class="homepage-cover">
-   <div class="container">
-      <div class="hobby_search_listings">
+   <div class="container" id="hompage-cover">
+      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.5);">
          <div>
             <h1>{{$homeLang['home_title']}}</h1>
             <h2>{{$homeLang['home_subtitle']}}</h2>
          </div><br>
          <div  data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">   
             <form action="/filters/search" method="get" role="form">
-               <div class="row">
-                  <div class="col-md-4 col-sm-3">
+              <div class="row">
+                <div class="col-md-11 col-sm-12 col-md-offset-1">
+                  <div class="col-md-4 col-sm-4">
                      <div class="form-group" >
                         <input type="text" class="form-control"  name='keyword' id='search_keywords' placeholder='{{$homeLang['home_keyword']}}' />
                      </div>
                   </div>
-                  <div class="col-md-4 col-sm-3">
+                  <div class="col-md-4 col-sm-4">
                      <div class="form-group" >
                         <select name="category_id" id="search_categories" class="postform element-select" >
                            <option value="0">{{$homeLang['home_category']}}</option>
@@ -41,10 +42,11 @@
                      </div>
                   </div> -->
                   <input type="hidden" name="chunk" value="0">
-                  <div class="col-md-3 col-sm-3">
+                  <div class="col-md-3 col-sm-4">
                      <button type="submit" class="btn btn-primary">{{$homeLang['home_search_button_text']}}</button>
                   </div>
                </div>
+              </div>
             </form>
          </div>
       </div>
@@ -100,9 +102,8 @@
                      <footer>
                         <a href="/batches/show/{{$data->id}}" >{{$data->batch}}</a>
                      </footer>
-                  </div>
-               
-                  </div>
+                  </div>            
+                </div>
                </div>
             </div>
          @endforeach
@@ -113,23 +114,4 @@
 </div>
 @stop
 @section('pagejquery')
-<script type="text/javascript">
-   $.fn.stars = function() {
-    return $(this).each(function() {
-        // Get the value
-        var val = parseFloat($(this).html());
-        // Make sure that the value is in 0 - 5 range, multiply to get width
-        var size = Math.max(0, (Math.min(5, val))) * 16;
-        // Create stars holder
-        var $span = $('<span />').width(size);
-        // Replace the numerical value with stars
-        $(this).html($span);
-    });
-   }
-   $(function() {
-    $('span.stars').stars();
-   });
-</script>
-<br>
-<br>
 @stop

@@ -6,80 +6,72 @@
                     <button type="button" class="close" data-dismiss="modal">
                         <span onClick="refreshForm('#signUpForm')" aria-hidden="true" title="close">&times;</span>                
                     </button>
-                    <h4 class="modal-title" id="myModalLabel1">Sign-Up</h4>
+                    <h4 class="modal-title" id="myModalLabel1">Sign Up</h4>
                     <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
                 </div>
-                <center><a href="/login/fb"><img height="40px" style="margin-top:14px;" src="/assets/images/signup-with-facebook.png"></a></center>
+                <center><a href="/login/fb"><img height="35px" style="margin-top:10px;" src="/assets/images/signup-with-facebook.png"></a></center>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="form-group">
-                            <label for="user_first_name" class="col-sm-3 control-label ">First Name<span class="required">*</span>
-                            </label>
-                            <div class="col-sm-8">
+                        <div class="form-group">                        
+                            <div class="col-sm-12">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                                <input type="text"   class="form-control " name="user_first_name"  id="user_first_name" value="@if(isset($userDetails)){{$userDetails->user_first_name}}@else{{Input::old('user_first_name')}}@endif">
+                                <input type="text" placeholder="Enter Your First Name*"  class="form-control " name="user_first_name"  id="user_first_name" value="@if(isset($userDetails)){{$userDetails->user_first_name}}@else{{Input::old('user_first_name')}}@endif">
                             </div>
                         </div>
                     </div><br>
                     <div class="row">
-                        <div class="form-group">
-                            <label for="user_last_name"  class="col-sm-3 control-label ">Last Name</label>
-                            <div class="col-sm-8">
-                                <input type="text"  class="form-control " name="user_last_name"  id="user_last_name" value="@if(isset($userDetails)){{$userDetails->user_last_name}}@else{{Input::old('user_last_name')}}@endif">
+                        <div class="form-group">                            
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Enter Your Last Name*"  class="form-control " name="user_last_name"  id="user_last_name" value="@if(isset($userDetails)){{$userDetails->user_last_name}}@else{{Input::old('user_last_name')}}@endif">
                             </div>
                         </div>
                     </div><br>
                     <div class="row">
-                        <div class="form-group">
-                            <label for="email" class="col-sm-3 control-label ">Email<span class="required">*</span>
+                        <div class="form-group">                            
                             </label>
-                            <div class="col-sm-8">
-                                <input type="email"  placeholder="mymail@example.com" class="form-control " name="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
+                            <div class="col-sm-12">
+                                <input type="email" placeholder="Enter Your Email ID*"  class="form-control " name="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
                             </div>
                         </div>
                     </div><br>
                     <div class="row">
-                        <div class="form-group">
-                            <label for="user_contact_no" class="col-sm-3 control-label ">Mobile Number<span class="required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="tel" class="form-control " name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
+                        <div class="form-group">            
+                            <div class="col-sm-12">
+                                <input type="tel" placeholder="Enter Your Mobile Number*" class="form-control " name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
                             </div>
                         </div>
                     </div><br>
                     <div class="row">
-                        <div class="form-group">
-                            <label for="user_location" class="col-sm-3 control-label ">City<span class="required">*</span></label>
-                            <div class="col-sm-8">
-                                <input type="tel" class="form-control " name="user_location"  id="user_location" value="@if(isset($userDetails)){{$userDetails->user_location}}@else{{Input::old('user_location')}}@endif">
+                        <div class="form-group">                           
+                            <div class="col-sm-12">
+                                <input type="tel" placeholder="Enter Your City Name*" class="form-control " name="user_location"  id="user_location" value="@if(isset($userDetails)){{$userDetails->user_location}}@else{{Input::old('user_location')}}@endif">
                             </div>
                         </div>
                     </div><br>
                     <div class="row">
-                        <div class="form-group">
-                            <label for="password" class="col-sm-3 control-label ">Password<span class="required">*</span>
+                        <div class="form-group">                            
                             </label>
-                            <div class="col-sm-8">
-                                <input type="password" class="form-control " name="password"  id="password">
+                            <div class="col-sm-12">
+                                <input type="password" placeholder="Enter Password For Your Account*" class="form-control " name="password"  id="password">
                             </div>
                         </div>
                     </div><br>
                     <div class="row">
-                        <div class="form-group">
-                            <label for="password_confirmation" class="col-sm-3 control-label ">Confirm Password<span class="required">*</span>
+                        <div class="form-group">                            
                             </label>
-                            <div class="col-sm-8">
-                                <input type="password"   class="form-control " name="password_confirmation"  id="password_confirmation">
+                            <div class="col-sm-12">
+                                <input type="password" placeholder="Confirm Password" class="form-control " name="password_confirmation"  id="password_confirmation">
                             </div>
                         </div>
-                    </div><br/>
-                </div>
-                <div class="modal-footer">
+                    </div>
                     <div class="checkbox login-remember">
-                        <label class="col-sm-6 control-label">
+                        <label class="col-sm-12 control-label">
                             <input name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
                             I agree to <a href="/terms">terms and conditions.</a>
                         </label>
-                    </div>                    
+                    </div>    
+                </div>
+                <div class="modal-footer">                                
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>

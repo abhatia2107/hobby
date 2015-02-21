@@ -195,9 +195,9 @@
 @section('content')
 <div class="home_vendor_page" id="createBatch">
     @include('Templates.navbarVendor')
-    <div class="container-fluid">
+    <div class="container-fluid" >
     <div id="classInfo1">
-    <form role="form" name="batchCreateForm" onsubmit="return(validate());" class="form-horizontal" id="classInfo" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" >          
+    <form role="form"  name="batchCreateForm" onsubmit="return(validate());" class="form-horizontal" id="classInfo" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" >          
         <div class="row row_padding">
             <p  class="create_class">Create your Class
             </p>
@@ -348,7 +348,7 @@
         <div class="row row_padding">
             <div class="form-group">
                 <label for="batch_venue_id" class="col-sm-3 control-label label1">Venue<span class="important_required">*</span></label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <select class="form-control" id="batch_venue_id" name="batch_venue_id" required>
                         @foreach ($venuesForUser as $data)
                             <option value={{$data->id}}
@@ -365,7 +365,7 @@
                     </select>
                 </div>
                 <div class="col-sm-3">
-                    <a data-target="#venueCreate" data-toggle="modal">Add a venue</a>
+                    <a data-target="#venueCreate" href='javascript:void()' data-toggle="modal">Add a Venue</a>
                 </div>
             </div>
         </div>
@@ -913,6 +913,8 @@
     {
         var Result = true;
         var Focus = false;
+        var valid = "glyphicon glyphicon-ok"; 
+        var invalid = "glyphicon glyphicon-remove";
         var targetAudienceFiledsValues = new Array();
         var scheduleFiledsValues = new Array();
         var targetAudienceErrorMessage = ["Please select difficulty level","Please select age group","Please select gender group"];
@@ -971,6 +973,10 @@
                 .attr("class","batchCreateFormError")
                 .text("Please fill this field properly")
                 .appendTo(PriceForSingleClassContainer);
+                $('<span></span>')
+                .attr("class",invalid+" right-addon")
+                .appendTo(PriceForSingleClassContainer);
+                $('#batch_single_price').css('border-color','#a94442');
                 if(!Focus)
                 {
                     $('#batch_single_price').focus();
@@ -1005,6 +1011,13 @@
                     .attr("class","batchCreateFormError")
                     .text(scheduleErrorMessage[filedsIndex])
                     .appendTo(scheduleMessageContainer);
+                    if(filedsIndex<2)
+                    {
+                        $('<span></span>')
+                        .attr("class",invalid+" right-addon")
+                        .appendTo(scheduleMessageContainer);
+                        $('#'+scheduleContainers[filedsIndex]+i).css('border-color','#a94442');
+                    }
                     Result = false;
                     if(!Focus)
                     {
@@ -1022,8 +1035,7 @@
     {
         var inputValue = $('#'+divName+divid).val();
         var divisionContainer = $('#'+divName+'_container'+divid),baseUrl;
-        var valid = "glyphicon glyphicon-ok";
-        
+        var valid = "glyphicon glyphicon-ok"; 
         var invalid = "glyphicon glyphicon-remove";
         if(isNaN(inputValue) || inputValue<1)
         {    
@@ -1037,6 +1049,7 @@
             $('<span></span>')
             .attr("class",invalid+" right-addon")
             .appendTo(divisionContainer);
+            $('#'+divName+divid).css('border-color','#a94442');
         }
         else
         {
@@ -1045,6 +1058,7 @@
             $('<span></span>')
             .attr("class",valid+" right-addon")
             .appendTo(divisionContainer);
+            $('#'+divName+divid).css('border-color','#3c763d');
         }
     }
 

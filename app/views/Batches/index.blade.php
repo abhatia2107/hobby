@@ -73,13 +73,14 @@
 		         	?>
 		         	<li class='batch{{$index}}' id='mybatch' style='display:none' >
 		         		<div class="row">
-		     				<div class="col-md-12 col-xs-12 col-sm-12 column" id="batch_status">
-			     				<span id="batch_status_result{{$aprovedValue}}" class="btn">Batch Status: {{$aprovedStatus[$aprovedValue]}}</span>
-			     				<span class="edit_delete_buttons">
-									<a class="glyphicon glyphicon-edit" title="Edit Details" href="/batches/edit/{{$data->id}}"></a>
-									<a class="glyphicon glyphicon-trash"  title="Delete Batch" href="/batches/disable/{{$data->id}}"></a>
-								</span>
-			     			</div>			     			
+		     				<div class="col-md-8 col-xs-12 col-sm-7" id="batch_status">		
+		     					<div class="col-md-12 col-xs-12 col-sm-8 col-md-offset-3 col-sm-offset-1">     					
+			     				<span id="batch_status_result{{$aprovedValue}}" class="btn" >Batch Status: {{$aprovedStatus[$aprovedValue]}}</span>			     						
+			     				</div>
+			     			</div>
+			     			<div class="col-md-4 col-xs-12 col-sm-5">
+									<span id="tag-icon"><span class="glyphicon glyphicon glyphicon-tags"></span><span class="trail_avail">{{$trial[$data->batch_trial]}}</span></span>	
+							</div>	
 			     		</div>
 			     		<div class="col-md-12 col-xs-12 col-sm-12 column">
 							<div class="row">
@@ -89,9 +90,10 @@
 											<span id="batch_name"><a href="/batches/show/{{$data->id}}">{{$data->batch}} </a></span>
 											<span class="inst_name">{{$data->institute}}</span>
 										</div>
-										<div class="col-md-4 col-xs-12 col-sm-5 column">
-											<span id="tag-icon"><span class="glyphicon glyphicon glyphicon-tags"></span><span class="trail_avail">{{$trial[$data->batch_trial]}}</span></span>	
-										</div>
+										<div class="col-md-4 col-xs-12 col-sm-5 edit_delete_buttons">
+											<a class="glyphicon glyphicon-edit" title="Edit Details" href="/batches/edit/{{$data->id}}"></a>
+											<a class="glyphicon glyphicon-trash"  title="Delete Batch" href="/batches/disable/{{$data->id}}"></a>
+										</div>									
 									</div>
 								</div>
 							</div>
@@ -122,7 +124,7 @@
 										</div>
 										<div class="row" id="price_schedule_container">
 											<div class="col-md-12 col-xs-12 col-sm-12 row" style="margin-top:-10px;">
-											<?php $MyBatchSchedules = $data->schedules;?>;
+											<?php $MyBatchSchedules = $data->schedules;?>
 											@foreach($MyBatchSchedules as $scheduleIndex => $Schedule)
 												<?php
 													$Price = $Schedule->schedule_price;

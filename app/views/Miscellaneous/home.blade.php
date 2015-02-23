@@ -8,7 +8,7 @@
             <h1>{{$homeLang['home_title']}}</h1>
             <h2>{{$homeLang['home_subtitle']}}</h2>
          </div><br>
-         <div  data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">   
+         <div data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">   
             <form action="/filters/search" method="get" role="form">
               <div class="row">
                 <div class="col-md-11 col-sm-12 col-md-offset-1">

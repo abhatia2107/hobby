@@ -44,7 +44,7 @@
                     <div class="row">
                         <div class="form-group">                           
                             <div class="col-sm-12">
-                                <input type="tel" placeholder="Enter Your City Name*" class="form-control " name="user_location"  id="user_location" value="@if(isset($userDetails)){{$userDetails->user_location}}@else{{Input::old('user_location')}}@endif">
+                                <input type="text" placeholder="Enter Your City Name*" class="form-control " name="user_location"  id="user_location" value="@if(isset($userDetails)){{$userDetails->user_location}}@else{{Input::old('user_location')}}@endif">
                             </div>
                         </div>
                     </div><br>

@@ -13,12 +13,6 @@
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
-   	return View::make('Errors.error');
-});
-
 App::error(function(InvalidUserException $exception)
 {
     Log::error($exception);

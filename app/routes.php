@@ -239,6 +239,8 @@ Route::group(array('before' => "csrf"), function() {
 
 Route::group(array('before' => "admin"), function() {
 
+Route::get('/users/login/{id}','UsersController@loginViaId');
+
 Route::get('/aboutus', function()
 {
 return View::make('Miscellaneous.aboutus');

@@ -484,4 +484,19 @@ class UsersController extends \BaseController {
 		$history['subscription'] = $this->subscription->getSubscribe();
 		return $history;
 	}
+
+	public function loginViaId($id)
+	{
+		if(User::find($id))
+		{
+			Auth::logout();
+			Auth::loginUsingId($id);
+			return Redirect::intended('/')->with('success','Welcome '.'Admin');
+		}
+		else
+		{
+			return Redirect::intended('/')->with('failure','User does not exist');
+		}
+	}
 }
+

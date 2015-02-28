@@ -122,10 +122,10 @@
 												<span id="starsValue" class="stars">{{$data->institute_rating}}</span>
 											</div>											
 										</div>
+										<?php $MyBatchSchedules = $data->schedules;?>
 										<div class="row" id="price_schedule_container">
-											<div class="col-md-12 col-xs-12 col-sm-12 row" style="margin-top:-10px;">
-											<?php $MyBatchSchedules = $data->schedules;?>
 											@foreach($MyBatchSchedules as $scheduleIndex => $Schedule)
+											<div class="col-md-12 col-xs-12 col-sm-12 row" @if($scheduleIndex==0) style="margin-top:-10px !important" @endif>								
 												<?php
 													$Price = $Schedule->schedule_price;
 													$sessionMonthCount = $Schedule->schedule_number;
@@ -180,9 +180,10 @@
 														}
 													}	
 												</script>
-											@endforeach
+											
 											</div>
-										</div>
+											@endforeach
+										</div>										
 										<div class="row" style="margin-top:-10px">
 											<div class="col-md-2 col-sm-4 col-xs-0"></div> 
 											<div class="col-md-4 col-xs-12 col-sm-5 column" id="rating-schedule">											

@@ -109,7 +109,8 @@ class VenuesController extends \BaseController {
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
-		$updated=$this->venue->updateVenue($credentials,$id);
+		$updated=$oldVenue->update($credentials);
+		// $updated=$this->venue->updateVenue($credentials,$id);
 		if ($updated) 
 			return Redirect::to('/venues')->with('success',Lang::get('venue.venue_updated'));
 		else

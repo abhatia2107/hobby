@@ -115,7 +115,7 @@ class BatchesController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
 		if($batch) {
-			$user=User::find(Auth::id())->toArray();
+			/*$user=User::find(Auth::id())->toArray();
 			$email=$user['email'];
 			$name=$user['user_first_name'];
 			$subject=Lang::get('batch.batch_create_mail',array("batch"=>$credentials['batch']));
@@ -124,7 +124,7 @@ class BatchesController extends \BaseController {
 			Mail::later(15,'Emails.batch.create', $data, function($message) use ($email,$name,$subject)
 			{
 				$message->to($email,$name)->subject($subject);
-			});
+			});*/
 			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_created'));
 		}
 		else

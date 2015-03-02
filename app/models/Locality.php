@@ -12,7 +12,7 @@ class Locality extends \Eloquent {
 
 	public static $rules = [		
 		'locality_location_id'=>'required|numeric',
-		'locality'=>'required|alpha',
+		'locality'=>'required',
 	];
 
  	public function updateLocality($credentials,$id)

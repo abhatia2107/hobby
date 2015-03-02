@@ -12,7 +12,7 @@ class Subcategory extends \Eloquent {
 
 	public static $rules = [		
 		'subcategory_category_id'=>'required|numeric',
-		'subcategory'=>'required|alpha',
+		'subcategory'=>'required',
 	];
 
  	public function updateSubcategory($credentials,$id)

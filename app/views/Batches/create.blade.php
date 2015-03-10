@@ -28,7 +28,8 @@
 
     .img_requirement { font-size:12px; }
 
-    .form_level { background: #3396d1;height:41px;margin-bottom: 20px;color: white;font-size: 22px;padding: 5px 15px 5px 10px;font-weight: bold; }
+    .form_level { background: #3396d1;height:41px;margin-bottom: 20px;color: white;font-size: 22px;padding: 5px 15px 5px 10px;font-weight: bold;
+                    border-radius: 3px; }
 
     .radio_data {  position:relative;top:1px; }
 
@@ -88,7 +89,7 @@
     <div class="container">
     <form role="form"  name="batchCreateForm" onsubmit="return(validate());" id="classInfo" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" >          
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <div class="create_class"><h1>Create your Class</h1></div>
+        <div class="create_class"><h1>Create Your Class</h1></div>
         <div class="col-md-10 col-md-offset-1">
             <div class="form_level">Class Description</div>
             <div class="row" style="padding:0 20px 0 20px;">
@@ -269,7 +270,7 @@
                         <input type="hidden" name="schedule[{{$j}}][id]" value="{{$scheduleData['id']}}">
                     @endif                          
                     <div class="col-sm-4 col-md-4 form-group">
-                        <select class="form-control" id="schedule_session_month" name="schedule[{{$j}}][schedule_session_month]" required="required">
+                        <select class="form-control" id="schedule_session_month{{$j}}" name="schedule[{{$j}}][schedule_session_month]" required="required">
                             <option value="">Please Select Session/Month*</option>
                             @if(isset($schedule_session_month))                            
                             @foreach ($schedule_session_month as $key => $data)
@@ -288,10 +289,10 @@
                         </select>
                     </div>                                
                     <div class="col-sm-4 col-md-4 form-group">
-                        <input type="text" placeholder="Enter No of Sessions/Months*" class="form-control" id="schedule_number" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" required="required" />
+                        <input type="text" placeholder="Enter No of Sessions/Months*" class="form-control" id="schedule_number{{$j}}" name="schedule[{{$j}}][schedule_number]" value="@if(isset($batchDetails)){{$scheduleData['schedule_number']}}@else{{Input::old('schedule[$j][schedule_number]')}}@endif" required="required" />
                     </div>                
                     <div class="col-sm-4 col-md-4 form-group">
-                        <input type="text" placeholder="Please Enter Price*" class="form-control" id="schedule_price" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif" required="required" />
+                        <input type="text" placeholder="Please Enter Price*" class="form-control" id="schedule_price{{$j}}" name="schedule[{{$j}}][schedule_price]" value="@if(isset($batchDetails)){{$scheduleData['schedule_price']}}@else{{Input::old('schedule[$j][schedule_price]')}}@endif" required="required" />
                     </div>
                 </div>
             </div>
@@ -305,7 +306,7 @@
                             @foreach($weekdays as $data)
                                 <li>
                                     <label>
-                                    <input type="checkbox" name="schedule[{{$j}}][schedule_class][]" value="{{$data}}"
+                                    <input type="checkbox" id="schedule_batch_weekdays{{$j}}" name="schedule[{{$j}}][schedule_class][]" value="{{$data}}"
                                     @if(isset($batchDetails))
                                         @if(in_array($data, $scheduleData['schedule_class']))
                                             {{'checked="checked"'}}
@@ -373,10 +374,10 @@
         </div>
         @endfor
         @endif
-        <div class='addschedule'>
+        <div class='addschedule'  @if(isset($batchDetails)) style="display:none" @endif>
             <button class='btn btn-primary addschedule' id="addschedule-btn" onclick="addSchedule()"> + Add Schedule</button>
         </div><hr/>
-        <div class="btn_save_div" style="margin-top:20px">
+        <div class="btn_save_div" style="margin-top:20px;">
             <button type="submit" id="createBatchButton" class="btn btn-success btn-lg"> @if(isset($batchDetails)) <i class="fa fa-save"></i>  Save @else <i class="fa fa-plus"></i>  Create @endif</button>
             <button type="reset" class="btn btn-warning btn-lg"><i class="fa fa-power-off"></i> Reset</button>
         </div>
@@ -397,7 +398,10 @@
     var allSubcategories = <?php echo json_encode($all_subcategories) ?>;
     var scheduleSessions = ["Session", "Month"];
     var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
+    var batchUpdate = @if(isset($batchDetails)) true @else false @endif;
     var scheduleCount = 1;
+    if(batchUpdate)
+        scheduleCount = {{$j+1}};
     var batchSinglePriceEnable = false;
     var valid = "glyphicon glyphicon-ok"; 
     var invalid = "glyphicon glyphicon-remove";
@@ -740,13 +744,13 @@
                 $('<span></span>')
                 .attr("class",invalid+" right-addon")
                 .appendTo(PriceForSingleClassContainer);
-                $('#batch_single_price').css('border-color','#a94442');
+                $('#batch_single_price').css('border-color','#a94442');                
                 if(!Focus)
                 {
                     $('#batch_single_price').focus();
                     Focus = true;
                 } 
-                Result = false;
+                Result = false;              
             }
         }
         for(var i=0;i<scheduleCount;i++)
@@ -779,14 +783,14 @@
                         .appendTo(scheduleMessageContainer);
                         $('#'+scheduleContainers[filedsIndex]+i).css('border-color','#a94442');
                     }
-                    Result = false;
+                    Result = false;                   
                     if(!Focus)
                     {
                         $('#'+scheduleContainers[filedsIndex]+i).focus();
                         Focus = true;
                     }
                 }
-            }
+            }             
         }
         $('#createBatchButton').attr("disabled", "disabled");
         $('#createBatchButton').removeAttr('disabled');

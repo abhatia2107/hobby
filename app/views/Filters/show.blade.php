@@ -124,7 +124,7 @@
 		var Schedules =@if(isset($Schedules))json_encode( $Schedules ) @else null @endif
 		var trials = {{json_encode( $trial )}}
 		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
-		var daysResult = new Arra@();				
+		var daysResult = new Array();				
 		//alert(Schedules[2][0]['schedule_price']);
 
 		var categoryId = "{{$category_id}}";

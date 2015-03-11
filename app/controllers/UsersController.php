@@ -174,7 +174,8 @@ class UsersController extends \BaseController {
 
 	public function getLogin()
 	{
-		return View::make('Users.login');
+		$loginPage = true;
+		return View::make('Users.login',compact('loginPage'));
 	}
 
 	/**

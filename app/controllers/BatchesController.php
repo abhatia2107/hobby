@@ -147,7 +147,7 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		dd($batchDetails);
+		//dd($batchDetails);
 		if(!is_null($batchDetails))
 		{
 			$institute_id=$batchDetails[0]->batch_institute_id;
@@ -359,5 +359,12 @@ class BatchesController extends \BaseController {
 	public function increment($id)
 	{
         Batch::where('batches.id','=',$id)->increment('batch_view');
+	}
+	public function order($id)
+	{
+		$user_id=Auth::id();
+		$batchDetails=$this->batch->getBatchesForUser($user_id);
+		$institute_id=$this->institute->getInstituteforUser($user_id);
+		return View::make('Batches.order',compact('batchDetails','institute_id'));
 	}
 }

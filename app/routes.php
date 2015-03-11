@@ -62,6 +62,7 @@ Route::group(array('before' => "auth|admin"), function() {
 Route::group(array('before' => "admin"), function() {
 	Route::get('/batches/increment/{id}','BatchesController@increment');
 	Route::get('/batches/show/{id}','BatchesController@show');
+	Route::get('/batches/order/{id}','BatchesController@order');
 });
 
 //Route for CategoriesController

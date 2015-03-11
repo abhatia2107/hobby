@@ -3,8 +3,12 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery.richtextarea.css" />
 @stop
 @section('content')
-	@include('Templates.navbarVendor')
+<div class="home_vendor_page">
+  @include('Templates.navbarVendor')
+  <div class="container">
     @include('Modals.venue')
+   </div>
+</div>
 @stop
 @section('pagejavascript')
     <script type="text/javascript"  src="/assets/js/moment-2.8.4.min.js"></script>

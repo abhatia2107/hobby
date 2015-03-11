@@ -3,7 +3,7 @@
     <div class="modal-content">
         <form name="login" class="login" id="loginForm" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
             <div class="modal-header">
-                <div type="button" class="close" title="Close"  data-dismiss="modal">
+                <div type="button" class="close" title="Close"  data-dismiss="modal" @if(isset($loginPage)) style="display:none" @endif>
                     <span onClick="refreshForm('#loginForm')" aria-hidden="true">&times;</span>
                 </div>
                 <h3 class="modal-title" id="myModalLabel2">LogIn</h3>

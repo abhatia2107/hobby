@@ -312,15 +312,15 @@ span.stars span {  background-position: 0 0; }
 
 
 /*vendor page style sheet */
-.home_vendor_page {
+.home_vendor_page {/*#f0f0f0*/
   width: 100%;background: url(/assets/images/sb.png);font-family: "Times New Roman", Times, serif;padding-top: 50px;
-  padding-bottom: 40px;color: #333;
+  padding-bottom: 40px;color: #333; 
  
 }
 
 .vendor_institute_details {
-  background-color: #ffffff;-moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);border-radius: 5px;padding: 10px 20px 20px 20px;
+  background-color: #ffffff;-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+  -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);padding: 10px 20px 20px 20px;border:1px solid lightgray;
 }
 
 .vendor_venue_list {
@@ -337,8 +337,8 @@ span.stars span {  background-position: 0 0; }
 #institute_details_box {  padding-top: 25px; }
 
 .vendor_institute_batches {
-  margin-top: 30px;background-color: white;box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);-moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);border-radius: 5px;
+  margin-top: 30px;background: white;box-shadow: inset 0 0 2px rgba(0,0,0,.3);-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+  -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);border:1px solid #e8e8e8;
 }
 
 #vendor_institute_batches {  padding-bottom: 50px; }
@@ -485,9 +485,36 @@ span.stars span {  background-position: 0 0; }
 #batch_status .btn {  font-size: 18px !important; }
 
 #batch_status_result0, #batch_status_result1 {
- padding: 5px 9px 6px 9px;background-color: #3aa54c;border-radius: 5px;font-weight: bold;color: white;min-width: 210px;
+ padding: 2px 1px 3px 1px;background-color: #3aa54c;border-radius: 0px;font-weight: bold;color: white;min-width: 200px;
 }
 
 #batch_status_result0 { background-color: #FF6600 !important; }
 
 .trail_avail {  font-weight: normal; }
+
+
+
+/* Order Page */
+
+.batchOrderTitleBar {
+  background-color: #3396D1;height: 40px;padding: 4px 0px 4px 15px;font-size:22px;color:white;text-align: left;
+  font-weight: bold;margin-bottom: 15px;
+}
+
+.batchOrderTitles {  font-size: 18px;text-align: center;margin-bottom: -10px; }
+
+.batchOrderSummery {  padding: 1px;margin-bottom: 50px; }
+
+.batchOrderDetails { font-size: 14px;text-align: center;margin-bottom: -05px;}
+
+.batchOrderFinalDetails {font-size: 18px;text-align: center;margin-top: -5px;margin-bottom: 20px;font-weight: bold;}
+
+.batchOrderFinalDetails1 { margin-top: 8px;}
+
+.payNowButton {
+    background-color: #3aa54c;margin-left: 10px;float: left;font-size: 18px;color: white;height: 35px;padding: 4px;margin-top: 5px;
+}
+
+.batchOrderButtons { overflow: hidden;}
+
+

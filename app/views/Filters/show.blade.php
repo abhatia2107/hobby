@@ -110,23 +110,17 @@
 		</div>
 	</div>
 </div>
-@foreach ($batchesForCategoryLocation as $index => $batchesData)
-	@if(isset($batchesData->schedules))
-		{{$Schedules[$index] = $batchesData->schedules}}
-	@else
-		{{$Schedules[$index] = null}}
-	@endif
+@foreach ($batchesForCategoryLocation as $index => $batchesData)	
+		<?php $Schedules[$index] = $batchesData->schedules ?>
 @endforeach
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
-		var result = {{json_encode( $batchesForCategoryLocation ) }}
-		var Schedules =@if(isset($Schedules))json_encode( $Schedules ) @else null @endif
-		var trials = {{json_encode( $trial )}}
+		var result = {{json_encode( $batchesForCategoryLocation ) }};  
+		var Schedules = {{json_encode( $Schedules ) }};
+		var trials = {{json_encode( $trial )}};
 		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
-		var daysResult = new Array();				
-		//alert(Schedules[2][0]['schedule_price']);
-
+		var daysResult = new Array();			
 		var categoryId = "{{$category_id}}";
 		var locationId = "{{$location_id}}";
 		var range = 10;
@@ -152,7 +146,6 @@
 				var dayID = "schedule_class_on_"+weekDays[day];
 				daysResult[day] = Schedule[dayID];
 			}
-			//alert(Schedule['schedule_price']);
 			var PriceScheduleContainer = $('.batch'+batchIndex+' #price_schedule_container'),baseUrl;
 			var DayCode = ["","M", "T", "W","T","F","S","S"];
 			var Price = Schedule['schedule_price'];
@@ -301,7 +294,6 @@
 			var linksContainer = $('#filter_data'),baseUrl;
 			for (var index=start; index<results.length; index++)
 			{
-				//alert(results.length);
 			   	var institute = results[index]['institute'];
 			   	var institute_id =  results[index]['batch_institute_id'];
 			   	var institute_photo_path = '/assets/images/institute/institute.gif';
@@ -322,7 +314,7 @@
 				var contact = results[index]['venue_contact_no'];
 				var trialID = results[index]['batch_trial'];
 				var institute_rating = results[index]['institute_rating'];
-				var venue_email = results[index]['venue_email'];
+				var venue_email = results[index]['venue_email'];				
 				$("<li style='display:none'></li>")
 				.attr("subcategory",subcategoryID)
 				.attr("locality",localityID)
@@ -557,12 +549,13 @@
 						)
 					)
 				)
-				.appendTo(linksContainer);								
+				.appendTo(linksContainer);
 				for(var I=0; I<Schedules[index].length && I<2; I++)
 				{
+					
 					var Schedule = Schedules[index][I];
 					multiScheduleAdder(index,I,Schedule);
-				}
+				}				
 				if(Schedules[index].length>2)						
 				{
 					var ScheduleContainer = $(".batch"+index+" #price_schedule1 #scheduleWeekDays");

@@ -17,10 +17,10 @@
          <div class="menu-need-help-menu-container">
             <ul id="menu-need-help-menu" class="menu">                                 
                <li><span class="glyphicon glyphicon-dashboard"></span><a href="/feedbacks/create">Feedback</a></li>
-               <li><span class="glyphicon glyphicon-list-alt"></span><a href-link="/terms">Terms Of Use</a></li>
-               <li><span class="glyphicon glyphicon-question-sign"></span><a href-link="/aboutus">About Hobbyix</a></li>
-               <li><span class="glyphicon glyphicon-globe"></span><a href-link="/blog">Hobbyix Blog</a></li>
-               <li><span class="glyphicon glyphicon-user"></span><a href-link="/careers">Careers</a></li>                           
+               <li><span class="glyphicon glyphicon-list-alt"></span><a href="/terms">Terms Of Use</a></li>
+                <li><span class="glyphicon glyphicon-user"></span><a href="/privacy">Privacy Policy</a></li>
+                <li><span class="glyphicon glyphicon-question-sign"></span><a href-link="/aboutus">About Hobbyix</a></li>
+                <li><span class="glyphicon glyphicon-globe"></span><a href-link="/blog">Hobbyix Blog</a></li>
             </ul>
          </div>
       </div>

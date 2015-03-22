@@ -1,15 +1,12 @@
 @extends('Layouts.layout')
 @section('pagestylesheet')
   <style type="text/css">
-    #page
+     #page
     {
       width: 100%;
       margin-top: -20px;
 
     }
-  </style>
-  <style type="text/css">
-
     #sample-institute-name
     {
       font-size: 40px;
@@ -42,7 +39,6 @@
     {
       font-size: 30px;
       font-weight: normal; 
-
       -webkit-box-shadow: 0px 3px 0px -2px #0099FF;
       box-shadow: 0px 3px 0px -2px #0099FF;
       text-align: center;
@@ -60,10 +56,8 @@
     {
       font-size: 20px;
       padding:20px 60px 20px 60px;
-
       margin-bottom: 50px;
-          padding-bottom: 50px;
-
+      padding-bottom: 50px;
     }
 
     #comments
@@ -92,7 +86,6 @@
       margin-top: 30px;
       box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
       -webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
-      border-radius: 7px;
     }
     .sample-box-small
     {
@@ -101,7 +94,6 @@
       padding:20px 30px 40px 30px;
       box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
       -webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
-      border-radius: 7px;
     }
 
     #pin-icon
@@ -186,6 +178,23 @@
   {
     margin-top: 15px;
   }
+  .batchOrderField
+  {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+  #batchOrderSample select
+  {
+    height: 25px;
+    padding: 0px 0px 0px 5px;
+    width: 75%;
+  }
+  #batchOrderSample input
+  {
+    height: 25px;
+    padding: 0px 0px 0px 5px;
+    width: 75%;
+  }
 
 
 
@@ -200,6 +209,7 @@
     $instituteID = $data->batch_institute_id;
     $batchName = $data->batch;
     $category = $data->category;
+    $sessionPrice = $data->batch_single_price;
     $subcategory = $data->subcategory;
     $ageGroup = $data->batch_age_group;
     $genderGroup = $data->batch_gender_group;
@@ -294,6 +304,43 @@
     </div>
    
     <div class='col-md-4 col-sm-12 col-xs-12 column'>
+      <div class="sample-box-small" id='batchOrderSample'>
+        <div id='sample-batch-name'>Book This Class</div>
+        <form role="form"  name="batchOrderForm" id="batchOrderForm" action="" > 
+        <div class="row batchOrderField">
+          <div class='col-md-5 col-sm-12 col-xs-12 column'>Price Per Session</div>
+          <div class='col-md-5 col-sm-12 col-xs-12 column'>: Rs. {{$sessionPrice}}</div>
+        </div>
+        <div class="row batchOrderField">
+          <div class='col-md-5 col-sm-12 col-xs-12'>No. of Sessions</div>
+          <div class='col-md-5 col-sm-12 col-xs-12'>  
+              <select class="form-control" id="numberOfSessions" name="numberOfSessions" required>                 
+                  @for($seesion=1;$seesion<=6;$seesion++)
+                      <option value={{$seesion}}>{{$seesion}}</option>
+                  @endfor
+              </select>          
+          </div>
+        </div>
+        <div class="row batchOrderField">
+          <div class='col-md-5 col-sm-12 col-xs-12'>Booking Date</div>
+          <div class='col-md-5 col-sm-12 col-xs-12'>
+                <input type="text" placeholder="Select Date" class="form-control" id="datepicker" name="bookingDate" required />                     
+          </div>          
+        </div>
+        <div class="row batchOrderField">
+          <div class='col-md-5 col-sm-12 col-xs-12'>Subtotal</div>
+          <div class='col-md-5 col-sm-12 col-xs-12' id="orderSubtotal">: Rs. {{$sessionPrice}}</div>
+        </div>
+        <hr/>
+        <div class="row totalAmount">
+          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}<span></div>
+        </div>
+        <div class="row batchOrderField batchOrderButtons">    
+          <a href=""><div class="col-md-4 col-sm-12 col-xs-12 payNowButton ">Pay Now</div></a>
+          <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a>
+        </div>
+        </form>        
+      </div>
       <div class="sample-box-small" id='institute-details'>
          <div id='sample-batch-name'>Institute Details</div>
          <span id='sample-details' class="details-container">{{$instituteDetails}}</span>    
@@ -307,33 +354,27 @@
           <a href="http://linkedin.com/Astoundify" class="sample-social-linkedin"><img src="/assets/images/sample/linkedin.jpg"></a></center> -->
           </div>
       </div>
-      <div id='sample-demo-model'  class="sample-box-small">
+      <div id='sample-demo-model'  class="sample-box-small" style="display:none">
         <div id='sample-batch-name'>Gallery</div>     
         <ul class="listify-gallery-images">
           <li class="gallery-preview-image" >
-             <a data-toggle="modal" data-target="#myModal">
-               
-             </a>
+             <a data-toggle="modal" data-target="#myModal"> </a>
           </li>
           <li class="gallery-preview-image" >
-             <a data-toggle="modal" data-target="#myModal">
-               
-             </a>
+             <a data-toggle="modal" data-target="#myModal"> </a>
           </li>
           <li class="gallery-preview-image" >
-             <a data-toggle="modal" data-target="#myModal">
-                
-             </a>
+             <a data-toggle="modal" data-target="#myModal"> </a>
           </li>
         </ul>              
       </div>
     </div>
-     <div class="col-md-1 column"></div>
   </div>
   </div>
 </div>
 @stop
 @section('pagejquery')
+<script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () 
   {
@@ -348,15 +389,30 @@
           $('#loginModal').modal('show') ;
         }
       });
-  });
-  $(function() {
-    $('#SubmitReviewButton').bind('click', function(event) {
-      var height = $("#ReviewForm").position().top + 200;
-      $('html, body').stop().animate({
-       scrollTop : height
-      }, 1000, 'easeInOutSine');
-      event.preventDefault();
-    });
+      $('#numberOfSessions').change(function () 
+      {
+          var sessionsCount = $(this).val(); 
+          var sessionPrice = {{$sessionPrice}};
+          var subtotal = sessionPrice*sessionsCount;
+          $('#orderSubtotal').empty();  
+          $('#orderSubtotal').append(": Rs. "+subtotal);
+          $('#orderTotal').empty();  
+          $('#orderTotal').append(": Rs. "+subtotal);          
+      });
+      $('#SubmitReviewButton').bind('click', function(event) 
+      {
+        var height = $("#ReviewForm").position().top + 200;
+        $('html, body').stop().animate({
+         scrollTop : height
+        }, 1000, 'easeInOutSine');
+        event.preventDefault();
+      });
+      $("#datepicker").datepicker({
+      /*showOn: 'both',
+      buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+            buttonText: "Choose Date",*/
+            dateFormat: 'yy-mm-dd'         
+      });
   });
 </script>
 @stop

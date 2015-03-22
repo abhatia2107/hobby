@@ -603,13 +603,13 @@
         $('#addschedule-btn').click(function(e){
             e.preventDefault();
             e.stopPropagation();
-        })
+        });
         $('#batch_category_id').change(function () 
         {
             var categoryID = $(this).val();            
             $('#batch_subcategory_id').empty();  
             filterSubcategories(categoryID);            
-        })
+        });
         navActive('navbar-vendor-createBatch');
         $("#session1").change(function(e){
             if($("#session1").val()==1)

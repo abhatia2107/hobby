@@ -98,7 +98,7 @@ class LocalitiesController extends \BaseController {
 			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_already_failed'));
 	}
 
-		// TO DO: Sublocality table should also be affected by this.
+		// TO DO: locality table should also be affected by this.
 	public function enable($id)
 	{
 		$locality=Locality::withTrashed()->find($id);

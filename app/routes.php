@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', 'HomeController@showWelcome');
 
 //To allow access only to admin.
@@ -188,6 +189,9 @@ Route::post('/venues/update/{id}','VenuesController@update');
 Route::get('/venues/delete/{id}','VenuesController@destroy');
 });
 
+//Route for PromosController
+Route::resource('promos', 'PromosController');
+Route::get('promos/isvalid/{promocode}','PromosController@isValid');
 
 //Route for UsersController
 
@@ -270,3 +274,5 @@ Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{cat
 Route::get('/filters/search','FiltersController@search');
 
 });
+
+Route::get('/users/account/{id}','UsersController@account');

@@ -264,7 +264,22 @@ class UsersController extends \BaseController {
 	public function postSignUp()
 	{
 		$newUserData=Input::all();
-        /*dd($newUserData);*/
+//        dd($newUserData);
+		if(isset($newUserData['user_referee_code']))
+		{
+			$referee=User::where('user_referral_code','=',$newUserData['user_referee_code'])->first();
+//			dd($referee);
+			if(empty($referee))
+			{
+				return Redirect::to('/users/signup')->with('failure',Lang::get('user.user_referral_error'))->withInput(Input::except('password'));
+			}
+            else
+            {
+                $newUserData['user_referee_id']=$referee->id;
+                $newUserData['user_classes_left']=3;
+            }
+		}
+		unset($newUserData['user_referee_code']);
         $validator=Validator::make($newUserData,User::$rules);
 		if($validator->fails())
 		{
@@ -279,35 +294,92 @@ class UsersController extends \BaseController {
 			{
 			    $newUserData['password'] = Hash::make($password);
 			}
-			$newUserData['user_confirmation_code']=$confirmationCode;
+			if($newUserData['user_fb_id'])
+            {
+                $newUserData['user_confirmed']=true;
+            }
+            else
+            {
+                $newUserData['user_confirmation_code']=$confirmationCode;
+            }
 			$newUserData['user_subscription_token']=true;
-			$email=$newUserData['email'];
-			$name=$newUserData['user_first_name'];
+			$newUserData['user_referral_code']=$this->makeReferralCode();
 			$this->user->create($newUserData);
 			$userId=$this->user->max('id');
-			/**
-			 * $data contains the name of the user reggistered and the confirmation code in the form
-			 * of array which will be used to confirm the email.
-			 * 
-			 */
-			$data=[
-			'name'=>$newUserData['user_first_name'],
-			'confirmationcode'=>$confirmationCode,
-			'userId'=>$userId,
-			];
-			/*Confirmation mail is to be send to the newly registerd user*/
-			$subject=Lang::get('user.user_signup_mail_subject');
-			Mail::later(15,'Emails.welcome', $data, function($message) use ($email,$name,$subject)
-			{
-				$message->to($email,$name)->subject($subject);
-			});
-			return Redirect::to('/')->with('success',Lang::get('user.user_signup_success'));
-		}	
+            if(isset($referee))
+            {
+                $referee->user_pending_referral++;
+                $referee->save();
+                $email = $referee->email;
+                $name = $referee->user_first_name.' '.$referee->user_last_name;
+                $data = [
+                    'friend_name' => $newUserData['user_first_name'],
+                    'friend_email' => $newUserData['email'],
+                    'referee' => $referee,
+                ];
+                /*Confirmation mail is to be send to the user for pending referral*/
+                $subject = Lang::get('user.user_pending_referral_subject',array("name"=>$newUserData['user_first_name']));
+                Mail::later(15, 'Emails.user.pending_referral', $data, function ($message) use ($email, $name, $subject) {
+                    $message->to($email, $name)->subject($subject);
+                });
+            }
+
+            if($newUserData['user_fb_id'])
+            {
+                $id=$this->user->getUid($newUserData['user_fb_id']);
+                Auth::loginUsingId($id);
+                return Redirect::to('/')->with('success','Welcome '.$newUserData['user_first_name'].' '.$newUserData['user_last_name']);
+            }
+            else {
+                /**
+                 * $data contains the name of the user registered and the confirmation code in the form
+                 * of array which will be used to confirm the email.
+                 *
+                 */
+                $email=$newUserData['email'];
+                $name=$newUserData['user_first_name'];
+                $data = [
+                    'name' => $newUserData['user_first_name'],
+                    'confirmationcode' => $confirmationCode,
+                    'userId' => $userId,
+                ];
+                /*Confirmation mail is to be send to the newly registered user*/
+                $subject = Lang::get('user.user_signup_mail_subject');
+                Mail::later(15, 'Emails.user.welcome', $data, function ($message) use ($email, $name, $subject) {
+                    $message->to($email, $name)->subject($subject);
+                });
+                return Redirect::to('/')->with('success', Lang::get('user.user_signup_success'));
+            }
+		}
 	}
+
+    public function account($id){
+
+    }
+
+	public function makeReferralCode($length = 6){
+        $password = "";
+        $possible = "0123456789abcdfghjkmnpqrstvwxyz";
+        $i = 0;
+        while ($i < $length) {
+            $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
+            if (!strstr($password, $char)) {
+                $password .= $char;
+                $i++;
+            }
+        }
+        $user_referral=User::where('user_referral_code','=',$password)->get()->toArray();
+		if(empty($user_referral))
+		{
+	        return $password;
+		}
+		else
+			$this->makeReferralCode();
+    }
 	/**
 	*Function to verify the email of the newly registered user. 
 	*
-	*@param userId and confirmation code; 
+	*@param integer userId and string confirmation code;
 	*@return Route to login
 	*/
 	public function getEmailVerify($userId,$confirmationCode)
@@ -327,7 +399,7 @@ class UsersController extends \BaseController {
 				$validate->user_confirmation_code="";
 				$validate->save();
 				Auth::loginUsingId($userId);
-				return Redirect::to('/')->with('success',Lang::get('user.welcome',array("name"=>$validate->user_first_name)));
+				return Redirect::to('/')->with('success',Lang::get('user.welcome_verify',array("name"=>$validate->user_first_name)));
 			}
 			else
 			{
@@ -439,7 +511,13 @@ class UsersController extends \BaseController {
 	    		}
 	    		else
 	    		{
-	    			User::create($profileData);
+	    			// Redirect::to('/');
+	    			$userDetails=new User($profileData);
+//                    return $userDetails->email;
+//                    return Redirect::to('/signup/fb/')->with($userDetails);
+//	    			return View::make('Modals.signup2',compact('userDetails'));
+	    			return View::make('Users.signup', compact('userDetails'));
+//	    			User::create($profileData);
 	    		}
 	    		try {
 				    $response = (new FacebookRequest(
@@ -474,7 +552,6 @@ class UsersController extends \BaseController {
     	}
 	}
 
-
 	public function history()
 	{
 		$date=Carbon::now()->subDay();
@@ -491,7 +568,7 @@ class UsersController extends \BaseController {
 		{
 			Auth::logout();
 			Auth::loginUsingId($id);
-			return Redirect::intended('/')->with('success','Welcome '.'Admin');
+            return Redirect::intended('/')->with('success','Welcome '.'Admin');
 		}
 		else
 		{

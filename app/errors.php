@@ -13,6 +13,7 @@
 |
 */
 
+
 App::error(function(InvalidUserException $exception)
 {
     Log::error($exception);

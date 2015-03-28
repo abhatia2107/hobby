@@ -313,9 +313,8 @@ class UsersController extends \BaseController {
                 $email = $referee->email;
                 $name = $referee->user_first_name.' '.$referee->user_last_name;
                 $data = [
+                    'name'=>$name,
                     'friend_name' => $newUserData['user_first_name'],
-                    'friend_email' => $newUserData['email'],
-                    'referee' => $referee,
                 ];
                 /*Confirmation mail is to be send to the user for pending referral*/
                 $subject = Lang::get('user.user_pending_referral_subject',array("name"=>$newUserData['user_first_name']));

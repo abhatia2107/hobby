@@ -14,18 +14,11 @@
             Dear {{ $name}},
         </h1>
         <p style="font-size:120%; color:#000;">
-            We're ready to activate your account. All we need to do is make sure this is your email address.
+            {{$friend_name}} has accepted your invitation and joined Hobbyix. 1 class will be credited to your account when your friend books the first class.
         </p>
         <div style="text-align:center;">
-            <a href="{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}">
-                <button type="button" style="color: #fff; background-color: #5cb85c;border-color: #4cae4c;color: #fff;background-color: #449d44;border-color: #398439;background-color: #5cb85c;padding: 10px 16px;font-size: 18px;line-height: 1.33;border-radius: 6px; ">
-                    VERIFY ADDRESS
-                </button>
-            </a>
+            Spread the love and earn more Hobbyix credit.
         </div>
-        <p style="font-size:85%; color:#444;">
-            Having Troubles? Copy this url to your browser:<a href="{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}">{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}</a>
-        </p>
         <p style="font-size:85%; color:#444;">
             For any queries, reach out to us at: <a href="mailto:support@hobbyix.com">support@hobbyix.com</a>
         </p>

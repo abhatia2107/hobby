@@ -57,47 +57,50 @@
 			<div class="row clearfix">
 				<!--Start of filter division -->
 				<div class="col-md-3 col-xs-12 col-sm-3 column" style="margin-top:-15px">
-					<span id='filter-tittle-name'>Filter By</span>
-					<div id="browse-filter" class="filter-option-1">	
-						<h4>Sub Categories</h4> 
-						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 	
-							@foreach ($subcategoriesForCategory as $subcategoryData)
-								<?php
-									$subcategory = $subcategoryData->subcategory;
-									$sub_id = $subcategoryData->id;
-								?>				
-								<li subcategory="{{$sub_id}}" >								
-								 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$subcategory}}</span></label>
-								</li>
-							 @endforeach
-						 </ul> 
-						 <hr>
+					<!--<span id='filter-tittle-name'>Filter By</span>-->
+					<div id="browse-filter" class="filter-option-1 filterOption">	
+						<div class="filterTitle">Sub Categories</div>
+						<div class="filterOptionsList">
+							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 	
+								@foreach ($subcategoriesForCategory as $subcategoryData)
+									<?php
+										$subcategory = $subcategoryData->subcategory;
+										$sub_id = $subcategoryData->id;
+									?>				
+									<li subcategory="{{$sub_id}}" >								
+									 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$subcategory}}</span></label>
+									</li>
+								 @endforeach
+							 </ul>
+						</div>
 					</div>			
-					<div id="browse-filter" class="filter-option-2">	
-						<h4>Locality</h4> 
-						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
-							@foreach ($localitiesForLocation as $localityData)
-								<?php 
-									$locality = $localityData->locality;
-									$loc_id = $localityData->id;
-								?>
-								<li subcategory="{{$loc_id}}" >								
-								 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$locality}}</span></label>
-								</li> 
-							@endforeach
-						 </ul>
-						 <hr>
+					<div id="browse-filter" class="filter-option-2 filterOption">	
+						<div class="filterTitle">Locality</div> 
+						<div class="filterOptionsList">
+							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+								@foreach ($localitiesForLocation as $localityData)
+									<?php 
+										$locality = $localityData->locality;
+										$loc_id = $localityData->id;
+									?>
+									<li subcategory="{{$loc_id}}" >								
+									 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$locality}}</span></label>
+									</li> 
+								@endforeach
+							 </ul>
+							</div>
 					</div>
-					<div id="browse-filter" class="filter-option-3">	
-						<h4>Trial Available</h4> 
-						<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
-						@foreach ($trial as $index => $trialValue)
-							<li trial="{{$index}}" >								
-							 	 <label class="sub"><input autocomplete="off" style="" value="{{$index}}" type="checkbox" class="trialCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$trialValue}}</span></label>
-							</li> 
-						@endforeach
-						 </ul> 
-						 <hr>
+					<div id="browse-filter" class="filter-option-3 filterOption">	
+						<div class="filterTitle">Trial Available</div> 
+						<div class="filterOptionsList">
+							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+							@foreach ($trial as $index => $trialValue)
+								<li trial="{{$index}}" > 
+								 	 <label class="sub"><input autocomplete="off" style="" value="{{$index}}" type="checkbox" class="trialCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$trialValue}}</span></label>
+								</li>						
+							@endforeach
+							 </ul>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-9 col-xs-11 col-sm-9 column results-container" >
@@ -110,23 +113,17 @@
 		</div>
 	</div>
 </div>
-@foreach ($batchesForCategoryLocation as $index => $batchesData)
-	@if(isset($batchesData->schedules))
-		{{$Schedules[$index] = $batchesData->schedules}}
-	@else
-		{{$Schedules[$index] = null}}
-	@endif
+@foreach ($batchesForCategoryLocation as $index => $batchesData)	
+		<?php $Schedules[$index] = $batchesData->schedules ?>
 @endforeach
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
-		var result = {{json_encode( $batchesForCategoryLocation ) }}
-		var Schedules =@if(isset($Schedules))json_encode( $Schedules ) @else null @endif
-		var trials = {{json_encode( $trial )}}
+		var result = {{json_encode( $batchesForCategoryLocation ) }};  
+		var Schedules = {{json_encode( $Schedules ) }};
+		var trials = {{json_encode( $trial )}};
 		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
-		var daysResult = new Arra@();				
-		//alert(Schedules[2][0]['schedule_price']);
-
+		var daysResult = new Array();			
 		var categoryId = "{{$category_id}}";
 		var locationId = "{{$location_id}}";
 		var range = 10;
@@ -145,14 +142,13 @@
 			$('#loadMore').css('display','none');
 			$('#noResults').css('display','block');
 		}
-		function multiScheduleAdder(batchIndex,scheduleIndex,Schedule)
+		/*function multiScheduleAdder(batchIndex,scheduleIndex,Schedule)
 		{
 			for(var day = 0;day<7;day++)
 			{
 				var dayID = "schedule_class_on_"+weekDays[day];
 				daysResult[day] = Schedule[dayID];
 			}
-			//alert(Schedule['schedule_price']);
 			var PriceScheduleContainer = $('.batch'+batchIndex+' #price_schedule_container'),baseUrl;
 			var DayCode = ["","M", "T", "W","T","F","S","S"];
 			var Price = Schedule['schedule_price'];
@@ -242,8 +238,7 @@
 					$(".batch"+batchIndex+" #price_schedule"+scheduleIndex+" #scheduleWeekDays"+" #day"+(day+1)).css('opacity','1');
 				}
 			}
-
-		}
+		}*/
 		function LoadResult(start,end)
 		{
 			var index = 0;
@@ -276,6 +271,7 @@
 			{
 				chunk++;
 				loadFilters = true;	
+				//alert(response);
 				if(response == "Empty")
 				{
 					$('#loadMore').hide();
@@ -301,7 +297,6 @@
 			var linksContainer = $('#filter_data'),baseUrl;
 			for (var index=start; index<results.length; index++)
 			{
-				//alert(results.length);
 			   	var institute = results[index]['institute'];
 			   	var institute_id =  results[index]['batch_institute_id'];
 			   	var institute_photo_path = '/assets/images/institute/institute.gif';
@@ -322,7 +317,7 @@
 				var contact = results[index]['venue_contact_no'];
 				var trialID = results[index]['batch_trial'];
 				var institute_rating = results[index]['institute_rating'];
-				var venue_email = results[index]['venue_email'];
+				var venue_email = results[index]['venue_email'];				
 				$("<li style='display:none'></li>")
 				.attr("subcategory",subcategoryID)
 				.attr("locality",localityID)
@@ -369,6 +364,37 @@
 								.append
 								(
 									$("<div></div>")
+									.attr("class","col-md-4 col-xs-12 col-sm-3 column")
+									.attr("id","rating-schedule")								
+									.append
+									(
+										$("<div></div>")
+										.attr("class","col-md-12")
+										.attr("id","ratingCircle")		
+										.append
+										(
+											$("<div></div>")
+											.attr("class","inscore col-md-8 col-xs-12 col-sm-3 column")									
+											.append
+											(
+												$("<div></div>")										
+												.attr("id","rating-value")
+											)
+											.text(institute_rating)
+										)
+										.append
+										(
+											$("<span></span>")
+											.attr("class","stars")
+											.attr("id","starsValue")
+											.text(institute_rating)	
+										)
+																													
+									)
+								)
+								/*.append
+								(
+									$("<div></div>")
 									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
 									.append
 									(
@@ -385,7 +411,7 @@
 											.text(trials[trialID])
 										)																	
 									)
-								)
+								)*/
 							)
 						)
 					)
@@ -469,7 +495,7 @@
 										.text(" Send Message")
 									)
 								)
-								.append
+								/*.append
 								(
 									$("<div></div>")
 									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
@@ -479,12 +505,12 @@
 										$("<span></span>")
 										.text("₹"+price+" / Session")								
 									)
-								)
+								)*/
 								.append
 								(
 									$("<div></div>")
 									.attr("class","col-md-12 col-xs-12 col-sm-12 column")
-									.append
+									/*.append
 									(
 										$("<div></div>")
 										.attr("id","inst_type")
@@ -499,26 +525,37 @@
 											$("<span></span>")											
 											.text("Type: "+subcategory+", "+category+".")
 										)
-									)
+									)*/
 									.append
 									(
 										$("<div></div>")
-										.attr("id","inst_price")
+										.attr("id","inst_type")
 										.append
 										(
 											$("<span></span>")
 											.attr("id","hand-icon")
-											.text("☛")
+											.attr("class","glyphicon glyphicon-map-marker")
 										)
 										.append
 										(
 											$("<span></span>")											
-											.text("Address: "+locality+", "+location_name)
+											.text(locality+", "+location_name)
 										)
 									)
 								)
 							)
 							.append
+							(
+									$("<div></div>")
+									.attr("class","col-md-5 col-xs-12 col-sm-3 column")
+									.attr("class","singleSessionPrice")								
+									.append
+									(
+										$("<div></div>")
+										.text("₹"+price+" / Session"+" (or Members: 1 credit)")
+									)
+							)
+							/*.append
 							(
 								$("<div></div>")
 								.attr("class","col-md-5 col-xs-12 col-sm-3 column")
@@ -544,10 +581,9 @@
 										.attr("class","stars")
 										.attr("id","starsValue")
 										.text(institute_rating)	
-									)
-																												
+									)																										
 								)
-							)							
+							)*/							
 							.append
 							(
 								$("<div></div>")
@@ -557,12 +593,13 @@
 						)
 					)
 				)
-				.appendTo(linksContainer);								
-				for(var I=0; I<Schedules[index].length && I<2; I++)
+				.appendTo(linksContainer);
+				/*for(var I=0; I<Schedules[index].length && I<2; I++)
 				{
+					
 					var Schedule = Schedules[index][I];
 					multiScheduleAdder(index,I,Schedule);
-				}
+				}				
 				if(Schedules[index].length>2)						
 				{
 					var ScheduleContainer = $(".batch"+index+" #price_schedule1 #scheduleWeekDays");
@@ -573,7 +610,7 @@
 					.prop("href","/batches/show/"+batchID)
 					.appendTo(ScheduleContainer);
 					//moreScheduleButton();
-				}
+				}*/
 		    }
 		  	$('span.stars').stars();
 		}
@@ -595,7 +632,7 @@
 			window.onscroll = function(ev)
 			{
 				var height = $(document).height();  
-	            if($(window).scrollTop() + $(window).height() > height-100) 
+	            if($(window).scrollTop() + $(window).height() > height-250) 
 				{
 					resultRange = result.length;
 					if(range>=resultRange)
@@ -604,6 +641,7 @@
 						{
 							$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 							{
+								//alert(response);
 								if(response == "Empty")
 								{
 									$('#loadMore').css('display','none');

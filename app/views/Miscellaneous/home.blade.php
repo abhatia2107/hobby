@@ -75,7 +75,7 @@
       @endif   
    </div>
 </div>
-<div id="batch_recent_listings" class="batch_recent_listings">
+<div id="batch_recent_listings" class="batch_recent_listings" @if(!isset($featuredBatches)) style="display:none" @endif>
    <h1>{{$homeLang['home_featured_title']}}</h1>
    <h2>{{$homeLang['home_featured_subtitle']}}</h2><br>
    <div class="recent_listings container">

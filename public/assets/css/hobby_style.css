@@ -1,8 +1,10 @@
 html  { overflow-x: hidden; }
 
+body { -webkit-text-size-adjust: none; }
+
 .modal-open{  padding-right: 0px !important; }
 
-body { overflow-x: hidden;font-family: "Times New Roman", Times, serif;margin: 0 0;  }
+body { overflow-x: hidden;font-family: "Times New Roman", Times, serif;margin: 0 0; }
 
 body li {  list-style-type: none; }
 
@@ -32,7 +34,7 @@ body li {  list-style-type: none; }
 
 @media (min-width:992px) {  #hompage-cover  { padding:0 160px 0 160px;  } }
 
-@media (min-width:992px) {  body,html { overflow-x: hidden; margin-right: 0px;  }
+@media (min-width:992px) {  body,html { overflow-x: hidden; margin-right: 0px;  } }
 
 @media (min-width:768px) {  body,html { overflow-x: hidden; } }
 
@@ -125,7 +127,7 @@ figcaption {
 .recent_listing_rating { margin-top:5px;float: right;text-align: center; }
 
 span.stars, span.stars span {
-  display: block;background: url(/assets/images/sample/star.png) 0 -16px repeat-x;width: 80px;height: 16px;margin-right: 5px;
+  display: block;background: url(/assets/images/sample/star.png) 0 -16px repeat-x;width:80px;height:16px;margin-right: 5px;
 }
 
 span.stars span {  background-position: 0 0; }
@@ -142,6 +144,23 @@ span.stars span {  background-position: 0 0; }
 
 
 /* filter page style sheet*/
+
+.filterOption {
+  box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+}
+
+.filterTitle {
+  color:white;font-family: "Times New Roman", Times, serif;font-size: 20px;padding: 0px 5px;background:#3396d1;height: 30px;
+
+}
+
+.filterOptionsList {
+  padding: 5px 2px 0px 5px;border:1px solid;border-top:0px solid;border-color:#3396d1;
+}
+
+@media (min-width:992px) { .filterOption {width: 90%;margin-left: 10%} }
+
+
 #batchInfo {   
   background: white;border:0px solid;margin-bottom: 15px;border-color: skyblue;-webkit-box-shadow: 0px 3px 0px -2px #0099FF;
   box-shadow: 0px 3px 0px -2px #0099FF;color: #333;font-family: "Times New Roman", Times, serif; font-size: 15px;font-weight: 100;
@@ -160,23 +179,17 @@ span.stars span {  background-position: 0 0; }
 
 .inst_name  {  font-size: 16px; font-weight: normal; color: #333; clear: both; float: left; }
 
-.filters  {  max-height: 110px; overflow: auto; color: #333;  line-height: 0.9em;   }
+.filters  {  max-height: 130px; overflow: auto; color: #333;padding: 0px; }
 
 #browse-filter   {  font-family: "Times New Roman", Times, serif; font-weight: lighter;   }
 
 #browse-filter label {font-weight: lighter;}
 
-#browse-filter li {line-height: 0em}
+.filter-option-2,.filter-option-3   {  margin-top: 10px;  font-weight: normal;   }
 
-.filter-option-2   {  margin-top: 0px;  font-weight: normal;   }
-
-.filter-option-1   {  margin-top: 20px; font-weight: normal;   }
+.filter-option-1   {  margin-top: 15px; font-weight: normal;   }
 
 .sub           {  cursor: pointer; }
-
-#browse-filter h4 {   
-  color:black;line-height: 0.3em;font-family: "Times New Roman", Times, serif;font-size: 20px;padding-bottom: 7px;
-}
 
 #fiter-text { font-weight: lighter;  margin-top: -17px; margin-left: 16px;  }
 
@@ -206,9 +219,13 @@ span.stars span {  background-position: 0 0; }
 }
 
 .inscore {
-  border-radius: 50%;border: 4px solid;border-color:#FF8000;vertical-align: middle;width: 45px;height: 45px;padding: 5px 5px 5px 5px;
-  font-size: 19px;font-weight: bold;color: #333;text-align: center; float: left; margin-left: 18px; margin-bottom: 7px;
+  border-radius: 50%;border: 2px solid;border-color:#FF8000;vertical-align: middle;width: 30px;height: 30px;padding: 4px 2px 2px 2px;
+  font-size: 14px;font-weight: bold;color: #333;text-align: center; float: left; margin-left: 25px; margin-bottom: 7px;
 }
+
+#rating-schedule { margin-top: 5px;}
+
+#ratingCircle { margin-left: 15%}
 
 .rating_starts  { clear:both;color: #FF8000;margin-top:0px;  }
 
@@ -238,7 +255,7 @@ span.stars span {  background-position: 0 0; }
 #contact  { display: none;  }
 
 .institute-profile-pic {
-  width:146px;height: 145px;border-radius: 50%;border: 5px solid;border-color:#0099FF;
+  width:116px;height: 115px;border-radius: 50%;border: 3px solid;border-color:#0099FF;
   vertical-align: middle;margin-top: -9px;margin-bottom: 10px;
 }
 
@@ -271,7 +288,7 @@ span.stars span {  background-position: 0 0; }
   font-weight: bolder;float: left;cursor: pointer;text-decoration: none;
 }
 
-@media screen and (min-width: 992px) {.inscore {margin-left: 45%;margin-top:-7px; } }
+@media screen and (min-width: 992px) {.inscore {margin-left: 47%;margin-top:-7px; } }
 
 @media screen and (min-width: 768px) {.inscore {margin-top:-7px; } }
 
@@ -305,22 +322,22 @@ span.stars span {  background-position: 0 0; }
 
 #close_model:hover { color: black }
 
-#filter-tittle-name { font-family: "Times New Roman", Times, serif; font-size: 20px; color: gray; }
+#filter-tittle-name { font-family: "Times New Roman", Times, serif; font-size: 18px; color: gray; margin-left: 10%}
 
 .breadcrumb { background: white; font-family: "Times New Roman", Times, serif; }
 
 
 
 /*vendor page style sheet */
-.home_vendor_page {
-  width: 100%;background: url(/assets/images/sb.png);font-family: "Times New Roman", Times, serif;padding-top: 50px;
-  padding-bottom: 40px;color: #333;
+.home_vendor_page {/*#f0f0f0*/
+  width: 100%;background:#f0f3f6;font-family:"Times New Roman", Times, serif;padding-top: 50px;
+  padding-bottom: 40px;color: #333; 
  
 }
 
 .vendor_institute_details {
-  background-color: #ffffff;-moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);border-radius: 5px;padding: 10px 20px 20px 20px;
+  background-color: #ffffff;box-shadow: 0px 0px 5px #3366CC;-moz-box-shadow: 0px 0px 5px #3366CC;-webkit-box-shadow: 0px 0px 5px #3366CC;
+  padding: 0px 20px 20px 20px;
 }
 
 .vendor_venue_list {
@@ -337,8 +354,7 @@ span.stars span {  background-position: 0 0; }
 #institute_details_box {  padding-top: 25px; }
 
 .vendor_institute_batches {
-  margin-top: 30px;background-color: white;box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);-moz-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);border-radius: 5px;
+  margin-top: 30px;background: white;box-shadow: 0px 0px 4px #3366CC;-moz-box-shadow: 0px 0px 4px #3366CC;-webkit-box-shadow: 0px 0px 4px #3366CC;
 }
 
 #vendor_institute_batches {  padding-bottom: 50px; }
@@ -485,9 +501,60 @@ span.stars span {  background-position: 0 0; }
 #batch_status .btn {  font-size: 18px !important; }
 
 #batch_status_result0, #batch_status_result1 {
- padding: 5px 9px 6px 9px;background-color: #3aa54c;border-radius: 5px;font-weight: bold;color: white;min-width: 210px;
+ padding: 2px 1px 3px 1px;background-color: #3aa54c;border-radius: 0px;font-weight: bold;color: white;min-width: 200px;
 }
 
 #batch_status_result0 { background-color: #FF6600 !important; }
 
 .trail_avail {  font-weight: normal; }
+
+
+
+/* Order Page */
+
+.batchOrderTitleBar {
+  background-color: #3396d1;height: 40px;padding: 4px 0px 4px 15px;font-size:22px;color:white;text-align: left;
+  font-weight: bold;margin-bottom: 15px;
+}
+
+.batchOrderTitles {  font-size: 18px;text-align: center;margin-bottom: -10px; }
+
+.batchOrderSummary {  padding: 0px 0px 1px 0px;margin-bottom: 50px; }
+
+.batchOrderDetails { font-size: 14px;text-align: center;margin-bottom: -05px;}
+
+.batchOrderFinalDetails {font-size: 18px;text-align: center;margin-top: -5px;margin-bottom: 20px;font-weight: bold;}
+
+.batchOrderFinalDetails1 { margin-top: 8px;}
+
+.payNowButton {
+    background-color: #3aa54c;margin-left: 10px;float: left;font-size: 18px;color: white;height:35px;padding: 4px;margin-top: 5px;
+}
+
+.batchOrderButtons { overflow: hidden;text-align: center;}
+
+.payNowButton_SamplePage { background-color:#3aa54c;padding: 7px 8px;color: white;text-decoration: none; }
+
+.SamplePage a {
+  text-decoration: none;color: white;
+}
+
+.batchOrderField .payNowButton
+{
+  padding: 3px; height: 32px;
+}
+
+.payNowButton1
+{
+  margin-left: 5px;
+}
+
+.sample-box-small .batchOrderButtons
+{
+  text-align: center;
+}
+
+.sample-box-small .totalAmount
+{
+  font-size: 18px;text-align: center;font-weight: bold;margin-top: -7px;
+}

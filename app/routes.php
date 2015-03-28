@@ -63,6 +63,7 @@ Route::group(array('before' => "auth|admin"), function() {
 Route::group(array('before' => "admin"), function() {
 	Route::get('/batches/increment/{id}','BatchesController@increment');
 	Route::get('/batches/show/{id}','BatchesController@show');
+	Route::get('/batches/order/{id}','BatchesController@order');
 });
 
 //Route for CategoriesController
@@ -241,6 +242,16 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
 });
 
+Route::get('/privacy', function()
+{
+    return View::make('Miscellaneous.privacy');
+});
+
+Route::get('/terms', function()
+{
+    return View::make('Miscellaneous.terms');
+});
+
 Route::group(array('before' => "admin"), function() {
 
 Route::get('/users/login/{id}','UsersController@loginViaId');
@@ -250,20 +261,6 @@ Route::get('/aboutus', function()
 return View::make('Miscellaneous.aboutus');
 });
 
-Route::get('/support', function()
-{
-return View::make('Miscellaneous.support');
-});
-
-Route::get('/terms', function()
-{
-return View::make('Miscellaneous.terms');
-});
-
-Route::get('/contactus', function()
-{
-return View::make('Miscellaneous.contactus');
-});
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 

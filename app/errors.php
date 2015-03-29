@@ -12,7 +12,14 @@
 | shown, which includes a detailed stack trace during debug.
 |
 */
-/*
+
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+App::error(function(ModelNotFoundException $exception)
+{
+    Log::error($exception);
+    dd('Sorry! Something is wrong with this URL!') ;
+});
 
 App::error(function(InvalidUserException $exception)
 {
@@ -29,4 +36,4 @@ App::fatal(function($exception)
 {
    	Log::error($exception); 
    	return View::make('Errors.fatal');
-});*/
+});

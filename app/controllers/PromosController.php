@@ -11,12 +11,22 @@ class PromosController extends \BaseController {
 	 */
 	public function index()
 	{
-		$promos = Promo::all();
+		$promos = Promo::withTrashed()->get();
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
 		return View::make('Promos.index',compact('promos','tableName','count','adminPanelListing'));
 	}
+
+    /**
+     * Display the form for creating a promo.
+     *
+     * @return View for the form.
+     */
+    public function create()
+    {
+        return View::make('Promos.create');
+    }
 
 	/**
 	 * Store a newly created promo in storage.
@@ -34,9 +44,25 @@ class PromosController extends \BaseController {
 
 		Promo::create($data);
 
-		return Redirect::route('Promos.index')->with('success',Lang::get('promo.promo_created'));
+		return Redirect::route('promos.index')->with('success',Lang::get('promo.promo_created'));
 	}
 
+    /**
+     * Display the details for the specific promo.
+     * @param $id
+     * @return View for show page.
+     */
+    public function show($id)
+    {
+        $promo=Promo::withTrashed()->findOrFail($id);
+        return View::make('Promos.show',compact('promo'));
+    }
+
+    public function edit($id)
+    {
+        $promo=Promo::withTrashed()->findOrFail($id);
+        return View::make('Promos.edit',compact('promo'));
+    }
 	/**
 	 * Update the specified promo in storage.
 	 *
@@ -56,10 +82,41 @@ class PromosController extends \BaseController {
 
 		$promo->update($data);
 
-		return Redirect::route('Promos.index')->with('success',Lang::get('promo.promo_updated'));
+		return Redirect::route('promos.index')->with('success',Lang::get('promo.promo_updated'));
 	}
 
-	/**
+    public function enable($id)
+    {
+        $promo=Promo::withTrashed()->find($id);
+        if($promo){
+            $promoDisabled=Promo::onlyTrashed()->find($id);
+            if($promoDisabled){
+                $promoDisabled->restore();
+                return Redirect::to('/promos')->with('success',Lang::get('promo.promo_enabled'));
+            }
+            else{
+                return Redirect::to('/promos')->with('failure',Lang::get('promo.promo_enable_failed'));
+            }
+        }
+        else
+            return Redirect::to('/promos')->with('failure',Lang::get('promo.promo_user_not_exist'));
+    }
+
+    public function disable($id)
+    {
+        $promo=Promo::find($id);
+        //dd($promo);
+        if($promo){
+            $promo->delete();
+            return Redirect::to('/promos')->with('success',Lang::get('promo.promo_disabled'));
+        }
+        else{
+            return Redirect::to('/promos')->with('failure',Lang::get('promo.promo_disable_failed'));
+        }
+    }
+
+
+    /**
 	 * Remove the specified promo from storage.
 	 *
 	 * @param  int  $id
@@ -67,20 +124,19 @@ class PromosController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Promo::destroy($id);
-
-		return Redirect::route('Promos.index');
+		$promo=Promo::withTrashed()->findOrFail($id);
+        $promo->forceDelete();
+		return Redirect::route('promos.index');
 	}
 
 	/**
 	 * To check if the Promo code entered by user is valid or not.
-	 * @param  string  $promocode 
+	 * @param  string  $promo_code
 	 * @return boolean            [description]
 	 */
-	public function isValid($promocode)
+	public function isValid($promo_code)
 	{
-		$promo=Promo::where('promocode','=',$promocode)->valid()->first();
-
+		$promo=Promo::where('promo_code','=',$promo_code)->valid()->firstOrFail();
 		return($promo->users);
 	}
 }

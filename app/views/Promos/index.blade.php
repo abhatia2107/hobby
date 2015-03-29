@@ -4,28 +4,11 @@
 	<nav>
 		<ul class="nav-ul">
 			<li class="nav-li" id="login">
-				<!-- TO DO: Input box going out of bound. Check this. -->
-				<a class="login-trigger">
+				<a href="/promos/create">
 					<button type="button" class="btn btn-success ">
-						Add a Promo Code <span>▼</span>
+						Add a Promo Code
 					</button>
 				</a>
-				<div id="login-content">
-					<form action="/promo" enctype="multipart/form-data" method="post">
-						<fieldset id="inputs">
-			                <div class="form-group required">
-								<input type="text" name="promocode" placeholder="Promo Code" required>
-								<input type="text" name="max_allowed_count" placeholder="Max Allowed Count">
-								<label for="valid_till">Expiry Date</label>
-								<input type="date" id="valid_till" name="valid_till" placeholder="Valid Till" value={{Carbon::now()->addMonths(2)}}>
-							</div>
-						</fieldset>
-						<fieldset id="actions">
-							<input type="submit" id="submit" value="Submit">
-							<input type="button" id="cancel" value="Cancel">
-						</fieldset>
-					</form>
-				</div>
 			</li>
 		</ul>
 	</nav>
@@ -48,67 +31,43 @@
 	        @foreach($promos as $data)
 		    <tr>
 		        <td>{{++$i}}</td>
-		        <td>{{$data->promocode}}</td>
+		        <td>{{$data->promo_code}}</td>
 		        <td>{{$data->count}}</td>
 		        <td>{{$data->max_allowed_count}}</td>
 		        <td>
-					@if($view)
-						<a href="{{$tableName}}/show/{{$data->id}}">
-							<button type="button" class="btn btn-success ">
-								<span class="glyphicon glyphicon-user"></span>
-								View
-							</button>
-						</a>
-					@else
-						<a  class="edit-trigger">
-							<button type="button" class="btn btn-success ">
-								<span class="glyphicon glyphicon-pencil"></span>
-								Edit
-							</button>
-						</a>
-						<div class="edit-content">
-							<form  action="{{$tableName}}/update/{{$data->id}}" enctype="multipart/form-data" method="post">
-								<fieldset id="inputs">
-					                <div class="form-group required">
-										<label>Category <sup>*</sup> </label>
-										<select class="form-control" name="subcategory_category_id" required>
-											@foreach ($categories as $categoryData)
-												<option value={{$categoryData->id}}>
-													{{$categoryData->category}}
-												</option>
-											@endforeach
-										</select>
-									</div>
-									<div class="form-group required">
-										<input type="text" name="subcategory" placeholder="Sub-Category Name"  required>
-									</div>
-								</fieldset>
-								<fieldset id="actions">
-									<input type="submit" class="btn btn-success"id="submit" value="Submit">
-									<input type="button" class="btn btn-danger cancel2" id="cancel" value="Cancel">
-								</fieldset>
-							</form>
-						</div>
-					@endif
-					</td>
-					<td>
+                    <a href="{{$tableName}}/{{$data->id}}">
+                        <button type="button" class="btn btn-success ">
+                            <span class="glyphicon glyphicon-user"></span>
+                            View
+                        </button>
+                    </a>
+                </td>
+                <td>
+                    <a href="/promos/{{$data->id}}/edit">
+                        <button type="button" class="btn btn-success ">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            Edit
+                        </button>
+                    </a>
+                </td>
+                <td>
 					@if(isset($data->deleted_at))
-						<a href="{{$tableName}}/enable/{{$data->id}}">
+						<a href="{{$tableName}}/{{$data->id}}/enable">
 							<button type="button" class="btn btn-info " input type="submit" value="Button">
 								<span class="glyphicon glyphicon-open"></span> 
 								Enable
 							</button>
 						</a>
 					@else
-						<a href="{{$tableName}}/disable/{{$data->id}}">
+						<a href="{{$tableName}}/{{$data->id}}/disable">
 							<button type="button" class="btn btn-warning ">
 								<span class="glyphicon glyphicon-remove"></span> 
 								Disable
 							</button>
 						</a>
-					</td>
-					@endif
-					<td>
+                </td>
+                    @endif
+                <td>
 					<!-- Remove modal -->
 					<button class="btn btn-danger" data-toggle="modal" data-target="#removeModal{{$data->id}}">
 						<span class="glyphicon glyphicon-trash"></span>
@@ -127,12 +86,10 @@
 									<p class="message">Do you want to remove the particular entry?</p>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<a href="{{$tableName}}/delete/{{$data->id}}">
-										<button type="button" class="btn btn-primary">
-											Remove
-										</button>
-									</a>
+                                    {{ Form::open(array('route' => array('promos.destroy', $data->id), 'method' => 'delete')) }}
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger">Remove</button>
+                                    {{ Form::close() }}
 								</div>
 							</div>
 						</div>

@@ -15,10 +15,14 @@ class CreatePromosTable extends Migration {
 		Schema::create('promos', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('promocode',10);
+			$table->string('promo_code',10);
+			$table->integer('discount_percentage')->nullable();
+			$table->integer('cash_discount')->nullable();
+			$table->integer('max_discount')->nullable();
 			$table->integer('count');
 			$table->integer('max_allowed_count')->nullable();
 			$table->timestamp('valid_till')->nullable();
+            $table->softDeletes();
 			$table->timestamps();
 		});
 	}

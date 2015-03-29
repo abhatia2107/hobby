@@ -157,6 +157,12 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/locations/delete/{id}','LocationsController@destroy');
 	Route::get('/locations/show/{id}','LocationsController@show');
 
+    //Route for PromosController
+    Route::resource('promos', 'PromosController');
+    Route::get('promos/{promo_code}/disable','PromosController@disable');
+    Route::get('promos/{promo_code}/enable','PromosController@enable');
+    Route::get('promos/isvalid/{promo_code}','PromosController@isValid');
+
 	//Route for SubcategoriesController
 	Route::get('/subcategories','SubcategoriesController@index');
 	Route::post('/subcategories/store','SubcategoriesController@store');
@@ -189,10 +195,6 @@ Route::get('/venues/edit/{id}','VenuesController@edit');
 Route::post('/venues/update/{id}','VenuesController@update');
 Route::get('/venues/delete/{id}','VenuesController@destroy');
 });
-
-//Route for PromosController
-Route::resource('promos', 'PromosController');
-Route::get('promos/isvalid/{promocode}','PromosController@isValid');
 
 //Route for UsersController
 

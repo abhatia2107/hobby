@@ -4,15 +4,22 @@ use Carbon\Carbon;
 
 class Promo extends \Eloquent {
 
+    use SoftDeletingTrait;
+
 	// Add your validation rules here
 	public static $rules = [
-		'promo_code' => 'required'
+		'promo_code' => 'required|unique:promos',
+        'discount_percentage'=> 'max:100',
+        'valid_till'=>'required|date',
 	];
 
 	// Don't forget to fill this array
 	protected $fillable = [
-		'promocode',
-		'valid_till',
+		'promo_code',
+        'discount_percentage',
+        'cash_discount',
+        'max_discount',
+        'valid_till',
 		'count',
 		'max_allowed_count',
 	];
@@ -25,12 +32,16 @@ class Promo extends \Eloquent {
 		$this->attributes['valid_till'] = Carbon::parse($date);
 	}
 
+    public function getValidTillAttribute($date)
+    {
+        return Carbon::parse($date)->format('Y-m-d');
+    }
 	public function scopeValid($query)
 	{
-		return $query
+        return $query
 		->where('valid_till','>=',Carbon::now())
 		->whereRaw('count <= max_allowed_count');
-	}
+    }
 
 	public function scopeExpired($query)
 	{

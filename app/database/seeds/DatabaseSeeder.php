@@ -37,12 +37,15 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('LocationsTableSeeder');
 		$this->command->info('Locations table seeded!');
-		
+
 		$this->call('LocalitiesTableSeeder');
-		$this->command->info('Localites table seeded!');
+		$this->command->info('Localities table seeded!');
 
 		$this->call('SchedulesTableSeeder');
         $this->command->info('Schedules table seeded!');
+
+        $this->call('PromosTableSeeder');
+        $this->command->info('Promos table seeded!');
 
 		$this->call('UsersTableSeeder');
         $this->command->info('Users table seeded!');
@@ -59,5 +62,5 @@ class DatabaseSeeder extends Seeder {
 		$this->call('BatchesTableSeeder');
         $this->command->info('Batches table seeded!');
 
-	}	
+	}
 }

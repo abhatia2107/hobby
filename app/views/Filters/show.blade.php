@@ -38,10 +38,10 @@
 		</div>
 	</div>				
 </div>
-<div class="container" >
-	<div class="row clearfix">
-		<div class="col-md-12 col-xs-12 col-sm-12 column">
-			<ul class="breadcrumb" style="background: white;">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 col-xs-12 col-sm-12">
+			<ul class="breadcrumb" style="background:white;">
 				<li>
 					<a href="/">Home</a>
 				</li>
@@ -54,9 +54,9 @@
 				</li>
 				<li></li>
 			</ul>
-			<div class="row clearfix">
+			<div class="row">
 				<!--Start of filter division -->
-				<div class="col-md-3 col-xs-12 col-sm-3 column" style="margin-top:-15px">
+				<div class="col-md-3 col-xs-12 col-sm-3" style="margin-top:-15px">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->
 					<div id="browse-filter" class="filter-option-1 filterOption">	
 						<div class="filterTitle">Sub Categories</div>
@@ -103,7 +103,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-9 col-xs-11 col-sm-9 column results-container" >
+				<div class="col-md-9 col-xs-11 col-sm-9 results-container" >
 					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div>
@@ -442,15 +442,15 @@
 						.append
 						(
 							$("<div></div>")
-							.attr("class","col-md-9 col-xs-12 col-sm-12 column")
+							.attr("class","col-md-9 col-xs-12 col-sm-12 batchDetailsAndPrice")
 							.append
 							(
 								$("<div></div>")
-								.attr("class","col-md-7 col-xs-12 col-sm-9 column")
+								.attr("class","col-md-8 col-xs-12 col-sm-8")
 								.append
 								(
 									$("<div></div>")
-									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
+									.attr("class","col-md-5 col-xs-12 col-sm-6 column")
 									.attr("id","inst_contact")
 									.attr("onClick","show_contact("+index+")")
 									.append
@@ -476,7 +476,7 @@
 								.append
 								(
 									$("<div></div>")
-									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
+									.attr("class","col-md-5 col-xs-12 col-sm-6 column")
 									.attr("id","inst_message")
 									.attr("href","#sendMessage")
 									.attr("data-toggle","modal")
@@ -546,14 +546,23 @@
 							)
 							.append
 							(
-									$("<div></div>")
-									.attr("class","col-md-5 col-xs-12 col-sm-3 column")
-									.attr("class","singleSessionPrice")								
-									.append
-									(
-										$("<div></div>")
-										.text("₹"+price+" / Session"+" (or Members: 1 credit)")
-									)
+								$("<div></div>")
+								.attr("class","col-md-4 col-xs-12 col-sm-4")
+								.attr("class","singleSessionPrice")								
+								.append
+								(
+									$("<div></div>")								
+									.text("₹ "+price+" / Session")
+									.append("<br>(or Members: 1 credit)")
+								)
+								.append
+								(
+									$("<a></a>")
+									.attr("class","btn btn-primary")
+									.attr("id","booknowButton")	
+									.attr("href","/batches/order/"+batchID)							
+									.text("BOOK NOW")
+								)
 							)
 							/*.append
 							(
@@ -584,12 +593,12 @@
 									)																										
 								)
 							)*/							
-							.append
+							/*.append
 							(
 								$("<div></div>")
 								.attr("class","row")
 								.attr("id","price_schedule_container")																												
-							)
+							)*/
 						)
 					)
 				)

@@ -62,7 +62,7 @@ Route::group(array('before' => "auth|admin"), function() {
 Route::group(array('before' => "admin"), function() {
 	Route::get('/batches/increment/{id}','BatchesController@increment');
 	Route::get('/batches/show/{id}','BatchesController@show');
-	Route::get('/batches/order/{id}','BatchesController@order');
+	// Route::get('/batches/order/{id}','BatchesController@order');
 });
 
 //Route for CategoriesController
@@ -172,6 +172,9 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/subscriptions/disable/{id}','SubscriptionsController@disable');
 	Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
 });
+
+Route::resource('bookings', 'BookingsController');
+Route::get('bookings/create/{id}', 'BookingsController@create');
 
 Route::post('/subscriptions','SubscriptionsController@store');
 Route::get('/subscriptions/unsubscribe/{email}/{id}', 'SubscriptionsController@disable');

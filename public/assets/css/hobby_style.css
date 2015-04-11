@@ -187,6 +187,8 @@ span.stars span {  background-position: 0 0; }
 
 .filter-option-2,.filter-option-3   {  margin-top: 10px;  font-weight: normal;   }
 
+.filter-option-3 {margin-bottom: 20px;}
+
 .filter-option-1   {  margin-top: 15px; font-weight: normal;   }
 
 .sub           {  cursor: pointer; }
@@ -201,7 +203,12 @@ span.stars span {  background-position: 0 0; }
 
 #inst_contact { 
   border: 1px solid;padding:3px 3px 3px 3px;border-color: #0099FF;border-radius: 4px;float:left;text-align: center;
-  margin-right:3px;margin-top: 2px;font-size: 13px;max-width:105px;min-width: 105px;height: 26px;
+  margin-right:3px;margin-top: 2px;font-size: 13px;height: 26px;min-width: 105px;max-width: 105px;
+}
+
+.batchDetailsAndPrice
+{
+  margin-bottom: 10px;
 }
 
 #inst_session_price { 
@@ -214,8 +221,8 @@ span.stars span {  background-position: 0 0; }
 #inst_message:hover { background: #E8E8E8  ;  cursor: pointer;  }
 
 #inst_message  {
-  margin-top: 2px;max-width:105px;min-width: 105px;border: 1px solid;padding:3px;border-color: #0099FF;font-size: 13px;
-  border-radius: 4px; float: left; text-align: center;margin-right: 3px;height: 26px;
+  margin-top: 2px;border: 1px solid;padding:3px;border-color: #0099FF;font-size: 13px;
+  border-radius: 4px; float: left; text-align: center;margin-right: 3px;height: 26px;min-width: 105px;max-width: 105px;
 }
 
 .inscore {
@@ -225,7 +232,7 @@ span.stars span {  background-position: 0 0; }
 
 #rating-schedule { margin-top: 5px;}
 
-#ratingCircle { margin-left: 15%}
+#ratingCircle { margin-left: 6%}
 
 .rating_starts  { clear:both;color: #FF8000;margin-top:0px;  }
 
@@ -461,7 +468,9 @@ span.stars span {  background-position: 0 0; }
 
 .modal-header, .modal-footer, #loadmorebutton, .venues-list-buttons {  text-align: center; }
 
-#loadmorebutton, .results-container {  padding-bottom: 20px; }
+#loadmorebutton, .results-container {  padding-bottom: 20px;}
+
+.results-container {padding-right: 0px;margin-right: 0px !important;}
 
 .venues-list-container {  margin-top: 20px; }
 
@@ -557,4 +566,14 @@ span.stars span {  background-position: 0 0; }
 .sample-box-small .totalAmount
 {
   font-size: 18px;text-align: center;font-weight: bold;margin-top: -7px;
+}
+
+#booknowButton
+{
+  background: #3aa54c;margin-top: 5px;padding: 4px 7px 2px 7px;border-radius: 0px;border:0px solid;text-align: center;
+}
+
+.singleSessionPrice
+{
+  text-align: center;
 }

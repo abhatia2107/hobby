@@ -13,6 +13,15 @@
 |
 */
 /*
+
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+App::error(function(ModelNotFoundException $exception)
+{
+    Log::error($exception);
+    dd('Sorry! Something is wrong with this URL!') ;
+});
+
 App::error(function(InvalidUserException $exception)
 {
     Log::error($exception);

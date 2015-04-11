@@ -23,12 +23,17 @@ class CreateUsersTable extends Migration {
 			$table->string('user_fb_id',50)->nullable();
 			$table->date('user_birthdate')->nullable();	
 			$table->string('user_gender',6)->nullable();
-			$table->string('remember_token',255)->nullable();
 			$table->string('user_facebook_access_token',511)->nullable();
 			$table->string('user_confirmation_code',90);
 			$table->boolean('user_confirmed')->default(0);
 			$table->boolean('user_subscription_token')->default(1);
 	        $table->boolean('user_photo')->default(0);
+			$table->rememberToken();
+			$table->string('user_referral_code',6)->unique();	
+			$table->integer('user_referee_id')->nullable();
+			$table->integer('user_classes_left')->default(0);
+			$table->integer('user_successful_referral')->default(0);
+			$table->integer('user_pending_referral')->default(0);
 	        $table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

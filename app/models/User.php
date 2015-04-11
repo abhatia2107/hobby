@@ -25,7 +25,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $guarded = [
 		'id',
 		'password_confirmation',
-		'user_confirmed',
 		'csrf_token',
 		'signup_terms',
 		'remember',
@@ -123,4 +122,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         return User::onlyTrashed()->count();
     }
+
+    public function promos()
+    {
+		return $this->belongsToMany('Promo');
+   	}
 }

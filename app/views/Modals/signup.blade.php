@@ -15,19 +15,20 @@
                         <div class="form-group">                        
                             <div class="col-sm-12">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="user_fb_id" value="@if(isset($userDetails)){{$userDetails->user_fb_id}}@else{{Input::old('user_fb_id')}}@endif">
                                 <input type="text" placeholder="Enter Your First Name*"  class="form-control " name="user_first_name"  id="user_first_name" value="@if(isset($userDetails)){{$userDetails->user_first_name}}@else{{Input::old('user_first_name')}}@endif">
                             </div>
                         </div>
                     </div><br>
                     <div class="row">
-                        <div class="form-group">                            
+                        <div class="form-group">
                             <div class="col-sm-12">
                                 <input type="text" placeholder="Enter Your Last Name*"  class="form-control " name="user_last_name"  id="user_last_name" value="@if(isset($userDetails)){{$userDetails->user_last_name}}@else{{Input::old('user_last_name')}}@endif">
                             </div>
                         </div>
                     </div><br>
                     <div class="row">
-                        <div class="form-group">                            
+                        <div class="form-group">                         
                             </label>
                             <div class="col-sm-12">
                                 <input type="email" placeholder="Enter Your Email ID*"  class="form-control " name="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
@@ -35,7 +36,7 @@
                         </div>
                     </div><br>
                     <div class="row">
-                        <div class="form-group">            
+                        <div class="form-group">
                             <div class="col-sm-12">
                                 <input type="tel" placeholder="Enter Your Mobile Number*" class="form-control " name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
                             </div>
@@ -63,13 +64,20 @@
                                 <input type="password" placeholder="Confirm Password" class="form-control " name="password_confirmation"  id="password_confirmation">
                             </div>
                         </div>
-                    </div>
+                    </div><br/>
+                    <div class="row">
+                        <div class="form-group">                           
+                            <div class="col-sm-12">
+                                <input type="text" placeholder="Referral Code" class="form-control " name="user_referee_code"  id="user_referee_code" value="{{Input::old('user_referee_code')}}">
+                            </div>
+                        </div>
+                    </div><br>
                     <div class="checkbox login-remember">
                         <label class="col-sm-12 control-label">
                             <input name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
                             I agree to <a href="/terms">terms and conditions.</a>
                         </label>
-                    </div>    
+                    </div>
                 </div>
                 <div class="modal-footer">                                
                     <button type="submit" class="btn btn-primary">Submit</button>

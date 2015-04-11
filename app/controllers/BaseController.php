@@ -31,6 +31,7 @@ class BaseController extends Controller {
 									'institutes' => 'Institutes', 
 									'localities' => 'Localities', 
 									'locations' => 'Locations',
+									'promos' => 'Promos',
 									'subcategories' => 'Subcategories', 
 									'subscriptions' => 'Subscriptions',
 									'users' => 'Users', 

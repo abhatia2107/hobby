@@ -15,15 +15,15 @@
   			<div class="col-md-2 col-sm-2 col-xs-12">Subtotal</div>
   		</div><hr/>
   		<div class="row batchOrderDetails">
-  			<div class="col-md-3 col-sm-3 col-xs-12">ABC DANCE CLASS </div>
+  			<div class="col-md-3 col-sm-3 col-xs-12">{{$batchDetails->batch}}</div>
   			<div class="col-md-2 col-sm-2 col-xs-12">
   				<form role="form"  name="batchOrderForm" id="batchOrderForm" action="" > 
   					<div class="form-group"> 
               <select class="form-control" id="numberOfSessions" name="numberOfSessions" required>
-                @for($seesion=1;$seesion<=6;$seesion++)
-                    <option value={{$seesion}}>{{$seesion}}</option>
+                @for($session=1;$session<=6;$session++)
+                    <option value={{$session}}>{{$session}}</option>
                 @endfor
-              </select>  						
+              </select>
   					</div>
   			</div>
   			<div class="col-md-3 col-sm-3 col-xs-12">
@@ -34,7 +34,7 @@
   				</div>
   				</form>
             </div>
-  			<div class="col-md-2 col-sm-2 col-xs-12">100/-</div>
+  			<div class="col-md-2 col-sm-2 col-xs-12"> ₹ {{$batchDetails->batch_single_price}}/-</div>
   			<div class="col-md-2 col-sm-2 col-xs-12"><div id="order_subtottal"></div></div>
   		</div><hr/>
   		<div class="row batchOrderFinalDetails">
@@ -56,7 +56,7 @@
 			/*showOn: 'both',
 			buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
             buttonText: "Choose Date",*/
-            dateFormat: 'yy-mm-dd'         
+            dateFormat: 'yy-mm-dd'
 		});
 	});
 </script>

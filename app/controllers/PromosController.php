@@ -134,9 +134,17 @@ class PromosController extends \BaseController {
 	 * @param  string  $promo_code
 	 * @return boolean            [description]
 	 */
-	public function isValid($promo_code)
+	public function isValid()
 	{
-		$promo=Promo::where('promo_code','=',$promo_code)->valid()->firstOrFail();
-		return($promo->users);
+		$promo_code=Input::get('promo_code');
+		$promo=Promo::where('promo_code','=',$promo_code)->valid()->first();
+		if(is_null($promo)){
+			return 'Invalid Promo Code';
+		}
+		$user_id=Auth::id();
+		if($promo->codeUsedByUser($promo,$user_id)){
+			return 'You can use this code only once.';
+		}
+		return($promo);
 	}
 }

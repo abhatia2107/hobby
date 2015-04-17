@@ -36,6 +36,7 @@ class Promo extends \Eloquent {
     {
         return Carbon::parse($date)->format('Y-m-d');
     }
+
 	public function scopeValid($query)
 	{
         return $query
@@ -48,6 +49,17 @@ class Promo extends \Eloquent {
 		return $query
 		->where('valid_till','<',Carbon::now())
 		->OrwhereRaw('count > max_allowed_count');
+	}
+
+	public function codeUsedByUser($promo,$user_id)
+	{
+		$promo_user=$promo->users()->where('users.id','=',$user_id)->first();
+		if($promo_user){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	public function users()

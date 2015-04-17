@@ -35,16 +35,19 @@ class BookingsController extends \BaseController {
 	 */
 	public function store()
 	{
+		// dd(Input::all());
 		$validator = Validator::make($data = Input::all(), Booking::$rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-
+		$data['user_id']=Auth::id();
+		$data['reference_id']=substr(uniqid(),0,8);
+		unset($data['csrf_token']);
+		// dd($data);
 		Booking::create($data);
-
-		return Redirect::route('Bookings.index');
+		return Redirect::back()->with('success',Lang::get('booking.booking_created'));
 	}
 
 	/**

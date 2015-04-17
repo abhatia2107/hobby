@@ -4,10 +4,15 @@ class Booking extends \Eloquent {
 
 	// Add your validation rules here
 	public static $rules = [
-		// 'title' => 'required'
+		'batch_id' => 'integer|required',
+		'no_of_sessions' => 'integer|required',
+		'payment' => 'integer|required',
 	];
 
-	// Don't forget to fill this array
-	protected $fillable = [];
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
 
 }

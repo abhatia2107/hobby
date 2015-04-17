@@ -19,6 +19,7 @@ class PromosTableSeeder extends Seeder {
                 'max_discount'=>$faker->randomNumber(200,1000),
                 'valid_till'=>Carbon::now()->addDays($index),
 				'max_allowed_count'=>$faker->randomNumber(100,300),
+				'coupon_valid_on_final_amount'=>$faker->boolean(),
 				'count'=>$faker->randomNumber(1,30),
 			]);
 		}

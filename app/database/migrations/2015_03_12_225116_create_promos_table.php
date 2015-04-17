@@ -20,6 +20,7 @@ class CreatePromosTable extends Migration {
 			$table->integer('cash_discount')->nullable();
 			$table->integer('max_discount')->nullable();
 			$table->integer('count');
+			$table->boolean('coupon_valid_on_final_amount');
 			$table->integer('max_allowed_count')->nullable();
 			$table->timestamp('valid_till')->nullable();
             $table->softDeletes();

@@ -66,6 +66,9 @@ Route::group(array('before' => "admin"), function() {
 	// Route::get('/batches/order/{id}','BatchesController@order');
 });
 
+Route::resource('bookings', 'BookingsController');
+Route::get('bookings/create/{id}', 'BookingsController@create');
+
 //Route for CategoriesController
 
 Route::group(array('before' => "auth|admin"), function() {	
@@ -161,7 +164,6 @@ Route::group(array('before' => "auth|admin"), function() {
     Route::resource('promos', 'PromosController');
     Route::get('promos/{promo_code}/disable','PromosController@disable');
     Route::get('promos/{promo_code}/enable','PromosController@enable');
-    Route::get('promos/isvalid/{promo_code}','PromosController@isValid');
 
 	//Route for SubcategoriesController
 	Route::get('/subcategories','SubcategoriesController@index');
@@ -179,9 +181,6 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/subscriptions/disable/{id}','SubscriptionsController@disable');
 	Route::get('/subscriptions/delete/{id}','SubscripitionsController@destroy');
 });
-
-Route::resource('bookings', 'BookingsController');
-Route::get('bookings/create/{id}', 'BookingsController@create');
 
 Route::post('/subscriptions','SubscriptionsController@store');
 Route::get('/subscriptions/unsubscribe/{email}/{id}', 'SubscriptionsController@disable');
@@ -245,6 +244,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
 	Route::post('/batches/sendMessage','BatchesController@sendMessage');
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
+    Route::post('promos/isValid','PromosController@isValid');
 });
 
 Route::get('/privacy', function()

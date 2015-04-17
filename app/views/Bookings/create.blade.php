@@ -29,7 +29,7 @@
   			<div class="col-md-3 col-sm-3 col-xs-12">
   				<div class="form-group">
   					<div class="col-md-offset-2 col-sm-12 col-md-8 col-xs-offset-2 col-xs-8">
-            	<input type="text" placeholder="Booking Date" class="form-control" id="datepicker" name="bookingDate" required />  						
+            	<input type="text" placeholder="Booking Date" class="form-control" id="datepicker" name="booking_date" required />
             </div>
   				</div>
   				</form>
@@ -37,11 +37,12 @@
   			<div class="col-md-2 col-sm-2 col-xs-12"> ₹ {{$batchDetails->batch_single_price}}/-</div>
   			<div class="col-md-2 col-sm-2 col-xs-12"><div id="order_subtottal"></div></div>
   		</div><hr/>
-  		<input type="checkbox" id ="promo" name="promo">
-  		<label for="promo">I have a promo code</label>
-  		<form>
-			<input type="text" id="promocode" name="promocode">
-			<input type="submit">
+  		<form method="post" action="/promos/isValid" enctype="multipart/form-data">
+        <input type="hidden" id="csrf_token" name="csrf_token" value="{{csrf_token()}}">
+        <input type="checkbox" id ="promo" name="promo">
+        <label for="promo">I have a promo code</label>
+  			<input type="text" id="promo_code" name="promo_code">
+  			<input type="submit">
   		</form>
   		<div class="row batchOrderFinalDetails">
   			<div class="col-md-8 col-sm-6 col-xs-12 batchOrderFinalDetails1">Amount Payable: Rs. 100/-</div>  		

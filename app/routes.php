@@ -278,3 +278,5 @@ Route::get('/filters/search','FiltersController@search');
 });
 
 Route::get('/users/account/{id}','UsersController@account');
+
+Route::resource('memberships', 'MembershipsController');

@@ -317,7 +317,10 @@
 				var contact = results[index]['venue_contact_no'];
 				var trialID = results[index]['batch_trial'];
 				var institute_rating = results[index]['institute_rating'];
-				var venue_email = results[index]['venue_email'];				
+				var landmark = results[index]['venue_landmark'];
+				var address = results[index]['venue_address'];
+				var venue_email = results[index]['venue_email'];
+				address = address.replace(/\n/g," ");			
 				$("<li style='display:none'></li>")
 				.attr("subcategory",subcategoryID)
 				.attr("locality",localityID)
@@ -351,17 +354,28 @@
 										(
 											$("<a></a>")
 											.prop("href","/batches/show/"+batchID)
-											.text(batch)
+											.text(institute)
 										)									
 									)
 									.append
 									(
 										$("<span></span>")
 										.attr("class","inst_name")
-										.text(institute)
+										.text(batch)
 									)	
 								)
 								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-4 col-xs-12 col-sm-3 column")
+									.append
+									(
+										$("<div></div>")
+										.attr("class","col-md-12 facilities_title")
+										.text("Facilities: ")
+									)
+								)
+								/*.append
 								(
 									$("<div></div>")
 									.attr("class","col-md-4 col-xs-12 col-sm-3 column")
@@ -391,7 +405,7 @@
 										)
 																													
 									)
-								)
+								)*/
 								/*.append
 								(
 									$("<div></div>")
@@ -422,9 +436,9 @@
 					.attr("class","row clearfix batch")
 					.append
 					(
-						$("<div style='margin-top:20px'></div>")
-						.attr("class","col-md-12 col-xs-12 col-sm-12 column")
-						.append
+						$("<div style='margin-top:10px'></div>")
+						.attr("class","")
+						/*.append
 						(
 							$("<div></div>")
 							.attr("class","col-md-3 col-xs-12 col-sm-12 column")
@@ -438,11 +452,11 @@
 									.attr("class",'institute-profile-pic')
 								)
 							)
-						)
+						)*/
 						.append
 						(
 							$("<div></div>")
-							.attr("class","col-md-9 col-xs-12 col-sm-12 batchDetailsAndPrice")
+							.attr("class","col-md-12 col-xs-12 col-sm-12 batchDetailsAndPrice")
 							.append
 							(
 								$("<div></div>")
@@ -494,22 +508,11 @@
 										$("<span></span>")
 										.text(" Send Message")
 									)
-								)
-								/*.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
-									.attr("id","inst_session_price")
-									.append
-									(
-										$("<span></span>")
-										.text("₹"+price+" / Session")								
-									)
-								)*/
+								)								
 								.append
 								(
 									$("<div></div>")
-									.attr("class","col-md-12 col-xs-12 col-sm-12 column")
+									.attr("class","row")
 									/*.append
 									(
 										$("<div></div>")
@@ -530,6 +533,8 @@
 									(
 										$("<div></div>")
 										.attr("id","inst_type")
+										.attr("title",locality+", "+landmark+", "+address)	
+										.attr("class","col-md-9 col-xs-12 col-sm-9")								
 										.append
 										(
 											$("<span></span>")
@@ -538,8 +543,25 @@
 										)
 										.append
 										(
-											$("<span></span>")											
-											.text(locality+", "+location_name)
+											$("<span></span>")																					
+											.text(locality+", "+landmark+", "+address)
+										)
+									)
+									.append
+									(
+										$("<div></div>")
+										.attr("id","inst_price")									
+										.attr("class","col-md-12 col-xs-12 col-sm-12")								
+										.append
+										(
+											$("<span></span>")
+											.attr("id","hand-icon")
+											.attr("class","glyphicon glyphicon-time")
+										)
+										.append
+										(
+											$("<span></span>")																					
+											.text("Mon-Sat: 5am-6pm")
 										)
 									)
 								)
@@ -553,7 +575,7 @@
 								(
 									$("<div></div>")								
 									.text("₹ "+price+" / Session")
-									.append("<br>(or Members: 1 credit)")
+									/*.append("<br>(or Members: 1 credit)")*/
 								)
 								.append
 								(
@@ -563,36 +585,7 @@
 									.attr("href","/batches/order/"+batchID)							
 									.text("BOOK NOW")
 								)
-							)
-							/*.append
-							(
-								$("<div></div>")
-								.attr("class","col-md-5 col-xs-12 col-sm-3 column")
-								.attr("id","rating-schedule")								
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-12")		
-									.append
-									(
-										$("<div></div>")
-										.attr("class","inscore col-md-8 col-xs-12 col-sm-3 column")									
-										.append
-										(
-											$("<div></div>")										
-											.attr("id","rating-value")
-										)
-										.text(institute_rating)
-									)
-									.append
-									(
-										$("<span></span>")
-										.attr("class","stars")
-										.attr("id","starsValue")
-										.text(institute_rating)	
-									)																										
-								)
-							)*/							
+							)												
 							/*.append
 							(
 								$("<div></div>")
@@ -637,6 +630,7 @@
 		});
 		$(document).ready(function() 
 		{
+			$('[data-toggle="popover"]').popover(); 
 			var linksContainer = $('#filter_data'),baseUrl;
 			window.onscroll = function(ev)
 			{
@@ -717,8 +711,8 @@
 						}
 						chunk++;	
 					});*/
-				}
-			});
+				}				
+			});			
 		});
 	</script>
 @stop

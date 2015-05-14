@@ -6,7 +6,7 @@
             <!-- <a class="btn btn-primary navbar-right" href="/batches">Host Panel</a> -->
         <!-- @else -->
             <!-- <button id="hostPanelLogin" class="btn btn-primary navbar-right" data-target="#loginModal" data-toggle="modal" href="/batches" >Host Panel{{$loggedIn}}</button>             -->
-        <!-- @endif     -->
+        <!-- @endif -->
         <div class="navbar-header min-button">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>

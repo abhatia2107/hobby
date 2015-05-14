@@ -7,7 +7,7 @@
 	<div class="clearfix header_row1">
 		<div class=" col-sm-2 col-md-2  ">
 			<a class="navbar-brand" href="/">
-				<img src="/assets/images/logo.png" class="img-responsive header_img" alt="HOBBYIX">
+				<span class="website-title">HOBBYIX</span>
 			</a>
 		</div>			
 		<div class="col-sm-6 col-md-6">
@@ -36,22 +36,22 @@
 		?>
 		@if(!$id)
 			<div class=" col-sm-3 col-md-3 userInfoListing" >
-				<div class="login-signup">
-					<a href="#" data-toggle="modal" data-target="#loginModal">Log In</a>
-					&nbsp;&nbsp;|&nbsp;&nbsp;
-					<a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a>					
+				<div class="login">
+					<a href="#" data-toggle="modal" data-target="#loginModal">LOGIN TO HOBBYIX</a>
+					<!--&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a> -->
 				</div>
 			</div>
 		@else
-			<div class=" col-sm-3 col-md-3 userInfoListing ">			 
+			<div class=" col-sm-3 col-md-3 userInfoListing ">
+			<span class="user_account">			 
 			<a href="/users/show/{{$id}}">
 				@if($user)
-					{{$name}}'s 
+					{{$name}}
 				@else
-					My
+					My Account
 				@endif
-				Account 
-			</a>&nbsp;|&nbsp;
+			</a>&nbsp;|&nbsp;</span>
 			<a href="/users/logout" >Logout</a>			
 			</div>		
 		@endif

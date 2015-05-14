@@ -4,7 +4,7 @@
      #page
     {
       width: 100%;
-      margin-top: -20px;
+      margin-top: 0px;
 
     }
     #sample-institute-name
@@ -37,7 +37,7 @@
     }
     #sample-batch-name
     {
-      font-size: 30px;
+      font-size: 27px;
       font-weight: normal; 
       -webkit-box-shadow: 0px 3px 0px -2px #0099FF;
       box-shadow: 0px 3px 0px -2px #0099FF;
@@ -91,7 +91,7 @@
     {
       background: white;
       margin-top: 30px;
-      padding:20px 30px 40px 30px;
+      padding:20px 30px 30px 30px;
       box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
       -webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
     }
@@ -245,16 +245,15 @@
   </div>
 </div>
 <div class="container" id='blog-container'>
-  <div class="row clearfix">
-    <div class="col-md-1 column"></div>
-  <div class="col-md-11 column">
-    <div class="col-md-7 col-sm-12 col-xs-12 column ">
+  <div class="row clearfix">    
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-7 col-sm-7 col-xs-12 ">
       <div id="sample-batch-details" class="sample-box col-md-12 col-sm-12 col-xs-12" >
         <div id='sample-batch-name'>{{$batchName}} Details</div>
         <div id='batch-session-count' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
           Sessions per Week: {{$sessionsCount}}
         </div>
-        <div id='batch-openclass' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
+        <!--<div id='batch-openclass' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
           Trial Class: {{$trial[$trialClass]}}
         </div>
         <div id='batch-gender' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
@@ -273,7 +272,7 @@
         <div id="sample-batch-accomplishment">
           <div id='sample-batch-name'>Accomplishment</div>
            <p id='sample-details' class="details-container"> {{$batchAccomplishment}}</p>
-        </div>
+        </div> -->
       </div>
       <div id="comments" class="sample-box">
         <div id='sample-batch-name'>Write a Review</div>
@@ -303,17 +302,17 @@
       </div>
     </div>
    
-    <div class='col-md-4 col-sm-12 col-xs-12 column'>
+    <div class='col-md-4 col-sm-5 col-xs-12 column'>
       <div class="sample-box-small" id='batchOrderSample'>
         <div id='sample-batch-name'>Book This Class</div>
         <form role="form"  name="batchOrderForm" id="batchOrderForm" action="" > 
         <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-12 col-xs-12 column'>Price Per Session</div>
-          <div class='col-md-5 col-sm-12 col-xs-12 column'>: Rs. {{$sessionPrice}}</div>
+          <div class='col-md-5 col-sm-6 col-xs-6'>Price Per Session</div>
+          <div class='col-md-5 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
         </div>
         <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-12 col-xs-12'>No. of Sessions</div>
-          <div class='col-md-5 col-sm-12 col-xs-12'>  
+          <div class='col-md-5 col-sm-6 col-xs-6'>No. of Sessions</div>
+          <div class='col-md-5 col-sm-6 col-xs-6'>  
               <select class="form-control" id="numberOfSessions" name="numberOfSessions" required>                 
                   @for($seesion=1;$seesion<=6;$seesion++)
                       <option value={{$seesion}}>{{$seesion}}</option>
@@ -322,14 +321,14 @@
           </div>
         </div>
         <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-12 col-xs-12'>Booking Date</div>
-          <div class='col-md-5 col-sm-12 col-xs-12'>
+          <div class='col-md-5 col-sm-6 col-xs-6'>Booking Date</div>
+          <div class='col-md-5 col-sm-6 col-xs-6'>
                 <input type="text" placeholder="Select Date" class="form-control" id="datepicker" name="bookingDate" required />                     
           </div>          
         </div>
         <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-12 col-xs-12'>Subtotal</div>
-          <div class='col-md-5 col-sm-12 col-xs-12' id="orderSubtotal">: Rs. {{$sessionPrice}}</div>
+          <div class='col-md-5 col-sm-6 col-xs-6'>Subtotal</div>
+          <div class='col-md-5 col-sm-6 col-xs-6' id="orderSubtotal">: Rs. {{$sessionPrice}}</div>
         </div>
         <hr/>
         <div class="row totalAmount">
@@ -371,7 +370,9 @@
     </div>
   </div>
   </div>
+  <div class="space_for_footer"></div>
 </div>
+
 @stop
 @section('pagejquery')
 <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>

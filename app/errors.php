@@ -12,7 +12,7 @@
 | shown, which includes a detailed stack trace during debug.
 |
 */
-
+/*
 App::error(function(InvalidUserException $exception)
 {
     Log::error($exception);

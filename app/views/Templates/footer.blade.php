@@ -20,7 +20,7 @@
                <li><span class="glyphicon glyphicon-list-alt"></span><a href="/terms">Terms Of Use</a></li>
                 <li><span class="glyphicon glyphicon-user"></span><a href="/privacy">Privacy Policy</a></li>
                 <li><span class="glyphicon glyphicon-question-sign"></span><a href-link="/aboutus">About Hobbyix</a></li>
-                <li><span class="glyphicon glyphicon-globe"></span><a href-link="/blog">Hobbyix Blog</a></li>
+                <!--<li><span class="glyphicon glyphicon-globe"></span><a href-link="/blog">Hobbyix Blog</a></li> -->
             </ul>
          </div>
       </div>
@@ -32,7 +32,7 @@
                <li><span class="glyphicon fa fa-w fa-facebook"></span><a href-link="$adminAccounts->facebook_link">Facebook</a></li>
                <li><span class="glyphicon fa fa-fw fa-google-plus"></span><a href-link="$adminAccounts->google_plus_link">Google+</a></li>
                <li><span class="glyphicon fa fa-fw fa-instagram"></span><a href-link="$adminAccounts->instagram_link">Instagram</a></li>
-               <li><span class="glyphicon fa fa-fw fa-vimeo-square"></span><a href-link="$adminAccounts->vimeo_link">Vimeo</a></li>                           
+               <!--<li><span class="glyphicon fa fa-fw fa-vimeo-square"></span><a href-link="$adminAccounts->vimeo_link">Vimeo</a></li>-->
             </ul>
          </div>
       </div>

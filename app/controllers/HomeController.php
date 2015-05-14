@@ -18,10 +18,11 @@ class HomeController extends BaseController {
 	public function showWelcome()
 	{
 		$featuredBatches=$this->feature->getFeaturedBatches();
+		$institutes = $this->institute->getAllInstitutes();
 		// dd($featuredBatches);
 		$homeLang =Lang::get('ViewsLang/home');
 		// dd($homeLang);
-		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches'));
+		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches','institutes'));
 	}
 
 	public function showDummyWelcome()

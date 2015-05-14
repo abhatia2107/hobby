@@ -3,12 +3,12 @@
 <div class="overlay-slider">
 <div class="homepage-cover">
    <div class="container" id="hompage-cover">
-      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.5);">
+      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.2);">
          <div>
             <h1>{{$homeLang['home_title']}}</h1>
             <h2>{{$homeLang['home_subtitle']}}</h2>
          </div><br>
-         <div data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">   
+      <!-- <div data-location="" data-keywords="" data-show_filters="true" data-show_pagination="false" data-per_page="500" data-orderby="featured" data-order="DESC" data-categories="">   
             <form action="/filters/search" method="get" role="form">
               <div class="row">
                 <div class="col-md-11 col-sm-12 col-md-offset-1">
@@ -21,26 +21,14 @@
                      <div class="form-group" >
                         <select name="category_id" id="search_categories" class="postform element-select" >
                            <option value="0">{{$homeLang['home_category']}}</option>
-                           @if(isset($categories))
+                          @if(isset($categories))
                               @foreach($categories as $data)
                                  <option value="{{$data->id}}">{{$data->category}}</option>
                               @endforeach
                            @endif
                         </select>
                      </div>
-                  </div>
-                  <!--<div class="col-md-3 col-sm-3">
-                     <div class="form-group" >
-                        <select name="location_id" id="search_locations" class="postform">
-                           <option value="0">{{$homeLang['home_location']}}</option>
-                           @if(isset($locations))
-                              @foreach($locations as $data)
-                                 <option value="{{$data->id}}" >{{$data->location}}</option>
-                              @endforeach
-                           @endif
-                        </select>
-                     </div>
-                  </div> -->
+                  </div>            
                   <input type="hidden" name="chunk" value="0">
                   <div class="col-md-3 col-sm-4">
                      <button type="submit" class="btn btn-primary">{{$homeLang['home_search_button_text']}}</button>
@@ -48,12 +36,12 @@
                </div>
               </div>
             </form>
-         </div>
+         </div> -->
       </div>
    </div>
 </div>
 </div>
-<div class="container categories_container">
+<!--<div class="container categories_container">
    <h1>{{$homeLang['home_category_title']}}</h1>
    <h2 class="home-widget-description">{{$homeLang['home_category_subtitle']}}</h2><br><br>
    <div class="row" id='category-list-items'>
@@ -109,8 +97,25 @@
          @endforeach
       @endif 
    </div>
+</div> -->
+<div class="division_divider_"></div>
+<div class="container featured_listing_container">
+<div class="featured_listing_title">{{$homeLang['home_featured_title']}}</div>
+<div class="col-md-4 col-xs-12 featured_listing_item">
+@for($index = 0;$index<=19;$index++ )
+{{$institutes[$index]->institute."<br>"}}
+@endfor
 </div>
-<div class="container">
+<div class="col-md-4 col-xs-12 featured_listing_item">
+@for($index = 30;$index<=49;$index++)
+{{$institutes[$index]->institute."<br>"}}
+@endfor
+</div>
+<div class="col-md-4 col-xs-12 featured_listing_item">
+@for($index = 60;$index<=79;$index++ )
+{{$institutes[$index]->institute."<br>"}}
+@endfor
+</div>
 </div>
 @stop
 @section('pagejquery')

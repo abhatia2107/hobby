@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder {
               'user_location'=>"Hyderabad",
               'user_gender'=>"male",
               'user_confirmed' =>true,
+              'user_referral_code'=>$faker->unique()->bothify('???##?'),
               'user_subscription_token' =>true,
               ));
        
@@ -28,6 +29,7 @@ class UsersTableSeeder extends Seeder {
               'user_location'=>"Kurukshetra",
               'user_gender'=>"male",
               'user_confirmed' =>true,
+              'user_referral_code'=>$faker->unique()->bothify('???##?'),
               'user_subscription_token' =>true,
               ));
               
@@ -40,9 +42,10 @@ class UsersTableSeeder extends Seeder {
               'user_location'=>"Basar",
               'user_gender'=>"male",
               'user_confirmed' =>true,
+              'user_referral_code'=>$faker->unique()->bothify('???##?'),
               'user_subscription_token' =>true,
               ));
-              
+              /*
               foreach(range(1,30) as $index)
               {
                      DB::table('users')->insert(array(
@@ -55,14 +58,14 @@ class UsersTableSeeder extends Seeder {
                      'user_fb_id' =>$faker->randomNumber(5),
                      'user_birthdate' =>$faker->date,
                      'user_gender'=>"male",
-                     'remember_token'=>$faker->lexify(),
-                     'user_facebook_access_token'=>$faker->lexify(),
+                     'remember_token'=>$faker->bothify(),
+                     'user_facebook_access_token'=>$faker->bothify(),
                      'user_confirmation_code' =>$faker->randomNumber(1000000,10000000),
-                     'user_confirmed' =>$faker->boolean,
-                     'user_subscription_token' =>$faker->boolean,
+                     'user_referral_code'=>$faker->unique()->bothify('???##?'),
+                     'user_confirmed' =>$faker->boolean(),
+                     'user_subscription_token' =>$faker->boolean(),
                      'user_photo'=>"0"
                      ));
-              }
+              }*/
        }
 }
-?>

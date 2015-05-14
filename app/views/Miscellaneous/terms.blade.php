@@ -41,6 +41,11 @@
                             <p> HOBBYIX’s, advertisers and licensors’ services or products referenced on this site are common law or registered trademarks or service marks of such parties.
                             </p>
                             <hr>
+                            <h4>DELIVERY OF SERVICE
+                            </h4>
+                            <p> HOBBYIX provides its user with the access to the hobby classes listed on the website on successfully receiving the funds. It’s solely the responsibility of the user to check the available time slot with the class before making a purchase. We don’t guarantee any particular time slot in any of the class. We provide only the access to the classes listed on the site. Other facilities in the class may be charged extra by the management of that class.
+                            </p>
+                            <hr>
                             <h4>REFUNDS
                             </h4>
                             <p> Once user place an order at hobbyix.com and order is confirmed by hobbyix.com and then if a customer cancels the order then it solely depends on      HOBBYIX how much amount to refund to the customer. In such cases customers cannot force HOBBYIX to refund the full amount or part of the amount.

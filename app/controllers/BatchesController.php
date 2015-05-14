@@ -359,12 +359,14 @@ class BatchesController extends \BaseController {
 	public function increment($id)
 	{
         Batch::where('batches.id','=',$id)->increment('batch_view');
-	}
+	}/*
 	public function order($id)
 	{
 		$user_id=Auth::id();
-		$batchDetails=$this->batch->getBatchesForUser($user_id);
+		// $batchDetails=$this->batch->getBatchesForUser($user_id);
 		$institute_id=$this->institute->getInstituteforUser($user_id);
+		$batchDetails=Batch::find($id);
+		// dd($batchDetails);
 		return View::make('Batches.order',compact('batchDetails','institute_id'));
-	}
+	}*/
 }

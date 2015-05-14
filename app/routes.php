@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', 'HomeController@showWelcome');
 
 //To allow access only to admin.
@@ -62,8 +63,11 @@ Route::group(array('before' => "auth|admin"), function() {
 Route::group(array('before' => "admin"), function() {
 	Route::get('/batches/increment/{id}','BatchesController@increment');
 	Route::get('/batches/show/{id}','BatchesController@show');
-	Route::get('/batches/order/{id}','BatchesController@order');
+	// Route::get('/batches/order/{id}','BatchesController@order');
 });
+
+Route::resource('bookings', 'BookingsController');
+Route::get('bookings/create/{id}', 'BookingsController@create');
 
 //Route for CategoriesController
 
@@ -156,6 +160,11 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/locations/delete/{id}','LocationsController@destroy');
 	Route::get('/locations/show/{id}','LocationsController@show');
 
+    //Route for PromosController
+    Route::resource('promos', 'PromosController');
+    Route::get('promos/{promo_code}/disable','PromosController@disable');
+    Route::get('promos/{promo_code}/enable','PromosController@enable');
+
 	//Route for SubcategoriesController
 	Route::get('/subcategories','SubcategoriesController@index');
 	Route::post('/subcategories/store','SubcategoriesController@store');
@@ -188,7 +197,6 @@ Route::get('/venues/edit/{id}','VenuesController@edit');
 Route::post('/venues/update/{id}','VenuesController@update');
 Route::get('/venues/delete/{id}','VenuesController@destroy');
 });
-
 
 //Route for UsersController
 
@@ -236,6 +244,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
 	Route::post('/batches/sendMessage','BatchesController@sendMessage');
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
+    Route::post('promos/isValid','PromosController@isValid');
 });
 
 Route::get('/privacy', function()
@@ -267,3 +276,7 @@ Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{cat
 Route::get('/filters/search','FiltersController@search');
 
 });
+
+Route::get('/users/account/{id}','UsersController@account');
+
+Route::resource('memberships', 'MembershipsController');

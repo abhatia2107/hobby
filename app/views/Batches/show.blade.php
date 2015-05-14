@@ -298,14 +298,14 @@
           @else
             <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-primary">Submit</button>           
           @endif
-        </form>               
+        </form>
       </div>
     </div>
    
     <div class='col-md-4 col-sm-5 col-xs-12 column'>
       <div class="sample-box-small" id='batchOrderSample'>
         <div id='sample-batch-name'>Book This Class</div>
-        <form role="form"  name="batchOrderForm" id="batchOrderForm" action="" > 
+        <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
         <div class="row batchOrderField">
           <div class='col-md-5 col-sm-6 col-xs-6'>Price Per Session</div>
           <div class='col-md-5 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
@@ -317,7 +317,7 @@
                   @for($seesion=1;$seesion<=6;$seesion++)
                       <option value={{$seesion}}>{{$seesion}}</option>
                   @endfor
-              </select>          
+              </select>
           </div>
         </div>
         <div class="row batchOrderField">
@@ -333,12 +333,21 @@
         <hr/>
         <div class="row totalAmount">
           <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}<span></div>
+          <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
         </div>
         <div class="row batchOrderField batchOrderButtons">    
-          <a href=""><div class="col-md-4 col-sm-12 col-xs-12 payNowButton ">Pay Now</div></a>
-          <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a>
+          <input type="submit" class="col-md-4 col-sm-12 col-xs-12 payNowButton" value="Pay Now">
+          <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
         </div>
-        </form>        
+        </form>
+
+        <form method="post" action="/promos/isValid" enctype="multipart/form-data">
+          <input type="hidden" id="csrf_token" name="csrf_token" value="{{csrf_token()}}">
+          <input type="checkbox" id ="promo" name="promo">
+          <label for="promo">I have a promo code</label>
+          <input type="text" id="promo_code" name="promo_code">
+          <input type="submit">
+        </form>
       </div>
       <div class="sample-box-small" id='institute-details'>
          <div id='sample-batch-name'>Institute Details</div>
@@ -390,7 +399,7 @@
           $('#loginModal').modal('show') ;
         }
       });
-      $('#numberOfSessions').change(function () 
+      $('#no_of_sessions').change(function () 
       {
           var sessionsCount = $(this).val(); 
           var sessionPrice = {{$sessionPrice}};

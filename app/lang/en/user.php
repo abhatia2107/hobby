@@ -32,17 +32,21 @@
 
 		"user_signup_mail_subject"=>"Welcome to Hobbyix",
 
+        "user_pending_referral_subject"=>"Your friend :name signed up for hobbyix.com",
+
 		"email_verification_failed"=>"Sorry you are not an authorized user, Sign-Up within 2 minutes.",
 
 		"email_already_verified"=>"Your email has been already verified.",
 
-		"welcome"=>"Welcome, :name your email has been verified. Please feel free to drop a mail at Support, if you have any complaint or feedback.",
+		"welcome_verify"=>"Welcome, :name your email has been verified. Please feel free to drop a mail at Support, if you have any complaint or feedback.",
 
 		"user_password_changed"=>"Your password has been successfully changed",
 
 		"user_password_change_failed"=>"Your current password is incorrect",
 
 		"user_permission_failed"=>"We're unable to get permission from your Facebook account.",
+
+		"user_referral_error"=>"Invalid referral code",
 
 		//admin
 		"user_enabled"=>"Your user have been enabled successfully",

@@ -582,7 +582,7 @@
 									$("<a></a>")
 									.attr("class","btn btn-primary")
 									.attr("id","booknowButton")	
-									.attr("href","/batches/order/"+batchID)							
+									.attr("href","/bookings/create/"+batchID)							
 									.text("BOOK NOW")
 								)
 							)												

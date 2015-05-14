@@ -70,7 +70,7 @@ class AdminsController extends \BaseController {
 				'name'=>$name,
 			];
 			$subject=Lang::get('admin.admin_mail_subject');
-			Mail::later(60,'Emails.admin', $data, function($message) use ($email,$name,$subject)
+			Mail::later(60,'Emails.admin.admin', $data, function($message) use ($email,$name,$subject)
 			{
     			$message->to($email,$name)->subject($subject);
 			});

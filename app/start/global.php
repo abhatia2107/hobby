@@ -93,3 +93,4 @@ $loggedIn = Auth::id();
 View::share('categories', $categories);
 View::share('locations',$locations);
 View::share('loggedIn',$loggedIn);
+

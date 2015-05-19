@@ -1,69 +1,21 @@
 @extends('Layouts.layout')
 @section('content')
-
-<div class="container main-container headerOffset">
-  
-  <div class="row innerPage">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-      <div class="row userInfo">
-        <div class="col-xs-12 col-sm-12">
-          <h1 class="title-big text-center section-title-style2">
-            <span >
-              About Hobbyix
-            </span>
-          </h1>
-          
-          <p class="lead text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat hendrerit dictum. Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
-          </p>
-          
-          
-          <hr class="hr hr30">
-          <div class="row animated">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-sm-6">
-              <img class="img-responsive" src="images/site/girl1.jpg" alt="img">
-              <h3 class="block-title-3">
-                Consectetur adipiscing  
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat hendrerit dictum. Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-              </p>
-              
-              
-              
-            </div>
-            
-            <div class="col-lg-4 col-md-4 col-sm-6 col-sm-6">
-              <img class="img-responsive" src="images/site/girl2.jpg" alt="img">
-              <h3 class="block-title-3">
-                Lorem ipsum dolor  
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat hendrerit dictum. Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-              </p>
-              
-            </div>
-            
-            <div class="col-lg-4 col-md-4 col-sm-6 col-sm-6">
-              <img class="img-responsive" src="images/site/girl3.jpg" alt="img">
-              <h3 class="block-title-3">
-                Consectetur adipiscing 
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat hendrerit dictum. Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-              </p>
-              
-            </div>
-            
-            
-            
-          </div><!--/.row-->
-          
-          <hr>
-        </div>
-      </div>  <!--/row end-->
-    </div>
-  </div> <!--/.innerPage-->
-  <div style="clear:both">  </div>
-</div><!-- /.main-container -->
+<div class="overlay-slider" style="background: url('/assets/images/home/aboutHobbyix.jpg') 0px -125px; 
+background-repeat:no-repeat;
+background-position:center top;
+-o-background-size: 100% 130%, auto;
+-moz-background-size: 100% 130%, auto;
+-webkit-background-size: 100% 130%, auto;
+background-size: 100% 130%, auto;">
+<div class="homepage-cover">
+   <div class="container" id="hompage-cover">
+      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.5);">
+         <div style="padding:1px 10px 5px 10px;">
+            <h1>Stay Active, Live Happy</h1>
+            <h2 style="font-size:20px;font-weight:normal">Hobbyix is a new kind of membership which makes your workout new, exciting and diverse every time. You will get to browse through 1000's of classes around with just one membership. Sounds cool!!! Get in touch for any details.....</h2>
+         </div>  
+      </div>
+   </div>
+</div>
+</div>
 @stop

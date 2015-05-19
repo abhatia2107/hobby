@@ -5,7 +5,7 @@
 	  	}
   	</style>
 	<div class="clearfix header_row1">
-		<div class=" col-sm-2 col-md-2  ">
+		<div class=" col-sm-3 col-md-3  ">
 			<a class="navbar-brand" href="/">
 				<span class="website-title">HOBBYIX</span>
 			</a>
@@ -32,10 +32,12 @@
 				$user=User::find($id);
 				if($user)
 					$name=$user->user_first_name;
+				else
+					$name = "USER ACCOUNT";
 			}
 		?>
 		@if(!$id)
-			<div class=" col-sm-3 col-md-3 userInfoListing" >
+			<div class="col-sm-3 col-md-3 userInfoListing" >
 				<div class="login">
 					<a href="#" data-toggle="modal" data-target="#loginModal">LOGIN TO HOBBYIX</a>
 					<!--&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -44,33 +46,19 @@
 			</div>
 		@else
 			<div class=" col-sm-3 col-md-3 userInfoListing ">
-			<span class="user_account">			 
-			<a href="/users/show/{{$id}}">
-				@if($user)
-					{{$name}}
-				@else
-					My Account
-				@endif
-			</a>&nbsp;|&nbsp;</span>
-			<a href="/users/logout" >Logout</a>			
+				<div class="btn-group dropdown user_account_options">
+					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{$name}}
+						&nbsp;<span class="caret"></span>
+					</button>													
+					<ul class="dropdown-menu">
+						<li> <a href="/users/MyProfile">My Profile</a></li>
+						<li> <a href="/users/MyOrders">My Orders</a> </li>
+						<li> <a class="" href="/users/show/{{$id}}">Change Password</a>	</li>
+						<li class="divider"> </li>
+						<li> <a class="header_logout_a" href="/users/logout" >Logout</a> </li>
+					</ul>
+				</div>			
 			</div>		
-		@endif
-			
-		<div class="col-sm-1 col-md-1">
-			<select  name="location_id" class="header_location_dropdown">
-				@if(isset($locations))
-					@foreach ($locations as $data)
-                        <option value={{$data->location_id}}
-                            @if(isset($location_id))
-                            {{($location_id==$data->id)?
-                            'selected="selected"':''}}
-                            @else{{"Input::old('location_id')"}}
-                            @endif>
-                            {{$data->location}}
-                        </option>
-                    @endforeach
-				@endif
-			</select>
-		</div>
+		@endif			
 	</div>
 @show

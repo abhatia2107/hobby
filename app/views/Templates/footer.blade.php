@@ -1,12 +1,12 @@
 @section("footer")
 <div class="container">
    <div class="row">
-      <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-5">
+      <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-7">
          <div class="textwidget">
             <p>
-               At Hobbyix our purpose is to help people find great local businesses like dentists, hair stylists and mechanics. Go Explore!
-            </p>
-            <p>Proudly Made in India</p>
+               Hobbyix<br>
+               Stay active and live happy.               
+            </p>            
          </div>
          <div class="copyright_text">
             Copyright Hobbyix 2015. All Rights Reserved  
@@ -19,12 +19,12 @@
                <li><span class="glyphicon glyphicon-dashboard"></span><a href="/feedbacks/create">Feedback</a></li>
                <li><span class="glyphicon glyphicon-list-alt"></span><a href="/terms">Terms Of Use</a></li>
                 <li><span class="glyphicon glyphicon-user"></span><a href="/privacy">Privacy Policy</a></li>
-                <li><span class="glyphicon glyphicon-question-sign"></span><a href-link="/aboutus">About Hobbyix</a></li>
+                <li><span class="glyphicon glyphicon-question-sign"></span><a href="/aboutus">About Hobbyix</a></li>
                 <!--<li><span class="glyphicon glyphicon-globe"></span><a href-link="/blog">Hobbyix Blog</a></li> -->
             </ul>
          </div>
       </div>
-      <div class="footer-widget-column col-xs-12 col-sm-3 col-lg-3">
+      <div class="footer-widget-column col-xs-12 col-sm-3 col-lg-3" style="display:none">
          <h1 class="footer-widget-title">Stay Connected</h1>
          <div class="menu-social-widget-menu-container">
             <ul id="menu-social-widget-menu" class="menu">                                 

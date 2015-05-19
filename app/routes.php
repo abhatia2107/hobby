@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -61,10 +61,13 @@ Route::group(array('before' => "auth|admin"), function() {
 
 // Route::group(array('before' => "approved-or-admin"), function() {
 Route::group(array('before' => "admin"), function() {
-	Route::get('/batches/increment/{id}','BatchesController@increment');
+	/*Route::get('/batches/increment/{id}','BatchesController@increment');
 	Route::get('/batches/show/{id}','BatchesController@show');
-	// Route::get('/batches/order/{id}','BatchesController@order');
+	// Route::get('/batches/order/{id}','BatchesController@order');*/
 });
+
+Route::get('/batches/increment/{id}','BatchesController@increment');
+Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::resource('bookings', 'BookingsController');
 Route::get('bookings/create/{id}', 'BookingsController@create');
@@ -206,6 +209,9 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/users/disable/{id}','UsersController@disable');
 	Route::get('/users/delete/{id}','UsersController@destroy');
 	Route::get('/users/history','UsersController@history');
+	Route::get('/users/MyProfile','UsersController@profile');
+	Route::get('/users/MyOrders','UsersController@orders');
+
 });
 
 Route::group(array('before' => "auth"), function() {
@@ -261,11 +267,13 @@ Route::group(array('before' => "admin"), function() {
 
 Route::get('/users/login/{id}','UsersController@loginViaId');
 
-Route::get('/aboutus', function()
-{
-return View::make('Miscellaneous.aboutus');
+
 });
 
+Route::get('/aboutus', function()
+{
+	return View::make('Miscellaneous.aboutus');
+});
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
@@ -274,8 +282,6 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chu
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{category_id}/{location_id}/{chunk}','FiltersController@filter');
 
 Route::get('/filters/search','FiltersController@search');
-
-});
 
 Route::get('/users/account/{id}','UsersController@account');
 

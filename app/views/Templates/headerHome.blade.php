@@ -5,7 +5,7 @@
 				<span class="website-title">HOBBYIX</span>
 			</a>
 		</div>		
-		<div class="col-xx-12 MainHeaderUserInfo">		
+		<div class="MainHeaderUserInfo">		
 			<div class="userInfoListing ">
 				<?php
 					$id=Auth::id();
@@ -30,20 +30,11 @@
 							&nbsp;<span class="caret"></span>
 						</button>													
 						<ul class="dropdown-menu">
-							<li>
-								<a href="#">Profile</a>
-							</li>
-							<li>
-								<a href="#">My Orders</a>
-							</li>
-							<li>
-								<a class="" href="/users/show/{{$id}}">Change Password</a>								
-							</li>
-							<li class="divider">
-							</li>
-							<li>
-								<a class="header_logout_a" href="/users/logout" >Logout</a>
-							</li>
+							<li> <a href="/users/MyProfile">My Profile</a></li>
+							<li> <a href="/users/MyOrders">My Orders</a> </li>
+							<li> <a class="" href="/users/show/{{$id}}">Change Password</a>	</li>
+							<li class="divider"> </li>
+							<li> <a class="header_logout_a" href="/users/logout" >Logout</a> </li>
 						</ul>
 					</div>											
 				@endif

@@ -335,19 +335,19 @@
           <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}<span></div>
           <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
         </div>
-        <div class="row batchOrderField batchOrderButtons">    
-          <input type="submit" class="col-md-4 col-sm-12 col-xs-12 payNowButton" value="Pay Now">
+        <div class="row batchOrderButtons">    
+          <button type="submit" style="padding:5px 70px;" id="booknowButton" >Pay Now</button>
           <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
         </div>
         </form>
-
+        <!---
         <form method="post" action="/promos/isValid" enctype="multipart/form-data">
           <input type="hidden" id="csrf_token" name="csrf_token" value="{{csrf_token()}}">
           <input type="checkbox" id ="promo" name="promo">
           <label for="promo">I have a promo code</label>
           <input type="text" id="promo_code" name="promo_code">
           <input type="submit">
-        </form>
+        </form> -->
       </div>
       <div class="sample-box-small" id='institute-details'>
          <div id='sample-batch-name'>Institute Details</div>
@@ -384,7 +384,7 @@
 
 @stop
 @section('pagejquery')
-<script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript">
   $(document).ready(function () 
   {

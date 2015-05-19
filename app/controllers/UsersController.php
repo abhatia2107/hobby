@@ -50,6 +50,16 @@ class UsersController extends \BaseController {
 		return Redirect::to('users/changepassword');
 	}
 
+	public function profile()
+	{
+		return View::make('Users.profile');
+	}
+
+	public function orders()
+	{
+		return View::make('Users.orders');
+	}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 * GET /users/{id}/edit

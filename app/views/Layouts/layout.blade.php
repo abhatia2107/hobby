@@ -31,9 +31,13 @@
 				@include('Modals.signup')
 			</div>
 			<!-- Error and success messages -->
-			@include('Templates.message')
+			<div style="margin:0px;position:absolute;width:100%;">
+				@include('Templates.message')
+			</div>
 			<!--  id="content" class="site-content" -->
+			<div style="margin-top:0px;">			
 			@yield('content')			
+			</div>
 			<!--Footer Section social networking links-->
 			<footer class="footer-wrapper">
 				@include('Templates.footer')

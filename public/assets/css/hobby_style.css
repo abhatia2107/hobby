@@ -4,7 +4,7 @@ body { -webkit-text-size-adjust: none; }
 
 .modal-open{  padding-right: 0px !important; }
 
-body { overflow-x: hidden;font-family: "Times New Roman", Times, serif;margin: 0 0; }
+body { overflow-x: hidden;font-family: 'Open Sans',sans-serif;margin: 0 0; }
 
 body li {  list-style-type: none; }
 
@@ -24,8 +24,7 @@ body li {  list-style-type: none; }
 
 .user_account_options .btn:hover, .btn:active {color: white !important;}
 
-.user_account_options ul {right: 0;left: auto;}
-
+.user_account_options ul {right: 0;left: auto;margin-top: -1px;border-radius: 0px;}
 
 .user_account_options .btn:focus, .btn:active:focus, .btn.active:focus {
     outline: 0 none;
@@ -34,11 +33,10 @@ body li {  list-style-type: none; }
 .user_account_options .btn-primary {
     color: #ffffff;border-color:#20cfb1;padding: 3px 10px;}
  
-.user_account_options .btn-primary:active, .btn-primary.active {
-    background: #007299;
+.user_account_options .btn-primary:active{
     box-shadow: none;
 }
-
+ 
 
 .homepage-cover { width: 100%;text-align: center;background-color: rgba(0, 0, 0, 0.1);  }
 
@@ -96,17 +94,13 @@ body li {  list-style-type: none; }
 
 .home-category-type img { width:100%;height: 170px; }
 
-figcaption { 
-  display: none;position: absolute;top: 0;left: 0;z-index: 100;width: 100%;height: 100%;opacity: .85;text-align: center;
-  background: lightgray;font-weight: bolder;padding-top: 25%;
-}
+.explore_button {text-align: center;}
 
-.photo_caption {
-  position: absolute;top: 0;left: 0;z-index: 20;width: 100%;height: 100%;color: skyblue;z-index: 1000;text-align: center;
-  margin-top: 25%;font-weight: bolder;color: white;font-size: 24px;
-}
+.explore_button .btn-primary {border-radius: 0px;border:0px;}
 
 .home-category-type:hover figcaption  { display: block; }
+
+.login {float: right;}
 
 .categories_container { text-align: center; }
 
@@ -164,9 +158,9 @@ span.stars span {  background-position: 0 0; }
 
 #vendorNavBar {  margin-top: -50px;position: relative; }
 
-.featured_listing_container { margin-bottom: 20px;}
+.featured_listing_container { margin-bottom: 20px;font-family: 'Open Sans',sans-serif;}
 
-.featured_listing_title {  border-bottom: 1px solid #e14164;margin: 16px 0 10px 0;padding: 0 0 5px 0;color: #e14164;font-weight: 300;
+.featured_listing_title {  border-bottom: 1px solid #20cfb1;margin: 16px 0 10px 0;padding: 0 0 5px 0;color: #202e54;font-weight: 300;
   font-size: 25px;
 }
 
@@ -183,7 +177,7 @@ span.stars span {  background-position: 0 0; }
 }
 
 .filterTitle {
-  color:white;font-family: "Times New Roman", Times, serif;font-size: 20px;padding: 0px 5px;background:#3396d1;height: 30px;
+  color:white;font-family: 'Open Sans',sans-serif;font-size: 20px;padding: 0px 5px;background:#3396d1;height: 30px;
 
 }
 
@@ -196,12 +190,12 @@ span.stars span {  background-position: 0 0; }
 
 #batchInfo {   
   background: white;border:0px solid;margin-bottom: 15px;border-color: skyblue;-webkit-box-shadow: 0px 3px 0px -2px #0099FF;
-  box-shadow: 0px 3px 0px -2px #0099FF;color: #333;font-family: "Times New Roman", Times, serif; font-size: 15px;font-weight: 100;
+  box-shadow: 0px 3px 0px -2px #0099FF;color: #333;font-family: 'Open Sans',sans-serif; font-size: 15px;font-weight: 100;
 }
 
 #filter_data {
   box-shadow: 0px 0px 4px #3366CC;-moz-box-shadow: 0px 0px 4px #3366CC;-webkit-box-shadow: 0px 0px 4px #3366CC;
-  margin-bottom: 20px; padding-top: 10px;color: #333; font-family: "Times New Roman", Times, serif;font-size: 15px;
+  margin-bottom: 20px; padding-top: 10px;color: #333; font-family: 'Open Sans',sans-serif;font-size: 15px;
 }
 
 #batch_name { font-size: 22px; font-weight: bold; color: #0033CC;  float: left;   }
@@ -216,7 +210,7 @@ span.stars span {  background-position: 0 0; }
 
 .filters  {  max-height: 130px; overflow: auto; color: #333;padding: 0px; }
 
-#browse-filter   {  font-family: "Times New Roman", Times, serif; font-weight: lighter;   }
+#browse-filter   {  font-family: 'Open Sans',sans-serif; font-weight: lighter;   }
 
 #browse-filter label {font-weight: lighter;}
 
@@ -344,7 +338,7 @@ span.stars span {  background-position: 0 0; }
 
 @media screen and (min-width: 768px) {  #sendMessage .modal-dialog  { width:430px; }  }
 
-#sendMessage {  border-radius: 5px; font-family: "Times New Roman", Times, serif; font-size: 15px; }
+#sendMessage {  border-radius: 5px; font-family: 'Open Sans',sans-serif; font-size: 15px; }
 
 #sendMessage .modal-dialog { margin-top:7%; }
 
@@ -368,15 +362,15 @@ span.stars span {  background-position: 0 0; }
 
 #close_model:hover { color: black }
 
-#filter-tittle-name { font-family: "Times New Roman", Times, serif; font-size: 18px; color: gray; margin-left: 10%}
+#filter-tittle-name { font-family: 'Open Sans',sans-serif; font-size: 18px; color: gray; margin-left: 10%}
 
-.breadcrumb { background: white; font-family: "Times New Roman", Times, serif; }
+.breadcrumb { background: white; font-family: 'Open Sans',sans-serif; }
 
 
 
 /*vendor page style sheet */
 .home_vendor_page {/*#f0f0f0*/
-  width: 100%;background:#f0f3f6;font-family:"Times New Roman", Times, serif;padding-top: 50px;
+  width: 100%;background:#f0f3f6;font-family:'Open Sans',sans-serif;padding-top: 50px;
   padding-bottom: 40px;color: #333; 
  
 }
@@ -548,6 +542,8 @@ span.stars span {  background-position: 0 0; }
 
 .footer-wrapper .copyright_text {  margin-top: 8%; }
 
+.space_footer {padding-top: 40px;background:#f0f3f6;}
+
 .content-div { min-height:330px;height:auto !important; }
 
 .checkbox_data { position:relative;top:-2px; }
@@ -597,7 +593,7 @@ span.stars span {  background-position: 0 0; }
 
 }
 
-.batchOrderButtons { overflow: hidden;text-align: center;}
+.batchOrderButtons { text-align: center;color: white}
 
 .payNowButton_SamplePage { background-color:#3aa54c;padding: 7px 8px;color: white;text-decoration: none; }
 
@@ -605,9 +601,9 @@ span.stars span {  background-position: 0 0; }
   text-decoration: none;color: white;
 }
 
-.batchOrderField .payNowButton
+.batchOrderField 
 {
-  padding: 3px; height: 32px;
+ text-align: center;
 }
 
 .payNowButton1
@@ -627,7 +623,7 @@ span.stars span {  background-position: 0 0; }
 
 #booknowButton
 {
-  background: #3aa54c;margin-top: 5px;padding: 4px 7px 2px 7px;border-radius: 0px;border:0px solid;text-align: center;
+  background: #3396d1;margin-top: 5px;padding: 6px 25px 4px 25px;border-radius: 0px;border:0px solid;text-align: center;
 }
 
 .singleSessionPrice

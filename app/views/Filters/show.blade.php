@@ -41,7 +41,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 col-xs-12 col-sm-12">
-			<ul class="breadcrumb" style="background:white;">
+			<!--<ul class="breadcrumb" style="background:white;">
 				<li>
 					<a href="/">Home</a>
 				</li>
@@ -53,10 +53,10 @@
 					@endif
 				</li>
 				<li></li>
-			</ul>
+			</ul> -->
 			<div class="row">
 				<!--Start of filter division -->
-				<div class="col-md-3 col-xs-12 col-sm-3" style="margin-top:-15px">
+				<div class="col-md-3 col-xs-12 col-sm-3" style="margin-top:15px">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->
 					<div id="browse-filter" class="filter-option-1 filterOption">	
 						<div class="filterTitle">Sub Categories</div>
@@ -89,21 +89,9 @@
 								@endforeach
 							 </ul>
 							</div>
-					</div>
-					<div id="browse-filter" class="filter-option-3 filterOption">	
-						<div class="filterTitle">Trial Available</div> 
-						<div class="filterOptionsList">
-							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
-							@foreach ($trial as $index => $trialValue)
-								<li trial="{{$index}}" > 
-								 	 <label class="sub"><input autocomplete="off" style="" value="{{$index}}" type="checkbox" class="trialCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$trialValue}}</span></label>
-								</li>						
-							@endforeach
-							 </ul>
-						</div>
-					</div>
+					</div>				
 				</div>
-				<div class="col-md-9 col-xs-11 col-sm-9 results-container" >
+				<div class="col-md-9 col-xs-11 col-sm-9 results-container" style="margin-top:30px;" >
 					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div>
@@ -372,7 +360,7 @@
 									(
 										$("<div></div>")
 										.attr("class","col-md-12 facilities_title")
-										.text("Facilities: ")
+										.text(" ")
 									)
 								)
 								/*.append
@@ -583,7 +571,7 @@
 									.attr("class","btn btn-primary")
 									.attr("id","booknowButton")	
 									.attr("href","/bookings/create/"+batchID)							
-									.text("BOOK NOW")
+									.text("Book Now")
 								)
 							)												
 							/*.append

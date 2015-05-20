@@ -182,6 +182,7 @@
   {
     margin-top: 10px;
     font-size: 15px;
+    text-align: left;
   }
   #batchOrderSample select
   {
@@ -307,12 +308,12 @@
         <div id='sample-batch-name'>Book This Class</div>
         <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
         <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-6 col-xs-6'>Price Per Session</div>
-          <div class='col-md-5 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
+          <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>
+          <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
         </div>
         <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-6 col-xs-6'>No. of Sessions</div>
-          <div class='col-md-5 col-sm-6 col-xs-6'>  
+          <div class='col-md-6 col-sm-6 col-xs-6'>No. of Sessions</div>
+          <div class='col-md-6 col-sm-6 col-xs-6'>  
               <select class="form-control" id="numberOfSessions" name="numberOfSessions" required>                 
                   @for($seesion=1;$seesion<=6;$seesion++)
                       <option value={{$seesion}}>{{$seesion}}</option>
@@ -321,14 +322,14 @@
           </div>
         </div>
         <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-6 col-xs-6'>Booking Date</div>
-          <div class='col-md-5 col-sm-6 col-xs-6'>
+          <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date</div>
+          <div class='col-md-6 col-sm-6 col-xs-6'>
                 <input type="text" placeholder="Select Date" class="form-control" id="datepicker" name="bookingDate" required />                     
           </div>          
         </div>
         <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-6 col-xs-6'>Subtotal</div>
-          <div class='col-md-5 col-sm-6 col-xs-6' id="orderSubtotal">: Rs. {{$sessionPrice}}</div>
+          <div class='col-md-6 col-sm-6 col-xs-6'>Subtotal</div>
+          <div class='col-md-6 col-sm-6 col-xs-6' id="orderSubtotal">: Rs. {{$sessionPrice}}</div>
         </div>
         <hr/>
         <div class="row totalAmount">

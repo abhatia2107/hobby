@@ -139,7 +139,7 @@ class BatchesController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id)
-	{
+	{		
 		$batchDetails= $this->batch->getBatch($id);
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
@@ -147,12 +147,19 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		//dd($batchDetails);
+		//dd($batchDetails[0]);
 		if(!is_null($batchDetails))
-		{
+		{			
+			$subcategory = $batchDetails[0]->subcategory;
+			$instituteName = $batchDetails[0]->institute;
+			$locality = $batchDetails[0]->locality;
+			$location = $batchDetails[0]->location;
+			$metaContent[0] = "$subcategory -  $instituteName - $locality - $location :: Hobbyix";
+			$metaContent[1] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";
+			$metaContent[2] = "$instituteName $locality, $instituteName $location, $subcategory classes in $locality, $subcategory classes in $location, $subcategory classes $instituteName";
 			$institute_id=$batchDetails[0]->batch_institute_id;
 			$comments=$this->comment->getCommentForInstitute($institute_id);
-			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays'));
+			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays','metaContent'));
 		}
 		else
 		{

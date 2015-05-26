@@ -1,8 +1,8 @@
 @extends('Layouts.layout')
 @section('pagestylesheet')
   <style type="text/css">
-     #page
-    {
+     #page 
+     {
       width: 100%;
       margin-top: 0px;
 
@@ -37,12 +37,11 @@
     }
     #sample-batch-name
     {
-      font-size: 27px;
+      font-size: 25px;
       font-weight: normal; 
       -webkit-box-shadow: 0px 3px 0px -2px #0099FF;
       box-shadow: 0px 3px 0px -2px #0099FF;
       text-align: center;
-      font-weight: bold;
     }
     #secondary
     {
@@ -84,16 +83,18 @@
     {
       background: white;
       margin-top: 30px;
-      box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
-      -webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
+       webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+      box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+      -moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);   
     }
     .sample-box-small
     {
       background: white;
       margin-top: 30px;
       padding:20px 30px 30px 30px;
-      box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
-      -webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
+       webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+      box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+      -moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
     }
 
     #pin-icon
@@ -196,14 +197,22 @@
     padding: 0px 0px 0px 5px;
     width: 75%;
   }
+  #related_data_container
+  {
+    border-top: 1px solid lightgrey; 
+    padding: 20px 5%;
+    width: 100%;    
+  }
+  #related_data_container h4 {font-size: 18px;color: #444;font-weight: bold;margin:0px;}
 
-
+  .related_item {margin-top: 15px;}
 
   </style> 
 @stop
 @section('content')
 <?php
-  foreach ($batchDetails as $data) {
+  foreach ($batchDetails as $data) 
+  {
     $instituteName = $data->institute;
     $instituteAddress = $data->venue_address;
     $instituteContact = $data->venue_contact_no;
@@ -221,8 +230,10 @@
     $batchAccomplishment = $data->batch_accomplishment;
     $instituteDetails = $data->institute_description;
     $facebookLink = $data->institute_fblink;
-    $twitterLink = $data->institute_twitter;    
+    $twitterLink = $data->institute_twitter; 
+    $locality =  $data->locality;
   }
+  $relatedContent = null;
 ?>
 
 <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
@@ -246,9 +257,8 @@
   </div>
 </div>
 <div class="container" id='blog-container'>
-  <div class="row clearfix">    
   <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="col-md-7 col-sm-7 col-xs-12 ">
+    <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1">
       <div id="sample-batch-details" class="sample-box col-md-12 col-sm-12 col-xs-12" >
         <div id='sample-batch-name'>{{$batchName}} Details</div>
         <div id='batch-session-count' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
@@ -354,15 +364,15 @@
          <div id='sample-batch-name'>Institute Details</div>
          <span id='sample-details' class="details-container">{{$instituteDetails}}</span>    
       </div>
-     <div id='sample-social-profiles' class="sample-box-small">
+     <!--<div id='sample-social-profiles' class="sample-box-small">
        <div id='sample-batch-name'>Social Profiles</div>
           <div class="social-profiles-container">
             <a href="{{$twitterLink}}" class="sample-social-twitter"><img src="/assets/images/sample/twitter.jpg"></a>
             <a href="{{$facebookLink}}" class="sample-social-facebook"><img src="/assets/images/sample/facebook.jpg"></a>
-         <!-- <a href="https://plus.google.com/" class="sample-social-googleplus"><img height="42px" src="/assets/images/sample/googleplus.jpg"></a>
-          <a href="http://linkedin.com/Astoundify" class="sample-social-linkedin"><img src="/assets/images/sample/linkedin.jpg"></a></center> -->
+           <a href="https://plus.google.com/" class="sample-social-googleplus"><img height="42px" src="/assets/images/sample/googleplus.jpg"></a>
+          <a href="http://linkedin.com/Astoundify" class="sample-social-linkedin"><img src="/assets/images/sample/linkedin.jpg"></a></center> 
           </div>
-      </div>
+      </div> -->
       <div id='sample-demo-model'  class="sample-box-small" style="display:none">
         <div id='sample-batch-name'>Gallery</div>     
         <ul class="listify-gallery-images">
@@ -378,9 +388,86 @@
         </ul>              
       </div>
     </div>
+  </div> 
+</div>
+<?php
+  $relatedData = ["data1","data2","data3","data4","data5","data6","data7","data8","data9","data10","data11","data12"];
+?>
+<div class="container" id="related_data_container">
+  <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <h4>Related to {{$instituteName}}</h4>       
+        <?php
+          $institutesLength = sizeof($relatedData);
+          $index = 0;
+          $maxlength = 12;
+          $colNum = 3;
+          $width = 4;
+          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
+          $listLength = $maxlength / $colNum;
+        ?>
+        @for($col = 0;$col<=$colNum;$col++ )
+          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
+            @for(; $index<$listLength && $index<$maxlength; $index++ )
+              <li title="{{$relatedData[$index]}}">
+                {{$relatedData[$index]}}
+              </li>
+            @endfor
+            <?php
+              $listLength += $listLength;
+            ?>  
+          </div>          
+        @endfor           
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 related_item">
+        <h4>Other {{$subcategory}} classes</h4>
+        <?php
+          $institutesLength = sizeof($relatedData);
+          $index = 0;
+          $maxlength = 12;
+          $colNum = 3;
+          $width = 4;
+          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
+          $listLength = $maxlength / $colNum;
+        ?>
+        @for($col = 0;$col<=$colNum;$col++ )
+          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
+            @for(; $index<$listLength && $index<$maxlength; $index++ )
+              <li title="{{$relatedData[$index]}}">
+                {{$relatedData[$index]}}
+              </li>
+            @endfor
+            <?php
+              $listLength += $listLength;
+            ?>  
+          </div>          
+        @endfor   
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 related_item">
+        <h4>{{$category}} classes in {{$locality}}</h4>
+        <?php
+          $institutesLength = sizeof($relatedData);
+          $index = 0;
+          $maxlength = 12;
+          $colNum = 3;
+          $width = 4;
+          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
+          $listLength = $maxlength / $colNum;
+        ?>
+        @for($col = 0;$col<=$colNum;$col++ )
+          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
+            @for(; $index<$listLength && $index<$maxlength; $index++ )
+              <li title="{{$relatedData[$index]}}">
+                {{$relatedData[$index]}}
+              </li>
+            @endfor
+            <?php
+              $listLength += $listLength;
+            ?>  
+          </div>          
+        @endfor   
+      </div>
   </div>
-  </div>
-  <div class="space_for_footer"></div>
 </div>
 
 @stop

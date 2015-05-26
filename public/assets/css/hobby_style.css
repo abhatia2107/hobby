@@ -8,7 +8,7 @@ body { overflow-x: hidden;font-family: 'Open Sans',sans-serif;margin: 0 0; }
 
 body li {  list-style-type: none; }
 
-.website-title {color: white;font-size: 28px;}
+.website-title {color: white;font-size: 28px;padding: 0px;}
 
 .header_img { height:30px; }
 
@@ -48,11 +48,15 @@ body li {  list-style-type: none; }
 
 .min-button {  float: right;  }
 
+@media (min-width:320px) { .homepage-cover { padding: 6em 0 5em; } }
+
 @media (min-width:768px) {  .homepage-cover { padding: 7em 0 8em; } }
 
-@media (min-width:992px) {  .homepage-cover { padding: 14em 0 13em; } }
+@media (min-height:550px)  {  .homepage-cover { padding: 12em 0 11em; } }
 
-@media (min-width:992px) {  #hompage-cover  { padding:0 160px 0 160px;  } }
+@media (min-height:650px)  {  .homepage-cover { padding: 14em 0 13em; } }
+
+@media (min-height:700px) and (max-height:900px) {  .homepage-cover { padding: 19em 0 18em; }}
 
 @media (min-width:992px) {  body,html { overflow-x: hidden; margin-right: 0px;  } }
 
@@ -82,9 +86,9 @@ body li {  list-style-type: none; }
 
 .category-list-items { height: 250px;border-radius: 4px;overflow: hidden;float: left;margin-top: 0px;padding: 10px;  }
 
-.overlay-slider { 
-  width: 100% !important;height: 100% !important;margin-top: 0px;top:0;left:0;
-  background: url("/assets/images/home/institute.jpg") 0px -125px; 
+.overlay-slider { margin-top: 0px;top:0;left:0;background: url("/assets/images/home/institute.jpg"); 
+  background-repeat:no-repeat;background-position:left top;-o-background-size: 100% 135%, auto;
+  -moz-background-size: 100% 135%, auto;-webkit-background-size: 100% 135%, auto;background-size: 100% 135%, auto;
 }
 
 .home-category-type { 
@@ -164,7 +168,7 @@ span.stars span {  background-position: 0 0; }
   font-size: 25px;
 }
 
-.division_divider { border-bottom: 1px solid lightgray;margin: 10px 0 0 0 ;  }
+.division_divider { border-bottom: 1px solid #DCDCDC;margin: 30px 0 0 0 ;  }
 
 .featured_listing_item { font-size: 15px;
 }
@@ -189,13 +193,13 @@ span.stars span {  background-position: 0 0; }
 
 
 #batchInfo {   
-  background: white;border:0px solid;margin-bottom: 15px;border-color: skyblue;-webkit-box-shadow: 0px 3px 0px -2px #0099FF;
-  box-shadow: 0px 3px 0px -2px #0099FF;color: #333;font-family: 'Open Sans',sans-serif; font-size: 15px;font-weight: 100;
+  background: white;border-bottom:1px solid skyblue;margin-bottom: 5px;color: #333;
+  font-family: 'Open Sans',sans-serif;font-size: 15px;font-weight: normal;
 }
 
 #filter_data {
-  box-shadow: 0px 0px 4px #3366CC;-moz-box-shadow: 0px 0px 4px #3366CC;-webkit-box-shadow: 0px 0px 4px #3366CC;
-  margin-bottom: 20px; padding-top: 10px;color: #333; font-family: 'Open Sans',sans-serif;font-size: 15px;
+  box-shadow: 0px 0px 2px #3366CC; -moz-box-shadow: 0px 0px 2px #3366CC;-webkit-box-shadow: 0px 0px 2px #3366CC;
+  margin: 0px; padding: 0px;color: #333; font-family: 'Open Sans',sans-serif;font-size: 15px;
 }
 
 #batch_name { font-size: 22px; font-weight: bold; color: #0033CC;  float: left;   }
@@ -366,11 +370,17 @@ span.stars span {  background-position: 0 0; }
 
 .breadcrumb { background: white; font-family: 'Open Sans',sans-serif; }
 
+.filter_page_container {width: 100%;padding: 0px;}
 
+.filter_page_container .alert {  margin: 0px;width: 100%;border-radius: 0px;padding: 10px; }
+
+.filter_page_container .alert a{  color: green;font-weight: bold; }
+
+.filter_page_container .alert button { margin-right:20px;color: black}
 
 /*vendor page style sheet */
 .home_vendor_page {/*#f0f0f0*/
-  width: 100%;background:#f0f3f6;font-family:'Open Sans',sans-serif;padding-top: 50px;
+  width: 100%;background:#f0f3f6;font-family:'Open Sans',sans-serif;padding-top: 0px;
   padding-bottom: 40px;color: #333; 
  
 }
@@ -495,7 +505,7 @@ span.stars span {  background-position: 0 0; }
 
 .userInfoListing {  text-align: right;font-size: 18px;padding-top: 13px; }
 
-.MainHeaderUserInfo { padding-right: 30px;text-align: right;font-size: 18px !important;float: right; }
+.MainHeaderUserInfo { padding-right: 5px;text-align: right;font-size: 18px !important;float: right; }
 
 .MainHeaderUserInfo a,.userInfoListing a {  text-decoration: none;color: white; }
 

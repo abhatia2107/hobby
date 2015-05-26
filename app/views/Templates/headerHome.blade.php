@@ -1,11 +1,11 @@
 @section("headerHome")
 	<div class="clearfix header_row1" >
-		<div class="col-sm-4 col-md-4">
+		<div class="col-sm-4 col-md-4 col-xs-5 website-title">
 			<a class="navbar-brand" href="/">
 				<span class="website-title">HOBBYIX</span>
 			</a>
 		</div>		
-		<div class="MainHeaderUserInfo">		
+		<div class="MainHeaderUserInfo col-xs-7">		
 			<div class="userInfoListing ">
 				<?php
 					$id=Auth::id();
@@ -39,7 +39,6 @@
 					</div>											
 				@endif
 			</div>
-
 		</div>
 	</div>
 @show

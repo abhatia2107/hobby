@@ -3,6 +3,8 @@
     <style>
     .ul-without-bullets { list-style-type: none; }
 
+    .ul-without-bullets li {padding: 0px;margin: 0px;}
+
     #gengroup,#agegroup { list-style-type: none; }
 
     .row_padding { padding-top:15px;padding-left:15px; }
@@ -22,7 +24,7 @@
 
     @media(min-width:992px) { #classInfo1 { margin-left: auto;margin-right: auto;width: 900px; } } 
 
-    .create_class { font-size: 20px;font-weight: 600;text-align: center;margin-top: -20px; }
+    .create_class { font-size: 20px;font-weight: 600;text-align: center;}
 
     .important_required { color:red; }
 
@@ -33,7 +35,7 @@
 
     .radio_data {  position:relative;top:1px; }
 
-    .checkbox_data { position:relative;top:-2px; }
+    .checkbox_data { position:relative;top:-2px; font-weight: normal;}
 
     #scheduleContainer { padding: 0 15px 0 5px; }
 
@@ -84,8 +86,10 @@
 @stop
 
 @section('content')
-<div class="home_vendor_page" id="createBatch">
-    @include('Templates.navbarVendor')
+<?php
+    $facilitiesAvailable = ["Shower","Steam","Locker","AC","Cafe","Changing Room"];
+?>
+<div class="home_vendor_page" id="createBatch">   
     <div class="container">
     <form role="form"  name="batchCreateForm" onsubmit="return(validate());" id="classInfo" action="@if(isset($batchDetails)){{"/batches/update/$batchDetails->id"}}@else{{"/batches/store"}}@endif" method="post" enctype="multipart/form-data" >          
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -179,8 +183,7 @@
                                     <input name="batch_age_group" class="batchAgeGroup" id="batch_age_group" value={{$key}} @if(isset($batchDetails)){{($batchDetails->batch_age_group==$key)?'checked':''}}@else{{(Input::old('batch_age_group')==$key)?'checked':''}}@endif type="radio" onClick="removeErrorMessage('#batchAgeGroupValidationMessageContainer')"/><span class="radio_data">{{$data}}</span>
                                 </label>
                                 </li>
-                                @endforeach
-                                
+                                @endforeach                                
                             </ul>
                         </div>
                     </div>
@@ -199,6 +202,24 @@
                                 @endforeach
                             </ul>
                         </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12" style="margin-top:20px;">
+                    <div class="form-group">
+                        <label for="batch_gender_group" class="col-sm-3 control-label label1">Facilities Available<span class="important_required">*</span></label>
+                        <div class="col-sm-8 targetAudienceRadioOptions">
+                            <ul class="ul-without-bullets" id="">
+                            @foreach($facilitiesAvailable as $data)
+                                <li>
+                                    <label>
+                                        <input type="checkbox" id="" name="" value="{{$data}}" onClick=""/>
+                                        <span class="checkbox_data">{{$data}}</span>
+                                    </label>
+                                </li>
+                            @endforeach
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
             </div>

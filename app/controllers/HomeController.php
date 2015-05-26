@@ -1,5 +1,6 @@
 <?php
 
+
 class HomeController extends BaseController {
 
 	/*
@@ -16,13 +17,15 @@ class HomeController extends BaseController {
 	*/
 
 	public function showWelcome()
-	{
-		$featuredBatches=$this->feature->getFeaturedBatches();
+	{		
+	   	$featuredBatches=$this->feature->getFeaturedBatches();
 		$institutes = $this->institute->getAllInstitutes();
-		// dd($featuredBatches);
+		$subcategories = $this->subcategory->all();
+		$localities = $this->locality->all();
+		//dd($localities);
 		$homeLang =Lang::get('ViewsLang/home');
 		// dd($homeLang);
-		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches','institutes'));
+		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches','institutes','subcategories','localities'));
 	}
 
 	public function showDummyWelcome()

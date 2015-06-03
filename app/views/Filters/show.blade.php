@@ -58,9 +58,9 @@
 		</div>
 	</div>				
 </div>
-<div class="container filter_page_container">
+<div class="container filter_page_container membership_message">
 	<div class="alert alert-success alert-dismissable">
-		 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+		 <button type="button"  onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">X</button>
 		<h4><a href="/Membership">Hobbyix Membership</a></h4>
 		<strong>Buy Membership and get access to all the</strong>
 	</div>

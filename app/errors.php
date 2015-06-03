@@ -12,19 +12,12 @@
 | shown, which includes a detailed stack trace during debug.
 |
 */
-/*
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 App::error(function(ModelNotFoundException $exception)
 {
     Log::error($exception);
     dd('Sorry! Something is wrong with this URL!') ;
-});
-
-App::error(function(InvalidUserException $exception)
-{
-    Log::error($exception);
-    return 'Sorry! Something is wrong with this account!';
 });
 
 App::missing(function($exception)

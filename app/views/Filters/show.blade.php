@@ -1,4 +1,24 @@
 @extends('Layouts.layout')
+@section('pagestylesheet')
+  <style type="text/css">
+     .post_header { background: #fff;margin: 0px;padding: 0px}
+
+     .facilities_continer {margin-top: 5px;clear: both;}
+
+    .facilities_icon {margin-right: 5px;}
+
+    .singleSessionPriceContainer {padding: 0px;margin:0px;}
+
+    .singleSessionPrice {clear: both;}
+
+    .filter_page {width:100%;padding:0% 1% 0% 1% }
+
+    @media screen and (min-width: 992px){ .filter_page {padding:0% 5%;}}
+
+    @media screen and (min-width: 768px){ .batchDetailsMiddlePart {margin-top: -5px;}}
+   </style>
+@stop
+
 @section('content')
 <div class="modal fade" id="sendMessage" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -38,25 +58,19 @@
 		</div>
 	</div>				
 </div>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 col-xs-12 col-sm-12">
-			<!--<ul class="breadcrumb" style="background:white;">
-				<li>
-					<a href="/">Home</a>
-				</li>
-				<li>					
-					@if($category_id==0)
-						<a href="javascript:void()">All</a>
-					@else
-						<a href="javascript:void()">{{$categories[$category_id-1]->category}}</a>
-					@endif
-				</li>
-				<li></li>
-			</ul> -->
-			<div class="row">
+<div class="container filter_page_container membership_message">
+	<div class="alert alert-success alert-dismissable">
+		 <button type="button"  onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+		<h4><a href="/Membership">Hobbyix Membership</a></h4>
+		<strong>Buy Membership and get access to all the</strong>
+	</div>
+</div>	
+<div class="container filter_page" >	
+	<div class="row">		
+		<div class="col-md-12 col-xs-12 col-sm-12">					
+			<div class="">
 				<!--Start of filter division -->
-				<div class="col-md-3 col-xs-12 col-sm-3" style="margin-top:15px">
+				<div class="col-md-3 col-xs-12 col-sm-3" style="margin-top:15px;padding:0px 1% 0px 0px;">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->
 					<div id="browse-filter" class="filter-option-1 filterOption">	
 						<div class="filterTitle">Sub Categories</div>
@@ -91,7 +105,7 @@
 							</div>
 					</div>				
 				</div>
-				<div class="col-md-9 col-xs-11 col-sm-9 results-container" style="margin-top:30px;" >
+				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 0px 0px;padding:0px 1% 0px 0px; " >
 					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div>
@@ -129,6 +143,30 @@
 		{
 			$('#loadMore').css('display','none');
 			$('#noResults').css('display','block');
+		}
+		function addFacilities (batchID) 
+		{
+			var linksContainer = $('#facilities_continer_'+batchID),baseUrl;
+			var facilities = ["ac","cafe","changing room","locker room","shower","steam"];
+			var facilitesAvailabe = [1,1,1,1,1,1];
+			var index = 0;
+			for (index=0;index<6;index++) 
+			{
+  				if(facilitesAvailabe[index]==1)
+  				{
+  					$("<span></span>")
+  					.attr("class","facilities_icon")
+  					.append
+  					(
+  						$("<img>")
+  						.attr("src","/assets/images/Facilities/"+facilities[index]+".png")
+  						.attr("width","30px")
+  						.attr("height","30px")
+  					)
+  					.appendTo(linksContainer)
+  						
+  				}
+			}
 		}
 		/*function multiScheduleAdder(batchIndex,scheduleIndex,Schedule)
 		{
@@ -170,18 +208,18 @@
 				.append
 				(
 					$("<div></div>")
-					.attr("class","col-md-6 col-xs-12 col-sm-6 column")
+					.attr("class","col-md-6 col-xs-12 col-sm-6 ")
 					.append
 					(
 						$("<div></div>")
-						.attr("class","col-md-12 col-xs-12 col-sm-12 column")
+						.attr("class","col-md-12 col-xs-12 col-sm-12 ")
 						.attr("id","schedulePrice")
 					)
 				)
 				.append
 				(
 					$("<div></div>")
-					.attr("class","col-md-6 col-xs-12 col-sm-6 column")
+					.attr("class","col-md-6 col-xs-12 col-sm-6 ")
 					.append
 					(
 						$("<div></div>")
@@ -317,106 +355,29 @@
 				.append
 				(
 					$("<div></div>")
-					.attr("class","row clearfix batch")
+					.attr("class","col-md-12 col-xs-12 col-sm-12 post_header")
 					.append
-					(		
+					(	
 						$("<div></div>")
-						.attr("class","col-md-12 col-xs-12 col-sm-12 column")
+						.attr("class","col-md-8 col-xs-12 col-sm-7")
 						.append
 						(
-							$("<div></div>")
-							.attr("class","row clearfix batch")
+							$("<span></span>")
+							.attr("id","batch_name")
 							.append
 							(
-								$("<div></div>")
-								.attr("class","col-md-12 col-xs-12 col-sm-12 column")
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-8 col-xs-12 col-sm-8 column")
-									.append
-									(
-										$("<span></span>")
-										.attr("id","batch_name")
-										.append
-										(
-											$("<a></a>")
-											.prop("href","/batches/show/"+batchID)
-											.text(institute)
-										)									
-									)
-									.append
-									(
-										$("<span></span>")
-										.attr("class","inst_name")
-										.text(batch)
-									)	
-								)
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-4 col-xs-12 col-sm-3 column")
-									.append
-									(
-										$("<div></div>")
-										.attr("class","col-md-12 facilities_title")
-										.text(" ")
-									)
-								)
-								/*.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-4 col-xs-12 col-sm-3 column")
-									.attr("id","rating-schedule")								
-									.append
-									(
-										$("<div></div>")
-										.attr("class","col-md-12")
-										.attr("id","ratingCircle")		
-										.append
-										(
-											$("<div></div>")
-											.attr("class","inscore col-md-8 col-xs-12 col-sm-3 column")									
-											.append
-											(
-												$("<div></div>")										
-												.attr("id","rating-value")
-											)
-											.text(institute_rating)
-										)
-										.append
-										(
-											$("<span></span>")
-											.attr("class","stars")
-											.attr("id","starsValue")
-											.text(institute_rating)	
-										)
-																													
-									)
-								)*/
-								/*.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-4 col-xs-12 col-sm-4 column")
-									.append
-									(
-										$("<span></span>")
-										.attr("id","tag-icon")							
-										.append
-										(
-											$("<span></span>")
-											.attr("class","glyphicon glyphicon glyphicon-tags")	
-										)
-										.append
-										(
-											$("<span></span>")
-											.text(trials[trialID])
-										)																	
-									)
-								)*/
-							)
+								$("<a></a>")
+								.prop("href","/batches/show/"+batchID)
+								.text(institute)
+							)									
 						)
-					)
+						.append
+						(
+							$("<span></span>")
+							.attr("class","inst_name")
+							.text(batch)
+						)																	
+					)						
 				)
 				.append
 				(
@@ -429,7 +390,7 @@
 						/*.append
 						(
 							$("<div></div>")
-							.attr("class","col-md-3 col-xs-12 col-sm-12 column")
+							.attr("class","col-md-3 col-xs-12 col-sm-12 ")
 							.append
 							(
 								$("<center></center>")
@@ -448,55 +409,7 @@
 							.append
 							(
 								$("<div></div>")
-								.attr("class","col-md-8 col-xs-12 col-sm-8")
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-5 col-xs-12 col-sm-6 column")
-									.attr("id","inst_contact")
-									.attr("onClick","show_contact("+index+")")
-									.append
-									(
-										$("<span></span>")
-										.attr("id","cell-icon")
-										.attr("class","glyphicon glyphicon-phone-alt")
-									)
-									.append
-									(
-										$("<span style='display:none'></span>")
-										.attr("id","contact"+index)
-										.attr("value",batchID)
-										.text(" "+contact)									
-									)
-									.append
-									(
-										$("<span></span>")
-										.attr("id","show_contact"+index)
-										.text(" View Number")								
-									)
-								)
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-5 col-xs-12 col-sm-6 column")
-									.attr("id","inst_message")
-									.attr("href","#sendMessage")
-									.attr("data-toggle","modal")
-									.attr("data-batch",batch)
-									.attr("data-email",email)
-									.attr("data-institute",institute)
-									.append
-									(
-										$("<span></span>")
-										.attr("id","cell-icon")
-										.attr("class","glyphicon glyphicon-envelope")
-									)
-									.append
-									(
-										$("<span></span>")
-										.text(" Send Message")
-									)
-								)								
+								.attr("class","col-md-4 col-xs-12 col-sm-6")															
 								.append
 								(
 									$("<div></div>")
@@ -557,21 +470,91 @@
 							.append
 							(
 								$("<div></div>")
-								.attr("class","col-md-4 col-xs-12 col-sm-4")
-								.attr("class","singleSessionPrice")								
+								.attr("class","col-md-5 col-xs-12 col-sm-6 batchDetailsMiddlePart")
+								.attr("id","")	
 								.append
 								(
-									$("<div></div>")								
-									.text("₹ "+price+" / Session")
-									/*.append("<br>(or Members: 1 credit)")*/
+									$("<div></div>")
+									.attr("class","col-md-5 col-xs-12 col-sm-6 ")
+									.attr("id","inst_contact")
+									.attr("onClick","show_contact("+index+")")
+									.append
+									(
+										$("<span></span>")
+										.attr("id","cell-icon")
+										.attr("class","glyphicon glyphicon-phone-alt")
+									)
+									.append
+									(
+										$("<span style='display:none'></span>")
+										.attr("id","contact"+index)
+										.attr("value",batchID)
+										.text(" "+contact)									
+									)
+									.append
+									(
+										$("<span></span>")
+										.attr("id","show_contact"+index)
+										.text(" View Number")								
+									)
 								)
 								.append
 								(
-									$("<a></a>")
-									.attr("class","btn btn-primary")
-									.attr("id","booknowButton")	
-									.attr("href","/bookings/create/"+batchID)							
-									.text("Book Now")
+									$("<div></div>")
+									.attr("class","col-md-5 col-xs-12 col-sm-6 ")
+									.attr("id","inst_message")
+									.attr("href","#sendMessage")
+									.attr("data-toggle","modal")
+									.attr("data-batch",batch)
+									.attr("data-email",email)
+									.attr("data-institute",institute)
+									.append
+									(
+										$("<span></span>")
+										.attr("id","cell-icon")
+										.attr("class","glyphicon glyphicon-envelope")
+									)
+									.append
+									(
+										$("<span></span>")
+										.text(" Send Message")
+									)
+								)	
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-12 col-sm-12 facilities_continer")
+									.attr("id","facilities_continer_"+batchID)
+									.append
+									(
+										$("<div></div>")
+										.attr("class","col-md-12 facilities_title")
+										.text(" ")
+									)
+								)																											
+							)
+							.append
+							(
+								$("<div></div>")
+								.attr("class","col-md-3 col-xs-12 col-sm-12 singleSessionPriceContainer ")
+								.append
+								(	
+									$("<div></div>")						
+									.attr("class","singleSessionPrice")
+									.append
+									(
+										$("<div></div>")								
+										.text("₹ "+price+" / Session")
+										/*.append("<br>(or Members: 1 credit)")*/
+									)
+									.append
+									(
+										$("<a></a>")
+										.attr("class","btn btn-primary")
+										.attr("id","booknowButton")	
+										.attr("href","/bookings/create/"+batchID)							
+										.text("Book Now")
+									)
 								)
 							)												
 							/*.append
@@ -584,6 +567,7 @@
 					)
 				)
 				.appendTo(linksContainer);
+				addFacilities(batchID);
 				/*for(var I=0; I<Schedules[index].length && I<2; I++)
 				{
 					

@@ -129,7 +129,7 @@ class RestAPI {
         $req->setAuth($this->auth_id, $this->auth_token, HTTP_Request2::AUTH_BASIC);
         $req->setHeader(array(
             'Connection' => 'close',
-            'User-Agent' => 'PHPPlivo',
+            'User2-Agent' => 'PHPPlivo',
         ));
         $r = $req->send();
         $status = $r->getStatus();
@@ -655,8 +655,8 @@ class Element {
         return $this->add(new Number($body, $attributes));
     }
 
-    function addUser($body=NULL, $attributes=array()) {
-        return $this->add(new User($body, $attributes));
+    function addUser2($body=NULL, $attributes=array()) {
+        return $this->add(new User2($body, $attributes));
     }
 
     function addGetDigits($attributes=array()) {
@@ -853,7 +853,7 @@ class Number extends Element {
     }
 }
 
-class User extends Element {
+class User2 extends Element {
     protected $nestables = array();
 
     protected $valid_attributes = array('sendDigits', 'sendOnPreanswer', 'sipHeaders');
@@ -867,7 +867,7 @@ class User extends Element {
 }
 
 class Dial extends Element {
-    protected $nestables = array('Number', 'User');
+    protected $nestables = array('Number', 'User2');
 
     protected $valid_attributes = array('action','method','timeout','hangupOnStar',
                                         'timeLimit','callerId', 'callerName', 'confirmSound',

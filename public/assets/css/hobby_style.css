@@ -427,6 +427,8 @@ span.stars span {  background-position: 0 0; }
 
 @media screen and (min-width: 992px) {  #signupModal .modal-dialog  { width:430px; }  }
 
+#signupModal .modal-body .row {margin-top: 10px;}
+
 #signupModal .modal-dialog { margin-top:3%; }
 
 #signupModal .modal-header {height: 60px;padding-top: 10px;}

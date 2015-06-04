@@ -1,7 +1,7 @@
 @section("login")
 <div class="modal-dialog" >
     <div class="modal-content">
-        <form name="login" class="" id="loginForm" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
+        <form name="login" class="loginForm" id="loginForm" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
             <div class="modal-header">
                 <div type="button" class="close" title="Close"  data-dismiss="modal" @if(isset($loginPage)) style="display:none" @endif>
                     <span onClick="refreshForm('#loginForm')" aria-hidden="true">&times;</span>
@@ -20,7 +20,7 @@
                 <div class="form-group inner-addon">
                     <i class="glyphicon glyphicon-lock left-addon"></i>
                      <input type="password" class="form-control " name="password" placeholder="Enter Your Password" id="password">
-                </div>
+                </div>                
                 <div class="row">
                     <div class="form-group rememberMe col-md-6 col-sm-6 col-xs-6">                               
                         <label class="control-label">
@@ -43,7 +43,7 @@
 <script type="text/javascript" >
     $(document).ready(function(){
         
-        $('.login').bootstrapValidator({
+        $('.loginForm').bootstrapValidator({
             message: 'This value is not valid',
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',

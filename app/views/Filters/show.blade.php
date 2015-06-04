@@ -147,25 +147,30 @@
 		function addFacilities (batchID) 
 		{
 			var linksContainer = $('#facilities_continer_'+batchID),baseUrl;
-			var facilities = ["ac","cafe","changing room","locker room","shower","steam"];
-			var facilitesAvailabe = [1,1,1,1,1,1];
-			var index = 0;
-			for (index=0;index<6;index++) 
-			{
-  				if(facilitesAvailabe[index]==1)
-  				{
-  					$("<span></span>")
-  					.attr("class","facilities_icon")
-  					.append
-  					(
-  						$("<img>")
-  						.attr("src","/assets/images/Facilities/"+facilities[index]+".png")
-  						.attr("width","30px")
-  						.attr("height","30px")
-  					)
-  					.appendTo(linksContainer)
-  						
-  				}
+			//var linksContainerStatus = linksContainer.html().trim();
+			//alert(linksContainerStatus);
+			if(linksContainer.is(':empty'))
+			{				
+				var facilities = ["ac","cafe","changing room","locker room","shower","steam"];
+				var facilitesAvailabe = [1,1,1,1,1,1];
+				var index = 0;
+				for (index=0;index<6;index++) 
+				{
+	  				if(facilitesAvailabe[index]==1)
+	  				{
+	  					$("<span></span>")
+	  					.attr("class","facilities_icon")
+	  					.append
+	  					(
+	  						$("<img>")
+	  						.attr("src","/assets/images/Facilities/"+facilities[index]+".png")
+	  						.attr("width","30px")
+	  						.attr("height","30px")
+	  					)
+	  					.appendTo(linksContainer)
+	  						
+	  				}
+				}
 			}
 		}
 		/*function multiScheduleAdder(batchIndex,scheduleIndex,Schedule)
@@ -368,7 +373,7 @@
 							(
 								$("<a></a>")
 								.prop("href","/batches/show/"+batchID)
-								.text(institute)
+								.text(batchID+" - "+institute)
 							)									
 						)
 						.append
@@ -524,13 +529,7 @@
 								(
 									$("<div></div>")
 									.attr("class","col-md-12 col-sm-12 facilities_continer")
-									.attr("id","facilities_continer_"+batchID)
-									.append
-									(
-										$("<div></div>")
-										.attr("class","col-md-12 facilities_title")
-										.text(" ")
-									)
+									.attr("id","facilities_continer_"+batchID)									
 								)																											
 							)
 							.append

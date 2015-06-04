@@ -53,6 +53,11 @@ class BookingsController extends \BaseController {
 		return View::make('Bookings.create',compact('batchDetails','institute_id','posted'))->with('success',Lang::get('payments.verify'));
 	}
 
+	public function iframe()
+	{
+	    $action='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest=92f6d327c0d5a857392e06af22fc2c7bb9f7e45d4aa31f1c5b1eb09866adb87f916f62285e31552ac75fa5d0ed25b00c7faa3662a205300a4e1209a26ce02c8d3d73204ea7421ac46d909c086533039b7143678b59bae36c4a1859b094635271f011829ba4768d6581b940546eb1aa7d7b70a140df5dcb177e34e78525c7ac664cf689cb2a60dc3f7b18d315e92f5daf0f51248820c1cb20fd694758de8e8d482af313f055472b92c76a9b4bd646ce02d941d78c76eb0640091ce0f0695429ceb6366ef4e1632f28e7dfc66d9f116cdbdf6add993e1c6684fab410694fbe5650&access_code=AVCA05CE22BS53ACSB';
+		return View::make('Bookings.iframe',compact('action'));
+	}
 	/**
 	 * Store a newly created booking in storage.
 	 *

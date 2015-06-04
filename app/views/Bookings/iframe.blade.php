@@ -4,7 +4,7 @@
 </head>
 <body>
 <center>
-<iframe src="<?php echo $posted['action']?>" id="paymentFrame" width="482" height="450" frameborder="0" scrolling="No" ></iframe>
+<iframe src="<?php echo $action?>" id="paymentFrame" width="482" height="450" frameborder="0" scrolling="No" ></iframe>
 
 <script type="text/javascript" src="/assets/js/jquery-1.7.2.js"></script>
 <script type="text/javascript">

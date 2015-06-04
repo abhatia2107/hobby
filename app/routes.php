@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -67,13 +67,14 @@ Route::group(array('before' => "admin"), function() {
 });
 
 Route::get('/batches/increment/{id}','BatchesController@increment');
+Route::get('/bookings/iframe','BookingsController@iframe');
 Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');
 Route::post('/bookings/redirect','BookingsController@redirect');
 Route::post('/bookings/cancel','BookingsController@cancel');
 
-Route::resource('bookings', 'BookingsController');
+// Route::resource('bookings', 'BookingsController');
 Route::get('bookings/create/{id}', 'BookingsController@create');
 
 //Route for CategoriesController

@@ -107,8 +107,8 @@ class BookingsController extends \BaseController {
 
 	public function redirect()
 	{
-		dd('passed');
-	/*
+		// dd('passed');
+	
 		include app_path().'/IFRAME_KIT/Crypto.php';
 		error_reporting(0);
 		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
@@ -147,7 +147,7 @@ class BookingsController extends \BaseController {
 		{
 			$information=explode('=',$decryptValues[$i]);
 		    	// echo '<tr><td>'.$information[0].'</td><td>'.$information[1].'</td></tr>';
-		}*/
+		}
 
 	}
 

@@ -1,21 +1,16 @@
 <html>
 <head>
-<title> Iframe</title>
+<title> Non-Seamless-kit</title>
 </head>
 <body>
 <center>
-<iframe src="<?php echo $action?>" id="paymentFrame" width="482" height="450" frameborder="0" scrolling="No" ></iframe>
-
-<script type="text/javascript" src="/assets/js/jquery-1.7.2.js"></script>
-<script type="text/javascript">
-    	$(document).ready(function(){
-    		 window.addEventListener('message', function(e) {
-		    	 $("#paymentFrame").css("height",e.data['newHeight']+'px'); 	 
-		 	 }, false);
-	 	 	
-		});
-</script>
+<form method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction"> 
+<?php
+echo "<input type=hidden name=encRequest value=$encrypted_data>";
+echo "<input type=hidden name=access_code value=$access_code>";
+?>
+</form>
+<script language='javascript'>document.redirect.submit();</script>
 </center>
 </body>
 </html>
-

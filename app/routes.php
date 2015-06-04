@@ -74,7 +74,7 @@ Route::get('/bookings/sms','BookingsController@sms');
 Route::post('/bookings/redirect','BookingsController@redirect');
 Route::post('/bookings/cancel','BookingsController@cancel');
 
-// Route::resource('bookings', 'BookingsController');
+Route::resource('bookings', 'BookingsController');
 Route::get('bookings/create/{id}', 'BookingsController@create');
 
 //Route for CategoriesController

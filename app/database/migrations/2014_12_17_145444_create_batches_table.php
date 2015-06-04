@@ -32,6 +32,18 @@ class CreateBatchesTable extends Migration {
 			$table->string('batch_comment')->nullable();
 			$table->string('batch_tagline',40)->nullable();
 			$table->boolean('batch_photo')->default(0);
+			$table->time('weekday_start_time');
+			$table->time('weekday_end_time');
+			$table->time('sunday_start_time')->nullable();
+			$table->time('sunday_end_time')->nullable();
+			$table->boolean('shower_room')->default(0);
+			$table->boolean('steam')->default(0);
+			$table->boolean('air_conditioning')->default(0);
+			$table->boolean('locker')->default(0);
+			$table->boolean('cafe')->default(0);
+			$table->boolean('miscellaneous1')->default(0);
+			$table->boolean('miscellaneous2')->default(0);
+			$table->boolean('miscellaneous3')->default(0);
 			$table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

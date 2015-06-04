@@ -38,8 +38,8 @@ class BookingsController extends \BaseController {
 		$posted['order_id']=$order_id;
 		$posted['currency']='INR';
 		$posted['amount']=50;
-		$posted['redirect_url']='/bookings/redirect';
-		$posted['cancel_url']='/bookings/cancel';
+		$posted['redirect_url']=url('/bookings/redirect');
+		$posted['cancel_url']=url('/bookings/cancel');
 		$posted['integration_type']='iframe_normal';
 		$posted['language']='en';
 
@@ -48,7 +48,7 @@ class BookingsController extends \BaseController {
 		}
 		$encrypted_data=encrypt($merchant_data,$working_key); // Method for encrypting the data.
 		// dd($encrypted_data);	
-	    $posted['action']='https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
+	    $posted['action']='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
 		// dd($batchDetails);
 		return View::make('Bookings.create',compact('batchDetails','institute_id','posted'))->with('success',Lang::get('payments.verify'));
 	}
@@ -60,7 +60,9 @@ class BookingsController extends \BaseController {
 	 */
 	public function store()
 	{
-		dd(Input::all());
+		$action=Input::get('action');
+		return View::make('Bookings.iframe',compact('action'));
+/*		dd(Input::all());
 		$validator = Validator::make($data = Input::all(), Booking::$rules);
 
 		if ($validator->fails())
@@ -73,7 +75,7 @@ class BookingsController extends \BaseController {
 		dd($data);
 		Booking::create($data);
 		return Redirect::back()->with('success',Lang::get('booking.booking_created'));
-	}
+*/	}
 
 	public function redirect()
 	{

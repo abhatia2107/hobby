@@ -14,7 +14,7 @@ label {
         {{$success}}
         {{$posted['order_id']}}
     </div>
-    <form action="{{$posted['action']}}" id="paymentsCreate" method="post" role="form" enctype="multipart/form-data" name="payuForm">
+    <form action="/bookings" id="paymentsCreate" method="post" role="form" enctype="multipart/form-data">
         <input type="hidden" name="merchant_id" value="{{$posted['merchant_id']}}">
         <input type="hidden" name="order_id" value="{{$posted['order_id']}}">
         <input type="hidden" name="currency" value="{{$posted['currency']}}">
@@ -23,6 +23,7 @@ label {
         <input type="hidden" name="cancel_url" value="{{$posted['cancel_url']}}">
         <input type="hidden" name="integration_type" value="{{$posted['integration_type']}}">
         <input type="hidden" name="language" value="{{$posted['language']}}">
+        <input type="hidden" name="action" value="{{$posted['action']}}">
         <div class="row">
             <div class="form-group required">
                 <div class="col-sm-4">

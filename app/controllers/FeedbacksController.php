@@ -14,7 +14,7 @@ class FeedbacksController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Feedbacks.index',compact('feedbacks','tableName','count','adminPanelListing'));
+		return View::make('Feedbacks.'.$this->device.'.index',compact('feedbacks','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -25,7 +25,7 @@ class FeedbacksController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Feedbacks.create');
+		return View::make('Feedbacks.'.$this->device.'.create');
 	}
 	
 	/**
@@ -81,7 +81,7 @@ class FeedbacksController extends \BaseController {
 			$feedbackDetails->feedback_read=true;
 			$feedbackDetails->save();
 		}
-		return View::make('Feedbacks.show',compact('feedbackDetails'));
+		return View::make('Feedbacks.'.$this->device.'.show',compact('feedbackDetails'));
 	}
 
 	public function read($id)

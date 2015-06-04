@@ -3,6 +3,7 @@
 
 class HomeController extends BaseController {
 
+
 	/*
 	|--------------------------------------------------------------------------
 	| Default Home Controller
@@ -25,12 +26,12 @@ class HomeController extends BaseController {
 		//dd($localities);
 		$homeLang =Lang::get('ViewsLang/home');
 		// dd($homeLang);
-		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches','institutes','subcategories','localities'));
+		return View::make('Miscellaneous.'.$this->device.'.home',compact('homeLang','featuredBatches','institutes','subcategories','localities'));
 	}
 
 	public function showDummyWelcome()
 	{
-		return View::make('Miscellaneous.homeDummy');
+		return View::make('Miscellaneous.'.$this->device.'.homeDummy');
 	}
 
 	public function showAdminHome()
@@ -39,7 +40,7 @@ class HomeController extends BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Miscellaneous.Admin.home',compact('homeAdminLang','tableName','count','adminPanelListing'));
+		return View::make('Miscellaneous.'.$this->device.'.Admin.home',compact('homeAdminLang','tableName','count','adminPanelListing'));
 	}
 
 }

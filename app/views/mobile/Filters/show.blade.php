@@ -1,10 +1,7 @@
 @extends('Layouts.layout')
 @section('content')
 <style type="text/css">
-
-	.filterOption { box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
-		-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);background: white;
-	}
+	
 
 	.filterTitle { color:white;font-family: 'Open Sans',sans-serif;font-size: 20px;padding: 0px 5px;
 		background:#3396d1;height: 30px;
@@ -31,15 +28,15 @@
 
 	.inst_name  {  font-size: 14px; font-weight: normal; color: #333; clear: both; float: left; }
 
-	.filters  {  max-height: 130px;min-height: 130px; overflow: auto; color: #333;padding: 0px; }
+	.filters  {  overflow: auto; color: #333;padding: 0px;max-height: 130px;min-height: 130px; }
 
 	#browse-filter   {  font-family: 'Open Sans',sans-serif; font-weight: lighter;   }
 
 	#browse-filter label {font-weight: lighter;}
 
-	.filter-option-2  {  margin-top: 20px;  font-weight: normal;   }	
+	.filter-option-2  {  margin-top: 10px;  font-weight: normal;   }	
 
-	.filter-option-1   {  margin-top: 15px; font-weight: normal;   }
+	.filter-option-1   {  font-weight: normal;   }
 
 	.sub {  cursor: pointer; }
 
@@ -115,27 +112,28 @@
 
 	.breadcrumb { background: white; font-family: 'Open Sans',sans-serif;margin: 0px; }
 
-	#results-container {margin-top: 0px;}
+	#results-container {margin-top: 0px;z-index: 1000;}
 
-	.fileter_options_popup {display: none;margin:0px;position: fixed;top: 0;left: 0;right: 0;bottom 0;
-		z-index: 10000000;background:white;/*#f0f3f6*/height: 100%;padding: 0px;
+	.filter_options_popup {display: none;position: fixed;top: 0;left: 0;right: 0;bottom: 0;
+		z-index: 1000000;background:white;/*#f0f3f6*/height: 100%;padding: 0px;height: 100%;
 	 }
 
-	.fileter_options_popup .header {background:#5a5a5a;font-size: 20px;text-align: center;width: 100%;padding: 10px;color: white; }
+	.filter_options_popup .header {background:#5a5a5a;font-size: 20px;text-align: center;width: 100%;padding: 10px 0px;color: white;}	
 
-	.fileter_options_popup .header a {color: white;text-decoration: none;position: absolute;left: 5px;top:15px;}
+	.filter_options_container {padding: 10px 30px;overflow: auto;max-height: 78%;background: white;top:11%;position:fixed;width: 100%; }
 
-	.fileter_options_popup .footer {bottom:0;position: absolute;text-align: center;color: white;padding: 0px 0px;}
+	.filter_options_popup .footer {bottom:0;margin:0;position: fixed;text-align: center;color: white;padding: 0; }
 
-	.fileter_options_popup .reset_button {background: #5a5a5a;padding: 10px 0px}
+	.filter_options_popup .header a {color: white;text-decoration: none;position: absolute;left: 5px;padding-top: 12px;}
 
-	.fileter_options_popup .apply_button {background: #3aa54c;padding: 10px 0px}
+	.filter_options_popup .reset_button {background: #5a5a5a;padding: 10px 0px}
 
-	.fileter_options_container {padding: 0px 30px;}
+	.filter_options_popup .apply_button {background: #3aa54c;padding: 10px 0px}
+	
 
-	.fileter_options_popup .footer a {color: white;text-decoration: none;font-size: 16px;}
+	.filter_options_popup .footer a {color: white;text-decoration: none;font-size: 16px;}
 
-	.filter_options_button { bottom:0;position: fixed;z-index: 1000000;width: 100%;background:rgba(0,0,0,0.7);text-align: center; height: 34px;left:0;right:0;}
+	.filter_options_button { bottom:0;position: fixed;z-index: 1000;width: 100%;background:rgba(0,0,0,0.7);text-align: center; height: 34px;left:0;right:0;}
 
 	.filter_options_button button {border-radius:0px;padding: 5px 15px;font-size: 17px;background:#0099FF;border:0px; }
 
@@ -162,11 +160,11 @@
 		<div class="col-xs-12">			
 			<div class="row">
 				<!--Start of filter division -->
-				<div class="col-xs-12 fileter_options_popup">
+				<div class="col-xs-12 filter_options_popup">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->
 					<div class="header"><a class="glyphicon glyphicon-arrow-left" id="return"></a> Filter </div>
-					<div class="fileter_options_container">
-						<div id="browse-filter" class="filter-option-1 filterOption">	
+					<div class="filter_options_container">
+						<div id="browse-filter" class="filter-option-1 filterOption" style="max-height:45%">	
 							<div class="filterTitle">Sub Categories</div>
 							<div class="filterOptionsList">
 								<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 	
@@ -182,7 +180,7 @@
 								 </ul>
 							</div>
 						</div>			
-						<div id="browse-filter" class="filter-option-2 filterOption">	
+						<div id="browse-filter" class="filter-option-2 filterOption" style="max-height:45%">	
 							<div class="filterTitle">Locality</div> 
 							<div class="filterOptionsList">
 								<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
@@ -222,12 +220,11 @@
 @section('pagejquery')
 	<script type="text/javascript">
 		function displayFilterOptions () {
-			var displayValue = $('.fileter_options_popup').css('display');
-			if(displayValue == "none")		
-				$('.fileter_options_popup').show();							   	
-			else
-				$('.fileter_options_popup').hide();
-			// body...
+			$('.filter_options_popup').show();	
+			$('#results-container').hide();				
+			$('html').css('overflow-y','hidden');
+			//$('.filter_options_button').hide();	
+			//$('body').css('overflow-y','hidden');
 		}
 		var result = {{json_encode( $batchesForCategoryLocation ) }};  
 		var Schedules = {{json_encode( $Schedules ) }};
@@ -517,8 +514,10 @@
 		var linksContainer = $('#filter_data'),baseUrl;	
 		$(document).ready(function() 
 		{	
-			$(".fileter_options_popup #return").click(function(){
-				$('.fileter_options_popup').hide();
+			$(".filter_options_popup #return").click(function(){
+				$('.filter_options_popup').hide();
+				$('html').css('overflow-y','auto');
+				$('#results-container').show();	
 			})
 
 			window.onscroll = function(ev)
@@ -565,7 +564,9 @@
 		});
 		function filterApply() 
 		{
-			$('.fileter_options_popup').hide();
+			$('html').css('overflow-y','auto');
+			$('.filter_options_popup').hide();
+			$('#results-container').show();	
 			filterStatus = true;
 			$('#loadMore').show();
 			$('#noResults').hide();			

@@ -249,6 +249,35 @@ class Batch extends \Eloquent {
                         ->get();
     }
 
+    public function getBatchesForLocality($batch_locality_id)
+    {     
+        return Batch::where('venue_locality_id',$batch_locality_id)
+                        ->where('batches.batch_approved','=','1')
+                        ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+                        ->Join('categories','categories.id','=','batches.batch_category_id')
+                        ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
+                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
+                        ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+                        ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+                        ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+                        ->orderBy('batches.created_at','desc')
+                        ->get();
+    }
+
+    public function getBatchesForSubcategory($batch_subcategory_id)
+    {
+        return Batch::where('batch_subcategory_id',$batch_subcategory_id)
+                        ->where('batches.batch_approved','=','1')
+                        ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+                        ->Join('categories','categories.id','=','batches.batch_category_id')
+                        ->Join('subcategories','subcategories.id','=','batches.batch_subcategory_id')
+                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
+                        ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+                        ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
+                        ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
+                        ->orderBy('batches.created_at','desc')
+                        ->get();
+    }
     public function getBatchesForUser($batch_user_id)
     {
         $batches= Batch::where('batch_user_id','=',$batch_user_id)

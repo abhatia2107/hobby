@@ -33,6 +33,16 @@ class Institute extends \Eloquent {
             ->select('*','institutes.id as id','institutes.deleted_at as deleted_at','institutes.created_at as created_at','institutes.updated_at as updated_at')
             ->get());
     }
+
+    public function getAllInstitutesWithLocality()
+    {
+        return( DB::table('institutes')
+            ->select('institutes.id','institute','locality')
+            ->Join('venues', 'institutes.id', '=', 'venues.venue_institute_id')
+            ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+            ->get());
+    }
+
     public function getInstitute($id)
     {
         $instituteDetails=Institute::
@@ -52,8 +62,9 @@ class Institute extends \Eloquent {
         return ($updated);
     } 
 
-    public function getInstituteForCategory($id)
+    public function getInstituteWithVenue($id)
     {
+
         return DB::table('institutes')->whereIn('institutes.id',$id)->Join('venues', 'institutes.id', '=', 'venues.venue_institute_id')->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')->Join('locations', 'locations.id', '=', 'venues.venue_location_id')->get();
     }
 

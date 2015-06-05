@@ -36,7 +36,10 @@
 		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
 			<li title="{{$institutes[$index]->institute}}">
-				{{$institutes[$index]->institute}}
+				<a href="/filter/institute/{{$institutes[$index]->id}}">
+					{{$institutes[$index]->institute}}, 
+					{{$institutes[$index]->locality}}
+				</a>
 			</li>
 		@endfor
 		<?php
@@ -61,7 +64,11 @@
 	@for($col = 0;$col<=$colNum;$col++ )
 		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li>{{$subcategories[$index]->subcategory}}</li>
+			<li>
+				<a href="/filter/subcategory/{{$subcategories[$index]->id}}">
+					{{$subcategories[$index]->subcategory}}
+				</a>
+			</li>				
 		@endfor
 		<?php
 			$listLength += $listLength;
@@ -85,7 +92,11 @@
 	@for($col = 0;$col<=$colNum;$col++ )
 		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li>{{$localities[$index]->locality}}</li>
+			<li>
+				<a href="/filter/locality/{{$localities[$index]->id}}">
+					{{$localities[$index]->locality}}
+				</a>
+			</li>
 		@endfor
 		<?php
 			$listLength += $listLength;

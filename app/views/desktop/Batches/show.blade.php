@@ -213,6 +213,7 @@
 <?php
   foreach ($batchDetails as $data) 
   {
+    $batchID = $data->id;
     $instituteName = $data->institute;
     $instituteAddress = $data->venue_address;
     $instituteContact = $data->venue_contact_no;
@@ -318,39 +319,40 @@
       <div class="sample-box-small" id='batchOrderSample'>
         <div id='sample-batch-name'>Book This Class</div>
         <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
-        <div class="row batchOrderField">
-          <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>
-          <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
-        </div>
-        <div class="row batchOrderField">
-          <div class='col-md-6 col-sm-6 col-xs-6'>No. of Sessions</div>
-          <div class='col-md-6 col-sm-6 col-xs-6'>  
-              <select class="form-control" id="numberOfSessions" name="numberOfSessions" required>                 
-                  @for($seesion=1;$seesion<=6;$seesion++)
-                      <option value={{$seesion}}>{{$seesion}}</option>
-                  @endfor
-              </select>
+          <input type="hidden" name="batch_id" value="{{$batchID}}">
+          <div class="row batchOrderField">
+            <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>
+            <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
           </div>
-        </div>
-        <div class="row batchOrderField">
-          <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date</div>
-          <div class='col-md-6 col-sm-6 col-xs-6'>
-                <input type="text" placeholder="Select Date" class="form-control" id="datepicker" name="bookingDate" required />                     
-          </div>          
-        </div>
-        <div class="row batchOrderField">
-          <div class='col-md-6 col-sm-6 col-xs-6'>Subtotal</div>
-          <div class='col-md-6 col-sm-6 col-xs-6' id="orderSubtotal">: Rs. {{$sessionPrice}}</div>
-        </div>
-        <hr/>
-        <div class="row totalAmount">
-          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}<span></div>
-          <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
-        </div>
-        <div class="row batchOrderButtons">    
-          <button type="submit" style="padding:5px 70px;" id="booknowButton" >Pay Now</button>
-          <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
-        </div>
+          <div class="row batchOrderField">
+            <div class='col-md-6 col-sm-6 col-xs-6'>No. of Sessions</div>
+            <div class='col-md-6 col-sm-6 col-xs-6'>  
+                <select class="form-control" id="numberOfSessions" name="no_of_sessions" required>                 
+                    @for($session=1;$session<=6;$session++)
+                        <option value={{$session}}>{{$session}}</option>
+                    @endfor
+                </select>
+            </div>
+          </div>
+          <div class="row batchOrderField">
+            <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date</div>
+            <div class='col-md-6 col-sm-6 col-xs-6'>
+                  <input type="text" placeholder="Select Date" class="form-control" id="datepicker" name="booking_date" required />                     
+            </div>          
+          </div>
+          <div class="row batchOrderField">
+            <div class='col-md-6 col-sm-6 col-xs-6'>Subtotal</div>
+            <div class='col-md-6 col-sm-6 col-xs-6' id="orderSubtotal">: Rs. {{$sessionPrice}}</div>
+          </div>
+          <hr/>
+          <div class="row totalAmount">
+            <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}<span></div>
+            <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
+          </div>
+          <div class="row batchOrderButtons">    
+            <button type="submit" style="padding:5px 70px;" id="booknowButton" >Pay Now</button>
+            <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
+          </div>
         </form>
         <!---
         <form method="post" action="/promos/isValid" enctype="multipart/form-data">
@@ -494,7 +496,7 @@
           $('#loginModal').modal('show') ;
         }
       });
-      $('#no_of_sessions').change(function () 
+      $('#numberOfSessions').change(function () 
       {
           var sessionsCount = $(this).val(); 
           var sessionPrice = {{$sessionPrice}};

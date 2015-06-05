@@ -289,7 +289,6 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersC
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','FiltersController@show');
 
-Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');
 
 Route::get('/filters/search','FiltersController@search');
 
@@ -303,3 +302,4 @@ Route::get('/users/account/{id}','UsersController@account');
 
 Route::resource('memberships', 'MembershipsController');
 
+Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');

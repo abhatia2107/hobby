@@ -19,7 +19,7 @@ class CreateMembershipsTable extends Migration {
 			$table->date('start_date');
 			$table->date('end_date');
 			$table->integer('user_id')->unsigned()->index();
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('payment');
 			$table->integer('promo_id')->unsigned()->nullable();
 			$table->foreign('promo_id')->references('id')->on('promos');

@@ -96,6 +96,7 @@ class FiltersController extends \BaseController {
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->getBatchesForInstitute($id);
+		// dd($batchesForCategoryLocation);
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
 			$batchesForCategoryLocation="";

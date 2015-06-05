@@ -48,7 +48,7 @@ class CategoriesTableSeeder extends Seeder {
               DB::table('categories')->insert(array(
               'category' =>'Other',
               'category_no_of_subcategories'=>1,
-             ));
+              ));
               */
        }
 }

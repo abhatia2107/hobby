@@ -61,6 +61,5 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('BatchesTableSeeder');
         $this->command->info('Batches table seeded!');
-
 	}
 }

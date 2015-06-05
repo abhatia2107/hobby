@@ -115,14 +115,10 @@
 		</div>
 	</div>
 </div>
-@foreach ($batchesForCategoryLocation as $index => $batchesData)	
-		<?php $Schedules[$index] = $batchesData->schedules ?>
-@endforeach
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
 		var result = {{json_encode( $batchesForCategoryLocation ) }};  
-		var Schedules = {{json_encode( $Schedules ) }};
 		var trials = {{json_encode( $trial )}};
 		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
 		var daysResult = new Array();			
@@ -175,103 +171,6 @@
 				}
 			}
 		}
-		/*function multiScheduleAdder(batchIndex,scheduleIndex,Schedule)
-		{
-			for(var day = 0;day<7;day++)
-			{
-				var dayID = "schedule_class_on_"+weekDays[day];
-				daysResult[day] = Schedule[dayID];
-			}
-			var PriceScheduleContainer = $('.batch'+batchIndex+' #price_schedule_container'),baseUrl;
-			var DayCode = ["","M", "T", "W","T","F","S","S"];
-			var Price = Schedule['schedule_price'];
-			var sessionMonthCount = Schedule['schedule_number'];
-			var indentifySessionMonth = Schedule['schedule_session_month'];
-			var seperator = " / ";
-			var sessionMonth = " Sessions";
-			if(sessionMonthCount==1)
-				sessionMonth = " Session";
-			if(indentifySessionMonth==1)
-			{
-				sessionMonth = " Months";
-				if(sessionMonthCount==1)
-					sessionMonth = " Month";
-			}
-			if(sessionMonthCount==0)
-			{
-				sessionMonth = "";
-				seperator = "";
-				sessionMonthCount = "";
-			}
-			var ContainerDistinct = $(".batch"+batchIndex+" #price_schedule"+scheduleIndex);
-			ContainerDistinct.remove();
-			$("<div></div>")
-			.attr("class","col-md-12 col-xs-12 col-sm-12 row")
-			.append
-			(
-				$("<div></div>")
-				.attr("id","price_schedule"+scheduleIndex)
-				.attr("class","price_schedule")
-				.append
-				(
-					$("<div></div>")
-					.attr("class","col-md-6 col-xs-12 col-sm-6 ")
-					.append
-					(
-						$("<div></div>")
-						.attr("class","col-md-12 col-xs-12 col-sm-12 ")
-						.attr("id","schedulePrice")
-					)
-				)
-				.append
-				(
-					$("<div></div>")
-					.attr("class","col-md-6 col-xs-12 col-sm-6 ")
-					.append
-					(
-						$("<div></div>")
-						.attr("id","scheduleWeekDays")		
-					)
-					
-				)
-			)
-			.appendTo(PriceScheduleContainer);
-			var ScheduleContainer = $(".batch"+batchIndex+" #price_schedule"+scheduleIndex+" #scheduleWeekDays");
-			var PriceContainer = $(".batch"+batchIndex+" #price_schedule"+scheduleIndex+" #schedulePrice");
-			$("<span></span>")
-			.attr("id","")
-			.append
-			(
-				$("<span></span>")
-				.attr("id","hand-icon")
-				.text("☛")
-			)
-			.append
-			(
-				$("<span></span>")
-				.text("Price: ₹ "+Price+seperator+sessionMonthCount+sessionMonth)
-			)
-			.appendTo(PriceContainer);
-			for(var day=1;day<=7;day++)
-			{
-				$("<div></div>")
-				.attr("id","day"+day)
-				.attr("class","day")
-				.text(DayCode[day])
-				.appendTo(ScheduleContainer);
-			}
-			$("<div></div>")
-			.attr("id","horizontalLine")
-			.append("")
-			.appendTo(PriceScheduleContainer);
-			for(var day=0;day<7;day++)
-			{
-				if(daysResult[day]==1)
-				{
-					$(".batch"+batchIndex+" #price_schedule"+scheduleIndex+" #scheduleWeekDays"+" #day"+(day+1)).css('opacity','1');
-				}
-			}
-		}*/
 		function LoadResult(start,end)
 		{
 			var index = 0;
@@ -304,8 +203,8 @@
 			{
 				chunk++;
 				loadFilters = true;	
-				//alert(response);
-				if(response == "Empty")
+				// alert(response);
+				if(response == "")
 				{
 					$('#loadMore').hide();
 					$('#noResults').show();
@@ -618,7 +517,7 @@
 							$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 							{
 								//alert(response);
-								if(response == "Empty")
+								if(response == "")
 								{
 									$('#loadMore').css('display','none');
 									$('#noResults').css('display','block');
@@ -667,7 +566,7 @@
 					location.reload(true);
 					/*$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
 					{						
-						if(response == "Empty")
+						if(response == "")
 						{
 							$('#loadMore').css('display','none');
 							$('#noResults').css('display','block');

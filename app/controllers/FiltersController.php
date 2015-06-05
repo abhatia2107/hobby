@@ -28,8 +28,8 @@ class FiltersController extends \BaseController {
 		$batchesForCategoryLocation=$this->batch->search($keyword,$category_id,$location_id,$chunk);
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
-			$batchesForCategoryLocation="Empty";
-			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+			$batchesForCategoryLocation="";
+			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		// dd($batchesForCategoryLocation[0]->schedules->all());
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
@@ -59,17 +59,19 @@ class FiltersController extends \BaseController {
 		if(Request::ajax()){
 			if($batchesForCategoryLocation)
 				return $batchesForCategoryLocation;
-			else
-				return $batchesForCategoryLocation="Empty";
+			else{
+				// dd('test');
+				return $batchesForCategoryLocation="";
+			}
 		}
 		else{
 			if(empty($batchesForCategoryLocation->toArray()))
 			{
-				$batchesForCategoryLocation="Empty";
-				$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+				$batchesForCategoryLocation="";
+				//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 			}
 		// dd($batchesForCategoryLocation[0]->schedules[0]);
-			//dd($batchesForCategoryLocation[0]);
+			// dd($batchesForCategoryLocation);
 			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 		}
 	}
@@ -96,8 +98,8 @@ class FiltersController extends \BaseController {
 		$batchesForCategoryLocation=$this->batch->getBatchesForInstitute($id);
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
-			$batchesForCategoryLocation="Empty";
-			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+			$batchesForCategoryLocation="";
+			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		//dd($batchesForCategoryLocation[0]->location);
 		$instituteName = $batchesForCategoryLocation[0]->institute;
@@ -123,8 +125,8 @@ class FiltersController extends \BaseController {
 		// dd($batchesForCategoryLocation[0]);
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
-			$batchesForCategoryLocation="Empty";
-			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+			$batchesForCategoryLocation="";
+			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		$locality = $batchesForCategoryLocation[0]->locality;
 		$location = $batchesForCategoryLocation[0]->location;
@@ -148,8 +150,8 @@ class FiltersController extends \BaseController {
 		$batchesForCategoryLocation=$this->batch->getBatchesForSubcategory($id);
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
-			$batchesForCategoryLocation="Empty";
-			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+			$batchesForCategoryLocation="";
+			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		// dd($batchesForCategoryLocation);
 		$subcategory = $batchesForCategoryLocation[0]->subcategory;
@@ -201,12 +203,17 @@ class FiltersController extends \BaseController {
 			$chunk=$chunk*100;
 			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
 		}
+		// dd($batchesForCategoryLocation);
+
 		if(Request::ajax()){
 			if($batchesForCategoryLocation){
 				return $batchesForCategoryLocation;
 			}
-			else
-				return $batchesForCategoryLocation="Empty";
+			else{
+				// dd('test');
+				$batchesForCategoryLocation ='';
+				return $batchesForCategoryLocation;
+			}
 		}
 		else{
 			// dd($batchesForCategoryLocation);

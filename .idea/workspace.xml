@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c8ed312-6321-4a47-b393-8222de422aec" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/database/seeds/CategoriesTableSeeder.php" afterPath="$PROJECT_DIR$/app/database/seeds/CategoriesTableSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/database/seeds/DatabaseSeeder.php" afterPath="$PROJECT_DIR$/app/database/seeds/DatabaseSeeder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/FiltersController.php" afterPath="$PROJECT_DIR$/app/controllers/FiltersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/home.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/home.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/desktop/Filters/show.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Filters/show.blade.php" />
     </list>
     <ignored path="hobby.iws" />
     <ignored path=".idea/workspace.xml" />

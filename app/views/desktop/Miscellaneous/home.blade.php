@@ -33,10 +33,13 @@
 		$listLength = $maxlength / $colNum;
 	?>
 	@for($col = 0;$col<=$colNum;$col++ )
-		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 @if($col>0 && $index>19) hidden-xs @endif featured_listing_item">
+		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
 			<li title="{{$institutes[$index]->institute}}">
-				{{$institutes[$index]->institute}}
+				<a href="/filter/institute/{{$institutes[$index]->id}}">
+					{{$institutes[$index]->institute}}, 
+					{{$institutes[$index]->locality}}
+				</a>
 			</li>
 		@endfor
 		<?php
@@ -48,7 +51,7 @@
 <div class="division_divider"></div>
 <div class="container featured_listing_container">
 	<div class="featured_listing_title">Fitness Activities</div>
-	<?php		
+	<?php
 		$institutesLength = sizeof($subcategories);
 		$index = 0;
 		$maxlength = 60;
@@ -57,11 +60,15 @@
 		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }
 		//if ($maxlength<=30) { $colNum = 2;$width = 6; }
 		$listLength = $maxlength / $colNum;
-	?>	
+	?>
 	@for($col = 0;$col<=$colNum;$col++ )
-		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 @if($col>0 && $index>19) hidden-xs @endif featured_listing_item">
+		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li>{{$subcategories[$index]->subcategory}}</li>
+			<li>
+				<a href="/filter/subcategory/{{$subcategories[$index]->id}}">
+					{{$subcategories[$index]->subcategory}}
+				</a>
+			</li>				
 		@endfor
 		<?php
 			$listLength += $listLength;
@@ -83,9 +90,13 @@
 		$listLength = $maxlength / $colNum;
 	?>
 	@for($col = 0;$col<=$colNum;$col++ )
-		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 @if($col>0 && $index>19) hidden-xs @endif featured_listing_item">
+		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li>{{$localities[$index]->locality}}</li>
+			<li>
+				<a href="/filter/locality/{{$localities[$index]->id}}">
+					{{$localities[$index]->locality}}
+				</a>
+			</li>
 		@endfor
 		<?php
 			$listLength += $listLength;

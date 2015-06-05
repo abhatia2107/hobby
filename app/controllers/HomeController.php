@@ -20,7 +20,9 @@ class HomeController extends BaseController {
 	public function showWelcome()
 	{		
 	   	$featuredBatches=$this->feature->getFeaturedBatches();
-		$institutes = $this->institute->getAllInstitutes();
+		$institutes = $this->institute->getAllInstitutesWithLocality();
+		// dd($institutes);
+		// dd($this->institute->getInstituteForCategory([1,2]));
 		$subcategories = $this->subcategory->all();
 		$localities = $this->locality->all();
 		//dd($localities);

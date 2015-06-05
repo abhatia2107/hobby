@@ -293,6 +293,12 @@ Route::get('/filter/{subcategoriesString}/{localitiesString}/{trialsString}/{cat
 
 Route::get('/filters/search','FiltersController@search');
 
+Route::get('/filter/institute/{id}','FiltersController@institute');
+
+Route::get('/filter/locality/{id}','FiltersController@locality');
+
+Route::get('/filter/subcategory/{id}','FiltersController@subcategory');
+
 Route::get('/users/account/{id}','UsersController@account');
 
 Route::resource('memberships', 'MembershipsController');

@@ -74,6 +74,78 @@ class FiltersController extends \BaseController {
 		}
 	}
 
+	public function institute($id)
+	{
+		$age_group=$this->age_group;
+		$difficulty_level=$this->difficulty_level;
+		$gender_group=$this->gender_group;
+		$trial=$this->trial;
+		$weekdays=$this->weekdays;
+		$category_id=5;
+		$location_id=1;
+		if(!$category_id){
+			$subcategoriesForCategory=$this->subcategory->all();
+		}
+		else
+			$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
+		
+		if(!$location_id)
+			$localitiesForLocation = $this->locality->all();
+		else		
+			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
+		$batchesForCategoryLocation=$this->batch->getBatchesForInstitute($id);
+		if(empty($batchesForCategoryLocation->toarray()))
+		{
+			$batchesForCategoryLocation="Empty";
+			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+		}
+		// dd($batchesForCategoryLocation);
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+	}
+
+	public function locality($id)
+	{
+		$age_group=$this->age_group;
+		$difficulty_level=$this->difficulty_level;
+		$gender_group=$this->gender_group;
+		$trial=$this->trial;
+		$weekdays=$this->weekdays;
+		$category_id=5;
+		$location_id=1;
+		$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
+		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
+		$batchesForCategoryLocation=$this->batch->getBatchesForLocality($id);
+		// dd($batchesForCategoryLocation[0]);
+		if(empty($batchesForCategoryLocation->toarray()))
+		{
+			$batchesForCategoryLocation="Empty";
+			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+		}
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+	}
+
+	public function subcategory($id)
+	{
+		$age_group=$this->age_group;
+		$difficulty_level=$this->difficulty_level;
+		$gender_group=$this->gender_group;
+		$trial=$this->trial;
+		$weekdays=$this->weekdays;
+		$category_id=5;
+		$location_id=1;
+		$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
+		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
+		$batchesForCategoryLocation=$this->batch->getBatchesForSubcategory($id);
+		if(empty($batchesForCategoryLocation->toarray()))
+		{
+			$batchesForCategoryLocation="Empty";
+			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+		}
+		// dd($batchesForCategoryLocation);
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+	}
+
+
 	public function filter($subcategoriesString,$localitiesString,$trialsString,$category_id,$location_id,$chunk)
 	{
 		$subcategories=explode(",",$subcategoriesString);

@@ -1,0 +1,172 @@
+body,html { font-family: 'Open Sans',sans-serif;margin: 0 0; width: 100%;overflow-x: hidden}
+
+.modal-open{  padding-right: 0px !important; }
+
+body li {  list-style-type: none; }
+
+.website-title {color: white;font-size: 25px;padding-left: 0px;}
+
+.header_location_dropdown { margin-top: 6px;font-size:10px;height:37px;width:100% !important;}
+
+.header_search_button { height: 34px;margin-top: 0px;font-size: 18px !important;padding-top: 5px !important; }
+
+.header_row1  { background-color: #202e54;padding: 0px 0px;text-align: left; /*max-width: 480px;*/}
+
+.user_account { font-size: 20px;text-align: center;color: white}
+
+.user_account_options button, .dropdown-toggle { background: none;color: white;font-family: 'Montserrat', sans-serif;font-weight: lighter; }
+
+.user_account_options .btn:hover, .btn:active {color: white !important;}
+
+.user_account_options ul {right: 0;left: auto;margin-top: -1px;border-radius: 0px;width:190px;font-size:16px }
+
+.user_account_options ul li {margin-top: 8px;}
+
+.user_account_options .btn:focus, .btn:active:focus, .btn.active:focus {   outline: 0 none; }
+ 
+.user_account_options .btn-primary { color: #ffffff;border-color:#20cfb1;padding: 3px 10px; }
+ 
+.user_account_options .btn-primary:active{ box-shadow: none; }
+ 
+.homepage-cover { width: 100%;text-align: center;background-color: rgba(0, 0, 0, 0.0);  }
+
+.min-button {  float: right;  }
+
+.homepage-cover { padding: 6em 0 6em; } 
+
+#page { color: white;font-weight: bold; }
+
+.home-widget-description, .home-widget-title {  margin: 0; padding: 0; text-align: center;  }
+
+.home-widget-title {  font-size: 20px;  }
+
+.homepage-cover select, .homepage-cover input {    width: 97%;  }
+
+.homepage-cover button  { width:65%;  }
+
+.home-cover-title { margin-bottom: 40px; }
+
+.homepage-cover h1 { font-size: 35px;color:white;font-weight: bold; }
+
+.homepage-cover h2 { font-size: 25px;color:white;font-weight: bold; }
+
+.overlay-slider { width: 100% !important;height: 100% !important;margin-top: 0px;top:0;left:0;
+  background: url("/assets/images/home/institute.jpg"); 
+background-repeat:no-repeat;
+background-position:left top;
+-o-background-size: 150% 100%, auto;
+-moz-background-size: 150% 100%, auto;
+-webkit-background-size: 150% 100%, auto;
+background-size: 150% 130%, auto;
+}
+
+.explore_button {text-align: center;}
+
+.explore_button .btn-primary {border-radius: 0px;border:0px;}
+
+.home-category-type { position:relative;overflow:hidden;background:black;height: 170px;margin-bottom:30px;
+  margin-top:7;border-radius: 9px;border:4px solid;border-color: lightgray;
+}
+
+ body select {  height: 34px;border-radius: 5px; }
+
+ .batch_recent_listings { background: url(/assets/images/home/recent_listing.jpg) 0 0;width: 100%;
+  margin-top: 50px;padding-top: 2px;padding-bottom: 50px; 
+}
+
+.active-rating .glyphicon { color: orange;font-weight: bolder; }
+
+.star-rating .glyphicon { color: gray;font-weight: bolder; }
+
+span.stars, span.stars span { background: url(/assets/images/sample/star.png) 0 -16px repeat-x;
+  width:80px;height:16px;margin-right: 5px; display: block;
+}
+
+span.stars span {  background-position: 0 0; }
+
+.featured_listing_container { margin-bottom: 20px;font-family: 'Open Sans',sans-serif;}
+
+.featured_listing_title {  border-bottom: 1px solid #20cfb1;margin: 16px 0 10px 0;padding: 0 0 5px 0;color: #202e54;
+  font-weight: 300;font-size: 21px;
+}
+
+.division_divider { border-bottom: 1px solid lightgray;margin: 10px 0 0 0 ;  }
+
+.featured_listing_item { font-size: 15px;}
+
+.featured_listing_item li {margin-top: 5px;}
+
+.footer-wrapper {  width: 100%;z-index: 10000 }
+
+.rememberMe {  text-align: left; }
+
+.forgetPassword {  text-align: right;}
+
+#instituteEdit .glyphicon {  font-size: 13px;margin-right: 3px; }
+
+#instituteEdit button {  padding: 0px 10px 0px 05px;height: 30px; }
+
+.required {  color: red; }
+
+.userInfoListing {  text-align: right;font-size: 18px;padding-top: 11px; }
+
+.login { float:right;padding: 2px 6px;border: 1px solid;border-color: #20cfb1;border-radius: 5px;font-size: 14px;}
+
+.login a {color: white;text-decoration: none;}
+
+.login_form {padding: 0px 15px; }
+
+.signin_button {  text-align: center; }
+
+.login_form button {font-size: 15px;height: 35px;padding: 2px 35px;border-radius: 0px;}
+
+.modal-header, .modal-footer, #loadmorebutton, .venues-list-buttons {  text-align: center; }
+
+#loadmorebutton, .results-container {  padding-bottom: 20px;}
+
+.results-container {padding-right: 0px;margin-right: 0px !important;}
+
+.venues-list-container {  margin-top: 20px; }
+
+.addBatchButton {  text-align: center; }
+
+#errorMsgPage{    min-height: 400px; }
+
+.form-control-feedback {  
+  position: absolute;top:0;right: 11px;z-index: 2;display: block;width: 34px;height: 34px;line-height: 34px;text-align: center;pointer-events: none;
+}
+
+ .footer-wrapper { position:absolute; width:100%;color: lightgray;padding: 10px;
+  background: url("/assets/images/home/footer.jpg") no-repeat center center fixed;-webkit-background-size: cover;
+  -moz-background-size: cover;-o-background-size: cover;background-size: cover;
+} 
+
+.footer-wrapper .glyphicon { font-size: 17px;font-weight: bolder;margin-right: 7px;width: 20px;margin-top: 3px; }
+
+.footer-wrapper a { color: lightgray;text-decoration:none; }
+
+.footer-wrapper .textwidget {  margin-top: 20px;font-size: 17px;font-weight: normal; }
+
+.footer-wrapper .copyright_text {  margin-top: 8%;border-top:1px solid skyblue;padding: 5px 0px;text-align: center; }
+
+.space_footer {padding-top: 30px;background:#f0f3f6;}
+
+.content-div { min-height:330px;height:auto !important; }
+
+.checkbox_data { position:relative;top:-2px; }
+
+.batchCreateFormError { margin-top: 4px;margin-left: 2px;color: #a94442;font-size: 12px; }
+
+/*form styele */
+
+.inner-addon {  position: relative; }
+
+.inner-addon .glyphicon {  position: absolute; pointer-events: none;}
+
+.inner-addon .left-addon {padding: 8px;}
+
+.left-addon .glyphicon  { left:  0px;}
+
+.right-addon { right: 22px;position: absolute;float: left;padding-top: 8px;}
+
+.inner-addon input  { padding-left:  30px;padding-right: 0px; }

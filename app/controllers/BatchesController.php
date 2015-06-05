@@ -14,6 +14,7 @@ class BatchesController extends \BaseController {
 
 	public function index()
 	{
+		//dd($this->device);
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
@@ -26,7 +27,7 @@ class BatchesController extends \BaseController {
 		$institute_id=$this->institute->getInstituteforUser($user_id);
 		// dd($institute_id);
 		//dd($batchDetails[2]);
-		return View::make('Batches.index',compact('age_group','batchDetails','difficulty_level','gender_group','institute_id','trial','weekdays'));
+		return View::make('Batches.'.$this->device.'.index',compact('age_group','batchDetails','difficulty_level','gender_group','institute_id','trial','weekdays'));
 	}
 
 	/**
@@ -51,7 +52,7 @@ class BatchesController extends \BaseController {
 		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$institute_id=$this->institute->getInstituteforUser($user_id);
 		$weekdays=$this->weekdays;
-		return View::make('Batches.create',compact('all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','schedule_session_month','trial','weekdays'));
+		return View::make('Batches.'.$this->device.'.create',compact('all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','schedule_session_month','trial','weekdays'));
 	}
 
 	/**
@@ -159,7 +160,7 @@ class BatchesController extends \BaseController {
 			$metaContent[2] = "$instituteName $locality, $instituteName $location, $subcategory classes in $locality, $subcategory classes in $location, $subcategory classes $instituteName";
 			$institute_id=$batchDetails[0]->batch_institute_id;
 			$comments=$this->comment->getCommentForInstitute($institute_id);
-			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays','metaContent'));
+			return View::make('Batches.'.$this->device.'.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays','metaContent'));
 		}
 		else
 		{
@@ -195,7 +196,7 @@ class BatchesController extends \BaseController {
 		// dd($scheduleForBatch['0']['id']);
 		$batchDetails->schedule=$scheduleForBatch;
 		// dd($batchDetails);
-		return View::make('Batches.create',compact('batchDetails','all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities', 'schedule_session_month','trial','weekdays'));
+		return View::make('Batches.'.$this->device.'.create',compact('batchDetails','all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities', 'schedule_session_month','trial','weekdays'));
 	}
 
 	/**
@@ -303,7 +304,7 @@ class BatchesController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Batches.approve',compact('batches','tableName','count','adminPanelListing'));
+		return View::make('Batches.'.$this->device.'.approve',compact('batches','tableName','count','adminPanelListing'));
 	}
 
 	public function approve($id)
@@ -374,6 +375,6 @@ class BatchesController extends \BaseController {
 		$institute_id=$this->institute->getInstituteforUser($user_id);
 		$batchDetails=Batch::find($id);
 		// dd($batchDetails);
-		return View::make('Batches.order',compact('batchDetails','institute_id'));
+		return View::make('Batches.'.$this->device.'.order',compact('batchDetails','institute_id'));
 	}*/
 }

@@ -16,7 +16,7 @@ class InstitutesController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Institutes.index',compact('institutes','tableName','count','adminPanelListing'));
+		return View::make('Institutes.'.$this->device.'.index',compact('institutes','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -27,7 +27,7 @@ class InstitutesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Institutes.create');
+		return View::make('Institutes.'.$this->device.'.create');
 	}
 
 	/**
@@ -71,7 +71,7 @@ class InstitutesController extends \BaseController {
 		{
 			return Redirect::back()->with('failure',Lang::get('institute.institute_disabled_by_admin'));;
 		}
-		return View::make('Institutes.show',compact('instituteDetails','institute_id'));
+		return View::make('Institutes.'.$this->device.'.show',compact('instituteDetails','institute_id'));
 	}
 	/**
 	 * Show the form for editing the specified resource.
@@ -89,7 +89,7 @@ class InstitutesController extends \BaseController {
 		$instituteDetails['institute_location']=$institute_location['location'];
 		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$institute_id=$id;
-		return View::make('Institutes.create',compact('instituteDetails','institute_id'));
+		return View::make('Institutes.'.$this->device.'.create',compact('instituteDetails','institute_id'));
 	}
 
 	/**

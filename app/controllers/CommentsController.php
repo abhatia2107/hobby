@@ -11,7 +11,7 @@ class CommentsController extends \BaseController {
 	public function index()
 	{
 		$comments=Comment::all();
-		return View::make('Comments.index',compact('comments'));
+		return View::make('Comments.'.$this->device.'.index',compact('comments'));
 	}
 
 	/**
@@ -22,7 +22,7 @@ class CommentsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Comments.create');
+		return View::make('Comments.'.$this->device.'.create');
 	}
 
 	/**
@@ -60,7 +60,7 @@ class CommentsController extends \BaseController {
 	public function show($id)
 	{
 		$commentDetails=Comment::find($id);
-		return View::make('Comments.show',compact('commentDetails'));
+		return View::make('Comments.'.$this->device.'.show',compact('commentDetails'));
 	}
 
 	/**
@@ -73,7 +73,7 @@ class CommentsController extends \BaseController {
 	public function edit($id)
 	{
 		$commentDetails=Comment::find($id);
-		return View::make('Comments.create',compact('commentDetails'));
+		return View::make('Comments.'.$this->device.'.create',compact('commentDetails'));
 	}
 
 	/**

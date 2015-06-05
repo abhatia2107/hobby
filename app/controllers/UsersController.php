@@ -35,7 +35,7 @@ class UsersController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Users.index',compact('users','tableName','count','adminPanelListing'));
+		return View::make('Users.'.$this->device.'.index',compact('users','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -52,12 +52,12 @@ class UsersController extends \BaseController {
 
 	public function profile()
 	{
-		return View::make('Users.profile');
+		return View::make('Users.'.$this->device.'.profile');
 	}
 
 	public function orders()
 	{
-		return View::make('Users.orders');
+		return View::make('Users.'.$this->device.'.orders');
 	}
 
 	/**
@@ -69,7 +69,7 @@ class UsersController extends \BaseController {
 	 */
 	public function edit()
 	{
-		return View::make('Users.edit');
+		return View::make('Users.'.$this->device.'.edit');
 	}
 
 	/**
@@ -185,7 +185,7 @@ class UsersController extends \BaseController {
 	public function getLogin()
 	{
 		$loginPage = true;
-		return View::make('Users.login',compact('loginPage'));
+		return View::make('Users.'.$this->device.'.login',compact('loginPage'));
 	}
 
 	/**
@@ -263,7 +263,7 @@ class UsersController extends \BaseController {
 	*/
 	public function getSignup()
 	{
-		return View::make('Users.signup');
+		return View::make('Users.'.$this->device.'.signup');
 	}
 
 	/**
@@ -425,7 +425,7 @@ class UsersController extends \BaseController {
 	public function getChangePassword()
 	{
 		// dd("G");
-		return View::make('Users.changePassword');
+		return View::make('Users.'.$this->device.'.changePassword');
 	}
 
 	/**
@@ -526,7 +526,7 @@ class UsersController extends \BaseController {
 //                    return $userDetails->email;
 //                    return Redirect::to('/signup/fb/')->with($userDetails);
 //	    			return View::make('Modals.signup2',compact('userDetails'));
-	    			return View::make('Users.signup', compact('userDetails'));
+	    			return View::make('Users.'.$this->device.'.signup', compact('userDetails'));
 //	    			User::create($profileData);
 	    		}
 	    		try {

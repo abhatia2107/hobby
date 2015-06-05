@@ -62,8 +62,5 @@ class DatabaseSeeder extends Seeder {
 		$this->call('BatchesTableSeeder');
         $this->command->info('Batches table seeded!');
 
-		$this->call('BookingsTableSeeder');
-		$this->command->info('Booking Photo seeded!');
-
 	}
 }

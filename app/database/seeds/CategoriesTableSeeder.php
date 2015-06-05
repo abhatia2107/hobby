@@ -1,6 +1,6 @@
 <?php
  
-class categoriesTableSeeder extends Seeder {
+class CategoriesTableSeeder extends Seeder {
 
        public function run()
        {
@@ -48,8 +48,7 @@ class categoriesTableSeeder extends Seeder {
               DB::table('categories')->insert(array(
               'category' =>'Other',
               'category_no_of_subcategories'=>1,
-              */
              ));
+              */
        }
 }
-?>

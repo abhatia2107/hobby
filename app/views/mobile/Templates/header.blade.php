@@ -6,7 +6,7 @@
 
 	  	.navbar-form input[type=text] {width: 100%;}
 
-	  	.header_row1 .searchicon a {color: white;font-size: 16px;padding: 17px 5px 0px 0px;float: right;text-decoration: none;}
+	  	.header_row1 .searchicon a {color: white;font-size: 16px;padding: 17px 5px 17px 0px;float: right;text-decoration: none;}
   	</style>
   	<?php
 		$id=Auth::id();

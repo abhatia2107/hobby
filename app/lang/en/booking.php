@@ -4,7 +4,7 @@
 		
 		"booking_created"=>"Your booking have been added successfully",
 		
-		"booking_create_failed" => "Sorry, We are unable to add the booking",
+		"booking_create_failed" => "Sorry, We are unable to add the booking, please try again.",
 		
 		"booking_updated"=>"Your booking have been updated successfully",
 		

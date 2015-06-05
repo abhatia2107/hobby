@@ -100,7 +100,7 @@ class FiltersController extends \BaseController {
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
 			$batchesForCategoryLocation="";
-			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		//dd($batchesForCategoryLocation[0]->location);
 		$instituteName = $batchesForCategoryLocation[0]->institute;

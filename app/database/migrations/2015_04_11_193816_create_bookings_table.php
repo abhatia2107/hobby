@@ -17,8 +17,8 @@ class CreateBookingsTable extends Migration {
 			$table->increments('id');
 			$table->integer('batch_id')->unsigned()->index();
 			$table->foreign('batch_id')->references('id')->on('batches');
-			$table->integer('user_id')->unsigned()->index();
-			$table->foreign('user_id')->references('id')->on('users')->nullable();
+			$table->integer('user_id')->unsigned()->index()->nullable();
+			$table->foreign('user_id')->references('id')->on('users');
 			$table->string('email',50);
 			$table->string('contact_no',15);
 			$table->integer('payment');

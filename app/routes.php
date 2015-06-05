@@ -67,7 +67,7 @@ Route::group(array('before' => "admin"), function() {
 });
 
 Route::get('/batches/increment/{id}','BatchesController@increment');
-Route::get('/bookings/iframe','BookingsController@iframe');
+Route::get('/bookings/payment/{id}','BookingsController@payment');
 Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');

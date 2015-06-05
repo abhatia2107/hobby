@@ -53,11 +53,11 @@ class BookingsController extends \BaseController {
 		return View::make('Bookings.create',compact('batchDetails','institute_id','posted'))->with('success',Lang::get('payments.verify'));
 	}
 
-	public function payment($booking)
+	public function payment($id)
 	{
-		// dd($booking);
 		include app_path().'/IFRAME_KIT/Crypto.php';
 		error_reporting(0);
+		$booking=Booking::find($id);
 		$merchant_id='61787';
 		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
 		$access_code='AVCA05CE22BS53ACSB';
@@ -81,10 +81,11 @@ class BookingsController extends \BaseController {
 		foreach ($posted as $key => $value){
 			$merchant_data.=$key.'='.$value.'&';
 		}
-		$action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
+		$action='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
+		// $action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 		$encrypted_data=encrypt($merchant_data,$working_key); // Method for encrypting the data.
 		// dd($encrypted_data);
-		return View::make('Bookings.payment',compact('action','encrypted_data','access_code'));
+		return View::make('Bookings.payment',compact('action'));
 	}
 	/**
 	 * Store a newly created booking in storage.
@@ -108,7 +109,7 @@ class BookingsController extends \BaseController {
 		// dd($data);
 		$booking = Booking::create($data);
 		if($booking)
-			$this->payment($booking);
+			return Redirect::to('/bookings/payment/'.$booking->id);
 		else
 			return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
 	}

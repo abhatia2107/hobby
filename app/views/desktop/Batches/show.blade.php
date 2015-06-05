@@ -203,9 +203,11 @@
     padding: 20px 5%;
     width: 100%;    
   }
-  #related_data_container h4 {font-size: 18px;color: #444;font-weight: bold;margin:0px;}
+  #related_data_container h4 {font-size: 18px;color: #202e54;font-weight: bold;margin:0px 0px 5px 0px;}
 
-  .related_item {margin-top: 15px;}
+  .related_item {margin-bottom: 15px;}
+
+  .related_item a {color:#5C5C5C;}
 
   </style> 
 @stop
@@ -393,12 +395,9 @@
     </div>
   </div> 
 </div>
-<?php
-  $relatedData = ["data1","data2","data3","data4","data5","data6","data7","data8","data9","data10","data11","data12"];
-?>
 <div class="container" id="related_data_container">
   <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-12 col-sm-12 col-xs-12 related_item">
         <h4>Related to {{$instituteName}}</h4>       
         <?php
           $institutesLength = sizeof($batchesOfInstitute);
@@ -410,11 +409,11 @@
           $listLength = $maxlength / $colNum;
         ?>
         @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
+          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">
             @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$relatedData[$index]}}">
+              <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
                 <a href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
-                  {{$batchesOfInstitute[$index]->subcategory}}
+                  {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
                 </a>
               </li>
             @endfor
@@ -436,9 +435,9 @@
           $listLength = $maxlength / $colNum;
         ?>
         @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
+          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12">
             @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$relatedData[$index]}}">
+              <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
                 <a href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
                   {{$institutesOfSubcategoryInLocality[$index]->institute}}
                 </a>
@@ -462,12 +461,11 @@
           $listLength = $maxlength / $colNum;
         ?>
         @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
+          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12">
             @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$relatedData[$index]}}">
+              <li title="{{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}">
                 <a href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
-                  {{$subcategoriesInLocality[$index]->subcategory}}
-                </a>
+                  {{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}
               </li>
             @endfor
             <?php

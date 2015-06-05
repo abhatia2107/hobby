@@ -99,8 +99,13 @@ class FiltersController extends \BaseController {
 			$batchesForCategoryLocation="Empty";
 			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
-		// dd($batchesForCategoryLocation);
-		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+		//dd($batchesForCategoryLocation[0]->location);
+		$instituteName = $batchesForCategoryLocation[0]->institute;
+		$location = $batchesForCategoryLocation[0]->location;
+		$metaContent[0] = "$instituteName - $location :: Hobbyix";
+		$metaContent[1] = "$instituteName $location, $instituteName classes in $location. Book a session, get address, contact info and reviews.";
+		$metaContent[2] = "$instituteName, $instituteName $location";
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent'));
 	}
 
 	public function locality($id)
@@ -108,7 +113,7 @@ class FiltersController extends \BaseController {
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
-		$trial=$this->trial;
+		$trial=$this->trial;	
 		$weekdays=$this->weekdays;
 		$category_id=5;
 		$location_id=1;
@@ -121,7 +126,12 @@ class FiltersController extends \BaseController {
 			$batchesForCategoryLocation="Empty";
 			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
-		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+		$locality = $batchesForCategoryLocation[0]->locality;
+		$location = $batchesForCategoryLocation[0]->location;
+		$metaContent[0] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing in $locality::Hobbyix";
+		$metaContent[1] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing in $locality";
+		$metaContent[2] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing in $locality";	
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent'));
 	}
 
 	public function subcategory($id)
@@ -142,7 +152,12 @@ class FiltersController extends \BaseController {
 			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		// dd($batchesForCategoryLocation);
-		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+		$subcategory = $batchesForCategoryLocation[0]->subcategory;
+		$location = $batchesForCategoryLocation[0]->location;
+		$metaContent[0] = "$subcategory classes in $location :: Hobbyix";
+		$metaContent[1] = "$subcategory classes in $location";
+		$metaContent[2] = "$subcategory, $subcategory classes in $location";
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent'));
 	}
 
 

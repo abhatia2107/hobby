@@ -148,7 +148,7 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		//dd($batchDetails[0]);
+		dd($batchDetails[0]);
 		if(!is_null($batchDetails))
 		{			
 			$subcategory = $batchDetails[0]->subcategory;

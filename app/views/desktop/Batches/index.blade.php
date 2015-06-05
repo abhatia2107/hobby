@@ -38,8 +38,7 @@
 		</div>
 	</div>				
 </div>
-<div class="home_vendor_page">
-	@include('Templates.navbarVendor')
+<div class="home_vendor_page">	
 	<?php $days = array("day1" => "M","day2" => "T","day3" => "W", "day4" => "T","day5" => "F","day6" => "S","day7" => "S"); ?>
 	<div class="container" id="vendor_institute_batches">
 		<div class="col-md-1 col-xs-12 col-sm-1"></div>

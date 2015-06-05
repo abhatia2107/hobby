@@ -15,7 +15,7 @@ class PromosController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Promos.'.$this->device.'.index',compact('promos','tableName','count','adminPanelListing'));
+		return View::make($this->device.'.Promos.index',compact('promos','tableName','count','adminPanelListing'));
 	}
 
     /**
@@ -25,7 +25,7 @@ class PromosController extends \BaseController {
      */
     public function create()
     {
-        return View::make('Promos.'.$this->device.'.create');
+        return View::make($this->device.'.Promos.create');
     }
 
 	/**
@@ -55,13 +55,13 @@ class PromosController extends \BaseController {
     public function show($id)
     {
         $promo=Promo::withTrashed()->findOrFail($id);
-        return View::make('Promos.'.$this->device.'.show',compact('promo'));
+        return View::make($this->device.'.Promos.show',compact('promo'));
     }
 
     public function edit($id)
     {
         $promo=Promo::withTrashed()->findOrFail($id);
-        return View::make('Promos.'.$this->device.'.edit',compact('promo'));
+        return View::make($this->device.'.Promos.edit',compact('promo'));
     }
 	/**
 	 * Update the specified promo in storage.

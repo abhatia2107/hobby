@@ -14,7 +14,7 @@ class SubscriptionsController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Subscriptions.'.$this->device.'index',compact('subscriptions','tableName','count','adminPanelListing'));
+		return View::make($this->device.'.Subscriptions.index',compact('subscriptions','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -25,7 +25,7 @@ class SubscriptionsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Subscriptions.'.$this->device.'create');
+		return View::make($this->device.'.Subscriptions.create');
 	}
 
 	/**

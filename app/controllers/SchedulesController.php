@@ -13,7 +13,7 @@ class SchedulesController extends \BaseController {
 		$weekdays=$this->weekdays;
 		$trial=$this->trial;
 		$schedule_session_month=$this->schedule_session_month;
-		return View::make('schedule.'.$this->device,compact('schedule_session_month','trial','weekdays'));
+		return View::make($this->device.'.schedule',compact('schedule_session_month','trial','weekdays'));
 	}
 
 	/**

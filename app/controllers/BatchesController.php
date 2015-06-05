@@ -148,9 +148,9 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		//dd($batchDetails[0]);
+		// dd($batchDetails[0]);
 		if(!is_null($batchDetails))
-		{			
+		{
 			$subcategory = $batchDetails[0]->subcategory;
 			$instituteName = $batchDetails[0]->institute;
 			$locality = $batchDetails[0]->locality;
@@ -160,7 +160,11 @@ class BatchesController extends \BaseController {
 			$metaContent[2] = "$instituteName $locality, $instituteName $location, $subcategory classes in $locality, $subcategory classes in $location, $subcategory classes $instituteName";
 			$institute_id=$batchDetails[0]->batch_institute_id;
 			$comments=$this->comment->getCommentForInstitute($institute_id);
-			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays','metaContent'));
+			$batchesOfInstitute=$this->batch->getBatchesForInstitute($institute_id);
+			$institutesOfSubcategoryInLocality=$this->batch->getInstitutesForSubcategoryInLocality($batchDetails[0]->batch_subcategory_id, $batchDetails[0]->venue_locality_id);
+			$subcategoriesInLocality=$this->subcategory->getSubcategoryInLocality($batchDetails[0]->venue_locality_id);
+			// dd($subcategoriesInLocality);
+			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));
 		}
 		else
 		{

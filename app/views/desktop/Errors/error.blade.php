@@ -1,4 +1,4 @@
-@extends('Layouts.desktop.layout')
+@extends('Layouts.layout')
 @section('content')
     <div class="clearfix" id="errorMsgPage">
     	<h1>There's some issue we'll solve it soon. Stay in touch!!!</h1>

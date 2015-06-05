@@ -96,7 +96,7 @@ class Batch extends \Eloquent {
                 ->get();
     }
 
-    public function getBatchForFilter($subcategories,$localities,$trials,$chunk)
+    public function getBatchForFilter($subcategories,$localities,$chunk)
     {
         $allBatches=Batch::
                         Join('institutes','institutes.id','=','batches.batch_institute_id')
@@ -107,7 +107,6 @@ class Batch extends \Eloquent {
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->where('batches.batch_approved','=','1')
                         ->whereIn('venues.venue_locality_id',$localities)
-                        ->whereIn('batches.batch_trial',$trials)
                         ->whereIn('batches.batch_subcategory_id',$subcategories)
                         ->skip($chunk)
                         ->take(100)
@@ -278,6 +277,19 @@ class Batch extends \Eloquent {
                         ->orderBy('batches.created_at','desc')
                         ->get();
     }
+
+    public function getInstitutesForSubcategoryInLocality($batch_subcategory_id, $venue_locality_id)
+    {
+        return Batch::where('batch_subcategory_id',$batch_subcategory_id)
+                        ->where('batches.batch_approved','=','1')
+                        ->where('venue_locality_id',$venue_locality_id)
+                        ->Join('institutes','institutes.id','=','batches.batch_institute_id')
+                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
+                        ->select('institutes.id as id','institute')
+                        ->take(12)
+                        ->get();
+    }
+
     public function getBatchesForUser($batch_user_id)
     {
         $batches= Batch::where('batch_user_id','=',$batch_user_id)

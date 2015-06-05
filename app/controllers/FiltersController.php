@@ -81,7 +81,7 @@ class FiltersController extends \BaseController {
 		$gender_group=$this->gender_group;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		$category_id=5;
+		$category_id=1;
 		$location_id=1;
 		if(!$category_id){
 			$subcategoriesForCategory=$this->subcategory->all();
@@ -110,7 +110,7 @@ class FiltersController extends \BaseController {
 		$gender_group=$this->gender_group;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		$category_id=5;
+		$category_id=1;
 		$location_id=1;
 		$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
 		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
@@ -131,7 +131,7 @@ class FiltersController extends \BaseController {
 		$gender_group=$this->gender_group;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		$category_id=5;
+		$category_id=1;
 		$location_id=1;
 		$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
 		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
@@ -146,11 +146,19 @@ class FiltersController extends \BaseController {
 	}
 
 
-	public function filter($subcategoriesString,$localitiesString,$trialsString,$category_id,$location_id,$chunk)
+	public function filter($subcategoriesString,$localitiesString,$category_id='1',$location_id='1',$chunk='0')
 	{
+		$age_group=$this->age_group;
+		$difficulty_level=$this->difficulty_level;
+		$gender_group=$this->gender_group;
+		$trial=$this->trial;
+		$weekdays=$this->weekdays;
+		$category_id=1;
+		$location_id=1;
+		$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
+		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$subcategories=explode(",",$subcategoriesString);
 		$localities=explode(",", $localitiesString);
-		$trials=explode(",", $trialsString);
 		// TO DO: If any array is empty make a array corresponding to it with all entries,
 		// where condition for all the arrays will be applied in only one statement.  
 
@@ -169,19 +177,14 @@ class FiltersController extends \BaseController {
 				array_push($localities, ($data->id));
 			}
 		}
-		// dd($trials);
-		if(!$trials[0])
-		{
-			$trials=array(0,1,2,3,4,5);
-		}
 
-		if(!$subcategories[0]&&!$localities[0]&&!$trials[0]){
+		if(!$subcategories[0]&&!$localities[0]){
 			$chunk=$chunk*100;
 			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		}
 		else{
 			$chunk=$chunk*100;
-			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$trials,$chunk);
+			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
 		}
 		if(Request::ajax()){
 			if($batchesForCategoryLocation){
@@ -192,7 +195,7 @@ class FiltersController extends \BaseController {
 		}
 		else{
 			// dd($batchesForCategoryLocation);
-			return View::make('Errors.pageNotFound');
+			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 		}
 	}
 }

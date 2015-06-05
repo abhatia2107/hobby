@@ -4,8 +4,86 @@ class SubcategoriesTableSeeder extends Seeder {
 
 	public function run()
 	{
-		//Category_id=>1 stands for Art & Craft
+		//Category_id=>1 stands for Fitness
 		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Aerobics',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Gymnastics',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Gyms',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Jiu jitsu',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Karate',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Kick-Boxing',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Kung Fu',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Martial Arts',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Mixed Martial Arts',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Nutrition',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Pilates',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Power Yoga',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Reiki',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Self Defence',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Taekwondo',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Tai Chi',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'5',
+			'subcategory'=>'Yoga',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Zumba',
+			));
+		DB::table('subcategories')->insert(array(
+			'subcategory_category_id'=>'1',
+			'subcategory'=>'Other',
+			));
+            
+		//Category_id=>1 stands for Art & Craft
+		/*DB::table('subcategories')->insert(array(
 			'subcategory_category_id'=>'1',
 			'subcategory'=>'Calligraphy',
 			));
@@ -574,7 +652,7 @@ class SubcategoriesTableSeeder extends Seeder {
 			'subcategory'=>'Other',
 			));
 
-			//Category_id=>10 stands for Fitness
+			//Category_id=>10 stands for Technology
 		DB::table('subcategories')->insert(array(
 			'subcategory_category_id'=>'10',
 			'subcategory'=>'Programming in C++',
@@ -596,7 +674,7 @@ class SubcategoriesTableSeeder extends Seeder {
 		DB::table('subcategories')->insert(array(
 			'subcategory_category_id'=>'11',
 			'subcategory'=>'Other',
-		));
+		));*/
 	}
 }
 ?>

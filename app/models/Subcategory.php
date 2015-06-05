@@ -52,6 +52,25 @@ class Subcategory extends \Eloquent {
             return Subcategory::all();
     }
 
+    public function getSubcategoryInLocality($venue_locality_id)
+    {
+        $subcategories=Batch::where('venue_locality_id',$venue_locality_id)
+                        ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
+                        ->select('batch_subcategory_id')
+                        ->get();
+        $i=0;
+        foreach ($subcategories as $subcategory) {
+            $sub[$i]=$subcategory->batch_subcategory_id;
+            $i++;
+        }
+        $subcategories = array_unique($sub);
+        // dd($subcategories[4]->batch_subcategory_id);
+        return Subcategory::whereIn('subcategories.id',$subcategories)
+                        ->select('id','subcategory')
+                        ->take(12)
+                        ->get();
+    }
+
     public function disableSubcategoriesForCategory($subcategory_category_id)
     {
 		    $subcategory=Subcategory::where('subcategory_category_id', '=', $subcategory_category_id)->delete();

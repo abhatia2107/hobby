@@ -1,4 +1,4 @@
-@extends('Layouts.desktop.layout')
+@extends('Layouts.layout')
 @section('content')
     <div class="clearfix" id="errorMsgPage">
     	<h1>It looks like, you've put some wrong URL.!!!</h1>

@@ -4,7 +4,7 @@ class categoriesTableSeeder extends Seeder {
 
        public function run()
        {
-              DB::table('categories')->insert(array(
+              /*DB::table('categories')->insert(array(
               'category' =>'Art & Craft',
               'category_no_of_subcategories'=>20,
               ));
@@ -20,11 +20,12 @@ class categoriesTableSeeder extends Seeder {
               'category' =>'Education',
               'category_no_of_subcategories'=>11,
               ));
+              */
               DB::table('categories')->insert(array(
               'category' =>'Fitness',
               'category_no_of_subcategories'=>18,
               ));
-              DB::table('categories')->insert(array(
+              /*DB::table('categories')->insert(array(
               'category' =>'Media',
               'category_no_of_subcategories'=>3,
               ));
@@ -47,7 +48,8 @@ class categoriesTableSeeder extends Seeder {
               DB::table('categories')->insert(array(
               'category' =>'Other',
               'category_no_of_subcategories'=>1,
-              ));
+              */
+             ));
        }
 }
 ?>

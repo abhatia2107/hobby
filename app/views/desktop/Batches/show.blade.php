@@ -231,6 +231,7 @@
     $instituteDetails = $data->institute_description;
     $facebookLink = $data->institute_fblink;
     $twitterLink = $data->institute_twitter; 
+    $locality_id = $data->venue_locality_id; 
     $locality =  $data->locality;
   }
   $relatedContent = null;
@@ -398,7 +399,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <h4>Related to {{$instituteName}}</h4>       
         <?php
-          $institutesLength = sizeof($relatedData);
+          $institutesLength = sizeof($batchesOfInstitute);
           $index = 0;
           $maxlength = 12;
           $colNum = 3;
@@ -410,7 +411,9 @@
           <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
             @for(; $index<$listLength && $index<$maxlength; $index++ )
               <li title="{{$relatedData[$index]}}">
-                {{$relatedData[$index]}}
+                <a href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
+                  {{$batchesOfInstitute[$index]->batch}}
+                </a>
               </li>
             @endfor
             <?php
@@ -422,7 +425,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12 related_item">
         <h4>Other {{$subcategory}} classes</h4>
         <?php
-          $institutesLength = sizeof($relatedData);
+          $institutesLength = sizeof($institutesOfSubcategoryInLocality);
           $index = 0;
           $maxlength = 12;
           $colNum = 3;
@@ -434,7 +437,9 @@
           <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
             @for(; $index<$listLength && $index<$maxlength; $index++ )
               <li title="{{$relatedData[$index]}}">
-                {{$relatedData[$index]}}
+                <a href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
+                  {{$institutesOfSubcategoryInLocality[$index]->institute}}
+                </a>
               </li>
             @endfor
             <?php
@@ -446,7 +451,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12 related_item">
         <h4>{{$category}} classes in {{$locality}}</h4>
         <?php
-          $institutesLength = sizeof($relatedData);
+          $institutesLength = sizeof($subcategoriesInLocality);
           $index = 0;
           $maxlength = 12;
           $colNum = 3;
@@ -458,7 +463,9 @@
           <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
             @for(; $index<$listLength && $index<$maxlength; $index++ )
               <li title="{{$relatedData[$index]}}">
-                {{$relatedData[$index]}}
+                <a href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
+                  {{$subcategoriesInLocality[$index]->subcategory}}
+                </a>
               </li>
             @endfor
             <?php

@@ -123,41 +123,21 @@ body li {  list-style-type: none; }
 
 .star-rating .glyphicon { color: gray;font-weight: bolder; }
 
-.recent_listings-item { position:relative;overflow:hidden;background:black;height: 200px;margin-bottom:30px;margin-top:7px;
-  border-radius: 7px;border:2px solid;border-color: lightgray;
-}
-
-.recent_listings-item header { margin-left: 10px;background-color: rgba(0, 0, 0, 0.7);font-weight: lighter;font-size: 15px; }
-
-.recent_listings-item img { z-index: 1;width:100%;height: 170px; } 
-
-.recent_listings-info {  position: absolute;top: 0;left: 0;z-index: 20;width: 100%;height: 100%;color: skyblue;z-index: 1000;
-  text-align: left;font-weight: normal;color: white;font-size: 14px;
-}
-
-.recent_listing_rating { margin-top:5px;float: right;text-align: center; }
-
 span.stars, span.stars span {
   display: block;background: url(/assets/images/sample/star.png) 0 -16px repeat-x;width:80px;height:16px;margin-right: 5px;
 }
 
 span.stars span {  background-position: 0 0; }
 
-.recent_listings-info .contact_address_info {  bottom:0;position: absolute;width: 100%;}
-
-.recent_listings-info a { color: white;font-size: 24px;text-align: center; }
-
-.recent_listings-info footer { text-align: center; }
-
 .vendor_batch_list_item:hover figcaption  {  display: block;z-index: 1000009; }
-
-#vendorNavBar {  margin-top: -50px;position: relative; }
 
 .featured_listing_container { margin-bottom: 20px;font-family: 'Open Sans',sans-serif;}
 
 .featured_listing_title {  border-bottom: 1px solid #20cfb1;margin: 16px 0 10px 0;padding: 0 0 5px 0;color: #202e54;font-weight: 300;
   font-size: 25px;
 }
+
+.featured_listing_container a {color: #333}
 
 .division_divider { border-bottom: 1px solid #DCDCDC;margin: 30px 0 0 0 ;  }
 

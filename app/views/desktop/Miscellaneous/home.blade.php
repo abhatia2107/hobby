@@ -35,7 +35,7 @@
 	@for($col = 0;$col<=$colNum;$col++ )
 		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li title="{{$institutes[$index]->institute}}">
+			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}}, Hyderabad">
 				<a href="/filter/institute/{{$institutes[$index]->id}}">
 					{{$institutes[$index]->institute}}, 
 					{{$institutes[$index]->locality}}
@@ -64,7 +64,7 @@
 	@for($col = 0;$col<=$colNum;$col++ )
 		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li>
+			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
 				<a href="/filter/subcategory/{{$subcategories[$index]->id}}">
 					{{$subcategories[$index]->subcategory}}
 				</a>
@@ -92,7 +92,7 @@
 	@for($col = 0;$col<=$colNum;$col++ )
 		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li>
+			<li title="Fitness Activities in {{$localities[$index]->locality}}">
 				<a href="/filter/locality/{{$localities[$index]->id}}">
 					{{$localities[$index]->locality}}
 				</a>

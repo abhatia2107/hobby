@@ -290,7 +290,7 @@
 		}
 		displayResults(result,0);
 		LoadResult(0,20);
-		function LoadFilterResults(sub_select,loc_select,trial_select,start)
+		function LoadFilterResults(sub_select,loc_select,start)
 		{
 			resultRange = result.length;
 			if(sub_select.length==0)
@@ -300,7 +300,7 @@
 			if(trial_select.length==0)
 				trial_select =0;
 			//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
-			$.get("/filter/"+sub_select+"/"+loc_select+"/"+trial_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
+			$.get("/filter/"+sub_select+"/"+loc_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
 			{
 				chunk++;
 				loadFilters = true;	
@@ -320,7 +320,7 @@
 					var count  = LoadResult(start,start+20);
 					if(count<10)
 					{
-						LoadFilterResults(sub_select,loc_select,trial_select,0);
+						LoadFilterResults(sub_select,loc_select,0);
 					}
 				}
 			});
@@ -382,7 +382,7 @@
 						(
 							$("<span></span>")
 							.attr("class","inst_name")
-							.text(batch)
+							.text(subcategory)
 						)																	
 					)						
 				)
@@ -637,7 +637,7 @@
 						}
 						if(filterStatus)
 						{							
-							LoadFilterResults(sub_select,loc_select,trial_select,resultRange);
+							LoadFilterResults(sub_select,loc_select,resultRange);
 						}
 					}
 					else
@@ -657,10 +657,9 @@
 				{
 					$(linksContainer).empty();
 					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
-					trial_select =  $('.trialCheckbox:checked').map(function(){return this.value;}).get(); 					
+					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();					
 					chunk = 0;
-					LoadFilterResults(sub_select,loc_select,trial_select,0);					
+					LoadFilterResults(sub_select,loc_select,0);					
 				}
 				else
 				{

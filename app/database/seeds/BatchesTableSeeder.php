@@ -24,6 +24,12 @@ class BatchesTableSeeder extends Seeder {
                      'batch_trial' =>$faker->randomNumber(1,3),
                      'batch_comment'=>$faker->lexify(),
                      'batch_tagline'=>$faker->lexify(),
+                     'shower_room' =>$faker->boolean(),
+                     'steam' =>$faker->boolean(),
+                     'air_conditioning' =>$faker->boolean(),
+                     'locker_room' =>$faker->boolean(),
+                     'changing_room' =>$faker->boolean(),
+                     'cafe' =>$faker->boolean(),
                      'batch_photo'=>"0",
                      ));
               }

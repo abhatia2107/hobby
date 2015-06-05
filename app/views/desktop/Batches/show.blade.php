@@ -414,7 +414,7 @@
             @for(; $index<$listLength && $index<$maxlength; $index++ )
               <li title="{{$relatedData[$index]}}">
                 <a href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
-                  {{$batchesOfInstitute[$index]->batch}}
+                  {{$batchesOfInstitute[$index]->subcategory}}
                 </a>
               </li>
             @endfor

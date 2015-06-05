@@ -39,9 +39,9 @@ class CreateBatchesTable extends Migration {
 			$table->boolean('shower_room')->default(0);
 			$table->boolean('steam')->default(0);
 			$table->boolean('air_conditioning')->default(0);
-			$table->boolean('locker')->default(0);
+			$table->boolean('locker_room')->default(0);
 			$table->boolean('cafe')->default(0);
-			$table->boolean('miscellaneous1')->default(0);
+			$table->boolean('changing_room')->default(0);
 			$table->boolean('miscellaneous2')->default(0);
 			$table->boolean('miscellaneous3')->default(0);
 			$table->softDeletes();

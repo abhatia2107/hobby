@@ -21,36 +21,8 @@ class BookingsController extends \BaseController {
 	 */
 	public function create($id)
 	{
-		include app_path().'/IFRAME_KIT/Crypto.php';
-		$user_id=Auth::id();
-		$institute_id=$this->institute->getInstituteforUser($user_id);
 		$batchDetails=Batch::find($id);
-		
-		$merchant_id='61787';
-		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
-		$access_code='AVCA05CE22BS53ACSB';
-		$merchant_data='';
-		
-		$user_id=Auth::id();
-		$user=User::find($user_id);
-		$order_id = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
-	    $posted['merchant_id']=$merchant_id;
-		$posted['order_id']=$order_id;
-		$posted['currency']='INR';
-		$posted['amount']=50;
-		$posted['redirect_url']=url('/bookings/redirect');
-		$posted['cancel_url']=url('/bookings/cancel');
-		$posted['integration_type']='iframe_normal';
-		$posted['language']='en';
-
-		foreach ($posted as $key => $value){
-			$merchant_data.=$key.'='.$value.'&';
-		}
-		$encrypted_data=encrypt($merchant_data,$working_key); // Method for encrypting the data.
-		// dd($encrypted_data);	
-	    $posted['action']='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
-		// dd($batchDetails);
-		return View::make('Bookings.create',compact('batchDetails','institute_id','posted'))->with('success',Lang::get('payments.verify'));
+		return View::make('Bookings.create',compact('batchDetails'));
 	}
 
 	public function payment($id)
@@ -68,7 +40,7 @@ class BookingsController extends \BaseController {
 		$posted['amount']=$booking->payment;
 		$posted['redirect_url']=url('/bookings/redirect');
 		$posted['cancel_url']=url('/bookings/cancel');
-		// $posted['integration_type']='iframe_normal';
+		$posted['integration_type']='iframe_normal';
 		$posted['language']='en';
 		$posted['billing_name']='Abhishek Bhatia';
 		$posted['billing_address']='Room no 1101, near Railway station Ambad';
@@ -78,13 +50,14 @@ class BookingsController extends \BaseController {
 		$posted['billing_country']='India';
 		$posted['billing_tel']=$booking->contact_no;
 		$posted['billing_email']=$booking->email;
+		// dd($posted);
 		foreach ($posted as $key => $value){
 			$merchant_data.=$key.'='.$value.'&';
 		}
-		$action='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
 		// $action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 		$encrypted_data=encrypt($merchant_data,$working_key); // Method for encrypting the data.
 		// dd($encrypted_data);
+		$action='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
 		return View::make('Bookings.payment',compact('action'));
 	}
 	/**

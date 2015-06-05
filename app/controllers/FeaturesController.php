@@ -15,7 +15,7 @@ class FeaturesController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make($this->device.'.Features.index',compact('features','tableName','count','adminPanelListing'));
+		return View::make('Features.index',compact('features','tableName','count','adminPanelListing'));
 	}
 
 	/**

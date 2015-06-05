@@ -14,7 +14,7 @@ class LocalitiesController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make($this->device.'.Localities.index',compact('localities','tableName','count','adminPanelListing'));
+		return View::make('Localities.index',compact('localities','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -25,7 +25,7 @@ class LocalitiesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make($this->device.'.Localities.create');
+		return View::make('Localities.create');
 	}
 
 	/**
@@ -59,7 +59,7 @@ class LocalitiesController extends \BaseController {
 	public function show($id)
 	{
 		$localityDetails=Locality::find($id);
-		return View::make($this->device.'.Localities.show',compact('localityDetails'));
+		return View::make('Localities.show',compact('localityDetails'));
 	}
 
 	/**
@@ -72,7 +72,7 @@ class LocalitiesController extends \BaseController {
 	public function edit($id)
 	{
 		$localityDetails=Locality::find($id);
-		return View::make($this->device.'.Localities.create',compact('localityDetails'));
+		return View::make('Localities.create',compact('localityDetails'));
 	}
 
 	/**

@@ -14,7 +14,7 @@ class LocationsController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make($this->device.'.Locations.index',compact('locations','tableName','count','adminPanelListing'));
+		return View::make('Locations.index',compact('locations','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -25,7 +25,7 @@ class LocationsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make($this->device.'.Locations.create');
+		return View::make('Locations.create');
 	}
 
 	/**
@@ -61,7 +61,7 @@ class LocationsController extends \BaseController {
 	{
 		$locationDetails=$this->locality->getLocalitiesForLocation($id);
 		$location=$this->location->getLocation($id);
-		return View::make($this->device.'.Locations.show',compact('location','locationDetails'));
+		return View::make('Locations.show',compact('location','locationDetails'));
 	}
 
 	/**
@@ -74,7 +74,7 @@ class LocationsController extends \BaseController {
 	public function edit($id)
 	{
 		$locationDetails=Location::find($id);
-		return View::make($this->device.'.Locations.create',compact('locationDetails'));
+		return View::make('Locations.create',compact('locationDetails'));
 	}
 
 	/**

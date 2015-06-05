@@ -11,7 +11,7 @@ class MembershipsController extends \BaseController {
 	{
 		$memberships = Membership::all();
 
-		return View::make($this->device.'.memberships.index', compact('memberships'));
+		return View::make('memberships.index', compact('memberships'));
 	}
 
 	/**
@@ -21,7 +21,7 @@ class MembershipsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make($this->device.'.memberships.create');
+		return View::make('memberships.create');
 	}
 
 	/**
@@ -57,7 +57,7 @@ class MembershipsController extends \BaseController {
 	{
 		$membership = Membership::findOrFail($id);
 
-		return View::make($this->device.'.memberships.show', compact('membership'));
+		return View::make('memberships.show', compact('membership'));
 	}
 
 	/**
@@ -70,7 +70,7 @@ class MembershipsController extends \BaseController {
 	{
 		$membership = Membership::find($id);
 
-		return View::make($this->device.'.memberships.edit', compact('membership'));
+		return View::make('memberships.edit', compact('membership'));
 	}
 
 	/**

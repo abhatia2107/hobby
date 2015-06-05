@@ -98,6 +98,8 @@ span.stars span {  background-position: 0 0; }
 
 .featured_listing_item li {margin-top: 5px;}
 
+.featured_listing_container a {color: #707070;}
+
 .footer-wrapper {  width: 100%;z-index: 10000 }
 
 .rememberMe {  text-align: left; }

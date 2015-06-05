@@ -107,17 +107,7 @@ body li {  list-style-type: none; }
 
 .categories_container h2 { font-size: 25px;color:#333;font-weight: bold; }
 
-.batch_recent_listings h1 { font-size: 35px;color:#fff;font-weight: bold;text-align: center; }
-
-.batch_recent_listings h2 { font-size: 25px;color:#fff;font-weight: normal;text-align: center; }
-
-.batch_recent_listings { color: white; }
-
  body select {  height: 34px;border-radius: 5px; }
-
- .batch_recent_listings { 
-  background: url(/assets/images/home/recent_listing.jpg) 0 0;width: 100%;margin-top: 50px;padding-top: 2px;padding-bottom: 50px;
- }
 
 .active-rating .glyphicon { color: orange;font-weight: bolder; }
 
@@ -137,9 +127,9 @@ span.stars span {  background-position: 0 0; }
   font-size: 25px;
 }
 
-.featured_listing_container a {color: #333}
+.featured_listing_container a {color: #707070;}
 
-.division_divider { border-bottom: 1px solid #DCDCDC;margin: 30px 0 0 0 ;  }
+.division_divider { border-bottom: 1px solid #EBEBEB;margin: 30px 0 0 0 ;  }
 
 .featured_listing_item { font-size: 15px; }
 

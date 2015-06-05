@@ -18,16 +18,18 @@
 	<?php
 		$institutesLength = sizeof($institutes);
 		$index = 0;
-		$maxlength = 20;
+		$maxlength = 15;
 		$colNum = 2;
 		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }
 		$listLength = $maxlength / $colNum;
 	?>
 	@for($col = 0;$col<=$colNum;$col++ )
-		<div class="col-xs-6 featured_listing_item">
+		<div class="col-xs-12 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li title="{{$institutes[$index]->institute}}">
-				{{$institutes[$index]->institute}}
+			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad">
+				<a href="/filter/institute/{{$institutes[$index]->id}}">
+					{{$institutes[$index]->institute}},{{$institutes[$index]->locality}}
+				</a>
 			</li>
 		@endfor
 		<?php
@@ -50,7 +52,11 @@
 	@for($col = 0;$col<=$colNum;$col++ )
 		<div class="col-xs-6 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li>{{$subcategories[$index]->subcategory}}</li>
+			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
+				<a href="/filter/subcategory/{{$subcategories[$index]->id}}">
+					{{$subcategories[$index]->subcategory}}
+				</a>
+			</li>
 		@endfor
 		<?php
 			$listLength += $listLength;
@@ -72,7 +78,11 @@
 	@for($col = 0;$col<=$colNum;$col++ )
 		<div class=" col-xs-6 featured_listing_item">
 		@for(; $index<$listLength && $index<$maxlength; $index++ )
-			<li>{{$localities[$index]->locality}}</li>
+			<li title="Fitness Activities in {{$localities[$index]->locality}}">
+				<a href="/filter/locality/{{$localities[$index]->id}}">
+					{{$localities[$index]->locality}}
+				</a>
+			</li>
 		@endfor
 		<?php
 			$listLength += $listLength;

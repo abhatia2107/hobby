@@ -102,11 +102,18 @@ class FiltersController extends \BaseController {
 			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		//dd($batchesForCategoryLocation[0]->location);
-		$instituteName = $batchesForCategoryLocation[0]->institute;
-		$location = $batchesForCategoryLocation[0]->location;
-		$metaContent[0] = "$instituteName - $location :: Hobbyix";
-		$metaContent[1] = "$instituteName $location, $instituteName classes in $location. Book a session, get address, contact info and reviews.";
-		$metaContent[2] = "$instituteName, $instituteName $location";
+		else
+		{
+			$instituteName = $batchesForCategoryLocation[0]->institute;
+			$location = $batchesForCategoryLocation[0]->location;
+			$locality = $batchesForCategoryLocation[0]->locality;
+			$subcategories = ["sub1", "sub2"];
+			$subcategoriesString = implode(", ",$subcategories);			
+			$metaContent[0] = "$instituteName in $locality, $location :: Hobbyix";
+			$metaContent[1] = "$instituteName provides $subcategoriesString in $location. Get access to all the activities through Hobbyix Membership.";
+			$subcategoriesString = implode(" $locality, ",$subcategories);			
+			$metaContent[2] = "$instituteName, $instituteName in $locality, $instituteName in $location, $subcategoriesString $locality";
+		}
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent'));
 	}
 
@@ -128,11 +135,17 @@ class FiltersController extends \BaseController {
 			$batchesForCategoryLocation="";
 			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
-		$locality = $batchesForCategoryLocation[0]->locality;
-		$location = $batchesForCategoryLocation[0]->location;
-		$metaContent[0] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing in $locality::Hobbyix";
-		$metaContent[1] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing in $locality";
-		$metaContent[2] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing in $locality";	
+		else
+		{
+			$locality = $batchesForCategoryLocation[0]->locality;
+			$location = $batchesForCategoryLocation[0]->location;
+			$subcategories = ["sub1","sub2","sub3"];
+			$subcategoriesString = implode(", ",$subcategories);
+			$metaContent[0] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing in $locality :: Hobbyix";
+			$metaContent[1] = "Hobbyix helps you in finding $subcategoriesString classes in $locality. Get access to all activities with Hobbyix Membership.";
+			$subcategoriesString = implode(" classes in $locality, ",$subcategories);
+			$metaContent[2] = "$subcategoriesString classes in $locality";		
+		}
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent'));
 	}
 
@@ -154,11 +167,16 @@ class FiltersController extends \BaseController {
 			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		// dd($batchesForCategoryLocation);
-		$subcategory = $batchesForCategoryLocation[0]->subcategory;
-		$location = $batchesForCategoryLocation[0]->location;
-		$metaContent[0] = "$subcategory classes in $location :: Hobbyix";
-		$metaContent[1] = "$subcategory classes in $location";
-		$metaContent[2] = "$subcategory, $subcategory classes in $location";
+		else
+		{
+			$subcategory = $batchesForCategoryLocation[0]->subcategory;
+			$location = $batchesForCategoryLocation[0]->location;
+			$localities = ["locality1","locality2","locality3"];
+			$localitiesString = implode(", $subcategory ",$localities);
+			$metaContent[0] = "$subcategory classes in $location :: Hobbyix";
+			$metaContent[1] = "Hobbyix helps you in exploring all $subcategory classes in $location. Get access to all activities with Hobbyix Membership.";
+			$metaContent[2] = "$subcategory, $subcategory classes in $location, $subcategory $localitiesString";
+		}
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent'));
 	}
 

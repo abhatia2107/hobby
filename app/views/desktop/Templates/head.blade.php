@@ -9,11 +9,11 @@
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <title>{{$metaContent[0]}}</title>
     <meta name="description" content="{{$metaContent[1]}}">
     <meta name="keywords" content="{{$metaContent[2]}}">
     <meta name="author" content="Hobbyix">
     <meta property="og:image" content="/assets/images/home/banner.jpg">
-    <title>{{$metaContent[0]}}</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css">

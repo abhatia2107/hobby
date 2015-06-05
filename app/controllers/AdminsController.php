@@ -14,7 +14,7 @@ class AdminsController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Admins.'.$this->device.'.index',compact('admins','tableName','count','adminPanelListing'));
+		return View::make('Admins.index',compact('admins','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -25,7 +25,7 @@ class AdminsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Admins.'.$this->device.'.create');
+		return View::make('Admins.create');
 	}
 
 	/**

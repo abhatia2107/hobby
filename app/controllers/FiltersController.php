@@ -32,7 +32,7 @@ class FiltersController extends \BaseController {
 			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		// dd($batchesForCategoryLocation[0]->schedules->all());
-		return View::make('Filters.'.$this->device.'.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
 
 	public function show($category_id,$location_id="0",$chunk="0")
@@ -70,7 +70,7 @@ class FiltersController extends \BaseController {
 			}
 		// dd($batchesForCategoryLocation[0]->schedules[0]);
 			//dd($batchesForCategoryLocation[0]);
-			return View::make('Filters.'.$this->device.'.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 		}
 	}
 

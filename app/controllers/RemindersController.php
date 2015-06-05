@@ -9,7 +9,7 @@ class RemindersController extends Controller {
 	 */
 	public function getRemind()
 	{
-		return View::make('Users.'.$this->device.'.forgotPassword');
+		return View::make('Users.forgotPassword');
 	}
 		
 	/**
@@ -44,7 +44,7 @@ class RemindersController extends Controller {
 		if (is_null($token)) App::abort(404);
 		$resetDetails=DB::table("password_reminder")->where("token",'=',$token)->get();
 		// dd($resetDetails[0]);
-		return View::make('Users.'.$this->device.'.resetPassword',compact('resetDetails'));
+		return View::make('Users.resetPassword',compact('resetDetails'));
 	}
 
 	/**

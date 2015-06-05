@@ -1,1 +1,0 @@
-/home/abhishek/Hobby/app/views/Localities/mobile/edit.blade.php

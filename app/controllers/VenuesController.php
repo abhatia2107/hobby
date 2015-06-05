@@ -15,7 +15,7 @@ class VenuesController extends \BaseController {
 		$venues=$this->venue->getVenueForUser($user_id);
 		$institute_id=$this->institute->getInstituteforUser($user_id);
 		$localities=$this->locality->all();
-		return View::make('Venues.'.$this->device.'index',compact('institute_id','venues','localities'));
+		return View::make('Venues.index',compact('institute_id','venues','localities'));
 	}
 
 	/**
@@ -30,7 +30,7 @@ class VenuesController extends \BaseController {
 		$localities=$this->locality->all();
 		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$institute_id=$this->institute->getInstituteforUser($user_id);
-		return View::make('Venues.'.$this->device.'create',compact('institute_id','localities'));
+		return View::make('Venues.create',compact('institute_id','localities'));
 	}
 
 	/**
@@ -82,7 +82,7 @@ class VenuesController extends \BaseController {
 		$venue_locality=$localities->find($locality_id);
 		$venueDetails['venue_location']=$venue_location;
 		$venueDetails['venue_locality']=$venue_locality;
-		return View::make('Venues.'.$this->device.'create',compact('institute_id','localities','locations','venueDetails'));
+		return View::make('Venues.create',compact('institute_id','localities','locations','venueDetails'));
 	}
 
 	/**

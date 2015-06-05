@@ -15,7 +15,7 @@ class CategoriesController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Categories.'.$this->device.'.index',compact('categories','tableName','count','adminPanelListing'));
+		return View::make('Categories.index',compact('categories','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -26,7 +26,7 @@ class CategoriesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Categories.'.$this->device.'.create');
+		return View::make('Categories.create');
 	}
 
 	/**
@@ -62,7 +62,7 @@ class CategoriesController extends \BaseController {
 	{
 		$categoryDetails=$this->subcategory->getSubcategoriesForCategory($id);
 		$category=$this->category->getCategory($id);
-		return View::make('Categories.'.$this->device.'.show',compact('category','categoryDetails'));
+		return View::make('Categories.show',compact('category','categoryDetails'));
 	}
 
 	/**
@@ -75,7 +75,7 @@ class CategoriesController extends \BaseController {
 	public function edit($id)
 	{
 		$categoryDetails=Category::find($id);
-		return View::make('Categories.'.$this->device.'.create',compact('categoryDetails'));
+		return View::make('Categories.create',compact('categoryDetails'));
 	}
 
 	/**

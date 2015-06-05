@@ -2,12 +2,353 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c8ed312-6321-4a47-b393-8222de422aec" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Batch.php" afterPath="$PROJECT_DIR$/app/models/Batch.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/admin/admin.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Comments/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Subscriptions/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/batch/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Bookings/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Comments/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Localities/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Locations/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Subcategories/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Subscriptions/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/memberships/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Errors/error.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Errors/fatal.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/feedback/feedbackRecieved.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Bookings/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Comments/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/memberships/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Users/login.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/message/messageRecieved.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Errors/pageNotFound.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/user/pending_referral.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/auth/reminder.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/feedback/sendFeedback.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/message/sendMessage.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Bookings/show.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Comments/show.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Localities/show.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Locations/show.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/Subcategories/show.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/desktop/memberships/show.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Subscriptions/show.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Users/signup.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/subscription/subscriptionEmail.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/user/successful_referral.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/mobile/Emails/user/welcome.blade.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Admins/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Batches/desktop/approve.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Batches/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Batches/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Batches/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/desktop/create2.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/desktop/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/iframe.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/mobile/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/mobile/create2.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/mobile/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/mobile/iframe.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/mobile/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Bookings/mobile/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Categories/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Categories/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Comments/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Comments/desktop/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Comments/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Comments/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Comments/mobile/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Comments/mobile/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Comments/mobile/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Comments/mobile/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Features/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Feedbacks/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Feedbacks/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Feedbacks/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Filters/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Institutes/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Institutes/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Institutes/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Layouts/desktop/Admin/layout.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Layouts/layout.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Localities/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Localities/desktop/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Localities/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Localities/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Localities/mobile/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Localities/mobile/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Locations/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Locations/desktop/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Locations/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Locations/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Locations/mobile/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Locations/mobile/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/desktop/Admin/home.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/desktop/aboutus.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/desktop/homeDummy.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/desktop/membership.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/desktop/message.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/desktop/privacy.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/desktop/terms.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Modals/login.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Modals/signup.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Modals/venue.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Promos/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Promos/desktop/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Promos/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Promos/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Promos/mobile/_form.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subcategories/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subcategories/desktop/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subcategories/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subcategories/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subcategories/mobile/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subcategories/mobile/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/desktop/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/mobile/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/mobile/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/mobile/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/Admin/head.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/footer.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/head.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/header.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/headerHome.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/Admin/button.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/Admin/headerAdmin.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/Admin/listing.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/Admin/message.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/message.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/navbar.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Templates/navbarVendor.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/changePassword.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/forgotPassword.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/login.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/orders.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/profile.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/resetPassword.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/signup.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/login.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/signup.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Users/sidebar.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Venues/desktop/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/Venues/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/memberships/desktop/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/memberships/desktop/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/memberships/desktop/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/memberships/mobile/create.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/memberships/mobile/edit.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/memberships/mobile/index.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/memberships/mobile/show.blade.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/images/home/Dummy.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/images/home/Dummy.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/images/home/banner.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/images/home/category.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/images/home/institute_.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/images/home/institute___.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/images/home/recent.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/images/home/user.jpg" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Admins/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Admins/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Admins/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Admins/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/approve.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Batches/approve.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Batches/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/desktop/order.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Bookings/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Batches/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/mobile/approve.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Batches/approve.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/mobile/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Batches/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Batches/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/mobile/order.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Batches/order.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/mobile/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Batches/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/order.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Batches/order.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Batches/show.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Batches/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Bookings/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Bookings/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Bookings/create2.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Bookings/create2.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Bookings/desktop/iframe.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Bookings/iframe.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Bookings/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Bookings/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Bookings/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Bookings/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Bookings/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Bookings/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Categories/desktop/show.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Categories/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Categories/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Categories/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Categories/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Categories/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Categories/mobile/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Categories/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Comments/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Comments/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Comments/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Comments/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Comments/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Comments/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Comments/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Comments/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/admin/admin.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/admin/admin.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/auth/reminder.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/auth/reminder.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/batch/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/batch/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/feedback/feedbackRecieved.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/feedback/feedbackRecieved.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/feedback/sendFeedback.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/feedback/sendFeedback.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/message/messageRecieved.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/message/messageRecieved.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/message/sendMessage.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/message/sendMessage.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/subscription/subscriptionEmail.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/subscription/subscriptionEmail.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/user/pending_referral.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/user/pending_referral.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/user/successful_referral.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/user/successful_referral.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Emails/user/welcome.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Emails/user/welcome.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Errors/error.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Errors/error.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Errors/fatal.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Errors/fatal.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Errors/pageNotFound.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Errors/pageNotFound.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Features/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Features/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Features/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Features/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Feedbacks/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Feedbacks/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Feedbacks/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Feedbacks/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Feedbacks/mobile/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Feedbacks/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Feedbacks/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Feedbacks/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Feedbacks/mobile/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Feedbacks/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Feedbacks/show.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Feedbacks/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Filters/desktop/show.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Filters/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Filters/mobile/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Filters/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Institutes/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Institutes/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Institutes/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Institutes/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Institutes/mobile/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Institutes/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Institutes/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Institutes/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Institutes/mobile/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Institutes/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Institutes/show.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Institutes/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Layouts/Admin/layout.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Layouts/Admin/layout.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Layouts/desktop/layout.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Layouts/layout.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Layouts/mobile/Admin/layout.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Layouts/Admin/layout.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Layouts/mobile/layout.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Layouts/layout.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Localities/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Localities/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Localities/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Localities/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Localities/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Localities/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Localities/mobile/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Localities/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Localities/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Localities/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Localities/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Localities/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Locations/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Locations/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Locations/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Locations/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Locations/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Locations/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Locations/mobile/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Locations/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Locations/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Locations/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Locations/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Locations/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/Admin/home.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/Admin/home.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/aboutus.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/aboutus.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/desktop/home.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/home.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/homeDummy.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/homeDummy.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/membership.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/membership.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/message.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/message.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/mobile/Admin/home.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Miscellaneous/Admin/home.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/mobile/aboutus.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Miscellaneous/aboutus.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/mobile/home.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Miscellaneous/home.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/mobile/homeDummy.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Miscellaneous/homeDummy.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/mobile/membership.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Miscellaneous/membership.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/mobile/message.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Miscellaneous/message.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/mobile/privacy.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Miscellaneous/privacy.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/mobile/terms.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Miscellaneous/terms.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/privacy.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/privacy.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/terms.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Miscellaneous/terms.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Modals/desktop/login.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Modals/login.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Modals/desktop/signup.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Modals/signup.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Modals/desktop/venue.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Modals/venue.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Modals/mobile/login.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Modals/login.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Modals/mobile/signup.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Modals/signup.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Modals/mobile/venue.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Modals/venue.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/_form.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Promos/_form.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Promos/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/desktop/_form.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Promos/_form.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Promos/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Promos/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/mobile/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Promos/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/mobile/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Promos/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Promos/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/mobile/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Promos/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Promos/show.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Promos/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subcategories/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Subcategories/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subcategories/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Subcategories/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subcategories/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Subcategories/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subcategories/mobile/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Subcategories/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subcategories/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Subcategories/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subcategories/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Subcategories/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Subscriptions/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Subscriptions/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Subscriptions/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Subscriptions/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Subscriptions/show.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Subscriptions/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/Admin/button.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/Admin/button.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/Admin/headerAdmin.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/Admin/headerAdmin.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/Admin/listing.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/Admin/listing.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/Admin/message.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/Admin/message.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/Admin/button.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/Admin/button.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/Admin/head.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/Admin/head.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/Admin/headerAdmin.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/Admin/headerAdmin.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/Admin/listing.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/Admin/listing.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/Admin/message.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/Admin/message.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/footer.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/footer.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/head.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/head.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/header.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/header.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/headerHome.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/headerHome.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/message.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/message.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/navbar.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/navbar.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/desktop/navbarVendor.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Templates/navbarVendor.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/message.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/message.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/Admin/head.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/Admin/head.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/footer.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/footer.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/head.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/head.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/header.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/header.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/headerHome.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/headerHome.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/navbar.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/navbar.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Templates/mobile/navbarVendor.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Templates/navbarVendor.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/changePassword.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/changePassword.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/desktop/sidebar.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/sidebar.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/forgotPassword.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/forgotPassword.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/login.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/login.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/changePassword.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Users/changePassword.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Users/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/forgotPassword.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Users/forgotPassword.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Users/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/orders.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Users/orders.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/profile.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Users/profile.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/resetPassword.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Users/resetPassword.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Users/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/mobile/sidebar.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Users/sidebar.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/orders.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/orders.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/profile.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/profile.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/resetPassword.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/resetPassword.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/show.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/show.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Users/signup.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Users/signup.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Venues/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Venues/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Venues/index.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/Venues/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Venues/mobile/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Venues/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/Venues/mobile/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/Venues/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/memberships/create.blade.php" afterPath="$PROJECT_DIR$/app/views/desktop/memberships/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/memberships/desktop/create.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/memberships/create.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/memberships/edit.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/memberships/edit.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/memberships/index.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/memberships/index.blade.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/memberships/show.blade.php" afterPath="$PROJECT_DIR$/app/views/mobile/memberships/show.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/AdminsController.php" afterPath="$PROJECT_DIR$/app/controllers/AdminsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/BaseController.php" afterPath="$PROJECT_DIR$/app/controllers/BaseController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/BatchesController.php" afterPath="$PROJECT_DIR$/app/controllers/BatchesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/BookingsController.php" afterPath="$PROJECT_DIR$/app/controllers/BookingsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/CategoriesController.php" afterPath="$PROJECT_DIR$/app/controllers/CategoriesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/CommentsController.php" afterPath="$PROJECT_DIR$/app/controllers/CommentsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/FeaturesController.php" afterPath="$PROJECT_DIR$/app/controllers/FeaturesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/FeedbacksController.php" afterPath="$PROJECT_DIR$/app/controllers/FeedbacksController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/FiltersController.php" afterPath="$PROJECT_DIR$/app/controllers/FiltersController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/HomeController.php" afterPath="$PROJECT_DIR$/app/controllers/HomeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/Institute.php" afterPath="$PROJECT_DIR$/app/models/Institute.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/InstitutesController.php" afterPath="$PROJECT_DIR$/app/controllers/InstitutesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/LocalitiesController.php" afterPath="$PROJECT_DIR$/app/controllers/LocalitiesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/LocationsController.php" afterPath="$PROJECT_DIR$/app/controllers/LocationsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/MembershipsController.php" afterPath="$PROJECT_DIR$/app/controllers/MembershipsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/PromosController.php" afterPath="$PROJECT_DIR$/app/controllers/PromosController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/RemindersController.php" afterPath="$PROJECT_DIR$/app/controllers/RemindersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/SchedulesController.php" afterPath="$PROJECT_DIR$/app/controllers/SchedulesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/SubcategoriesController.php" afterPath="$PROJECT_DIR$/app/controllers/SubcategoriesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/SubscriptionsController.php" afterPath="$PROJECT_DIR$/app/controllers/SubscriptionsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/UsersController.php" afterPath="$PROJECT_DIR$/app/controllers/UsersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/VenuesController.php" afterPath="$PROJECT_DIR$/app/controllers/VenuesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/start/global.php" afterPath="$PROJECT_DIR$/app/start/global.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/Miscellaneous/home.blade.php" afterPath="$PROJECT_DIR$/app/views/Miscellaneous/home.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes.php" afterPath="$PROJECT_DIR$/app/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/view.php" afterPath="$PROJECT_DIR$/app/config/view.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="hobby.iws" />
@@ -52,8 +393,8 @@
       <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="954">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="18" max-vertical-offset="972">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -62,8 +403,8 @@
       <file leaf-file-name="Institute.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/Institute.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37023592" vertical-offset="948" max-vertical-offset="2160">
-              <caret line="64" column="43" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.33756804" vertical-offset="948" max-vertical-offset="2160">
+              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -192,6 +533,176 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="start" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="en" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="seeds" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="migrations" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Hobby" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -307,11 +818,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1301" height="744" extended-state="7" />
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3059761" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31155378" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850242" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -404,20 +915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Users/signup.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.058631923" vertical-offset="0" max-vertical-offset="614">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Batches/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.56406" vertical-offset="2178" max-vertical-offset="15570">
-          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/predis/predis/tests/Predis/Protocol/Text/TextProtocolTest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22827938" vertical-offset="604" max-vertical-offset="2124">
@@ -439,27 +936,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Emails/user/pending_referral.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2722323" vertical-offset="138" max-vertical-offset="774">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Emails/user/successful_referral.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80399275" vertical-offset="223" max-vertical-offset="774">
-          <caret line="37" column="7" selection-start-line="37" selection-start-column="7" selection-end-line="37" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Emails/user/welcome.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6406534" vertical-offset="223" max-vertical-offset="774">
-          <caret line="32" column="29" selection-start-line="0" selection-start-column="0" selection-end-line="37" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/lang/en/user.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16333938" vertical-offset="522" max-vertical-offset="1494">
@@ -471,13 +947,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5106383" vertical-offset="324" max-vertical-offset="1080">
           <caret line="35" column="50" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Modals/signup.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8784029" vertical-offset="794" max-vertical-offset="3888">
-          <caret line="71" column="28" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -533,13 +1002,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Users/changePassword.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.3617022" vertical-offset="1674" max-vertical-offset="3618">
@@ -551,27 +1013,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="324" max-vertical-offset="2376">
           <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Promos/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="216">
-          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Promos/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="216">
-          <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Promos/_form.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.666667" vertical-offset="0" max-vertical-offset="576">
-          <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -593,13 +1034,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="39.592594" vertical-offset="1069" max-vertical-offset="1620">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Promos/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0" vertical-offset="0" max-vertical-offset="216">
-          <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
         </state>
       </provider>
     </entry>
@@ -680,13 +1114,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/Promos/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.108892925" vertical-offset="606" max-vertical-offset="1926">
-          <caret line="37" column="43" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/Promo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5851064" vertical-offset="426" max-vertical-offset="1116">
@@ -711,16 +1138,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="936">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="18" max-vertical-offset="972">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/Institute.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37023592" vertical-offset="948" max-vertical-offset="2160">
-          <caret line="64" column="43" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.33756804" vertical-offset="948" max-vertical-offset="2160">
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
           <folding />
         </state>
       </provider>

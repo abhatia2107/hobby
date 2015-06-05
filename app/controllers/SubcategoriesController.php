@@ -14,7 +14,7 @@ class SubcategoriesController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
-		return View::make('Subcategories.'.$this->device.'.index',compact('subcategories','tableName','count','adminPanelListing'));
+		return View::make('Subcategories.index',compact('subcategories','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -25,7 +25,7 @@ class SubcategoriesController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('Subcategories.'.$this->device.'.create');
+		return View::make('Subcategories.create');
 	}
 
 	/**
@@ -60,7 +60,7 @@ class SubcategoriesController extends \BaseController {
 	public function show($id)
 	{
 		$subcategoryDetails=Subcategory::find($id);
-		return View::make('Subcategories.'.$this->device.'.show',compact('subcategoryDetails'));
+		return View::make('Subcategories.show',compact('subcategoryDetails'));
 	}
 
 	/**
@@ -73,7 +73,7 @@ class SubcategoriesController extends \BaseController {
 	public function edit($id)
 	{
 		$subcategoryDetails=Subcategory::find($id);
-		return View::make('Subcategories.'.$this->device.'.create',compact('subcategoryDetails'));
+		return View::make('Subcategories.create',compact('subcategoryDetails'));
 	}
 
 	/**

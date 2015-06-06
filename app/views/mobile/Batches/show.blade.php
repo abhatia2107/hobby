@@ -56,9 +56,7 @@
 
   .batchOrderFieldLabel { margin-top: 3px;text-align: left;}
 
-  .totalAmount {margin-top: -10px;text-align: center;padding-right: 0px;}
-
-  .batchOrderButtons {padding: 5px 76px; text-align: center;}
+  .totalAmount {margin-top: 0px;text-align: center;padding-right: 0px;}
 
   .batchOrderField button { border:0px;background-color: #3aa54c;font-size: 15px;color: white;height:30px;padding: 4px;margin-top: 5px; }
 
@@ -72,9 +70,23 @@
 
   #related_data_container {  border-top: 1px solid lightgrey;padding: 20px 5%;width: 100%;  }
 
-  #related_data_container h4 {font-size: 18px;color: #444;font-weight: bold;margin:0px;}
+  #related_data_container h4 {font-size: 18px;color: #444;font-weight: bold;margin:0px 0px 5px 0px;}
+  
+  .booknowButton, .booknowButton:hover, .booknowButton button:active { background: #3396d1;margin-top: 5px;padding: 5px 25px 5px 25px;border-radius: 0px;border:0px solid;text-align: center; }
 
-  .related_item {margin-top: 15px;}
+  .batchOrderButtons { text-align: center;color: white}
+
+  .related_item {margin-bottom: 15px;}
+
+  .related_item a {color:#5C5C5C;}
+
+  .help-block {color: #a94442 !important}
+
+  #bookOrderFormStep1{padding-bottom: 10px;}
+
+  #bookOrderFormStep2 { display: none;padding: 20px 0 10px 0;  }
+
+  hr {margin: 10px 0px 10px 0px; }
 
 </style> 
 
@@ -83,6 +95,7 @@
 <?php
   foreach ($batchDetails as $data) 
   {
+    $batchID = $data->id;
     $instituteName = $data->institute;
     $instituteAddress = $data->venue_address;
     $instituteContact = $data->venue_contact_no;
@@ -130,44 +143,66 @@
       <div class="col-xs-12">
         <div class="sample-box" id='batchOrderSample'>        
           <div class='sample_box_title' style="padding-top:3px">Book This Class</div>
-          <div class="sample_box_order_data">
+          <div class="sample_box_order_data">        
             <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
-              <div class="row batchOrderField">
-                <div class='col-xs-6'>Price p. Session</div>
-                <div class='col-xs-6'>: Rs. {{$sessionPrice}}</div>
-              </div>
-              <div class="row batchOrderField">
-                <div class='col-xs-6 batchOrderFieldLabel'>No. of Sessions*</div>
-                <div class='col-xs-6'>  
-                    <select class="form-control" id="numberOfSessions" name="numberOfSessions" required>                 
-                        @for($seesion=1;$seesion<=6;$seesion++)
-                            <option value={{$seesion}}>{{$seesion}}</option>
-                        @endfor
-                    </select>
+              <div class="" id="bookOrderFormStep1">
+                <input type="hidden" name="batch_id" value="{{$batchID}}">
+                <div class="row batchOrderField">
+                  <div class='col-xs-6'>Price p. Session</div>
+                  <div class='col-xs-6'>: Rs. {{$sessionPrice}}</div>
+                </div>
+                <div class="row batchOrderField">
+                  <div class='col-xs-6 batchOrderFieldLabel'>No. of Sessions*</div>
+                  <div class='col-xs-6'>  
+                      <select class="form-control" id="numberOfSessions" name="no_of_sessions" >                 
+                          @for($seesion=1;$seesion<=6;$seesion++)
+                              <option value={{$seesion}}>{{$seesion}}</option>
+                          @endfor
+                      </select>
+                  </div>
+                </div>
+                <div class="row batchOrderField">
+                  <div class='col-xs-6 batchOrderFieldLabel'>Booking Date*</div>
+                  <div class='col-xs-6'>
+                      <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
+                  </div>          
+                </div>
+                <div class="row batchOrderField">
+                  <div class='col-xs-9 batchOrderFieldLabel'>
+                    <input type="text" style="width:100%" placeholder="Enter Promo Code" class="form-control" id="promoCode" name="Promo Code" />                     
+                  </div>
+                  <div class='col-xs-3' style="text-align:left;padding:5px 0px 0px 0px;font-size:15px;">
+                     <a href="javascript:verifyPromoCode();">Apply</a>
+                  </div>          
+                </div>            
+                <hr/>
+                <div class="row totalAmount">
+                  <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
+                  <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
+                </div>
+                <div class="batchOrderButtons">    
+                  <button style="padding:5px 50px;" class="booknowButton" id="proceedButton">Proceed</button>
+                  <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
                 </div>
               </div>
-              <div class="row batchOrderField">
-                <div class='col-xs-6 batchOrderFieldLabel'>Booking Date*</div>
-                <div class='col-xs-6'>
-                      <input type="text" placeholder="Select Date" class="form-control" id="datepicker" name="bookingDate" required />                     
-                </div>          
-              </div>
-              <div class="row batchOrderField">
-                <div class='col-xs-9 batchOrderFieldLabel'>
-                  <input type="text" style="width:100%" placeholder="Enter Promo Code" class="form-control" id="promoCode" name="Promo Code" />                     
-                </div>
-                <div class='col-xs-3' style="text-align:left;padding:5px 0px 0px 0px;font-size:15px;">
-                   <a href="javascript:verifyPromoCode();">Apply</a>
-                </div>          
-              </div>            
-              <hr/>
-              <div class="row totalAmount">
-                <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
-                <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
-              </div>
-              <div class="row batchOrderField batchOrderButtons">    
-                <button type="submit" class="col-xs-12" >Pay Now</button>
-                <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
+              <div class="" id="bookOrderFormStep2">
+                <div class="row batchOrderField">
+                  <div class='col-md-5 col-sm-4 col-xs-5'>E-Mail ID*</div>
+                  <div class='col-md-7 col-sm-8 col-xs-7'>
+                        <input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email" name="email" required />                     
+                  </div>          
+                </div>   
+                <div class="row batchOrderField">
+                  <div class='col-md-5 col-sm-4 col-xs-5'>Mobile No.*</div>
+                  <div class='col-md-7 col-sm-8 col-xs-7'>
+                        <input type="tel" placeholder="Enter Mobile No." class="form-control" id="contact_no" name="contact_no" required />                     
+                  </div>          
+                </div> 
+                 <hr/>   
+                <div class="row batchOrderButtons">    
+                  <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" >Pay Now</button>
+                  <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
+                </div>              
               </div>
             </form>
           </div>        
@@ -311,8 +346,27 @@
 @section('pagejquery')
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript">
+  var dateToday = new Date();
+  function bookOrderFormValidate() 
+  {
+    var Result = true;    
+    var bookingDate = $('#booking_date').val();
+    if(bookingDate=="" || bookingDate==undefined)
+    {
+      Result =  false;
+      var errorMessageContainer = $('#booking_date').parent(),baseUrl;
+      $('#errorMessage').remove();     
+      $('<span></span>')
+        .attr("id","errorMessage")
+        .attr("class","batchCreateFormError")
+        .text("required field")
+        .appendTo(errorMessageContainer);      
+    }
+    return Result;
+  }
   $(document).ready(function () 
   {
+      
       var categoryId = "<?php echo $loggedIn; ?>";     
       $('.rating-input').attr('checked', false);
       $('#commentsForm').click(function(e)
@@ -342,12 +396,60 @@
         }, 1000, 'easeInOutSine');
         event.preventDefault();
       });
-      $("#datepicker").datepicker({
+      $('#proceedButton').click(function(e)
+      {          
+        e.preventDefault();       
+        e.stopPropagation();         
+        if(bookOrderFormValidate())
+        {   
+          $("#bookOrderFormStep1").hide();
+          $("#bookOrderFormStep2").fadeIn();              
+        }      
+      });  
+      $('#batchOrderForm').bootstrapValidator({                    
+            fields: {
+
+                contact_no: {                       
+                        validators: {
+                            notEmpty: {
+                                message: 'Mobile no. is required'
+                            },
+
+                            regexp: {
+                                regexp: /^[0-9]{10}$/,
+                                message: 'The mobile number consists of 10 digits. Skip adding +91 or 0'
+                            }
+                        }
+                    },
+
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Email is required'
+                        },
+                        emailAddress: {
+                            message: 'The input is not a valid email address'
+                        }
+                    }
+                }
+            }
+      }); 
+      $("#booking_date").datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 1,
+          minDate: dateToday,
+          onSelect: function(selectedDate) {
+              var option = this.id == "from" ? "minDate" : "maxDate",
+                  instance = $(this).data("datepicker"),
+                  date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+              dates.not(this).datepicker("option", option, date);
+          },
       /*showOn: 'both',
       buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
             buttonText: "Choose Date",*/
-            dateFormat: 'yy-mm-dd'         
-      });
+        dateFormat: 'yy-mm-dd'         
+      });    
   });
 </script>
 @stop

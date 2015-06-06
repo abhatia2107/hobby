@@ -221,6 +221,7 @@
 <?php
   foreach ($batchDetails as $data) 
   {
+    date_default_timezone_set("Asia/Calcutta");
     $batchID = $data->id;
     $instituteName = $data->institute;
     $instituteAddress = $data->venue_address;
@@ -242,6 +243,7 @@
     $twitterLink = $data->institute_twitter; 
     $locality_id = $data->venue_locality_id; 
     $locality =  $data->locality;
+    $todayDate = date('Y-m-d');
   }
   $relatedContent = null;
 ?>
@@ -346,7 +348,7 @@
             <div class="row batchOrderField" id="batchOrderField1">
               <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date*</div>
               <div class='col-md-6 col-sm-6 col-xs-6'>
-                    <input type="date" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />                     
+                    <input type="date" placeholder="Select Date" min="{{$todayDate}}" class="form-control" id="booking_date" name="booking_date" />                     
               </div>          
             </div>    
             <div class="row batchOrderField">
@@ -580,7 +582,7 @@
           $("#bookOrderFormStep2").fadeIn();              
         }      
       });  
-       $('#batchOrderForm').bootstrapValidator({                    
+      $('#batchOrderForm').bootstrapValidator({                    
             fields: {
 
                 contact_no: {                       
@@ -607,7 +609,7 @@
                     }
                 }
             }
-        });   
+      });   
 
   });
 </script>

@@ -450,7 +450,7 @@
 									.append
 									(
 										$("<a></a>")
-										.attr("class","btn btn-primary")
+										.attr("class","btn btn-primary booknowButton")
 										.attr("id","booknowButton")	
 										.attr("href","/bookings/create/"+batchID)							
 										.text("Book Now")

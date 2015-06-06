@@ -563,7 +563,6 @@
         }, 1000, 'easeInOutSine');
         event.preventDefault();
       });
-      alert(dateToday);
       $("#booking_date").datepicker({
         defaultDate: "+1w",
         changeMonth: true,

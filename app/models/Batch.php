@@ -179,8 +179,10 @@ class Batch extends \Eloquent {
             ->Join('locations', 'locations.id', '=', 'localities.locality_location_id')
             ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
             ->get();
-
-        return $batch;
+        if(empty($batch->toArray()))
+            App::abort(404);
+        else
+            return $batch[0];
     }
  
     public function getBatchActive()

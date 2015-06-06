@@ -219,30 +219,28 @@
 @stop
 @section('content')
 <?php
-  foreach ($batchDetails as $data) 
-  {
-    $batchID = $data->id;
-    $instituteName = $data->institute;
-    $instituteAddress = $data->venue_address;
-    $instituteContact = $data->venue_contact_no;
-    $instituteID = $data->batch_institute_id;
-    $batchName = $data->batch;
-    $category = $data->category;
-    $sessionPrice = $data->batch_single_price;
-    $subcategory = $data->subcategory;
-    $ageGroup = $data->batch_age_group;
-    $genderGroup = $data->batch_gender_group;
-    $difficultyLevel = $data->batch_difficulty_level;
-    $trialClass = $data->batch_trial;
-    $sessionsCount = $data->batch_no_of_classes_in_week;
-    $batchDescription = $data->batch_comment;
-    $batchAccomplishment = $data->batch_accomplishment;
-    $instituteDetails = $data->institute_description;
-    $facebookLink = $data->institute_fblink;
-    $twitterLink = $data->institute_twitter; 
-    $locality_id = $data->venue_locality_id; 
-    $locality =  $data->locality;
-  }
+
+    $batchID = $batchDetails->id;
+    $instituteName = $batchDetails->institute;
+    $instituteAddress = $batchDetails->venue_address;
+    $instituteContact = $batchDetails->venue_contact_no;
+    $instituteID = $batchDetails->batch_institute_id;
+    $batchName = $batchDetails->batch;
+    $category = $batchDetails->category;
+    $sessionPrice = $batchDetails->batch_single_price;
+    $subcategory = $batchDetails->subcategory;
+    $ageGroup = $batchDetails->batch_age_group;
+    $genderGroup = $batchDetails->batch_gender_group;
+    $difficultyLevel = $batchDetails->batch_difficulty_level;
+    $trialClass = $batchDetails->batch_trial;
+    $sessionsCount = $batchDetails->batch_no_of_classes_in_week;
+    $batchDescription = $batchDetails->batch_comment;
+    $batchAccomplishment = $batchDetails->batch_accomplishment;
+    $instituteDetails = $batchDetails->institute_description;
+    $facebookLink = $batchDetails->institute_fblink;
+    $twitterLink = $batchDetails->institute_twitter; 
+    $locality_id = $batchDetails->venue_locality_id; 
+    $locality =  $batchDetails->locality;
   $relatedContent = null;
 ?>
 

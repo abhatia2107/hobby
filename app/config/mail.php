@@ -94,7 +94,7 @@ return array(
 	|
 	*/
 
-	'password' => 'servicehobbyix',
+	'password' => 'serviceshobby',
 
 	/*
 	|--------------------------------------------------------------------------

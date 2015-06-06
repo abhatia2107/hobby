@@ -23,7 +23,7 @@ class BatchesController extends \BaseController {
 		$weekdays=$this->weekdays;
 		$user_id=Auth::id();
 		$batchDetails=$this->batch->getBatchesForUser($user_id);
-		// dd($batchDetails[0]->schedules->all());
+		// dd($batchDetails->schedules->all());
 		$institute_id=$this->institute->getInstituteforUser($user_id);
 		// dd($institute_id);
 		//dd($batchDetails[2]);
@@ -148,22 +148,21 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
-		// dd($batchDetails[0]);
 		if(!is_null($batchDetails))
 		{
-			$subcategory = $batchDetails[0]->subcategory;
-			$instituteName = $batchDetails[0]->institute;
-			$locality = $batchDetails[0]->locality;
-			$location = $batchDetails[0]->location;
+
+			$subcategory = $batchDetails->subcategory;
+			$instituteName = $batchDetails->institute;
+			$locality = $batchDetails->locality;
+			$location = $batchDetails->location;
 			$metaContent[0] = "$subcategory -  $instituteName - $locality - $location :: Hobbyix";
 			$metaContent[1] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";
 			$metaContent[2] = "$instituteName $locality, $instituteName $location, $subcategory classes in $locality, $subcategory classes in $location, $subcategory classes $instituteName";
-			$institute_id=$batchDetails[0]->batch_institute_id;
+			$institute_id=$batchDetails->batch_institute_id;
 			$comments=$this->comment->getCommentForInstitute($institute_id);
 			$batchesOfInstitute=$this->batch->getBatchesForInstitute($institute_id);
-			$institutesOfSubcategoryInLocality=$this->batch->getInstitutesForSubcategoryInLocality($batchDetails[0]->batch_subcategory_id, $batchDetails[0]->venue_locality_id);
-			$subcategoriesInLocality=$this->subcategory->getSubcategoryInLocality($batchDetails[0]->venue_locality_id);
-			// dd($subcategoriesInLocality);
+			$institutesOfSubcategoryInLocality=$this->batch->getInstitutesForSubcategoryInLocality($batchDetails->batch_subcategory_id, $batchDetails->venue_locality_id);
+			$subcategoriesInLocality=$this->subcategory->getSubcategoryInLocality($batchDetails->venue_locality_id);
 			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));
 		}
 		else

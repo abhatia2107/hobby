@@ -1,5 +1,4 @@
 <?php
-
 class BookingsController extends \BaseController {
 
 	/**
@@ -113,10 +112,7 @@ class BookingsController extends \BaseController {
 
 		if($order_status==="Success")
 		{
-			$this->sms($user_mobile, $user_msg);
-			$this->sms($institute_mobile, $institute_msg);
-			$this->sms($admin_mobile, $admin_msg);
-			$this->email($booking);
+			$this->sms_email($booking);
 			
 			echo "Thank you for shopping with us. Your credit card has been charged and your transaction is successful. We will be shipping your order to you soon.";
 		}
@@ -208,20 +204,17 @@ class BookingsController extends \BaseController {
 		return Redirect::route('Bookings.index');
 	}
 
-	public function email(/*$booking_id*/)
+	public function sms_email(/*$booking_id*/)
 	{
 		$booking_id=1;
 		$booking=Booking::find($booking_id);
-		// dd($booking);
 		$batch=$this->batch->getBatch($booking->batch_id);
-		$email= $booking->email;
-		$subject='Booking Successful';
 		$data = array(
 					'order_id' => $booking->order_id,
 					'institute' => $batch->institute, 
 					'subcategory' => $batch->subcategory,
 					'amount' => $booking->amount,
-					'date' => $booking->booking_date,
+					'date' => date("d M Y", strtotime($booking->booking_date)),
 					'no_of_sessions' => $booking->no_of_sessions,
 					'venue_address' => $batch->venue_address,
 					'locality' => $batch->locality,
@@ -231,21 +224,34 @@ class BookingsController extends \BaseController {
 					'venue_email' => $batch->venue_email,
 					'venue_contact_no' => $batch->venue_contact_no,
 					'user_email' => $booking->email,
-					'user_contact_no' => $booking->contact_no
+					'user_contact_no' => $booking->contact_no,
+					'admin_contact_no' => '9100946081',
+					'admin_email' => 'support@hobbyix.com'
 					);
-		// dd($data);
+		$email= $booking->email;
+		$user_msg='Hi user, Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
+		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. 
+		Thanks,
+		hobbyix.com';
+		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'.';
+		$subject='Booking Successful';
+		$this->sms($user_contact_no, $user_msg);
 		Mail::send('Emails.booking.user', $data, function($message) use ($email, $subject)
 		{
 			$message->to($email)->subject($subject);
 		});
 
+		$email=$batch->venue_email;
 		$subject='Booking for your class done';
+		$this->sms($venue_contact_no, $institute_msg);
 		Mail::send('Emails.booking.institute', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->subject($subject);
 		});
 
+		$email=$data['admin_email'];
 		$subject='Booking Done';
+		$this->sms($admin_contact_no, $admin_msg);
 		Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->subject($subject);
@@ -262,7 +268,7 @@ class BookingsController extends \BaseController {
 	    // Send a message
 	    $params = array(
 	            'src' => 'HBXSMS',
-	            'dst' => $mobile,
+	            'dst' => '91'.$mobile,
 	            'text' => $msg,
 	            'type' => 'sms',
 	        );

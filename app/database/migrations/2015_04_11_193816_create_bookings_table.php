@@ -22,7 +22,7 @@ class CreateBookingsTable extends Migration {
 			$table->string('email',50);
 			$table->string('contact_no',15);
 			$table->integer('payment');
-			$table->timestamp('booking_date');
+			$table->date('booking_date');
 			$table->integer('no_of_sessions');
 			$table->string('order_id',8);
 			$table->integer('promo_id')->unsigned()->nullable();

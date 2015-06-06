@@ -71,7 +71,7 @@ Route::get('/bookings/payment/{id}','BookingsController@payment');
 Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');
-Route::get('/email', 'BookingsController@email');
+Route::get('/email', 'BookingsController@sms_email');
 Route::post('/bookings/redirect','BookingsController@redirect');
 Route::post('/bookings/cancel','BookingsController@cancel');
 

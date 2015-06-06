@@ -241,6 +241,7 @@
     $twitterLink = $batchDetails->institute_twitter; 
     $locality_id = $batchDetails->venue_locality_id; 
     $locality =  $batchDetails->locality;
+    $todayDate = date('Y-m-d');
   $relatedContent = null;
 ?>
 

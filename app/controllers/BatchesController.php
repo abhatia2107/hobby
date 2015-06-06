@@ -163,6 +163,7 @@ class BatchesController extends \BaseController {
 			$batchesOfInstitute=$this->batch->getBatchesForInstitute($institute_id);
 			$institutesOfSubcategoryInLocality=$this->batch->getInstitutesForSubcategoryInLocality($batchDetails->batch_subcategory_id, $batchDetails->venue_locality_id);
 			$subcategoriesInLocality=$this->subcategory->getSubcategoryInLocality($batchDetails->venue_locality_id);
+			// dd($batchDetails->category);
 			return View::make('Batches.show',compact('batchDetails','difficulty_level','age_group','gender_group','trial','weekdays','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));
 		}
 		else

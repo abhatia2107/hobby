@@ -1,5 +1,6 @@
 @extends('Layouts.layout')
 @section('pagestylesheet')
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <style type="text/css">
      #page 
      {
@@ -219,7 +220,6 @@
 @stop
 @section('content')
 <?php
-
     $batchID = $batchDetails->id;
     $instituteName = $batchDetails->institute;
     $instituteAddress = $batchDetails->venue_address;
@@ -242,7 +242,6 @@
     $locality_id = $batchDetails->venue_locality_id; 
     $locality =  $batchDetails->locality;
     $todayDate = date('Y-m-d');
-  $relatedContent = null;
 ?>
 
 <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
@@ -345,7 +344,7 @@
             <div class="row batchOrderField" id="batchOrderField1">
               <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date*</div>
               <div class='col-md-6 col-sm-6 col-xs-6'>
-                    <input type="date" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />                     
+                    <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />                     
               </div>          
             </div>    
             <div class="row batchOrderField">
@@ -509,8 +508,9 @@
 
 @stop
 @section('pagejquery')
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
+<script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
 <script type="text/javascript"> 
+  var dateToday = new Date(); 
   function bookOrderFormValidate() 
   {
     var Result = true;    
@@ -563,12 +563,14 @@
         }, 1000, 'easeInOutSine');
         event.preventDefault();
       });
-      /*$("#datepicker").datepicker({
-      /*showOn: 'both',
-      buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-            buttonText: "Choose Date",*
-            dateFormat: 'yy-mm-dd'         
-      }); */     
+      alert(dateToday);
+      $("#booking_date").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        minDate: dateToday,      
+        dateFormat: 'yy-mm-dd'         
+      });    
       $('#proceedButton').click(function(e)
       {  
         e.preventDefault();       
@@ -579,7 +581,7 @@
           $("#bookOrderFormStep2").fadeIn();              
         }      
       });  
-       $('#batchOrderForm').bootstrapValidator({                    
+      $('#batchOrderForm').bootstrapValidator({                    
             fields: {
 
                 contact_no: {                       
@@ -606,7 +608,7 @@
                     }
                 }
             }
-        });   
+      });   
 
   });
 </script>

@@ -101,8 +101,8 @@ class BookingsController extends \BaseController {
 			$information=explode('=',$decryptValues[$i]);
 			if($i==3)	$order_status=$information[1];
 		}
-		dd($information);
-		// dd($order_status);	
+		var_dump($information);
+		dd($order_status);	
 
 		if($order_status==="Success")
 		{

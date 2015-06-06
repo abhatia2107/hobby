@@ -53,9 +53,9 @@ class BookingsController extends \BaseController {
 		foreach ($posted as $key => $value){
 			$merchant_data.=$key.'='.$value.'&';
 		}
-		// $action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 		$encrypted_data=encrypt($merchant_data,$working_key); // Method for encrypting the data.
 		// dd($encrypted_data);
+		// $action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 		$action='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
 		return View::make('Bookings.payment',compact('action'));
 	}
@@ -86,12 +86,6 @@ class BookingsController extends \BaseController {
 			return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
 	}
 
-	public function test()
-	{
-		$this->sms('919885890640', 'Badiya bhai deepak');
-		dd('test');
-	}
-
 	public function redirect()
 	{
 		include app_path().'/IFRAME_KIT/Crypto.php';
@@ -107,12 +101,12 @@ class BookingsController extends \BaseController {
 			$information=explode('=',$decryptValues[$i]);
 			if($i==3)	$order_status=$information[1];
 		}
-		// dd($information);
+		dd($information);
 		// dd($order_status);	
 
 		if($order_status==="Success")
 		{
-			$this->sms_email($booking);
+			$this->sms_email($booking_id);
 			
 			echo "Thank you for shopping with us. Your credit card has been charged and your transaction is successful. We will be shipping your order to you soon.";
 		}

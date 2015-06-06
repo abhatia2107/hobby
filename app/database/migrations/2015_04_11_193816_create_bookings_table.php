@@ -19,12 +19,14 @@ class CreateBookingsTable extends Migration {
 			$table->foreign('batch_id')->references('id')->on('batches');
 			$table->integer('user_id')->unsigned()->index()->nullable();
 			$table->foreign('user_id')->references('id')->on('users');
+			$table->string('name',50);
 			$table->string('email',50);
 			$table->string('contact_no',15);
 			$table->integer('payment');
 			$table->date('booking_date');
 			$table->integer('no_of_sessions');
 			$table->string('order_id',8);
+			$table->string('order_status',10)->nullable();
 			$table->integer('promo_id')->unsigned()->nullable();
 			$table->foreign('promo_id')->references('id')->on('promos');
 			$table->boolean('referral_credit_used');

@@ -11,7 +11,6 @@ use Facebook\GraphSessionInfo;
 use Facebook\FacebookAuthorizationException;
 use Facebook\FacebookRequestException;
 
-
 session_start();
 
 
@@ -222,7 +221,7 @@ class UsersController extends \BaseController {
 			|
 			*/
 			//$data=$this->user->getid(Input::get('email'));
-    		return Redirect::intended('/')->with('success','Welcome '.$userDetails['user_first_name'].' '.$userDetails['user_last_name']);
+    		return Redirect::intended('/')/*->with('success','Welcome '.$userDetails['user_first_name'].' '.$userDetails['user_last_name'])*/;
 		}
 		else
 		{
@@ -251,7 +250,7 @@ class UsersController extends \BaseController {
 	{
 		Auth::logout();
 		Session::flush();
-    	Session::flash('success', Lang::get('user.logout'));
+    	// Session::flash('success', Lang::get('user.logout'));
     	return Redirect::to("/");
 	}
 
@@ -554,11 +553,11 @@ class UsersController extends \BaseController {
 	    	*/
 	    	$id=$this->user->getUid($user_fb_id);
 	    	Auth::loginUsingId($id);
-    		return Redirect::to('/')->with('success','Welcome '.$userFb['first_name'].' '.$userFb['last_name']);
+    		return Redirect::to('/')/*->with('success','Welcome '.$userFb['first_name'].' '.$userFb['last_name'])*/;
     	}
     	else
     	{
-			return Redirect::to('/')->with('failure',Lang::get('user.user_permission_failed'));		
+			return Redirect::to('/')/*->with('failure',Lang::get('user.user_permission_failed'))*/;	
     	}
 	}
 

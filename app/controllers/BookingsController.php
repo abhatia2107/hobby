@@ -1,5 +1,5 @@
 <?php
-include app_path().'IFRAME_KIT/Crypto.php';
+include app_path().'/IFRAME_KIT/Crypto.php';
 class BookingsController extends \BaseController {
 
 
@@ -51,7 +51,7 @@ class BookingsController extends \BaseController {
 						'date'=>$booking->booking_date,
 						'no_of_sessions'=>$booking->no_of_sessions
 				);
-			return View::make('Bookings.Success')->with($data);
+			return View::make('Bookings.success')->with($data);
 		}
 		else if($information['order_status']==="Aborted")
 		{
@@ -63,6 +63,7 @@ class BookingsController extends \BaseController {
 			$data=array('status_message'=>$information['status_message'],
 						'batch_id'=>$booking->batch_id
 						);
+			return View::make('Bookings.failure')->with($data);
 		}
 		else
 		{

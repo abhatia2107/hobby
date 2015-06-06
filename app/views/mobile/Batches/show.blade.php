@@ -1,5 +1,6 @@
 @extends('Layouts.layout')
 @section('pagestylesheet')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <style type="text/css">
 
   #page { width: 100%;margin-top: 0px;padding: 1em 0 0em;
@@ -92,30 +93,29 @@
 
 @stop
 @section('content')
+<script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
 <?php
-  foreach ($batchDetails as $data) 
-  {
-    $batchID = $data->id;
-    $instituteName = $data->institute;
-    $instituteAddress = $data->venue_address;
-    $instituteContact = $data->venue_contact_no;
-    $instituteID = $data->batch_institute_id;
-    $batchName = $data->batch;
-    $category = $data->category;
-    $sessionPrice = $data->batch_single_price;
-    $subcategory = $data->subcategory;
-    $ageGroup = $data->batch_age_group;
-    $genderGroup = $data->batch_gender_group;
-    $difficultyLevel = $data->batch_difficulty_level;
-    $trialClass = $data->batch_trial;
-    $sessionsCount = $data->batch_no_of_classes_in_week;
-    $batchDescription = $data->batch_comment;
-    $batchAccomplishment = $data->batch_accomplishment;
-    $instituteDetails = $data->institute_description;
-    $facebookLink = $data->institute_fblink;
-    $twitterLink = $data->institute_twitter;
-    $locality =  $data->locality;    
-  }
+    $batchID = $batchDetails->id;
+    $instituteName = $batchDetails->institute;
+    $instituteAddress = $batchDetails->venue_address;
+    $instituteContact = $batchDetails->venue_contact_no;
+    $instituteID = $batchDetails->batch_institute_id;
+    $batchName = $batchDetails->batch;
+    $category = $batchDetails->category;
+    $sessionPrice = $batchDetails->batch_single_price;
+    $subcategory = $batchDetails->subcategory;
+    $ageGroup = $batchDetails->batch_age_group;
+    $genderGroup = $batchDetails->batch_gender_group;
+    $difficultyLevel = $batchDetails->batch_difficulty_level;
+    $trialClass = $batchDetails->batch_trial;
+    $sessionsCount = $batchDetails->batch_no_of_classes_in_week;
+    $batchDescription = $batchDetails->batch_comment;
+    $batchAccomplishment = $batchDetails->batch_accomplishment;
+    $instituteDetails = $batchDetails->institute_description;
+    $facebookLink = $batchDetails->institute_fblink;
+    $twitterLink = $batchDetails->institute_twitter;
+    $locality_id = $batchDetails->venue_locality_id; 
+    $locality =  $batchDetails->locality;    
 ?>
 <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
   <div id="content" class="site-content">
@@ -137,7 +137,7 @@
     </div>
   </div>
 </div>
-<div class="container blog-container">
+<div class="container blog-container" style="margin:0;padding:0">
   <div class="row clearfix">    
     <div class="col-xs-12">
       <div class="col-xs-12">
@@ -148,7 +148,7 @@
               <div class="" id="bookOrderFormStep1">
                 <input type="hidden" name="batch_id" value="{{$batchID}}">
                 <div class="row batchOrderField">
-                  <div class='col-xs-6'>Price p. Session</div>
+                  <div class='col-xs-6'>Price Per Session</div>
                   <div class='col-xs-6'>: Rs. {{$sessionPrice}}</div>
                 </div>
                 <div class="row batchOrderField">
@@ -271,21 +271,24 @@
 ?>
 <div class="container" id="related_data_container">
   <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-12 col-sm-12 col-xs-12 related_item">
         <h4>Related to {{$instituteName}}</h4>       
         <?php
-          $institutesLength = sizeof($relatedData);
+          $institutesLength = sizeof($batchesOfInstitute);
           $index = 0;
-          $maxlength = 12;
-          $colNum = 2;
+          $maxlength = 8;
+          $colNum = 3;
+          $width = 4;
           if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
           $listLength = $maxlength / $colNum;
         ?>
         @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-xs-6 featured_listing_item">
+          <div class="col-xs-12 ">
             @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$relatedData[$index]}}">
-                {{$relatedData[$index]}}
+              <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
+                <a href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
+                  {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
+                </a>
               </li>
             @endfor
             <?php
@@ -297,18 +300,21 @@
       <div class="col-md-12 col-sm-12 col-xs-12 related_item">
         <h4>Other {{$subcategory}} classes</h4>
         <?php
-          $institutesLength = sizeof($relatedData);
+          $institutesLength = sizeof($institutesOfSubcategoryInLocality);
           $index = 0;
-          $maxlength = 12;
-          $colNum = 2;
+          $maxlength = 8;
+          $colNum = 3;
+          $width = 4;
           if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
           $listLength = $maxlength / $colNum;
         ?>
         @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-xs-6 featured_listing_item">
+          <div class="col-xs-12">
             @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$relatedData[$index]}}">
-                {{$relatedData[$index]}}
+              <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
+                <a href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
+                  {{$institutesOfSubcategoryInLocality[$index]->institute}}
+                </a>
               </li>
             @endfor
             <?php
@@ -320,18 +326,20 @@
       <div class="col-md-12 col-sm-12 col-xs-12 related_item">
         <h4>{{$category}} classes in {{$locality}}</h4>
         <?php
-          $institutesLength = sizeof($relatedData);
+          $institutesLength = sizeof($subcategoriesInLocality);
           $index = 0;
-          $maxlength = 12;
-          $colNum = 2;
+          $maxlength = 8;
+          $colNum = 3;
+          $width = 4;
           if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
           $listLength = $maxlength / $colNum;
         ?>
         @for($col = 0;$col<=$colNum;$col++ )
-          <div class=" col-xs-6 featured_listing_item">
+          <div class="col-xs-12">
             @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$relatedData[$index]}}">
-                {{$relatedData[$index]}}
+              <li title="{{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}">
+                <a href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
+                  {{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}
               </li>
             @endfor
             <?php
@@ -344,7 +352,6 @@
 </div>
 @stop
 @section('pagejquery')
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript">
   var dateToday = new Date();
   function bookOrderFormValidate() 
@@ -439,16 +446,7 @@
           changeMonth: true,
           numberOfMonths: 1,
           minDate: dateToday,
-          onSelect: function(selectedDate) {
-              var option = this.id == "from" ? "minDate" : "maxDate",
-                  instance = $(this).data("datepicker"),
-                  date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
-              dates.not(this).datepicker("option", option, date);
-          },
-      /*showOn: 'both',
-      buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-            buttonText: "Choose Date",*/
-        dateFormat: 'yy-mm-dd'         
+          dateFormat: 'yy-mm-dd'         
       });    
   });
 </script>

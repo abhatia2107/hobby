@@ -79,12 +79,18 @@ class BookingsController extends \BaseController {
 		$data['user_id']=Auth::id();
 		$data['order_id']=substr(uniqid(),0,8);
 		unset($data['csrf_token']);
-		// dd($data);
+		unset($data['Promo_Code']);
 		$booking = Booking::create($data);
 		if($booking)
 			return Redirect::to('/bookings/payment/'.$booking->id);
 		else
 			return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
+	}
+
+	public function test()
+	{
+		$this->sms('919885890640', 'Badiya bhai deepak');
+		dd('test');
 	}
 
 	public function redirect()
@@ -102,10 +108,16 @@ class BookingsController extends \BaseController {
 			$information=explode('=',$decryptValues[$i]);
 			if($i==3)	$order_status=$information[1];
 		}
-		dd($order_status);	
+		// dd($information);
+		// dd($order_status);	
 
 		if($order_status==="Success")
 		{
+			$this->sms($user_mobile, $user_msg);
+			$this->sms($institute_mobile, $institute_msg);
+			$this->sms($admin_mobile, $admin_msg);
+			$this->email($booking);
+			
 			echo "Thank you for shopping with us. Your credit card has been charged and your transaction is successful. We will be shipping your order to you soon.";
 		}
 		else if($order_status==="Aborted")
@@ -196,7 +208,52 @@ class BookingsController extends \BaseController {
 		return Redirect::route('Bookings.index');
 	}
 
-	public function sms()
+	public function email(/*$booking_id*/)
+	{
+		$booking_id=1;
+		$booking=Booking::find($booking_id);
+		// dd($booking);
+		$batch=$this->batch->getBatch($booking->batch_id);
+		$email= $booking->email;
+		$subject='Booking Successful';
+		$data = array(
+					'order_id' => $booking->order_id,
+					'institute' => $batch->institute, 
+					'subcategory' => $batch->subcategory,
+					'amount' => $booking->amount,
+					'date' => $booking->booking_date,
+					'no_of_sessions' => $booking->no_of_sessions,
+					'venue_address' => $batch->venue_address,
+					'locality' => $batch->locality,
+					'location' => $batch->location,
+					'venue_landmark' => $batch->venue_landmark,
+					'venue_pincode' => $batch->venue_pincode,
+					'venue_email' => $batch->venue_email,
+					'venue_contact_no' => $batch->venue_contact_no,
+					'user_email' => $booking->email,
+					'user_contact_no' => $booking->contact_no
+					);
+		// dd($data);
+		Mail::send('Emails.booking.user', $data, function($message) use ($email, $subject)
+		{
+			$message->to($email)->subject($subject);
+		});
+
+		$subject='Booking for your class done';
+		Mail::send('Emails.booking.institute', $data, function($message) use ($email,$subject)
+		{
+			$message->to($email)->subject($subject);
+		});
+
+		$subject='Booking Done';
+		Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
+		{
+			$message->to($email)->subject($subject);
+		});
+		
+	}
+
+	public function sms($mobile, $msg)
 	{
         require app_path().'/plivo/plivo.php';
 	 	$auth_id = "MANDE2YZJLMWNKYMEXMZ";
@@ -205,11 +262,11 @@ class BookingsController extends \BaseController {
 	    // Send a message
 	    $params = array(
 	            'src' => 'HBXSMS',
-	            'dst' => '919729725987',
-	            'text' => 'Hi, Message from Plivo API. Agar aa jaye to mujhe ping kr do FB pr.- bhatia',
+	            'dst' => $mobile,
+	            'text' => $msg,
 	            'type' => 'sms',
 	        );
 	    $response = $p->send_message($params);
-	    dd($response);
+	    // var_dump($response);
 	}
 }

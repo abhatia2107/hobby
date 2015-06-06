@@ -538,6 +538,6 @@ span.stars span {  background-position: 0 0; }
 
 .sample-box-small .totalAmount {  font-size: 18px;text-align: center;font-weight: bold;margin-top: -7px; }
 
-#booknowButton { background: #3396d1;margin-top: 5px;padding: 6px 25px 4px 25px;border-radius: 0px;border:0px solid;text-align: center; }
+.booknowButton { background: #3396d1;margin-top: 5px;padding: 6px 25px 4px 25px;border-radius: 0px;border:0px solid;text-align: center; }
 
 .singleSessionPrice {  text-align: center; }

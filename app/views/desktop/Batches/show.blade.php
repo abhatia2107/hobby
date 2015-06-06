@@ -189,14 +189,18 @@
   {
     height: 25px;
     padding: 0px 0px 0px 5px;
-    width: 75%;
+    width: 85%;
   }
   #batchOrderSample input
   {
     height: 25px;
     padding: 0px 0px 0px 5px;
-    width: 75%;
+    width: 85%;
   }
+  #bookOrderFormStep2 { display: none;padding-top: 20px;  }
+
+  #bookOrderFormStep2 {}
+
   #related_data_container
   {
     border-top: 1px solid lightgrey; 
@@ -208,6 +212,8 @@
   .related_item {margin-bottom: 15px;}
 
   .related_item a {color:#5C5C5C;}
+
+  .help-block {color: #a94442 !important}
 
   </style> 
 @stop
@@ -321,39 +327,64 @@
       <div class="sample-box-small" id='batchOrderSample'>
         <div id='sample-batch-name'>Book This Class</div>
         <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
-          <input type="hidden" name="batch_id" value="{{$batchID}}">
-          <div class="row batchOrderField">
-            <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>
-            <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
-          </div>
-          <div class="row batchOrderField">
-            <div class='col-md-6 col-sm-6 col-xs-6'>No. of Sessions</div>
-            <div class='col-md-6 col-sm-6 col-xs-6'>  
-                <select class="form-control" id="numberOfSessions" name="no_of_sessions" required>                 
-                    @for($session=1;$session<=6;$session++)
-                        <option value={{$session}}>{{$session}}</option>
-                    @endfor
-                </select>
+          <div class="" id="bookOrderFormStep1">
+            <input type="hidden" name="batch_id" value="{{$batchID}}">
+            <div class="row batchOrderField">
+              <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>
+              <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
+            </div>
+            <div class="row batchOrderField">
+              <div class='col-md-6 col-sm-6 col-xs-6'>No. of Sessions*</div>
+              <div class='col-md-6 col-sm-6 col-xs-6'>  
+                  <select class="form-control" id="numberOfSessions" name="no_of_sessions">                 
+                      @for($session=1;$session<=6;$session++)
+                          <option value={{$session}}>{{$session}}</option>
+                      @endfor
+                  </select>
+              </div>
+            </div>
+            <div class="row batchOrderField" id="batchOrderField1">
+              <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date*</div>
+              <div class='col-md-6 col-sm-6 col-xs-6'>
+                    <input type="date" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />                     
+              </div>          
+            </div>    
+            <div class="row batchOrderField">
+              <div class='col-xs-9'>
+                <input type="text" style="width:100%" placeholder="Enter Promo Code" class="form-control" id="promoCode" name="Promo Code" />                     
+              </div>
+              <div class='col-xs-3' style="text-align:left;padding:1px 0px 1px 0px;font-size:15px;">
+                 <a href="javascript:verifyPromoCode();">Apply</a>
+              </div>          
+            </div>       
+            <hr/>
+            <div class="row totalAmount">
+              <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
+              <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
+            </div>
+            <div class="row batchOrderButtons">    
+              <button style="padding:5px 70px;" class="booknowButton" id="proceedButton">Proceed</button>
+              <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
             </div>
           </div>
-          <div class="row batchOrderField">
-            <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date</div>
-            <div class='col-md-6 col-sm-6 col-xs-6'>
-                  <input type="text" placeholder="Select Date" class="form-control" id="datepicker" name="booking_date" required />                     
-            </div>          
-          </div>
-          <div class="row batchOrderField">
-            <div class='col-md-6 col-sm-6 col-xs-6'>Subtotal</div>
-            <div class='col-md-6 col-sm-6 col-xs-6' id="orderSubtotal">: Rs. {{$sessionPrice}}</div>
-          </div>
-          <hr/>
-          <div class="row totalAmount">
-            <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}<span></div>
-            <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
-          </div>
-          <div class="row batchOrderButtons">    
-            <button type="submit" style="padding:5px 70px;" id="booknowButton" >Pay Now</button>
-            <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
+          <div class="" id="bookOrderFormStep2">
+            <div class="row batchOrderField">
+              <div class='col-md-5 col-sm-4 col-xs-5'>E-Mail ID*</div>
+              <div class='col-md-7 col-sm-8 col-xs-7'>
+                    <input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email" name="email" required />                     
+              </div>          
+            </div>   
+            <div class="row batchOrderField">
+              <div class='col-md-5 col-sm-4 col-xs-5'>Mobile Number*</div>
+              <div class='col-md-7 col-sm-8 col-xs-7'>
+                    <input type="tel" placeholder="Enter Mobile Number" class="form-control" id="contact_no" name="contact_no" required />                     
+              </div>          
+            </div> 
+             <hr/>   
+            <div class="row batchOrderButtons">    
+              <button type="submit" style="padding:5px 70px;" class="booknowButton" id="booknowButton" >Pay Now</button>
+              <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
+            </div>
           </div>
         </form>
         <!---
@@ -480,9 +511,29 @@
 @stop
 @section('pagejquery')
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
+  function bookOrderFormValidate() 
+  {
+    var Result = true;    
+    var bookingDate = $('#booking_date').val();
+    if(bookingDate=="" || bookingDate==undefined)
+    {
+      Result =  false;
+      var errorMessageContainer = $('#booking_date').parent(),baseUrl;
+      $('#errorMessage').remove();     
+      $('<span></span>')
+        .attr("id","errorMessage")
+        .attr("class","batchCreateFormError")
+        .text("Booking date is required")
+        .appendTo(errorMessageContainer);      
+    }
+    return Result;
+  }
   $(document).ready(function () 
   {
+      $("#booking_date").change(function () {
+          $('#errorMessage').remove();     
+      });
       var categoryId = "<?php echo $loggedIn; ?>";     
       $('.rating-input').attr('checked', false);
       $('#commentsForm').click(function(e)
@@ -493,6 +544,7 @@
           e.stopPropagation();
           $('#loginModal').modal('show') ;
         }
+
       });
       $('#numberOfSessions').change(function () 
       {
@@ -512,12 +564,51 @@
         }, 1000, 'easeInOutSine');
         event.preventDefault();
       });
-      $("#datepicker").datepicker({
+      /*$("#datepicker").datepicker({
       /*showOn: 'both',
       buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-            buttonText: "Choose Date",*/
+            buttonText: "Choose Date",*
             dateFormat: 'yy-mm-dd'         
-      });
+      }); */     
+      $('#proceedButton').click(function(e)
+      {  
+        e.preventDefault();       
+        e.stopPropagation();         
+        if(bookOrderFormValidate())
+        {   
+          $("#bookOrderFormStep1").hide();
+          $("#bookOrderFormStep2").fadeIn();              
+        }      
+      });  
+       $('#batchOrderForm').bootstrapValidator({                    
+            fields: {
+
+                contact_no: {                       
+                        validators: {
+                            notEmpty: {
+                                message: 'Mobile number is required'
+                            },
+
+                            regexp: {
+                                regexp: /^[0-9]{10}$/,
+                                message: 'The mobile number consists of 10 digits. Skip adding +91 or 0'
+                            }
+                        }
+                    },
+
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Email is required'
+                        },
+                        emailAddress: {
+                            message: 'The input is not a valid email address'
+                        }
+                    }
+                }
+            }
+        });   
+
   });
 </script>
 @stop

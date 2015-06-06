@@ -3,12 +3,12 @@
 <style type="text/css">
 
   #page { width: 100%;margin-top: 0px;padding: 1em 0 0em;
-  background-repeat:no-repeat;
-background-position:center top;
--o-background-size: 130% 120%, auto;
--moz-background-size: 130% 120%, auto;
--webkit-background-size: 130% 120%, auto;
-background-size: 130% 150%, auto;}
+          background-repeat:no-repeat;
+        background-position:center top;
+        -o-background-size: 130% 120%, auto;
+        -moz-background-size: 130% 120%, auto;
+        -webkit-background-size: 130% 120%, auto;
+        background-size: 130% 150%, auto;}
 
   .samplePageInfo {  background: rgba(0, 0, 0, 0.2); color: white; padding: 0px 0px 10px 0px;}
 
@@ -104,7 +104,6 @@ background-size: 130% 150%, auto;}
     $locality =  $data->locality;    
   }
 ?>
-
 <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
   <div id="content" class="site-content">
     <div class="samplePageInfo cover-wrapper">

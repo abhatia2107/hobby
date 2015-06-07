@@ -179,7 +179,7 @@
         <div class="row batchOrderField">
           <div class='col-md-5 col-sm-4 col-xs-5'>Name*</div>
           <div class='col-md-7 col-sm-8 col-xs-7'>
-                <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" value="@if(isset($user)){{$user->user_first_name.$user->user_last_name}}@endif" required/>
+                <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" value="@if(isset($user)){{$user->user_first_name.' '.$user->user_last_name}}@endif" required/>
           </div>          
         </div>   
         <div class="row batchOrderField">
@@ -207,78 +207,6 @@
   <div class="row clearfix">    
     <div class="col-xs-12">
       <div class="col-xs-12">
-        <div class="sample-box" id='batchOrderSample' style="display:none">        
-          <div class='sample_box_title' style="padding-top:3px">Book This Class</div>
-          <div class="sample_box_order_data">        
-            <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
-              <div class="" id="bookOrderFormStep1">
-                <input type="hidden" name="batch_id" value="{{$batchID}}">
-                <div class="row batchOrderField">
-                  <div class='col-xs-6'>Price Per Session</div>
-                  <div class='col-xs-6'>: Rs. {{$sessionPrice}}</div>
-                </div>
-                <div class="row batchOrderField">
-                  <div class='col-xs-6 batchOrderFieldLabel'>No. of Sessions*</div>
-                  <div class='col-xs-6'>  
-                      <select class="form-control" id="numberOfSessions" name="no_of_sessions" >                 
-                          @for($seesion=1;$seesion<=6;$seesion++)
-                              <option value={{$seesion}}>{{$seesion}}</option>
-                          @endfor
-                      </select>
-                  </div>
-                </div>
-                <div class="row batchOrderField">
-                  <div class='col-xs-6 batchOrderFieldLabel'>Booking Date*</div>
-                  <div class='col-xs-6'>
-                      <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
-                  </div>          
-                </div>
-                <div class="row batchOrderField">
-                  <div class='col-xs-9 batchOrderFieldLabel'>
-                    <input type="text" style="width:100%" placeholder="Enter Promo Code" class="form-control" id="promoCode" name="Promo Code" />                     
-                  </div>
-                  <div class='col-xs-3' style="text-align:left;padding:5px 0px 0px 0px;font-size:15px;">
-                     <a href="javascript:verifyPromoCode();">Apply</a>
-                  </div>          
-                </div>            
-                <hr/>
-                <div class="row totalAmount">
-                  <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
-                  <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
-                </div>
-                <div class="batchOrderButtons">    
-                  <button style="padding:5px 50px;" class="booknowButton" id="proceedButton">Proceed</button>
-                  <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
-                </div>
-              </div>
-              <div class="" id="bookOrderFormStep2">
-                <div class="row batchOrderField">
-                  <div class='col-md-5 col-sm-4 col-xs-5'>Name*</div>
-                  <div class='col-md-7 col-sm-8 col-xs-7'>
-                        <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" required />
-                  </div>          
-                </div>
-                <div class="row batchOrderField">
-                  <div class='col-md-5 col-sm-4 col-xs-5'>E-Mail ID*</div>
-                  <div class='col-md-7 col-sm-8 col-xs-7'>
-                        <input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email" name="email" required />                     
-                  </div>          
-                </div>   
-                <div class="row batchOrderField">
-                  <div class='col-md-5 col-sm-4 col-xs-5'>Mobile No.*</div>
-                  <div class='col-md-7 col-sm-8 col-xs-7'>
-                        <input type="tel" placeholder="Enter Mobile No." class="form-control" id="contact_no" name="contact_no" required />                     
-                  </div>          
-                </div> 
-                 <hr/>   
-                <div class="row batchOrderButtons">    
-                  <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" >Pay Now</button>
-                  <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
-                </div>              
-              </div>
-            </form>
-          </div>        
-        </div>     
         <div id="sample-batch-details" class="sample-box" >
           <div class='sample_box_title'>Batch Details</div>
           <div class="sample_box_data">

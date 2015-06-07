@@ -59,8 +59,6 @@ class BookingsController extends \BaseController {
 						'batch_id'=>$booking->batch_id
 			);
 			return View::make('Bookings.aborted')->with($data);
-			echo "Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
-		
 		}
 		else if($information['order_status']==="Failure")
 		{
@@ -149,8 +147,6 @@ class BookingsController extends \BaseController {
 	{
 		// dd(Input::all());
 		$data = Input::all();
-		$data['email']='abhatia2107@gmail.com';
-		$data['contact_no']='9729725987';
 		$validator = Validator::make($data, Booking::$rules);
 		if ($validator->fails())
 		{
@@ -169,7 +165,12 @@ class BookingsController extends \BaseController {
 
 	public function cancel()
 	{
-		dd('Cancelled');
+		dd($Input::all());
+		$data=array(
+			'batch_id'=>$booking->batch_id
+		);
+		return View::make('Bookings.aborted')->with($data);
+
 	}
 	/**
 	 * Display the specified booking.
@@ -232,16 +233,16 @@ class BookingsController extends \BaseController {
 		return Redirect::route('Bookings.index');
 	}
 
-	public function sms_email(/*$booking_id*/)
+	public function sms_email($booking_id)
 	{
-		$booking_id=1;
+		// $booking_id=1;
 		$booking=Booking::find($booking_id);
 		$batch=$this->batch->getBatch($booking->batch_id);
 		$data = array(
 					'order_id' => $booking->order_id,
 					'institute' => $batch->institute, 
 					'subcategory' => $batch->subcategory,
-					'amount' => $booking->amount,
+					'amount' => $booking->payment,
 					'date' => date("d M Y", strtotime($booking->booking_date)),
 					'no_of_sessions' => $booking->no_of_sessions,
 					'venue_address' => $batch->venue_address,
@@ -251,10 +252,11 @@ class BookingsController extends \BaseController {
 					'venue_pincode' => $batch->venue_pincode,
 					'venue_email' => $batch->venue_email,
 					'venue_contact_no' => $batch->venue_contact_no,
+					'user_name' => $booking->name,
 					'user_email' => $booking->email,
 					'user_contact_no' => $booking->contact_no,
 					'admin_contact_no' => '9100946081',
-					'admin_email' => 'support@hobbyix.com'
+					'admin_email' => 'booking@hobbyix.com'
 					);
 		$email= $booking->email;
 		$user_msg='Hi user, Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
@@ -263,7 +265,7 @@ class BookingsController extends \BaseController {
 		hobbyix.com';
 		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'.';
 		$subject='Booking Successful';
-		$this->sms($user_contact_no, $user_msg);
+		$this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.booking.user', $data, function($message) use ($email, $subject)
 		{
 			$message->to($email)->subject($subject);
@@ -271,7 +273,7 @@ class BookingsController extends \BaseController {
 
 		$email=$batch->venue_email;
 		$subject='Booking for your class done';
-		$this->sms($venue_contact_no, $institute_msg);
+		$this->sms(false, $data['venue_contact_no'], $institute_msg);
 		Mail::send('Emails.booking.institute', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->subject($subject);
@@ -279,7 +281,7 @@ class BookingsController extends \BaseController {
 
 		$email=$data['admin_email'];
 		$subject='Booking Done';
-		$this->sms($admin_contact_no, $admin_msg);
+		$this->sms(false, $data['admin_contact_no'], $admin_msg);
 		Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->subject($subject);
@@ -287,20 +289,39 @@ class BookingsController extends \BaseController {
 		
 	}
 
-	public function sms($mobile, $msg)
+	/*public function test()
 	{
-        require app_path().'/plivo/plivo.php';
-	 	$auth_id = "MANDE2YZJLMWNKYMEXMZ";
-	    $auth_token = "MTdhYzc2MTg4MzQzMTgwZjk0NzJlNTM3MDk1NGEz";
-	    $p = new \RestAPI($auth_id, $auth_token);
-	    // Send a message
+		$data = array(
+					'admin_contact_no' => '9100946081',
+					'admin_email' => 'booking@hobbyix.com'
+					);
+		$email=$data['admin_email'];
+		var_dump($email);
+		$subject='Booking Done';
+		$response=Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
+		{
+			$message->to($email)->subject($subject);
+		});
+		dd($response);
+	}*/
+
+	public function sms($first,$mobile, $msg)
+	{
+		static $smsObject;
+		if($first)
+		{
+	        require app_path().'/plivo/plivo.php';
+		 	$auth_id = "MANDE2YZJLMWNKYMEXMZ";
+		    $auth_token = "MTdhYzc2MTg4MzQzMTgwZjk0NzJlNTM3MDk1NGEz";
+		    $smsObject = new \RestAPI($auth_id, $auth_token);
+	    }
 	    $params = array(
 	            'src' => 'HBXSMS',
 	            'dst' => '91'.$mobile,
 	            'text' => $msg,
 	            'type' => 'sms',
 	        );
-	    $response = $p->send_message($params);
-	    // var_dump($response);
+	    $smsObject->sendMessage($params);
+	    // var_dump($params);
 	}
 }

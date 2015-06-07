@@ -12,7 +12,7 @@
 			</div>
 			<div style="padding:0px 40px">
 				<h1 style="font-size:150%; color:#000;">
-					Dear {{$institute}},
+					Dear {{$user_name}},
 				</h1>
 				<p style="color:#000;">
 					Thank you for your Order on Hobbyix.com.<br>We are pleased to inform you that your transaction on Hobbyix.com is confirmed and the Order number is {{$order_id}}.

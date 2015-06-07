@@ -13,14 +13,14 @@
     <meta name="description" content="{{$metaContent[1]}}">
     <meta name="keywords" content="{{$metaContent[2]}}">
     <meta name="author" content="Hobbyix">
-    <meta property="og:image" content="/assets/images/home/banner.jpg">   
+    <meta property="og:image" content="/assets/images/home/banner.jpg">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.11.2.min.css" id="jquery-ui-style-css" media="all">
-    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrapValidator.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/assets/css/hobby_style_mobile.css">   
+    <!--<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css"> -->
+    <!--<link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css"> -->
+    <!--<link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.11.2.min.css" >
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrapValidator.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/hobby_style_mobile.css">  
 
     <script src="/assets/js/jquery-1.11.2.min.js"></script>
     <script src="/assets/js/jquery-2.1.1.min.js"></script>

@@ -1,5 +1,12 @@
 @extends('Layouts.layout')
 @section('content')
+<div class="container filter_page_container membership_message" style="position:absolute;width:100%;margin:0;padding:0">
+	<div class="alert alert-success alert-dismissable">
+		 <button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">X</button>
+		<h4><a href="/Membership">Hobbyix Membership</a></h4>
+		<strong>Buy Membership and get access to everything</strong>
+	</div>
+</div>
 <div class="overlay-slider">
 <div class="homepage-cover">
    <div class="container" id="hompage-cover">

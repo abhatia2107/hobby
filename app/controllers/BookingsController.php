@@ -25,53 +25,30 @@ class BookingsController extends \BaseController {
 		$batchDetails=Batch::find($id);
 		return View::make('Bookings.create',compact('batchDetails'));
 	}
-
-	public function redirect()
+	
+	/**
+	 * Store a newly created booking in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
 	{
-		$encResponse=Input::get("encResp");			//This is the response sent by the CCAvenue Server
-		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
-		$rcvdString=decrypt($encResponse,$working_key);		//Crypto Decryption used as per the specified working key.
-		$decryptValues=explode('&', $rcvdString);
-		$dataSize=sizeof($decryptValues);
-		for($i = 0; $i < $dataSize; $i++) 
+		// dd(Input::all());
+		$data = Input::all();
+		$validator = Validator::make($data, Booking::$rules);
+		if ($validator->fails())
 		{
-			$info=explode('=',$decryptValues[$i]);
-			$information[$info[0]]=$info[1];
+			return Redirect::back()->withErrors($validator)->withInput();
 		}
-		$booking=Booking::where('order_id',$information['order_id'])->first();
-		$booking->order_status=$information['order_status'];
-		$booking->save();
-		if($information['order_status']==="Success")
-		{
-			$this->sms_email($booking->id);
-			$batch=$this->batch->getBatch($booking->batch_id);
-			$data=array('subcategory'=>$batch->subcategory,
-						'institute'=>$batch->institute,
-						'order_id'=>$booking->order_id,
-						'date'=>$booking->booking_date,
-						'no_of_sessions'=>$booking->no_of_sessions
-				);
-			return View::make('Bookings.success')->with($data);
-		}
-		else if($information['order_status']==="Aborted")
-		{
-			$data=array(
-						'batch_id'=>$booking->batch_id
-			);
-			return View::make('Bookings.aborted')->with($data);
-		}
-		else if($information['order_status']==="Failure")
-		{
-			$data=array('status_message'=>$information['status_message'],
-						'batch_id'=>$booking->batch_id
-						);
-			return View::make('Bookings.failure')->with($data);
-		}
+		$data['user_id']=Auth::id();
+		$data['order_id']=substr(uniqid(),0,8);
+		unset($data['csrf_token']);
+		unset($data['Promo_Code']);
+		$booking = Booking::create($data);
+		if($booking)
+			return Redirect::to('/bookings/payment/'.$booking->id);
 		else
-		{
-			echo "Security Error. Illegal access detected";
-		
-		}
+			return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
 	}
 
 	public function success()
@@ -138,34 +115,70 @@ class BookingsController extends \BaseController {
 		// return View::make('Bookings.iframe',compact('action'));
 		return View::make('Bookings.non-seamless',compact('encrypted_data', 'access_code'));
 	}
-	/**
-	 * Store a newly created booking in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
+
+	public function redirect()
 	{
-		// dd(Input::all());
-		$data = Input::all();
-		$validator = Validator::make($data, Booking::$rules);
-		if ($validator->fails())
+		$encResponse=Input::get("encResp");			//This is the response sent by the CCAvenue Server
+		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
+		$rcvdString=decrypt($encResponse,$working_key);		//Crypto Decryption used as per the specified working key.
+		$decryptValues=explode('&', $rcvdString);
+		$dataSize=sizeof($decryptValues);
+		for($i = 0; $i < $dataSize; $i++) 
 		{
-			return Redirect::back()->withErrors($validator)->withInput();
+			$info=explode('=',$decryptValues[$i]);
+			$information[$info[0]]=$info[1];
 		}
-		$data['user_id']=Auth::id();
-		$data['order_id']=substr(uniqid(),0,8);
-		unset($data['csrf_token']);
-		unset($data['Promo_Code']);
-		$booking = Booking::create($data);
-		if($booking)
-			return Redirect::to('/bookings/payment/'.$booking->id);
+		$booking=Booking::where('order_id',$information['order_id'])->first();
+		$booking->order_status=$information['order_status'];
+		$booking->save();
+		if($information['order_status']==="Success")
+		{
+			$this->sms_email($booking->id);
+			$batch=$this->batch->getBatch($booking->batch_id);
+			$data=array('subcategory'=>$batch->subcategory,
+						'institute'=>$batch->institute,
+						'order_id'=>$booking->order_id,
+						'date'=>$booking->booking_date,
+						'no_of_sessions'=>$booking->no_of_sessions
+				);
+			return View::make('Bookings.success')->with($data);
+		}
+		else if($information['order_status']==="Aborted")
+		{
+			$data=array(
+						'batch_id'=>$booking->batch_id
+			);
+			return View::make('Bookings.aborted')->with($data);
+		}
+		else if($information['order_status']==="Failure")
+		{
+			$data=array('status_message'=>$information['status_message'],
+						'batch_id'=>$booking->batch_id
+						);
+			return View::make('Bookings.failure')->with($data);
+		}
 		else
-			return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
+		{
+			echo "Security Error. Illegal access detected";
+		
+		}
 	}
 
 	public function cancel()
 	{
-		dd($Input::all());
+		$encResponse=Input::get("encResp");			//This is the response sent by the CCAvenue Server
+		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
+		$rcvdString=decrypt($encResponse,$working_key);		//Crypto Decryption used as per the specified working key.
+		$decryptValues=explode('&', $rcvdString);
+		$dataSize=sizeof($decryptValues);
+		for($i = 0; $i < $dataSize; $i++) 
+		{
+			$info=explode('=',$decryptValues[$i]);
+			$information[$info[0]]=$info[1];
+		}
+		$booking=Booking::where('order_id',$information['order_id'])->first();
+		$booking->order_status=$information['order_status'];
+		$booking->save();
 		$data=array(
 			'batch_id'=>$booking->batch_id
 		);

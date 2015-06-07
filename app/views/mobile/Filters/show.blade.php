@@ -649,12 +649,23 @@
 			filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();	
 			//alert(filter_select);
 			if(filter_select.length>0)
-			{
-				$(linksContainer).empty();
+			{				
 				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();				
 				chunk = 0;				
-				LoadFilterResults(sub_select,loc_select,0);					
+				if( sub_select.length == 1 && loc_select.length ==0 )
+				{
+					window.location.href = "/filter/subcategory/"+sub_select;
+				}
+				else if(loc_select.length == 1 && sub_select.length ==0)
+				{
+					window.location.href = "/filter/locality/"+loc_select;
+				}				
+				else
+				{
+					$(linksContainer).empty();						
+					LoadFilterResults(sub_select,loc_select,0);					
+				}				
 			}
 			else
 			{

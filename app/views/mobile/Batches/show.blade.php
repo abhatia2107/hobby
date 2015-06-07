@@ -131,8 +131,8 @@
     </div>
   </div>
 </div>
-<div class="" id='batchOrderSample' style="padding-top:0px;margin-top:0px;border-bottom:2px solid #3396d1">        
-  <div class='sample_box_title' style="padding:6px 0px;margin-top:0px;background:#3396d1;color:white">Book This Class</div>
+<div class="" id='batchOrderSample' style="padding-top:0px;margin-top:0px;">        
+  <div class='sample_box_title' style="padding:10px 0px 2px 0px;margin-top:0px;">Book This Class</div>
   <div class="sample_box_order_data" style="padding:10px 15px 0px 15px;">        
     <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
       <div class="" id="bookOrderFormStep1">

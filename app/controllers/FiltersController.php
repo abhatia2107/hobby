@@ -56,21 +56,24 @@ class FiltersController extends \BaseController {
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$chunk=$chunk*100;
 		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
-		if(Request::ajax()){
+		if(Request::ajax())
+		{
 			if($batchesForCategoryLocation)
+			{
 				return $batchesForCategoryLocation;
-			else{
-				// dd('test');
-				return $batchesForCategoryLocation="";
 			}
+			else
+			{
+				return $batchesForCategoryLocation="";		
+			}					
 		}
-		else{
+		else
+		{
 			if(empty($batchesForCategoryLocation->toArray()))
 			{
-				$batchesForCategoryLocation="";
-				//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+				$batchesForCategoryLocation="";				
 			}
-		// dd($batchesForCategoryLocation[0]);
+			//dd($batchesForCategoryLocation[0]->shower_room);
 			// dd($batchesForCategoryLocation);
 			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 		}
@@ -140,6 +143,7 @@ class FiltersController extends \BaseController {
 		$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
 		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->getBatchesForLocality($id);
+		$locality_id = $id;
 		// dd($batchesForCategoryLocation[0]);
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
@@ -165,7 +169,7 @@ class FiltersController extends \BaseController {
 			$subcategoriesString = implode(" classes in $locality, ",$subcategoryArray);
 			$metaContent[2] = "$subcategoriesString classes in $locality";		
 		}		
-		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localitySubcategories','location','locality'));
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localitySubcategories','location','locality','locality_id'));
 	}
 
 	public function subcategory($id)

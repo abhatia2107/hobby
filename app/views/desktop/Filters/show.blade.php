@@ -1,6 +1,7 @@
 @extends('Layouts.layout')
 @section('pagestylesheet')
   <style type="text/css">
+
      .post_header { background: #fff;margin: 0px;padding: 0px}
 
      .facilities_continer {margin-top: 5px;clear: both;}
@@ -24,6 +25,7 @@
   	.related_item {margin-bottom: 15px;}
 
   	.related_item a {color:#5C5C5C;}
+  	
    </style>
 @stop
 
@@ -90,7 +92,7 @@
 										$sub_id = $subcategoryData->id;
 									?>				
 									<li subcategory="{{$sub_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" @if(isset($subcategory_id)) @if($subcategory_id == $sub_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
 									</li>
 								 @endforeach
 							 </ul>
@@ -106,7 +108,7 @@
 										$loc_id = $localityData->id;
 									?>
 									<li subcategory="{{$loc_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$localityName}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" @if(isset($locality_id)) @if($locality_id == $loc_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$localityName}}</span></label>
 									</li> 
 								@endforeach
 							 </ul>
@@ -215,38 +217,36 @@
 		var resultCount = 0;
 		var sub_select = new Array();
 		var loc_select = new Array();
-		var filter_select = new Array();
-		var trial_select = new Array();
-		navActive('NavItem'+categoryId);
+		var filter_select = new Array();		
+		//navActive('NavItem'+categoryId);
 		if(result.length==0)	
 		{
 			$('#loadMore').css('display','none');
 			$('#noResults').css('display','block');
 		}
-		function addFacilities (batchID) 
+		function addFacilities (batchID,facilitesAvailable) 
 		{
 			var linksContainer = $('#facilities_continer_'+batchID),baseUrl;
 			//var linksContainerStatus = linksContainer.html().trim();
 			//alert(linksContainerStatus);
 			if(linksContainer.is(':empty'))
 			{				
-				var facilities = ["ac","cafe","changing room","locker room","shower","steam"];
-				var facilitesAvailabe = [1,1,1,1,1,1];
+				var facilitiesName = ["Air Conditioning","Cafe","Changing Room","Locker","Shower Room","Steam"];				
 				var index = 0;
-				for (index=0;index<6;index++) 
+				for (index=0;index<facilitesAvailable.length;index++) 
 				{
-	  				if(facilitesAvailabe[index]==1)
+	  				if(facilitesAvailable[index]==1)
 	  				{
 	  					$("<span></span>")
 	  					.attr("class","facilities_icon")
 	  					.append
 	  					(
 	  						$("<img>")
-	  						.attr("src","/assets/images/Facilities/"+facilities[index]+".png")
+	  						.attr("src","/assets/images/Facilities/"+facilitiesName[index]+".png")
 	  						.attr("width","30px")
 	  						.attr("height","30px")
-	  						.attr("title",facilities[index])
-	  						.attr("alt",facilities[index])
+	  						.attr("title",facilitiesName[index])
+	  						.attr("alt",facilitiesName[index])
 	  					)
 	  					.appendTo(linksContainer)
 	  						
@@ -311,7 +311,7 @@
 		{
 			var linksContainer = $('#filter_data'),baseUrl;
 			for (var index=start; index<results.length; index++)
-			{
+			{				
 			   	var institute = results[index]['institute'];
 			   	var institute_id =  results[index]['batch_institute_id'];
 			   	var institute_photo_path = '/assets/images/institute/institute.gif';
@@ -324,7 +324,7 @@
 				var subcategory = results[index]['subcategory'];
 				var category =  results[index]['category'];
 				var location_name = results[index]['location'];
-				var locality =results[index]['locality'];
+				var locality = results[index]['locality'];
 				var tagline =results[index]['batch_tagline'];
 				var subcategoryID = results[index]['batch_subcategory_id'];
 				var localityID = results[index]['venue_locality_id'];
@@ -357,7 +357,7 @@
 							(
 								$("<a></a>")
 								.prop("href","/batches/show/"+batchID)
-								.text(institute)
+								.text(batchID+institute)
 							)									
 						)
 						.append
@@ -513,7 +513,13 @@
 					)
 				)
 				.appendTo(linksContainer);
-				addFacilities(batchID);		
+				var facilitesAvailable = new Array();
+				var facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
+				for (facilitesIndex=0;facilitesIndex<facilities.length;facilitesIndex++) 
+				{
+					facilitesAvailable[facilitesIndex] = results[index][facilities[facilitesIndex]];
+				}				
+				addFacilities(batchID,facilitesAvailable);		
 		    }
 		  	$('span.stars').stars();
 		}
@@ -579,18 +585,29 @@
 				$('#loadMore').show();
 				$('#noResults').hide();
 				result = [];				
-				filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();			
+				filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();							
 				if(filter_select.length>0)
-				{
-					$(linksContainer).empty();
+				{					
 					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();					
+					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
 					chunk = 0;
-					LoadFilterResults(sub_select,loc_select,0);					
+					if(sub_select.length == 1 && loc_select.length ==0)
+					{
+						window.location.href = "/filter/subcategory/"+sub_select;
+					}
+					else if(loc_select.length == 1 && sub_select.length ==0)
+					{
+						window.location.href = "/filter/locality/"+loc_select;
+					}				
+					else
+					{
+						$(linksContainer).empty();						
+						LoadFilterResults(sub_select,loc_select,0);					
+					}
 				}
 				else
 				{					
-					location.reload(true);					
+					window.location.href = "/filter/categories/"+categoryId+"/locations";					
 				}				
 			});			
 		});

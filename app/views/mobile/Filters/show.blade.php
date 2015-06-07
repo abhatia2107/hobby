@@ -174,13 +174,13 @@
 								<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 	
 									@foreach ($subcategoriesForCategory as $subcategoryData)
 										<?php
-											$subcategory = $subcategoryData->subcategory;
+											$subcategoryName = $subcategoryData->subcategory;
 											$sub_id = $subcategoryData->id;
 										?>				
 										<li subcategory="{{$sub_id}}" >								
-										 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$subcategory}}</span></label>
+										 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" @if(isset($subcategory_id)) @if($subcategory_id == $sub_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
 										</li>
-									 @endforeach
+								 	@endforeach
 								 </ul>
 							</div>
 						</div>			
@@ -190,11 +190,11 @@
 								<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 									@foreach ($localitiesForLocation as $localityData)
 										<?php 
-											$locality = $localityData->locality;
+											$localityName = $localityData->locality;
 											$loc_id = $localityData->id;
 										?>
 										<li subcategory="{{$loc_id}}" >								
-										 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$locality}}</span></label>
+										 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" @if(isset($locality_id)) @if($locality_id == $loc_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$localityName}}</span></label>
 										</li> 
 									@endforeach
 								 </ul>
@@ -315,8 +315,7 @@
 		var resultCount = 0;
 		var sub_select = new Array();
 		var loc_select = new Array();
-		var filter_select = new Array();
-		var trial_select = new Array();
+		var filter_select = new Array();		
 		navActive('NavItem'+categoryId);
 		function addFacilities (batchID) 
 		{
@@ -371,10 +370,8 @@
 			if(sub_select.length==0)
 				sub_select=0;
 			if(loc_select.length==0)
-				loc_select=0;
-			if(trial_select.length==0)
-				trial_select =0;
-			//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
+				loc_select=0;			
+			//alert("sub = "+sub_select+"loc = "+loc_select+"trial = ");
 			$.get("/filter/"+sub_select+"/"+loc_select+"/"+locationId+"/"+chunk,function(response)
 			{
 				chunk++;

@@ -279,8 +279,6 @@
 				sub_select=0;
 			if(loc_select.length==0)
 				loc_select=0;
-			if(trial_select.length==0)
-				trial_select =0;
 			//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
 			$.get("/filter/"+sub_select+"/"+loc_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
 			{
@@ -357,7 +355,7 @@
 							(
 								$("<a></a>")
 								.prop("href","/batches/show/"+batchID)
-								.text(batchID+institute)
+								.text(institute)
 							)									
 						)
 						.append

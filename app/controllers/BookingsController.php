@@ -76,6 +76,35 @@ class BookingsController extends \BaseController {
 		}
 	}
 
+	public function success()
+	{
+		$data=array('subcategory'=>'$batch->subcategory',
+					'institute'=>'$batch->institute',
+					'order_id'=>'$booking->order_id',
+					'date'=>'$booking->booking_date',
+					'no_of_sessions'=>'$booking->no_of_sessions'
+			);
+		return View::make('Bookings.success')->with($data);
+		
+	}
+
+	public function aborted()
+	{
+		$data=array(
+					'batch_id'=>'$booking->batch_id'
+		);
+		return View::make('Bookings.aborted')->with($data);
+		echo "Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";		
+	}
+
+	public function failure()
+	{
+			$data=array('status_message'=>'$information[status_message]',
+						'batch_id'=>'$booking->batch_id'
+						);
+			return View::make('Bookings.failure')->with($data);
+	}
+
 	public function payment($id)
 	{
 		error_reporting(0);

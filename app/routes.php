@@ -77,6 +77,10 @@ Route::get('/email', 'BookingsController@sms_email');
 Route::post('/bookings/redirect','BookingsController@redirect');
 Route::post('/bookings/cancel','BookingsController@cancel');
 
+Route::get('/success', 'BookingsController@success');
+Route::get('/aborted', 'BookingsController@aborted');
+Route::get('/failure', 'BookingsController@failure');
+
 Route::resource('bookings', 'BookingsController');
 Route::get('bookings/create/{id}', 'BookingsController@create');
 

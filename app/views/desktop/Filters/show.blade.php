@@ -16,6 +16,14 @@
     @media screen and (min-width: 992px){ .filter_page {padding:0% 5%;}}
 
     @media screen and (min-width: 768px){ .batchDetailsMiddlePart {margin-top: -5px;}}
+
+    #related_data_container  {  border-top: 1px solid lightgrey;padding: 20px 5%;width: 100%;}
+
+  	#related_data_container h4 {font-size: 18px;color: #202e54;font-weight: bold;margin:0px 0px 5px 0px;}
+
+  	.related_item {margin-bottom: 15px;}
+
+  	.related_item a {color:#5C5C5C;}
    </style>
 @stop
 
@@ -70,7 +78,7 @@
 		<div class="col-md-12 col-xs-12 col-sm-12">					
 			<div class="">
 				<!--Start of filter division -->
-				<div class="col-md-3 col-xs-12 col-sm-3" style="margin-top:15px;padding:0px 1% 0px 0px;">
+				<div class="col-md-3 col-xs-12 col-sm-3" style="margin:15px 0px 25px 0px;padding:0px 1% 0px 0px;">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->
 					<div id="browse-filter" class="filter-option-1 filterOption">	
 						<div class="filterTitle">Sub Categories</div>
@@ -78,11 +86,11 @@
 							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 	
 								@foreach ($subcategoriesForCategory as $subcategoryData)
 									<?php
-										$subcategory = $subcategoryData->subcategory;
+										$subcategoryName = $subcategoryData->subcategory;
 										$sub_id = $subcategoryData->id;
 									?>				
 									<li subcategory="{{$sub_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$subcategory}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
 									</li>
 								 @endforeach
 							 </ul>
@@ -94,27 +102,102 @@
 							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 								@foreach ($localitiesForLocation as $localityData)
 									<?php 
-										$locality = $localityData->locality;
+										$localityName = $localityData->locality;
 										$loc_id = $localityData->id;
 									?>
 									<li subcategory="{{$loc_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$locality}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" /><span class="checkbox_data">{{' '.$localityName}}</span></label>
 									</li> 
 								@endforeach
 							 </ul>
 							</div>
 					</div>				
 				</div>
-				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 0px 0px;padding:0px 1% 0px 0px; " >
+				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 25px 0px;padding:0px 1% 0px 0px;" >
 					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
-					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div>
-					<div id="noResults" class='resultsMessage' >No More results to display.</div>
+					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif">Loading Results</div>
+					<div id="noResults" class='resultsMessage' >No more results to display.</div>
 				</div><!--end of results info -->
 			</div>
 		</div>
 	</div>
 </div>
+@if(isset($subcategories))
+	<div class="container" id="related_data_container">
+	 	<div class="row">
+	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+	    		<?php	    			
+		          	$institutesLength = sizeof($subcategories);
+		          	$index = 0;
+		          	$maxlength = 12;		          
+		          	$width = 3;
+		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+		        ?>
+		        <h4>Related to {{$instituteName}} activities</h4>       		        		        
+				@for(; $index<$maxlength; $index++ )
+				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+				      <li title="{{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->id}}/{{$locality_id}}">
+				          {{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
+				        </a>
+				      </li>
+				    </div> 
+				@endfor		            		                  		             
+	      </div>       
+	  </div>
+	</div>
+@endif
+@if(isset($localities))
+	<div class="container" id="related_data_container">
+	 	<div class="row">
+	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+	    		<?php	    			
+		          	$institutesLength = sizeof($localities);
+		          	$index = 0;
+		          	$maxlength = 12;		          
+		          	$width = 3;
+		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+		        ?>
+		        <h4>Related to {{$subcategory}} classes in {{$location}}</h4>       		        		        
+				@for(; $index<$maxlength; $index++ )
+				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+				      <li title="{{$subcategory}} classes in {{$localities[$index].', '.$location}}" >
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategory_id}}/{{$localities[$index]->id}}">
+				          {{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}
+				        </a>
+				      </li>
+				    </div> 
+				@endfor		            		                  		             
+	      </div>       
+	  </div>
+	</div>
+@endif
+@if(isset($localitySubcategories))
+	<div class="container" id="related_data_container">
+	 	<div class="row">
+	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+	    		<?php	    			
+		          	$institutesLength = sizeof($localitySubcategories);
+		          	$index = 0;
+		          	$maxlength = 12;		          
+		          	$width = 3;
+		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+		        ?>
+		        <h4>Related to {{$categories[$category_id-1]->category}} classes in  {{$locality.', '.$location}}</h4>       		        		        
+				@for(; $index<$maxlength; $index++ )
+				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+				      <li title="{{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
+				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$localitySubcategories[$index]->id}}">
+				          {{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
+				        </a>
+				      </li>
+				    </div> 
+				@endfor		            		                  		             
+	      </div>       
+	  </div>
+	</div>
+@endif
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
@@ -281,7 +364,7 @@
 						(
 							$("<span></span>")
 							.attr("class","inst_name")
-							.text(subcategory)
+							.text(subcategory+", "+locality)
 						)																	
 					)						
 				)
@@ -341,7 +424,7 @@
 										$("<div></div>")
 										.attr("id","inst_type")
 										.attr("title",locality+", "+landmark+", "+address)	
-										.attr("class","col-md-9 col-xs-12 col-sm-9")								
+										.attr("class","col-md-9 col-xs-12 col-sm-9 text_over_flow_hide")								
 										.append
 										(
 											$("<span></span>")

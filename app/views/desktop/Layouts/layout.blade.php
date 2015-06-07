@@ -25,7 +25,7 @@
 			@include('Modals.login')
 		</div>
 		<!--sign-UP pop up modal-->
-		<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y:auto">
 			@include('Modals.signup')
 		</div>
 		<!-- Error and success messages -->

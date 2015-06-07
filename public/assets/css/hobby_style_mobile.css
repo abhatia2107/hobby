@@ -100,6 +100,8 @@ span.stars span {  background-position: 0 0; }
 
 .featured_listing_container a {color: #707070;}
 
+.text_over_flow_hide {display:inline-block; white-space: nowrap; overflow:hidden !important;text-overflow: ellipsis;max-width:100%;}
+
 .footer-wrapper {  width: 100%;z-index: 10000 }
 
 .rememberMe {  text-align: left; }

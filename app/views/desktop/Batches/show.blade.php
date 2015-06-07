@@ -206,7 +206,7 @@
   {
     border-top: 1px solid lightgrey; 
     padding: 20px 5%;
-    width: 100%;    
+    width: 100%;
   }
   #related_data_container h4 {font-size: 18px;color: #202e54;font-weight: bold;margin:0px 0px 5px 0px;}
 
@@ -266,7 +266,7 @@
 </div>
 <div class="container" id='blog-container'>
   <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1">
+    <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1" style="margin-bottom:25px">
       <div id="sample-batch-details" class="sample-box col-md-12 col-sm-12 col-xs-12" >
         <div id='sample-batch-name'>{{$batchName}} Details</div>
         <div id='batch-session-count' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
@@ -319,9 +319,8 @@
           @endif
         </form>
       </div>
-    </div>
-   
-    <div class='col-md-4 col-sm-5 col-xs-12 column'>
+    </div>   
+    <div class='col-md-4 col-sm-5 col-xs-12 column' style="margin-bottom:25px">
       <div class="sample-box-small" id='batchOrderSample'>
         <div id='sample-batch-name'>Book This Class</div>
         <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
@@ -421,8 +420,8 @@
           </li>
         </ul>              
       </div>
-    </div>
-  </div> 
+    </div>    
+  </div>  
 </div>
 <div class="container" id="related_data_container">
   <div class="row">
@@ -431,24 +430,16 @@
         <?php
           $institutesLength = sizeof($batchesOfInstitute);
           $index = 0;
-          $maxlength = 12;
-          $colNum = 3;
-          $width = 4;
-          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
-          $listLength = $maxlength / $colNum;
+          $maxlength = 12;        
+          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                 
         ?>
-        @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">
-            @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
-                <a href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
-                  {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
-                </a>
-              </li>
-            @endfor
-            <?php
-              $listLength += $listLength;
-            ?>  
+         @for(;$index<$maxlength; $index++ )
+          <div class="col-md-3 col-sm-3 col-xs-6">           
+            <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
+              <a class="text_over_flow_hide" href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
+                {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
+              </a>
+            </li>
           </div>          
         @endfor           
       </div>
@@ -457,25 +448,17 @@
         <?php
           $institutesLength = sizeof($institutesOfSubcategoryInLocality);
           $index = 0;
-          $maxlength = 12;
-          $colNum = 3;
-          $width = 4;
-          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
-          $listLength = $maxlength / $colNum;
+          $maxlength = 12;          
+          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                  
         ?>
-        @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12">
-            @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
-                <a href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
-                  {{$institutesOfSubcategoryInLocality[$index]->institute}}
-                </a>
-              </li>
-            @endfor
-            <?php
-              $listLength += $listLength;
-            ?>  
-          </div>          
+        @for(;$index<$maxlength; $index++ )
+          <div class="col-md-3 col-sm-3 col-xs-6">            
+            <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
+              <a class="text_over_flow_hide" href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
+                {{$institutesOfSubcategoryInLocality[$index]->institute}}
+              </a>
+            </li>
+          </div>        
         @endfor   
       </div>
       <div class="col-md-12 col-sm-12 col-xs-12 related_item">
@@ -483,24 +466,17 @@
         <?php
           $institutesLength = sizeof($subcategoriesInLocality);
           $index = 0;
-          $maxlength = 12;
-          $colNum = 3;
-          $width = 4;
-          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
-          $listLength = $maxlength / $colNum;
+          $maxlength = 12;          
+          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                  
         ?>
-        @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12">
-            @for(; $index<$listLength && $index<$maxlength; $index++ )
+        @for(; $index<$maxlength; $index++ )
+          <div class="col-md-3 col-sm-3 col-xs-6">            
               <li title="{{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}">
-                <a href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
+                <a class="text_over_flow_hide" href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
                   {{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}
+                </a> 
               </li>
-            @endfor
-            <?php
-              $listLength += $listLength;
-            ?>  
-          </div>          
+          </div>
         @endfor   
       </div>
   </div>

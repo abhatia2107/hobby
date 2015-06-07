@@ -89,11 +89,7 @@
             $(document).ready(function(){     
                 $('.signUp').bootstrapValidator({
                     message: 'This value is not valid',
-                    feedbackIcons: {
-                        valid: 'glyphicon glyphicon-ok',
-                        invalid: 'glyphicon glyphicon-remove',
-                        validating: 'glyphicon glyphicon-refresh'
-                    },
+                   
                         
                 fields: {
                     user_first_name: {

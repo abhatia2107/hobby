@@ -25,27 +25,18 @@
 	<?php
 		$institutesLength = sizeof($institutes);
 		$index = 0;
-		$maxlength = 60;
-		$colNum = 3;
-		$width = 4;
-		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }
-		//if ($maxlength<=30) { $colNum = 2;$width = 6; }
-		$listLength = $maxlength / $colNum;
-	?>
-	@for($col = 0;$col<=$colNum;$col++ )
-		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
-		@for(; $index<$listLength && $index<$maxlength; $index++ )
+		$maxlength = 60;				
+		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
+	?>	
+	@for(;$index<$maxlength; $index++ )
+		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
 			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad">
-				<a href="/filter/institute/{{$institutes[$index]->id}}">
+				<a class="text_over_flow_hide" href="/filter/institute/{{$institutes[$index]->id}}">
 					{{$institutes[$index]->institute}},{{$institutes[$index]->locality}}
 				</a>
 			</li>
-		@endfor
-		<?php
-			$listLength += $listLength;
-		?>
-		</div>
-	@endfor
+		</div>	
+	@endfor				
 </div>
 <div class="division_divider"></div>
 <div class="container featured_listing_container">
@@ -53,26 +44,17 @@
 	<?php
 		$institutesLength = sizeof($subcategories);
 		$index = 0;
-		$maxlength = 60;
-		$colNum = 3;
-		$width = 4;
-		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }
-		//if ($maxlength<=30) { $colNum = 2;$width = 6; }
-		$listLength = $maxlength / $colNum;
+		$maxlength = 60;			
+		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
 	?>
-	@for($col = 0;$col<=$colNum;$col++ )
-		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
-		@for(; $index<$listLength && $index<$maxlength; $index++ )
+	@for(; $index<$maxlength; $index++ )
+		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item">		
 			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
-				<a href="/filter/subcategory/{{$subcategories[$index]->id}}">
+				<a class="text_over_flow_hide" href="/filter/subcategory/{{$subcategories[$index]->id}}">
 					{{$subcategories[$index]->subcategory}}
 				</a>
-			</li>				
-		@endfor
-		<?php
-			$listLength += $listLength;
-		?>
-		</div>
+			</li>
+		</div>					
 	@endfor
 </div>
 <div class="division_divider"></div>
@@ -81,26 +63,17 @@
 	<?php
 		$localitiesLength = sizeof($localities);
 		$index = 0;
-		$maxlength = 60;
-		$colNum = 3;
-		$width = 4;
-		if ($localitiesLength<$maxlength) { $maxlength = $localitiesLength; }
-		//if ($maxlength<=30) { $colNum = 2;$width = 6; }
-		$listLength = $maxlength / $colNum;
+		$maxlength = 60;	
+		if ($localitiesLength<$maxlength) { $maxlength = $localitiesLength; }		
 	?>
-	@for($col = 0;$col<=$colNum;$col++ )
-		<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 featured_listing_item">
-		@for(; $index<$listLength && $index<$maxlength; $index++ )
+	@for(;$index<$maxlength; $index++ )
+		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item">		
 			<li title="Fitness Activities in {{$localities[$index]->locality}}">
 				<a href="/filter/locality/{{$localities[$index]->id}}">
 					{{$localities[$index]->locality}}
 				</a>
 			</li>
-		@endfor
-		<?php
-			$listLength += $listLength;
-		?>
-		</div>
+		</div>		
 	@endfor
 </div>
 @stop

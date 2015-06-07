@@ -179,26 +179,26 @@
         <div class="row batchOrderField">
           <div class='col-md-5 col-sm-4 col-xs-5'>Name*</div>
           <div class='col-md-7 col-sm-8 col-xs-7'>
-                <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" required />
-          </div>          
-        </div>
-        <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-4 col-xs-5'>E-Mail ID*</div>
-          <div class='col-md-7 col-sm-8 col-xs-7'>
-                <input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email" name="email" required />                     
+                <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" value="@if(isset($user)){{$user->user_first_name.$user->user_last_name}}@endif" required/>
           </div>          
         </div>   
         <div class="row batchOrderField">
-          <div class='col-md-5 col-sm-4 col-xs-5'>Mobile No.*</div>
+          <div class='col-md-5 col-sm-4 col-xs-5'>E-Mail ID*</div>
           <div class='col-md-7 col-sm-8 col-xs-7'>
-                <input type="tel" placeholder="Enter Mobile No." class="form-control" id="contact_no" name="contact_no" required />                     
+                <input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email" name="email" value="@if(isset($user)){{$user->email}}@endif" required />                     
+          </div>          
+        </div>   
+        <div class="row batchOrderField">
+          <div class='col-md-5 col-sm-4 col-xs-5'>Mobile Number*</div>
+          <div class='col-md-7 col-sm-8 col-xs-7'>
+                <input type="tel" placeholder="Enter Mobile Number" class="form-control" id="contact_no" name="contact_no" value="@if(isset($user)){{$user->user_contact_no}}@endif" required />                     
           </div>          
         </div> 
          <hr/>   
         <div class="row batchOrderButtons">    
-          <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" >Pay Now</button>
+          <button type="submit" style="padding:5px 70px;" class="booknowButton" id="booknowButton" >Pay Now</button>
           <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
-        </div>              
+        </div>
       </div>
     </form>
   </div>        

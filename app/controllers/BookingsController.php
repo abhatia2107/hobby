@@ -55,6 +55,10 @@ class BookingsController extends \BaseController {
 		}
 		else if($information['order_status']==="Aborted")
 		{
+			$data=array(
+						'batch_id'=>$booking->batch_id
+			);
+			return View::make('Bookings.aborted')->with($data);
 			echo "Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
 		
 		}
@@ -95,7 +99,7 @@ class BookingsController extends \BaseController {
 		$posted['billing_address']=$batch->venue_address.', '.$batch->locality;
 		$posted['billing_city']='Hyderabad';
 		$posted['billing_state']='Telangana';
-		$posted['billing_zip']='500084';
+		$posted['billing_zip']=$batch->venue_pincode;
 		$posted['billing_country']='India';
 		foreach ($posted as $key => $value){
 			$merchant_data.=$key.'='.$value.'&';
@@ -103,8 +107,9 @@ class BookingsController extends \BaseController {
 		$encrypted_data=encrypt($merchant_data,$working_key); // Method for encrypting the data.
 		// dd($encrypted_data);
 		// $action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
-		$action='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
-		return View::make('Bookings.payment',compact('action'));
+		// $action='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
+		// return View::make('Bookings.iframe',compact('action'));
+		return View::make('Bookings.non-seamless',compact('encrypted_data', 'access_code'));
 	}
 	/**
 	 * Store a newly created booking in storage.

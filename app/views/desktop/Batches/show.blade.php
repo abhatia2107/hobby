@@ -366,6 +366,12 @@
           </div>
           <div class="" id="bookOrderFormStep2">
             <div class="row batchOrderField">
+              <div class='col-md-5 col-sm-4 col-xs-5'>Name*</div>
+              <div class='col-md-7 col-sm-8 col-xs-7'>
+                    <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" required />
+              </div>          
+            </div>   
+            <div class="row batchOrderField">
               <div class='col-md-5 col-sm-4 col-xs-5'>E-Mail ID*</div>
               <div class='col-md-7 col-sm-8 col-xs-7'>
                     <input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email" name="email" required />                     
@@ -559,6 +565,23 @@
       $('#batchOrderForm').bootstrapValidator({                    
             fields: {
 
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Name is required'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Email is required'
+                        },
+                        emailAddress: {
+                            message: 'The input is not a valid email address'
+                        }
+                    }
+                },
                 contact_no: {                       
                         validators: {
                             notEmpty: {
@@ -570,18 +593,7 @@
                                 message: 'The mobile number consists of 10 digits. Skip adding +91 or 0'
                             }
                         }
-                    },
-
-                email: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Email is required'
-                        },
-                        emailAddress: {
-                            message: 'The input is not a valid email address'
-                        }
                     }
-                }
             }
       });   
 

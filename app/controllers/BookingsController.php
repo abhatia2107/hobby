@@ -1,5 +1,7 @@
 <?php
+include app_path().'/IFRAME_KIT/Crypto.php';
 class BookingsController extends \BaseController {
+
 
 	/**
 	 * Display a listing of bookings
@@ -24,15 +26,61 @@ class BookingsController extends \BaseController {
 		return View::make('Bookings.create',compact('batchDetails'));
 	}
 
+	public function redirect()
+	{
+		$encResponse=Input::get("encResp");			//This is the response sent by the CCAvenue Server
+		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
+		$rcvdString=decrypt($encResponse,$working_key);		//Crypto Decryption used as per the specified working key.
+		$decryptValues=explode('&', $rcvdString);
+		$dataSize=sizeof($decryptValues);
+		for($i = 0; $i < $dataSize; $i++) 
+		{
+			$info=explode('=',$decryptValues[$i]);
+			$information[$info[0]]=$info[1];
+		}
+		$booking=Booking::where('order_id',$information['order_id'])->first();
+		$booking->order_status=$information['order_status'];
+		$booking->save();
+		if($information['order_status']==="Success")
+		{
+			$this->sms_email($booking->id);
+			$batch=$this->batch->getBatch($booking->batch_id);
+			$data=array('subcategory'=>$batch->subcategory,
+						'institute'=>$batch->institute,
+						'order_id'=>$booking->order_id,
+						'date'=>$booking->booking_date,
+						'no_of_sessions'=>$booking->no_of_sessions
+				);
+			return View::make('Bookings.success')->with($data);
+		}
+		else if($information['order_status']==="Aborted")
+		{
+			echo "Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
+		
+		}
+		else if($information['order_status']==="Failure")
+		{
+			$data=array('status_message'=>$information['status_message'],
+						'batch_id'=>$booking->batch_id
+						);
+			return View::make('Bookings.failure')->with($data);
+		}
+		else
+		{
+			echo "Security Error. Illegal access detected";
+		
+		}
+	}
+
 	public function payment($id)
 	{
-		include app_path().'/IFRAME_KIT/Crypto.php';
 		error_reporting(0);
 		$booking=Booking::find($id);
 		$merchant_id='61787';
 		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
 		$access_code='AVCA05CE22BS53ACSB';
 		$merchant_data='';
+	    $batch=$this->batch->getBatch($booking->batch_id);
 	    $posted['merchant_id']=$merchant_id;
 		$posted['order_id']=$booking->order_id;
 		$posted['currency']='INR';
@@ -41,15 +89,14 @@ class BookingsController extends \BaseController {
 		$posted['cancel_url']=url('/bookings/cancel');
 		$posted['integration_type']='iframe_normal';
 		$posted['language']='en';
-		$posted['billing_name']='Abhishek Bhatia';
-		$posted['billing_address']='Room no 1101, near Railway station Ambad';
+		$posted['billing_name']=$booking->name;
+		$posted['billing_email']=$booking->email;
+		$posted['billing_tel']=$booking->contact_no;
+		$posted['billing_address']=$batch->venue_address.', '.$batch->locality;
 		$posted['billing_city']='Hyderabad';
 		$posted['billing_state']='Telangana';
 		$posted['billing_zip']='500084';
 		$posted['billing_country']='India';
-		$posted['billing_tel']=$booking->contact_no;
-		$posted['billing_email']=$booking->email;
-		// dd($posted);
 		foreach ($posted as $key => $value){
 			$merchant_data.=$key.'='.$value.'&';
 		}
@@ -84,53 +131,6 @@ class BookingsController extends \BaseController {
 			return Redirect::to('/bookings/payment/'.$booking->id);
 		else
 			return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
-	}
-
-	public function redirect()
-	{
-		include app_path().'/IFRAME_KIT/Crypto.php';
-		error_reporting(0);
-		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
-		$encResponse=Input::get("encResp");			//This is the response sent by the CCAvenue Server
-		$rcvdString=decrypt($encResponse,$workingKey);		//Crypto Decryption used as per the specified working key.
-		$decryptValues=explode('&', $rcvdString);
-		$dataSize=sizeof($decryptValues);
-		
-		for($i = 0; $i < $dataSize; $i++) 
-		{
-			$information=explode('=',$decryptValues[$i]);
-			if($i==3)	$order_status=$information[1];
-		}
-		var_dump($information);
-		dd($order_status);	
-
-		if($order_status==="Success")
-		{
-			$this->sms_email($booking_id);
-			
-			echo "Thank you for shopping with us. Your credit card has been charged and your transaction is successful. We will be shipping your order to you soon.";
-		}
-		else if($order_status==="Aborted")
-		{
-			echo "Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
-		
-		}
-		else if($order_status==="Failure")
-		{
-			echo "Thank you for shopping with us.However,the transaction has been declined.";
-		}
-		else
-		{
-			echo "Security Error. Illegal access detected";
-		
-		}
-
-		for($i = 0; $i < $dataSize; $i++) 
-		{
-			$information=explode('=',$decryptValues[$i]);
-		    	// echo '<tr><td>'.$information[0].'</td><td>'.$information[1].'</td></tr>';
-		}
-
 	}
 
 	public function cancel()

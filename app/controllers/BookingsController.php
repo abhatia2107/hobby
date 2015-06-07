@@ -59,8 +59,6 @@ class BookingsController extends \BaseController {
 						'batch_id'=>$booking->batch_id
 			);
 			return View::make('Bookings.aborted')->with($data);
-			echo "Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
-		
 		}
 		else if($information['order_status']==="Failure")
 		{
@@ -120,8 +118,6 @@ class BookingsController extends \BaseController {
 	{
 		// dd(Input::all());
 		$data = Input::all();
-		$data['email']='abhatia2107@gmail.com';
-		$data['contact_no']='9729725987';
 		$validator = Validator::make($data, Booking::$rules);
 		if ($validator->fails())
 		{
@@ -140,7 +136,12 @@ class BookingsController extends \BaseController {
 
 	public function cancel()
 	{
-		dd('Cancelled');
+		dd($Input::all());
+		$data=array(
+			'batch_id'=>$booking->batch_id
+		);
+		return View::make('Bookings.aborted')->with($data);
+
 	}
 	/**
 	 * Display the specified booking.
@@ -226,7 +227,7 @@ class BookingsController extends \BaseController {
 					'user_email' => $booking->email,
 					'user_contact_no' => $booking->contact_no,
 					'admin_contact_no' => '9100946081',
-					'admin_email' => 'support@hobbyix.com'
+					'admin_email' => 'booking@hobbyix.com'
 					);
 		$email= $booking->email;
 		$user_msg='Hi user, Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
@@ -258,23 +259,23 @@ class BookingsController extends \BaseController {
 		});
 		
 	}
-/*
-	public function test()
-	{
-		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. 
-		Thanks,
-		hobbyix.com';
-		$venue_contact_no = '9729725987';
-		
-		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'.';
-		
-		$this->sms(0,$venue_contact_no, $institute_msg);
-		$admin_contact_no = '9100946081';
 
-		$this->sms(1,$admin_contact_no, $admin_msg);
-		dd();
-	}
-*/
+	/*public function test()
+	{
+		$data = array(
+					'admin_contact_no' => '9100946081',
+					'admin_email' => 'booking@hobbyix.com'
+					);
+		$email=$data['admin_email'];
+		var_dump($email);
+		$subject='Booking Done';
+		$response=Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
+		{
+			$message->to($email)->subject($subject);
+		});
+		dd($response);
+	}*/
+
 	public function sms($first,$mobile, $msg)
 	{
 		static $smsObject;
@@ -291,6 +292,7 @@ class BookingsController extends \BaseController {
 	            'text' => $msg,
 	            'type' => 'sms',
 	        );
+	    $smsObject->sendMessage($params);
 	    // var_dump($params);
 	}
 }

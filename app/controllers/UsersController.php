@@ -532,7 +532,7 @@ class UsersController extends \BaseController {
 				    $response = (new FacebookRequest(
 				      $session, 'POST', '/me/feed', array(
 				        'link' => 'www.'.Lang::get('ViewsLang/home.home_name').'.com',
-				        'message' => 'User provided message'
+				        'message' => 'hobbyix.com'
 				      )
 				    ))->execute()->getGraphObject();
 

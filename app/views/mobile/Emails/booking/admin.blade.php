@@ -12,24 +12,24 @@
 			</div>
 			<div style="padding:0px 40px">
 				<h1 style="font-size:150%; color:#000;">
-					Dear Admin
+					Dear Admin,
 				</h1>				
 				<div style="background:#FAFDFE;border:2px solid #1E2C4F;display:inline-block;min-width:100%;overflow:hidden;border-radius:10px;">
 					<div style="background:#1E2C4F;padding:10px 5px; color:white">
-					    <strong>Booking ID: $order_id}}</strong>
+					    <strong>Booking ID: {{$order_id}}</strong>
 					</div>
 					<div style="max-width:100%;padding:2% 2% 2% 2%;">
 						<div style="max-width:47%;display:inline-block;float:left;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
-								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Institute Name : $institute}}</div>
-								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;"> Subcategory: $subcategory}}</div>
-								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Address:  $locality.', '.$location}}</div>
-								<div style="width:100%;padding:5px 6px">Institute Contact Number: $venue_contact_no}}</div>
+								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Institute Name : {{$institute}}</div>
+								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;"> Subcategory: {{$subcategory}}</div>
+								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Address:  {{$locality.', '.$location}}</div>
+								<div style="width:100%;padding:5px 6px">Institute Contact Number: {{$venue_contact_no}}</div>
 						</div>							
 						<div style="max-width:47.5%;display:inline-block;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Class Booked for: $date}}</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Number of Sessions: $no_of_sessions}}</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Amount Payed: $amount}}</div>
-							<div style="width:100%;float:left;padding:5px 6px;">User Contact Number: $venue_contact_no}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Class Booked for: {{$date}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Number of Sessions: {{$no_of_sessions}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Amount Payed: {{$amount}}</div>
+							<div style="width:100%;float:left;padding:5px 6px;">User Contact Number: {{$venue_contact_no}}</div>
 						</div>								
 					</div>
 				</div>	

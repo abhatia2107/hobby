@@ -25,7 +25,7 @@ class BookingsController extends \BaseController {
 		$batchDetails=Batch::find($id);
 		return View::make('Bookings.create',compact('batchDetails'));
 	}
-	
+
 	/**
 	 * Store a newly created booking in storage.
 	 *
@@ -123,7 +123,7 @@ class BookingsController extends \BaseController {
 		$rcvdString=decrypt($encResponse,$working_key);		//Crypto Decryption used as per the specified working key.
 		$decryptValues=explode('&', $rcvdString);
 		$dataSize=sizeof($decryptValues);
-		for($i = 0; $i < $dataSize; $i++) 
+		for($i = 0; $i < $dataSize; $i) 
 		{
 			$info=explode('=',$decryptValues[$i]);
 			$information[$info[0]]=$info[1];
@@ -171,7 +171,7 @@ class BookingsController extends \BaseController {
 		$rcvdString=decrypt($encResponse,$working_key);		//Crypto Decryption used as per the specified working key.
 		$decryptValues=explode('&', $rcvdString);
 		$dataSize=sizeof($decryptValues);
-		for($i = 0; $i < $dataSize; $i++) 
+		for($i = 0; $i < $dataSize; $i) 
 		{
 			$info=explode('=',$decryptValues[$i]);
 			$information[$info[0]]=$info[1];
@@ -273,9 +273,7 @@ class BookingsController extends \BaseController {
 					);
 		$email= $booking->email;
 		$user_msg='Hi user, Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
-		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. 
-		Thanks,
-		hobbyix.com';
+		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com';
 		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'.';
 		$subject='Booking Successful';
 		$this->sms(true, $data['user_contact_no'], $user_msg);
@@ -301,8 +299,8 @@ class BookingsController extends \BaseController {
 		});
 		
 	}
-
-	/*public function test()
+/*
+	public function test()
 	{
 		$data = array(
 					'admin_contact_no' => '9100946081',
@@ -316,8 +314,22 @@ class BookingsController extends \BaseController {
 			$message->to($email)->subject($subject);
 		});
 		dd($response);
-	}*/
-
+	}
+*/
+/*
+	public function test()
+	{
+		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. 
+		Thanks,
+		hobbyix.com';
+		$venue_contact_no = '9729725987';
+		$this->sms(1,$venue_contact_no, $institute_msg);
+		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'.';
+		$admin_contact_no = '9100946081';
+		$this->sms(0,$admin_contact_no, $admin_msg);
+		dd('Success');
+	}
+*/
 	public function sms($first,$mobile, $msg)
 	{
 		static $smsObject;
@@ -334,7 +346,7 @@ class BookingsController extends \BaseController {
 	            'text' => $msg,
 	            'type' => 'sms',
 	        );
-	    $smsObject->sendMessage($params);
+	    $smsObject->send_message($params);
 	    // var_dump($params);
 	}
 }

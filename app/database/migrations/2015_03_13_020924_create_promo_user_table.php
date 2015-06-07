@@ -15,10 +15,8 @@ class CreatePromoUserTable extends Migration {
 		Schema::create('promo_user', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('promo_id')->unsigned()->index();
-			$table->foreign('promo_id')->references('id')->on('promos')->onDelete('cascade');
-			$table->integer('user_id')->unsigned()->index();
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->integer('promo_id')->unsigned()->foreign('promo_id')->references('id')->on('promos')->onDelete('cascade');
+			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}

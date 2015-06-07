@@ -18,11 +18,9 @@ class CreateMembershipsTable extends Migration {
 			$table->string('classes_left');
 			$table->date('start_date');
 			$table->date('end_date');
-			$table->integer('user_id')->unsigned()->index();
-			$table->foreign('user_id')->references('id')->on('users');
+			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users');
 			$table->integer('payment');
-			$table->integer('promo_id')->unsigned()->nullable();
-			$table->foreign('promo_id')->references('id')->on('promos');
+			$table->integer('promo_id')->unsigned()->nullable()->foreign('promo_id')->references('id')->on('promos');
 			$table->timestamps();
 		});
 	}

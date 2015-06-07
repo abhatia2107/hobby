@@ -330,6 +330,13 @@ class BookingsController extends \BaseController {
 		dd('Success');
 	}
 */
+/*
+	public function test()
+	{
+		$p=Hash::make('qwerty123');
+		dd($p);
+	}*/
+
 	public function sms($first,$mobile, $msg)
 	{
 		static $smsObject;

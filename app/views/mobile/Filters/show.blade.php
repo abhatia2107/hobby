@@ -133,19 +133,23 @@
 
 	.filter_options_popup .footer a {color: white;text-decoration: none;font-size: 16px;}
 
-	.filter_options_button { bottom:0;position: fixed;z-index: 1000;width: 100%;background:rgba(0,0,0,0.7);text-align: center; height: 34px;left:0;right:0;}
+	.filter_options_button { bottom:0;position: fixed;z-index: 100000;width: 100%;background:rgba(0,0,0,0.7);text-align: center; height: 34px;left:0;right:0;}
 
 	.filter_options_button button {border-radius:0px;padding: 5px 15px;font-size: 17px;background:#0099FF;border:0px; }
 
 	.filter_page_container {width: 100%;padding: 0px;}
 
-	.filter_page_container .alert {
-	  margin: 0px;width: 100%;border-radius: 0px;padding: 10px;
-	}
+	.filter_page_container .alert {  margin: 0px;width: 100%;border-radius: 0px;padding: 10px;	}
 
-	.filter_page_container .alert a{
-	  color: green;font-weight: bold;
-	}
+	.filter_page_container .alert a{  color: green;font-weight: bold;	}
+
+	#related_data_container  {  border-top: 1px solid lightgrey;padding: 20px 5%;width: 100%;}
+
+  	#related_data_container h4 {font-size: 18px;color: #202e54;font-weight: bold;margin:0px 0px 5px 0px;}
+
+  	.related_item {margin-bottom: 15px;}
+
+  	.related_item a {color:#5C5C5C;}
 
 </style>
 <div class="container filter_page_container">
@@ -202,7 +206,7 @@
 						<a class="col-xs-6 apply_button" href="javascript:filterApply()">Apply</a>
 					</div>			
 				</div>
-				<div class="col-xs-12" id="results-container" style="padding:0px 0px;">
+				<div class="col-xs-12" id="results-container" style="padding:0px 0px 10px 0px;">
 					<ul class="list-unstyled" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div>
@@ -213,21 +217,91 @@
 		<div class="filter_options_button"><button onclick="displayFilterOptions();" class="btn btn-primary">Filter</button></div>
 	</div>	
 </div>
-@foreach ($batchesForCategoryLocation as $index => $batchesData)	
-		<?php $Schedules[$index] = $batchesData->schedules ?>
-@endforeach
+@if(isset($subcategories))
+	<div class="container" id="related_data_container">
+	 	<div class="row">
+	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+	    		<?php	    			
+		          	$institutesLength = sizeof($subcategories);
+		          	$index = 0;
+		          	$maxlength = 12;		          
+		          	$width = 3;
+		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+		        ?>
+		        <h4>Related to {{$instituteName}} activities</h4>       		        		        
+				@for(; $index<$maxlength; $index++ )
+				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+				      <li title="{{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->id}}/{{$locality_id}}">
+				          {{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
+				        </a>
+				      </li>
+				    </div> 
+				@endfor		            		                  		             
+	      </div>       
+	  </div>
+	</div>
+@endif
+@if(isset($localities))
+	<div class="container" id="related_data_container">
+	 	<div class="row">
+	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+	    		<?php	    			
+		          	$institutesLength = sizeof($localities);
+		          	$index = 0;
+		          	$maxlength = 12;		          
+		          	$width = 3;
+		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+		        ?>
+		        <h4>Related to {{$subcategory}} classes in {{$location}}</h4>       		        		        
+				@for(; $index<$maxlength; $index++ )
+				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+				      <li title="{{$subcategory}} classes in {{$localities[$index].', '.$location}}" >
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategory_id}}/{{$localities[$index]->id}}">
+				          {{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}
+				        </a>
+				      </li>
+				    </div> 
+				@endfor		            		                  		             
+	      </div>       
+	  </div>
+	</div>
+@endif
+@if(isset($localitySubcategories))
+	<div class="container" id="related_data_container">
+	 	<div class="row">
+	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+	    		<?php	    			
+		          	$institutesLength = sizeof($localitySubcategories);
+		          	$index = 0;
+		          	$maxlength = 12;		          
+		          	$width = 3;
+		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+		        ?>
+		        <h4>Related to {{$categories[$category_id-1]->category}} classes in  {{$locality.', '.$location}}</h4>       		        		        
+				@for(; $index<$maxlength; $index++ )
+				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+				      <li title="{{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
+				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$localitySubcategories[$index]->id}}">
+				          {{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
+				        </a>
+				      </li>
+				    </div> 
+				@endfor		            		                  		             
+	      </div>       
+	  </div>
+	</div>
+@endif
+@stop
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
 		function displayFilterOptions () {
 			$('.filter_options_popup').show();	
 			$('#results-container').hide();				
-			$('html').css('overflow-y','hidden');
-			//$('.filter_options_button').hide();	
-			//$('body').css('overflow-y','hidden');
+			$('html').css('overflow-y','hidden');			
 		}
-		var result = {{json_encode( $batchesForCategoryLocation ) }};  
-		var Schedules = {{json_encode( $Schedules ) }};
+		var result = {{json_encode( $batchesForCategoryLocation ) }};  		
 		var trials = {{json_encode( $trial )}};
 		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
 		var daysResult = new Array();			
@@ -291,7 +365,7 @@
 		}
 		displayResults(result,0);
 		LoadResult(0,20);
-		function LoadFilterResults(sub_select,loc_select,trial_select,start)
+		function LoadFilterResults(sub_select,loc_select,start)
 		{
 			resultRange = result.length;
 			if(sub_select.length==0)
@@ -301,12 +375,11 @@
 			if(trial_select.length==0)
 				trial_select =0;
 			//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
-			$.get("/filter/"+sub_select+"/"+loc_select+"/"+trial_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
+			$.get("/filter/"+sub_select+"/"+loc_select+"/"+locationId+"/"+chunk,function(response)
 			{
 				chunk++;
-				loadFilters = true;	
-				//alert(response);
-				if(response == "Empty")
+				loadFilters = true;									
+				if(response == "")
 				{
 					$('#loadMore').hide();
 					$('#noResults').show();
@@ -320,10 +393,11 @@
 					displayResults(result,start);
 					var count  = LoadResult(start,start+20);
 					if(count<10)
-					{
-						LoadFilterResults(sub_select,loc_select,trial_select,0);
+					{						
+						LoadFilterResults(sub_select,loc_select,0);
 					}
 				}
+				response = [];
 			});
 		}
 		function displayResults(results,start)
@@ -379,11 +453,12 @@
 								.append
 								(
 									$("<div></div>")
-									.attr("class"," col-xs-12  ")
+									.attr("class"," col-xs-12")
 									.append
 									(
 										$("<span></span>")
 										.attr("id","batch_name")
+										.attr("class","text_over_flow_hide")
 										.append
 										(
 											$("<a></a>")
@@ -407,8 +482,8 @@
 						.append
 						(
 							$("<div></div>")
-							.attr("class","inst_name col-xs-12")
-							.text(batch)
+							.attr("class","inst_name col-xs-12 text_over_flow_hide")
+							.text(subcategory+', '+locality)
 						)						
 						.append
 						(
@@ -531,9 +606,8 @@
 						if(!filterStatus)
 						{
 							$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
-							{
-								//alert(response);
-								if(response == "Empty")
+							{								
+								if(response == "")
 								{
 									$('#loadMore').css('display','none');
 									$('#noResults').css('display','block');
@@ -547,12 +621,13 @@
 									displayResults(result,resultRange);	
 									LoadResult(range,range+10);
 								}
-								chunk++;	
+								chunk++;
+								response = [];	
 							});
 						}
 						if(filterStatus)
 						{							
-							LoadFilterResults(sub_select,loc_select,trial_select,resultRange);
+							LoadFilterResults(sub_select,loc_select,resultRange);
 						}
 					}
 					else
@@ -577,10 +652,9 @@
 			{
 				$(linksContainer).empty();
 				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
-				trial_select =  $('.trialCheckbox:checked').map(function(){return this.value;}).get(); 					
-				chunk = 0;
-				LoadFilterResults(sub_select,loc_select,trial_select,0);					
+				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();				
+				chunk = 0;				
+				LoadFilterResults(sub_select,loc_select,0);					
 			}
 			else
 			{

@@ -277,21 +277,7 @@
         </div>
         <div id='batch-gender' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
           Gender:{{' '.$gender_group[$genderGroup]}}
-        </div>
-        <div id='batch-age-group' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-          Age Group: {{' '.$age_group[$ageGroup]}}
-        </div>
-        <div id='batch-difficulty' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-          Difficulty Level: {{' '.$difficulty_level[$difficultyLevel]}}
-        </div>
-        <div id='sample-batch-description' >
-          <div id='sample-batch-name'>Batch Description</div>
-          <p id='sample-details' class="details-container">{{$batchDescription}}</p>
-        </div>
-        <div id="sample-batch-accomplishment">
-          <div id='sample-batch-name'>Accomplishment</div>
-           <p id='sample-details' class="details-container"> {{$batchAccomplishment}}</p>
-        </div> -->
+        </div>-->
       </div>
       <div id="comments" class="sample-box">
         <div id='sample-batch-name'>Write a Review</div>

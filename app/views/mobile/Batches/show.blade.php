@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <style type="text/css">
 
-  #page { width: 100%;margin-top: 0px;padding: 1em 0 0em;
+  #page { width: 100%;margin-top: 0px;padding: 4em 0 2em;
           background-repeat:no-repeat;
         background-position:center top;
         -o-background-size: 130% 120%, auto;
@@ -11,13 +11,13 @@
         -webkit-background-size: 130% 120%, auto;
         background-size: 130% 150%, auto;}
 
-  .samplePageInfo {  background: rgba(0, 0, 0, 0.2); color: white; padding: 0px 0px 10px 0px;}
+  .samplePageInfo {  background: rgba(0, 0, 0, 0.4); color: white; padding: 0px 0px 10px 0px;}
 
-  .sample-institute-name  { font-size: 20px;font-weight: bold;  }  
+  .sample-institute-name  { font-size: 22px;font-weight: bold;  }  
 
-  .sample_batch_detail  { font-size: 13px;font-weight: normal;margin-bottom: 5px; }
+  .sample_batch_detail  { font-size: 15px;font-weight: normal;margin-bottom: 5px; }
 
-  .sample_batch_detail li {margin-top: 5px; font-size: 13px;}
+  .sample_batch_detail li {margin-top: 5px; font-size: 15px;}
 
   .sample_batch_detail .glyphicon { font-size: 15px;font-weight: normal; }
 
@@ -85,7 +85,7 @@
 
   #bookOrderFormStep1{padding-bottom: 10px;}
 
-  #bookOrderFormStep2 { display: none;padding: 20px 0 10px 0;  }
+  #bookOrderFormStep2 { display: none;padding: 5px 0 10px 0;  }
 
   hr {margin: 10px 0px 10px 0px; }
 
@@ -126,22 +126,88 @@
           <div>{{'  '.$subcategory}},{{' '.$category}}</div>
           <li><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$instituteAddress}}</li>
           <li><div class='glyphicon glyphicon-phone-alt'></div>{{'  '.$instituteContact}}</li>
-        </div>
-        <div class="col-xs-12">
-          <div class="submitReviewButton have_promo_code">
-             <!-- <button  class="btn btn-primary">Share</button> -->
-             <button id="SubmitReviewButton" class="btn btn-primary">Submit a Review</button>
-          </div>
-        </div>
+        </div>        
       </div>
     </div>
   </div>
 </div>
+<div class="" id='batchOrderSample' style="padding-top:0px;margin-top:0px;border-bottom:2px solid #3396d1">        
+  <div class='sample_box_title' style="padding:6px 0px;margin-top:0px;background:#3396d1;color:white">Book This Class</div>
+  <div class="sample_box_order_data" style="padding:10px 15px 0px 15px;">        
+    <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
+      <div class="" id="bookOrderFormStep1">
+        <input type="hidden" name="batch_id" value="{{$batchID}}">
+        <div class="row batchOrderField">
+          <div class='col-xs-6'>Price Per Session</div>
+          <div class='col-xs-6'>: Rs. {{$sessionPrice}}</div>
+        </div>
+        <div class="row batchOrderField">
+          <div class='col-xs-6 batchOrderFieldLabel'>No. of Sessions*</div>
+          <div class='col-xs-6'>  
+              <select class="form-control" id="numberOfSessions" name="no_of_sessions" >                 
+                  @for($seesion=1;$seesion<=6;$seesion++)
+                      <option value={{$seesion}}>{{$seesion}}</option>
+                  @endfor
+              </select>
+          </div>
+        </div>
+        <div class="row batchOrderField">
+          <div class='col-xs-6 batchOrderFieldLabel'>Booking Date*</div>
+          <div class='col-xs-6'>
+              <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
+          </div>          
+        </div>
+        <div class="row batchOrderField">
+          <div class='col-xs-9 batchOrderFieldLabel'>
+            <input type="text" style="width:100%" placeholder="Enter Promo Code" class="form-control" id="promoCode" name="Promo Code" />                     
+          </div>
+          <div class='col-xs-3' style="text-align:left;padding:5px 0px 0px 0px;font-size:15px;">
+             <a href="javascript:verifyPromoCode();">Apply</a>
+          </div>          
+        </div>            
+        <hr/>
+        <div class="row totalAmount">
+          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
+          <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
+        </div>
+        <div class="batchOrderButtons">    
+          <button style="padding:5px 50px;" class="booknowButton" id="proceedButton">Proceed</button>
+          <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
+        </div>
+      </div>
+      <div class="" id="bookOrderFormStep2">
+        <div class="row batchOrderField">
+          <div class='col-md-5 col-sm-4 col-xs-5'>Name*</div>
+          <div class='col-md-7 col-sm-8 col-xs-7'>
+                <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" required />
+          </div>          
+        </div>
+        <div class="row batchOrderField">
+          <div class='col-md-5 col-sm-4 col-xs-5'>E-Mail ID*</div>
+          <div class='col-md-7 col-sm-8 col-xs-7'>
+                <input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email" name="email" required />                     
+          </div>          
+        </div>   
+        <div class="row batchOrderField">
+          <div class='col-md-5 col-sm-4 col-xs-5'>Mobile No.*</div>
+          <div class='col-md-7 col-sm-8 col-xs-7'>
+                <input type="tel" placeholder="Enter Mobile No." class="form-control" id="contact_no" name="contact_no" required />                     
+          </div>          
+        </div> 
+         <hr/>   
+        <div class="row batchOrderButtons">    
+          <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" >Pay Now</button>
+          <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
+        </div>              
+      </div>
+    </form>
+  </div>        
+</div> 
 <div class="container blog-container" style="margin:0;padding:0">
   <div class="row clearfix">    
     <div class="col-xs-12">
       <div class="col-xs-12">
-        <div class="sample-box" id='batchOrderSample'>        
+        <div class="sample-box" id='batchOrderSample' style="display:none">        
           <div class='sample_box_title' style="padding-top:3px">Book This Class</div>
           <div class="sample_box_order_data">        
             <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
@@ -282,24 +348,16 @@
         <?php
           $institutesLength = sizeof($batchesOfInstitute);
           $index = 0;
-          $maxlength = 8;
-          $colNum = 3;
-          $width = 4;
-          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
-          $listLength = $maxlength / $colNum;
+          $maxlength = 12;        
+          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                 
         ?>
-        @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-xs-12 ">
-            @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
-                <a href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
-                  {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
-                </a>
-              </li>
-            @endfor
-            <?php
-              $listLength += $listLength;
-            ?>  
+         @for(;$index<$maxlength; $index++ )
+          <div class="col-xs-6">           
+            <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
+              <a class="text_over_flow_hide" href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
+                {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
+              </a>
+            </li>
           </div>          
         @endfor           
       </div>
@@ -308,25 +366,17 @@
         <?php
           $institutesLength = sizeof($institutesOfSubcategoryInLocality);
           $index = 0;
-          $maxlength = 8;
-          $colNum = 3;
-          $width = 4;
-          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
-          $listLength = $maxlength / $colNum;
+          $maxlength = 12;          
+          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                  
         ?>
-        @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-xs-12">
-            @for(; $index<$listLength && $index<$maxlength; $index++ )
-              <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
-                <a href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
-                  {{$institutesOfSubcategoryInLocality[$index]->institute}}
-                </a>
-              </li>
-            @endfor
-            <?php
-              $listLength += $listLength;
-            ?>  
-          </div>          
+        @for(;$index<$maxlength; $index++ )
+          <div class="col-xs-6">            
+            <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
+              <a class="text_over_flow_hide" href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
+                {{$institutesOfSubcategoryInLocality[$index]->institute}}
+              </a>
+            </li>
+          </div>        
         @endfor   
       </div>
       <div class="col-md-12 col-sm-12 col-xs-12 related_item">
@@ -334,24 +384,17 @@
         <?php
           $institutesLength = sizeof($subcategoriesInLocality);
           $index = 0;
-          $maxlength = 8;
-          $colNum = 3;
-          $width = 4;
-          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        
-          $listLength = $maxlength / $colNum;
+          $maxlength = 12;          
+          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                  
         ?>
-        @for($col = 0;$col<=$colNum;$col++ )
-          <div class="col-xs-12">
-            @for(; $index<$listLength && $index<$maxlength; $index++ )
+        @for(; $index<$maxlength; $index++ )
+          <div class="col-xs-6">            
               <li title="{{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}">
-                <a href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
+                <a class="text_over_flow_hide" href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
                   {{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}
+                </a> 
               </li>
-            @endfor
-            <?php
-              $listLength += $listLength;
-            ?>  
-          </div>          
+          </div>
         @endfor   
       </div>
   </div>

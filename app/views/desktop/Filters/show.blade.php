@@ -375,22 +375,7 @@
 					.append
 					(
 						$("<div style='margin-top:10px'></div>")
-						.attr("class","")
-						/*.append
-						(
-							$("<div></div>")
-							.attr("class","col-md-3 col-xs-12 col-sm-12 ")
-							.append
-							(
-								$("<center></center>")
-								.append
-								(
-									$("<img/>")
-									.prop("src",institute_photo_path)
-									.attr("class",'institute-profile-pic')
-								)
-							)
-						)*/
+						.attr("class","")						
 						.append
 						(
 							$("<div></div>")
@@ -402,23 +387,7 @@
 								.append
 								(
 									$("<div></div>")
-									.attr("class","row")
-									/*.append
-									(
-										$("<div></div>")
-										.attr("id","inst_type")
-										.append
-										(
-											$("<span></span>")
-											.attr("id","hand-icon")
-											.text("☛")
-										)
-										.append
-										(
-											$("<span></span>")											
-											.text("Type: "+subcategory+", "+category+".")
-										)
-									)*/
+									.attr("class","row")								
 									.append
 									(
 										$("<div></div>")
@@ -539,35 +508,12 @@
 										.text("Book Now")
 									)
 								)
-							)												
-							/*.append
-							(
-								$("<div></div>")
-								.attr("class","row")
-								.attr("id","price_schedule_container")																												
-							)*/
+							)																			
 						)
 					)
 				)
 				.appendTo(linksContainer);
-				addFacilities(batchID);
-				/*for(var I=0; I<Schedules[index].length && I<2; I++)
-				{
-					
-					var Schedule = Schedules[index][I];
-					multiScheduleAdder(index,I,Schedule);
-				}				
-				if(Schedules[index].length>2)						
-				{
-					var ScheduleContainer = $(".batch"+index+" #price_schedule1 #scheduleWeekDays");
-					$("<a></a>")
-					.attr("id","moreScheduleButton")
-					.attr("class","glyphicon glyphicon-plus")
-					.attr("title","More Schedules")
-					.prop("href","/batches/show/"+batchID)
-					.appendTo(ScheduleContainer);
-					//moreScheduleButton();
-				}*/
+				addFacilities(batchID);		
 		    }
 		  	$('span.stars').stars();
 		}
@@ -598,8 +544,7 @@
 						if(!filterStatus)
 						{
 							$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
-							{
-								//alert(response);
+							{								
 								if(response == "")
 								{
 									$('#loadMore').css('display','none');
@@ -644,27 +589,8 @@
 					LoadFilterResults(sub_select,loc_select,0);					
 				}
 				else
-				{
-					//chunk = 0;
-					location.reload(true);
-					/*$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
-					{						
-						if(response == "")
-						{
-							$('#loadMore').css('display','none');
-							$('#noResults').css('display','block');
-						}
-						else
-						{
-							for (var index=0; index<response.length; index++)
-							{	
-								result[index] = response[index];	
-							}
-							displayResults(result,0);	
-							LoadResult(0,20);
-						}
-						chunk++;	
-					});*/
+				{					
+					location.reload(true);					
 				}				
 			});			
 		});

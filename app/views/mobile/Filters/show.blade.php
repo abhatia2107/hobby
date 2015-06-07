@@ -2,6 +2,7 @@
 @section('content')
 <style type="text/css">
 	
+	.overflow_x {max-width:100%;overflow-x:hidden}
 
 	.filterTitle { color:white;font-family: 'Open Sans',sans-serif;font-size: 20px;padding: 0px 5px;
 		background:#3396d1;height: 30px;
@@ -152,14 +153,14 @@
   	.related_item a {color:#5C5C5C;}
 
 </style>
-<div class="container filter_page_container">
+<div class="container filter_page_container membership_message">
 	<div class="alert alert-success alert-dismissable">
-		 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+		 <button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<h4><a href="/Membership">Hobbyix Membership</a></h4>
 		<strong>Buy Membership and get access to all the</strong>
 	</div>
 </div>
-<div class="container">
+<div class="container" >
 	<div class="row">
 		<div class="col-xs-12">			
 			<div class="row">
@@ -206,7 +207,7 @@
 						<a class="col-xs-6 apply_button" href="javascript:filterApply()">Apply</a>
 					</div>			
 				</div>
-				<div class="col-xs-12" id="results-container" style="padding:0px 0px 10px 0px;">
+				<div class="col-xs-12" id="results-container" style="padding:0px 0px 10px 0px;" >
 					<ul class="list-unstyled" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div>
@@ -426,7 +427,7 @@
 				var address = results[index]['venue_address'];
 				var venue_email = results[index]['venue_email'];
 				address = address.replace(/\n/g," ");			
-				$("<li style='display:none'></li>")
+				$("<li style='display:none;max-width:100%;overflow-x:hidden'></li>")
 				.attr("subcategory",subcategoryID)
 				.attr("locality",localityID)
 				.attr("class","batch"+index)
@@ -434,11 +435,11 @@
 				.append
 				(
 					$("<div></div>")
-					.attr("class","row clearfix")
+					.attr("class","row overflow_x")
 					.append
 					(		
 						$("<div></div>")
-						.attr("class","col-xs-12")
+						.attr("class","col-xs-12 overflow_x")
 						.append
 						(
 							$("<div></div>")
@@ -450,7 +451,7 @@
 								.append
 								(
 									$("<div></div>")
-									.attr("class"," col-xs-12")
+									.attr("class"," col-xs-12 ")
 									.append
 									(
 										$("<span></span>")
@@ -471,7 +472,7 @@
 				.append
 				(
 					$("<div></div>")
-					.attr("class","row")
+					.attr("class","row overflow_x")
 					.append
 					(
 						$("<div></div>")
@@ -536,7 +537,7 @@
 						.append
 						(
 							$("<div></div>")
-							.attr("class","col-xs-12 singleSessionPrice")								
+							.attr("class","col-xs-12 singleSessionPrice text_over_flow_hide ")								
 							.append
 							(
 								$("<div></div>")								
@@ -586,6 +587,7 @@
 		var linksContainer = $('#filter_data'),baseUrl;	
 		$(document).ready(function() 
 		{	
+			$('body').css('overflow-x','hidden');	
 			$(".filter_options_popup #return").click(function(){
 				$('.filter_options_popup').hide();
 				$('html').css('overflow-y','auto');

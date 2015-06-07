@@ -26,7 +26,7 @@
 		</div>
 
 		<!--  id="content" class="site-content" -->
-		<div style="margin-top:0px;">			
+		<div style="margin-top:0px;max-width:100%;overflow-x:hidden">			
 			@yield('content')			
 		</div>
 

@@ -370,8 +370,9 @@
               </div>          
             </div> 
              <hr/>   
-            <div class="row batchOrderButtons">    
-              <button type="submit" style="padding:5px 70px;" class="booknowButton" id="booknowButton" >Pay Now</button>
+            <div class="row batchOrderButtons">  
+              <button style="padding:5px 50px;background:lightgrey;color:black" class="booknowButton" id="goBackButton" >Go Back</button>
+              <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" >Pay Now</button>
               <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
             </div>
           </div>
@@ -478,7 +479,7 @@
 @section('pagejquery')
 <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
 <script type="text/javascript"> 
-  var dateToday = new Date(); 
+  var dateToday = new Date();   
   function bookOrderFormValidate() 
   {
     var Result = true;    
@@ -547,7 +548,14 @@
           $("#bookOrderFormStep1").hide();
           $("#bookOrderFormStep2").fadeIn();              
         }      
-      });  
+      }); 
+      $('#goBackButton').click(function(e)
+      {          
+        e.preventDefault();       
+        e.stopPropagation();         
+        $("#bookOrderFormStep1").fadeIn();
+        $("#bookOrderFormStep2").hide();                        
+      }); 
       $('#batchOrderForm').bootstrapValidator({                    
             fields: {
 

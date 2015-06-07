@@ -32,7 +32,7 @@
 		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
 			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad">
 				<a class="text_over_flow_hide" href="/filter/institute/{{$institutes[$index]->id}}">
-					{{$institutes[$index]->institute}},{{$institutes[$index]->locality}}
+					{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}
 				</a>
 			</li>
 		</div>	

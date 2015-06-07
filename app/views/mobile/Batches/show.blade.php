@@ -3,7 +3,9 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <style type="text/css">
 
-  #page { width: 100%;margin-top: 0px;padding: 4em 0 2em;
+  .overflow_x {max-width:100%;overflow-x:hidden}
+
+  #page { width: 100%;margin-top: 0px;padding: 4em 0 1.2em;
           background-repeat:no-repeat;
         background-position:center top;
         -o-background-size: 130% 120%, auto;
@@ -23,7 +25,7 @@
 
   .blog-container { background:#f0f3f6;width: 100%;}
 
-  .sample-box { background: white;margin-top: 20px;box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);padding: 5px 9px;
+  .sample-box { background: white;margin: 20px 0px 0px 0px;box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);padding: 5px 9px;
     -moz-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);-webkit-box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.5);
   }
 
@@ -117,7 +119,7 @@
     $locality_id = $batchDetails->venue_locality_id; 
     $locality =  $batchDetails->locality;    
 ?>
-<div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
+<div id="page" class="hfeed site overflow_x" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
   <div id="content" class="site-content">
     <div class="samplePageInfo cover-wrapper">
       <div class="container">
@@ -131,7 +133,7 @@
     </div>
   </div>
 </div>
-<div class="" id='batchOrderSample' style="padding-top:0px;margin-top:0px;">        
+<div class="overflow_x" id='batchOrderSample' style="padding-top:0px;padding-bottom:5px;margin-top:0px;">        
   <div class='sample_box_title' style="padding:10px 0px 2px 0px;margin-top:0px;">Book This Class</div>
   <div class="sample_box_order_data" style="padding:10px 15px 0px 15px;">        
     <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
@@ -154,7 +156,7 @@
         <div class="row batchOrderField">
           <div class='col-xs-6 batchOrderFieldLabel'>Booking Date*</div>
           <div class='col-xs-6'>
-              <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
+              <input type="text" readonly="true" style="background:white"placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
           </div>          
         </div>
         <div class="row batchOrderField">
@@ -170,12 +172,12 @@
           <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
           <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
         </div>
-        <div class="batchOrderButtons">    
+        <div class="batchOrderButtons" style="margin-top:5px;">    
           <button style="padding:5px 50px;" class="booknowButton" id="proceedButton">Proceed</button>
           <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
         </div>
       </div>
-      <div class="" id="bookOrderFormStep2">
+      <div class="" id="bookOrderFormStep2" >
         <div class="row batchOrderField">
           <div class='col-md-5 col-sm-4 col-xs-5'>Name*</div>
           <div class='col-md-7 col-sm-8 col-xs-7'>
@@ -196,18 +198,19 @@
         </div> 
          <hr/>   
         <div class="row batchOrderButtons">    
-          <button type="submit" style="padding:5px 70px;" class="booknowButton" id="booknowButton" >Pay Now</button>
+          <button onclick="goBackToOrder();" style="padding:5px 50px;background:lightgrey;color:black" class="booknowButton" id="goBackButton" >Go Back</button>
+          <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" >Pay Now</button>
           <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
         </div>
       </div>
     </form>
   </div>        
 </div> 
-<div class="container blog-container" style="margin:0;padding:0">
-  <div class="row clearfix">    
+<div class="container blog-container overflow_x" style="margin:0;padding:0">
+  <div class="row overflow_x" style="width:100%;margin:0">    
     <div class="col-xs-12">
       <div class="col-xs-12">
-        <div id="sample-batch-details" class="sample-box" >
+        <div id="sample-batch-details" class="sample-box " >
           <div class='sample_box_title'>Batch Details</div>
           <div class="sample_box_data">
             <div id='batch-session-count' class="batch-details">
@@ -216,13 +219,13 @@
             </div>    
           </div>   
         </div>
-        <div class="sample-box" id='institute-details'>
+        <div class="sample-box " id='institute-details'>
           <div class='sample_box_title'>Institute Details</div>
           <div class="sample_box_data">
             <span id='sample-details' class="details-container">{{$instituteDetails}}</span>    
           </div>
         </div>
-        <div id="comments" class="sample-box">
+        <div id="comments" class="sample-box ">
           <div class='sample_box_title'>Write a Review</div>
           <div class="sample_box_data">          
             <form  action='/comments/store/' method='post' id="commentsForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">            
@@ -251,16 +254,7 @@
               </div>
             </form>
           </div>
-        </div>    
-        <div class="sample-box" style="display:none">
-          <div class='sample_box_title'>Social Profiles</div>
-          <div class="sample_box_data">         
-            <a href="{{$twitterLink}}" class="sample-social-twitter"><img src="/assets/images/sample/twitter.jpg"></a>
-            <a href="{{$facebookLink}}" class="sample-social-facebook"><img src="/assets/images/sample/facebook.jpg"></a>
-            <!-- <a href="https://plus.google.com/" class="sample-social-googleplus"><img height="42px" src="/assets/images/sample/googleplus.jpg"></a>
-            <a href="http://linkedin.com/Astoundify" class="sample-social-linkedin"><img src="/assets/images/sample/linkedin.jpg"></a></center> -->         
-          </div>
-        </div>     
+        </div>            
       </div>
     </div>  
   </div>
@@ -330,7 +324,7 @@
 @stop
 @section('pagejquery')
 <script type="text/javascript">
-  var dateToday = new Date();
+  var dateToday = new Date();  
   function bookOrderFormValidate() 
   {
     var Result = true;    
@@ -389,7 +383,17 @@
           $("#bookOrderFormStep1").hide();
           $("#bookOrderFormStep2").fadeIn();              
         }      
-      });  
+      }); 
+      $('#goBackButton').click(function(e)
+      {          
+        e.preventDefault();       
+        e.stopPropagation();         
+        if(bookOrderFormValidate())
+        {   
+          $("#bookOrderFormStep1").fadeIn();
+          $("#bookOrderFormStep2").hide();              
+        }      
+      });
       $('#batchOrderForm').bootstrapValidator({                    
             fields: {
 

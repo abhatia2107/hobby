@@ -136,7 +136,7 @@
     }
     $todayDate = date('Y-m-d');
 ?>
-<div id="page" class="hfeed site overflow_x" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
+<div id="page" class="hfeed site overflow_x" style="background-image: url(/assets/images/sample/workout.jpg);">
   <div id="content" class="site-content">
     <div class="samplePageInfo cover-wrapper">
       <div class="container">

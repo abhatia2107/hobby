@@ -53,13 +53,18 @@ class UsersController extends \BaseController {
 	{	
 		$user_id=Auth::id();
 		$user=User::find($user_id);
-		return View::make('Users.profile',compact('user'));
+		$credits=$user->user_classes_left;
+		$user_name=$user->user_first_name;
+		return View::make('Users.profile',compact('user','user_name','credits'));
 	}
 
 	public function orders()
 	{
 		$user_id=Auth::id();
 		$bookingDetails=Booking::where('user_id',$user_id)->get();
+		$user=User::find($user_id);
+		$user_name=$user->user_first_name;
+		$credits=$user->user_classes_left;
 		// dd($booking);
 		foreach ($bookingDetails as $booking) {
 		
@@ -69,7 +74,7 @@ class UsersController extends \BaseController {
 			$booking->batch=$batch;
 			// dd($booking);
 		}
-		return View::make('Users.orders',compact('bookingDetails'));
+		return View::make('Users.orders',compact('bookingDetails','user_name', 'credits'));
 	}
 
 	/**
@@ -436,8 +441,11 @@ class UsersController extends \BaseController {
 	 */
 	public function getChangePassword()
 	{
-		// dd("G");
-		return View::make('Users.changePassword');
+		$user_id=Auth::id();
+		$user=User::find($user_id);
+		$user_name=$user->user_first_name;
+		$credits=$user->user_classes_left;	
+		return View::make('Users.changePassword',compact('user_name','credits'));
 	}
 
 	/**

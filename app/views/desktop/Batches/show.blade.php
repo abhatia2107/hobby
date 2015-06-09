@@ -255,10 +255,10 @@
     $facilitiesName = ["Air Conditioning","Cafe","Changing Room","Locker","Shower Room","Steam"];
     $facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
     $facilitesAvailable = [];
-    for ($i=0; $i < 6 ; $i++) { 
+    for ($i=0; $i < 6 ; $i++) 
+    { 
       $facilitesAvailable[$i] = $batchDetails->$facilities[$i];      
     }
-    $facilitesAvailable = ['1','0','1','0','1','0'];
     $todayDate = date('Y-m-d');
 ?>
 

@@ -134,7 +134,6 @@
     for ($i=0; $i < 6 ; $i++) { 
       $facilitesAvailable[$i] = $batchDetails->$facilities[$i];      
     }
-    $facilitesAvailable = ['1','0','1','0','1','0'];
     $todayDate = date('Y-m-d');
 ?>
 <div id="page" class="hfeed site overflow_x" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
@@ -240,7 +239,7 @@
             <div id='batch-facilities' class="batch-details">
               @for($i=0;$i<=5;$i++)            
                   <span class="facilities_icon" @if($facilitesAvailable[$i]==0) style="opacity:.2" @endif>
-                    <img src="/assets/images/Facilities/{{$facilitiesName[$i]}}.png" width="35px" height="35px" title="{{$facilitiesName[$i]}}" alt="{{$facilitiesName[$i]}}">
+                    <img src="/assets/images/Facilities/{{$facilitiesName[$i]}}.png" width="30px" height="30px" title="{{$facilitiesName[$i]}}" alt="{{$facilitiesName[$i]}}">
                   </span>           
               @endfor
             </div> 

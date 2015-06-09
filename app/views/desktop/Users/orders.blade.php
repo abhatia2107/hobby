@@ -27,7 +27,7 @@
         @foreach ($bookingDetails as $booking)
             <div class="uac_orders">
               <div class="uac_order_header row"> 
-                <div class="col-md-9 col-sm-8 col-xs-12">
+                <div class="col-md-5 col-sm-4 col-xs-12">
                   <div class="uac_order_number">
                     ORDER REFERENCE ID: <span class="order_values">{{$booking->order_id}}</span>
                   </div>
@@ -35,6 +35,11 @@
                     Price Per Session: <span class="order_values">Rs. {{$booking->payment/$booking->no_of_sessions}}/-</span>
                   </div>
                 </div> 
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                  <div class="uac_order_number">
+                    <span class="order_values">{{$booking->batch->subcategory}}, {{$booking->batch->institute}}</span>
+                  </div>                                   
+                </div>
                 <div class="col-md-3 col-sm-4 col-xs-12">
                   <span class="uac_order_date">{{$booking->created_date_time}}</span>
                 </div>
@@ -47,7 +52,7 @@
                   No. of Sessions: <span class="order_values">{{$booking->no_of_sessions}}</span>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                  Price: <span class="order_values">Rs. {{$booking->payment}}/-</span>
+                  Aomount Paid: <span class="order_values">Rs. {{$booking->payment}}/-</span>
                 </div>
               </div>
             </div> 

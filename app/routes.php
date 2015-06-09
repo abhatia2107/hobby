@@ -221,12 +221,11 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/users/disable/{id}','UsersController@disable');
 	Route::get('/users/delete/{id}','UsersController@destroy');
 	Route::get('/users/history','UsersController@history');
-	Route::get('/users/MyProfile','UsersController@profile');
-	Route::get('/users/MyOrders','UsersController@orders');
-
 });
 
 Route::group(array('before' => "auth"), function() {
+	Route::get('/users/MyProfile','UsersController@profile');
+	Route::get('/users/MyOrders','UsersController@orders');
 	Route::get('/users/changepassword','UsersController@getChangePassword');
 	Route::get('/users/edit','VenuesController@edit');
 	Route::post('/users/update','UsersController@update');

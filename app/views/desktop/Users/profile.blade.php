@@ -23,10 +23,10 @@
             My Profile            
           </div>
           <div class="uac_profile_itmes">
-            <li><span class="uac_profile_item" >NAME : </span></li>
-            <li><span class="uac_profile_item" >EMAIL ID : </span></li>
-            <li><span class="uac_profile_item" >MOBILE NUMBER : </span></li>
-            <li><span class="uac_profile_item" >CITY : </span></li>
+            <li><span class="uac_profile_item" >NAME : {{$user->user_first_name.' '.$user->user_last_name}}</span></li>
+            <li><span class="uac_profile_item" >EMAIL ID : {{$user->email}}</span></li>
+            <li><span class="uac_profile_item" >MOBILE NUMBER : {{$user->user_contact_no}}</span></li>
+            <li><span class="uac_profile_item" >CITY : {{$user->user_location}}</span></li>
           </div>
         </div>
       </div>

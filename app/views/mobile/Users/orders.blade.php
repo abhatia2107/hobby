@@ -28,49 +28,39 @@
 @stop
 @section('content')
 <?php 
-  $orderNumber = 1;
-  $orderDate = "14-05-2015";
-  $orderTime = "10:45 am";
-  $orderForDate = "17-05-2015";
-  $numSessions = 5;
-  $price = 100;
-  $orderPrice = $numSessions*$price;
-  $orderStatus = true;
-  $index = 0;
   $nav_item = 2;
 ?>
 <div class="container user_account_page">
   <div class="col-xs-12 uac_container">    
       <div class="col-xs-12">
-        @for($index = 0; $index<=5;$index++)        
+        @foreach ($bookingDetails as $booking)
             <div class="uac_orders">
               <div class="uac_order_header row"> 
                 <div class="col-xs-12">
                   <div class="uac_order_number">
-                    ORDER NUMBER: <span class="order_values">{{$orderNumber}}</span>
+                    ORDER REFERENCE ID: <span class="order_values">{{$booking->order_id}}</span>
                   </div>
                   <div class="uac_order_price">
-                    Price Per Session: <span class="order_values">Rs. {{$price}}/-</span>
+                    Price Per Session: <span class="order_values">Rs. {{$booking->payment/$booking->no_of_sessions}}/-</span>
                   </div>
                 </div> 
                 <div class="col-xs-12">      
-                  <span class="uac_order_date">{{$orderDate}}</span>&nbsp;&nbsp;
-                  <span class="uac_order_time">{{$orderTime}}</span>
+                  <span class="uac_order_date">{{$booking->created_date_time}}</span>
                 </div>
               </div>
               <div class="uac_order_details row">
                 <div class="col-xs-12">
-                  ORDER BOOKED FOR: <span class="order_values">{{$orderForDate}}</span>
+                  ORDER BOOKED FOR: <span class="order_values">{{$booking->booking_date}}</span>
                 </div>
                 <div class="col-xs-12">
-                  No. of Sessions: <span class="order_values">{{$numSessions}}</span>
+                  No. of Sessions: <span class="order_values">{{$booking->no_of_sessions}}</span>
                 </div>
                 <div class="col-xs-12">
-                  Price: <span class="order_values">Rs. {{$orderPrice}}/-</span>
+                  Price: <span class="order_values">Rs. {{$booking->payment}}/-</span>
                 </div>
               </div>
             </div> 
-        @endfor
+        @endforeach
       </div>      
   </div>
 </div>

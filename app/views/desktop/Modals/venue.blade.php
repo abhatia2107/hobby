@@ -54,7 +54,9 @@
                                         @endforeach
                                     </select>
                         </div>
-                                
+                        <?php
+                            // asort($localities->toArray());
+                        ?>
                         <div class="form-group inner-addon">
                             <select name="venue_locality_id" class="form-control" id="venue_locality_id" required="required">
                                  <option disabled="disabled"> Select Locality</option>

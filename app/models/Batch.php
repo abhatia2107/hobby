@@ -12,7 +12,7 @@ class Batch extends \Eloquent {
         'created_at',
         'updated_at',
     ];
-
+/*
     public static $rules = [
         'batch'=>'required',
         'batch_category_id'=>'required',
@@ -25,7 +25,7 @@ class Batch extends \Eloquent {
         'batch_trial'=>'required',
         'batch_single_price'=>'numeric',
 
-    ];
+    ];*/
 
     public static $rulesMessage = [
         'msgInputName' => 'required',

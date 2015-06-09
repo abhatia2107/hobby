@@ -50,13 +50,26 @@ class UsersController extends \BaseController {
 	}
 
 	public function profile()
-	{
-		return View::make('Users.profile');
+	{	
+		$user_id=Auth::id();
+		$user=User::find($user_id);
+		return View::make('Users.profile',compact('user'));
 	}
 
 	public function orders()
 	{
-		return View::make('Users.orders');
+		$user_id=Auth::id();
+		$bookingDetails=Booking::where('user_id',$user_id)->get();
+		// dd($booking);
+		foreach ($bookingDetails as $booking) {
+		
+			$booking->booking_date = date("d M Y", strtotime($booking->booking_date));
+			$booking->created_date_time=date('d M Y h:i a', strtotime($booking->created_at->toDateTimeString()));
+			$batch=$this->batch->getBatch($booking->batch_id);
+			$booking->batch=$batch;
+			// dd($booking);
+		}
+		return View::make('Users.orders',compact('bookingDetails'));
 	}
 
 	/**

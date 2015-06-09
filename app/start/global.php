@@ -87,9 +87,11 @@ require app_path().'/filters.php';
 
 
 $categories = Category::all();
+$homeLang = Lang::get('ViewsLang/home');
 $locations = Location::all();
 $mainAdminId = 1;
 $loggedIn = Auth::id();
 View::share('categories', $categories);
+View::share('homeLang', $homeLang);
 View::share('locations',$locations);
 View::share('loggedIn',$loggedIn);

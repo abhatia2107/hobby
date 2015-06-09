@@ -4,9 +4,9 @@ return array(
 
 	"home_name"=>"hobbyix",
 
-	"home_title"=>"Search Your City",
+	"home_title"=>"Fitness Classes in Hyderabad",
 
-	"home_subtitle"=>"Hobbyix helps you find out whats happening in your city, Let's explore.",
+	"home_subtitle"=>"Book a Single Session of any Fitness Class in Hyderabad",
 
 	"home_keyword"=>"Keyword",
 
@@ -31,6 +31,10 @@ return array(
 	"home_button"=>"How It Works",
 
 	"home_institute_title"=>"Want to learn more?(For institute)",
+
+	"home_membership_title"=>"Launching Hobbyix Membership Soon!!!",	
+
+	"home_membership_tagline"=>"Hobbyix Membership: One Membership -> Access to all the Gyms & Fitness Activities in Hyderabad @1999/Month"
 
 	
 );

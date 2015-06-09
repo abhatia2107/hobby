@@ -2,7 +2,7 @@
 
 @section('pagestylesheet')
 	<style type="text/css">
-		.membership_page_container { margin-top: 20px; font-family: 'Open Sans',sans-serif;color: #333;	}
+		.membership_page_container { margin-top: 20px; font-family: 'Open Sans',sans-serif;color: #333;background: #f0f3f6	}
 
 		.membership_page_item {padding: 0px 14px;}
 
@@ -15,12 +15,12 @@
 		}
 
 		.membership_features_container { background:#FFF;webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
-      box-shadow: inset 0 0 2px rgba(0,0,0,.3);-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);padding: 7px 20px 15px 20px;margin-bottom: 10px; 
+      box-shadow: inset 0 0 2px rgba(0,0,0,.3);-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);padding: 1px 5px 1px 5px;margin-bottom: 10px; 
     }
 
-		.header{  padding: 0px 15px 5px 15px;border-bottom:1px solid;border-color: #20cfb1;font-size: 25px;text-align: center;} 
+		.header{  padding: 0px 1px 1px 1px;border-bottom:1px solid;border-color: #20cfb1;font-size: 18px;text-align: center;font-weight: bold} 
 
-		.membership_features_container li { font-size: 18px;margin-bottom: 15px;}
+		.membership_features_container li { font-size: 16px;margin-bottom: 15px;}
 
 		.membership_features_container .glyphicon{color: #20cfb1;margin-right: 7px;}
 
@@ -43,7 +43,7 @@
 						<h1 class="header">
 							Hobbyix Membership Features
 						</h1>
-						<ul class="membership_features">
+						<ul class="membership_features" style="padding:0px 10px">
 							<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of classes with Hobbyix Membership</li>
 							<li><span class="glyphicon glyphicon-hand-right"></span>There is no limit on how many types of activities you indulge in</li>
 							<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>							

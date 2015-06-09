@@ -2,6 +2,18 @@
 @section('pagestylesheet')
 <style type="text/css">
 
+.user_account_page {  background:#f0f3f6;min-height: 320px;width: 100%;color: #333;margin: 0;padding: 0}
+
+.uac_container { margin-top: 40px;padding: 0px;}
+
+.uac_sidebar_header{  padding: 3px 15px 2px 15px;border-bottom:1px solid;border-color: #20cfb1;font-size: 21px;color: #333;text-align: center;} 
+
+.uac_profile li { margin: 5px;}
+
+.uac_sidebar, .uac_profile, .uac_orders { font-family: 'Open Sans',sans-serif;background: none repeat scroll 0% 0% #FFF;
+  border: 1px solid #E8E8E8;padding: 10px 10px 10px 10px;margin-bottom: 10px; }
+
+
 .uac_order_header {padding:5px 0px 6px 0px; ;border-bottom:1px solid;border-color: #E2E2E2;}
 
 .uac_order_details {margin-top: 8px;margin-bottom: 5px;}
@@ -28,10 +40,7 @@
   $nav_item = 2;
 ?>
 <div class="container user_account_page">
-  <div class="col-xs-12 uac_container">
-      <div class="col-xs-12">
-         @include('Users.sidebar')
-      </div>
+  <div class="col-xs-12 uac_container">    
       <div class="col-xs-12">
         @for($index = 0; $index<=5;$index++)        
             <div class="uac_orders">

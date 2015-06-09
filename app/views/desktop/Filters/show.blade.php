@@ -25,13 +25,17 @@
   	.related_item {margin-bottom: 15px;}
 
   	.related_item a {color:#5C5C5C;}
+
+  	.filter_option_loading {position: absolute;margin:18.5% 20% 0 10%;display: none}
+
+  	.filter_option_loading img{width: 100%;height: 100%}
   	
    </style>
 @stop
 
 @section('content')
 <div class="modal fade" id="sendMessage" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+		<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" id='close_model' class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -46,7 +50,7 @@
 
 					<div class="form-group inner-addon" >
 						 <i class="glyphicon glyphicon-user left-addon"></i>
-						 <input type="text" class="form-control" name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
+						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
 					</div>
 					<div class="form-group inner-addon">
 						<i class="glyphicon glyphicon-envelope left-addon"></i>
@@ -68,13 +72,16 @@
 		</div>
 	</div>				
 </div>
-<div class="container filter_page_container membership_message">
-	<div class="alert alert-success alert-dismissable">
-		 <button type="button"  onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-		<h4><a href="/Membership">Hobbyix Membership</a></h4>
-		<strong>Buy Membership and get access to all the</strong>
+<div class="container membership_message" style="background:#3396D1">
+	<div class="alert">
+		<div style="color:white;position:absolute;right:40px;">
+			<a href="tel:9100946081">Call: 9100946081</a>
+		</div>
+		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
+		<strong>{{$homeLang['home_membership_tagline']}}</strong>
 	</div>
-</div>	
+</div>
 <div class="container filter_page" >	
 	<div class="row">		
 		<div class="col-md-12 col-xs-12 col-sm-12">					
@@ -85,6 +92,7 @@
 					<div id="browse-filter" class="filter-option-1 filterOption">	
 						<div class="filterTitle">Sub Categories</div>
 						<div class="filterOptionsList">
+							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
 							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 	
 								@foreach ($subcategoriesForCategory as $subcategoryData)
 									<?php
@@ -92,15 +100,17 @@
 										$sub_id = $subcategoryData->id;
 									?>				
 									<li subcategory="{{$sub_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" @if(isset($subcategory_id)) @if($subcategory_id == $sub_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" id="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subcategory_id)) @if($subcategory_id == $sub_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
 									</li>
 								 @endforeach
 							 </ul>
+							 
 						</div>
 					</div>			
 					<div id="browse-filter" class="filter-option-2 filterOption">	
 						<div class="filterTitle">Locality</div> 
 						<div class="filterOptionsList">
+							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
 							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
 								@foreach ($localitiesForLocation as $localityData)
 									<?php 
@@ -108,18 +118,18 @@
 										$loc_id = $localityData->id;
 									?>
 									<li subcategory="{{$loc_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" @if(isset($locality_id)) @if($locality_id == $loc_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$localityName}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" id="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locality_id)) @if($locality_id == $loc_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$localityName}}</span></label>
 									</li> 
 								@endforeach
-							 </ul>
-							</div>
+							 </ul>							 
+						</div>
 					</div>				
 				</div>
 				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 25px 0px;padding:0px 1% 0px 0px;" >
 					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif">Loading Results</div>
-					<div id="noResults" class='resultsMessage' >No more results to display.</div>
+					<div id="noResults" class='resultsMessage' >No results to display.</div>
 				</div><!--end of results info -->
 			</div>
 		</div>
@@ -261,8 +271,7 @@
 			{	
 				if(index>=start && index<=end)
 				{
-					var test = $(this).attr('class');
-					$('.'+test).fadeIn(100);
+					$(this).fadeIn(100);
 				}
 				index++;
 			});
@@ -273,7 +282,8 @@
 		displayResults(result,0);
 		LoadResult(0,20);
 		function LoadFilterResults(sub_select,loc_select,start)
-		{
+		{		
+			$(".filterOptionsList").css('pointer-events','none');	
 			resultRange = result.length;
 			if(sub_select.length==0)
 				sub_select=0;
@@ -292,6 +302,7 @@
 				}
 				else
 				{
+					//alert(response.length);
 					for (var index=0; index<response.length; index++)
 					{
 						result[index+resultRange] = response[index];
@@ -303,6 +314,7 @@
 						LoadFilterResults(sub_select,loc_select,0);
 					}
 				}
+				setTimeout("$('.filterOptionsList').css('pointer-events','all');$('.filter_option_loading').hide();$('.filters').css('opacity','1');", 1000);					
 			});
 		}
 		function displayResults(results,start)
@@ -333,191 +345,194 @@
 				var landmark = results[index]['venue_landmark'];
 				var address = results[index]['venue_address'];
 				var venue_email = results[index]['venue_email'];
-				address = address.replace(/\n/g," ");			
-				$("<li style='display:none'></li>")
-				.attr("subcategory",subcategoryID)
-				.attr("locality",localityID)
-				.attr("class","batch"+index)
-				.attr("id","batchInfo")
-				.append
-				(
-					$("<div></div>")
-					.attr("class","col-md-12 col-xs-12 col-sm-12 post_header")
-					.append
-					(	
-						$("<div></div>")
-						.attr("class","col-md-8 col-xs-12 col-sm-7")
-						.append
-						(
-							$("<span></span>")
-							.attr("id","batch_name")
-							.append
-							(
-								$("<a></a>")
-								.prop("href","/batches/show/"+batchID)
-								.text(institute)
-							)									
-						)
-						.append
-						(
-							$("<span></span>")
-							.attr("class","inst_name")
-							.text(subcategory+", "+locality)
-						)																	
-					)						
-				)
-				.append
-				(
-					$("<div></div>")
-					.attr("class","row clearfix batch")
+				address = address.replace(/\n/g," ");	
+				if ( $( "#batch"+batchID ).length == 0 ) 
+				{		
+					$("<li style='display:none'></li>")
+					.attr("subcategory",subcategoryID)
+					.attr("locality",localityID)
+					.attr("class","batchInfo batch"+index)
+					.attr("id","batch"+batchID)
 					.append
 					(
-						$("<div style='margin-top:10px'></div>")
-						.attr("class","")						
+						$("<div></div>")
+						.attr("class","col-md-12 col-xs-12 col-sm-12 post_header")
+						.append
+						(	
+							$("<div></div>")
+							.attr("class","col-md-8 col-xs-12 col-sm-7")
+							.append
+							(
+								$("<span></span>")
+								.attr("id","batch_name")
+								.append
+								(
+									$("<a></a>")
+									.prop("href","/batches/show/"+batchID)
+									.text(institute)
+								)									
+							)
+							.append
+							(
+								$("<span></span>")
+								.attr("class","inst_name")
+								.text(subcategory+", "+locality)
+							)																	
+						)						
+					)
+					.append
+					(
+						$("<div></div>")
+						.attr("class","row clearfix batch")
 						.append
 						(
-							$("<div></div>")
-							.attr("class","col-md-12 col-xs-12 col-sm-12 batchDetailsAndPrice")
+							$("<div style='margin-top:10px'></div>")
+							.attr("class","")						
 							.append
 							(
 								$("<div></div>")
-								.attr("class","col-md-4 col-xs-12 col-sm-6")															
+								.attr("class","col-md-12 col-xs-12 col-sm-12 batchDetailsAndPrice")
 								.append
 								(
 									$("<div></div>")
-									.attr("class","row")								
+									.attr("class","col-md-4 col-xs-12 col-sm-6")															
 									.append
 									(
 										$("<div></div>")
-										.attr("id","inst_type")
-										.attr("title",locality+", "+landmark+", "+address)	
-										.attr("class","col-md-9 col-xs-12 col-sm-9 text_over_flow_hide")								
+										.attr("class","row")								
 										.append
 										(
-											$("<span></span>")
-											.attr("id","hand-icon")
-											.attr("class","glyphicon glyphicon-map-marker")
+											$("<div></div>")
+											.attr("id","inst_type")
+											.attr("title",locality+", "+landmark+", "+address)	
+											.attr("class","col-md-9 col-xs-12 col-sm-9 text_over_flow_hide")								
+											.append
+											(
+												$("<span></span>")
+												.attr("id","hand-icon")
+												.attr("class","glyphicon glyphicon-map-marker")
+											)
+											.append
+											(
+												$("<span></span>")																					
+												.text(locality+", "+landmark+", "+address)
+											)
 										)
 										.append
 										(
-											$("<span></span>")																					
-											.text(locality+", "+landmark+", "+address)
+											$("<div></div>")
+											.attr("id","inst_price")									
+											.attr("class","col-md-12 col-xs-12 col-sm-12")								
+											.append
+											(
+												$("<span></span>")
+												.attr("id","hand-icon")
+												.attr("class","glyphicon glyphicon-time")
+											)
+											.append
+											(
+												$("<span></span>")																					
+												.text("Mon-Sat: 5am-6pm")
+											)
+										)
+									)
+								)
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-5 col-xs-12 col-sm-6 batchDetailsMiddlePart")
+									.attr("id","")	
+									.append
+									(
+										$("<div></div>")
+										.attr("class","col-md-5 col-xs-12 col-sm-6 ")
+										.attr("id","inst_contact")
+										.attr("onClick","show_contact("+index+")")
+										.append
+										(
+											$("<span></span>")
+											.attr("id","cell-icon")
+											.attr("class","glyphicon glyphicon-phone-alt")
+										)
+										.append
+										(
+											$("<span style='display:none'></span>")
+											.attr("id","contact"+index)
+											.attr("value",batchID)
+											.text(" "+contact)									
+										)
+										.append
+										(
+											$("<span></span>")
+											.attr("id","show_contact"+index)
+											.text(" View Number")								
 										)
 									)
 									.append
 									(
 										$("<div></div>")
-										.attr("id","inst_price")									
-										.attr("class","col-md-12 col-xs-12 col-sm-12")								
+										.attr("class","col-md-5 col-xs-12 col-sm-6 ")
+										.attr("id","inst_message")
+										.attr("href","#sendMessage")
+										.attr("data-toggle","modal")
+										.attr("data-batch",batch)
+										.attr("data-email",email)
+										.attr("data-institute",institute)
 										.append
 										(
 											$("<span></span>")
-											.attr("id","hand-icon")
-											.attr("class","glyphicon glyphicon-time")
+											.attr("id","cell-icon")
+											.attr("class","glyphicon glyphicon-envelope")
 										)
 										.append
 										(
-											$("<span></span>")																					
-											.text("Mon-Sat: 5am-6pm")
+											$("<span></span>")
+											.text(" Send Message")
+										)
+									)	
+									.append
+									(
+										$("<div></div>")
+										.attr("class","col-md-12 col-sm-12 facilities_continer hidden-xs")
+										.attr("id","facilities_continer_"+batchID)									
+									)																											
+								)
+								.append
+								(
+									$("<div></div>")
+									.attr("class","col-md-3 col-xs-12 col-sm-12 singleSessionPriceContainer ")
+									.append
+									(	
+										$("<div></div>")						
+										.attr("class","singleSessionPrice")
+										.append
+										(
+											$("<div></div>")								
+											.text("₹ "+price+" / Session")
+											/*.append("<br>(or Members: 1 credit)")*/
+										)
+										.append
+										(
+											$("<a></a>")
+											.attr("class","btn btn-primary booknowButton")
+											.attr("id","booknowButton")	
+											.attr("href","/bookings/create/"+batchID)							
+											.text("Book Now")
 										)
 									)
-								)
+								)																			
 							)
-							.append
-							(
-								$("<div></div>")
-								.attr("class","col-md-5 col-xs-12 col-sm-6 batchDetailsMiddlePart")
-								.attr("id","")	
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-5 col-xs-12 col-sm-6 ")
-									.attr("id","inst_contact")
-									.attr("onClick","show_contact("+index+")")
-									.append
-									(
-										$("<span></span>")
-										.attr("id","cell-icon")
-										.attr("class","glyphicon glyphicon-phone-alt")
-									)
-									.append
-									(
-										$("<span style='display:none'></span>")
-										.attr("id","contact"+index)
-										.attr("value",batchID)
-										.text(" "+contact)									
-									)
-									.append
-									(
-										$("<span></span>")
-										.attr("id","show_contact"+index)
-										.text(" View Number")								
-									)
-								)
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-5 col-xs-12 col-sm-6 ")
-									.attr("id","inst_message")
-									.attr("href","#sendMessage")
-									.attr("data-toggle","modal")
-									.attr("data-batch",batch)
-									.attr("data-email",email)
-									.attr("data-institute",institute)
-									.append
-									(
-										$("<span></span>")
-										.attr("id","cell-icon")
-										.attr("class","glyphicon glyphicon-envelope")
-									)
-									.append
-									(
-										$("<span></span>")
-										.text(" Send Message")
-									)
-								)	
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-12 col-sm-12 facilities_continer hidden-xs")
-									.attr("id","facilities_continer_"+batchID)									
-								)																											
-							)
-							.append
-							(
-								$("<div></div>")
-								.attr("class","col-md-3 col-xs-12 col-sm-12 singleSessionPriceContainer ")
-								.append
-								(	
-									$("<div></div>")						
-									.attr("class","singleSessionPrice")
-									.append
-									(
-										$("<div></div>")								
-										.text("₹ "+price+" / Session")
-										/*.append("<br>(or Members: 1 credit)")*/
-									)
-									.append
-									(
-										$("<a></a>")
-										.attr("class","btn btn-primary booknowButton")
-										.attr("id","booknowButton")	
-										.attr("href","/bookings/create/"+batchID)							
-										.text("Book Now")
-									)
-								)
-							)																			
 						)
 					)
-				)
-				.appendTo(linksContainer);
-				var facilitesAvailable = new Array();
-				var facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
-				for (facilitesIndex=0;facilitesIndex<facilities.length;facilitesIndex++) 
-				{
-					facilitesAvailable[facilitesIndex] = results[index][facilities[facilitesIndex]];
+					.appendTo(linksContainer);
+					var facilitesAvailable = new Array();
+					var facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
+					for (facilitesIndex=0;facilitesIndex<facilities.length;facilitesIndex++) 
+					{
+						facilitesAvailable[facilitesIndex] = results[index][facilities[facilitesIndex]];
+					}				
+					addFacilities(batchID,facilitesAvailable);
 				}				
-				addFacilities(batchID,facilitesAvailable);		
 		    }
 		  	$('span.stars').stars();
 		}
@@ -556,6 +571,7 @@
 								}
 								else
 								{
+									//alert(response.length);
 									for (var index=0; index<response.length; index++)
 									{	
 										result[index+resultRange] = response[index];	
@@ -577,8 +593,18 @@
 					}
 				}
 			}
-			$("#filter-sub input").click(function () 
+			$("#filter-sub input").click(function(e)
 			{		
+				if($(this).attr('id')=="subcategory_filter")
+				{
+					$('.filter-option-1 .filters').css('opacity','.5');
+					$('.filter-option-1 .filter_option_loading').show();
+				}
+				else
+				{
+					$('.filter-option-2 .filters').css('opacity','.5');
+					$('.filter-option-2 .filter_option_loading').show();
+				}
 				filterStatus = true;
 				$('#loadMore').show();
 				$('#noResults').hide();
@@ -598,7 +624,7 @@
 						window.location.href = "/filter/locality/"+loc_select;
 					}				
 					else
-					{
+					{						
 						$(linksContainer).empty();						
 						LoadFilterResults(sub_select,loc_select,0);					
 					}

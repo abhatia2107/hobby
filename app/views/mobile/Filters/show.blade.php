@@ -10,7 +10,7 @@
 
 	.filterOptionsList { padding: 5px 2px 0px 5px;border:1px solid;border-top:0px solid;border-color:#3396d1; }	
 
-	#batchInfo {   
+	.batchInfo {   
 	  background: white;border:0px solid;margin-bottom:  5px;border-color: skyblue;-webkit-box-shadow: 0px 3px 0px -2px #0099FF;
 	  box-shadow: 0px 3px 0px -2px #0099FF;color: #333;font-family: 'Open Sans',sans-serif; font-size: 15px;font-weight: 100;
 	}
@@ -153,11 +153,14 @@
   	.related_item a {color:#5C5C5C;}
 
 </style>
-<div class="container filter_page_container membership_message">
-	<div class="alert alert-success alert-dismissable">
-		 <button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-		<h4><a href="/Membership">Hobbyix Membership</a></h4>
-		<strong>Buy Membership and get access to all the</strong>
+<div class="container membership_message" style="background:#3396D1">
+	<div class="alert">		
+		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
+		<strong>{{$homeLang['home_membership_tagline']}}</strong>
+		<div style="color:white;">
+			<a href="tel:9100946081">Call: 9100946081</a>
+		</div>
 	</div>
 </div>
 <div class="container" >
@@ -318,30 +321,6 @@
 		var loc_select = new Array();
 		var filter_select = new Array();		
 		navActive('NavItem'+categoryId);
-		function addFacilities (batchID) 
-		{
-			var linksContainer = $('#facilities_continer_'+batchID),baseUrl;
-			var facilities = ["ac","cafe","changing room","locker room","shower","steam"];
-			var facilitesAvailabe = [1,1,1,1,1,1];
-			var index = 0;
-			for (index=0;index<6;index++) 
-			{
-  				if(facilitesAvailabe[index]==1)
-  				{
-  					$("<span></span>")
-  					.attr("class","facilities_icon")
-  					.append
-  					(
-  						$("<img>")
-  						.attr("src","/assets/images/Facilities/"+facilities[index]+".png")
-  						.attr("width","30px")
-  						.attr("height","30px")
-  					)
-  					.appendTo(linksContainer)
-  						
-  				}
-			}
-		}
 		if(result.length==0)	
 		{
 			$('#loadMore').css('display','none');
@@ -353,9 +332,8 @@
 			$("#filter_data li").each(function () 
 			{	
 				if(index>=start && index<=end)
-				{
-					var test = $(this).attr('class');
-					$('.'+test).fadeIn(100);
+				{					
+					$(this).fadeIn(100);
 				}
 				index++;
 			});
@@ -426,161 +404,164 @@
 				var landmark = results[index]['venue_landmark'];
 				var address = results[index]['venue_address'];
 				var venue_email = results[index]['venue_email'];
-				address = address.replace(/\n/g," ");			
-				$("<li style='display:none;max-width:100%;overflow-x:hidden'></li>")
-				.attr("subcategory",subcategoryID)
-				.attr("locality",localityID)
-				.attr("class","batch"+index)
-				.attr("id","batchInfo")
-				.append
-				(
-					$("<div></div>")
-					.attr("class","row overflow_x")
+				address = address.replace(/\n/g," ");
+				if ( $("#batch"+batchID ).length == 0 ) 
+				{			
+					$("<li style='display:none;max-width:100%;overflow-x:hidden'></li>")
+					.attr("subcategory",subcategoryID)
+					.attr("locality",localityID)
+					.attr("class","batchInfo batch"+index)
+					.attr("id","batch"+batchID)
 					.append
-					(		
+					(
 						$("<div></div>")
-						.attr("class","col-xs-12 overflow_x")
+						.attr("class","row overflow_x")
 						.append
-						(
+						(		
 							$("<div></div>")
-							.attr("class","row")
+							.attr("class","col-xs-12 overflow_x")
 							.append
 							(
 								$("<div></div>")
-								.attr("class"," col-xs-12")
+								.attr("class","row")
 								.append
 								(
 									$("<div></div>")
-									.attr("class"," col-xs-12 ")
+									.attr("class"," col-xs-12")
 									.append
 									(
-										$("<span></span>")
-										.attr("id","batch_name")
-										.attr("class","text_over_flow_hide")
+										$("<div></div>")
+										.attr("class"," col-xs-12 ")
 										.append
 										(
-											$("<a></a>")
-											.prop("href","/batches/show/"+batchID)
-											.text(institute)
+											$("<span></span>")
+											.attr("id","batch_name")
+											.attr("class","text_over_flow_hide")
+											.append
+											(
+												$("<a></a>")
+												.prop("href","/batches/show/"+batchID)
+												.text(institute)
+											)									
 										)									
-									)									
-								)																					
+									)																					
+								)
 							)
 						)
 					)
-				)
-				.append
-				(
-					$("<div></div>")
-					.attr("class","row overflow_x")
 					.append
 					(
 						$("<div></div>")
-						.attr("class","col-xs-7")
+						.attr("class","row overflow_x")
 						.append
 						(
 							$("<div></div>")
-							.attr("class","inst_name col-xs-12 text_over_flow_hide")
-							.text(subcategory+', '+locality)
-						)						
+							.attr("class","col-xs-7")
+							.append
+							(
+								$("<div></div>")
+								.attr("class","inst_name col-xs-12 text_over_flow_hide")
+								.text(subcategory+', '+locality)
+							)						
+							.append
+							(
+								$("<div></div>")
+								.attr("class","col-xs-12  batchDetailsAndPrice")
+								.append
+								(								
+										$("<div style='clear:both'></div>")
+										.attr("class","row")									
+										.append
+										(
+											$("<div></div>")
+											.attr("id","inst_type")
+											.attr("title",locality+", "+landmark+", "+address)	
+											.attr("class"," col-xs-12 ")								
+											.append
+											(
+												$("<span></span>")
+												.attr("id","hand-icon")
+												.attr("class","glyphicon glyphicon-map-marker")
+											)
+											.append
+											(
+												$("<span></span>")																					
+												.text(locality+", "+landmark)
+											)
+										)
+										.append
+										(
+											$("<div></div>")
+											.attr("id","inst_price")									
+											.attr("class"," col-xs-12 ")								
+											.append
+											(
+												$("<span></span>")
+												.attr("id","hand-icon")
+												.attr("class","glyphicon glyphicon-time")
+											)
+											.append
+											(
+												$("<span></span>")																					
+												.text("Mon-Sat: 5am-6pm")
+											)
+										)
+									
+								)																					
+							)		
+						)
 						.append
 						(
 							$("<div></div>")
-							.attr("class","col-xs-12  batchDetailsAndPrice")
-							.append
-							(								
-									$("<div style='clear:both'></div>")
-									.attr("class","row")									
-									.append
-									(
-										$("<div></div>")
-										.attr("id","inst_type")
-										.attr("title",locality+", "+landmark+", "+address)	
-										.attr("class"," col-xs-12 ")								
-										.append
-										(
-											$("<span></span>")
-											.attr("id","hand-icon")
-											.attr("class","glyphicon glyphicon-map-marker")
-										)
-										.append
-										(
-											$("<span></span>")																					
-											.text(locality+", "+landmark)
-										)
-									)
-									.append
-									(
-										$("<div></div>")
-										.attr("id","inst_price")									
-										.attr("class"," col-xs-12 ")								
-										.append
-										(
-											$("<span></span>")
-											.attr("id","hand-icon")
-											.attr("class","glyphicon glyphicon-time")
-										)
-										.append
-										(
-											$("<span></span>")																					
-											.text("Mon-Sat: 5am-6pm")
-										)
-									)
-								
-							)																					
-						)		
-					)
-					.append
-					(
-						$("<div></div>")
-						.attr("class","col-xs-5")
-						.append
-						(
-							$("<div></div>")
-							.attr("class","col-xs-12 singleSessionPrice text_over_flow_hide ")								
+							.attr("class","col-xs-5")
 							.append
 							(
-								$("<div></div>")								
-								.text("₹ "+price+" / Session")									
-							)
-							.append
-							(
-								$("<a></a>")
-								.attr("class","btn btn-primary")
-								.attr("id","booknowButton")	
-								.attr("href","/batches/show/"+batchID)							
-								.text("Book Now")
-							)
-							.append
-							(
-								$("<div style='display:none'></div>")
-								.attr("class"," col-xs-12 ")
-								.attr("id","inst_contact")
-								.attr("onClick","show_contact("+index+")")
+								$("<div></div>")
+								.attr("class","col-xs-12 singleSessionPrice text_over_flow_hide ")								
 								.append
 								(
-									$("<span></span>")
-									.attr("id","cell-icon")
-									.attr("class","glyphicon glyphicon-phone-alt")
+									$("<div></div>")								
+									.text("₹ "+price+" / Session")									
 								)
 								.append
 								(
-									$("<span style='display:none'></span>")
-									.attr("id","contact"+index)
-									.attr("value",batchID)
-									.text(" "+contact)									
+									$("<a></a>")
+									.attr("class","btn btn-primary")
+									.attr("id","booknowButton")	
+									.attr("href","/batches/show/"+batchID)							
+									.text("Book Now")
 								)
 								.append
 								(
-									$("<span></span>")
-									.attr("id","show_contact"+index)
-									.text(" View Number")								
-								)								
-							)	
-						)			
-					)
-				)			
-				.appendTo(linksContainer);				
+									$("<div style='display:none'></div>")
+									.attr("class"," col-xs-12 ")
+									.attr("id","inst_contact")
+									.attr("onClick","show_contact("+index+")")
+									.append
+									(
+										$("<span></span>")
+										.attr("id","cell-icon")
+										.attr("class","glyphicon glyphicon-phone-alt")
+									)
+									.append
+									(
+										$("<span style='display:none'></span>")
+										.attr("id","contact"+index)
+										.attr("value",batchID)
+										.text(" "+contact)									
+									)
+									.append
+									(
+										$("<span></span>")
+										.attr("id","show_contact"+index)
+										.text(" View Number")								
+									)								
+								)	
+							)			
+						)
+					)			
+					.appendTo(linksContainer);	
+				}			
 		    }
 		  	$('span.stars').stars();
 		}	

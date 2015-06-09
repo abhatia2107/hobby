@@ -54,16 +54,15 @@
     }
     #sample-batch-details
     {
-      font-size: 20px;
+      font-size: 16px;
       padding:20px 60px 20px 60px;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
       padding-bottom: 50px;
     }
 
     #comments
     {
-      clear: both;
-      margin-top: 50px;
+      clear: both;     
       font-size: 20px;
       padding:20px 60px 20px 60px;
       width: 100%;
@@ -100,14 +99,22 @@
 
     #pin-icon
     {
-      font-size: 20px;
+      font-size: 16px;
       color: #0099FF;
-      margin-left: 5px;
+      margin: 5px 5px 0px 0px;
     }
+
+    #batch-facilities {text-align: center;margin-top: 20px;}
     .batch-details
     {
       margin-top: 10px;
     }
+    .batch-details .glyphicon
+    {           
+      color: #0099FF;
+      margin: 10px 5px 0px 0px;   
+    }
+
     #sample-batch-description
     {
       margin-top: 30px;
@@ -216,6 +223,8 @@
 
   .help-block {color: #a94442 !important}
 
+  .facilities_icon {margin-right: 5px;}
+
   </style> 
 @stop
 @section('content')
@@ -241,6 +250,15 @@
     $twitterLink = $batchDetails->institute_twitter; 
     $locality_id = $batchDetails->venue_locality_id; 
     $locality =  $batchDetails->locality;
+    $landMark = $batchDetails->venue_landmark;
+    $location = $batchDetails->location;
+    $facilitiesName = ["Air Conditioning","Cafe","Changing Room","Locker","Shower Room","Steam"];
+    $facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
+    $facilitesAvailable = [];
+    for ($i=0; $i < 6 ; $i++) { 
+      $facilitesAvailable[$i] = $batchDetails->$facilities[$i];      
+    }
+    $facilitesAvailable = ['1','0','1','0','1','0'];
     $todayDate = date('Y-m-d');
 ?>
 
@@ -251,7 +269,7 @@
         <div class="col-sm-10 col-md-10">
           <div id='sample-institute-name'>{{$instituteName}}</div>
           <div id='sample-batch-type'>{{'  '.$subcategory}},{{' '.$category}}</div>
-          <div id='sample-institute-address'><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$instituteAddress}}</div>
+          <div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$instituteAddress}}</div>
           <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  '.$instituteContact}}</div>
         </div>
         <div class="col-sm-2 col-md-2">
@@ -266,25 +284,29 @@
 </div>
 <div class="container" id='blog-container'>
   <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1" style="margin-bottom:25px">
+    <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1" style="margin-bottom:15px">
       <div id="sample-batch-details" class="sample-box col-md-12 col-sm-12 col-xs-12" >
-        <div id='sample-batch-name'>{{$batchName}} Details</div>
-        <div id='batch-session-count' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-          Sessions per Week: {{$sessionsCount}}
+        <div id='sample-batch-name'>{{$instituteName}} Details</div>
+        <div id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
+          {{$instituteAddress.', '.$locality.', '.$location.', '.$landMark}}
         </div>
-        <!--<div id='batch-openclass' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-          Trial Class: {{$trial[$trialClass]}}
+        <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
+          {{$instituteContact}}
         </div>
-        <div id='batch-gender' class="batch-details"><i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-          Gender:{{' '.$gender_group[$genderGroup]}}
-        </div>-->
+        <div id='batch-facilities' class="batch-details">
+          @for($i=0;$i<=5;$i++)            
+              <span class="facilities_icon" @if($facilitesAvailable[$i]==0) style="opacity:.2" @endif>
+                <img src="/assets/images/Facilities/{{$facilitiesName[$i]}}.png" width="35px" height="35px" title="{{$facilitiesName[$i]}}" alt="{{$facilitiesName[$i]}}">
+              </span>           
+          @endfor
+        </div>
       </div>
       <div id="comments" class="sample-box">
         <div id='sample-batch-name'>Write a Review</div>
         <form  action='/comments/store/' method='post' id="commentsForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
           <div class="form-group" id='rating-input'>
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="comment_institute_id" value="{{$instituteID}}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="comment_institute_id" value="{{$instituteID}}">
               <span class="rating" >
               @for($index = 5; $index > 0;$index--)
                 <input type="radio" class="rating-input" required='required'
@@ -334,7 +356,7 @@
             </div>    
             <div class="row batchOrderField">
               <div class='col-xs-9'>
-                <input type="text" style="width:100%" placeholder="Enter Promo Code" class="form-control" id="promoCode" name="Promo Code" />                     
+                <input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="Promo Code" />                     
               </div>
               <div class='col-xs-3' style="text-align:left;padding:1px 0px 1px 0px;font-size:15px;">
                  <a href="javascript:verifyPromoCode();">Apply</a>
@@ -386,10 +408,12 @@
           <input type="submit">
         </form> -->
       </div>
+      @if($instituteDetails!=null)
       <div class="sample-box-small" id='institute-details'>
          <div id='sample-batch-name'>Institute Details</div>
          <span id='sample-details' class="details-container">{{$instituteDetails}}</span>    
       </div>
+      @endif
      <!--<div id='sample-social-profiles' class="sample-box-small">
        <div id='sample-batch-name'>Social Profiles</div>
           <div class="social-profiles-container">

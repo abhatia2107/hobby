@@ -91,6 +91,14 @@
 
   hr {margin: 10px 0px 10px 0px; }
 
+  .facilities_icon {margin-right: 1px;}
+
+  #batch-facilities {text-align: center;margin-top: 20px;}
+
+  .batch-details {  margin-top: 10px;  }
+
+  .batch-details .glyphicon  {  color: #0099FF;margin: 10px 5px 0px 0px; }
+
 </style> 
 
 @stop
@@ -118,6 +126,16 @@
     $twitterLink = $batchDetails->institute_twitter;
     $locality_id = $batchDetails->venue_locality_id; 
     $locality =  $batchDetails->locality;    
+    $landMark = $batchDetails->venue_landmark;
+    $location = $batchDetails->location;
+    $facilitiesName = ["Air Conditioning","Cafe","Changing Room","Locker","Shower Room","Steam"];
+    $facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
+    $facilitesAvailable = [];
+    for ($i=0; $i < 6 ; $i++) { 
+      $facilitesAvailable[$i] = $batchDetails->$facilities[$i];      
+    }
+    $facilitesAvailable = ['1','0','1','0','1','0'];
+    $todayDate = date('Y-m-d');
 ?>
 <div id="page" class="hfeed site overflow_x" style="background-image: url(/assets/images/sample/Stocksy_txp782c31421CE000_Medium_85879.jpg);">
   <div id="content" class="site-content">
@@ -126,8 +144,8 @@
         <div class="sample_batch_detail">
           <div class='sample-institute-name'>{{$instituteName}}</div>
           <div>{{'  '.$subcategory}},{{' '.$category}}</div>
-          <li><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$instituteAddress}}</li>
-          <li><div class='glyphicon glyphicon-phone-alt'></div>{{'  '.$instituteContact}}</li>
+          <li><div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$instituteAddress}}</div></li>
+          <li><div class='glyphicon glyphicon-phone-alt'></div>&nbsp;<a style="color:white" href="tel:{{$instituteContact}}">{{$instituteContact}}</a></li>
         </div>        
       </div>
     </div>
@@ -206,17 +224,26 @@
     </form>
   </div>        
 </div> 
-<div class="container blog-container overflow_x" style="margin:0;padding:0">
-  <div class="row overflow_x" style="width:100%;margin:0">    
-    <div class="col-xs-12">
-      <div class="col-xs-12">
+<div class="container blog-container" style="margin:0;padding:0">
+  <div class="row" style="width:100%;margin:0">    
+    <div class="col-xs-12">            
         <div id="sample-batch-details" class="sample-box " >
-          <div class='sample_box_title'>Batch Details</div>
+          <div class='sample_box_title'><span class="text_over_flow_hide">{{$instituteName}} Details</span></div>
           <div class="sample_box_data">
             <div id='batch-session-count' class="batch-details">
-              <i class='glyphicon glyphicon-pushpin' id='pin-icon'></i>
-              Sessions per Week: {{$sessionsCount}}
-            </div>    
+              <span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
+              {{$instituteAddress.', '.$locality.', '.$location.', '.$landMark}}
+            </div> 
+            <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
+              {{$instituteContact}}
+            </div> 
+            <div id='batch-facilities' class="batch-details">
+              @for($i=0;$i<=5;$i++)            
+                  <span class="facilities_icon" @if($facilitesAvailable[$i]==0) style="opacity:.2" @endif>
+                    <img src="/assets/images/Facilities/{{$facilitiesName[$i]}}.png" width="35px" height="35px" title="{{$facilitiesName[$i]}}" alt="{{$facilitiesName[$i]}}">
+                  </span>           
+              @endfor
+            </div> 
           </div>   
         </div>
         <div class="sample-box " id='institute-details'>
@@ -255,7 +282,7 @@
             </form>
           </div>
         </div>            
-      </div>
+      
     </div>  
   </div>
   <div class="space_footer"></div>

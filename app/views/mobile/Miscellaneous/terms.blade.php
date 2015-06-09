@@ -5,20 +5,20 @@
     		<div class="col-lg-12 col-md-12 col-sm-12">
     		    <div class="row userInfo">
         			<div class="col-xs-12 col-sm-12">
-	          			<h1 class=" text-left border-title"> Use of the hobbyix.com service/system constitutes acceptance of the following TERMS OF USE.</h1>
-	          			<h1 class=" text-center border-title"> Terms and Conditions </h1>
-	          			<h3 class=" text-left border-title"> ACCEPTANCE OF TERMS THROUGH USE </h3>
+	          			<h1 class=" text-left border-title" style="font-size:18px"> Use of the hobbyix.com service/system constitutes acceptance of the following TERMS OF USE.</h1>
+	          			<h1 class=" text-center border-title" style="font-size:20px"> Terms and Conditions </h1>
+	          			<h3 class=" text-left border-title" style="font-size:16px"> ACCEPTANCE OF TERMS THROUGH USE </h3>
                         <p ><strong>By using hobbyix.com or by clicking “I agree” to this Agreement, you (“User”) signify your agreement to these terms and conditions.</strong> </p>
                         <p>If you do not agree to this Agreement please do not use this site and do not click “I agree”. Please check this Agreement periodically for changes as the owner of this site (“HOBBYIX”) reserves the right to revise this Agreement and your continued use of this site following the posting of any changes to the Agreement constitutes acceptance of such changes. HOBBYIX reserves the right to terminate a User’s use of this site at any time without notice and may do so for any breach of this Agreement or the instructions on this site by User. This Agreement applies to licensor and advertisers as well.</p>
                         <hr>
-                        <h3 class=" text-left border-title">YOU MUST BE OVER 18 TO AGREE TO THIS AGREEMENT</h3>
+                        <h3 class=" text-left border-title" style="font-size:16px">YOU MUST BE OVER 18 TO AGREE TO THIS AGREEMENT</h3>
                         <p >This Agreement must be completed, understood and agreed to by a person over 18. If a parent or guardian wishes to permit a person under 18, and under his or her supervision, to use this site, he or she should email HOBBYIX with his or her explicit permission and acceptance of full legal responsibility for the minor to do so. If you are not yet 18, or are accessing this site from any country where material on this site is prohibited or illegal, please leave now as you do not have permission to access this site.</p>
                         <hr>
-                        <h3 class=" text-left border-title">LICENSE TO USE THIS SITE</h3>
+                        <h3 class=" text-left border-title" style="font-size:16px">LICENSE TO USE THIS SITE</h3>
                         <p >Upon your agreement to this Agreement, HOBBYIX hereby grants you a non-exclusive, non-transferable limited license to use this site in strict accordance with the terms and conditions in this Agreement and as permitted via instructions on this site. You agree not to make any false or fraudulent statements in your use of or to gain access to this site. You acknowledge and agree that all content and services available on this site are property of HOBBYIX and its advertisers and licensors and are protected by copyrights, moral rights, trademarks, service marks, patents, trade secrets, and other proprietary rights and laws, in India and internationally. All rights not expressly granted herein are fully reserved by HOBBYIX, its advertisers and licensors. You agree to pay for any and all purchases and services made using your name and credit card through this Site, not to challenge any such charges and to pay for all collections and/or attorney’s fees resulting from any non-payment.
                         </p>
                         <hr>
-                        <h3 class=" text-left border-title">LICENSE RESTRICTIONS
+                        <h3 class=" text-left border-title" style="font-size:16px">LICENSE RESTRICTIONS
                         </h3>
                         <div class="w100 clearfix">
                             <h4>USE</h4>

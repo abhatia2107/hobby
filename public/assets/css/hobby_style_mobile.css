@@ -6,13 +6,17 @@ body,html { font-family: 'Open Sans',sans-serif;margin: 0 0; max-width: 100%;ove
 
 body li {  list-style-type: none; }
 
-.filter_page_container .alert {  margin: 0px;width: 100%;border-radius: 0px;padding: 10px; }
+.membership_message  {  margin: 0px;width: 100%;border-radius: 0px;padding: 0px;background-color : transparent;background-color: rgba(0, 0, 0, 0.5);color: white }
 
-.filter_page_container .alert a{  color: green;font-weight: bold; }
+.membership_message  a{  color: white;font-weight: bold;}
 
-.filter_page_container .alert button { margin-right:20px;color: black}
+.membership_message .alert {margin: 0px;padding: 7px 10px;}
 
-.membership_message {display: none;}
+.membership_message button { margin-right:2px;color: white;opacity: .7;margin-top: -5px}
+
+.membership_message h3 {margin: 0px 0px 3px 0px;padding:0px 0px;font-size: 17px; } 
+
+.membership_message {display: none;text-align: center;font-size: 14px;font-weight: normal;}
 
 .website-title {color: white;font-size: 25px;padding-left: 0px;}
 
@@ -42,7 +46,7 @@ body li {  list-style-type: none; }
 
 .min-button {  float: right;  }
 
-.homepage-cover { padding: 6em 0 6em; } 
+.homepage-cover { padding: 11em 0 8em; } 
 
 #page { color: white;font-weight: bold; }
 
@@ -56,9 +60,9 @@ body li {  list-style-type: none; }
 
 .home-cover-title { margin-bottom: 40px; }
 
-.homepage-cover h1 { font-size: 35px;color:white;font-weight: bold; }
+.homepage-cover h1 { font-size: 22px;color:white;font-weight: bold; margin: 5px 0px}
 
-.homepage-cover h2 { font-size: 25px;color:white;font-weight: bold; }
+.homepage-cover h2 { font-size: 17px;color:white;font-weight: normal;margin: 0px }
 
 .overlay-slider { width: 100% !important;height: 100% !important;margin-top: 0px;top:0;left:0;
   background: url("/assets/images/home/institute.jpg"); 

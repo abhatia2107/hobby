@@ -1,5 +1,15 @@
 @extends('Layouts.layout')
 <style type="text/css">
+
+.user_account_page {  background:#f0f3f6;min-height: 320px;width: 100%;color: #333;}
+
+.uac_sidebar_header{  padding: 3px 15px 2px 15px;border-bottom:1px solid;border-color: #20cfb1;font-size: 21px;color: #333;text-align: center;} 
+
+.uac_profile li { margin: 5px;}
+
+.uac_sidebar, .uac_profile, .uac_orders { font-family: 'Open Sans',sans-serif;background: none repeat scroll 0% 0% #FFF; border: 1px solid #E8E8E8;padding: 10px 10px 10px 10px;margin-bottom: 10px; }
+
+
 .uac_change_password {background: white;padding: 15px 15px 0px 15px;}
 
 .uac_change_password input[type=password] {height: 30px; padding:2px 5px;}
@@ -8,13 +18,9 @@
 
 </style>
 @section('content')
-<?php $nav_item = 3; ?>
-<div class="container user_account_page">
-  	<div class="col-xs-12 uac_container">
-	   	<div class="col-xs-12">
-        	@include('Users.sidebar')
-      	</div>      	
-	    <div class="col-xs-12" >	    	
+<div class="container user_account_page" style="margin:0px;padding:0px">
+  	<div class="col-xs-12 uac_container" style="margin:40px 0px;padding:0">	   	  
+	    <div class="col-xs-12" style="margin:0px;padding:0px">	    	
 	    	<div class="uac_orders" style="background:white !improtant"> 
 	      		<div class="uac_sidebar_header">
 	            	Change Password       

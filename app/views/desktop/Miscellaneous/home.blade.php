@@ -1,21 +1,24 @@
 @extends('Layouts.layout')
 @section('content')
-<div class="container filter_page_container membership_message" style="position:absolute;opacity:.7">
-	<div class="alert alert-success alert-dismissable">
-		 <button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-		<h4><a href="/Membership">Hobbyix Membership</a></h4>
-		<strong>Buy Membership and get access to everything</strong>
+<div class="container membership_message" style="position:absolute;">	
+	<div class="alert">		
+		<div style="color:white;position:absolute;right:40px;">
+			<a href="tel:9100946081">Call: 9100946081</a>
+		</div>
+		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>		 
+		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
+		<strong>{{$homeLang['home_membership_tagline']}}</strong>		
 	</div>
 </div>
 <div class="overlay-slider">
 <div class="homepage-cover">
    <div class="container" id="hompage-cover">
-      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.2);">
+      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.2);padding:0px 0px 5px 0px;">
          <div>
             <h1>{{$homeLang['home_title']}}</h1>
             <h2>{{$homeLang['home_subtitle']}}</h2>
          </div> 
-         <div class="explore_button"><a href="/filter/categories/1/locations" class="btn btn-primary">Explore Now</a></div>  
+         <div class="explore_button" ><a href="/filter/categories/1/locations" class="btn btn-primary">Explore Now</a></div>  
       </div>
    </div>
 </div>

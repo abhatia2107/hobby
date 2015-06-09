@@ -1,24 +1,27 @@
 @extends('Layouts.layout')
 @section('content')
-<div class="container filter_page_container membership_message" style="position:absolute;width:100%;margin:0;padding:0">
-	<div class="alert alert-success alert-dismissable">
-		 <button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">X</button>
-		<h4><a href="/Membership">Hobbyix Membership</a></h4>
-		<strong>Buy Membership and get access to everything</strong>
-	</div>
-</div>
 <div class="overlay-slider">
 <div class="homepage-cover">
-   <div class="container" id="hompage-cover">
-      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.3);">
+   <div class="container" id="hompage-cover" style="margin:0;padding:0">
+      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.5);padding:5px 0px 10px 0px;">
          <div>
             <h1>{{$homeLang['home_title']}}</h1>
             <h2>{{$homeLang['home_subtitle']}}</h2>
          </div>
-         <div class="explore_button"><a href="/filter/categories/1/locations" class="btn btn-primary">Explore Now</a></div>  
+         <div class="explore_button" style="padding-top:8px"><a href="/filter/categories/1/locations" class="btn btn-primary">Explore Now</a></div>  
       </div>
    </div>
 </div>
+</div>
+<div class="container membership_message" style="background:#3396D1">
+	<div class="alert">		
+		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
+		<strong>{{$homeLang['home_membership_tagline']}}</strong>
+		<div style="color:white;">
+			<a href="tel:9100946081">Call: 9100946081</a>
+		</div>
+	</div>
 </div>
 <div class="container featured_listing_container">
 	<div class="featured_listing_title">Fitness Studios</div>

@@ -252,6 +252,7 @@
     $twitterLink = $batchDetails->institute_twitter; 
     $locality_id = $batchDetails->venue_locality_id; 
     $locality =  $batchDetails->locality;
+    $pincode =  $batchDetails->venue_pincode;
     $landMark = $batchDetails->venue_landmark;
     $location = $batchDetails->location;
     $facilitiesName = ["Air Conditioning","Cafe","Changing Room","Locker","Shower Room","Steam"];
@@ -271,8 +272,8 @@
         <div class="col-sm-10 col-md-10">
           <div id='sample-institute-name'>{{$instituteName}}</div>
           <div id='sample-batch-type'>{{'  '.$subcategory}},{{' '.$category}}</div>
-          <div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$instituteAddress}}</div>
-          <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  '.$instituteContact}}</div>
+          <div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$locality}}</div>
+          <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  +91'.$instituteContact}}</div>
         </div>
         <div class="col-sm-2 col-md-2">
           <div class="submitReviewButton">
@@ -290,10 +291,10 @@
       <div id="sample-batch-details" class="sample-box col-md-12 col-sm-12 col-xs-12" >
         <div id='sample-batch-name'>{{$instituteName}} Details</div>
         <div id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
-          {{$instituteAddress.', '.$locality.', '.$location.', '.$landMark}}
+          {{$instituteAddress.', '.$landMark.', '.$locality.', '.$location.', '.$pincode}}
         </div>
         <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
-          {{$instituteContact}}
+          +91{{$instituteContact}}
         </div>
         <div id='batch-facilities' class="batch-details">
           @for($i=0;$i<=5;$i++)            

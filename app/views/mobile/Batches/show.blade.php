@@ -7,11 +7,11 @@
 
   #page { width: 100%;margin-top: 0px;padding: 4em 0 1.2em;
           background-repeat:no-repeat;
-        background-position:center top;
+        background-position:center center;
         -o-background-size: 130% 120%, auto;
         -moz-background-size: 130% 120%, auto;
         -webkit-background-size: 130% 120%, auto;
-        background-size: 130% 150%, auto;}
+        background-size: 100% 100%, auto;}
 
   .samplePageInfo {  background: rgba(0, 0, 0, 0.4); color: white; padding: 0px 0px 10px 0px;}
 

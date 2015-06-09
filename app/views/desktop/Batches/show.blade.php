@@ -6,6 +6,8 @@
      {
       width: 100%;
       margin-top: 0px;
+       background-repeat:no-repeat;background-position:center center;-o-background-size: 100% 135%, auto;
+      -moz-background-size: 100% 135%, auto;-webkit-background-size: 100% 135%, auto;background-size: 100% 135%, auto;
 
     }
     #sample-institute-name

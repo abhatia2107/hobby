@@ -3,7 +3,7 @@
 <div class="container membership_message" style="position:absolute;">	
 	<div class="alert">		
 		<div style="color:white;position:absolute;right:40px;">
-			<a href="tel:9100946081">Call: 9100946081</a>
+			<!-- <a href="tel:+919100946081"> -->Call: +91-9100 946 081<!-- </a> -->
 		</div>
 		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>		 
 		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>

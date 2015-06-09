@@ -19,7 +19,7 @@
 		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
 		<strong>{{$homeLang['home_membership_tagline']}}</strong>
 		<div style="color:white;">
-			<a href="tel:9100946081">Call: 9100946081</a>
+			<a href="tel:+919100946081">Call: +91-9100 946 081</a>
 		</div>
 	</div>
 </div>

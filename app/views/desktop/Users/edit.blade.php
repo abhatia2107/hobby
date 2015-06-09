@@ -1,23 +1,13 @@
 @extends('Layouts.layout')
 @section('content')
-    <form method="post" enctype="multipart/form-data" action="/users/update">
-		<div class="col-xs-12 col-sm-6">
-		<div class="form-group required">
-		<label for="InputPasswordnew"> Current Password<sup>*</sup> </label>
-		<input type="hidden" name="token" value="{{ csrf_token() }}">
-		<input type="password"  name="current_password" class="form-control" id="InputPasswordnew">
-		</div>
-		<div class="form-group required">
-		<label for="InputPasswordnew"> New Password<sup>*</sup> </label>
-		<input type="password"  name="password" class="form-control" id="InputPasswordnew">
-		</div>
-		<div class="form-group required">
-		<label for="InputPasswordnewConfirm"> Confirm Password<sup>*</sup></label>
-		<input type="password"  name="password_confirmation" class="form-control" id="InputPasswordnewConfirm">
-		</div>
-		</div>
-		<div class="col-lg-12">
-		<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> &nbsp; Change Password </button>
-		</div>
-	</form>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=417226411769220";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+	<div class="fb-like" data-href="https://www.facebook.com/pages/HOBBYIX/836049089804962" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 @stop

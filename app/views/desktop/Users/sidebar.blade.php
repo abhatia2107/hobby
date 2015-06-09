@@ -13,7 +13,7 @@
 
 .uac_credits_container {padding: 10px 10px;font-size: 21px;border-bottom:1px solid;border-color: #20cfb1;}
 
-.uac_credits_container .glyphicon {color:  #20cfb1;font-size: 25px;text-align: left;}
+.uac_credits_container .fa {color:  #20cfb1;font-size: 25px;text-align: left;}
 
 .uac_container { margin-top: 50px;}
 
@@ -34,7 +34,7 @@
     {{$user_name}}            
   </div>
   <div class="uac_credits_container">
-      <span class="glyphicon glyphicon-credit-card"></span>
+      <span class="fa fa-credit-card"></span>
       {{$credits}} Credits
   </div>
   <div class="uac_nav_items">

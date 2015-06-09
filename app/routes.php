@@ -72,7 +72,9 @@ Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');
 Route::get('/test', 'BookingsController@test');
-Route::get('/test2', 'BookingsController@test2');
+Route::get('/test2', function(){
+	return View::make('Users.edit');
+});
 Route::get('/email', 'BookingsController@sms_email');
 Route::post('/bookings/redirect','BookingsController@redirect');
 Route::post('/bookings/cancel','BookingsController@cancel');

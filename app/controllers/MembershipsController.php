@@ -9,10 +9,10 @@ class MembershipsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$end_date=strtotime((Carbon::now()->addDays(30)->toDateTimeString()));
+		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
 		$credentials['start_date']=date('Y-m-d');
 		$credentials['end_date']=date('Y-m-d',$end_date);
-		$credentials['payment']='2000';
+		$credentials['payment']='1';
 		$credentials['start']=date('d M Y');
 		$credentials['end']=date('d M Y', $end_date);
 		$credentials['credits']=30;
@@ -236,53 +236,36 @@ class MembershipsController extends \BaseController {
 		return Redirect::route('Memberships.index');
 	}
 
-
 	public function sms_email($membership_id)
 	{
 		// $membership_id=1;
-		$membership=Booking::find($membership_id);
-		$batch=$this->batch->getBatch($membership->batch_id);
+		$membership=Membership::find($membership_id);
+		$user=User::find($membership->user_id);
 		$data = array(
 					'order_id' => $membership->order_id,
-					'institute' => $batch->institute, 
-					'subcategory' => $batch->subcategory,
 					'amount' => $membership->payment,
-					'date' => date("d M Y", strtotime($membership->membership_date)),
-					'no_of_sessions' => $membership->no_of_sessions,
-					'venue_address' => $batch->venue_address,
-					'locality' => $batch->locality,
-					'location' => $batch->location,
-					'venue_landmark' => $batch->venue_landmark,
-					'venue_pincode' => $batch->venue_pincode,
-					'venue_email' => $batch->venue_email,
-					'venue_contact_no' => $batch->venue_contact_no,
-					'user_name' => $membership->name,
-					'user_email' => $membership->email,
-					'user_contact_no' => $membership->contact_no,
+					'start_date' => date("d M Y", strtotime($membership->start_date)),
+					'end_date' => date("d M Y", strtotime($membership->end_date)),
+					'credits' => $membership->credits,
+					'user_name' => $user->user_first_name.' '.$user->user_last_name,
+					'user_email' => $user->email,
+					'user_contact_no' => $user->user_contact_no,
 					'admin_contact_no' => '9100946081',
-					'admin_email' => 'membership@hobbyix.com'
+					'admin_email' => 'booking@hobbyix.com'
 					);
 		$email= $membership->email;
-		$user_msg='Hi user, Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
-		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com';
-		$admin_msg=$membership_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'.';
-		$subject='Booking Successful';
+		$user_msg='Hi user, Order id: '.$data['order_id'].'. Thanks for buying Hobbyix Membership. 30 credits have been added to your account, valid till'. $data['end_date'];
+		dd($user_msg);
+		$admin_msg='Membership booked, '.$membership_id.', Order id: '.$data['order_id']. ' by '. $data['user_contact_no'].'.';
+		$subject='Hobbyix Membership Booking Confirmation';
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.membership.user', $data, function($message) use ($email, $subject)
 		{
 			$message->to($email)->subject($subject);
 		});
 
-		$email=$batch->venue_email;
-		$subject='Booking for your class done';
-		$this->sms(false, $data['venue_contact_no'], $institute_msg);
-		Mail::send('Emails.membership.institute', $data, function($message) use ($email,$subject)
-		{
-			$message->to($email)->subject($subject);
-		});
-
 		$email=$data['admin_email'];
-		$subject='Booking Done';
+		$subject='Hobbyix Membership Booking Done';
 		$this->sms(false, $data['admin_contact_no'], $admin_msg);
 		Mail::send('Emails.membership.admin', $data, function($message) use ($email,$subject)
 		{

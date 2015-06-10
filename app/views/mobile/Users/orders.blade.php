@@ -52,8 +52,9 @@
                 <div>
                   @if($booking->referral_credit_used)
                     Credit Used: <span class="order_values">{{referral_credit_used}}/-</span>
-                  else
+                  @else
                     Amount Paid: <span class="order_values">Rs. {{$booking->payment}}/-</span>
+                  @endif
                   </div>
               </div>
             </div>

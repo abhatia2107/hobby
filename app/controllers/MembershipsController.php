@@ -14,6 +14,7 @@ class MembershipsController extends \BaseController {
 		$credentials['end_date']=date('Y-m-d',$end_date);
 		$credentials['payment']='2000';
 		$credentials['start']=date('d M Y');
+		$credentials['end']=date('d M Y', $end_date);
 		$credentials['credits']=30;
 		return View::make('Memberships.index',compact('credentials'));
 	}

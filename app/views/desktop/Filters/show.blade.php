@@ -78,7 +78,7 @@
 			Call: +919100 946 081
 		</div>
 		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
+		<h3><a href="/memberships"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
 		<strong>{{$homeLang['home_membership_tagline']}}</strong>
 	</div>
 </div>
@@ -429,7 +429,8 @@
 										(
 											$("<div></div>")
 											.attr("id","inst_price")									
-											.attr("class","col-md-12 col-xs-12 col-sm-12")								
+											.attr("class","col-md-12 col-xs-12 col-sm-12 text_over_flow_hide")
+											.attr("title",comment+' '+tagline)
 											.append
 											(
 												$("<span></span>")

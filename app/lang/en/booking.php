@@ -23,4 +23,12 @@
 		"booking_not_exist"=>"No booking exist with this ID.",
 	
 		"booking_access_failed"=>"You don't have permission to access this booking details.",
+
+		"booking_not_enough_credit"=>"You don't have enough credits to book this class."
+
+		"booking_already_done"=>"You have already booked one class for this day, using Hobbyix Membership, if you wish to book more, kindly use another payment method."
+
+		"booking_one_allowed"=>"Sorry, you can book only one session using Hobbyix Membership."
+
+		""
 	);

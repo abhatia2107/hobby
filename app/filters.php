@@ -15,7 +15,11 @@
 
 App::before(function($request)
 {
-	//
+	if ((Request::root()=== 'http://hobbyix.in')||(Request::root()=== 'http://www.hobbyix.in'))
+	// if ((Request::root()=== 'http://localhost:8000'))
+	{
+		return Redirect::to('http://hobbyix.com/'.Request::path());
+	}
 });
 
 

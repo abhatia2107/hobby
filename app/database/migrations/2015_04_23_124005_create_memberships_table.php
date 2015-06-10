@@ -20,6 +20,8 @@ class CreateMembershipsTable extends Migration {
 			$table->date('end_date');
 			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users');
 			$table->integer('payment');
+			$table->string('order_id',8);
+			$table->string('order_status',10)->nullable();
 			$table->integer('promo_id')->unsigned()->nullable()->foreign('promo_id')->references('id')->on('promos');
 	        $table->softDeletes();
 			$table->timestamps();

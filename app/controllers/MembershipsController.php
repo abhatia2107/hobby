@@ -260,7 +260,6 @@ class MembershipsController extends \BaseController {
 					);
 		$email= $user->email;
 		$user_msg='Hi user, Order id: '.$data['order_id'].'. Thanks for buying Hobbyix Membership. 30 credits have been added to your account, valid till '. $data['end_date'];
-		dd($user_msg);
 		$admin_msg='Membership booked, '.$membership_id.', Order id: '.$data['order_id']. ' by '. $data['user_contact_no'].'.';
 		$subject='Hobbyix Membership Booking Confirmation';
 		$this->sms(true, $data['user_contact_no'], $user_msg);

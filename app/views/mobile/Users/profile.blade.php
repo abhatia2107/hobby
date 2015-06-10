@@ -31,9 +31,13 @@
           <div class="uac_sidebar_header">
             My Profile            
           </div>
-           <div class="uac_credits_container">
+          <div class="uac_credits_container">
               <span class="fa fa-credit-card"></span>
-              30 Credits
+              {{$user->user_credits_left}} Credits
+          </div>
+          <div class="uac_credits_container" style="font-size:12px;">
+              <span style="font-size:12px;" class="fa fa-calendar"></span>
+              Valid Till: {{$user->user_credits_expiry}}
           </div>
           <div class="uac_profile_itmes">
             <li><span class="uac_profile_item" >NAME : {{$user->user_first_name.' '.$user->user_last_name}}</span></li>

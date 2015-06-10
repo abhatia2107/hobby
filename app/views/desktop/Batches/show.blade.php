@@ -403,8 +403,10 @@
              <hr/>   
             <div class="row batchOrderButtons">  
               <button style="padding:5px 50px;background:lightgrey;color:black" class="booknowButton" id="goBackButton" >Go Back</button>
-              <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" >Pay Now</button>
-              <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
+              <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" name="submit" value="payment">Pay Now</button>             
+            </div>
+            <div class="row batchOrderButtons" style="margin-top:5px;">  
+              <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="booknowButton" name="submit" value="credit">Pay Using Hobbyix Membership</button>
             </div>
           </div>
         </form>

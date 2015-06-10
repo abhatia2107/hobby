@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <!--<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css"> -->
     <!--<link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css"> -->
-    <!--<link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css"> 
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.11.2.min.css" >
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrapValidator.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/hobby_style_mobile.css">  

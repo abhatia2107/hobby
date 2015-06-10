@@ -39,7 +39,7 @@
   </div>
   <div class="uac_credits_container" style="font-size:13px;">
       <span  style="font-size:13px;" class="fa fa-calendar"></span>
-      Valid Till: 05 Jun 2015
+      Valid Till: {{$user->user_credits_expiry}}
   </div>
   <div class="uac_nav_items">
     <li @if($nav_item==1) class="active" @endif> <a href="/users/MyProfile">My Profile</a></li>

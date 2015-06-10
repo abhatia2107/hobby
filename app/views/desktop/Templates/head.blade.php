@@ -14,6 +14,7 @@
     <meta name="keywords" content="{{$metaContent[2]}}">
     <meta name="author" content="Hobbyix">
     <meta property="og:image" content="/assets/images/home/banner.jpg">
+    <link rel="icon" type="image/png" href="/assets/images/hobbyix_favicon.png">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <!--<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css"> -->
     <!--<link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css"> -->

@@ -38,6 +38,7 @@ class MembershipsController extends \BaseController {
 	 */
 	public function store()
 	{
+		// dd(Input::all());
 		$credentials = Input::all();
 		$user_id=Auth::id();
 		// $user=User::find($user_id);
@@ -50,6 +51,7 @@ class MembershipsController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
+		unset($data['csrf_token']);
 		$credentials['order_id']=substr(uniqid(),0,8);
 		$credentials['user_id']=Auth::id();
 		$membership=Membership::create($credentials);

@@ -58,13 +58,13 @@ class BookingsController extends \BaseController {
 			$user=User::find($data['user_id']);
 			$booking_already_done = Booking::where('user_id',$data['user_id'])->where('booking_date', $data['booking_date'])->first();
 			if($data['no_of_sessions']==1){
-				if($user->user_credits_left>$data['credit']){
+				if($user->user_credits_left>$data['referral_credit_used']){
 					if(!$booking_already_done){
 						unset($data['csrf_token']);
 						unset($data['Promo_Code']);
 						$booking = Booking::create($data);
 						if($booking){
-							$user->user_credits_left=$user->user_credits_left-$data['credit'];
+							$user->user_credits_left=$user->user_credits_left-$data['referral_credit_used'];
 							$user->save();
 							$this->sms_email($booking->id);
 							$batch=$this->batch->getBatch($booking->batch_id);
@@ -349,8 +349,11 @@ class BookingsController extends \BaseController {
 /*
 	public function test()
 	{
-		$p=Hash::make('qwerty123');
-		dd($p);
+		$data['referral_credit_used']=2;
+		$user_id=Auth::id();
+		$user=User::find($user_id);
+		$user->user_credits_left=$user->user_credits_left-$data['referral_credit_used'];
+		dd($user);
 	}*/
 
 	public function sms($first,$mobile, $msg)

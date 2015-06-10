@@ -9,13 +9,13 @@
     <div class="panel-body">
     <div class="lead text-center">
 
-  <h4>Congratulations, your booking of {{$subcategory}} class with {{$institute}} is successful.</h4>
-  
-  <h4>Your Order ID for this order is <strong>{{$order_id}}</strong>.</h4>
-  
-  <h4>Booking Date: {{$date}}, No of sessions: {{$no_of_sessions}}</h4>
+        <h4>Congratulations, your payment for Hobbyix Membership is successful.</h4>
+        
+        <h4>Your Order ID for this order is <strong>{{$order_id}}</strong>.</h4>
+        
+        <h4>Expiry Date: {{$end_date}}, No of Credits: {{$credits}}</h4>
 
-  <h4>Continue to our <a href="{{url('/')}}">website.</a></h4>
+        <h4>Continue to our <a href="{{url('/')}}">website.</a></h4>
 
   </div>
   </div>

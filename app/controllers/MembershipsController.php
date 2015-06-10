@@ -93,34 +93,16 @@ class MembershipsController extends \BaseController {
 		return View::make('Memberships.non-seamless',compact('encrypted_data', 'access_code'));
 	}
 
-
 	public function success()
 	{
 		$data=array(
 					'order_id'=>'$membership->order_id',
-					'end_date'=>'$membership->membership_end_date',
+					'end_date'=>date("d M Y", strtotime('$membership->end_date')),
 					'credits'=>'$membership->credits'
 			);
 		return View::make('Memberships.success')->with($data);
-		
 	}
 
-	public function aborted()
-	{
-		$data=array(
-					'batch_id'=>'$membership->batch_id'
-		);
-		return View::make('Memberships.aborted')->with($data);
-		echo "Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";		
-	}
-
-	public function failure()
-	{
-			$data=array('status_message'=>'$information[status_message]',
-						'batch_id'=>'$membership->batch_id'
-						);
-			return View::make('Memberships.failure')->with($data);
-	}
 
 
 	public function redirect()
@@ -140,14 +122,15 @@ class MembershipsController extends \BaseController {
 		$membership->save();
 		if($information['order_status']==="Success")
 		{
-			$this->sms_email($membership->id);
 			$user=User::find($membership->user_id);
 			$user->user_credits_left=$membership->credits;
 			$user->user_credits_expiry=$membership->end_date;
 			$user->save();
-			$data=array('credits'=>$membership->credits,
+			$this->sms_email($membership->id);
+			$data=array(
+						'credits'=>$membership->credits,
 						'order_id'=>$membership->order_id,
-						'end_date'=>$membership->end_date,
+						'end_date'=>date("d M Y", strtotime('$membership->end_date')),
 				);
 			return View::make('Memberships.success')->with($data);
 		}
@@ -161,10 +144,11 @@ class MembershipsController extends \BaseController {
 			$membership->delete();
 			$data=array('status_message'=>$information['status_message'],
 						);
-			return View::make('Memberships.failure');
+			return View::make('Memberships.failure')->with($data);
 		}
 		else
 		{
+			$membership->delete();
 			$data=array('status_message'=>"Security Error. Illegal access detected");
 			return View::make('Memberships.illegal')->with($data);
 		}
@@ -252,19 +236,19 @@ class MembershipsController extends \BaseController {
 		return Redirect::route('Memberships.index');
 	}
 
-	
-	public function sms_email($booking_id)
+
+	public function sms_email($membership_id)
 	{
-		// $booking_id=1;
-		$booking=Booking::find($booking_id);
-		$batch=$this->batch->getBatch($booking->batch_id);
+		// $membership_id=1;
+		$membership=Booking::find($membership_id);
+		$batch=$this->batch->getBatch($membership->batch_id);
 		$data = array(
-					'order_id' => $booking->order_id,
+					'order_id' => $membership->order_id,
 					'institute' => $batch->institute, 
 					'subcategory' => $batch->subcategory,
-					'amount' => $booking->payment,
-					'date' => date("d M Y", strtotime($booking->booking_date)),
-					'no_of_sessions' => $booking->no_of_sessions,
+					'amount' => $membership->payment,
+					'date' => date("d M Y", strtotime($membership->membership_date)),
+					'no_of_sessions' => $membership->no_of_sessions,
 					'venue_address' => $batch->venue_address,
 					'locality' => $batch->locality,
 					'location' => $batch->location,
@@ -272,19 +256,19 @@ class MembershipsController extends \BaseController {
 					'venue_pincode' => $batch->venue_pincode,
 					'venue_email' => $batch->venue_email,
 					'venue_contact_no' => $batch->venue_contact_no,
-					'user_name' => $booking->name,
-					'user_email' => $booking->email,
-					'user_contact_no' => $booking->contact_no,
+					'user_name' => $membership->name,
+					'user_email' => $membership->email,
+					'user_contact_no' => $membership->contact_no,
 					'admin_contact_no' => '9100946081',
-					'admin_email' => 'booking@hobbyix.com'
+					'admin_email' => 'membership@hobbyix.com'
 					);
-		$email= $booking->email;
+		$email= $membership->email;
 		$user_msg='Hi user, Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
 		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com';
-		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'.';
+		$admin_msg=$membership_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'.';
 		$subject='Booking Successful';
 		$this->sms(true, $data['user_contact_no'], $user_msg);
-		Mail::send('Emails.booking.user', $data, function($message) use ($email, $subject)
+		Mail::send('Emails.membership.user', $data, function($message) use ($email, $subject)
 		{
 			$message->to($email)->subject($subject);
 		});
@@ -292,7 +276,7 @@ class MembershipsController extends \BaseController {
 		$email=$batch->venue_email;
 		$subject='Booking for your class done';
 		$this->sms(false, $data['venue_contact_no'], $institute_msg);
-		Mail::send('Emails.booking.institute', $data, function($message) use ($email,$subject)
+		Mail::send('Emails.membership.institute', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->subject($subject);
 		});
@@ -300,13 +284,13 @@ class MembershipsController extends \BaseController {
 		$email=$data['admin_email'];
 		$subject='Booking Done';
 		$this->sms(false, $data['admin_contact_no'], $admin_msg);
-		Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
+		Mail::send('Emails.membership.admin', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->subject($subject);
 		});
 		
 	}
-	
+
 	public function sms($first,$mobile, $msg)
 	{
 		static $smsObject;

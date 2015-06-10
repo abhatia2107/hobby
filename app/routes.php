@@ -292,8 +292,6 @@ Route::get('/Membership', function()
 Route::post('/memberships/redirect','MembershipsController@redirect');
 Route::post('/memberships/cancel','MembershipsController@cancel');
 
-Route::post('/bookings/membership','MembershipsController@cancel');
-
 Route::get('/success', 'MembershipsController@success');
 Route::get('/aborted', 'MembershipsController@aborted');
 Route::get('/failure', 'MembershipsController@failure');

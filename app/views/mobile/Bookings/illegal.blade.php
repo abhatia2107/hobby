@@ -8,7 +8,7 @@
     <h4 class="panel-heading text-center" style="padding:13px;margin:0px;font-weight:bold">Order Cancel</h4>
     <div class="panel-body">
     <div class="lead text-center">
-    <h4>Sorry, your payment is aborted.</h4>
+    <h4>Sorry, your payment is aborted. {{$status_message}}</h4>
     <p><a href={{url('/batches/show/')}}/{{$batch_id}}> Try Again</a></p>
 </div>
 </div>

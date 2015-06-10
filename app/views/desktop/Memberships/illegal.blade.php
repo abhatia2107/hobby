@@ -9,8 +9,7 @@
     <div class="panel-body">
     <div class="lead text-center">
     <h4>Sorry, your payment is aborted. {{$status_message}}</h4>
-    <!--Please enter your website homepage URL -->
-    <p><a href={{url('/batches/show/')}}/{{$batch_id}}> Try Again</a></p>
+    <p><a href={{url('/memberships'}}> Try Again</a></p>
 </div>
 </div>
 </div>

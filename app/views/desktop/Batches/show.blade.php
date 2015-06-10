@@ -242,10 +242,9 @@
     $subcategory = $batchDetails->subcategory;
     $ageGroup = $batchDetails->batch_age_group;
     $genderGroup = $batchDetails->batch_gender_group;
-    $difficultyLevel = $batchDetails->batch_difficulty_level;
-    $trialClass = $batchDetails->batch_trial;
+    $comment = $batchDetails->batch_comment;
+    $tagline = $batchDetails->batch_tagline;
     $sessionsCount = $batchDetails->batch_no_of_classes_in_week;
-    $batchDescription = $batchDetails->batch_comment;
     $batchAccomplishment = $batchDetails->batch_accomplishment;
     $instituteDetails = $batchDetails->institute_description;
     $facebookLink = $batchDetails->institute_fblink;
@@ -295,6 +294,9 @@
         </div>
         <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
           +91{{$instituteContact}}
+        </div>
+        <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-time' id='pin-icon'></span>
+          {{$comment.' '.$tagline}}
         </div>
         <div id='batch-facilities' class="batch-details">
           @for($i=0;$i<=5;$i++)            

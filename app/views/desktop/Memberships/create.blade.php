@@ -9,7 +9,8 @@
 			<div class="col-md-3 col-sm-3 col-xs-12">
 				<div class="form-group">
 					<div class="col-md-offset-2 col-sm-12 col-md-8 col-xs-offset-2 col-xs-8">
-		    			<input type="date" placeholder="Starting Date" class="form-control" id="datepicker" name="start_date" required />
+		    			<input type="hidden" >
+		    			<!-- <input type="date" placeholder="Starting Date" class="form-control" id="datepicker" name="start_date" required /> -->
 						<input type="submit">
 		    		</div>
 				</div>

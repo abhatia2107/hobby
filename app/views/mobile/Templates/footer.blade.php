@@ -28,8 +28,8 @@
                <span class="glyphicon fa fa-fw fa-youtube"></span>
                <!-- <a href="" class="col-xs-3"><span class="glyphicon fa fa-fw fa-youtube"></span></a> -->
             </li>
-            <li><a href="tel:+919100946081">Call: +91-9100946081</a></li>
-            <li>Email at <a href="mailto:support@hobbyix.com">support@hobbyix.com</a></li>
+            <li><span class="glyphicon glyphicon-phone"></span><a href="tel:+919100946081">Call: +91-9100946081</a></li>
+            <li><span class="glyphicon glyphicon-envelope"></span>Email at <a href="mailto:support@hobbyix.com">support@hobbyix.com</a></li>
             <!-- <a href-link="$adminAccounts->instagram_link" class="col-xs-3"><span class="glyphicon fa fa-fw fa-instagram"></span></a> -->
          </div>
       </div>

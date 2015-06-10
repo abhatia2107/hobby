@@ -395,6 +395,7 @@
 				var location_name = results[index]['location'];
 				var locality =results[index]['locality'];
 				var tagline =results[index]['batch_tagline'];
+				var comment =results[index]['batch_comment'];
 				var subcategoryID = results[index]['batch_subcategory_id'];
 				var localityID = results[index]['venue_locality_id'];
 				var email = results[index]['venue_email'];
@@ -503,7 +504,7 @@
 											.append
 											(
 												$("<span></span>")																					
-												.text("Mon-Sat: 5am-6pm")
+												.text(comment+' '+tagline)
 											)
 										)
 									

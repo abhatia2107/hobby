@@ -50,7 +50,7 @@ class MembershipsController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-		$credits['order_id']=substr(uniqid(),0,8);
+		$credentials['order_id']=substr(uniqid(),0,8);
 		$credentials['user_id']=Auth::id();
 		$membership=Membership::create($credentials);
 		return Redirect::to('/memberships/payment/'.$membership->id);
@@ -63,6 +63,7 @@ class MembershipsController extends \BaseController {
 		$user_id=Auth::id();
 		$user=User::find($user_id);
 		$membership=Membership::find($id);
+		// dd($membership);
 		$merchant_id='61787';
 		$working_key='AEB6A7302F8DC5AC50A53B8DED9FB9DF';
 		$access_code='AVCA05CE22BS53ACSB';
@@ -96,11 +97,14 @@ class MembershipsController extends \BaseController {
 
 	public function success()
 	{
+		$membership=Membership::find(1);
+		// var_dump(strtotime($membership->end_date));
 		$data=array(
 					'order_id'=>'$membership->order_id',
-					'end_date'=>date("d M Y", strtotime('$membership->end_date')),
+					'end_date'=>date("d M Y", strtotime($membership->end_date)),
 					'credits'=>'$membership->credits'
 			);
+		dd($data);
 		return View::make('Memberships.success')->with($data);
 	}
 
@@ -113,7 +117,7 @@ class MembershipsController extends \BaseController {
 		$rcvdString=decrypt($encResponse, $working_key);		//Crypto Decryption used as per the specified working key.
 		$decryptValues=explode('&', $rcvdString);
 		$dataSize=sizeof($decryptValues);
-		for($i = 0; $i < $dataSize; $i) 
+		for($i = 0; $i < $dataSize; $i++) 
 		{
 			$info=explode('=',$decryptValues[$i]);
 			$information[$info[0]]=$info[1];
@@ -131,7 +135,7 @@ class MembershipsController extends \BaseController {
 			$data=array(
 						'credits'=>$membership->credits,
 						'order_id'=>$membership->order_id,
-						'end_date'=>date("d M Y", strtotime('$membership->end_date')),
+						'end_date'=>date("d M Y", strtotime($membership->end_date)),
 				);
 			return View::make('Memberships.success')->with($data);
 		}
@@ -254,8 +258,8 @@ class MembershipsController extends \BaseController {
 					'admin_contact_no' => '9100946081',
 					'admin_email' => 'booking@hobbyix.com'
 					);
-		$email= $membership->email;
-		$user_msg='Hi user, Order id: '.$data['order_id'].'. Thanks for buying Hobbyix Membership. 30 credits have been added to your account, valid till'. $data['end_date'];
+		$email= $user->email;
+		$user_msg='Hi user, Order id: '.$data['order_id'].'. Thanks for buying Hobbyix Membership. 30 credits have been added to your account, valid till '. $data['end_date'];
 		dd($user_msg);
 		$admin_msg='Membership booked, '.$membership_id.', Order id: '.$data['order_id']. ' by '. $data['user_contact_no'].'.';
 		$subject='Hobbyix Membership Booking Confirmation';

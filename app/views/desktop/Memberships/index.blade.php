@@ -46,11 +46,17 @@
 						Get Your Membership
 					</h1>				
 					<div class="row">
-						<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
-						<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
-						<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
-						<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
-						<div style="text-align:center;color:white"><button class="booknowButton" >Pay Now</button></div>
+						<form method="post" enctype="multipart/form-data" action="/memberships">
+							<input type="hidden" name="start_date" value="{{$credentials['start_date']}}">
+							<input type="hidden" name="end_date" value="{{$credentials['end_date']}}">
+							<input type="hidden" name="credits" value="{{$credentials['credits']}}">
+							<input type="hidden" name="payment" value="{{$credentials['payment']}}">
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
+							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" >Pay Now</button></div>
+						</form>
 					</div>
 				</div>				
 			</div>

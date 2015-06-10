@@ -1,4 +1,5 @@
 <?php
+include app_path().'/IFRAME_KIT/Crypto.php';
 use Carbon\Carbon;
 class MembershipsController extends \BaseController {
 
@@ -52,7 +53,7 @@ class MembershipsController extends \BaseController {
 		$credits['order_id']=substr(uniqid(),0,8);
 		$credentials['user_id']=Auth::id();
 		$membership=Membership::create($credentials);
-		return Redirect::to('/memberships/payment'.$membership->id);
+		return Redirect::to('/memberships/payment/'.$membership->id);
 	}
 
 
@@ -90,7 +91,7 @@ class MembershipsController extends \BaseController {
 		// $action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 		// $action='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
 		// return View::make('Memberships.iframe',compact('action'));
-		return View::make('Memberships.non-seamless',compact('encrypted_data', 'access_code'));
+		return View::make('Bookings.non-seamless',compact('encrypted_data', 'access_code'));
 	}
 
 	public function success()

@@ -30,11 +30,11 @@
 ?>
 <div class="uac_sidebar">
   <div class="uac_sidebar_header">
-    userName            
+    {{$user_name}}            
   </div>
   <div class="uac_credits_container">
       <span class="fa fa-credit-card"></span>
-      30 Credits
+      {{$user_credits_left}} Credits
   </div>
   <div class="uac_nav_items">
     <li @if($nav_item==1) class="active" @endif> <a href="/users/MyProfile">My Profile</a></li>

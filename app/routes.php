@@ -71,7 +71,6 @@ Route::get('/bookings/payment/{id}','BookingsController@payment');
 Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');
-Route::get('/test', 'BookingsController@test');
 Route::get('/test2', function(){
 	return View::make('Users.edit');
 });

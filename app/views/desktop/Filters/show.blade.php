@@ -412,7 +412,7 @@
 											$("<div></div>")
 											.attr("id","inst_type")
 											.attr("title",locality+", "+landmark+", "+address)	
-											.attr("class","col-md-9 col-xs-12 col-sm-9 text_over_flow_hide")								
+											.attr("class","col-md-12 col-xs-12 col-sm-12 text_over_flow_hide")								
 											.append
 											(
 												$("<span></span>")

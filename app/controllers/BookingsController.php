@@ -265,7 +265,6 @@ class BookingsController extends \BaseController {
 	public function sms_email($booking_id)
 	{
 		// $booking_id=1;
-		$booking=Booking::find($booking_id);
 		$batch=$this->batch->getBatch($booking->batch_id);
 		$data = array(
 					'order_id' => $booking->order_id,

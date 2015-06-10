@@ -31,7 +31,7 @@ class CreateUsersTable extends Migration {
 			$table->rememberToken();
 			$table->string('user_referral_code',6)->unique();	
 			$table->integer('user_referee_id')->nullable();
-			$table->integer('user_classes_left')->default(0);
+			$table->float('user_classes_left')->default(0);
 			$table->integer('user_successful_referral')->default(0);
 			$table->integer('user_pending_referral')->default(0);
 	        $table->softDeletes();

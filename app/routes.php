@@ -293,6 +293,8 @@ Route::get('/Membership', function()
 	return View::make('Miscellaneous.membership');
 });
 
+Route::get('/memberships/payment/{id}','MembershipsController@payment');
+
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','FiltersController@show');

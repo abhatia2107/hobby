@@ -15,12 +15,13 @@ class CreateMembershipsTable extends Migration {
 		Schema::create('memberships', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('classes_left');
+			$table->integer('credits');
 			$table->date('start_date');
 			$table->date('end_date');
 			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users');
 			$table->integer('payment');
 			$table->integer('promo_id')->unsigned()->nullable()->foreign('promo_id')->references('id')->on('promos');
+	        $table->softDeletes();
 			$table->timestamps();
 		});
 	}

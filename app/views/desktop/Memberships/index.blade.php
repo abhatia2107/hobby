@@ -55,7 +55,7 @@
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
-							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" >Pay Now</button></div>
+							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" id="membership_pay">Pay Now</button></div>
 						</form>
 					</div>
 				</div>				
@@ -78,5 +78,21 @@
 		<div class="space_for_footer"></div>
 		<div class="col-md-12 col-sm-12 page_height_footer"></div>
 	</div>
-	
+@stop
+@section('pagejquery')
+<script type="text/javascript">
+	var loginId = "<?php echo $loggedIn; ?>";  
+	$(document).ready(function () 
+  	{
+	 	$('#membership_pay').click(function(e)
+		{
+	        if(loginId=="")
+	        {
+	          e.preventDefault();
+	          e.stopPropagation();
+	          $('#loginModal').modal('show') ;
+	        }
+		});
+	}
+</script>
 @stop

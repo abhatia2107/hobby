@@ -204,12 +204,12 @@
               <input type="hidden" name="batch_id" value="{{$batchID}}">
               <div class="row batchOrderField">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>
-                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
+                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}} or {{$batchDetails->batch_credit}} Credit</div>
               </div>
-              <div class="row batchOrderField">
+              <!-- <div class="row batchOrderField">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Hobbyix Credits/Session</div>
-                <div class='col-md-6 col-sm-6 col-xs-6'>: {{$batchDetails->batch_credit}}</div>
-              </div>
+                <div class='col-md-6 col-sm-6 col-xs-6'>: </div>
+              </div> -->
               <div class="row batchOrderField">
                 <div class='col-md-6 col-sm-6 col-xs-6'>No. of Sessions*</div>
                 <div class='col-md-6 col-sm-6 col-xs-6'>  
@@ -238,6 +238,7 @@
               <div class="row totalAmount">
                 <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
                 <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
+                <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
               </div>
               <div class="row batchOrderButtons">    
                 <button style="padding:5px 70px;" class="booknowButton" id="proceedButton">Proceed</button>

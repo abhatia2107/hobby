@@ -45,6 +45,7 @@ class BookingsController extends \BaseController {
 		unset($data['csrf_token']);
 		unset($data['Promo_Code']);
 		if(isset($data['pay_cc'])){
+			unset($data['referral_credit_used']);
 			unset($data['pay_cc']);
 			$booking = Booking::create($data);
 			if($booking)

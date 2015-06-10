@@ -344,6 +344,10 @@
               <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}}</div>
             </div>
             <div class="row batchOrderField">
+              <div class='col-md-6 col-sm-6 col-xs-6'>Hobbyix Credits/Session</div>
+              <div class='col-md-6 col-sm-6 col-xs-6'>: {{$batchDetails->batch_credit}}</div>
+            </div>
+            <div class="row batchOrderField">
               <div class='col-md-6 col-sm-6 col-xs-6'>No. of Sessions*</div>
               <div class='col-md-6 col-sm-6 col-xs-6'>  
                   <select class="form-control" id="numberOfSessions" name="no_of_sessions">                 

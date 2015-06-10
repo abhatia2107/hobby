@@ -22,14 +22,15 @@
          <h3 class="footer-widget-title">Stay Connected</h3>
          <div>
             <li>                 
-               <a href="https://twitter.com/hobbyix" class="col-xs-3"><span class="glyphicon fa fa-fw fa-twitter"></span></a>
-               <a href="https://www.facebook.com/pages/HOBBYIX/836049089804962" class="col-xs-3"><span class="glyphicon fa fa-fw fa-facebook"></span></a>
-               <a href="" class="col-xs-3"><span class="glyphicon fa fa-fw fa-google-plus"></span></a>
-               <span class="glyphicon fa fa-fw fa-youtube"></span>
-               <!-- <a href="" class="col-xs-3"><span class="glyphicon fa fa-fw fa-youtube"></span></a> -->
+               <span class="col-xs-3"><a href="https://twitter.com/hobbyix"><span class="glyphicon fa fa-fw fa-twitter"></span></a></span>
+               <span class="col-xs-3"><a href="https://www.facebook.com/pages/HOBBYIX/836049089804962" ><span class="glyphicon fa fa-fw fa-facebook"></span></a></span>
+               <span class="col-xs-3"><a href=""><span class="glyphicon fa fa-fw fa-google-plus"></span></a></span>
+               <span class="col-xs-3"><a href=""><span class="glyphicon fa fa-fw fa-globe"></span></a></span>
             </li>
-            <li><span class="glyphicon glyphicon-phone"></span><a href="tel:+919100946081">Call: +91-9100946081</a></li>
-            <li><span class="glyphicon glyphicon-envelope"></span>Email at <a href="mailto:support@hobbyix.com">support@hobbyix.com</a></li>
+            <div style="clear:both;padding:15px 30px 0px 30px;font-size:16px">
+               <li><a href="tel:+919100946081"><span class="glyphicon fa fa-fw fa-phone"></span>+91 9100946081</a></li>
+               <li><a href="mailto:support@hobbyix.com"><span class="glyphicon fa fa-fw fa-envelope"></span>support@hobbyix.com</a></li>            
+            </div>
             <!-- <a href-link="$adminAccounts->instagram_link" class="col-xs-3"><span class="glyphicon fa fa-fw fa-instagram"></span></a> -->
          </div>
       </div>

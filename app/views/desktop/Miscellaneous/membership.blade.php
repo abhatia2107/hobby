@@ -7,7 +7,7 @@
 		.membership_page_item {padding: 0px 14px;}
 
 		.membership_card_container { background:#FFF;webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
-      box-shadow: inset 0 0 2px rgba(0,0,0,.3);-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);padding: 5px 5px 15px 5px;margin-bottom: 10px; 
+      box-shadow: inset 0 0 2px rgba(0,0,0,.3);-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);padding: 5px 5px 5px 5px;margin-bottom: 10px; 
 		}
 
 		.membership_card { background: url("/assets/images/home/hobbyix_membership_card.gif");background-repeat:no-repeat;background-position:left top;-o-background-size: 100% 100%, auto;
@@ -21,6 +21,8 @@
 		.header{  padding: 0px 15px 5px 15px;border-bottom:1px solid;border-color: #20cfb1;font-size: 25px;text-align: center;} 
 
 		.membership_features_container li { font-size: 18px;margin-bottom: 15px;}
+
+		li { font-size: 18px;margin-bottom: 5px;}
 
 		.membership_features_container .glyphicon{color: #20cfb1;margin-right: 7px;}
 
@@ -36,6 +38,18 @@
 				<div class="membership_card_container">
 					<div class="membership_card"></div>					
 					<div class="membership_card_details"></div>
+				</div>
+				<div class="membership_card_container">
+					<h1 class="header">
+						Get Your Membership
+					</h1>				
+					<div class="row">
+						<li class="col-md-12" style="padding: 0 60px"><span class="col-md-6">Credits</span><span>: 30</span></li>
+						<li class="col-md-12" style="padding: 0 60px"><span class="col-md-6">Price</span><span>: Rs. 2000/-</span></li>
+						<li class="col-md-12"  style="padding: 0 60px"><span class="col-md-6">Start Date</span><span>: 03 Jun 2015</span></li>
+						<li class="col-md-12"  style="padding: 0 60px"><span class="col-md-6">Expiry Date</span><span>: 03 Jul 2015</span></li>
+						<div style="text-align:center;color:white"><button class="booknowButton" >Pay Now</button></div>
+					</div>
 				</div>				
 			</div>
 			<div class="col-xs-12 col-md-8 col-sm-7 membership_page_item">

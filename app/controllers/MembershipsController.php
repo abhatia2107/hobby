@@ -9,7 +9,7 @@ class MembershipsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$memberships = Membership::all();
+		$memberships = Membership::all();		
 		return View::make('Memberships.index', compact('memberships'));
 	}
 

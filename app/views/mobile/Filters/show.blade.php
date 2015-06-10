@@ -156,7 +156,7 @@
 <div class="container membership_message" style="background:#3396D1">
 	<div class="alert">		
 		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
+		<h3><a href="/memberships"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
 		<strong>{{$homeLang['home_membership_tagline']}}</strong>
 		<div style="color:white;">
 			<a href="tel:+919100946081">Call: +919100946081</a>
@@ -477,7 +477,7 @@
 											$("<div></div>")
 											.attr("id","inst_type")
 											.attr("title",locality+", "+landmark+", "+address)	
-											.attr("class"," col-xs-12 ")								
+											.attr("class"," col-xs-12 text_over_flow_hide")								
 											.append
 											(
 												$("<span></span>")
@@ -494,7 +494,8 @@
 										(
 											$("<div></div>")
 											.attr("id","inst_price")									
-											.attr("class"," col-xs-12 ")								
+											.attr("class"," col-xs-12 text_over_flow_hide")	
+											.attr("title",comment+' '+tagline)							
 											.append
 											(
 												$("<span></span>")

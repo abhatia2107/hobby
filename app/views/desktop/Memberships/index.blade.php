@@ -79,20 +79,17 @@
 		<div class="col-md-12 col-sm-12 page_height_footer"></div>
 	</div>
 @stop
-@section('pagejquery')
-<script type="text/javascript">
-	var loginId = "<?php echo $loggedIn; ?>";  
-	$(document).ready(function () 
-  	{
-	 	$('#membership_pay').click(function(e)
-		{
-	        if(loginId=="")
-	        {
-	          e.preventDefault();
-	          e.stopPropagation();
-	          $('#loginModal').modal('show') ;
-	        }
-		});
-	}
-</script>
-@stop
+@section('pagejquery')  
+	<script type="text/javascript">
+		var loginStatus = "{{$loggedIn}}";		
+		$('#membership_pay').click(function(e)
+        {
+          if(loginStatus=="")
+          {
+            e.preventDefault();
+            e.stopPropagation();
+            $('#loginModal').modal('show');
+          }
+        });
+	</script>
+ @stop

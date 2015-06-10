@@ -51,33 +51,52 @@ class BookingsController extends \BaseController {
 			return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
 	}
 
-	public function success()
+	public function booking_membership()
 	{
-		$data=array('subcategory'=>'$batch->subcategory',
-					'institute'=>'$batch->institute',
-					'order_id'=>'$booking->order_id',
-					'date'=>'$booking->booking_date',
-					'no_of_sessions'=>'$booking->no_of_sessions'
-			);
-		return View::make('Bookings.success')->with($data);
-		
-	}
-
-	public function aborted()
-	{
-		$data=array(
-					'batch_id'=>'$booking->batch_id'
-		);
-		return View::make('Bookings.aborted')->with($data);
-		echo "Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";		
-	}
-
-	public function failure()
-	{
-			$data=array('status_message'=>'$information[status_message]',
-						'batch_id'=>'$booking->batch_id'
-						);
-			return View::make('Bookings.failure')->with($data);
+		$data = Input::all();
+		$validator = Validator::make($data, Booking::$rules);
+		if ($validator->fails())
+		{
+			return Redirect::back()->withErrors($validator)->withInput();
+		}
+		$data['user_id']=Auth::id();
+		$data['order_id']=substr(uniqid(),0,8);
+		$user=User::find($data['user_id']);
+		$booking_already_done = Booking::where('user_id',$data['user_id'])->where('booking_date', $data['booking_date'])->first();
+		if($data['no_of_sessions']==1){
+			if($user->user_credits_left>$data['credit']){
+				if(!$booking_already_done){
+					unset($data['csrf_token']);
+					unset($data['Promo_Code']);
+					$booking = Booking::create($data);
+					if($booking){
+						$user->user_credits_left=$user->user_credits_left-$data['credit'];
+						$user->save();
+						$this->sms_email($booking->id);
+						$batch=$this->batch->getBatch($booking->batch_id);
+						$data=array('subcategory'=>$batch->subcategory,
+									'institute'=>$batch->institute,
+									'order_id'=>$booking->order_id,
+									'date'=>$booking->booking_date,
+									'no_of_sessions'=>$booking->no_of_sessions
+							);
+						return View::make('Bookings.success')->with($data);
+					}
+					else{
+						return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
+					}
+				}
+				else{
+					return Redirect::back()->with('failure',Lang::get('booking.booking_already_done'));
+				}
+			}
+			else{
+				return Redirect::back()->with('failure',Lang::get('booking.booking_not_enough_credit'));
+			}
+		}
+		else{
+			return Redirect::back()->with('failure',Lang::get('booking.booking_one_allowed'));
+		}
 	}
 
 	public function payment($id)
@@ -109,7 +128,7 @@ class BookingsController extends \BaseController {
 			$merchant_data.=$key.'='.$value.'&';
 		}
 		$encrypted_data=encrypt($merchant_data,$working_key); // Method for encrypting the data.
-		// dd($encrypted_data);
+		dd($encrypted_data);
 		// $action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 		// $action='https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction&encRequest='.$encrypted_data.'&access_code='.$access_code;
 		// return View::make('Bookings.iframe',compact('action'));
@@ -159,8 +178,10 @@ class BookingsController extends \BaseController {
 		}
 		else
 		{
-			echo "Security Error. Illegal access detected";
-		
+			$data=array('status_message'=>"Security Error. Illegal access detected",
+						'batch_id'=>$booking->batch_id
+						);
+			return View::make('Bookings.illegal')->with($data);
 		}
 	}
 

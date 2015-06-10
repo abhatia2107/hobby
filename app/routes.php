@@ -79,10 +79,6 @@ Route::get('/email', 'BookingsController@sms_email');
 Route::post('/bookings/redirect','BookingsController@redirect');
 Route::post('/bookings/cancel','BookingsController@cancel');
 
-Route::get('/success', 'BookingsController@success');
-Route::get('/aborted', 'BookingsController@aborted');
-Route::get('/failure', 'BookingsController@failure');
-
 Route::resource('bookings', 'BookingsController');
 Route::get('bookings/create/{id}', 'BookingsController@create');
 
@@ -293,8 +289,18 @@ Route::get('/Membership', function()
 	return View::make('Miscellaneous.membership');
 });
 
-Route::get('/memberships/payment/{id}','MembershipsController@payment');
+Route::post('/memberships/redirect','MembershipsController@redirect');
+Route::post('/memberships/cancel','MembershipsController@cancel');
 
+Route::post('/bookings/membership','MembershipsController@cancel');
+
+Route::get('/success', 'MembershipsController@success');
+Route::get('/aborted', 'MembershipsController@aborted');
+Route::get('/failure', 'MembershipsController@failure');
+
+
+Route::get('/memberships/payment/{id}','MembershipsController@payment');
+	
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
 Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','FiltersController@show');

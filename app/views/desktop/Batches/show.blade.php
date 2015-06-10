@@ -5,6 +5,7 @@
     #page { width: 100%;margin-top: 0px;background-repeat:no-repeat;background-position:center center;-o-background-size: 100% 135%, auto;
       -moz-background-size: 100% 135%, auto;-webkit-background-size: 100% 135%, auto;background-size: 100% 135%, auto;
     }
+
     #sample-institute-name { font-size: 40px;font-weight: bold; }
 
     #sample-batch-type { font-size: 22px;font-weight: normal;margin-bottom: 5px; }
@@ -268,10 +269,8 @@
               <div class="row batchOrderButtons">  
                 <button style="padding:5px 50px;background:lightgrey;color:black" class="booknowButton" id="goBackButton" >Go Back</button>
                 <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" name="pay_cc" value="payment">Pay Now</button>
-              </div>
-              <div class="row batchOrderButtons" style="margin-top:3px;">  
                 <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="payCredits" name="pay_hobbyix" value="credit">Pay Using Hobbyix Membership</button>
-              </div>
+              </div>              
             </div>
           </form>
           <!---
@@ -424,11 +423,10 @@
         {
             var sessionsCount = $(this).val(); 
             var sessionPrice = {{$sessionPrice}};
-            var subtotal = sessionPrice*sessionsCount;
-            $('#orderSubtotal').empty();  
-            $('#orderSubtotal').append(": Rs. "+subtotal);
+            var subtotal = sessionPrice*sessionsCount;           
             $('#orderTotal').empty();  
-            $('#orderTotal').append(": Rs. "+subtotal);          
+            $('#orderTotal').append(": Rs. "+subtotal);
+            $('#payment').val(subtotal);
         });
         $('#SubmitReviewButton').bind('click', function(event) 
         {

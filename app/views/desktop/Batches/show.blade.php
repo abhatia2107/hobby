@@ -272,7 +272,7 @@
           <div id='sample-institute-name'>{{$instituteName}}</div>
           <div id='sample-batch-type'>{{'  '.$subcategory}},{{' '.$category}}</div>
           <div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$locality}}</div>
-          <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  +91'.$instituteContact}}</div>
+          <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  +91 '.$instituteContact}}</div>
         </div>
         <div class="col-sm-2 col-md-2">
           <div class="submitReviewButton">
@@ -289,11 +289,14 @@
     <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1" style="margin-bottom:15px">
       <div id="sample-batch-details" class="sample-box col-md-12 col-sm-12 col-xs-12" >
         <div id='sample-batch-name'>{{$instituteName}} Details</div>
-        <div id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
-          {{$instituteAddress.', '.$landMark.', '.$locality.', '.$location.', '.$pincode}}
+        <div id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-home' id='pin-icon'></span>
+          {{$instituteAddress.', '.$locality.', '.$location.', '.$pincode}}
+        </div>
+        <div @if(!isset($landMark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
+          Land Mark: {{$landMark}}
         </div>
         <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
-          +91{{$instituteContact}}
+          +91 {{$instituteContact}}
         </div>
         <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-time' id='pin-icon'></span>
           {{$comment.' '.$tagline}}
@@ -403,10 +406,10 @@
              <hr/>   
             <div class="row batchOrderButtons">  
               <button style="padding:5px 50px;background:lightgrey;color:black" class="booknowButton" id="goBackButton" >Go Back</button>
-              <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" name="submit" value="payment">Pay Now</button>             
+              <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" name="pay_cc" value="payment">Pay Now</button>
             </div>
-            <div class="row batchOrderButtons" style="margin-top:5px;">  
-              <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="booknowButton" name="submit" value="credit">Pay Using Hobbyix Membership</button>
+            <div class="row batchOrderButtons" style="margin-top:3px;">  
+              <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="payCredits" name="pay_hobbyix" value="credit">Pay Using Hobbyix Membership</button>
             </div>
           </div>
         </form>
@@ -539,6 +542,15 @@
       });
       var categoryId = "<?php echo $loggedIn; ?>";     
       $('.rating-input').attr('checked', false);
+      $('#payCredits').click(function(e)
+      {
+        if(categoryId=="")
+        {
+          e.preventDefault();
+          e.stopPropagation();
+          $('#loginModal').modal('show') ;
+        }
+      });
       $('#commentsForm').click(function(e)
       {
         if(categoryId=="")
@@ -547,7 +559,6 @@
           e.stopPropagation();
           $('#loginModal').modal('show') ;
         }
-
       });
       $('#numberOfSessions').change(function () 
       {

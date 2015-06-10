@@ -44,14 +44,16 @@ class BookingsController extends \BaseController {
 		$data['order_id']=substr(uniqid(),0,8);
 		unset($data['csrf_token']);
 		unset($data['Promo_Code']);
-		if($data['submit']==='payment'){
+		if(isset($data['pay_cc'])){
+			unset($data['pay_cc']);
 			$booking = Booking::create($data);
 			if($booking)
 				return Redirect::to('/bookings/payment/'.$booking->id);
 			else
 				return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
 		}
-		else if($data['submit']==='credit'){
+		else if(isset($data['pay_hobbyix'])){
+			unset($data['pay_hobbyix']);
 			$user=User::find($data['user_id']);
 			$booking_already_done = Booking::where('user_id',$data['user_id'])->where('booking_date', $data['booking_date'])->first();
 			if($data['no_of_sessions']==1){

@@ -47,7 +47,7 @@
 					</h1>				
 					<div class="row">
 						<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
-						<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: {{$credentials['payment']}}</span></li>
+						<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
 						<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
 						<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
 						<div style="text-align:center;color:white"><button class="booknowButton" >Pay Now</button></div>

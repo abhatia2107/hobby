@@ -21,11 +21,15 @@
       <div class="footer-widget-column col-xs-12">
          <h3 class="footer-widget-title">Stay Connected</h3>
          <div>
-            <!-- <a href-link="$adminAccounts->twitter_link" class="col-xs-3"><span class="glyphicon fa fa-fw fa-twitter"></span></a> -->
-            <li><a href="https://www.facebook.com/pages/HOBBYIX/836049089804962"></a><span class="glyphicon fa fa-w fa-facebook"> Facebook</span></li>
-            <li>Want to talk with us, simply <a href="tel:+919100946081">call: +91-9100946081</a></li>
-            <li>Just want to tell us something, drop a mail at <a href="mailto:support@hobbyix.com">support@hobbyix.com</a></li>
-            <!-- <a href-link="$adminAccounts->google_plus_link" class="col-xs-3"><span class="glyphicon fa fa-fw fa-google-plus"></span></a> -->
+            <li>                 
+               <a href="https://twitter.com/hobbyix" class="col-xs-3"><span class="glyphicon fa fa-fw fa-twitter"></span></a>
+               <a href="https://www.facebook.com/pages/HOBBYIX/836049089804962" class="col-xs-3"><span class="glyphicon fa fa-fw fa-facebook"></span></a>
+               <a href="" class="col-xs-3"><span class="glyphicon fa fa-fw fa-google-plus"></span></a>
+               <span class="glyphicon fa fa-fw fa-youtube"></span>
+               <!-- <a href="" class="col-xs-3"><span class="glyphicon fa fa-fw fa-youtube"></span></a> -->
+            </li>
+            <li><a href="tel:+919100946081">Call: +91-9100946081</a></li>
+            <li>Email at <a href="mailto:support@hobbyix.com">support@hobbyix.com</a></li>
             <!-- <a href-link="$adminAccounts->instagram_link" class="col-xs-3"><span class="glyphicon fa fa-fw fa-instagram"></span></a> -->
          </div>
       </div>

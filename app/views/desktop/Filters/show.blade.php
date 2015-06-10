@@ -75,7 +75,7 @@
 <div class="container membership_message" style="background:#3396D1">
 	<div class="alert">
 		<div style="color:white;position:absolute;right:40px;">
-			<a href="tel:9100946081">Call: 9100946081</a>
+			Call: +919100 946 081
 		</div>
 		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
@@ -174,7 +174,7 @@
 		        <h4>Related to {{$subcategory}} classes in {{$location}}</h4>       		        		        
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategory}} classes in {{$localities[$index].', '.$location}}" >
+				      <li title="{{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}" >
 				        <a class="text_over_flow_hide" href="/filter/{{$subcategory_id}}/{{$localities[$index]->id}}">
 				          {{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}
 				        </a>

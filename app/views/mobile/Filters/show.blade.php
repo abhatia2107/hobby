@@ -159,7 +159,7 @@
 		<h3><a href="/Membership"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
 		<strong>{{$homeLang['home_membership_tagline']}}</strong>
 		<div style="color:white;">
-			<a href="tel:9100946081">Call: 9100946081</a>
+			<a href="tel:+919100946081">Call: +919100946081</a>
 		</div>
 	</div>
 </div>
@@ -260,7 +260,7 @@
 		        <h4>Related to {{$subcategory}} classes in {{$location}}</h4>       		        		        
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategory}} classes in {{$localities[$index].', '.$location}}" >
+				      <li title="{{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}" >
 				        <a class="text_over_flow_hide" href="/filter/{{$subcategory_id}}/{{$localities[$index]->id}}">
 				          {{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}
 				        </a>

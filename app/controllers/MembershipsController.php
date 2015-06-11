@@ -13,7 +13,7 @@ class MembershipsController extends \BaseController {
 		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
 		$credentials['start_date']=date('Y-m-d');
 		$credentials['end_date']=date('Y-m-d',$end_date);
-		$credentials['payment']='1';
+		$credentials['payment']='1999';
 		$credentials['start']=date('d M Y');
 		$credentials['end']=date('d M Y', $end_date);
 		$credentials['credits']=30;

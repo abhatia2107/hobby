@@ -3,10 +3,10 @@
    <div class="row">
       <div class="footer-widget-column col-xs-12">
          <div class="textwidget">
+            <p>Hobbyix</p>
             <p>
-               At Hobbyix our purpose is to help people find great local businesses like dentists, hair stylists and mechanics. Go Explore!
+               Stay active and live happy.
             </p>
-            <p>Proudly Made in India</p>
          </div>        
       </div>
       <div class="footer-widget-column col-xs-12">

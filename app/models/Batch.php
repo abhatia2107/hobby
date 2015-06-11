@@ -180,7 +180,8 @@ class Batch extends \Eloquent {
             ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
             ->get();
         if(empty($batch->toArray()))
-            App::abort(404);
+            // App::abort(404);
+            return null;
         else
             return $batch[0];
     }

@@ -32,7 +32,7 @@ return array(
 
 	"home_institute_title"=>"Want to learn more?(For institute)",
 
-	"home_membership_title"=>"Checkout Hobbyix Membership!!!",	
+	"home_membership_title"=>"Check out Hobbyix Membership!!!",	
 
 	"home_membership_tagline"=>"Hobbyix Membership: One Membership -> Access to all the Gyms & Fitness Activities in Hyderabad @1999/Month"
 

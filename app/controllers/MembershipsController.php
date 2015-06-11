@@ -52,6 +52,7 @@ class MembershipsController extends \BaseController {
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 		unset($credentials['csrf_token']);
+		unset($credentials['Promo_Code']);
 		$credentials['order_id']=substr(uniqid(),0,8);
 		$credentials['user_id']=Auth::id();
 		$membership=Membership::create($credentials);

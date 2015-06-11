@@ -299,7 +299,7 @@ class UsersController extends \BaseController {
             else
             {
                 $newUserData['user_referee_id']=$referee->id;
-                $newUserData['user_classes_left']=3;
+                $newUserData['user_credits_left']=0;
             }
 		}
 		unset($newUserData['user_referee_code']);

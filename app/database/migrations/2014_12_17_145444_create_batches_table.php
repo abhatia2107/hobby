@@ -31,7 +31,7 @@ class CreateBatchesTable extends Migration {
 			$table->integer('batch_credit')->default(0);
 			$table->integer('batch_view')->default(0);
 			$table->string('batch_comment')->nullable();
-			$table->string('batch_tagline',40)->nullable();
+			$table->string('batch_tagline')->nullable();
 			$table->boolean('batch_photo')->default(0);
 			$table->time('weekday_start_time');
 			$table->time('weekday_end_time');

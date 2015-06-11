@@ -405,6 +405,11 @@
 				var landmark = results[index]['venue_landmark'];
 				var address = results[index]['venue_address'];
 				var venue_email = results[index]['venue_email'];
+				var batchCredit = results[index]['batch_credit'];
+				if(batchCredit>1)
+					batchCredit += " Credits)";
+				else
+					batchCredit += " Credit)";
 				address = address.replace(/\n/g," ");
 				if ( $("#batch"+batchID ).length == 0 ) 
 				{			
@@ -523,7 +528,8 @@
 								.append
 								(
 									$("<div></div>")								
-									.text("₹ "+price+" / Session")									
+									.text("₹ "+price+" / Session")
+									.append("<br>(or "+batchCredit)									
 								)
 								.append
 								(

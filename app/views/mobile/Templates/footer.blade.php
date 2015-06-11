@@ -27,7 +27,7 @@
                <span class="col-xs-3"><a href=""><span class="glyphicon fa fa-fw fa-google-plus"></span></a></span>
                <span class="col-xs-3"><a href=""><span class="glyphicon fa fa-fw fa-globe"></span></a></span>
             </li>
-            <div style="clear:both;padding:15px 30px 0px 30px;font-size:16px">
+            <div style="clear:both;padding:15px 30px 0px 30px;font-size:16px;text-align:center">
                <li><a href="tel:+919100946081"><span class="glyphicon fa fa-fw fa-phone"></span>+91 9100946081</a></li>
                <li><a href="mailto:support@hobbyix.com"><span class="glyphicon fa fa-fw fa-envelope"></span>support@hobbyix.com</a></li>            
             </div>

@@ -158,12 +158,8 @@
         <input type="hidden" name="batch_id" value="{{$batchID}}">
         <div class="row batchOrderField">
           <div class='col-xs-6'>Price Per Session</div>
-          <div class='col-xs-6'>: Rs. {{$sessionPrice}}</div>
-        </div>
-        <div class="row batchOrderField">
-          <div class='col-xs-6'>Credits/Session</div>
-          <div class='col-xs-6'>: {{$batchDetails->batch_credit}}</div>
-        </div>
+          <div class='col-xs-6'>: Rs. {{$sessionPrice}} or {{$batchDetails->batch_credit}} Credits</div>
+        </div>       
         <div class="row batchOrderField">
           <div class='col-xs-6 batchOrderFieldLabel'>No. of Sessions*</div>
           <div class='col-xs-6'>  
@@ -220,12 +216,9 @@
          <hr/>   
         <div class="row batchOrderButtons">    
           <button onclick="goBackToOrder();" style="padding:5px 50px;background:lightgrey;color:black" class="booknowButton" id="goBackButton" >Go Back</button>
-          <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" name="submit" value="payment" >Pay Now</button>
-          <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
-        </div>
-        <div class="row batchOrderButtons" style="margin-top:5px;">  
-            <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="booknowButton" name="submit" value="credit">Pay Using Hobbyix Membership</button>
-        </div>
+          <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" name="pay_cc" value="payment" >Pay Now</button>
+          <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="booknowButton" name="pay_hobbyix" value="credit">Pay Using Hobbyix Membership</button>
+        </div>        
       </div>
     </form>
   </div>        

@@ -61,14 +61,16 @@ class UsersController extends \BaseController {
 		$user_id=Auth::id();
 		$bookingDetails=Booking::where('user_id',$user_id)->get();
 		$user=User::find($user_id);
-		foreach ($bookingDetails as $booking) {
-		
+		foreach ($bookingDetails as $key=> $booking) {
 			$booking->booking_date = date("d M Y", strtotime($booking->booking_date));
 			$booking->created_date_time=date('d M Y h:i a', strtotime($booking->created_at->toDateTimeString()));
 			$batch=$this->batch->getBatch($booking->batch_id);
-			$booking->batch=$batch;
-			// dd($booking);
+			if(isset($batch))
+				$booking->batch=$batch;
+			else
+				unset($bookingDetails[$key]);
 		}
+		// dd('test');
 		return View::make('Users.orders',compact('bookingDetails','user'));
 	}
 

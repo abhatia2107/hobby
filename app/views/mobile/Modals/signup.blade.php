@@ -1,11 +1,8 @@
 @section("signup")
-<div class="modal-dialog">
-        <div class="modal-content">
+<div class="">
+        <div class="">
             <form name="signUp" class="signUp" id="signUpForm" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span onClick="refreshForm('#signUpForm')" aria-hidden="true" title="close">&times;</span>                
-                    </button>
+                <div class="modal-header">                
                     <h4 class="modal-title" id="myModalLabel1">Sign Up</h4>
                     <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
                 </div>

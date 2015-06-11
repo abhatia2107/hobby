@@ -4,7 +4,7 @@
 	<style type="text/css">
 		.membership_page_container { margin-top: 20px; font-family: 'Open Sans',sans-serif;color: #333;	}
 
-		.membership_page_item {padding: 0px 14px;}
+		.membership_page_item {padding: 0px 10px;}
 
 		.membership_card_container { background:#FFF;webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
       box-shadow: inset 0 0 2px rgba(0,0,0,.3);-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);padding: 5px 5px 5px 5px;margin-bottom: 10px; 
@@ -15,25 +15,32 @@
 		}
 
 		.membership_features_container { background:#FFF;webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
-      box-shadow: inset 0 0 2px rgba(0,0,0,.3);-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);padding: 7px 20px 15px 20px;margin-bottom: 10px; 
-    }
+      		box-shadow: inset 0 0 2px rgba(0,0,0,.3);-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);padding: 7px 10px 15px 10px;margin-bottom: 10px; 
+    	}
 
-		.header{  padding: 0px 15px 5px 15px;border-bottom:1px solid;border-color: #20cfb1;font-size: 25px;text-align: center;} 
+		.header{  padding: 0px 0px 5px 0px;border-bottom:1px solid;border-color: #20cfb1;font-size: 18px;text-align: center;} 
 
-		.membership_features_container li { font-size: 18px;margin-bottom: 15px;}
-
-		li { font-size: 18px;margin-bottom: 5px;}
+		.membership_features_container li { font-size: 14px;margin:0 0 10px 0;padding: 0px 0px;}		
 
 		.membership_features_container .glyphicon{color: #20cfb1;margin-right: 7px;}
 
-		.page_height_footer {margin-top: 40px;}
+		.page_height_footer {margin-top: 15px;}		
 
-		@media (min-width: 920px) { .get_membership li {padding: 0 60px}}
+		li { font-size: 15px;margin-bottom: 5px;}
+
+		.membership_features {padding: 0 10px;margin: 0 0;}
 
 	</style>
 @stop
 
 @section('content')
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			@include('Modals.login')
+	</div>
+	<!--sign-UP pop up modal-->
+	<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y:auto">
+		@include('Modals.signup')
+	</div>
 	<div class="container membership_page_container">
 		<div class="row">
 			<div class="col-xs-12 col-md-4 col-sm-5 membership_page_item">
@@ -52,11 +59,13 @@
 							<input type="hidden" name="end_date" value="{{$credentials['end_date']}}">
 							<input type="hidden" name="credits" value="{{$credentials['credits']}}">
 							<input type="hidden" name="payment" value="{{$credentials['payment']}}">
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
-							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" id="membership_pay">Pay Now</button></div>
+							<li class="col-xs-12"><span class="col-xs-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
+							<li class="col-xs-12"><span class="col-xs-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
+							<li class="col-xs-12"><span class="col-xs-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
+							<li class="col-xs-12"><span class="col-xs-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
+							<div style="text-align:center;color:white">
+								<button type="submit" class="booknowButton" id="membership_pay">Pay Now</button>
+							</div>
 						</form>
 					</div>
 				</div>				
@@ -76,7 +85,6 @@
 				</div>				
 			</div>
 		</div>
-		<div class="space_for_footer"></div>
 		<div class="col-md-12 col-sm-12 page_height_footer"></div>
 	</div>
 @stop
@@ -89,7 +97,7 @@
           {
             e.preventDefault();
             e.stopPropagation();
-            $('#loginModal').modal('show');
+            window.location.href="/users/login";
           }
         });
 	</script>

@@ -164,8 +164,8 @@
           <div class='col-xs-6 batchOrderFieldLabel'>No. of Sessions*</div>
           <div class='col-xs-6'>  
               <select class="form-control" id="numberOfSessions" name="no_of_sessions" >                 
-                  @for($seesion=1;$seesion<=6;$seesion++)
-                      <option value={{$seesion}}>{{$seesion}}</option>
+                  @for($session=1;$session<=6;$session++)
+                      <option value={{$session}}>{{$session}}</option>
                   @endfor
               </select>
           </div>
@@ -187,6 +187,7 @@
         <hr/>
         <div class="row totalAmount">
           <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
+          <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
           <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
         </div>
         <div class="row batchOrderButtons" style="margin-top:5px;">    
@@ -198,6 +199,7 @@
         <div class="row batchOrderField">
           <div class='col-md-5 col-sm-4 col-xs-5'>Name*</div>
           <div class='col-md-7 col-sm-8 col-xs-7'>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" value="@if(isset($user)){{$user->user_first_name.' '.$user->user_last_name}}@endif" required/>
           </div>          
         </div>   
@@ -218,7 +220,7 @@
           <button onclick="goBackToOrder();" style="padding:5px 50px;background:lightgrey;color:black" class="booknowButton" id="goBackButton" >Go Back</button>
           <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" name="pay_cc" value="payment" >Pay Now</button>
           <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="booknowButton" name="pay_hobbyix" value="credit">Pay Using Hobbyix Membership</button>
-        </div>        
+        </div>              
       </div>
     </form>
   </div>        

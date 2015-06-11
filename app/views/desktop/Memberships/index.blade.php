@@ -47,6 +47,7 @@
 					</h1>				
 					<div class="row">
 						<form method="post" enctype="multipart/form-data" action="/memberships">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 							<input type="hidden" name="start_date" value="{{$credentials['start_date']}}">
 							<input type="hidden" name="end_date" value="{{$credentials['end_date']}}">
 							<input type="hidden" name="credits" value="{{$credentials['credits']}}">

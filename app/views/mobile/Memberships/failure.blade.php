@@ -10,7 +10,7 @@
 		<div class="lead text-center">
 		<h4>Sorry, your transaction is failed due to {{$status_message}}</h4>
 		<!--Please enter your website homepage URL -->
-		<p><a href={{url('/memberships'}}> Try Again</a></p>
+		<p><a href={{url('/memberships')}}> Try Again</a></p>
 </div>
 </div>
 </div>

@@ -38,6 +38,7 @@ class MembershipsController extends \BaseController {
 	 */
 	public function store()
 	{
+		// dd(Input::all());
 		$credentials = Input::all();
 		$user_id=Auth::id();
 		// $user=User::find($user_id);
@@ -50,6 +51,7 @@ class MembershipsController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
+		unset($credentials['csrf_token']);
 		$credentials['order_id']=substr(uniqid(),0,8);
 		$credentials['user_id']=Auth::id();
 		$membership=Membership::create($credentials);
@@ -166,7 +168,7 @@ class MembershipsController extends \BaseController {
 		$rcvdString=decrypt($encResponse,$working_key);		//Crypto Decryption used as per the specified working key.
 		$decryptValues=explode('&', $rcvdString);
 		$dataSize=sizeof($decryptValues);
-		for($i = 0; $i < $dataSize; $i) 
+		for($i = 0; $i < $dataSize; $i++) 
 		{
 			$info=explode('=',$decryptValues[$i]);
 			$information[$info[0]]=$info[1];

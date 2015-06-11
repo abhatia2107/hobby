@@ -67,7 +67,6 @@ Route::group(array('before' => "admin"), function() {
 });
 
 Route::get('/batches/increment/{id}','BatchesController@increment');
-Route::get('/bookings/payment/{id}','BookingsController@payment');
 Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');
@@ -75,11 +74,6 @@ Route::get('/test2', function(){
 	return View::make('Users.edit');
 });
 Route::get('/email', 'BookingsController@sms_email');
-Route::post('/bookings/redirect','BookingsController@redirect');
-Route::post('/bookings/cancel','BookingsController@cancel');
-
-Route::resource('bookings', 'BookingsController');
-Route::get('bookings/create/{id}', 'BookingsController@create');
 
 //Route for CategoriesController
 
@@ -150,6 +144,29 @@ Route::group(array('before' => "auth|instituteOwn-or-admin"), function() {
 	Route::get('/institutes/disable/{id}','InstitutesController@disable');
 	Route::get('/institutes/show/{id}','InstitutesController@show');
 });
+
+//Route for BookingsController
+Route::get('/bookings','BookingsController@index');
+Route::post('/bookings/update/{id}','BookingsController@update');
+Route::get('/bookings/enable/{id}','BookingsController@enable');
+Route::get('/bookings/disable/{id}','BookingsController@disable');
+Route::get('/bookings/delete/{id}','BookingsController@destroy');
+Route::get('/bookings/show/{id}','BookingsController@show');
+Route::post('/bookings/redirect','BookingsController@redirect');
+Route::post('/bookings/cancel','BookingsController@cancel');
+Route::get('bookings/create/{id}', 'BookingsController@create');
+Route::get('/bookings/payment/{id}','BookingsController@payment');
+
+//Route for MembershipsController
+Route::get('/memberships','MembershipsController@index');
+Route::post('/memberships/update/{id}','MembershipsController@update');
+Route::get('/memberships/enable/{id}','MembershipsController@enable');
+Route::get('/memberships/disable/{id}','MembershipsController@disable');
+Route::get('/memberships/delete/{id}','MembershipsController@destroy');
+Route::get('/memberships/show/{id}','MembershipsController@show');
+Route::post('/memberships/redirect','MembershipsController@redirect');
+Route::post('/memberships/cancel','MembershipsController@cancel');
+Route::get('/memberships/payment/{id}','MembershipsController@payment');
 
 
 Route::group(array('before' => "auth|admin"), function() {
@@ -252,6 +269,8 @@ Route::group(array('before' => "guest-or-admin"), function() {
 
 Route::group(array('before' => "csrf"), function() {
 	Route::post('/comments/store','CommentsController@store');
+	Route::post('/bookings','BookingsController@store');
+	Route::post('/memberships','MembershipsController@store');
 	Route::post('/users/login/submit','UsersController@postAuthenticate');
 	Route::post('/users/signup/submit','UsersController@postSignup');
 	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
@@ -282,21 +301,6 @@ Route::get('/aboutus', function()
 {
 	return View::make('Miscellaneous.aboutus');
 });
-
-Route::get('/Membership', function()
-{
-	return View::make('Miscellaneous.membership');
-});
-
-Route::post('/memberships/redirect','MembershipsController@redirect');
-Route::post('/memberships/cancel','MembershipsController@cancel');
-
-Route::get('/success', 'MembershipsController@success');
-Route::get('/aborted', 'MembershipsController@aborted');
-Route::get('/failure', 'MembershipsController@failure');
-
-
-Route::get('/memberships/payment/{id}','MembershipsController@payment');
 	
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
@@ -312,7 +316,5 @@ Route::get('/filter/locality/{id}','FiltersController@locality');
 Route::get('/filter/subcategory/{id}','FiltersController@subcategory');
 
 Route::get('/users/account/{id}','UsersController@account');
-
-Route::resource('memberships', 'MembershipsController');
 
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');

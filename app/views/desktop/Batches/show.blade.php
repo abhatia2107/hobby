@@ -250,7 +250,8 @@
               <div class="row batchOrderField">
                 <div class='col-md-5 col-sm-4 col-xs-5'>Name*</div>
                 <div class='col-md-7 col-sm-8 col-xs-7'>
-                      <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" value="@if(isset($user)){{$user->user_first_name.' '.$user->user_last_name}}@endif" required/>
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" value="@if(isset($user)){{$user->user_first_name.' '.$user->user_last_name}}@endif" required/>
                 </div>          
               </div>   
               <div class="row batchOrderField">

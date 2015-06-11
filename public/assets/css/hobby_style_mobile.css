@@ -41,6 +41,8 @@ body li {  list-style-type: none; }
 .user_account_options .btn-primary { color: #ffffff;border-color:#20cfb1;padding: 3px 10px; }
  
 .user_account_options .btn-primary:active{ box-shadow: none; }
+
+.user_account_options { z-index: 1000000000000;}
  
 .homepage-cover { width: 100%;text-align: center;background-color: rgba(0, 0, 0, 0.0);  }
 

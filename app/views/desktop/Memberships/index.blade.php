@@ -123,14 +123,24 @@
 	    		$('#promoCodeContainer').append("<span id='statusMessage'>Promo Code Applied Already</span>")
 	      	}
    		} 
-		$('#membership_pay').click(function(e)
-        {
-          if(loginStatus=="")
-          {
-            e.preventDefault();
-            e.stopPropagation();
-            $('#loginModal').modal('show');
-          }
-        });        
+   		$(document).ready(function () 
+   		{   		
+			$('#membership_pay').click(function(e)
+	        {
+	          if(loginStatus=="")
+	          {
+	            e.preventDefault();
+	            e.stopPropagation();
+	            $('#loginModal').modal('show');
+	          }
+	        });
+	        $('#promoCode').keypress(function(e){
+			    if ( e.which == 13 )
+			    {
+			    	verifyPromoCode () ;
+			    	e.preventDefault();
+			    } 
+			});
+		});        
 	</script>
  @stop

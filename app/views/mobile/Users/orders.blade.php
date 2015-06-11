@@ -20,6 +20,11 @@
 <div class="container user_order_page padding_margin_0">
   <div class="col-xs-12 padding_margin_0" >
     <div class="user_order_page_header">Your Orders</div>
+      @if(sizeof($bookingDetails)==0)
+        <div class="uac_orders" style="text-align:center">
+           <h4> Sorry No orders found </h4>
+        </div>
+      @endif       
     @foreach ($bookingDetails as $booking)
         <div class="uac_orders">
           <div style="margin:0px 10px 0px 10px;">

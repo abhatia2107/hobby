@@ -187,3 +187,5 @@ span.stars span {  background-position: 0 0; }
 .right-addon { right: 22px;position: absolute;float: left;padding-top: 8px;}
 
 .inner-addon input  { padding-left:  30px;padding-right: 0px; }
+
+.booknowButton, .booknowButton:hover, .booknowButton button:active { background: #3396d1;margin-top: 5px;padding: 5px 25px 5px 25px;border-radius: 0px;border:0px solid;text-align: center; }

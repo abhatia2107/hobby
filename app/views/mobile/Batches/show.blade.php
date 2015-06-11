@@ -128,6 +128,7 @@
     $locality =  $batchDetails->locality;    
     $landMark = $batchDetails->venue_landmark;
     $location = $batchDetails->location;
+    $pincode =  $batchDetails->venue_pincode;
     $facilitiesName = ["Air Conditioning","Cafe","Changing Room","Locker","Shower Room","Steam"];
     $facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
     $facilitesAvailable = [];
@@ -219,7 +220,7 @@
         <div class="row batchOrderButtons">    
           <button onclick="goBackToOrder();" style="padding:5px 50px;background:lightgrey;color:black" class="booknowButton" id="goBackButton" >Go Back</button>
           <button type="submit" style="padding:5px 50px;" class="booknowButton" id="booknowButton" name="pay_cc" value="payment" >Pay Now</button>
-          <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="booknowButton" name="pay_hobbyix" value="credit">Pay Using Hobbyix Membership</button>
+          <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="payCredits" name="pay_hobbyix" value="credit">Pay Using Hobbyix Membership</button>
         </div>              
       </div>
     </form>
@@ -231,13 +232,15 @@
         <div id="sample-batch-details" class="sample-box " >
           <div class='sample_box_title'><span class="text_over_flow_hide">{{$instituteName}} Details</span></div>
           <div class="sample_box_data">
-            <div id='batch-session-count' class="batch-details">
-              <span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
-              {{$instituteAddress.', '.$locality.', '.$location.', '.$landMark}}
-            </div> 
+            <div id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-home' id='pin-icon'></span>
+              {{$instituteAddress.', '.$locality.', '.$location.', '.$pincode}}
+            </div>
+            <div @if(!isset($landMark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
+              Land Mark: {{$landMark}}
+            </div>
             <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
-              {{$instituteContact}}
-            </div> 
+              +91 {{$instituteContact}}
+            </div>
             <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-time' id='pin-icon'></span>
               {{$comment.' '.$tagline}}
             </div>
@@ -250,12 +253,14 @@
             </div> 
           </div>   
         </div>
-        <div class="sample-box " id='institute-details'>
-          <div class='sample_box_title'>Institute Details</div>
-          <div class="sample_box_data">
-            <span id='sample-details' class="details-container">{{$instituteDetails}}</span>    
+        @if($instituteDetails!=null)
+          <div class="sample-box " id='institute-details'>
+            <div class='sample_box_title'>Institute Details</div>
+            <div class="sample_box_data">
+              <span id='sample-details' class="details-container">{{$instituteDetails}}</span>    
+            </div>
           </div>
-        </div>
+        @endif
         <div id="comments" class="sample-box ">
           <div class='sample_box_title'>Write a Review</div>
           <div class="sample_box_data">          
@@ -291,9 +296,6 @@
   </div>
   <div class="space_footer"></div>
 </div>
-<?php
-  $relatedData = ["data1","data2","data3","data4","data5","data6","data7","data8","data9","data10","data11","data12"];
-?>
 <div class="container" id="related_data_container">
   <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12 related_item">
@@ -384,18 +386,26 @@
         {
           e.preventDefault();
           e.stopPropagation();
-          $('#loginModal').modal('show') ;
+          window.location.href="/users/login";
+        }
+      });
+      $('#payCredits').click(function(e)
+      {
+        if(categoryId=="")
+        {
+          e.preventDefault();
+          e.stopPropagation();
+            window.location.href="/users/login";
         }
       });
       $('#numberOfSessions').change(function () 
       {
           var sessionsCount = $(this).val(); 
           var sessionPrice = {{$sessionPrice}};
-          var subtotal = sessionPrice*sessionsCount;
-          $('#orderSubtotal').empty();  
-          $('#orderSubtotal').append(": Rs. "+subtotal);
+          var subtotal = sessionPrice*sessionsCount;          
           $('#orderTotal').empty();  
-          $('#orderTotal').append(": Rs. "+subtotal);          
+          $('#orderTotal').append(": Rs. "+subtotal);
+          $('#payment').val(subtotal);          
       });
       $('#SubmitReviewButton').bind('click', function(event) 
       {

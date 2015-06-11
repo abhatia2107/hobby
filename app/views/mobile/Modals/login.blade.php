@@ -7,7 +7,10 @@
             </div>
             <h3 class="modal-title" id="myModalLabel2">LogIn</h3>
         </div>
-        <div class="modal-body">               
+        <div class="modal-body">  
+            <div class="sign_up_opt" style="margin-bottom:10px">
+                    Not a member yet? <a href="/users/signup">Sign Up</a>
+            </div>            
             <input type="hidden" name="csrf_token" id="hiddenCSRF" value="{{ csrf_token() }}">
             <div class="form-group inner-addon" >
                  <i class="glyphicon glyphicon-envelope left-addon"></i>

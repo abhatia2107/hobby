@@ -30,6 +30,10 @@
 
 		@media (min-width: 920px) { .get_membership li {padding: 0 60px}}
 
+		.membership_card_container input[type=text] { height: 25px; padding: 0px 0px 0px 5px; width: 90%; border-radius: 2px; }
+
+		#promoCodeContainer #statusMessage {color: red;font-size: 14px;}
+
 	</style>
 @stop
 
@@ -51,12 +55,20 @@
 							<input type="hidden" name="start_date" value="{{$credentials['start_date']}}">
 							<input type="hidden" name="end_date" value="{{$credentials['end_date']}}">
 							<input type="hidden" name="credits" value="{{$credentials['credits']}}">
-							<input type="hidden" name="payment" value="{{$credentials['payment']}}">
+							<input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span id="totalPrice">: Rs. {{$credentials['payment']}}/-</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
-							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" id="membership_pay">Pay Now</button></div>
+							<li class="col-md-12" style="margin:5px 0px;">
+								<div class='col-md-10 col-sm-10' style="" id="promoCodeContainer">
+            						<input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="Promo Code" />
+          						</div>
+          						<div class='col-md-2 col-sm-2' id="promoCodeMessageContainer" style="text-align:left;padding:1px 0px 0px 0px;font-size:15px;color:green">
+             					<a href="javascript:verifyPromoCode();">Apply</a>
+          						</div>          
+        					</li>     
+							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" id="membership_pay">Pay Now</button></div>							
 						</form>
 					</div>
 				</div>				
@@ -82,7 +94,35 @@
 @stop
 @section('pagejquery')  
 	<script type="text/javascript">
-		var loginStatus = "{{$loggedIn}}";		
+		var loginStatus = "{{$loggedIn}}";
+		var appliedPromoCode = false;      		
+		function verifyPromoCode () 
+		{
+      		var promoCodeIP = $('#promoCode').val();      		
+      		if((promoCodeIP == "HBX200") && (appliedPromoCode==false))
+      		{      			
+          		var totalAmount = $('#payment').val();
+          		totalAmount = totalAmount-200;          		
+          		$('#payment').val(totalAmount);
+          		$('#totalPrice').empty();          	
+          		$('#totalPrice').append(': Rs. '+totalAmount+'/-');
+          		/*$('#promoCodeMessageContainer').empty();
+          		$('#promoCodeMessageContainer').append("<span class='glyphicon glyphicon-ok'> </span>"); */
+          		$('#promoCodeContainer #statusMessage').empty();
+	    		$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied</span>");
+	    		appliedPromoCode = true;	    		
+      		}
+		   	else if ( (promoCodeIP != "HBX200") && (appliedPromoCode==false))
+	    	{	    		
+	    		$('#promoCodeContainer #statusMessage').empty();
+	    		$('#promoCodeContainer').append("<span id='statusMessage'>Invalid Promo Code</span>")
+	      	}
+	      	else
+	      	{
+	      		$('#promoCodeContainer #statusMessage').empty();
+	    		$('#promoCodeContainer').append("<span id='statusMessage'>Promo Code Applied Already</span>")
+	      	}
+   		} 
 		$('#membership_pay').click(function(e)
         {
           if(loginStatus=="")
@@ -91,6 +131,6 @@
             e.stopPropagation();
             $('#loginModal').modal('show');
           }
-        });
+        });        
 	</script>
  @stop

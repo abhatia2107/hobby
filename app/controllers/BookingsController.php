@@ -57,14 +57,18 @@ class BookingsController extends \BaseController {
 			unset($data['pay_hobbyix']);
 			$user=User::find($data['user_id']);
 			$booking_already_done = Booking::where('user_id',$data['user_id'])->where('booking_date', $data['booking_date'])->first();
+			// dd($booking_already_done);
 			if($data['no_of_sessions']==1){
 				if($user->user_credits_left>$data['referral_credit_used']){
 					if(!$booking_already_done){
+						// dd('test');
 						unset($data['csrf_token']);
 						unset($data['Promo_Code']);
 						$booking = Booking::create($data);
 						if($booking){
+							// var_dump($user);
 							$user->user_credits_left=$user->user_credits_left-$data['referral_credit_used'];
+							// dd($user);
 							$user->save();
 							$this->sms_email($booking->id);
 							$batch=$this->batch->getBatch($booking->batch_id);
@@ -264,7 +268,7 @@ class BookingsController extends \BaseController {
 
 	public function sms_email($booking_id)
 	{
-		// $booking_id=1;
+		$booking=Booking::find($booking_id);
 		$batch=$this->batch->getBatch($booking->batch_id);
 		$data = array(
 					'order_id' => $booking->order_id,

@@ -7,7 +7,8 @@
         $metaContent[2] = "gyms, best gyms, zumba classes, zumba dance, gym, aerobics classes, pilates classes, yoga centers, yoga classes, kick boxing, gym membership, aerobic exercise";
     }
 ?>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="vgzS24WtBop22kDPTpDMKE4pKu92EkBc3NVHcuIqPfk" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <title>{{$metaContent[0]}}</title>
     <meta name="description" content="{{$metaContent[1]}}">

@@ -34,7 +34,9 @@ class Locality extends \Eloquent {
 	public function getLocalitiesForLocation($locality_location_id)
 	{
 		if($locality_location_id!=0)
-	        return Locality::where('locality_location_id',$locality_location_id)->get();
+	        return Locality::where('locality_location_id',$locality_location_id)
+	    	->get()
+	    	->sortBy('locality');
 		else
 			return Locality::all();
 	}
@@ -54,18 +56,17 @@ class Locality extends \Eloquent {
         return Locality::whereIn('localities.id', $localities)
         				->select('id','locality')
         				->take(5)
-        				->get();
+        				->get()
+        				->sortBy('locality');
 	}
 
 	public function getAllLocalities()
 	{
-		return 
-		DB::table('localities')->
-		// localities::
-	//	withTrashed()
-		leftJoin('locations', 'localities.locality_location_id', '=', 'locations.id','localities.id as id','localities.deleted_at as deleted_at','localities.created_at as created_at','localities.updated_at as updated_at')
+		return Locality::where('locality_location_id',1)
+		->Join('locations', 'localities.locality_location_id', '=', 'locations.id')
 		->select('*','localities.id as id','localities.deleted_at as deleted_at','localities.created_at as created_at','localities.updated_at as updated_at')
-        ->get();
+		->get()
+		->sortBy('locality');
 	}
 
 	public function disableLocalitiesForLocation($locality_location_id)

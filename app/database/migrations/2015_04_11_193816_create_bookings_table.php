@@ -27,6 +27,7 @@ class CreateBookingsTable extends Migration {
 			$table->string('order_status',10)->nullable();
 			$table->integer('promo_id')->nullable()->foreign('promo_id')->references('id')->on('promos');
 			$table->float('referral_credit_used');
+	        $table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');
 		});

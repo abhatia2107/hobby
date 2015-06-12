@@ -166,6 +166,7 @@ class BookingsController extends \BaseController {
 			$data=array(
 						'batch_id'=>$booking->batch_id
 			);
+			$booking->delete();
 			return View::make('Bookings.aborted')->with($data);
 		}
 		else if($information['order_status']==="Failure")
@@ -173,6 +174,7 @@ class BookingsController extends \BaseController {
 			$data=array('status_message'=>$information['status_message'],
 						'batch_id'=>$booking->batch_id
 						);
+			$booking->delete();
 			return View::make('Bookings.failure')->with($data);
 		}
 		else
@@ -180,6 +182,7 @@ class BookingsController extends \BaseController {
 			$data=array('status_message'=>"Security Error. Illegal access detected",
 						'batch_id'=>$booking->batch_id
 						);
+			$booking->delete();
 			return View::make('Bookings.illegal')->with($data);
 		}
 	}
@@ -199,6 +202,7 @@ class BookingsController extends \BaseController {
 		$booking=Booking::where('order_id',$information['order_id'])->first();
 		$booking->order_status=$information['order_status'];
 		$booking->save();
+		$booking->delete();
 		$data=array(
 			'batch_id'=>$booking->batch_id
 		);

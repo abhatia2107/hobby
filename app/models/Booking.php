@@ -1,6 +1,8 @@
 <?php
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Booking extends \Eloquent {
+use SoftDeletingTrait;
 
 	// Add your validation rules here
 	public static $rules = [

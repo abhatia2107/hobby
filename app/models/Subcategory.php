@@ -35,19 +35,18 @@ class Subcategory extends \Eloquent {
 
 	public function getAllSubcategories()
 	{
-		return 
-		DB::table('subcategories')->
-		// Subcategory::
-	//	withTrashed()
-		leftJoin('categories', 'subcategories.subcategory_category_id', '=', 'categories.id','subcategories.id as id','subcategories.deleted_at as deleted_at','subcategories.created_at as created_at','subcategories.updated_at as updated_at')
+        return Subcategory::where('subcategory_category_id',1)
+		->Join('categories', 'subcategories.subcategory_category_id', '=', 'categories.id')
 		->select('*','subcategories.id as id','subcategories.deleted_at as deleted_at','subcategories.created_at as created_at','subcategories.updated_at as updated_at')
-        ->get();
+        ->get()
+        ->sortBy('subcategory');
 	}
 
 	public function getSubcategoriesForCategory($subcategory_category_id)
     {
         if($subcategory_category_id!=0)
-            return Subcategory::where('subcategory_category_id',$subcategory_category_id)->get();
+            return Subcategory::where('subcategory_category_id',$subcategory_category_id)->get()
+            ->sortBy('subcategory');
         else
             return Subcategory::all();
     }
@@ -67,7 +66,8 @@ class Subcategory extends \Eloquent {
         return Subcategory::whereIn('subcategories.id',$subcategories)
                         ->select('id','subcategory')
                         ->take(12)
-                        ->get();
+                        ->get()
+                        ->sortBy('subcategory');
     }
 
     public function getSubcategoryForInstitute($institute_id)
@@ -85,7 +85,8 @@ class Subcategory extends \Eloquent {
         return Subcategory::whereIn('subcategories.id',$subcategories)
                         ->select('id','subcategory')
                         ->take(5)
-                        ->get();
+                        ->get()
+                        ->sortBy('subcategory');
     }
 
     public function disableSubcategoriesForCategory($subcategory_category_id)

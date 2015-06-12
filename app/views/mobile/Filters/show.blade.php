@@ -271,6 +271,31 @@
 	  </div>
 	</div>
 @endif
+@if(isset($locationSubcategories))
+	<div class="container" id="related_data_container">
+	 	<div class="row">
+	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+	    		<?php	    			
+		          	$institutesLength = sizeof($locationSubcategories);
+		          	$index = 0;
+		          	$maxlength = 12;		          
+		          	$width = 3;
+		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+		        ?>
+		        <h4>Related to {{$categories[$category_id-1]->category}} classes in  {{$location}}</h4>       		        		        
+				@for(; $index<$maxlength; $index++ )
+				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+				      <li title="{{$locationSubcategories[$index]->subcategory}} classes in {{$location}}" >
+				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$locationSubcategories[$index]->id}}">
+				          {{$locationSubcategories[$index]->subcategory}} classes in {{$location}}
+				        </a>
+				      </li>
+				    </div> 
+				@endfor		            		                  		             
+	      </div>       
+	  </div>
+	</div>
+@endif
 @if(isset($localitySubcategories))
 	<div class="container" id="related_data_container">
 	 	<div class="row">

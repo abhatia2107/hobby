@@ -46,12 +46,12 @@ class FiltersController extends \BaseController {
 		$weekdays=$this->weekdays;		
 		//For display
 		if(!$category_id){
-			$subcategoriesForCategory=$this->subcategory->all();
+			$subcategoriesForCategory=$this->subcategory->getAllSubcategories();
 		}
 		else
 			$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
 		if(!$location_id)
-			$localitiesForLocation = $this->locality->all();
+			$localitiesForLocation = $this->locality->getAllLocalities();
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$chunk=$chunk*100;
@@ -73,9 +73,27 @@ class FiltersController extends \BaseController {
 			{
 				$batchesForCategoryLocation="";				
 			}
-			//dd($batchesForCategoryLocation[0]->shower_room);
+			else
+			{
+				// $locality = $batchesForCategoryLocation[0]->locality;			
+				$location = $batchesForCategoryLocation[0]->location;
+				$locationSubcategories = $this->subcategory->getAllSubcategories();
+				$subcategoryArray = array();
+				$index = 0;
+		        foreach ($locationSubcategories as $subcategory) {
+		            array_push($subcategoryArray,$subcategory->subcategory);
+		            if($index==5)
+		            	break;
+		            $index++;	
+		        }
+				$subcategoriesString = implode(", ",$subcategoryArray);
+				$metaContent[0] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing in $location :: Hobbyix";
+				$metaContent[1] = "Hobbyix helps you in finding $subcategoriesString classes in $location. Get access to all activities with Hobbyix Membership.";
+				$subcategoriesString = implode(" classes in $location, ",$subcategoryArray);
+				$metaContent[2] = "$subcategoriesString classes in $location";
+			}
 			// dd($batchesForCategoryLocation);
-			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','locationSubcategories','category_id','location_id','location','metaContent'));
 		}
 	}
 
@@ -89,13 +107,13 @@ class FiltersController extends \BaseController {
 		$category_id=1;
 		$location_id=1;
 		if(!$category_id){
-			$subcategoriesForCategory=$this->subcategory->all();
+			$subcategoriesForCategory=$this->subcategory->getAllSubcategories();
 		}
 		else
 			$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
 		
 		if(!$location_id)
-			$localitiesForLocation = $this->locality->all();
+			$localitiesForLocation = $this->locality->getAllLocalities();
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->getBatchesForInstitute($id);
@@ -103,7 +121,7 @@ class FiltersController extends \BaseController {
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
 			$batchesForCategoryLocation="";
-			$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+			// $batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
 		//dd($batchesForCategoryLocation[0]->location);
 		else

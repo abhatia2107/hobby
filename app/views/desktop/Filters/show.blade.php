@@ -125,7 +125,11 @@
 								@endforeach
 							 </ul>							 
 						</div>
-					</div>				
+					</div>
+					<div id="browse-filter" class="filter-option-2 filterOption">	
+						Like us on facebook
+						<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+					</div>
 				</div>
 				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 25px 0px;padding:0px 1% 0px 0px;" >
 					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 

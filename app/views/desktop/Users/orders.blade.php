@@ -24,6 +24,11 @@
          @include('Users.sidebar')
       </div>
       <div class="col-md-9 col-sm-4 col-xs-12">
+        @if(sizeof($bookingDetails)==0)
+            <div class="uac_orders">
+               <h4> Sorry No orders found </h4>
+            </div>
+        @endif        
         @foreach ($bookingDetails as $booking)
             <div class="uac_orders">
               <div class="uac_order_header row"> 

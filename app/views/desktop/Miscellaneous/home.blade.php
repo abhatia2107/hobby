@@ -24,25 +24,6 @@
 	</div>
 </div>
 <div class="container featured_listing_container">
-	<div class="featured_listing_title">Fitness Studios</div>
-	<?php
-		$institutesLength = sizeof($institutes);
-		$index = 0;
-		$maxlength = 60;				
-		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
-	?>	
-	@for(;$index<$maxlength; $index++ )
-		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
-			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad">
-				<a class="text_over_flow_hide" href="/filter/institute/{{$institutes[$index]->id}}">
-					{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}
-				</a>
-			</li>
-		</div>	
-	@endfor				
-</div>
-<div class="division_divider"></div>
-<div class="container featured_listing_container">
 	<div class="featured_listing_title">Fitness Activities</div>
 	<?php
 		$institutesLength = sizeof($subcategories);
@@ -78,6 +59,25 @@
 			</li>
 		</div>		
 	@endfor
+</div>
+<div class="division_divider"></div>
+<div class="container featured_listing_container">
+	<div class="featured_listing_title">Fitness Studios</div>
+	<?php
+		$institutesLength = sizeof($institutes);
+		$index = 0;
+		$maxlength = 60;				
+		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
+	?>	
+	@for(;$index<$maxlength; $index++ )
+		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
+			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad">
+				<a class="text_over_flow_hide" href="/filter/institute/{{$institutes[$index]->id}}">
+					{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}
+				</a>
+			</li>
+		</div>	
+	@endfor				
 </div>
 @stop
 @section('pagejquery')

@@ -88,7 +88,7 @@
 							Hobbyix Membership Features
 						</h1>
 						<ul class="membership_features">
-							<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of classes with Hobbyix Membership</li>
+							<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of fitness activities with Hobbyix Membership</li>
 							<li><span class="glyphicon glyphicon-hand-right"></span>There is no limit on how many types of activities you indulge in</li>
 							<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>							
 							<li><span class="glyphicon glyphicon-hand-right"></span>You will get 30 credits in your account. Each class is of 1 credit except a few which could be of 2-3 credits</li>

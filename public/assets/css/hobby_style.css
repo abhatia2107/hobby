@@ -85,6 +85,11 @@ body li {  list-style-type: none; }
   -moz-background-size: 100% 135%, auto;-webkit-background-size: 100% 135%, auto;background-size: 100% 135%, auto;
 }
 
+.yoga-slider { margin-top: 0px;top:0;left:0;background: url("/assets/images/yoga/sri_sri.jpg"); 
+  background-repeat:no-repeat;background-position:left top;-o-background-size: 100% 135%, auto;
+  -moz-background-size: 100% 135%, auto;-webkit-background-size: 100% 135%, auto;background-size: 100% 135%, auto;
+}
+
 .home-category-type { position:relative;overflow:hidden;background:black;height: 170px;margin-bottom:30px;
   margin-top:7;border-radius: 9px;border:4px solid;border-color: lightgray;
 }

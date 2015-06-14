@@ -11,17 +11,17 @@
 	</div>
 </div>
 <div class="overlay-slider">
-<div class="homepage-cover">
-   <div class="container" id="hompage-cover">
-      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.2);padding:0px 0px 5px 0px;">
-         <div>
-            <h1>{{$homeLang['home_title']}}</h1>
-            <h2>{{$homeLang['home_subtitle']}}</h2>
-         </div> 
-         <div class="explore_button" ><a href="/filter/categories/1/locations" class="btn btn-primary">Explore Now</a></div>  
-      </div>
-   </div>
-</div>
+	<div class="homepage-cover">
+	   <div class="container" id="hompage-cover">
+	      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.2);padding:0px 0px 5px 0px;">
+	         <div>
+	            <h1>{{$homeLang['home_title']}}</h1>
+	            <h2>{{$homeLang['home_subtitle']}}</h2>
+	         </div> 
+	         <div class="explore_button" ><a href="/filter/categories/1/locations" class="btn btn-primary">Explore Now</a></div>  
+	      </div>
+	   </div>
+	</div>
 </div>
 <div class="container featured_listing_container">
 	<div class="featured_listing_title">Fitness Studios</div>

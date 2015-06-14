@@ -278,6 +278,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/batches/sendMessage','BatchesController@sendMessage');
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
     Route::post('promos/isValid','PromosController@isValid');
+	Route::post('/yoga','YogasController@store');
 });
 
 Route::get('/privacy', function()
@@ -318,3 +319,7 @@ Route::get('/filter/subcategory/{id}','FiltersController@subcategory');
 Route::get('/users/account/{id}','UsersController@account');
 
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');
+
+Route::get('/yoga','YogasController@create');
+Route::get('/yoga/list','YogasController@index');
+

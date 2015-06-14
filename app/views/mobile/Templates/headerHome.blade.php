@@ -16,6 +16,7 @@
 				<span class="website-title">HOBBYIX</span>
 			</a>
 		</div>				
+		<a href="{{url('/yoga')}}">International Yoga Day&nbsp; &nbsp;&nbsp;</a>
 		<div class="userInfoListing col-xs-6">
 			@if(!$id)
 				<div class="login">

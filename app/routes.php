@@ -70,6 +70,7 @@ Route::get('/batches/increment/{id}','BatchesController@increment');
 Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');
+// Route::get('/test', 'FiltersController@test');
 Route::get('/test2', function(){
 	return View::make('Users.edit');
 });
@@ -238,8 +239,8 @@ Route::group(array('before' => "auth|admin"), function() {
 });
 
 Route::group(array('before' => "auth"), function() {
-	Route::get('/users/MyProfile','UsersController@profile');
-	Route::get('/users/MyOrders','UsersController@orders');
+	Route::get('/users/profile','UsersController@profile');
+	Route::get('/users/orders','UsersController@orders');
 	Route::get('/users/changepassword','UsersController@getChangePassword');
 	Route::get('/users/edit','VenuesController@edit');
 	Route::post('/users/update','UsersController@update');
@@ -308,7 +309,7 @@ Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersC
 Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','FiltersController@show');
 
 
-Route::get('/filters/search','FiltersController@search');
+Route::get('/filter/search','FiltersController@search');
 
 Route::get('/filter/institute/{id}','FiltersController@institute');
 
@@ -322,4 +323,3 @@ Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{loc
 
 Route::get('/yoga','YogasController@create');
 Route::get('/yoga/list','YogasController@index');
-

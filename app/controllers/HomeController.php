@@ -21,7 +21,6 @@ class HomeController extends BaseController {
 	{		
 	   	$featuredBatches=$this->feature->getFeaturedBatches();
 		$institutes = $this->institute->getAllInstitutesWithLocality();
-		// dd($institutes);
 		// dd($this->institute->getInstituteForCategory([1,2]));
 		$subcategories = $this->subcategory->all();
 		$localities = $this->locality->all();

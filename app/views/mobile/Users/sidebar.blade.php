@@ -41,8 +41,8 @@
       Valid Till: @if(isset($user->user_credits_expiry)){{date('d M Y',strtotime($user->user_credits_expiry))}}@else{{'-'}}@endif
   </div>
   <div class="uac_nav_items">
-    <li @if($nav_item==1) class="active" @endif> <a href="/users/MyProfile">My Profile</a></li>
-    <li @if($nav_item==2) class="active" @endif> <a href="/users/MyOrders">My Orders</a> </li>
+    <li @if($nav_item==1) class="active" @endif> <a href="/users/profile">My Profile</a></li>
+    <li @if($nav_item==2) class="active" @endif> <a href="/users/orders">My Orders</a> </li>
     <li @if($nav_item==3) class="active" @endif> <a href="/users/show/{{$id}}">Change Password</a> </li>
   </div>
 </div>

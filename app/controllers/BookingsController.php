@@ -56,21 +56,47 @@ class BookingsController extends \BaseController {
 		else if(isset($data['pay_hobbyix'])){
 			unset($data['pay_hobbyix']);
 			$user=User::find($data['user_id']);
+
 			$booking_already_done = Booking::where('user_id',$data['user_id'])->where('booking_date', $data['booking_date'])->first();
+			$batch_booking_already = Booking::where('user_id',$data['user_id'])->where('batch_id', $data['batch_id'])->first();
 			// dd($booking_already_done);
 			if($data['no_of_sessions']==1){
-				if($user->user_credits_left>$data['referral_credit_used']){
+				if(($user->user_free_credits_left>=$data['referral_credit_used'])||($user->user_credits_left>=$data['referral_credit_used'])){
 					if(!$booking_already_done){
 						// dd('test');
 						unset($data['csrf_token']);
 						unset($data['Promo_Code']);
 						$booking = Booking::create($data);
 						if($booking){
-							// var_dump($user);
-							$user->user_credits_left=$user->user_credits_left-$data['referral_credit_used'];
-							// dd($user);
-							$user->save();
-							$this->sms_email($booking->id);
+							if(!$batch_booking_already){
+								// dd($data['referral_credit_used']);
+								if($user->user_free_credits_left>=$data['referral_credit_used']){
+									$user->user_free_credits_left=$user->user_free_credits_left-$data['referral_credit_used'];
+									$user->save();
+									$batch=Batch::find($data['batch_id']);
+									$batch->batch_trial=$batch->batch_trial+1;
+									$batch->save();
+									$this->sms_email_trial($booking->id);
+								}
+								else{
+									$user->user_credits_left=$user->user_credits_left-$data['referral_credit_used'];
+									$user->save();
+									$this->sms_email($booking->id);
+								}
+							}
+							else{
+								if($user->user_credits_left>=$data['referral_credit_used']){
+									$user->user_credits_left=$user->user_credits_left-$data['referral_credit_used'];
+									$user->save();
+									$this->sms_email($booking->id);
+								}
+								else{
+									$booking->order_status="batch_booking_already";
+									$booking->save();
+									$booking->delete();
+									return Redirect::back()->with('failure',Lang::get('booking.batch_booking_already'));
+								}
+							}
 							$batch=$this->batch->getBatch($booking->batch_id);
 							$data=array('subcategory'=>$batch->subcategory,
 										'institute'=>$batch->institute,
@@ -78,21 +104,32 @@ class BookingsController extends \BaseController {
 										'date'=>$booking->booking_date,
 										'no_of_sessions'=>$booking->no_of_sessions
 								);
+							$batch->batch_bookings=$batch->batch_bookings+1;
+							$batch->save();
 							return View::make('Bookings.success')->with($data);
 						}
 						else{
 							return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
 						}
 					}
-					else{
+					else{	
+						$booking->order_status="booking_already_done";
+						$booking->save();
+						$booking->delete();
 						return Redirect::back()->with('failure',Lang::get('booking.booking_already_done'));
 					}
 				}
 				else{
+					$booking->order_status="not_enough_credit";
+					$booking->save();
+					$booking->delete();
 					return Redirect::back()->with('failure',Lang::get('booking.booking_not_enough_credit'));
 				}
 			}
 			else{
+				$booking->order_status="booking_one_allowed";
+				$booking->save();
+				$booking->delete();
 				return Redirect::back()->with('failure',Lang::get('booking.booking_one_allowed'));
 			}
 		}
@@ -159,6 +196,8 @@ class BookingsController extends \BaseController {
 						'date'=>$booking->booking_date,
 						'no_of_sessions'=>$booking->no_of_sessions
 				);
+			$batch->batch_bookings=$batch->batch_bookings+1;
+			$batch->save();
 			return View::make('Bookings.success')->with($data);
 		}
 		else if($information['order_status']==="Aborted")
@@ -322,6 +361,59 @@ class BookingsController extends \BaseController {
 		});
 		
 	}
+
+	public function sms_email_trial($booking_id)
+	{
+		$booking=Booking::find($booking_id);
+		$batch=$this->batch->getBatch($booking->batch_id);
+		$data = array(
+					'order_id' => $booking->order_id,
+					'institute' => $batch->institute, 
+					'subcategory' => $batch->subcategory,
+					'amount' => $booking->payment,
+					'date' => date("d M Y", strtotime($booking->booking_date)),
+					'no_of_sessions' => $booking->no_of_sessions,
+					'venue_address' => $batch->venue_address,
+					'locality' => $batch->locality,
+					'location' => $batch->location,
+					'venue_landmark' => $batch->venue_landmark,
+					'venue_pincode' => $batch->venue_pincode,
+					'venue_email' => $batch->venue_email,
+					'venue_contact_no' => $batch->venue_contact_no,
+					'user_name' => $booking->name,
+					'user_email' => $booking->email,
+					'user_contact_no' => $booking->contact_no,
+					'admin_contact_no' => '9100946081',
+					'admin_email' => 'booking@hobbyix.com'
+					);
+		$email= $booking->email;
+		$user_msg='Hi user, Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. This is a trial class. Please display the confirmation sms/email at the venue.';
+		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. This is a trial class. Thanks, hobbyix.com- '.$data['admin_contact_no'];
+		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'. This is a trial class.';
+		$subject='Trial Booking Successful';
+		$this->sms(true, $data['user_contact_no'], $user_msg);
+		Mail::send('Emails.trial_booking.user', $data, function($message) use ($email, $subject)
+		{
+			$message->to($email)->subject($subject);
+		});
+
+		$email=$batch->venue_email;
+		$subject='Trial Booking for your class done';
+		$this->sms(false, $data['venue_contact_no'], $institute_msg);
+		Mail::send('Emails.trial_booking.institute', $data, function($message) use ($email,$subject)
+		{
+			$message->to($email)->subject($subject);
+		});
+
+		$email=$data['admin_email'];
+		$subject='Trial Booking Done';
+		$this->sms(false, $data['admin_contact_no'], $admin_msg);
+		Mail::send('Emails.trial_booking.admin', $data, function($message) use ($email,$subject)
+		{
+			$message->to($email)->subject($subject);
+		});
+	}
+
 /*
 	public function test()
 	{

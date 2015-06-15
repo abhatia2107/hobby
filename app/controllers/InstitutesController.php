@@ -40,7 +40,7 @@ class InstitutesController extends \BaseController {
 	{
 		$credentials=Input::all();
 		$credentials['institute_user_id']=Auth::id();
-		$credentials['institute_url']=$credentials['institute'].$credentials['institute_user_id'];
+		$credentials['institute_url'] = str_replace(' ', '-', $credentials['institute']);
 		$validator = Validator::make($credentials, Institute::$rules);
 		if($validator->fails())
 		{
@@ -104,7 +104,7 @@ class InstitutesController extends \BaseController {
 		$user_id=Auth::id();
 		$credentials=Input::all();
 		$credentials['institute_user_id']=$user_id;
-		$credentials['institute_url']=$credentials['institute'].$credentials['institute_user_id'];
+		$credentials['institute_url'] = str_replace(' ', '-', $credentials['institute']);
 		$validator = Validator::make($credentials, Institute::$rules);
 		if($validator->fails())
 		{
@@ -118,7 +118,6 @@ class InstitutesController extends \BaseController {
 		else
 			return Redirect::to('/institutes/show/'.$id)->with('failed',Lang::get('institute.institute_already_failed'));
 	}
-
 
 	public function enable($id)
 	{

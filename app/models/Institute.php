@@ -37,7 +37,7 @@ class Institute extends \Eloquent {
     public function getAllInstitutesWithLocality()
     {
         return( DB::table('institutes')
-            ->select('institutes.id','institute','locality')
+            ->select('institutes.id', 'institute', 'institute_url', 'locality')
             ->Join('venues', 'institutes.id', '=', 'venues.venue_institute_id')
             ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
             ->get());

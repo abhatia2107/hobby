@@ -34,8 +34,8 @@
 						&nbsp;<span class="caret"></span>
 					</button>													
 					<ul class="dropdown-menu">
-						<li> <a href="/users/MyProfile">My Profile</a></li>
-						<li> <a href="/users/MyOrders">My Orders</a> </li>
+						<li> <a href="/users/profile">My Profile</a></li>
+						<li> <a href="/users/orders">My Orders</a> </li>
 						<li> <a class="" href="/users/show/{{$id}}">Change Password</a>	</li>
 						<li class="divider"> </li>
 						<li> <a class="header_logout_a" href="/users/logout" >Logout</a> </li>
@@ -44,7 +44,7 @@
 			</div>		
 		@endif						
 		<div class="col-sm-6 col-md-6 col-xs-12 search_area">
-			<form action="/filters/search" method="get" role="search">
+			<form action="/filter/search" method="get" role="search">
 				<div class="input-group search-box">
 					<input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword" >
 					<input type="hidden" name="category_id" value="0">
@@ -74,8 +74,8 @@
 						&nbsp;<span class="caret"></span>
 					</button>													
 					<ul class="dropdown-menu">
-						<li> <a href="/users/MyProfile">My Profile</a></li>
-						<li> <a href="/users/MyOrders">My Orders</a> </li>
+						<li> <a href="/users/profile">My Profile</a></li>
+						<li> <a href="/users/orders">My Orders</a> </li>
 						<li> <a class="" href="/users/show/{{$id}}">Change Password</a>	</li>
 						<li class="divider"> </li>
 						<li> <a class="header_logout_a" href="/users/logout" >Logout</a> </li>

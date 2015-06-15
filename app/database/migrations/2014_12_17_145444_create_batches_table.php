@@ -21,7 +21,7 @@ class CreateBatchesTable extends Migration {
 			$table->integer('batch_institute_id')->foreign('batch_institute_id')->references('id')->on('institutes');
 			$table->integer('batch_venue_id')->foreign('batch_venue_id')->references('id')->on('venues');
 			$table->longText('batch_accomplishment')->nullable();
-			$table->integer('batch_difficulty_level')->default(0);
+			$table->integer('batch_bookings')->default(0);
 			$table->integer('batch_age_group')->default(0);
 			$table->integer('batch_gender_group')->default(0);
 			$table->integer('batch_single_price')->nullable();

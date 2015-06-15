@@ -16,7 +16,8 @@ class CreateLocalitiesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('locality_location_id')->foreign('locality_location_id')->references('id')->on('location');
-			$table->string("locality",255);
+			$table->string("locality");
+			$table->string("locality_url");
 			$table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

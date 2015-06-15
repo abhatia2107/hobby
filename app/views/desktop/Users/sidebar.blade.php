@@ -11,7 +11,7 @@
 
 .uac_sidebar_header{  padding: 7px 15px 5px 15px;border-bottom:1px solid;border-color: #20cfb1;font-size: 21px;color: #333;text-align: center;} 
 
-.uac_credits_container {padding: 10px 10px;font-size: 21px;border-bottom:1px solid;border-color: #20cfb1;}
+.uac_credits_container {padding: 10px 10px;font-size: 20px;border-bottom:1px solid;border-color: #20cfb1;}
 
 .uac_credits_container .fa {color:  #20cfb1;font-size: 25px;text-align: left;}
 
@@ -33,17 +33,23 @@
   <div class="uac_sidebar_header">
     {{$user->user_first_name}}    
   </div>
+  @if($user->user_free_credits_left)
+    <div class="uac_credits_container">
+        <span class="fa fa-credit-card"></span>
+        {{$user->user_free_credits_left}} Free Credits
+    </div>
+  @endif
   <div class="uac_credits_container">
       <span class="fa fa-credit-card"></span>
       {{$user->user_credits_left}} Credits
   </div>
-  <div class="uac_credits_container" style="font-size:13px;">
-      <span  style="font-size:13px;" class="fa fa-calendar"></span>
+  <div class="uac_credits_container" style="font-size:15px;">
+      <span  style="font-size:15px;" class="fa fa-calendar"></span>
       Valid Till: @if(isset($user->user_credits_expiry)){{date('d M Y',strtotime($user->user_credits_expiry))}}@else{{'-'}}@endif
   </div>
   <div class="uac_nav_items">
-    <li @if($nav_item==1) class="active" @endif> <a href="/users/MyProfile">My Profile</a></li>
-    <li @if($nav_item==2) class="active" @endif> <a href="/users/MyOrders">My Orders</a> </li>
+    <li @if($nav_item==1) class="active" @endif> <a href="/users/profile">My Profile</a></li>
+    <li @if($nav_item==2) class="active" @endif> <a href="/users/orders">My Orders</a> </li>
     <li @if($nav_item==3) class="active" @endif> <a href="/users/show/{{$id}}">Change Password</a> </li>
   </div>
 </div>

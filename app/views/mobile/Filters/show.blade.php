@@ -182,7 +182,7 @@
 											$sub_id = $subcategoryData->id;
 										?>				
 										<li subcategory="{{$sub_id}}" >								
-										 	 <label class="sub"><input autocomplete="off" value="{{$sub_id}}" type="checkbox" class="SubCheckbox filterCheckBox" @if(isset($subcategory_id)) @if($subcategory_id == $sub_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
+										 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryName}}" type="checkbox" class="SubCheckbox filterCheckBox" @if(isset($subcategory_id)) @if($subcategory_id == $sub_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
 										</li>
 								 	@endforeach
 								 </ul>
@@ -195,10 +195,11 @@
 									@foreach ($localitiesForLocation as $localityData)
 										<?php 
 											$localityName = $localityData->locality;
+											$localityUrl = $localityData->locality_url;
 											$loc_id = $localityData->id;
 										?>
 										<li subcategory="{{$loc_id}}" >								
-										 	 <label class="sub"><input autocomplete="off" style="" value="{{$loc_id}}" type="checkbox" class="LocCheckbox filterCheckBox" @if(isset($locality_id)) @if($locality_id == $loc_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$localityName}}</span></label>
+										 	 <label class="sub"><input autocomplete="off" style="" value="{{$localityUrl}}" type="checkbox" class="LocCheckbox filterCheckBox" @if(isset($locality_id)) @if($locality_id == $loc_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$localityName}}</span></label>
 										</li> 
 									@endforeach
 								 </ul>
@@ -236,7 +237,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->id}}/{{$locality_id}}">
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locality_id}}">
 				          {{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
 				        </a>
 				      </li>
@@ -261,7 +262,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/{{$subcategory_id}}/{{$localities[$index]->id}}">
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategory_id}}/{{$localities[$index]->locality}}">
 				          {{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}
 				        </a>
 				      </li>
@@ -286,7 +287,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$locationSubcategories[$index]->subcategory}} classes in {{$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$locationSubcategories[$index]->id}}">
+				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$locationSubcategories[$index]->subcategory}}">
 				          {{$locationSubcategories[$index]->subcategory}} classes in {{$location}}
 				        </a>
 				      </li>
@@ -311,7 +312,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$localitySubcategories[$index]->id}}">
+				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$localitySubcategories[$index]->subcategory}}">
 				          {{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
 				        </a>
 				      </li>
@@ -471,7 +472,7 @@
 											.append
 											(
 												$("<a></a>")
-												.prop("href","/batches/show/"+batchID)
+												.prop("href","/batches/show/"+batch)
 												.text(institute)
 											)									
 										)									
@@ -561,7 +562,7 @@
 									$("<a></a>")
 									.attr("class","btn btn-primary")
 									.attr("id","booknowButton")	
-									.attr("href","/batches/show/"+batchID)							
+									.attr("href","/batches/show/"+batch)							
 									.text("Book Now")
 								)
 								.append
@@ -580,7 +581,7 @@
 									(
 										$("<span style='display:none'></span>")
 										.attr("id","contact"+index)
-										.attr("value",batchID)
+										.attr("value", batchID)
 										.text(" "+contact)									
 									)
 									.append

@@ -69,6 +69,11 @@ class BatchesController extends \BaseController {
 		$batch_institute_id=Institute::getInstituteforUser($user_id);
 		$credentials['batch_user_id']=$user_id;
 		$credentials['batch_institute_id']=$batch_institute_id;
+		$institute=Institute::find($batch['batch_institute_id'])->institute_url;
+		$subcategory=Subcategory::find($batch['batch_subcategory_id'])->subcategory;
+		$venue=Venue::find($batch['batch_venue_id']);
+		$locality=Locality::find($venue->venue_locality_id)->locality_url;
+		$batch->batch=$institute.'-'.$subcategory.'-'.$locality;
 		$validator = Validator::make($credentials, Batch::$rules);
 		unset($credentials['csrf_token']);
 		if($validator->fails())
@@ -220,6 +225,11 @@ class BatchesController extends \BaseController {
 		$user_id=Auth::id();
 		$batch_institute_id=Institute::getInstituteforUser($user_id);
 		$credentials['batch_institute_id']=$batch_institute_id;
+		$institute=Institute::find($batch['batch_institute_id'])->institute_url;
+		$subcategory=Subcategory::find($batch['batch_subcategory_id'])->subcategory;
+		$venue=Venue::find($batch['batch_venue_id']);
+		$locality=Locality::find($venue->venue_locality_id)->locality_url;
+		$batch->batch=$institute.'-'.$subcategory.'-'.$locality;
 		$validator = Validator::make($credentials, Batch::$rules);
 		if($validator->fails())
 		{
@@ -253,7 +263,6 @@ class BatchesController extends \BaseController {
 
 	}
 
-	
 	public function enable($id)
 	{
 		$batch=Batch::withTrashed()->find($id);

@@ -13,12 +13,13 @@
     <title>{{$metaContent[0]}}</title>
     <meta name="description" content="{{$metaContent[1]}}">
     <meta name="keywords" content="{{$metaContent[2]}}">
-    <meta name="author" content="Hobbyix">
-    <meta property="og:image" content="/assets/images/home/banner.jpg">
+    <meta name="author" content="Hobbyix">   
+    <meta property="og:title" content="Hobbyix" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://www.facebook.com/hobbyix" />
+    <meta property="og:image" content="/assets/images/home/institute.jpg" />
     <link rel="icon" type="image/png" href="/assets/images/hobbyix_favicon.png">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css"> -->
-    <!--<link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css"> -->
     <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.11.2.min.css" >
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrapValidator.min.css">

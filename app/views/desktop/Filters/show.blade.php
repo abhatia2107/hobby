@@ -127,8 +127,8 @@
 							 </ul>							 
 						</div>
 					</div>
-					<div id="browse-filter" class="filter-option-2 filterOption">	
-						Like us on facebook
+					<div id="browse-filter" class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 10px 5px;display:block;">	
+						<h5>Like us on facebook</h5>
 						<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 					</div>
 				</div>

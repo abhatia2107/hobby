@@ -23,6 +23,34 @@
 	   </div>
 	</div>
 </div>
+<div class="container membership_offer_container">
+	<div class="header">
+		<a style="color:black;text-decoration:none" href="/memberships">Hobbyix Membership</a>
+	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12">	
+		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
+			<div class="header"></div>
+			<div class="details">
+				<img src="/assets/images/home/Fitness_AnyTime.PNG">				
+			</div>
+			<div class="footer" style="clear:both">Have Fitness Classes Available 24X7 Choose What Suits Your Schedule</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
+			<div class="header"></div>
+			<div class="details">
+				<img src="/assets/images/home/Fitness_AnyWhere.PNG">				
+			</div>		
+			<div class="footer" style="clear:both">Don't Settle For Any One Gym, Go To Any Gym Of Your Choice Everyday</div>
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
+			<div class="header"></div>
+			<div class="details">
+				<img src="/assets/images/home/Fitness_AnyType.PNG">				
+			</div>		
+			<div class="footer" style="clear:both">Spice Up Your Fitness Schedule With New Type Of Activities Everyday</div>
+		</div>		
+	</div>	
+</div>
 <div class="container featured_listing_container">
 	<div class="featured_listing_title">Fitness Activities</div>
 	<?php

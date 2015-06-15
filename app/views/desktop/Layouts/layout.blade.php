@@ -25,14 +25,7 @@
 		  ga('send', 'pageview');
 
 		</script>
-
-
-		<!--Header Section contains sign-in sign-up searchbox and logo -->			
-		{{--
-		<header class="layout_header" >
-			@include('Templates.headerHome')
-		</header>
-		--}}
+		<!--Header Section contains sign-in sign-up searchbox and logo -->					
 		@if(isset($featuredBatches))
 			<header class="layout_header" >
 				@include('Templates.headerHome')

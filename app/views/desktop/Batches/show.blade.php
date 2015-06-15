@@ -2,8 +2,8 @@
 @section('pagestylesheet')
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <style type="text/css">
-    #page { width: 100%;margin-top: 0px;background-repeat:no-repeat;background-position:center center;-o-background-size: 100% 135%, auto;
-      -moz-background-size: 100% 135%, auto;-webkit-background-size: 100% 135%, auto;background-size: 100% 135%, auto;
+    #page { width: 100%;margin-top: 0px; background-repeat:no-repeat;background-position:left center;-o-background-size: cover;
+  -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
     }
 
     #sample-institute-name { font-size: 40px;font-weight: bold; }

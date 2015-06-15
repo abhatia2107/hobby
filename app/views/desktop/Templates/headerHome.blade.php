@@ -19,9 +19,7 @@
 					<a href="{{url('/yoga')}}">International Yoga Day&nbsp; &nbsp;&nbsp;</a>
 				@if(!$id)
 					<div class="login">
-						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">LOGIN TO HOBBYIX</a>
-						<!-- &nbsp;&nbsp;|&nbsp;&nbsp;
-						<a  class="header_signup_a" href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a> -->
+						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">LOGIN TO HOBBYIX</a>						
 					</div>
 				@else
 					<div class="btn-group dropdown user_account_options">

@@ -66,7 +66,7 @@ class Batch extends \Eloquent {
         if(!$category_id&&!$location_id)
             return $allBatches
                 ->skip($chunk)
-                ->take(100)
+                ->take(40)
                 ->orderBy('institute_rating','desc')
                 ->get();
 
@@ -74,7 +74,7 @@ class Batch extends \Eloquent {
             return $allBatches
                 ->where('batches.batch_category_id','=',$category_id)
                 ->skip($chunk)
-                ->take(100)
+                ->take(40)
                 ->orderBy('institute_rating','desc')
                 ->get();
 
@@ -82,7 +82,7 @@ class Batch extends \Eloquent {
             return $allBatches
                 ->where('venues.venue_location_id','=',$location_id)
                 ->skip($chunk)
-                ->take(100)
+                ->take(40)
                 ->orderBy('institute_rating','desc')
                 ->get();
 
@@ -91,13 +91,23 @@ class Batch extends \Eloquent {
                 ->where('batches.batch_category_id','=',$category_id)
                 ->where('venues.venue_location_id','=',$location_id)
                 ->skip($chunk)
-                ->take(100)
+                ->take(40)
                 ->orderBy('institute_rating','desc')
                 ->get();
     }
 
     public function getBatchForFilter($subcategories,$localities,$chunk)
     {
+        if(!is_numeric($subcategories[0])&&!is_numeric($localities[0])){
+            $subcategories2=Subcategory::whereIn('subcategories.subcategory',$subcategories)->get();
+            foreach ($subcategories2 as $key => $subcategory) {
+                $subcategories[$key] = $subcategory->id;
+            }
+            $localities2=Locality::whereIn('localities.locality_url',$localities)->get();
+            foreach ($localities2 as $key => $locality) {
+                $localities[$key] = $locality->id;
+            }
+        }
         $allBatches=Batch::
                         Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
@@ -109,7 +119,7 @@ class Batch extends \Eloquent {
                         ->whereIn('venues.venue_locality_id',$localities)
                         ->whereIn('batches.batch_subcategory_id',$subcategories)
                         ->skip($chunk)
-                        ->take(100)
+                        ->take(40)
                         ->orderBy('institute_rating','desc')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->get();
@@ -153,7 +163,7 @@ class Batch extends \Eloquent {
             $allBatches=$allBatches
                     ->orderBy('institute_rating','desc')
                     ->skip($chunk)
-                    ->take(100)
+                    ->take(40)
                     ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                     ->get();
         // dd($allBatches[0]);
@@ -167,9 +177,16 @@ class Batch extends \Eloquent {
         Batch::
         where('batches.id','=',$id)
         ->increment('batch_view');
-
+        if (is_numeric($id))
+        {
+            $column = 'id';
+        }
+        else
+        {
+            $column = 'batch'; // This is the name of the column you wish to search
+        }
         $batch= Batch:://find($id)
-            where('batches.id','=',$id)
+            where('batches.'.$column,'=',$id)
             ->where('batches.batch_approved','=','1')
             ->Join('institutes','institutes.id','=','batches.batch_institute_id')
             ->Join('categories','categories.id','=','batches.batch_category_id')

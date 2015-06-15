@@ -24,7 +24,7 @@ class FiltersController extends \BaseController {
 			$localitiesForLocation = $this->locality->all();
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
-		$chunk=$chunk*100;
+		$chunk=$chunk*40;
 		$batchesForCategoryLocation=$this->batch->search($keyword,$category_id,$location_id,$chunk);
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
@@ -39,6 +39,14 @@ class FiltersController extends \BaseController {
 	{
 		//check count how many time page is viewed in filter page.
 		//For future filters
+		if(!is_numeric($category_id))
+        {
+            $category_id=Category::where('category',$category_id)->first()->id;
+        }
+        if(!is_numeric($location_id))
+        {
+            $location_id=Location::where('location',$location_id)->first()->id;
+        }
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
@@ -54,7 +62,7 @@ class FiltersController extends \BaseController {
 			$localitiesForLocation = $this->locality->getAllLocalities();
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
-		$chunk=$chunk*100;
+		$chunk=$chunk*40;
 		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		if(Request::ajax())
 		{
@@ -99,6 +107,10 @@ class FiltersController extends \BaseController {
 
 	public function institute($id)
 	{
+        if(!is_numeric($id))
+        {
+            $id=Institute::where('institute_url',$id)->first()->id;
+        }
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
@@ -151,6 +163,10 @@ class FiltersController extends \BaseController {
 
 	public function locality($id)
 	{
+		if(!is_numeric($id))
+        {
+            $id=Locality::where('locality_url',$id)->first()->id;
+        }
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
@@ -192,6 +208,10 @@ class FiltersController extends \BaseController {
 
 	public function subcategory($id)
 	{
+		if(!is_numeric($id))
+        {
+            $id=Subcategory::where('subcategory',$id)->first()->id;
+        }
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
@@ -261,11 +281,11 @@ class FiltersController extends \BaseController {
 		}
 
 		if(!$subcategories[0]&&!$localities[0]){
-			$chunk=$chunk*100;
+			$chunk=$chunk*40;
 			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
 		}
 		else{
-			$chunk=$chunk*100;
+			$chunk=$chunk*40;
 			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
 		}
 		// dd($batchesForCategoryLocation);

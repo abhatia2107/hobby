@@ -29,4 +29,6 @@
 		"booking_already_done"=>"You have already booked one class for this day, using Hobbyix Membership, if you wish to book more, kindly use another payment method.",
 
 		"booking_one_allowed"=>"Sorry, you can book only one session using Hobbyix Membership.",
+
+		"batch_booking_already"=>"Sorry, you've already booked this batch using your free credits. If you wish to book this batch again kindly try single sesssion or our membership.",
 	);

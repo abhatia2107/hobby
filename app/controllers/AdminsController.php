@@ -90,7 +90,7 @@ class AdminsController extends \BaseController {
 	public function show($id)
 	{
 		$adminDetails=Admin::find($id);
-		return Redirect::to('/users/'.$adminDetails['admin_user_id']);
+		return Redirect::to('/users/show/'.$adminDetails['admin_user_id']);
 	}
 
 	public function enable($id)

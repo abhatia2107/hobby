@@ -31,12 +31,18 @@
           <div class="uac_sidebar_header">
             My Profile            
           </div>
+          @if($user->user_free_credits_left)
+            <div class="uac_credits_container">
+                <span class="fa fa-credit-card"></span>
+                {{$user->user_free_credits_left}} Free Credits
+            </div>
+          @endif
           <div class="uac_credits_container">
               <span class="fa fa-credit-card"></span>
               {{$user->user_credits_left}} Credits
           </div>
-          <div class="uac_credits_container" style="font-size:12px;">
-              <span style="font-size:12px;" class="fa fa-calendar"></span>
+          <div class="uac_credits_container">
+              <span class="fa fa-calendar"></span>
               Valid Till: @if(isset($user->user_credits_expiry)){{date('d M Y',strtotime($user->user_credits_expiry))}}@else{{'-'}}@endif
           </div>
           <div class="uac_profile_itmes">

@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration {
 			$table->string('user_referral_code',6)->unique();	
 			$table->integer('user_referee_id')->nullable();
 			$table->float('user_credits_left')->default(0);
+			$table->integer('user_free_credits_left')->default(2);
 			$table->date('user_credits_expiry')->nullable();
 			$table->integer('user_successful_referral')->default(0);
 			$table->integer('user_pending_referral')->default(0);

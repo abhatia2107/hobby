@@ -18,7 +18,7 @@
 	            <h1>{{$homeLang['home_title']}}</h1>
 	            <h2>{{$homeLang['home_subtitle']}}</h2>
 	         </div> 
-	         <div class="explore_button" ><a href="/filter/categories/1/locations" class="btn btn-primary">Explore Now</a></div>  
+	         <div class="explore_button" ><a href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Explore Now</a></div>
 	      </div>
 	   </div>
 	</div>
@@ -62,7 +62,7 @@
 	@for(; $index<$maxlength; $index++ )
 		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item">		
 			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
-				<a class="text_over_flow_hide" href="/filter/subcategory/{{$subcategories[$index]->id}}">
+				<a class="text_over_flow_hide" href="/filter/subcategory/{{$subcategories[$index]->subcategory}}">
 					{{$subcategories[$index]->subcategory}}
 				</a>
 			</li>
@@ -81,7 +81,7 @@
 	@for(;$index<$maxlength; $index++ )
 		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item">		
 			<li title="Fitness Activities in {{$localities[$index]->locality}}">
-				<a href="/filter/locality/{{$localities[$index]->id}}">
+				<a href="/filter/locality/{{$localities[$index]->locality_url}}">
 					{{$localities[$index]->locality}}
 				</a>
 			</li>
@@ -100,7 +100,7 @@
 	@for(;$index<$maxlength; $index++ )
 		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
 			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad">
-				<a class="text_over_flow_hide" href="/filter/institute/{{$institutes[$index]->id}}">
+				<a class="text_over_flow_hide" href="/filter/institute/{{$institutes[$index]->institute_url}}">
 					{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}
 				</a>
 			</li>

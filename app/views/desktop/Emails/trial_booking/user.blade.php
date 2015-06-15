@@ -12,24 +12,27 @@
 			</div>
 			<div style="padding:0px 40px">
 				<h1 style="font-size:150%; color:#000;">
-					Dear Admin,
-				</h1>				
+					Dear {{$user_name}},
+				</h1>
+				<p style="color:#000;">
+					Thank you for your Order on Hobbyix.com.<br>We are pleased to inform you that your trial booking on Hobbyix.com is confirmed and the Order number is {{$order_id}}.
+					Below are your order details
+				</p>
 				<div style="background:#FAFDFE;border:2px solid #1E2C4F;display:inline-block;min-width:100%;overflow:hidden;border-radius:10px;">
 					<div style="background:#1E2C4F;padding:10px 5px; color:white">
 					    <strong>Booking ID: {{$order_id}}</strong>
 					</div>
-					<div style="max-width:100%;padding:2% 2% 2% 2%;">
+					<div style="max-width:100%;padding:1.6% 2% 5% 2%;">
 						<div style="max-width:47%;display:inline-block;float:left;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
 								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Institute Name : {{$institute}}</div>
 								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;"> Subcategory: {{$subcategory}}</div>
 								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Address:  {{$locality.', '.$location}}</div>
-								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Institute Contact Number: {{$venue_contact_no}}</div>
+								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Mobile Number: {{$venue_contact_no}}</div>
 						</div>							
 						<div style="max-width:47.5%;display:inline-block;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Class Booked for: {{$date}}</div>
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Number of Sessions: {{$no_of_sessions}}</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Amount Paid: {{$amount}}/-</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">User Contact Number: {{$venue_contact_no}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">This is a trial booking.</div>
 						</div>								
 					</div>
 				</div>	
@@ -40,7 +43,7 @@
 				Customer Services Team
 				</p>		
 				<!--<div style="text-align:center;">
-					<a href=" URL::to('/batches')}}">
+					<a href="{{ URL::to('/batches')}}">
 						<button class="btn btn-primary">
 							<strong>View Batches</strong>
 						</button>

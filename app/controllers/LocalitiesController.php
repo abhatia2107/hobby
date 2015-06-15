@@ -43,11 +43,12 @@ class LocalitiesController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 		$this->location->increment_no($credentials['locality_location_id']);
+		$locality['locality_url'] = str_replace(' ', '-', $locality['locality']);
 		$created=Locality::create($credentials);
 		if ($created)
-			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_created'));
+			return Redirect::to('/localities')->with('success', Lang::get('locality.locality_created'));
 		else
-			return Redirect::to('/localities')->with('failure',Lang::get('locality.locality_already_failed'));
+			return Redirect::to('/localities')->with('failure', Lang::get('locality.locality_already_failed'));
 	}
 	/**
 	 * Display the specified resource.
@@ -74,7 +75,7 @@ class LocalitiesController extends \BaseController {
 		$localityDetails=Locality::find($id);
 		return View::make('Localities.create',compact('localityDetails'));
 	}
-
+	
 	/**
 	 * Update the specified resource in storage.
 	 * PUT /localities/{id}
@@ -91,6 +92,7 @@ class LocalitiesController extends \BaseController {
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
+		$locality['locality_url'] = str_replace(' ', '-', $locality['locality']);
 		$updated=$this->locality->updateLocality($credentials,$id);
 		if ($updated) 
 			return Redirect::to('/localities')->with('success',Lang::get('locality.locality_updated'));

@@ -104,15 +104,27 @@ body li {  list-style-type: none; }
 
 .login {float: right;}
 
-.categories_container { text-align: center; }
-
-.categories_container a, .categories_container a:hover { text-decoration: none;color: white;font-size: 24px; }
-
-.categories_container  h1 { font-size: 35px;color:#333;font-weight: bold; }
-
-.categories_container h2 { font-size: 25px;color:#333;font-weight: bold; }
-
  body select {  height: 34px;border-radius: 5px; }
+
+.membership_offer_container { width: 100%;background: #dfdfdf;padding: 20px 0px 50px 0px;}
+
+.membership_offer_container .header {font-size: 30px;text-align: center;padding: 0px 0px 5px 0px;border-bottom:2px solid #81d2f6;color: black}
+
+@media(min-width: 992px) {.membership_offer_container {padding: 20px 14% 50px 14%;}}
+
+@media(min-width: 992px) {.membership_offer_container .membership_offer_item {padding: 0px 4%; }}
+
+.membership_offer_container .membership_offer_item { background: #fff;background: #dfdfdf;margin: 20px 0px 0px 0px}
+
+.membership_offer_container .details {min-height: 230px;background: #fff;}
+
+.membership_offer_container .footer {color:black;background: #81d2f6;padding: 10px 5px 20px 5px;text-align: center;font-size: 17px;min-height: 90px;max-height: 90px}
+
+.membership_offer_container .details img{width: 99%; height: auto;padding: 0 10px;margin-top: 40px;}
+
+.membership_offer_container .membership_offer_item .header{ background: url("/assets/images/home/tag_header.jpg");min-height: 220px;background-size: 100% 100%,auto;
+  background-repeat:no-repeat;background-position: top top;-o-background-size: 100% 100%;-moz-background-size: 100% 100%;-webkit-background-size: 100% 100%;
+}
 
 .active-rating .glyphicon { color: orange;font-weight: bolder; }
 

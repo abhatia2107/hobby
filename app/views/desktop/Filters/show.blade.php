@@ -260,6 +260,8 @@
 		var sub_select = new Array();
 		var loc_select = new Array();
 		var filter_select = new Array();		
+		sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
+		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();			
 		//navActive('NavItem'+categoryId);
 		if(result.length==0)	
 		{
@@ -309,7 +311,10 @@
 			});
 			range = end;
 			if(range>index) range=index;
-			return index;
+			if(index<10)
+			{				
+				LoadFilterResults(sub_select,loc_select,0);
+			}			
 		}
 		displayResults(result,0);
 		LoadResult(0,20);
@@ -340,11 +345,9 @@
 						result[index+resultRange] = response[index];
 					}
 					displayResults(result,start);
-					var count  = LoadResult(start,start+20);
-					if(count<10)
-					{
-						LoadFilterResults(sub_select,loc_select,0);
-					}
+					LoadResult(start,start+20);
+					//alert(count);
+					
 				}
 				setTimeout("$('.filterOptionsList').css('pointer-events','all');$('.filter_option_loading').hide();$('.filters').css('opacity','1');", 1000);					
 			});
@@ -595,6 +598,13 @@
 		});
 		$(document).ready(function() 
 		{
+			filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();
+			sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
+			loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();							
+			if(filter_select.length>0)
+			{
+				filterStatus = true;
+			}
 			$('[data-toggle="popover"]').popover(); 
 			var linksContainer = $('#filter_data'),baseUrl;
 			window.onscroll = function(ev)
@@ -608,7 +618,7 @@
 						if(!filterStatus)
 						{
 							$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
-							{								
+							{	
 								if(response == "")
 								{
 									$('#loadMore').css('display','none');
@@ -628,7 +638,7 @@
 							});
 						}
 						if(filterStatus)
-						{							
+						{								
 							LoadFilterResults(sub_select,loc_select,resultRange);
 						}
 					}
@@ -649,15 +659,15 @@
 				{
 					$('.filter-option-2 .filters').css('opacity','.5');
 					$('.filter-option-2 .filter_option_loading').show();
-				}
-				filterStatus = true;
+				}				
 				$('#loadMore').show();
 				$('#noResults').hide();
 				result = [];				
 				filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();							
 				if(filter_select.length>0)
-				{					
-					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
+				{	
+					filterStatus = true;				
+					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();					
 					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
 					chunk = 0;
 					if(sub_select.length == 1 && loc_select.length ==0)

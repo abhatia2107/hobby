@@ -10,7 +10,18 @@
 @stop
 @section('content')
 
-<div class="yoga-slider">
+<div class="yoga-slider" style="max-height:750px; min-height:750px; overflow:hidden">
+    <div style="background-color: rgba(0, 0, 0, 0.1);">
+        <div class="col-md-5 col-sm-5 col-xs-4">
+            <img src="/assets/images/yoga/hobbyix.jpg" alt="Hobbyix" height="50" width="100" class="pull-left"/>
+        </div>
+        <div class="col-md-2 col-sm-2 col-xs-4">
+            <img src="/assets/images/yoga/yoga.jpg" alt="International Day of Yoga" height="70" width="50%" style="margin-left:25%;"/>
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-4">
+            <img src="/assets/images/yoga/aol.jpg" alt="The Art of Living" height="50" width="100" class="pull-right"/>
+        </div>
+    </div>
     <div class="homepage-cover">
        <div class="container" id="hompage-cover">
             <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.2);padding:0px 0px 5px 0px;">

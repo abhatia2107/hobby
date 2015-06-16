@@ -43,7 +43,7 @@ class YogasController extends \BaseController {
 		}
 		unset($data['csrf_token']);
 		Yoga::create($data);
-		return Redirect::to('/')->with('success','You have successfully registered for the international yoga day');
+		return Redirect::to('/')->with('success','You have successfully registered for the International Yoga Day. Be ready on 21st June. We\'ll message you venue details soon.' );
 	}
 
 }

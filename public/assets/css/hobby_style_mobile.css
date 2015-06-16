@@ -72,6 +72,11 @@ body li {  list-style-type: none; }
   -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
 }
 
+.yoga-slider { margin-top: 0px;top:0;left:0;background: url("/assets/images/yoga/sri_sri_mobile.jpg"); 
+ background-repeat:no-repeat;background-position:left top;-o-background-size: cover;
+  -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
+}
+
 .explore_button {text-align: center;}
 
 .explore_button .btn-primary {border-radius: 0px;border:0px;}

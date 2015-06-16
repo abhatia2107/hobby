@@ -20,7 +20,7 @@ class CreateVenuesTable extends Migration {
 			$table->integer('venue_location_id')->foreign('venue_location_id')->references('id')->on('locations');
 			$table->integer('venue_locality_id')->foreign('venue_locality_id')->references('id')->on('localities');
 			$table->string('venue_address',255);
-			$table->string('venue_landmark',50)->nullable();
+			$table->string('venue_landmark',60)->nullable();
 			$table->string('venue_pincode',6);
 			$table->string('venue_email',50);
 			$table->string('venue_contact_no',10);

@@ -33,21 +33,21 @@
 			<div class="details">
 				<img src="/assets/images/home/Fitness_AnyTime.PNG">				
 			</div>
-			<div class="footer" style="clear:both">Have Fitness Classes Available 24X7 Choose What Suits Your Schedule</div>
+			<div class="footer" style="clear:both">Have Fitness Classes Available 24X7, Choose What Suits Your Schedule</div>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
 			<div class="details">
 				<img src="/assets/images/home/Fitness_AnyWhere.PNG">				
 			</div>		
-			<div class="footer" style="clear:both">Don't Settle For Any One Gym, Go To Any Gym Of Your Choice Everyday</div>
+			<div class="footer" style="clear:both">Don't Settle For One Gym when you can go to any gym</div>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
 			<div class="details">
 				<img src="/assets/images/home/Fitness_AnyType.PNG">				
 			</div>		
-			<div class="footer" style="clear:both">Spice Up Your Fitness Schedule With New Type Of Activities Everyday</div>
+			<div class="footer" style="clear:both">Spice Up Your Fitness Schedule With A New Type Of Activity Everyday</div>
 		</div>		
 	</div>	
 </div>

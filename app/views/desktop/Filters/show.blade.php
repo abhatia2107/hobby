@@ -259,7 +259,7 @@
 		var resultCount = 0;
 		var sub_select = new Array();
 		var loc_select = new Array();
-		var filter_select = new Array();		
+		var filter_select = new Array();
 		sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();			
 		//navActive('NavItem'+categoryId);

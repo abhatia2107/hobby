@@ -98,11 +98,13 @@ class Batch extends \Eloquent {
 
     public function getBatchForFilter($subcategories,$localities,$chunk)
     {
-        if(!is_numeric($subcategories[0])&&!is_numeric($localities[0])){
+        if(!is_numeric($subcategories[0])){
             $subcategories2=Subcategory::whereIn('subcategories.subcategory',$subcategories)->get();
             foreach ($subcategories2 as $key => $subcategory) {
                 $subcategories[$key] = $subcategory->id;
             }
+        }
+        if(!is_numeric($localities[0])){
             $localities2=Locality::whereIn('localities.locality_url',$localities)->get();
             foreach ($localities2 as $key => $locality) {
                 $localities[$key] = $locality->id;

@@ -301,7 +301,7 @@ class UsersController extends \BaseController {
             else
             {
                 $newUserData['user_referee_id']=$referee->id;
-                $newUserData['user_credits_left']=0;
+                $newUserData['user_free_credits_left']=2;
             }
 		}
 		unset($newUserData['user_referee_code']);
@@ -328,7 +328,7 @@ class UsersController extends \BaseController {
                 $newUserData['user_confirmation_code']=$confirmationCode;
             }
 			$newUserData['user_subscription_token']=true;
-			$newUserData['user_referral_code']=$this->makeReferralCode();
+			$newUserData['user_referral_code']=substr(uniqid(),0,6);
 			$this->user->create($newUserData);
 			$userId=$this->user->max('id');
             if(isset($referee))
@@ -377,29 +377,6 @@ class UsersController extends \BaseController {
 		}
 	}
 
-    public function account($id){
-
-    }
-
-	public function makeReferralCode($length = 6){
-        $password = "";
-        $possible = "0123456789abcdfghjkmnpqrstvwxyz";
-        $i = 0;
-        while ($i < $length) {
-            $char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
-            if (!strstr($password, $char)) {
-                $password .= $char;
-                $i++;
-            }
-        }
-        $user_referral=User::where('user_referral_code','=',$password)->get()->toArray();
-		if(empty($user_referral))
-		{
-	        return $password;
-		}
-		else
-			$this->makeReferralCode();
-    }
 	/**
 	*Function to verify the email of the newly registered user. 
 	*

@@ -5,7 +5,7 @@
   .batchOrderButtons { text-align: center;color: white}
   .batchOrderField {margin-bottom: 4px;}
   .batchOrderField button { border:0px;background-color: #3aa54c;font-size: 15px;color: white;height:30px;padding: 4px;margin-top: 5px; }
-
+  .help-block{color: white !important;}
 </style> 
 @stop
 @section('content')
@@ -36,17 +36,17 @@
 			<div class="col-md-4">
 				<form role="form" method="post" name="batchOrderForm" enctype="multipart/form-data" id="batchOrderForm" action="/yoga" > 
 					<h3>Mark your presence</h3>
-					<div class="row batchOrderField">
+					<div class="form-group row batchOrderField">
 						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 						<input type="text" placeholder="Enter Name" class="form-control" id="name" name="name" value="@if(isset($user)){{$user->user_first_name.' '.$user->user_last_name}}@endif" required/>
 					</div>
-					<div class="row batchOrderField">
+					<div class="form-group row batchOrderField">
 						<input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email" name="email" value="@if(isset($user)){{$user->email}}@endif" required />
 					</div>
-					<div class="row batchOrderField">
+					<div class="form-group row batchOrderField">
 						<input type="tel" placeholder="Enter Mobile Number" class="form-control" id="contact_no" name="contact_no" value="@if(isset($user)){{$user->user_contact_no}}@endif" required />
 					</div>
-					<div class="row batchOrderField">
+					<div class="form-group row batchOrderField">
 						<select class="form-control" name="locality_id" >                 
 							@foreach($yoga_locality as $locality)
 		                    	<option value="{{$locality->id}}">{{$locality->locality}}</option>

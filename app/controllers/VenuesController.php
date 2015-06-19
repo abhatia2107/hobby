@@ -117,6 +117,24 @@ class VenuesController extends \BaseController {
 			return Redirect::to('/venues')->with('failure',Lang::get('venue.venue_already_failed'));
 	}
 
+	public function upfate()
+	{
+		$venues=Venue::all();
+		foreach ($venues as $venue) {
+			if(($venue->id==49)||($venue->id==50))
+			{
+
+			}
+			else{
+				$institute=Institute::where('id',$venue->venue_institute_id)->first()->institute_url;
+				$locality=Locality::where('id',$venue->venue_locality_id)->first()->locality_url;
+				// dd($locality);
+				$venue->venue=$institute.'-'.$locality;
+				$venue->save();
+			}
+		}
+	}
+
 	/**
 	 * Remove the specified resource from storage.
 	 * DELETE /venues/{id}

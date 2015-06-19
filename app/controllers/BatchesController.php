@@ -30,6 +30,50 @@ class BatchesController extends \BaseController {
 		return View::make('Batches.index',compact('age_group','batchDetails','difficulty_level','gender_group','institute_id','trial','weekdays'));
 	}
 
+	public function createentry()
+	{
+		$users=$this->user->all();
+		$institutes=$this->institute->all();
+		$all_subcategories=$this->subcategory->all();
+		$user_id=Auth::id();
+		$venuesForUser=$this->venue->all();
+		$age_group=$this->age_group;
+		$difficulty_level=$this->difficulty_level;
+		$gender_group=$this->gender_group;
+		//Locations are being send for venue create form which will be called up in the modal of venue.
+		$localities=$this->locality->all();
+		// $recurring=$this->recurring;
+		$schedule_session_month=$this->schedule_session_month;
+		$trial=$this->trial;
+		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
+		$institute_id=$this->institute->getInstituteforUser($user_id);
+		$weekdays=$this->weekdays;
+		$facilitiesAvailable= $this->facilitiesAvailable;
+		return View::make('Batches.createentry',compact('institutes','users','all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','schedule_session_month','trial','weekdays','facilitiesAvailable'));
+	}
+
+	public function storeentry()
+	{
+		$data=Input::all();
+		// dd($data);
+		$institute=Institute::find($data['batch_institute_id']);
+		$subcategory=Subcategory::find($data['batch_subcategory_id'])->subcategory;
+		$venue=Venue::find($data['batch_venue_id']);
+		$locality=Locality::find($venue->venue_locality_id)->locality_url;
+		if((($institute->institute_user_id)==$data['batch_user_id'])&&($venue->venue_user_id==$data['batch_user_id'])){
+			$data['batch']=$institute->institute_url.'-'.$subcategory.'-'.$locality;
+			$data['batch_category_id']=1;
+			// $data['batch_approved']=1;
+			unset($data['csrf_token']);
+			dd($data);
+			Batch::create($data);
+			return Redirect::back()->with('success','Entry added');
+		}
+		else{
+			return Redirect::back()->withInput()->with('failure','user, venue and institute not match');
+		}
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 * GET /batches/create
@@ -52,7 +96,8 @@ class BatchesController extends \BaseController {
 		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$institute_id=$this->institute->getInstituteforUser($user_id);
 		$weekdays=$this->weekdays;
-		return View::make('Batches.create',compact('all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','schedule_session_month','trial','weekdays'));
+		$facilitiesAvailable= $this->facilitiesAvailable;
+		return View::make('Batches.create',compact('all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','schedule_session_month','trial','weekdays','facilitiesAvailable'));
 	}
 
 	/**
@@ -179,6 +224,13 @@ class BatchesController extends \BaseController {
 		{
 			App::abort(404);
 		}
+	}
+
+	
+	public function json_show($id)
+	{
+		$batchDetails= $this->batch->getBatch($id);
+		return json_encode($batchDetails);
 	}
 
 	/**

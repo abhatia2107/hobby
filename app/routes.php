@@ -70,11 +70,13 @@ Route::get('/batches/increment/{id}','BatchesController@increment');
 Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');
-// Route::get('/test', 'FiltersController@test');
-Route::get('/test2', function(){
-	return View::make('Users.edit');
+Route::get('/batches/createentry', 'BatchesController@createentry');
+Route::post('/batches/createentry', 'BatchesController@storeentry');
+Route::get('/test', function(){
+	return View::make('Miscellaneous.test');
 });
 Route::get('/email', 'BookingsController@sms_email');
+Route::get('venues/upfate', 'VenuesController@upfate');
 
 //Route for CategoriesController
 
@@ -317,9 +319,31 @@ Route::get('/filter/locality/{id}','FiltersController@locality');
 
 Route::get('/filter/subcategory/{id}','FiltersController@subcategory');
 
-Route::get('/users/account/{id}','UsersController@account');
-
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');
 
 Route::get('/yoga','YogasController@create');
 Route::get('/yoga/list','YogasController@index');
+
+
+
+
+
+// JSON routes.
+
+
+Route::get('/json/batches/show/{id}','BatchesController@json_show');
+
+Route::get('/json/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
+
+Route::get('/json/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','FiltersController@show');
+
+
+Route::get('/json/filter/search','FiltersController@search');
+
+Route::get('/json/filter/institute/{id}','FiltersController@institute');
+
+Route::get('/json/filter/locality/{id}','FiltersController@locality');
+
+Route::get('/json/filter/subcategory/{id}','FiltersController@subcategory');
+
+Route::get('/json/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');

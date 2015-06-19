@@ -24,6 +24,7 @@ class BaseController extends Controller {
 	protected $schedule_session_month=array("Session","Month");
 	protected $trial=array(1 => "No Trial Class Available","Free Trial Class Available", "Paid Trial Class Available");
 	protected $weekdays=array(1 => "monday","tuesday","wednesday","thursday","friday","saturday","sunday");
+	protected $facilitiesAvailable=['shower_room', 'steam', 'air_conditioning', 'locker_room', 'cafe', 'changing_room'];
 	protected $adminPanelList=array(
 									'categories' => 'Categories', 
 									'features' => 'Features', 

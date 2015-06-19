@@ -31,6 +31,11 @@ class FiltersController extends \BaseController {
 			$batchesForCategoryLocation="";
 			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
 		}
+		if(Request::segment(1)=='json')
+		{
+			return json_encode($batchesForCategoryLocation);
+		}
+		
 		// dd($batchesForCategoryLocation[0]->schedules->all());
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
@@ -75,6 +80,17 @@ class FiltersController extends \BaseController {
 				return $batchesForCategoryLocation="";		
 			}					
 		}
+		else if(Request::segment(1)=='json')
+		{
+			if($batchesForCategoryLocation)
+			{
+				return json_encode($batchesForCategoryLocation);
+			}
+			else
+			{
+				return json_encode($batchesForCategoryLocation="");		
+			}
+		}
 		else
 		{
 			if(empty($batchesForCategoryLocation->toArray()))
@@ -109,7 +125,11 @@ class FiltersController extends \BaseController {
 	{
         if(!is_numeric($id))
         {
-            $id=Institute::where('institute_url',$id)->first()->id;
+            $institute=Institute::where('institute_url',$id)->first();
+            if(!is_null($institute))
+            {
+            	$id=$institute->id;
+            }
         }
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
@@ -158,6 +178,10 @@ class FiltersController extends \BaseController {
 			$subcategoriesString = implode(" $locality, ",$subcategoryArray);
 			$metaContent[2] = "$instituteName, $instituteName in $locality, $instituteName in $location, $subcategoriesString $locality";
 		}
+		if(Request::segment(1)=='json')
+		{
+			return json_encode($batchesForCategoryLocation);
+		}
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','subcategories','instituteName','location','locality','locality_id'));
 	}
 
@@ -165,7 +189,11 @@ class FiltersController extends \BaseController {
 	{
 		if(!is_numeric($id))
         {
-            $id=Locality::where('locality_url',$id)->first()->id;
+            $locality=Locality::where('locality_url',$id)->first();
+            if(!is_null($locality))
+            {
+            	$id=$locality->id;
+            }
         }
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
@@ -202,7 +230,11 @@ class FiltersController extends \BaseController {
 			$metaContent[1] = "Hobbyix helps you in finding $subcategoriesString classes in $locality. Get access to all activities with Hobbyix Membership.";
 			$subcategoriesString = implode(" classes in $locality, ",$subcategoryArray);
 			$metaContent[2] = "$subcategoriesString classes in $locality";		
-		}		
+		}
+		if(Request::segment(1)=='json')
+		{
+			return json_encode($batchesForCategoryLocation);
+		}
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localitySubcategories','location','locality','locality_id'));
 	}
 
@@ -210,7 +242,11 @@ class FiltersController extends \BaseController {
 	{
 		if(!is_numeric($id))
         {
-            $id=Subcategory::where('subcategory',$id)->first()->id;
+            $subcategory=Subcategory::where('subcategory',$id)->first();
+            if(!is_null($subcategory))
+            {
+            	$id=$subcategory->id;
+            }
         }
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
@@ -243,6 +279,10 @@ class FiltersController extends \BaseController {
 			$metaContent[0] = "$subcategory classes in $location :: Hobbyix";
 			$metaContent[1] = "Hobbyix helps you in exploring all $subcategory classes in $location. Get access to all activities with Hobbyix Membership.";
 			$metaContent[2] = "$subcategory, $subcategory $location, $subcategory classes in $location, $subcategory $localitiesString";
+		}
+		if(Request::segment(1)=='json')
+		{
+			return json_encode($batchesForCategoryLocation);
 		}
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localities','subcategory','location','subcategory_id'));
 	}
@@ -300,9 +340,14 @@ class FiltersController extends \BaseController {
 				return $batchesForCategoryLocation;
 			}
 		}
+		else if(Request::segment(1)=='json')
+		{
+			return json_encode($batchesForCategoryLocation);
+		}
 		else{
 			// dd($batchesForCategoryLocation);
 			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 		}
 	}
+
 }

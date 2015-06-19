@@ -22,13 +22,13 @@ class CreateBatchesTable extends Migration {
 			$table->integer('batch_venue_id')->foreign('batch_venue_id')->references('id')->on('venues');
 			$table->longText('batch_accomplishment')->nullable();
 			$table->integer('batch_bookings')->default(0);
-			$table->integer('batch_age_group')->default(0);
+			$table->integer('batch_hobbyix_price');
 			$table->integer('batch_gender_group')->default(0);
-			$table->integer('batch_single_price')->nullable();
+			$table->integer('batch_single_price');
 			$table->integer('batch_recurring')->default(0)->nullable();
 			$table->boolean('batch_approved')->default(0);
 			$table->integer('batch_trial')->default(0);
-			$table->integer('batch_credit')->default(0);
+			$table->integer('batch_credit')->default(1);
 			$table->integer('batch_view')->default(0);
 			$table->string('batch_comment')->nullable();
 			$table->string('batch_tagline')->nullable();

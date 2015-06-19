@@ -207,7 +207,7 @@ class UsersController extends \BaseController {
 	 * @return Route
 	 */
 	public function postAuthenticate()
-	{	
+	{
 		$remember=(Input::has('remember'))?true:false;
 		$credentials=$this->getCredentials();
 		// dd($credentials);

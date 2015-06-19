@@ -14,6 +14,10 @@ class SubcategoriesController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
+		if(Request::segment(1)=='json')
+		{
+			return json_encode($subcategories);
+		}
 		return View::make('Subcategories.index',compact('subcategories','tableName','count','adminPanelListing'));
 	}
 

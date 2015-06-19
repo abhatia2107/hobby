@@ -347,3 +347,7 @@ Route::get('/json/filter/locality/{id}','FiltersController@locality');
 Route::get('/json/filter/subcategory/{id}','FiltersController@subcategory');
 
 Route::get('/json/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');
+
+Route::get('/json/subcategories','SubcategoriesController@index');
+
+Route::get('/json/localities','LocalitiesController@index');

@@ -198,6 +198,15 @@ class BatchesController extends \BaseController {
 		// $recurring=$this->recurring;
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
+		if(Request::segment(1)=='json')
+		{
+			$response['batches']=$batchDetails;
+			if($batchDetails)
+				$response['success']=1;
+			else
+				$response['success']=0;
+		 	return json_encode($response);
+		}
 		if(!is_null($batchDetails))
 		{
 
@@ -226,12 +235,6 @@ class BatchesController extends \BaseController {
 		}
 	}
 
-	
-	public function json_show($id)
-	{
-		$batchDetails= $this->batch->getBatch($id);
-		return json_encode($batchDetails);
-	}
 
 	/**
 	 * Show the form for editing the specified resource.

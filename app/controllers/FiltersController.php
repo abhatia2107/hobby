@@ -33,7 +33,12 @@ class FiltersController extends \BaseController {
 		}
 		if(Request::segment(1)=='json')
 		{
-			return json_encode($batchesForCategoryLocation);
+			$response['institute']=$batchesForCategoryLocation;
+			if($batchesForCategoryLocation)
+				$response['success']=1;
+			else
+				$response['success']=0;
+		 	return json_encode($response);
 		}
 		
 		// dd($batchesForCategoryLocation[0]->schedules->all());
@@ -80,16 +85,14 @@ class FiltersController extends \BaseController {
 				return $batchesForCategoryLocation="";		
 			}					
 		}
-		else if(Request::segment(1)=='json')
+		if(Request::segment(1)=='json')
 		{
+			$response['institute']=$batchesForCategoryLocation;
 			if($batchesForCategoryLocation)
-			{
-				return json_encode($batchesForCategoryLocation);
-			}
+				$response['success']=1;
 			else
-			{
-				return json_encode($batchesForCategoryLocation="");		
-			}
+				$response['success']=0;
+		 	return json_encode($response);
 		}
 		else
 		{
@@ -180,7 +183,12 @@ class FiltersController extends \BaseController {
 		}
 		if(Request::segment(1)=='json')
 		{
-			return json_encode($batchesForCategoryLocation);
+			$response['institute']=$batchesForCategoryLocation;
+			if($batchesForCategoryLocation)
+				$response['success']=1;
+			else
+				$response['success']=0;
+		 	return json_encode($response);
 		}
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','subcategories','instituteName','location','locality','locality_id'));
 	}
@@ -233,7 +241,12 @@ class FiltersController extends \BaseController {
 		}
 		if(Request::segment(1)=='json')
 		{
-			return json_encode($batchesForCategoryLocation);
+			$response['institute']=$batchesForCategoryLocation;
+			if($batchesForCategoryLocation)
+				$response['success']=1;
+			else
+				$response['success']=0;
+		 	return json_encode($response);
 		}
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localitySubcategories','location','locality','locality_id'));
 	}
@@ -282,7 +295,12 @@ class FiltersController extends \BaseController {
 		}
 		if(Request::segment(1)=='json')
 		{
-			return json_encode($batchesForCategoryLocation);
+			$response['institute']=$batchesForCategoryLocation;
+			if($batchesForCategoryLocation)
+				$response['success']=1;
+			else
+				$response['success']=0;
+		 	return json_encode($response);
 		}
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localities','subcategory','location','subcategory_id'));
 	}
@@ -342,7 +360,12 @@ class FiltersController extends \BaseController {
 		}
 		else if(Request::segment(1)=='json')
 		{
-			return json_encode($batchesForCategoryLocation);
+			$response['institute']=$batchesForCategoryLocation;
+			if($batchesForCategoryLocation)
+				$response['success']=1;
+			else
+				$response['success']=0;
+		 	return json_encode($response);
 		}
 		else{
 			// dd($batchesForCategoryLocation);

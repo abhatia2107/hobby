@@ -4,7 +4,7 @@ class SubcategoriesController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /localities
+	 * GET /subcategories
 	 *
 	 * @return Response
 	 */
@@ -16,14 +16,19 @@ class SubcategoriesController extends \BaseController {
 		$adminPanelListing=$this->adminPanelList;
 		if(Request::segment(1)=='json')
 		{
-			return json_encode($subcategories);
+			$response['subcategories']=$subcategories;
+			if($subcategories)
+				$response['success']=1;
+			else
+				$response['success']=0;
+		 	return json_encode($response);
 		}
 		return View::make('Subcategories.index',compact('subcategories','tableName','count','adminPanelListing'));
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /localities/create
+	 * GET /subcategories/create
 	 *
 	 * @return Response
 	 */
@@ -34,7 +39,7 @@ class SubcategoriesController extends \BaseController {
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /localities
+	 * POST /subcategories
 	 *
 	 * @return Response
 	 */
@@ -56,7 +61,7 @@ class SubcategoriesController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
-	 * GET /localities/{id}
+	 * GET /subcategories/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -69,7 +74,7 @@ class SubcategoriesController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /localities/{id}/edit
+	 * GET /subcategories/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -82,7 +87,7 @@ class SubcategoriesController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /localities/{id}
+	 * PUT /subcategories/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -157,7 +162,7 @@ class SubcategoriesController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /localities/{id}
+	 * DELETE /subcategories/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

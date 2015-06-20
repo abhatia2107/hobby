@@ -331,7 +331,7 @@ Route::get('/yoga/list','YogasController@index');
 // JSON routes.
 
 
-Route::get('/json/batches/show/{id}','BatchesController@json_show');
+Route::get('/json/batches/show/{id}','BatchesController@show');
 
 Route::get('/json/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 

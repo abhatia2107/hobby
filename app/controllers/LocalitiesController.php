@@ -16,7 +16,12 @@ class LocalitiesController extends \BaseController {
 		$adminPanelListing=$this->adminPanelList;
 		if(Request::segment(1)=='json')
 		{
-			return json_encode($localities);
+			$response['localities']=$localities;
+			if($localities)
+				$response['success']=1;
+			else
+				$response['success']=0;
+		 	return json_encode($response);
 		}
 		return View::make('Localities.index',compact('localities','tableName','count','adminPanelListing'));
 	}

@@ -16,7 +16,7 @@ class LocalitiesController extends \BaseController {
 		$adminPanelListing=$this->adminPanelList;
 		if(Request::segment(1)=='json')
 		{
-			$response['localities']=$localities[0];
+			$response['localities']=$localities;
 			if($localities)
 				$response['success']=1;
 			else

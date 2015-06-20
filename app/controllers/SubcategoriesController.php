@@ -16,7 +16,7 @@ class SubcategoriesController extends \BaseController {
 		$adminPanelListing=$this->adminPanelList;
 		if(Request::segment(1)=='json')
 		{
-			$response['subcategories']=$subcategories;
+			$response['subcategories']=$subcategories[0];
 			if($subcategories)
 				$response['success']=1;
 			else

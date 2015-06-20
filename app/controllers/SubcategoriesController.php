@@ -14,9 +14,12 @@ class SubcategoriesController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
+		$response['subcategories']=array();
 		if(Request::segment(1)=='json')
 		{
-			$response['subcategories']=$subcategories;
+			foreach ($subcategories as $value) {
+				array_push($response['subcategories'], $value);
+			}
 			if($subcategories)
 				$response['success']=1;
 			else

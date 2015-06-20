@@ -14,9 +14,13 @@ class LocalitiesController extends \BaseController {
 		$tableName="$_SERVER[REQUEST_URI]";
 		$count=$this->getCountForAdmin();
 		$adminPanelListing=$this->adminPanelList;
+		$response['localities']=array();
 		if(Request::segment(1)=='json')
 		{
-			$response['localities']=$localities;
+			foreach ($localities as $value) {
+				array_push($response['localities'], $value);
+			}
+			// dd($response);
 			if($localities)
 				$response['success']=1;
 			else

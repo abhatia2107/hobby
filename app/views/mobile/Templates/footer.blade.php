@@ -9,7 +9,7 @@
             </p>
          </div>        
       </div>
-      <div class="footer-widget-column col-xs-12">
+      <div class="footer-widget-column col-xs-12" >
          <h3 class="footer-widget-title">About Hobbyix</h3>
          <div>
             <a href="/feedbacks/create" class="col-xs-3"><span class="glyphicon glyphicon-dashboard" title="Feedback"></span></a>

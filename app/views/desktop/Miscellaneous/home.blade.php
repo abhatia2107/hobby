@@ -27,6 +27,19 @@
 	<div class="header">
 		<a style="color:black;text-decoration:none" href="/memberships">Hobbyix Membership</a>
 	</div>
+	<script>
+  (function() {
+    var cx = '001868570926516956913:k1behnqa6xq';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    //s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
 	<div class="col-md-12 col-sm-12 col-xs-12">	
 		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
@@ -109,9 +122,16 @@
 </div>
 @stop
 @section('pagejquery')
-<script type="text/javascript">	
-	$(document).ready(function () {		
-		
-	})
+<script type="application/ld+json">
+{
+   "@context": "http://schema.org",
+   "@type": "WebSite",
+   "url": "http://hobbyix.com",
+   "potentialAction": {
+     "@type": "SearchAction",
+     "target": "http://hobbyix.com/filter/search",
+     "query-input": "required name=keyword"
+   }
+}
 </script>
 @stop

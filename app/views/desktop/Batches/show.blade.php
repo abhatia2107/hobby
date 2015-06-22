@@ -123,6 +123,12 @@
       { 
         $facilitesAvailable[$i] = $batchDetails->$facilities[$i];      
       }
+      $weekDays = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+      $weekDaysAvailable = [];
+      for ($i=0; $i < 7 ; $i++) 
+      { 
+        $weekDaysAvailable[$i] = $batchDetails->$weekDays[$i];   
+      }
       $todayDate = date('Y-m-d');
   ?>
   <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/workout.jpg);">
@@ -377,7 +383,14 @@
 @section('pagejquery')
   <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
   <script type="text/javascript"> 
-    var dateToday = new Date();   
+    var dateToday = new Date();
+    var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};    
+    function DisableDay(date) 
+    {
+        var day = date.getDay();        
+        if (weekDaysAvailable[day] == 0) { return [false]; } 
+        else { return [true]; }      
+    } 
     function bookOrderFormValidate() 
     {
       var Result = true;    
@@ -441,7 +454,8 @@
           defaultDate: "+1w",
           changeMonth: true,
           numberOfMonths: 1,
-          minDate: dateToday,      
+          minDate: dateToday,                
+          beforeShowDay: DisableDay,
           dateFormat: 'yy-mm-dd'         
         });    
         $('#proceedButton').click(function(e)

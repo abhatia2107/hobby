@@ -4,9 +4,11 @@ return array(
 
 	"home_name"=>"hobbyix",
 
-	"home_title"=>"Fitness Classes in Hyderabad",
+	"home_title"=>"Looking for Yoga, Gym or Any Other Fitness Activities???",
 
-	"home_subtitle"=>"Book a Single Session of any Fitness Class in Hyderabad",
+	"home_subtitle1"=>"One Hobbyix Membership @Rs. 1999/- &",
+
+	"home_subtitle2"=>"workout at any gym, yoga, fitness centers etc. in Hyderabad",
 
 	"home_keyword"=>"Keyword",
 

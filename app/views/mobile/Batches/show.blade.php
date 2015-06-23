@@ -183,6 +183,22 @@
               <input type="text" readonly="true" style="background:white"placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
           </div>          
         </div>
+        <?php
+          $amountPayable = $sessionPrice;
+          if(isset($user->user_successful_referral) && $user->user_successful_referral>0)                
+          {
+            $referralAmount = $user->user_successful_referral;
+            $amountPayable = $sessionPrice-$referralAmount; 
+            if($referralAmount>=$sessionPrice)
+              $amountPayable = 0;
+          }
+          else
+            $referralAmount = 0;
+        ?>
+        <div class="row batchOrderField" @if($referralAmount>0) style="display:block" @else style="display:none" @endif>
+          <div class='col-xs-6'>Hobbyix Wallet</div>
+          <div class='col-xs-6'>: Rs. {{$referralAmount}}/-</div>
+        </div> 
         <div class="row batchOrderField">
           <div class='col-xs-9 batchOrderFieldLabel'>
             <input type="text" style="width:100%" placeholder="Enter Promo Code" class="form-control" id="promoCode" name="Promo Code" />                     
@@ -192,10 +208,10 @@
           </div>          
         </div>            
         <hr/>
-        <div class="row totalAmount">
-          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
+        <div class="row totalAmount">         
+          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>
           <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
-          <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
+          <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
         </div>
         <div class="row batchOrderButtons" style="margin-top:5px;">    
           <button style="padding:5px 50px;" class="booknowButton" id="proceedButton">Proceed</button>
@@ -363,7 +379,8 @@
 @stop
 @section('pagejquery')
 <script type="text/javascript">
-  var dateToday = new Date(); 
+  var dateToday = new Date();
+  var referralAmount = {{json_encode( $referralAmount ) }};
   var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};    
   function DisableDay(date) 
   {
@@ -415,7 +432,11 @@
       {
           var sessionsCount = $(this).val(); 
           var sessionPrice = {{$sessionPrice}};
-          var subtotal = sessionPrice*sessionsCount;          
+          var subtotal = sessionPrice*sessionsCount; 
+          if(referralAmount>=subtotal)        
+            subtotal = 0;
+          else
+            subtotal = subtotal - referralAmount;         
           $('#orderTotal').empty();  
           $('#orderTotal').append(": Rs. "+subtotal);
           $('#payment').val(subtotal);          

@@ -4,7 +4,7 @@
 			<a href="/">HOBBYIX</a>
 		</div>		
 		<div class="MainHeaderUserInfo col-xs-7">		
-			<div class="userInfoListing ">
+			<div class="userInfoListing">
 				<?php
 					$id=Auth::id();
 					if($id)
@@ -15,8 +15,7 @@
 						else
 							$name = "USER ACCOUNT";
 					}
-				?>
-					<a href="{{url('/yoga')}}">International Yoga Day&nbsp; &nbsp;&nbsp;</a>
+				?>					
 				@if(!$id)
 					<div class="login">
 						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">LOGIN TO HOBBYIX</a>						

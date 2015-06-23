@@ -226,12 +226,28 @@
                         @endfor
                     </select>
                 </div>
-              </div>
+              </div>             
               <div class="row batchOrderField" id="batchOrderField1">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date*</div>
                 <div class='col-md-6 col-sm-6 col-xs-6'>
                       <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />                     
                 </div>          
+              </div>
+              <?php
+                $amountPayable = $sessionPrice;
+                if(isset($user->user_successful_referral) && $user->user_successful_referral>0)                
+                {
+                  $referralAmount = $user->user_successful_referral;
+                  $amountPayable = $sessionPrice-$referralAmount; 
+                  if($referralAmount>=$sessionPrice)
+                    $amountPayable = 0;
+                }
+                else
+                  $referralAmount = 0;
+              ?>
+              <div class="row batchOrderField" @if($referralAmount>0) style="display:block" @else style="display:none" @endif>
+                <div class='col-md-6 col-sm-6 col-xs-6'>Hobbyix Wallet</div>
+                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$referralAmount}}/-</div>
               </div>    
               <div class="row batchOrderField">
                 <div class='col-xs-9'>
@@ -242,9 +258,9 @@
                 </div>          
               </div>       
               <hr/>
-              <div class="row totalAmount">
-                <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
-                <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
+              <div class="row totalAmount">               
+                <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>
+                <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
                 <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
               </div>
               <div class="row batchOrderButtons">    
@@ -384,6 +400,7 @@
   <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
   <script type="text/javascript"> 
     var dateToday = new Date();
+    var referralAmount = {{json_encode( $referralAmount ) }};            
     var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};    
     function DisableDay(date) 
     {
@@ -435,9 +452,16 @@
         });
         $('#numberOfSessions').change(function () 
         {
-            var sessionsCount = $(this).val(); 
+            var sessionsCount = $(this).val();             
             var sessionPrice = {{$sessionPrice}};
-            var subtotal = sessionPrice*sessionsCount;           
+            var subtotal = sessionPrice*sessionsCount;
+            if(referralAmount>0)
+            {
+              if(referralAmount>=subtotal)        
+                subtotal = 0;
+              else
+                subtotal = subtotal - referralAmount;
+            }
             $('#orderTotal').empty();  
             $('#orderTotal').append(": Rs. "+subtotal);
             $('#payment').val(subtotal);

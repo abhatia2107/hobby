@@ -23,10 +23,12 @@
             My Profile            
           </div>
           <div class="uac_profile_itmes">
-            <li><span class="uac_profile_item" >NAME : {{$user->user_first_name.' '.$user->user_last_name}}</span></li>
-            <li><span class="uac_profile_item" >EMAIL ID : {{$user->email}}</span></li>
-            <li><span class="uac_profile_item" >MOBILE NUMBER : {{$user->user_contact_no}}</span></li>
-            <li><span class="uac_profile_item" >CITY : {{$user->user_location}}</span></li>
+            <li><span class="uac_profile_item" >NAME: {{$user->user_first_name.' '.$user->user_last_name}}</span></li>
+            <li><span class="uac_profile_item" >EMAIL ID: {{$user->email}}</span></li>
+            <li><span class="uac_profile_item" >MOBILE NUMBER: {{$user->user_contact_no}}</span></li>
+            <li><span class="uac_profile_item" >CITY: {{$user->user_location}}</span></li>
+            <li><span class="uac_profile_item" >REFERRAL CODE: {{$user->user_referral_code}}</span></li>            
+            <li><span class="uac_profile_item" >REFERRAL AMOUNT: Rs. {{$user->user_successful_referral}}/-  &nbsp; &nbsp;(Invite your friends and get Rs. 100/- off)</span></li>                                   
           </div>
         </div>
       </div>

@@ -13,12 +13,14 @@
 <div class="overlay-slider">
 	<div class="homepage-cover">
 	   <div class="container" id="hompage-cover">
-	      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.2);padding:0px 0px 5px 0px;">
+	      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.4);padding:0px 0px 5px 0px;">
 	         <div>
 	            <h1>{{$homeLang['home_title']}}</h1>
-	            <h2>{{$homeLang['home_subtitle']}}</h2>
+	            <h2>{{$homeLang['home_subtitle1']}}</h2>
+	            <h2>{{$homeLang['home_subtitle2']}}</h2>
 	         </div> 
-	         <div class="explore_button" ><a href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Explore Now</a></div>
+	         <span class="explore_button" ><a href="/memberships" class="btn btn-primary">Check out Membership</a></span>
+	         <span class="explore_button" style="margin-left:5px;" ><a href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
 	      </div>
 	   </div>
 	</div>

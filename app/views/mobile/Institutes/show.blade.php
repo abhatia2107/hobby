@@ -14,7 +14,6 @@
 		</div>
 		<div class="col-md-12 col-xs-12 col-sm-12 column" id="institute_details_box">
 			<div class="col-md-6 col-xs-12 col-sm-6 column">
-				<li><span class="glyphicon glyphicon-map-marker"></span>{{$instituteDetails->user_location}}</li>
 				<li><span class="glyphicon glyphicon-phone"></span>{{$instituteDetails->user_contact_no}}</li>
 				<li><span class="glyphicon glyphicon-hand-right"></span>{{$instituteDetails->institute_description}}</li>
 			</div>

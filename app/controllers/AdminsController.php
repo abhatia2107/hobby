@@ -65,7 +65,7 @@ class AdminsController extends \BaseController {
 		if($created){
 			/*Confirmation mail is to be send to the newly registerd admin*/
 			$email=$user->email;
-			$name=$user->user_first_name.' '.$user->user_last_name;
+			$name=$user->user_name;
 			$data=[
 				'name'=>$name,
 			];

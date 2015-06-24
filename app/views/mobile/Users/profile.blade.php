@@ -46,10 +46,9 @@
               Valid Till: @if(isset($user->user_credits_expiry)){{date('d M Y',strtotime($user->user_credits_expiry))}}@else{{'-'}}@endif
           </div>
           <div class="uac_profile_itmes">
-            <li><span class="uac_profile_item" >NAME : {{$user->user_first_name.' '.$user->user_last_name}}</span></li>
+            <li><span class="uac_profile_item" >NAME : {{$user->user_name}}</span></li>
             <li><span class="uac_profile_item" >EMAIL ID : {{$user->email}}</span></li>
             <li><span class="uac_profile_item" >MOBILE NUMBER : {{$user->user_contact_no}}</span></li>
-            <li><span class="uac_profile_item" >CITY : {{$user->user_location}}</span></li>
           </div>
         </div>
       </div>

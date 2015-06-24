@@ -30,11 +30,6 @@ class HomeController extends BaseController {
 		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches','institutes','subcategories','localities'));
 	}
 
-	public function showDummyWelcome()
-	{
-		return View::make('Miscellaneous.homeDummy');
-	}
-
 	public function showAdminHome()
 	{
 		$homeAdminLang =Lang::get('homeAdmin');

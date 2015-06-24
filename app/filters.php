@@ -15,7 +15,7 @@
 
 App::before(function($request)
 {
-	if ((Request::root()=== 'http://hobbyix.in')||(Request::root()=== 'http://www.hobbyix.in')||(Request::root()=== 'http://www.hobbyix.com'))
+	if ((Request::root()=== 'http://hobbyix.in')||(Request::root()=== 'http://www.hobbyix.in')||(Request::root()=== 'http://www.hobbyix.com')||(Request::root()=== 'http://104.236.85.67'))
 	// if ((Request::root()=== 'http://localhost:8000'))
 	{
 		return Redirect::to('http://hobbyix.com/'.Request::path());

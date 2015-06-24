@@ -37,17 +37,6 @@ class UsersController extends \BaseController {
 		return View::make('Users.index',compact('users','tableName','count','adminPanelListing'));
 	}
 
-	/**
-	 * Display the specified resource.
-	 * GET /users/{id}
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		return Redirect::to('users/changepassword');
-	}
 
 	public function profile()
 	{	
@@ -83,7 +72,10 @@ class UsersController extends \BaseController {
 	 */
 	public function edit()
 	{
-		return View::make('Users.edit');
+		$user_id=Auth::id();
+		$user=User::find($user_id);
+		dd($user);
+		return View::make('Users.edit','user');
 	}
 
 	/**
@@ -236,7 +228,7 @@ class UsersController extends \BaseController {
 			|
 			*/
 			//$data=$this->user->getid(Input::get('email'));
-    		return Redirect::intended('/')/*->with('success','Welcome '.$userDetails['user_first_name'].' '.$userDetails['user_last_name'])*/;
+    		return Redirect::intended('/')/*->with('success','Welcome '.$userDetails['user_name'])*/;
 		}
 		else
 		{
@@ -289,8 +281,8 @@ class UsersController extends \BaseController {
 	public function postSignUp()
 	{
 		$newUserData=Input::all();
-//        dd($newUserData);
-		if(isset($newUserData['user_referee_code']))
+       // dd($newUserData);
+		if(!empty($newUserData['user_referee_code']))
 		{
 			$referee=User::where('user_referral_code','=',$newUserData['user_referee_code'])->first();
 //			dd($referee);
@@ -333,16 +325,16 @@ class UsersController extends \BaseController {
 			$userId=$this->user->max('id');
             if(isset($referee))
             {
-                $referee->user_pending_referral++;
+                $referee->user_pending_referral=$referee->user_pending_referral+100;
                 $referee->save();
                 $email = $referee->email;
-                $name = $referee->user_first_name.' '.$referee->user_last_name;
+                $name = $referee->user_name;
                 $data = [
                     'name'=>$name,
-                    'friend_name' => $newUserData['user_first_name'],
+                    'friend_name' => $newUserData['user_name'],
                 ];
                 /*Confirmation mail is to be send to the user for pending referral*/
-                $subject = Lang::get('user.user_pending_referral_subject',array("name"=>$newUserData['user_first_name']));
+                $subject = Lang::get('user.user_pending_referral_subject',array("name"=>$newUserData['user_name']));
                 Mail::later(15, 'Emails.user.pending_referral', $data, function ($message) use ($email, $name, $subject) {
                     $message->to($email, $name)->subject($subject);
                 });
@@ -352,7 +344,19 @@ class UsersController extends \BaseController {
             {
                 $id=$this->user->getUid($newUserData['user_fb_id']);
                 Auth::loginUsingId($id);
-                return Redirect::to('/')->with('success','Welcome '.$newUserData['user_first_name'].' '.$newUserData['user_last_name']);
+                $email=$newUserData['email'];
+                $name=$newUserData['user_name'];
+                $data = [
+                    'name' => $newUserData['user_name'],
+                    'user_successful_referral' => $newUserData['user_successful_referral'],
+                    'user_free_credits_left' => $newUserData['user_free_credits_left'],
+                ];
+                /*Confirmation mail is to be send to the newly registered user*/
+                $subject = Lang::get('user.user_signup_mail_subject');
+                Mail::later(15, 'Emails.user.confirmed', $data, function ($message) use ($email, $name, $subject) {
+                    $message->to($email, $name)->subject($subject);
+                });
+                return Redirect::to('/')->with('success','Welcome '.$newUserData['user_name']);
             }
             else {
                 /**
@@ -361,9 +365,9 @@ class UsersController extends \BaseController {
                  *
                  */
                 $email=$newUserData['email'];
-                $name=$newUserData['user_first_name'];
+                $name=$newUserData['user_name'];
                 $data = [
-                    'name' => $newUserData['user_first_name'],
+                    'name' => $newUserData['user_name'],
                     'confirmationcode' => $confirmationCode,
                     'userId' => $userId,
                 ];
@@ -400,7 +404,19 @@ class UsersController extends \BaseController {
 				$validate->user_confirmation_code="";
 				$validate->save();
 				Auth::loginUsingId($userId);
-				return Redirect::to('/')->with('success',Lang::get('user.welcome_verify',array("name"=>$validate->user_first_name)));
+                $email=$newUserData['email'];
+                $name=$newUserData['user_name'];
+                $data = [
+                    'name' => $newUserData['user_name'],
+                    'confirmationcode' => $confirmationCode,
+                    'userId' => $userId,
+                ];
+                /*Confirmation mail is to be send to the newly registered user*/
+                $subject = Lang::get('user.user_signup_mail_subject');
+                Mail::later(15, 'Emails.user.welcome', $data, function ($message) use ($email, $name, $subject) {
+                    $message->to($email, $name)->subject($subject);
+                });
+				return Redirect::to('/')->with('success',Lang::get('user.welcome_verify',array("name"=>$validate->user_name)));
 			}
 			else
 			{
@@ -437,7 +453,7 @@ class UsersController extends \BaseController {
 			$userDetails = User::find($id);
 			$current_password = Input::get('current_password');
 			$password = Input::get('password');
-			if(Hash::check($current_password,$userDetails->password))
+			if(Hash::check($current_password, $userDetails->password))
 			{
 				$userDetails->password = Hash::make($password);
 				$userDetails->save();
@@ -461,7 +477,7 @@ class UsersController extends \BaseController {
 	{
 		FacebookSession::setDefaultApplication(Config::get('facebook.appId'),Config::get('facebook.secret'));
 	    $helper = new FacebookRedirectLoginHelper(url('/login/fb/callback'));
-	    $loginUrl = $helper->getLoginUrl( array('scope' => 'user_birthday, email, user_location, publish_actions' ));
+	    $loginUrl = $helper->getLoginUrl( array('scope' => 'email, publish_actions' ));
 	    return Redirect::to($loginUrl);
 	}
 
@@ -495,12 +511,8 @@ class UsersController extends \BaseController {
 	    	{
 	    		// dd(false);
 	    		$profileData['user_fb_id']=$user_fb_id;
-	    		$profileData['user_first_name']=$userFb['first_name'];
-	    		$profileData['user_last_name']=$userFb['last_name'];
+	    		$profileData['user_name']=$userFb['first_name'];
     			$profileData['email']=$userFb['email'];
-    			if(isset($userFb['location'])) {
-	    			$profileData['user_location']=$userFb['location']->name;
-    			}
     			$profileData['user_confirmed']=true;
     			$checkEmail=Validator::make(array("email"=>$userFb['email']),User::$fbRules);
 	    		// dd($checkEmail->fails());
@@ -546,7 +558,7 @@ class UsersController extends \BaseController {
 	    	*/
 	    	$id=$this->user->getUid($user_fb_id);
 	    	Auth::loginUsingId($id);
-    		return Redirect::to('/')/*->with('success','Welcome '.$userFb['first_name'].' '.$userFb['last_name'])*/;
+    		return Redirect::to('/')/*->with('success','Welcome '.$userFb['first_name'])*/;
     	}
     	else
     	{

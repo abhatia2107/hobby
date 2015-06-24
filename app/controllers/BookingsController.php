@@ -334,9 +334,9 @@ class BookingsController extends \BaseController {
 					'admin_email' => 'booking@hobbyix.com'
 					);
 		$email= $booking->email;
-		$user_msg='Hi user, Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
-		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com- '.$data['admin_contact_no'];
-		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'.';
+		$user_msg='Hi '.$data['user_name'].', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
+		$institute_msg='Hobbyix: Order placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com- '.$data['admin_contact_no'];
+		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no']', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'.';
 		$subject='Booking Successful';
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.booking.user', $data, function($message) use ($email, $subject)
@@ -387,9 +387,9 @@ class BookingsController extends \BaseController {
 					'admin_email' => 'booking@hobbyix.com'
 					);
 		$email= $booking->email;
-		$user_msg='Hi user, Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. This is a trial class. Please display the confirmation sms/email at the venue.';
-		$institute_msg='Hobbyix: Order receieved, Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. This is a trial class. Thanks, hobbyix.com- '.$data['admin_contact_no'];
-		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_contact_no'].'. This is a trial class.';
+		$user_msg='Hi '.$data['user_name'].', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. This is a trial class. Please display the confirmation sms/email at the venue.';
+		$institute_msg='Hobbyix: Order placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. This is a trial class. Thanks, hobbyix.com- '.$data['admin_contact_no'];
+		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no']', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'. This is a trial class.';
 		$subject='Trial Booking Successful';
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.trial_booking.user', $data, function($message) use ($email, $subject)

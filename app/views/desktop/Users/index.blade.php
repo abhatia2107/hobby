@@ -18,7 +18,7 @@
 	        @foreach($users as $data)
 	        <tr>
 	            <td>{{++$i}}</td>
-	            <td>{{$data->user_first_name.' '.$data->user_last_name}}</td>
+	            <td>{{$data->user_name}}</td>
 	            <td>{{$data->email}}</td>
 	            <td>{{$data->user_contact_no}}</td>
 				<td>

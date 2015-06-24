@@ -17,7 +17,10 @@ class MembershipsController extends \BaseController {
 		$credentials['start']=date('d M Y');
 		$credentials['end']=date('d M Y', $end_date);
 		$credentials['credits']=30;
-		return View::make('Memberships.index',compact('credentials'));
+		$user_id=Auth::id();
+		if($user_id)
+			$user=User::find();
+		return View::make('Memberships.index',compact('credentials','user'));
 	}
 
 	/**
@@ -79,7 +82,7 @@ class MembershipsController extends \BaseController {
 		$posted['cancel_url']=url('/memberships/cancel');
 		$posted['integration_type']='iframe_normal';
 		$posted['language']='en';
-		$posted['billing_name']=$user->user_first_name.' '.$user->user_last_name;
+		$posted['billing_name']=$user->user_name;
 		$posted['billing_email']=$user->email;
 		$posted['billing_tel']=$user->user_contact_no;
 		$posted['billing_address']='Kondapur';
@@ -131,8 +134,20 @@ class MembershipsController extends \BaseController {
 		if($information['order_status']==="Success")
 		{
 			$user=User::find($membership->user_id);
+			$referee_id=$user->user_referee_id;
+			if(!is_null($referee_id)&&!($user->user_membership_purchased))
+			{
+				$referee=User::find($referee_id);
+				if($referee->user_pending_referral)
+				{
+					$referee->user_successful_referral=$referee->user_successful_referral+100;
+					$referee->user_pending_referral=$referee->user_pending_referral-100;
+					$referee->save();
+				}
+			}
 			$user->user_credits_left=$membership->credits;
 			$user->user_credits_expiry=$membership->end_date;
+			$user->user_membership_purchased=1;
 			$user->save();
 			$this->sms_email($membership->id);
 			$data=array(
@@ -255,7 +270,7 @@ class MembershipsController extends \BaseController {
 					'start_date' => date("d M Y", strtotime($membership->start_date)),
 					'end_date' => date("d M Y", strtotime($membership->end_date)),
 					'credits' => $membership->credits,
-					'user_name' => $user->user_first_name.' '.$user->user_last_name,
+					'user_name' => $user->user_name,
 					'user_email' => $user->email,
 					'user_contact_no' => $user->user_contact_no,
 					'admin_contact_no' => '9100946081',

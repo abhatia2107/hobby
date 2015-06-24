@@ -31,7 +31,7 @@
 ?>
 <div class="uac_sidebar">
   <div class="uac_sidebar_header">
-    {{$user->user_first_name}}    
+    {{$user->user_name}}    
   </div>
   @if($user->user_free_credits_left)
     <div class="uac_credits_container">

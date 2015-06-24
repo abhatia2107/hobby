@@ -34,12 +34,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	];
 
 	public static $rules = [
-		'user_first_name'=>'required',
+		'user_name'=>'required',
 	   	'email'=>'required|unique:users',
 		'user_contact_no'=>'required|unique:users|regex:/[0-9]{10}/',
-		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
-	    'user_birthdate'=>'date',
-	    'user_gender'=>'boolean',
+		'password'=>'required|min:6|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
 	    'user_confirmed'=>'boolean',                   
 	];
 	
@@ -49,7 +47,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $rulesChangePassword=[
 		'current_password'=>'required',
-		'password'=>'required|confirmed|min:8|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
+		'password'=>'required|min:6|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
 	];
 	
 	public function updateUser($credentials,$id)
@@ -93,15 +91,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function  getid($email)
 	{
 		return DB::select('select id from users where email=?',array($email));
-	}
-	/**
-	*To change the password of the user.
-	*@param user_id of the logged in user
-	*
-	*/
-	public function change_password($id)
-	{
-		
 	}
 	public function getAuthPassword()
 	{

@@ -11,12 +11,11 @@
 					{
 						$user=User::find($id);
 						if($user)
-							$name=$user->user_first_name;
+							$name=$user->user_name;
 						else
 							$name = "USER ACCOUNT";
 					}
 				?>
-					<a href="{{url('/yoga')}}">International Yoga Day&nbsp; &nbsp;&nbsp;</a>
 				@if(!$id)
 					<div class="login">
 						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">LOGIN TO HOBBYIX</a>						

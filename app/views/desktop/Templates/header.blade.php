@@ -10,7 +10,7 @@
 		{
 			$user=User::find($id);
 			if($user)
-				$name=$user->user_first_name;
+				$name=$user->user_name;
 			else
 				$name = "USER ACCOUNT";
 		}

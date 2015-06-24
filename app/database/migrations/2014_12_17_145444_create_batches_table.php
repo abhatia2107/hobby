@@ -14,7 +14,7 @@ class CreateBatchesTable extends Migration {
 	{
 		Schema::create('batches', function($table){
 			$table->increments('id');
-			$table->string('batch',50);
+			$table->string('batch');
 			$table->integer('batch_category_id')->foreign('batch_category_id')->references('id')->on('categories');
 			$table->integer('batch_subcategory_id')->foreign('batch_subcategory_id')->references('id')->on('subcategories');
 			$table->integer('batch_user_id')->foreign('batch_user_id')->references('id')->on('users');
@@ -45,6 +45,13 @@ class CreateBatchesTable extends Migration {
 			$table->boolean('changing_room')->default(0);
 			$table->boolean('miscellaneous2')->default(0);
 			$table->boolean('miscellaneous3')->default(0);
+			$table->boolean('monday')->default(1);
+			$table->boolean('tuesday')->default(1);
+			$table->boolean('wednesday')->default(1);
+			$table->boolean('thursday')->default(1);
+			$table->boolean('friday')->default(1);
+			$table->boolean('saturday')->default(1);
+			$table->boolean('sunday')->default(1);
 			$table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

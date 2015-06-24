@@ -14,7 +14,7 @@
             Dear {{ $name}},
         </h1>
         <p style="font-size:120%; color:#000;">
-            {{$friend_name}} has accepted your invitation and joined Hobbyix. 1 class will be credited to your account when your friend books the first class.
+            {{$friend_name}} has accepted your invitation and joined Hobbyix. Rs. 100 will be credited to your hobbyix wallet when your friend buys the membership.
         </p>
         <div style="text-align:center;">
             Spread the love and earn more Hobbyix credit.

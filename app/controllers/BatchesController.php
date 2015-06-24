@@ -168,7 +168,7 @@ class BatchesController extends \BaseController {
 		if($batch) {
 			/*$user=User::find(Auth::id())->toArray();
 			$email=$user['email'];
-			$name=$user['user_first_name'];
+			$name=$user['user_name'];
 			$subject=Lang::get('batch.batch_create_mail',array("batch"=>$credentials['batch']));
 			$data['name']=$name;
 			$data['batch']=$credentials['batch'];

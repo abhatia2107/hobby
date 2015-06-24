@@ -49,7 +49,7 @@ class Institute extends \Eloquent {
             withTrashed()
             ->where('institutes.id','=',$id)
             ->Join('users','users.id','=','institutes.institute_user_id')
-            ->select('institutes.*','users.user_location','users.user_contact_no')
+            ->select('institutes.*','users.user_contact_no')
             ->get();
             // dd($instituteDetails);
             if(!empty((array)($instituteDetails[0])))

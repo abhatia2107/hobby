@@ -30,7 +30,7 @@
 ?>
 <div class="uac_sidebar">
   <div class="uac_sidebar_header">
-    {{$user->user_first_name}}    
+    {{$user->user_name}}    
   </div>
   <div class="uac_credits_container">
       <span class="fa fa-credit-card"></span>

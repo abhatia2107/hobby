@@ -26,7 +26,7 @@ class Comment extends \Eloquent {
     {
         $comments= Comment::where('comment_institute_id','=',$institute_id)
                         ->Join('users', 'users.id', '=', 'comments.comment_user_id')
-                        ->select('comments.*','users.user_first_name','users.user_last_name')
+                        ->select('comments.*','users.user_name')
                         ->get();
         return $comments;
     }

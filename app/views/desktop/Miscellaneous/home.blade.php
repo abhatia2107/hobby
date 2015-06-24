@@ -13,12 +13,14 @@
 <div class="overlay-slider">
 	<div class="homepage-cover">
 	   <div class="container" id="hompage-cover">
-	      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.2);padding:0px 0px 5px 0px;">
+	      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.4);padding:0px 0px 5px 0px;">
 	         <div>
 	            <h1>{{$homeLang['home_title']}}</h1>
-	            <h2>{{$homeLang['home_subtitle']}}</h2>
+	            <h2>{{$homeLang['home_subtitle1']}}</h2>
+	            <h2>{{$homeLang['home_subtitle2']}}</h2>
 	         </div> 
-	         <div class="explore_button" ><a href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Explore Now</a></div>
+	         <span class="explore_button"><a href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
+	         <span class="explore_button" style="margin-left:5px;" ><a href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
 	      </div>
 	   </div>
 	</div>
@@ -27,6 +29,19 @@
 	<div class="header">
 		<a style="color:black;text-decoration:none" href="/memberships">Hobbyix Membership</a>
 	</div>
+	<script>
+  (function() {
+    var cx = '001868570926516956913:k1behnqa6xq';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    //s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
 	<div class="col-md-12 col-sm-12 col-xs-12">	
 		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
@@ -60,10 +75,10 @@
 		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
 	?>
 	@for(; $index<$maxlength; $index++ )
-		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item">		
+		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
 			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
-				<a class="text_over_flow_hide" href="/filter/subcategory/{{$subcategories[$index]->subcategory}}">
-					{{$subcategories[$index]->subcategory}}
+				<a class="text_over_flow_hide" itemprop="url" href="/filter/subcategory/{{$subcategories[$index]->subcategory}}">
+					<span itemprop="name">{{$subcategories[$index]->subcategory}}</span>
 				</a>
 			</li>
 		</div>					
@@ -79,10 +94,10 @@
 		if ($localitiesLength<$maxlength) { $maxlength = $localitiesLength; }		
 	?>
 	@for(;$index<$maxlength; $index++ )
-		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item">		
+		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation" >		
 			<li title="Fitness Activities in {{$localities[$index]->locality}}">
-				<a href="/filter/locality/{{$localities[$index]->locality_url}}">
-					{{$localities[$index]->locality}}
+				<a itemprop="url" href="/filter/locality/{{$localities[$index]->locality_url}}">
+					<span itemprop="name">{{$localities[$index]->locality}}</span>
 				</a>
 			</li>
 		</div>		
@@ -98,10 +113,10 @@
 		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
 	?>	
 	@for(;$index<$maxlength; $index++ )
-		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
-			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad">
-				<a class="text_over_flow_hide" href="/filter/institute/{{$institutes[$index]->institute_url}}">
-					{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}
+		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
+			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad" >
+				<a class="text_over_flow_hide" itemprop="url" href="/filter/institute/{{$institutes[$index]->institute_url}}">
+					<span itemprop="name">{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}</span>
 				</a>
 			</li>
 		</div>	
@@ -109,9 +124,16 @@
 </div>
 @stop
 @section('pagejquery')
-<script type="text/javascript">	
-	$(document).ready(function () {		
-		
-	})
+<script type="application/ld+json">
+{
+   "@context": "http://schema.org",
+   "@type": "WebSite",
+   "url": "http://hobbyix.com",
+   "potentialAction": {
+     "@type": "SearchAction",
+     "target": "http://hobbyix.com/filter/search?keyword={keyword}&category_id=0&location_id=0&chunk=0",
+     "query-input": "required name={keyword}"
+   }
+}
 </script>
 @stop

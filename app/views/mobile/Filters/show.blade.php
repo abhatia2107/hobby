@@ -488,8 +488,8 @@
 						.attr("class","row overflow_x")
 						.append
 						(
-							$("<div></div>")
-							.attr("class","col-xs-7")
+							$("<div ></div>")
+							.attr("class","col-xs-8")
 							.append
 							(
 								$("<div></div>")
@@ -546,8 +546,8 @@
 						)
 						.append
 						(
-							$("<div></div>")
-							.attr("class","col-xs-5")
+							$("<div style='padding:0 0px 0 0;'></div>")
+							.attr("class","col-xs-4")
 							.append
 							(
 								$("<div></div>")
@@ -555,7 +555,7 @@
 								.append
 								(
 									$("<div></div>")								
-									.text("₹ "+price+" / Session")
+									.text("₹"+price+"/Session")
 									.append("<br>(or "+batchCredit)									
 								)
 								.append

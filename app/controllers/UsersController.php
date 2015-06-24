@@ -348,7 +348,7 @@ class UsersController extends \BaseController {
                 $name=$newUserData['user_name'];
                 $data = [
                     'name' => $newUserData['user_name'],
-                    'user_successful_referral' => $newUserData['user_successful_referral'],
+                    'user_wallet' => $newUserData['user_wallet'],
                     'user_free_credits_left' => $newUserData['user_free_credits_left'],
                 ];
                 /*Confirmation mail is to be send to the newly registered user*/

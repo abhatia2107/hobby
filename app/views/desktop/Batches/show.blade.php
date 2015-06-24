@@ -123,17 +123,31 @@
       { 
         $facilitesAvailable[$i] = $batchDetails->$facilities[$i];      
       }
+      $weekDays = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+      $weekDaysAvailable = [];
+      for ($i=0; $i < 7 ; $i++) 
+      { 
+        $weekDaysAvailable[$i] = $batchDetails->$weekDays[$i];   
+      }
       $todayDate = date('Y-m-d');
   ?>
   <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/workout.jpg);">
     <div id="content" class="site-content">
       <div class="samplePageInfo cover-wrapper ">
         <div class="container">
-          <div class="col-sm-10 col-md-10">
-            <div id='sample-institute-name'>{{$instituteName}}</div>
+          <div class="col-sm-10 col-md-10" itemscope itemtype="http://schema.org/SportsActivityLocation">
+            <div id='sample-institute-name' itemprop="name" >{{$instituteName}}</div>
             <div id='sample-batch-type'>{{'  '.$subcategory}},{{' '.$category}}</div>
-            <div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$locality}}</div>
-            <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  +91 '.$instituteContact}}</div>
+            <div id='sample-institute-address' class="text_over_flow_hide">
+              <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <span class='glyphicon glyphicon-map-marker'></span>
+                <span itemprop="streetAddress">{{'  '.$landMark}}</span>, 
+                <span itemprop="addressLocality">{{$locality.', '.$location}}</span>
+              </div>
+            </div>
+            <div id='sample-institute-contact'>
+              <div class='glyphicon glyphicon-phone-alt'></div><span itemprop="telephone">{{'  +91 '.$instituteContact}}</span>
+            </div>
           </div>
           <div class="col-sm-2 col-md-2">
             <div class="submitReviewButton">
@@ -148,26 +162,31 @@
   <div class="container" id='blog-container'>
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1" style="margin-bottom:15px">
-        <div id="sample-batch-details" class="sample-box col-md-12 col-sm-12 col-xs-12" >
-          <div id='sample-batch-name'>{{$instituteName}} Details</div>
-          <div id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-home' id='pin-icon'></span>
-            {{$instituteAddress.', '.$locality.', '.$location.', '.$pincode}}
-          </div>
-          <div @if(!isset($landMark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
-            Land Mark: {{$landMark}}
-          </div>
-          <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
-            +91 {{$instituteContact}}
-          </div>
-          <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-time' id='pin-icon'></span>
-            {{$comment.' '.$tagline}}
-          </div>
-          <div id='batch-facilities' class="batch-details">
-            @for($i=0;$i<=5;$i++)            
-                <span class="facilities_icon" @if($facilitesAvailable[$i]==0) style="opacity:.2" @endif>
-                  <img src="/assets/images/Facilities/{{$facilitiesName[$i]}}.png" width="35px" height="35px" title="{{$facilitiesName[$i]}}" alt="{{$facilitiesName[$i]}}">
-                </span>           
-            @endfor
+        <div class="sample-box col-md-12 col-sm-12 col-xs-12" id="sample-batch-details" >
+          <div itemscope itemtype="http://schema.org/SportsActivityLocation">          
+            <div id='sample-batch-name'><span itemprop="name" >{{$instituteName}}</span> Details</div> 
+            <div class="batch-details" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <span class='glyphicon glyphicon-home' id='pin-icon'></span>
+              <span itemprop="streetAddress">{{$instituteAddress}}</span>, 
+              <span itemprop="addressLocality">{{$locality.', '.$location}}</span>,
+              <span itemprop="postalCode">{{$pincode}}</span>      
+            </div>
+            <div @if(!isset($landMark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
+              Land Mark: {{$landMark}}
+            </div>
+            <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
+              <span itemprop="telephone">+91 {{$instituteContact}}</span>
+            </div>
+            <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-time' id='pin-icon'></span>
+              {{$comment.' '.$tagline}}
+            </div>
+            <div id='batch-facilities' class="batch-details">
+              @for($i=0;$i<=5;$i++)            
+                  <span class="facilities_icon" @if($facilitesAvailable[$i]==0) style="opacity:.2" @endif>
+                    <img src="/assets/images/Facilities/{{$facilitiesName[$i]}}.png" width="35px" height="35px" title="{{$facilitiesName[$i]}}" alt="{{$facilitiesName[$i]}}">
+                  </span>           
+              @endfor
+            </div>
           </div>
         </div>
         <div id="comments" class="sample-box">
@@ -220,12 +239,28 @@
                         @endfor
                     </select>
                 </div>
-              </div>
+              </div>             
               <div class="row batchOrderField" id="batchOrderField1">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date*</div>
                 <div class='col-md-6 col-sm-6 col-xs-6'>
                       <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />                     
                 </div>          
+              </div>
+              <?php
+                $amountPayable = $sessionPrice;
+                if(isset($user->user_wallet) && $user->user_wallet>0)                
+                {
+                  $walletAmount = $user->user_wallet;
+                  $amountPayable = $sessionPrice-$walletAmount; 
+                  if($walletAmount>=$sessionPrice)
+                    $amountPayable = 0;
+                }
+                else
+                  $walletAmount = 0;
+              ?>
+              <div class="row batchOrderField" @if($walletAmount>0) style="display:block" @else style="display:none" @endif>
+                <div class='col-md-6 col-sm-6 col-xs-6'>Hobbyix Wallet</div>
+                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$walletAmount}}/-</div>
               </div>    
               <div class="row batchOrderField">
                 <div class='col-xs-9'>
@@ -236,9 +271,9 @@
                 </div>          
               </div>       
               <hr/>
-              <div class="row totalAmount">
-                <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
-                <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
+              <div class="row totalAmount">               
+                <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>
+                <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
                 <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
               </div>
               <div class="row batchOrderButtons">    
@@ -377,7 +412,15 @@
 @section('pagejquery')
   <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
   <script type="text/javascript"> 
-    var dateToday = new Date();   
+    var dateToday = new Date();
+    var walletAmount = {{json_encode( $walletAmount ) }};            
+    var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};    
+    function DisableDay(date) 
+    {
+        var day = date.getDay();        
+        if (weekDaysAvailable[day] == 0) { return [false]; } 
+        else { return [true]; }      
+    } 
     function bookOrderFormValidate() 
     {
       var Result = true;    
@@ -422,9 +465,16 @@
         });
         $('#numberOfSessions').change(function () 
         {
-            var sessionsCount = $(this).val(); 
+            var sessionsCount = $(this).val();             
             var sessionPrice = {{$sessionPrice}};
-            var subtotal = sessionPrice*sessionsCount;           
+            var subtotal = sessionPrice*sessionsCount;
+            if(walletAmount>0)
+            {
+              if(walletAmount>=subtotal)        
+                subtotal = 0;
+              else
+                subtotal = subtotal - walletAmount;
+            }
             $('#orderTotal').empty();  
             $('#orderTotal').append(": Rs. "+subtotal);
             $('#payment').val(subtotal);
@@ -437,11 +487,11 @@
           }, 1000, 'easeInOutSine');
           event.preventDefault();
         });
-        $("#booking_date").datepicker({
-          defaultDate: "+1w",
+        $("#booking_date").datepicker({          
           changeMonth: true,
           numberOfMonths: 1,
-          minDate: dateToday,      
+          minDate: dateToday,                
+          beforeShowDay: DisableDay,
           dateFormat: 'yy-mm-dd'         
         });    
         $('#proceedButton').click(function(e)

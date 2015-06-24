@@ -26,6 +26,8 @@
             <li><span class="uac_profile_item" >NAME : {{$user->user_name}}</span></li>
             <li><span class="uac_profile_item" >EMAIL ID : {{$user->email}}</span></li>
             <li><span class="uac_profile_item" >MOBILE NUMBER : {{$user->user_contact_no}}</span></li>
+            <li><span class="uac_profile_item" >REFERRAL CODE: {{$user->user_referral_code}}</span></li>            
+            <li><span class="uac_profile_item" >HOBBYIX WALLET: Rs. {{$user->user_wallet}}/-  &nbsp; &nbsp;(Invite your friends and get Rs. 100/- off on your next purchase)</span></li>
           </div>
         </div>
       </div>

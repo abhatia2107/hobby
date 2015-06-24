@@ -48,9 +48,9 @@ body li {  list-style-type: none; }
 
 @media (min-height:550px) {  .homepage-cover { padding: 12em 0 11em; } }
 
-@media (min-height:600px)  {  .homepage-cover { padding: 14em 0 13em; } }
+@media (min-height:600px)  {  .homepage-cover { padding: 13em 0 12em; } }
 
-@media (min-height:700px) and (max-height:900px) {  .homepage-cover { padding: 19em 0 18em; }}
+@media (min-height:700px) and (max-height:900px) {  .homepage-cover { padding: 18em 0 17em; }}
 
 @media (min-width:992px) {  body,html { overflow-x: hidden; margin-right: 0px;  } }
 
@@ -74,9 +74,9 @@ body li {  list-style-type: none; }
 
 .home-cover-title { margin-bottom: 40px; }
 
-.homepage-cover h1 { font-size: 35px;color:white;font-weight: bold; }
+.homepage-cover h1 { font-size: 30px;color:white;font-weight: bold; }
 
-.homepage-cover h2 { font-size: 25px;color:white;font-weight: bold; }
+.homepage-cover h2 { font-size: 22px;color:white;font-weight: lighter;padding: 5px 0 2px 0;margin: 0;}
 
 .category-list-items { height: 250px;border-radius: 4px;overflow: hidden;float: left;margin-top: 0px;padding: 10px;  }
 
@@ -98,7 +98,7 @@ body li {  list-style-type: none; }
 
 .explore_button {text-align: center;}
 
-.explore_button .btn-primary {border-radius: 0px;border:0px;}
+.explore_button .btn-primary {border-radius: 0px;border:0px;min-width: 210px;max-width: 210px;margin: 10px 0px 5px 0px;background: #3396d1;font-size: 17px;}
 
 .home-category-type:hover figcaption  { display: block; }
 
@@ -118,7 +118,7 @@ body li {  list-style-type: none; }
 
 .membership_offer_container .details {min-height: 230px;background: #fff;}
 
-.membership_offer_container .footer {color:black;background: #81d2f6;padding: 10px 5px 20px 5px;text-align: center;font-size: 17px;min-height: 90px;max-height: 90px}
+.membership_offer_container .footer {color:black;background: #81d2f6;padding: 10px 5px 20px 5px;text-align: center;font-size: 17px;min-height: 100px;max-height: 100px;overflow: hidden;}
 
 .membership_offer_container .details img{width: 99%; height: auto;padding: 0 10px;margin-top: 40px;}
 
@@ -202,7 +202,7 @@ span.stars span {  background-position: 0 0; }
 .location-icon  { width:12px;height: 17px;margin-top: -4px;margin-right: 5px; }
 
 #inst_contact { border: 1px solid;padding:3px 3px 3px 3px;border-color: #0099FF;border-radius: 4px;float:left;text-align: center;
-  margin-right:3px;margin-top: 2px;font-size: 13px;height: 26px;min-width: 120px;max-width: 120px;
+  margin-right:3px;margin-top: 2px;font-size: 13px;height: 26px;min-width: 130px;max-width: 130px;
 }
 
 .batchDetailsAndPrice {  margin-bottom: 10px; }
@@ -216,7 +216,7 @@ span.stars span {  background-position: 0 0; }
 #inst_message:hover { background: #E8E8E8  ;  cursor: pointer;  }
 
 #inst_message  { margin-top: 2px;border: 1px solid;padding:3px;border-color: #0099FF;font-size: 13px;overflow: hidden;display: inline-block;
-  border-radius: 4px; float: left; text-align: center;margin-right: 3px;height: 26px;min-width: 120px;max-width: 120px;
+  border-radius: 4px; float: left; text-align: center;margin-right: 3px;height: 26px;min-width: 115px;max-width: 115px;
 }
 
 .inscore { border-radius: 50%;border: 2px solid;border-color:#FF8000;vertical-align: middle;width: 30px;height: 30px;padding: 4px 2px 2px 2px;

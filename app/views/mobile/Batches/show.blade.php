@@ -135,6 +135,12 @@
     for ($i=0; $i < 6 ; $i++) { 
       $facilitesAvailable[$i] = $batchDetails->$facilities[$i];      
     }
+    $weekDays = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+    $weekDaysAvailable = [];
+    for ($i=0; $i < 7 ; $i++) 
+    { 
+      $weekDaysAvailable[$i] = $batchDetails->$weekDays[$i];   
+    }
     $todayDate = date('Y-m-d');
 ?>
 <div id="page" class="hfeed site overflow_x" style="background-image: url(/assets/images/sample/workout.jpg);">
@@ -177,6 +183,22 @@
               <input type="text" readonly="true" style="background:white"placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
           </div>          
         </div>
+        <?php
+          $amountPayable = $sessionPrice;
+          if(isset($user->user_wallet) && $user->user_wallet>0)                
+          {
+            $walletAmount = $user->user_wallet;
+            $amountPayable = $sessionPrice-$walletAmount; 
+            if($walletAmount>=$sessionPrice)
+              $amountPayable = 0;
+          }
+          else
+            $walletAmount = 0;
+        ?>
+        <div class="row batchOrderField" @if($walletAmount>0) style="display:block" @else style="display:none" @endif>
+          <div class='col-xs-6'>Hobbyix Wallet</div>
+          <div class='col-xs-6'>: Rs. {{$walletAmount}}/-</div>
+        </div> 
         <div class="row batchOrderField">
           <div class='col-xs-9 batchOrderFieldLabel'>
             <input type="text" style="width:100%" placeholder="Enter Promo Code" class="form-control" id="promoCode" name="Promo Code" />                     
@@ -186,10 +208,10 @@
           </div>          
         </div>            
         <hr/>
-        <div class="row totalAmount">
-          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$sessionPrice}}</span></div>
+        <div class="row totalAmount">         
+          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>
           <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
-          <input type="hidden" id="payment" name="payment" value="{{$sessionPrice}}">
+          <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
         </div>
         <div class="row batchOrderButtons" style="margin-top:5px;">    
           <button style="padding:5px 50px;" class="booknowButton" id="proceedButton">Proceed</button>
@@ -357,7 +379,15 @@
 @stop
 @section('pagejquery')
 <script type="text/javascript">
-  var dateToday = new Date();  
+  var dateToday = new Date();
+  var walletAmount = {{json_encode( $walletAmount ) }};
+  var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};    
+  function DisableDay(date) 
+  {
+      var day = date.getDay();        
+      if (weekDaysAvailable[day] == 0) { return [false]; } 
+      else { return [true]; }      
+  } 
   function bookOrderFormValidate() 
   {
     var Result = true;    
@@ -402,7 +432,11 @@
       {
           var sessionsCount = $(this).val(); 
           var sessionPrice = {{$sessionPrice}};
-          var subtotal = sessionPrice*sessionsCount;          
+          var subtotal = sessionPrice*sessionsCount; 
+          if(walletAmount>=subtotal)        
+            subtotal = 0;
+          else
+            subtotal = subtotal - walletAmount;         
           $('#orderTotal').empty();  
           $('#orderTotal').append(": Rs. "+subtotal);
           $('#payment').val(subtotal);          
@@ -474,6 +508,7 @@
           changeMonth: true,
           numberOfMonths: 1,
           minDate: dateToday,
+          beforeShowDay: DisableDay,
           dateFormat: 'yy-mm-dd'         
       });    
   });

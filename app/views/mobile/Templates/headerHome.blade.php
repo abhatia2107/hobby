@@ -15,7 +15,7 @@
 			<a class="navbar-brand" href="/">
 				<span class="website-title">HOBBYIX</span>
 			</a>
-		</div>				
+		</div>
 		<div class="userInfoListing col-xs-6">
 			@if(!$id)
 				<div class="login">

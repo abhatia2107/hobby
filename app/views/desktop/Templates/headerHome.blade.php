@@ -4,7 +4,7 @@
 			<a href="/">HOBBYIX</a>
 		</div>		
 		<div class="MainHeaderUserInfo col-xs-7">		
-			<div class="userInfoListing ">
+			<div class="userInfoListing">
 				<?php
 					$id=Auth::id();
 					if($id)

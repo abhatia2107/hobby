@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration {
 			$table->float('user_credits_left')->default(0);
 			$table->integer('user_free_credits_left')->default(0);
 			$table->date('user_credits_expiry')->nullable();
-			$table->integer('user_successful_referral')->default(0);
+			$table->integer('user_wallet')->default(0);
 			$table->integer('user_pending_referral')->default(0);
 	        $table->boolean('user_membership_purchased')->default(0);
 	        $table->softDeletes();

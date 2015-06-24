@@ -140,7 +140,7 @@ class MembershipsController extends \BaseController {
 				$referee=User::find($referee_id);
 				if($referee->user_pending_referral)
 				{
-					$referee->user_successful_referral=$referee->user_successful_referral+100;
+					$referee->user_wallet=$referee->user_wallet+100;
 					$referee->user_pending_referral=$referee->user_pending_referral-100;
 					$referee->save();
 				}

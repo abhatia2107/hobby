@@ -28,11 +28,13 @@
 
 		.page_height_footer {margin-top: 40px;}
 
-		@media (min-width: 920px) { .get_membership li {padding: 0 60px}}
+		@media (min-width: 920px) { .get_membership li {padding: 0 20px}}
 
 		.membership_card_container input[type=text] { height: 25px; padding: 0px 0px 0px 5px; width: 90%; border-radius: 2px; }
 
 		#promoCodeContainer #statusMessage {color: red;font-size: 14px;}
+
+		.get_membership hr {margin: 10px 15px 5px 15px;}
 
 	</style>
 @stop
@@ -50,16 +52,31 @@
 						Get Your Membership
 					</h1>				
 					<div class="row">
+						<?php
+			                $amountPayable = $credentials['payment'];
+			                if(isset($user->user_wallet) && $user->user_wallet>0)                
+			                {
+			                  	$walletAmount = $user->user_wallet;
+			                  	$amountPayable = $credentials['payment']-$walletAmount; 
+			                  	if($walletAmount>=$credentials['payment'])
+				                    $amountPayable = 0;
+			                }
+			                else
+			                	$walletAmount = 0;
+			            ?>
 						<form method="post" enctype="multipart/form-data" action="/memberships">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 							<input type="hidden" name="start_date" value="{{$credentials['start_date']}}">
 							<input type="hidden" name="end_date" value="{{$credentials['end_date']}}">
-							<input type="hidden" name="credits" value="{{$credentials['credits']}}">
+							<input type="hidden" name="credits" value="{{$amountPayable}}">
 							<input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span id="totalPrice">: Rs. {{$credentials['payment']}}/-</span></li>
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
+							<li class="col-md-12" @if($walletAmount>0) style="display:block" @else style="display:none" @endif >
+								<span class="col-md-6 col-sm-6">Hobbyix Wallet</span><span>: Rs. {{$walletAmount}}/-</span>							
+							</li>
 							<li class="col-md-12" style="margin:5px 0px;">
 								<div class='col-md-10 col-sm-10' style="" id="promoCodeContainer">
             						<input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="Promo Code" />
@@ -67,7 +84,8 @@
           						<div class='col-md-2 col-sm-2' id="promoCodeMessageContainer" style="text-align:left;padding:1px 0px 0px 0px;font-size:15px;color:green">
              					<a href="javascript:verifyPromoCode();">Apply</a>
           						</div>          
-        					</li>     
+        					</li>        					
+        					<li class="col-md-12" style="text-align:center"><hr/>Amount Payable<span id="totalPrice">: Rs. {{$amountPayable}}/-</span></li>								     
 							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" id="membership_pay">Pay Now</button></div>							
 						</form>
 					</div>

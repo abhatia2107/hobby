@@ -9,7 +9,7 @@
             <h2>{{$homeLang['home_subtitle1']}}</h2>
             <h2>{{$homeLang['home_subtitle2']}}</h2>
          </div>
-         <span class="explore_button" ><a href="/memberships" class="btn btn-primary">Check out Membership</a></span>
+         <span class="explore_button" ><a href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
 	     <span class="explore_button" style="margin-left:5px;" ><a href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
       </div>
    </div>

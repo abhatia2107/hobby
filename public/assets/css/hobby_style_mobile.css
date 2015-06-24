@@ -79,7 +79,7 @@ body li {  list-style-type: none; }
 
 .explore_button {text-align: center;}
 
-.explore_button .btn-primary {border-radius: 0px;border:0px;margin-top: 8px;}
+.explore_button .btn-primary {border-radius: 0px;border:0px;margin-top: 8px;background: #3396d1;}
 
 .home-category-type { position:relative;overflow:hidden;background:black;height: 170px;margin-bottom:30px;
   margin-top:7;border-radius: 9px;border:4px solid;border-color: lightgray;

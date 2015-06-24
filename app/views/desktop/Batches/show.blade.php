@@ -135,11 +135,19 @@
     <div id="content" class="site-content">
       <div class="samplePageInfo cover-wrapper ">
         <div class="container">
-          <div class="col-sm-10 col-md-10">
-            <div id='sample-institute-name'>{{$instituteName}}</div>
+          <div class="col-sm-10 col-md-10" itemscope itemtype="http://schema.org/SportsActivityLocation">
+            <div id='sample-institute-name' itemprop="name" >{{$instituteName}}</div>
             <div id='sample-batch-type'>{{'  '.$subcategory}},{{' '.$category}}</div>
-            <div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$locality}}</div>
-            <div id='sample-institute-contact'><div class='glyphicon glyphicon-phone-alt'></div>{{'  +91 '.$instituteContact}}</div>
+            <div id='sample-institute-address' class="text_over_flow_hide">
+              <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <span class='glyphicon glyphicon-map-marker'></span>
+                <span itemprop="streetAddress">{{'  '.$landMark}}</span>, 
+                <span itemprop="addressLocality">{{$locality.', '.$location}}</span>
+              </div>
+            </div>
+            <div id='sample-institute-contact'>
+              <div class='glyphicon glyphicon-phone-alt'></div><span itemprop="telephone">{{'  +91 '.$instituteContact}}</span>
+            </div>
           </div>
           <div class="col-sm-2 col-md-2">
             <div class="submitReviewButton">
@@ -154,26 +162,31 @@
   <div class="container" id='blog-container'>
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1" style="margin-bottom:15px">
-        <div id="sample-batch-details" class="sample-box col-md-12 col-sm-12 col-xs-12" >
-          <div id='sample-batch-name'>{{$instituteName}} Details</div>
-          <div id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-home' id='pin-icon'></span>
-            {{$instituteAddress.', '.$locality.', '.$location.', '.$pincode}}
-          </div>
-          <div @if(!isset($landMark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
-            Land Mark: {{$landMark}}
-          </div>
-          <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
-            +91 {{$instituteContact}}
-          </div>
-          <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-time' id='pin-icon'></span>
-            {{$comment.' '.$tagline}}
-          </div>
-          <div id='batch-facilities' class="batch-details">
-            @for($i=0;$i<=5;$i++)            
-                <span class="facilities_icon" @if($facilitesAvailable[$i]==0) style="opacity:.2" @endif>
-                  <img src="/assets/images/Facilities/{{$facilitiesName[$i]}}.png" width="35px" height="35px" title="{{$facilitiesName[$i]}}" alt="{{$facilitiesName[$i]}}">
-                </span>           
-            @endfor
+        <div class="sample-box col-md-12 col-sm-12 col-xs-12" id="sample-batch-details" >
+          <div itemscope itemtype="http://schema.org/SportsActivityLocation">          
+            <div id='sample-batch-name'><span itemprop="name" >{{$instituteName}}</span> Details</div> 
+            <div class="batch-details" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <span class='glyphicon glyphicon-home' id='pin-icon'></span>
+              <span itemprop="streetAddress">{{$instituteAddress}}</span>, 
+              <span itemprop="addressLocality">{{$locality.', '.$location}}</span>,
+              <span itemprop="postalCode">{{$pincode}}</span>      
+            </div>
+            <div @if(!isset($landMark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
+              Land Mark: {{$landMark}}
+            </div>
+            <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
+              <span itemprop="telephone">+91 {{$instituteContact}}</span>
+            </div>
+            <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-time' id='pin-icon'></span>
+              {{$comment.' '.$tagline}}
+            </div>
+            <div id='batch-facilities' class="batch-details">
+              @for($i=0;$i<=5;$i++)            
+                  <span class="facilities_icon" @if($facilitesAvailable[$i]==0) style="opacity:.2" @endif>
+                    <img src="/assets/images/Facilities/{{$facilitiesName[$i]}}.png" width="35px" height="35px" title="{{$facilitiesName[$i]}}" alt="{{$facilitiesName[$i]}}">
+                  </span>           
+              @endfor
+            </div>
           </div>
         </div>
         <div id="comments" class="sample-box">
@@ -474,8 +487,7 @@
           }, 1000, 'easeInOutSine');
           event.preventDefault();
         });
-        $("#booking_date").datepicker({
-          defaultDate: "+1w",
+        $("#booking_date").datepicker({          
           changeMonth: true,
           numberOfMonths: 1,
           minDate: dateToday,                

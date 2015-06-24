@@ -16,10 +16,10 @@
          <h1 class="footer-widget-title">About Hobbyix</h1>
          <div class="menu-need-help-menu-container">
             <ul id="menu-need-help-menu" class="menu"  itemscope itemtype="http://schema.org/BreadcrumbList">
-               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-question-sign"></span><a itemprop="name" href="/aboutus"><span itemprop="name">About Hobbyix</span></a><meta itemprop="position" content="1" /></li>               
-               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-list-alt"></span><a itemprop="name" href="/terms"><span itemprop="name">Terms Of Use</span></a><meta itemprop="position" content="2" /></li>
-               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-user"></span><a itemprop="name" href="/privacy"><span itemprop="name">Privacy Policy</span></a><meta itemprop="position" content="3" /></li>
-               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-dashboard"></span><a itemprop="name" href="/feedbacks/create"><span itemprop="name">Feedback</span></a><meta itemprop="position" content="4" /></li>       
+               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-question-sign"></span><a itemprop="url" href="/aboutus"><span itemprop="name">About Hobbyix</span></a><meta itemprop="position" content="1" /></li>               
+               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-list-alt"></span><a itemprop="url" href="/terms"><span itemprop="name">Terms Of Use</span></a><meta itemprop="position" content="2" /></li>
+               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-user"></span><a itemprop="url" href="/privacy"><span itemprop="name">Privacy Policy</span></a><meta itemprop="position" content="3" /></li>
+               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-dashboard"></span><a itemprop="url" href="/feedbacks/create"><span itemprop="name">Feedback</span></a><meta itemprop="position" content="4" /></li>       
                 <!--<li><span class="glyphicon glyphicon-globe"></span><a href-link="/blog">Hobbyix Blog</a></li> -->
             </ul>
          </div>

@@ -42,7 +42,7 @@ class BookingsController extends \BaseController {
 		}
 		$data['user_id']=Auth::id();
 		$data['order_id']=substr(uniqid(),0,8);
-		$data['payment'] = Batch::find($data['batch_id'])->batch_single_price;
+		$data['payment'] = $data['no_of_sessions']*Batch::find($data['batch_id'])->batch_single_price;
 		unset($data['csrf_token']);
 		// dd($data);
 		if(isset($data['pay_cc']))

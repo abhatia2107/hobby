@@ -48,10 +48,6 @@ class MembershipsController extends \BaseController {
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-		if($credentials['payment']<'1799')
-		{
-			return Redirect::back()->with('failure','Payment Cannot be less than Rs 1799/-');
-		}
 		unset($credentials['csrf_token']);
 		$credentials['credits']=30;
 		$credentials['order_id']=substr(uniqid(),0,8);

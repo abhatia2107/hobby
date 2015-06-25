@@ -249,6 +249,7 @@
               <?php
                 $amountPayable = $sessionPrice;
               ?>
+              <hr/>
               <div class="row totalAmount">               
                 <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>
                 <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">

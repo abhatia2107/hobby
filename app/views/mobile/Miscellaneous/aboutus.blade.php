@@ -3,10 +3,10 @@
 <div class="overlay-slider" style="background: url('/assets/images/home/aboutHobbyix.jpg') 0px -125px; 
 background-repeat:no-repeat;
 background-position:center top;
--o-background-size: 100% 130%, auto;
--moz-background-size: 100% 130%, auto;
--webkit-background-size: 100% 130%, auto;
-background-size: 100% 130%, auto;">
+-o-background-size: cover;
+-moz-background-size: cover;
+-webkit-background-size: cover;
+background-size: cover;">
 <div class="homepage-cover">
    <div class="container" id="hompage-cover">
       <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.5);">

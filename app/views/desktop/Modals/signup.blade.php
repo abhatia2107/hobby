@@ -9,7 +9,7 @@
                     <h4 class="modal-title" id="myModalLabel1">Sign Up</h4>
                     <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
                 </div>
-                <center><a href="/login/fb"><img height="35px" style="margin-top:10px;" src="/assets/images/signup-with-facebook.png"></a></center>
+                <center><a href="/login/fb"><img alt="SignUp Using Facebook" title="SignUp Using Facebook" height="35px" style="margin-top:10px;" src="/assets/images/signup-with-facebook.png"></a></center>
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">                        

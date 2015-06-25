@@ -5,7 +5,7 @@
 		<div style="color:white;position:absolute;right:40px;">
 			<!-- <a href="tel:+919100946081"> -->Call: +91-9100 946 081<!-- </a> -->
 		</div>
-		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>		 
+		<button onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>		 
 		<h3><a href="/memberships"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
 		<strong>{{$homeLang['home_membership_tagline']}}</strong>		
 	</div>
@@ -13,7 +13,7 @@
 <div class="overlay-slider">
 	<div class="homepage-cover">
 	   <div class="container" id="hompage-cover">
-	      <div class="hobby_search_listings" style="background-color: rgba(0, 0, 0, 0.4);padding:0px 0px 5px 0px;">
+	      <div class="hobby_search_listings">
 	         <div>
 	            <h1>{{$homeLang['home_title']}}</h1>
 	            <h2>{{$homeLang['home_subtitle1']}}</h2>
@@ -46,23 +46,23 @@
 		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
 			<div class="details">
-				<img src="/assets/images/home/Fitness_AnyTime.PNG">				
+				<img alt="Fitness_AnyTime" title="Fitness_AnyTime" src="/assets/images/home/Fitness_AnyTime.PNG">				
 			</div>
-			<div class="footer" style="clear:both">Have Fitness Classes Available 24X7, Choose What Suits Your Schedule</div>
+			<div class="footer">Have Fitness Classes Available 24X7, Choose What Suits Your Schedule</div>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
 			<div class="details">
-				<img src="/assets/images/home/Fitness_AnyWhere.PNG">				
+				<img alt="Fitness_AnyWhere" title="Fitness_AnyWhere" src="/assets/images/home/Fitness_AnyWhere.PNG">				
 			</div>		
-			<div class="footer" style="clear:both">Don't Settle For One Gym when you can go to any gym</div>
+			<div class="footer">Don't Settle For One Gym when you can go to any gym</div>
 		</div>
 		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
 			<div class="details">
-				<img src="/assets/images/home/Fitness_AnyType.PNG">				
+				<img alt="Fitness_AnyType" title="Fitness_AnyType" src="/assets/images/home/Fitness_AnyType.PNG">				
 			</div>		
-			<div class="footer" style="clear:both">Spice Up Your Fitness Schedule With A New Type Of Activity Everyday</div>
+			<div class="footer">Spice Up Your Fitness Schedule With A New Type Of Activity Everyday</div>
 		</div>		
 	</div>	
 </div>
@@ -132,7 +132,7 @@
    "potentialAction": {
      "@type": "SearchAction",
      "target": "http://hobbyix.com/filter/search?keyword={keyword}&category_id=0&location_id=0&chunk=0",
-     "query-input": "required name={keyword}"
+     "query-input": "required name=keyword"
    }
 }
 </script>

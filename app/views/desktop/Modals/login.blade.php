@@ -35,7 +35,7 @@
                 <div class="signin_button"><button type="submit" class="btn btn-primary">LogIn</button></div>
             </div>
             <div class="modal-footer">                               
-                <a href="/login/fb"><img height="35px" src="/assets/images/login_facebook.png"></a>                
+                <a href="/login/fb"><img alt="Login Using Facebook" title="Login Using Facebook" height="35px" src="/assets/images/login_facebook.png"></a>                
             </div>
         </form>
     </div>

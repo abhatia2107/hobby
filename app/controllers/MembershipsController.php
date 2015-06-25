@@ -10,6 +10,9 @@ class MembershipsController extends \BaseController {
 	 */
 	public function index()
 	{
+		$metaContent[0] = "Hobbyix Membership :: Hobbyix";
+		$metaContent[1] = "One Hobbyix Membership @Rs. 1999/- & workout at any gym, yoga, fitness centers etc. in Hyderabad";
+		$metaContent[2] = "Hobbyix Membership, Hobbyix Membership Features, Get Your Hobbyix Membership";
 		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
 		$credentials['start_date']=date('Y-m-d');
 		$credentials['end_date']=date('Y-m-d',$end_date);
@@ -17,7 +20,7 @@ class MembershipsController extends \BaseController {
 		$credentials['start']=date('d M Y');
 		$credentials['end']=date('d M Y', $end_date);
 		$credentials['credits']=30;
-		return View::make('Memberships.index',compact('credentials'));
+		return View::make('Memberships.index',compact('credentials','metaContent'));
 	}
 
 	/**

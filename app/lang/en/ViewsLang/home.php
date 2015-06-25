@@ -36,7 +36,7 @@ return array(
 
 	"home_membership_title"=>"Check out Hobbyix Membership!!!",	
 
-	"home_membership_tagline"=>"Hobbyix Membership: One Membership -> Access to all the Gyms & Fitness Activities in Hyderabad @1999/Month"
+	"home_membership_tagline"=>"Hobbyix Membership: One Membership -> Access to all the Gyms & Fitness Activities in Hyderabad @Rs. 1999/Month"
 
 	
 );

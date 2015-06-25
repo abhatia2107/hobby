@@ -74,7 +74,7 @@ body li {  list-style-type: none; }
 
 .home-cover-title { margin-bottom: 40px; }
 
-.homepage-cover h1 { font-size: 30px;color:white;font-weight: bold; }
+.homepage-cover h1 { font-size: 30px;color:white;font-weight: bold;margin: 0 0 7px 0 }
 
 .homepage-cover h2 { font-size: 22px;color:white;font-weight: lighter;padding: 5px 0 2px 0;margin: 0;}
 
@@ -85,22 +85,11 @@ body li {  list-style-type: none; }
   -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
 }
 
-.yoga-slider { margin-top: 0px;top:0;left:0;background: url("/assets/images/yoga/sri_sri.jpg"); 
- background-repeat:no-repeat;background-position:left top;-o-background-size: cover;
-  -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
-}
-
-.home-category-type { position:relative;overflow:hidden;background:black;height: 170px;margin-bottom:30px;
-  margin-top:7;border-radius: 9px;border:4px solid;border-color: lightgray;
-}
-
-.home-category-type img { width:100%;height: 170px; }
+.hobby_search_listings {background-color: rgba(0, 0, 0, 0.4);padding:10px 0px 10px 0px;}
 
 .explore_button {text-align: center;}
 
 .explore_button .btn-primary {border-radius: 0px;border:0px;min-width: 210px;max-width: 210px;margin: 10px 0px 5px 0px;background: #3396d1;font-size: 17px;}
-
-.home-category-type:hover figcaption  { display: block; }
 
 .login {float: right;}
 

@@ -291,7 +291,10 @@ Route::get('/privacy', function()
 
 Route::get('/terms', function()
 {
-    return View::make('Miscellaneous.terms');
+	$metaContent[0] = "Terms of Use :: Hobbyix";
+	$metaContent[1] = "Terms and Conditions of Hobbyix, Acceptance of Terms Through Use of Hobbyix, License Restrictions etc.";
+	$metaContent[2] = "About Hobbyix, About Us Hobbyix, Terms of Use Hobbyix, Privacy Policy Hobbyix";
+    return View::make('Miscellaneous.terms',compact('metaContent'));
 });
 
 Route::group(array('before' => "admin"), function() {
@@ -303,7 +306,10 @@ Route::get('/users/login/{id}','UsersController@loginViaId');
 
 Route::get('/aboutus', function()
 {
-	return View::make('Miscellaneous.aboutus');
+	$metaContent[0] = "About Us :: Hobbyix";
+	$metaContent[1] = "Hobbyix is a new kind of membership which makes your workout new, exciting and diverse every time. You will get to browse through 1000's of classes";
+	$metaContent[2] = "About Hobbyix, About Us Hobbyix, Terms of Use Hobbyix, Privacy Policy Hobbyix";
+	return View::make('Miscellaneous.aboutus',compact('metaContent'));
 });
 	
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');

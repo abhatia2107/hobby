@@ -136,7 +136,7 @@
 					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif">Loading Results</div>
-					<div id="noResults" class='resultsMessage' >No results to display.</div>
+					<div id="noResults" class='resultsMessage' >No more results to display.</div>
 				</div><!--end of results info -->
 			</div>
 		</div>
@@ -265,8 +265,10 @@
 		//navActive('NavItem'+categoryId);
 		if(result.length==0)	
 		{
-			$('#loadMore').css('display','none');
-			$('#noResults').css('display','block');
+			$('#noResults').empty();
+			$('#noResults').append("No Results Found");
+			$('#loadMore').hide();
+			$('#noResults').show();
 		}
 		function addFacilities (batchID,facilitesAvailable) 
 		{
@@ -309,7 +311,7 @@
 				}
 				index++;
 			});
-			range = end;
+			range = end;		
 			if(range>index) range=index;
 			if(index<10)
 			{				
@@ -330,10 +332,19 @@
 			$.get("/filter/"+sub_select+"/"+loc_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
 			{
 				chunk++;
-				loadFilters = true;	
-				// alert(response);
+				loadFilters = true;					
 				if(response == "")
 				{
+					if(result.length==0)
+					{
+						$('#noResults').empty();
+						$('#noResults').append("No Results Found");
+					}
+					else
+					{
+						$('#noResults').empty();
+						$('#noResults').append("No more results found");
+					}
 					$('#loadMore').hide();
 					$('#noResults').show();
 				}
@@ -621,8 +632,18 @@
 							{	
 								if(response == "")
 								{
-									$('#loadMore').css('display','none');
-									$('#noResults').css('display','block');
+									if(result.length==0)
+									{
+										$('#noResults').empty();
+										$('#noResults').append("No Results Found");
+									}
+									else
+									{
+										$('#noResults').empty();
+										$('#noResults').append("No more results found");
+									}
+									$('#loadMore').hide();
+									$('#noResults').show();
 								}
 								else
 								{

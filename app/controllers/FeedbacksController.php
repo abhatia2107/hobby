@@ -24,8 +24,11 @@ class FeedbacksController extends \BaseController {
 	 * @return Response
 	 */
 	public function create()
-	{
-		return View::make('Feedbacks.create');
+	{	
+		$metaContent[0] = "Sumbit Feedback About Our Service :: Hobbyix";
+		$metaContent[1] = "Sumbit your feedback, complaint, request etc. about Hobbyix services";
+		$metaContent[2] = "About Hobbyix, About Us Hobbyix, Terms of Use Hobbyix, Privacy Policy Hobbyix";
+		return View::make('Feedbacks.create',compact('metaContent'));
 	}
 	
 	/**

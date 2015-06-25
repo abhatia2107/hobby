@@ -13,7 +13,7 @@
 |
 */
 
-/*
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\MethodNotAllowedHttpException;
 
@@ -40,4 +40,3 @@ App::missing(function($exception)
 {
     return Response::view('Errors.pageNotFound', array(), 404);
 });
-*/

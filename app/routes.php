@@ -247,7 +247,6 @@ Route::group(array('before' => "auth"), function() {
 	Route::get('/users/edit','UsersController@edit');
 	Route::get('/users/logout','UsersController@getLogout');
 	Route::get('/users/subscribe/{id}','UsersController@subscribe');
-	Route::get('/users/show/{id}','UsersController@show');
 });
 
 /*  To verify that unsubscribe request came from a valid email only,

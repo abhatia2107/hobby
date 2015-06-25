@@ -36,8 +36,7 @@ class UsersController extends \BaseController {
 		$adminPanelListing=$this->adminPanelList;
 		return View::make('Users.index',compact('users','tableName','count','adminPanelListing'));
 	}
-
-
+	
 	public function profile()
 	{	
 		$user_id=Auth::id();
@@ -325,7 +324,7 @@ class UsersController extends \BaseController {
                 $newUserData['user_confirmation_code']=$confirmationCode;
             }
 			$newUserData['user_subscription_token']=true;
-			$newUserData['user_referral_code']=substr(uniqid(),0,9);
+			$newUserData['user_referral_code']=$newUserData['user_contact_no'];
 			// dd($newUserData);
 			$this->user->create($newUserData);
 			$userId=$this->user->max('id');

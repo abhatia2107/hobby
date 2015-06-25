@@ -40,7 +40,7 @@
 					<ul class="dropdown-menu">
 						<li> <a href="/users/profile">My Profile</a></li>
 						<li> <a href="/users/orders">My Orders</a> </li>
-						<li> <a class="" href="/users/show/{{$id}}">Change Password</a>	</li>
+						<li> <a class="" href="/users/changepassword">Change Password</a>	</li>
 						<li class="divider"> </li>
 						<li> <a class="header_logout_a" href="/users/logout" >Logout</a> </li>
 					</ul>

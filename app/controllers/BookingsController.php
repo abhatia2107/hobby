@@ -44,12 +44,24 @@ class BookingsController extends \BaseController {
 		$data['order_id']=substr(uniqid(),0,8);
 		unset($data['csrf_token']);
 		unset($data['Promo_Code']);
-		if(isset($data['pay_cc'])){
+		if(isset($data['pay_cc']))
+		{
 			unset($data['referral_credit_used']);
 			unset($data['pay_cc']);
+			if($data['payment']==0)
+			{
+				$data['order_status']='success';
+			}
 			$booking = Booking::create($data);
 			if($booking)
-				return Redirect::to('/bookings/payment/'.$booking->id);
+			{
+				if($data['payment']==0)
+				{
+					return $this->success($booking);
+				}
+				else
+					return Redirect::to('/bookings/payment/'.$booking->id);
+			}
 			else
 				return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
 		}
@@ -135,6 +147,34 @@ class BookingsController extends \BaseController {
 		}
 	}
 
+	public function success($booking)
+	{
+		$this->sms_email($booking->id);
+		$batch=$this->batch->getBatch($booking->batch_id);
+		$data=array('subcategory'=>$batch->subcategory,
+					'institute'=>$batch->institute,
+					'order_id'=>$booking->order_id,
+					'date'=>$booking->booking_date,
+					'no_of_sessions'=>$booking->no_of_sessions
+			);
+		$batch->batch_bookings=$batch->batch_bookings+1;
+		$batch->save();
+		if($booking->wallet_amount)
+		{
+			$user_id=Auth::id();
+			$user=User::find($user_id);
+			if(isset($user->user_wallet) && $user->user_wallet>0)
+	        {
+	          	if($user->user_wallet == $booking->wallet_amount)
+	                $user->user_wallet = 0;
+	            else
+	            	$user->user_wallet = $user->user_wallet-($booking->wallet_amount);
+	            $user->save();
+	        }
+		}
+		return View::make('Bookings.success')->with($data);
+	}
+
 	public function payment($id)
 	{
 		error_reporting(0);
@@ -188,17 +228,7 @@ class BookingsController extends \BaseController {
 		$booking->save();
 		if($information['order_status']==="Success")
 		{
-			$this->sms_email($booking->id);
-			$batch=$this->batch->getBatch($booking->batch_id);
-			$data=array('subcategory'=>$batch->subcategory,
-						'institute'=>$batch->institute,
-						'order_id'=>$booking->order_id,
-						'date'=>$booking->booking_date,
-						'no_of_sessions'=>$booking->no_of_sessions
-				);
-			$batch->batch_bookings=$batch->batch_bookings+1;
-			$batch->save();
-			return View::make('Bookings.success')->with($data);
+			return $this->success($booking);	
 		}
 		else if($information['order_status']==="Aborted")
 		{
@@ -336,7 +366,7 @@ class BookingsController extends \BaseController {
 		$email= $booking->email;
 		$user_msg='Hi '.$data['user_name'].', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
 		$institute_msg='Hobbyix: Order placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com- '.$data['admin_contact_no'];
-		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no']', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'.';
+		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'.';
 		$subject='Booking Successful';
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.booking.user', $data, function($message) use ($email, $subject)
@@ -389,7 +419,7 @@ class BookingsController extends \BaseController {
 		$email= $booking->email;
 		$user_msg='Hi '.$data['user_name'].', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. This is a trial class. Please display the confirmation sms/email at the venue.';
 		$institute_msg='Hobbyix: Order placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. This is a trial class. Thanks, hobbyix.com- '.$data['admin_contact_no'];
-		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no']', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'. This is a trial class.';
+		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'. This is a trial class.';
 		$subject='Trial Booking Successful';
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.trial_booking.user', $data, function($message) use ($email, $subject)

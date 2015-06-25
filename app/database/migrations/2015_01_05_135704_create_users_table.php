@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration {
 			$table->boolean('user_subscription_token')->default(1);
 	        $table->boolean('user_photo')->default(0);
 			$table->rememberToken();
-			$table->string('user_referral_code',10)->unique();	
+			$table->string('user_referral_code',10)->unique()->nullable();	
 			$table->integer('user_referee_id')->nullable();
 			$table->integer('user_wallet')->default(0);
 			$table->integer('user_free_credits_left')->default(0);

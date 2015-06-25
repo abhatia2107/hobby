@@ -25,6 +25,8 @@ class CreateBookingsTable extends Migration {
 			$table->integer('no_of_sessions');
 			$table->string('order_id',8);
 			$table->string('order_status',10)->nullable();
+			$table->string('promo_code',25);
+			$table->integer('wallet_amount')->default(0);
 			$table->integer('promo_id')->nullable()->foreign('promo_id')->references('id')->on('promos');
 			$table->float('referral_credit_used');
 	        $table->softDeletes();

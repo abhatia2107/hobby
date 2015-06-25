@@ -353,7 +353,7 @@ class UsersController extends \BaseController {
             if($newUserData['user_fb_id'])
             {
                 $id=$this->user->getUid($newUserData['user_fb_id']);
-                $this->welcome($id);
+                return $this->welcome($id);
             }
             else {
                 /**
@@ -400,7 +400,7 @@ class UsersController extends \BaseController {
 				$validate->user_confirmed=1;
 				$validate->user_confirmation_code="";
 				$validate->save();
-                $this->welcome($id);
+                return $this->welcome($id);
 			}
 			else
 			{
@@ -524,7 +524,7 @@ class UsersController extends \BaseController {
 	    	{
 	    		// dd(false);
 	    		$profileData['user_fb_id']=$user_fb_id;
-	    		$profileData['user_name']=$userFb['first_name'];
+	    		$profileData['user_name']=$userFb['first_name'].' '.$userFb['last_name'];
     			$profileData['email']=$userFb['email'];
     			$profileData['user_confirmed']=true;
     			$checkEmail=Validator::make(array("email"=>$userFb['email']),User::$fbRules);

@@ -27,7 +27,10 @@
             <li><span class="uac_profile_item" >EMAIL ID : {{$user->email}}</span></li>
             <li><span class="uac_profile_item" >MOBILE NUMBER : {{$user->user_contact_no}}</span></li>
             <li><span class="uac_profile_item" >REFERRAL CODE: {{$user->user_referral_code}}</span></li>            
-            <li><span class="uac_profile_item" >HOBBYIX WALLET: Rs. {{$user->user_wallet}}/-  &nbsp; &nbsp;(Invite your friends and get Rs. 100/- off on your next purchase)</span></li>
+            <li><span class="uac_profile_item" >HOBBYIX WALLET: Rs. {{$user->user_wallet}}/- (Invite your friends and get Rs. 100/- off on your next purchase)</span></li>
+            @if($user->user_pending_referral)
+              <li><span class="uac_profile_item" >PENDING REFERRAL AMOUNT: Rs. {{$user->user_pending_referral}}/- (We'll credit it to your hobbyix wallet once your friend buys our membership.)</span></li>
+            @endif
           </div>
         </div>
       </div>

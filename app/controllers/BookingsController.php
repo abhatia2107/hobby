@@ -42,8 +42,9 @@ class BookingsController extends \BaseController {
 		}
 		$data['user_id']=Auth::id();
 		$data['order_id']=substr(uniqid(),0,8);
+		$data['payment'] = Batch::find($data['batch_id'])->batch_single_price;
 		unset($data['csrf_token']);
-		unset($data['Promo_Code']);
+		// dd($data);
 		if(isset($data['pay_cc']))
 		{
 			unset($data['referral_credit_used']);

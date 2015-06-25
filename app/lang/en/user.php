@@ -7,7 +7,7 @@
 
 		"user_not_registered"=>"This email ID had not been registered at our site. Sign-Up within minutes.",
 		
-		"welcome"=>"Welcome ,:name",
+		"welcome"=>"Welcome, :name",
 		
 		"user_disabled_by_admin"=>"Sorry, you have been disabled by our admin. 
 		If you think there is some problem or it is a mistake. 
@@ -30,8 +30,12 @@
 
 		"user_signup_failed"=>"Sorry, We are unable to add the user",
 
-		"user_signup_mail_subject"=>"Welcome to Hobbyix",
+		"user_verify_mail_subject"=>"Confirm your hobbyix account",
 
+        "user_welcome_mail_subject"=>"Welcome to hobbyix. Try our classes.",
+
+	    "user_successful_referral_subject"=>"Your friend :name bought a membership from hobbyix.com",
+        
         "user_pending_referral_subject"=>"Your friend :name signed up for hobbyix.com",
 
 		"email_verification_failed"=>"Sorry you are not an authorized user, Sign-Up within 2 minutes.",
@@ -69,7 +73,7 @@
 		
 		"user_delete_failed" => "Sorry, No user exist with this ID.",
 		
-		"user_already_failed"=>"You already have same details of user in your list",
+		"user_already_failed"=>"You already have same details in your list",
 	
 		"user_not_exist"=>"No user exist with this ID.",
 	

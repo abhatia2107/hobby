@@ -14,7 +14,10 @@
             Dear {{ $name}},
         </h1>
         <p style="font-size:120%; color:#000;">
-            {{$friend_name}} has accepted your invitation and joined Hobbyix. Rs. 100 will be credited to your hobbyix wallet when your friend buys the membership.
+            {{$friend_name}} has accepted your invitation and joined Hobbyix. Rs. 100/- will be credited to your hobbyix wallet when {{$friend_name}} buys the first membership from us.
+        </p>
+        <p style="font-size:120%; color:#000;">
+            Currently you've Rs. {{$user_wallet}}/- in your hobbyix wallet and Rs. {{$user_pending_referral}}/- are pending to be added to your account.
         </p>
         <div style="text-align:center;">
             Spread the love and earn more Hobbyix credit.

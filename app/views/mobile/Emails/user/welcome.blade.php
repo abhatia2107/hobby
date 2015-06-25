@@ -14,17 +14,15 @@
 					Dear {{ $name}},
 				</h1>
 				<p style="font-size:120%; color:#000;">
-					We're ready to activate your account. All we need to do is make sure this is your email address.
+					You've successfully signed up for <a href="{{url('/')}}">hobbyix.com</a>. 
+					@if(isset($user_wallet))
+						We've credited Rs.{{$user_wallet}}/- in your hobbyix wallet.
+					@elseif(isset($user_free_credits_left))
+						We've credited {{$user_free_credits_left}} free credits in your account.
+					@endif
 				</p>
-				<div style="text-align:center;">
-					<a href="{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}">
-						<button type="button" style="color: #fff; background-color: #5cb85c;border-color: #4cae4c;color: #fff;background-color: #449d44;border-color: #398439;background-color: #5cb85c;padding: 10px 16px;font-size: 18px;line-height: 1.33;border-radius: 6px; ">
-							VERIFY ADDRESS
-						</button>
-					</a>
-				</div>
-				<p style="font-size:85%; color:#444;">
-					Having Troubles? Copy this url to your browser:<a href="{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}">{{ URL::to('/users/registration/verify/'.$userId.'/'.$confirmationcode) }}</a>
+				<p style="font-size:120%; color:#000;">
+					Try booking some classes with us. <a href="{{url('/memberships')}}">Click here</a> to explore our membership or check out {{url('/memberships')}}.
 				</p>
 				<p style="font-size:85%; color:#444;">
 					For any queries, reach out to us at: <a href="mailto:support@hobbyix.com">support@hobbyix.com</a>

@@ -24,12 +24,12 @@ class CreateUsersTable extends Migration {
 			$table->boolean('user_subscription_token')->default(1);
 	        $table->boolean('user_photo')->default(0);
 			$table->rememberToken();
-			$table->string('user_referral_code',6)->unique();	
+			$table->string('user_referral_code',10)->unique();	
 			$table->integer('user_referee_id')->nullable();
-			$table->float('user_credits_left')->default(0);
-			$table->integer('user_free_credits_left')->default(0);
-			$table->date('user_credits_expiry')->nullable();
 			$table->integer('user_wallet')->default(0);
+			$table->integer('user_free_credits_left')->default(0);
+			$table->float('user_credits_left')->default(0);
+			$table->date('user_credits_expiry')->nullable();
 			$table->integer('user_pending_referral')->default(0);
 	        $table->boolean('user_membership_purchased')->default(0);
 	        $table->softDeletes();

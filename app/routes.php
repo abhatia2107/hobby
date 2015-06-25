@@ -245,7 +245,6 @@ Route::group(array('before' => "auth"), function() {
 	Route::get('/users/orders','UsersController@orders');
 	Route::get('/users/changepassword','UsersController@getChangePassword');
 	Route::get('/users/edit','UsersController@edit');
-	Route::post('/users/update','UsersController@update');
 	Route::get('/users/logout','UsersController@getLogout');
 	Route::get('/users/subscribe/{id}','UsersController@subscribe');
 	Route::get('/users/show/{id}','UsersController@show');
@@ -276,6 +275,7 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/memberships','MembershipsController@store');
 	Route::post('/users/login/submit','UsersController@postAuthenticate');
 	Route::post('/users/signup/submit','UsersController@postSignup');
+	Route::post('/users/update','UsersController@update');
 	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
 	Route::post('/batches/sendMessage','BatchesController@sendMessage');

@@ -73,9 +73,9 @@ class UsersController extends \BaseController {
 	public function edit()
 	{
 		$user_id=Auth::id();
-		$user=User::find($user_id);
-		dd($user);
-		return View::make('Users.edit','user');
+		$userDetails=User::find($user_id);
+		// dd($user);
+		return View::make('Users.edit',compact('userDetails'));
 	}
 
 	/**
@@ -88,17 +88,17 @@ class UsersController extends \BaseController {
 	public function update()
 	{
 		$id=Auth::id();
-		$credentials=Input::all();	
-		$validator = Validator::make($credentials, User::$rules);
+		$credentials=Input::all();
+		$validator = Validator::make($credentials, User::$rulesUpdate);
 		if($validator->fails())
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 		$updated=$this->user->updateUser($credentials,$id);
 		if ($updated) 
-			return Redirect::to('/users')->with('success',Lang::get('user.user_updated'));
+			return Redirect::to('/users/profile')->with('success',Lang::get('user.user_updated'));
 		else
-			return Redirect::to('/users')->with('failure',Lang::get('user.user_already_failure'));
+			return Redirect::to('/users/profile')->with('failure',Lang::get('user.user_already_failure'));
 	}
 
 	public function enable($id)
@@ -290,10 +290,15 @@ class UsersController extends \BaseController {
 			{
 				return Redirect::to('/users/signup')->with('failure',Lang::get('user.user_referral_error'))->withInput(Input::except('password'));
 			}
-            else
+            else if($referee->id=='1')
             {
                 $newUserData['user_referee_id']=$referee->id;
                 $newUserData['user_free_credits_left']=2;
+            }
+            else
+            {
+                $newUserData['user_referee_id']=$referee->id;
+                $newUserData['user_wallet']=100;
             }
 		}
 		unset($newUserData['user_referee_code']);
@@ -320,17 +325,22 @@ class UsersController extends \BaseController {
                 $newUserData['user_confirmation_code']=$confirmationCode;
             }
 			$newUserData['user_subscription_token']=true;
-			$newUserData['user_referral_code']=substr(uniqid(),0,6);
+			$newUserData['user_referral_code']=substr(uniqid(),0,9);
+			// dd($newUserData);
 			$this->user->create($newUserData);
 			$userId=$this->user->max('id');
+			// dd('test '.$userId);
+            
             if(isset($referee))
             {
                 $referee->user_pending_referral=$referee->user_pending_referral+100;
                 $referee->save();
-                $email = $referee->email;
                 $name = $referee->user_name;
+                $email = $referee->email;
                 $data = [
                     'name'=>$name,
+	                'user_wallet' => $referee->user_wallet,
+	                'user_pending_referral' => $referee->user_pending_referral,
                     'friend_name' => $newUserData['user_name'],
                 ];
                 /*Confirmation mail is to be send to the user for pending referral*/
@@ -343,20 +353,7 @@ class UsersController extends \BaseController {
             if($newUserData['user_fb_id'])
             {
                 $id=$this->user->getUid($newUserData['user_fb_id']);
-                Auth::loginUsingId($id);
-                $email=$newUserData['email'];
-                $name=$newUserData['user_name'];
-                $data = [
-                    'name' => $newUserData['user_name'],
-                    'user_wallet' => $newUserData['user_wallet'],
-                    'user_free_credits_left' => $newUserData['user_free_credits_left'],
-                ];
-                /*Confirmation mail is to be send to the newly registered user*/
-                $subject = Lang::get('user.user_signup_mail_subject');
-                Mail::later(15, 'Emails.user.confirmed', $data, function ($message) use ($email, $name, $subject) {
-                    $message->to($email, $name)->subject($subject);
-                });
-                return Redirect::to('/')->with('success','Welcome '.$newUserData['user_name']);
+                $this->welcome($id);
             }
             else {
                 /**
@@ -372,8 +369,8 @@ class UsersController extends \BaseController {
                     'userId' => $userId,
                 ];
                 /*Confirmation mail is to be send to the newly registered user*/
-                $subject = Lang::get('user.user_signup_mail_subject');
-                Mail::later(15, 'Emails.user.welcome', $data, function ($message) use ($email, $name, $subject) {
+                $subject = Lang::get('user.user_verify_mail_subject');
+                Mail::later(15, 'Emails.user.verify', $data, function ($message) use ($email, $name, $subject) {
                     $message->to($email, $name)->subject($subject);
                 });
                 return Redirect::to('/')->with('success', Lang::get('user.user_signup_success'));
@@ -387,9 +384,9 @@ class UsersController extends \BaseController {
 	*@param integer userId and string confirmation code;
 	*@return Route to login
 	*/
-	public function getEmailVerify($userId,$confirmationCode)
+	public function getEmailVerify($id,$confirmationCode)
 	{
-		$validate=$this->user->find($userId);
+		$validate=$this->user->find($id);
 		if($validate)
 		{
 			/* to check whether the email has been already verified or not  */
@@ -403,20 +400,7 @@ class UsersController extends \BaseController {
 				$validate->user_confirmed=1;
 				$validate->user_confirmation_code="";
 				$validate->save();
-				Auth::loginUsingId($userId);
-                $email=$newUserData['email'];
-                $name=$newUserData['user_name'];
-                $data = [
-                    'name' => $newUserData['user_name'],
-                    'confirmationcode' => $confirmationCode,
-                    'userId' => $userId,
-                ];
-                /*Confirmation mail is to be send to the newly registered user*/
-                $subject = Lang::get('user.user_signup_mail_subject');
-                Mail::later(15, 'Emails.user.welcome', $data, function ($message) use ($email, $name, $subject) {
-                    $message->to($email, $name)->subject($subject);
-                });
-				return Redirect::to('/')->with('success',Lang::get('user.welcome_verify',array("name"=>$validate->user_name)));
+                $this->welcome($id);
 			}
 			else
 			{
@@ -425,6 +409,35 @@ class UsersController extends \BaseController {
 		}
 	}
 	
+	public function welcome($id)
+	{
+		Auth::loginUsingId($id);
+        $user=User::find($id)->toArray();
+        // dd($user);
+        $email=$user['email'];
+        $name=$user['user_name'];
+        $data = [
+            'name' => $name,
+        ];
+        if(isset($user['user_referee_id']))
+        {
+        	if($user['user_referee_id']==1)
+            {
+            	$data['user_free_credits_left']=$user['user_free_credits_left'];
+            }
+            else
+            {
+            	$data['user_wallet']=$user['user_wallet'];
+            }
+        }
+        /*Welcome on board mail is to be sent to the newly registered user*/
+        $subject = Lang::get('user.user_welcome_mail_subject');
+        Mail::later(15, 'Emails.user.welcome', $data, function ($message) use ($email, $name, $subject) {
+            $message->to($email, $name)->subject($subject);
+        });
+        return Redirect::to('/')->with('success',Lang::get('user.welcome',array("name"=>$user['user_name'])));
+	}
+
 	/**
 	 * To go to "Change Password" page
 	 * @return View

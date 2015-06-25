@@ -35,12 +35,18 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public static $rules = [
 		'user_name'=>'required',
-	   	'email'=>'required|unique:users',
+	   	'email'=>'required|email|unique:users',
 		'user_contact_no'=>'required|unique:users|regex:/[0-9]{10}/',
 		'password'=>'required|min:6|regex: /^[a-zA-Z0-9!@#$%&_]+$/',
 	    'user_confirmed'=>'boolean',                   
 	];
 	
+	public static $rulesUpdate = [
+		'user_name'=>'required',
+	   	'email'=>'required|email|unique:users',
+		'user_contact_no'=>'required|unique:users|regex:/[0-9]{10}/',
+	];
+
 	public static $fbRules=[
 		'email'=>'unique:users,email',
 	];
@@ -52,7 +58,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	
 	public function updateUser($credentials,$id)
     {
-        $updated=DB::table('users')->where('id','=',$id)->update($credentials);
+        $user=User::find($id);
+        $user->user_name=$credentials['user_name'];
+        $user->email=$credentials['email'];
+        $user->user_contact_no=$credentials['user_contact_no'];
+        $updated=$user->save();
         return ($updated);
     } 
 

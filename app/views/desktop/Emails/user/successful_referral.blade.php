@@ -14,7 +14,7 @@
             Dear {{ $name}},
         </h1>
         <p style="font-size:120%; color:#000;">
-            Your friend {{$friend_name}} just bought the hobbyix membership. As promised, we've credited Rs. 100 to your hobbyix wallet. Current balance in your wallet is Rs. {{$user_wallet}}.
+            Your friend {{$friend_name}} just bought the hobbyix membership. As promised, we've credited Rs. 100/- to your hobbyix wallet. Current balance in your wallet is Rs. {{$user_wallet}}/- and Rs. {{$user_pending_referral}}/- are pending to be added to your account.
         </p>
         <p style="font-size:85%; color:#444;">
             Your Hobbyix wallet will be automatically redeemed when you book a class with us or buy our membership.

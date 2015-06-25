@@ -79,7 +79,7 @@
                                 message: 'Name must be more than 2 characters long'
                             },
                             regexp: {
-                                regexp: /^[a-zA-Z]+(?:(?:\\s+|-)[a-zA-Z]+)*$/,
+                                regexp: /^[a-zA-Z ]+(?:(?:\\s+|-)[a-zA-Z ]+)*$/,
                                 message: 'Name can only consist of alphabets'
                             }
                         }

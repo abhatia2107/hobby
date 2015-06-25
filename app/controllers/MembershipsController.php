@@ -143,6 +143,19 @@ class MembershipsController extends \BaseController {
 					$referee->user_wallet=$referee->user_wallet+100;
 					$referee->user_pending_referral=$referee->user_pending_referral-100;
 					$referee->save();
+					$email=$referee->email;
+			        $name=$referee->user_name;
+	                $data = [
+	                    'name'=>$name,
+		                'user_wallet' => $referee->user_wallet,
+		                'user_pending_referral' => $referee->user_pending_referral,
+	                    'friend_name' => $user->user_name,
+	                ];
+			        /*Successful referral mail, to be sent to the referee on purchase of first membership*/
+			        $subject = Lang::get('user.user_successful_referral_subject');
+			        Mail::later(15, 'Emails.user.successful_referral', $data, function ($message) use ($email, $name, $subject) {
+			            $message->to($email, $name)->subject($subject);
+			        });
 				}
 			}
 			$user->user_credits_left=$membership->credits;

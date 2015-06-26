@@ -137,8 +137,10 @@ class PromosController extends \BaseController {
 	 * @param  string  $promo_code
 	 * @return boolean            [description]
 	 */
-	public function isValid($promo_code)
+	public function isValid($promo_code="",$no_of_session="1")
 	{
+		if(!$promo_code)
+			return Lang::get('promo.promo_empty');
 		$referrer = URL::previous();
 		if($referrer==url("/memberships"))
 		{
@@ -150,7 +152,7 @@ class PromosController extends \BaseController {
 			$page='batches';
 			$batch_id = substr($referrer, strrpos($referrer, '/') + 1);
 			$batch=$this->batch->getbatch($batch_id);
-			$payment=$batch->batch_single_price;
+			$payment=$batch->batch_single_price*$no_of_session;
 		}
 		else
 		{
@@ -225,6 +227,17 @@ class PromosController extends \BaseController {
 			}
 
 		}
-		return $final;
+		$user_id=Auth::id();
+		if($user_id)
+		{
+			$user=User::find($user_id);
+			$wallet_amount=$user->user_wallet;
+			if($wallet_amount)
+				$final=$final-$wallet_amount;
+		}
+		if($final<0)
+			return 0;
+		else
+			return $final;
 	}
 }

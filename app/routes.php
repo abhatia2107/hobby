@@ -171,7 +171,7 @@ Route::post('/memberships/redirect','MembershipsController@redirect');
 Route::post('/memberships/cancel','MembershipsController@cancel');
 Route::get('/memberships/payment/{id}','MembershipsController@payment');
 
-Route::get('/promos/isvalid/{promo_code}','PromosController@isValid');
+Route::get('/promos/isvalid/{promo_code?}/{no_of_session?}','PromosController@isValid');
 
 Route::group(array('before' => "auth|admin"), function() {
 

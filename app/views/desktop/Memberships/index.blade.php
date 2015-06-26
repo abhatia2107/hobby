@@ -52,42 +52,18 @@
 						Get Your Membership
 					</h1>				
 					<div class="row">
-						<?php
-			                $amountPayable = $credentials['payment'];
-			                if(isset($user->user_wallet) && $user->user_wallet>0)                
-			                {
-			                  	if($user->user_wallet>=$credentials['payment'])
-			                  	{
-				                    $amountPayable = 0;
-			                  		$wallet_amount = $credentials['payment'];
-			                  		$wallet_balance = $user->user_wallet-$credentials['payment'];
-			                  	}
-			                  	else
-			                  	{
-				                  	$wallet_amount = $user->user_wallet;
-				                  	$wallet_balance = 0;
-			                  		$amountPayable = $credentials['payment']-$wallet_amount; 
-			                  	}
-			                }
-			                else
-			                	$wallet_amount = 0;
-			            ?>
-						<form method="post" enctype="multipart/form-data" action="/memberships">
+						<form method="post" onsubmit="return(verifyPromoCode('onsubmit'));" enctype="multipart/form-data" action="/memberships">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-							<input type="hidden" name="start_date" value="{{$credentials['start_date']}}">
-							<input type="hidden" name="end_date" value="{{$credentials['end_date']}}">
-							<input type="hidden" name="credits" value="{{$credentials['credits']}}">
-							<input type="hidden" name="wallet_amount" value="{{$wallet_amount}}">
-							<input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
+							<input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['price']}}/-</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
-							<li class="col-md-12" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif >
-								<span class="col-md-6 col-sm-6">Hobbyix Wallet</span><span>: Rs. {{$user->user_wallet}}/-</span>
+							<li class="col-md-12" @if($credentials['wallet_amount']>0) style="display:block" @else style="display:none" @endif >
+								<span class="col-md-6 col-sm-6">Hobbyix Wallet</span><span>: Rs. {{$credentials['wallet_amount']}}/-</span>
 							</li>
-							<li class="col-md-12" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif >
-								<span class="col-xs-6">Balance</span><span>: Rs. {{$wallet_balance}}/-</span>
+							<li class="col-md-12" @if($credentials['wallet_amount']>0) style="display:block" @else style="display:none" @endif >
+								<span class="col-xs-6">Balance</span><span>: Rs. {{$credentials['wallet_balance']}}/-</span>
 							</li>
 							<li class="col-md-12" style="margin:5px 0px;">
 								<div class='col-md-10 col-sm-10' style="" id="promoCodeContainer">
@@ -97,7 +73,7 @@
              					<a href="javascript:verifyPromoCode();">Apply</a>
           						</div>          
         					</li>        					
-        					<li class="col-md-12" style="text-align:center"><hr/>Amount Payable<span id="totalPrice">: Rs. {{$amountPayable}}/-</span></li>								     
+        					<li class="col-md-12" style="text-align:center"><hr/>Amount Payable<span id="orderTotal">: Rs. {{$credentials['payment']}}/-</span></li>								     
 							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" id="membership_pay">Pay Now</button></div>							
 						</form>
 					</div>
@@ -126,8 +102,9 @@
 	<script type="text/javascript">
 		var loginStatus = "{{$loggedIn}}";
 		var appliedPromoCode = false;      		
-		function verifyPromoCode () 
+		function verifyPromoCode (position) 
 		{
+			var result=true;
 			$('#promoCodeContainer #statusMessage').empty();
       		var promoCode = $("#promoCode").val();
 			if(promoCode != "" )
@@ -142,15 +119,17 @@
 						$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied</span>");
 					}
 					else
-					{            						
+					{  
+						result = false;  
 						$('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
 					}
 				}); 
 			} 
-			else
+			else if(position != "onsubmit" )
 			{				
 				$('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");
-			}   
+			} 
+			return result;
    		} 
    		$(document).ready(function () 
    		{   		

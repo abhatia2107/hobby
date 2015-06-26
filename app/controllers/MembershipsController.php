@@ -14,14 +14,25 @@ class MembershipsController extends \BaseController {
 		$metaContent[1] = "One Hobbyix Membership @Rs. 1999/- & workout at any gym, yoga, fitness centers etc. in Hyderabad";
 		$metaContent[2] = "Hobbyix Membership, Hobbyix Membership Features, Get Your Hobbyix Membership";
 		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
-		$credentials['payment']=$this->membershipVal['payment'];
+		$credentials['price']=$this->membershipVal['payment'];
 		$credentials['start']=date('d M Y');
 		$credentials['end']=date('d M Y', $end_date);
 		$credentials['credits']=$this->membershipVal['credits'];
+		$credentials['wallet_amount']=0;
+		$credentials['wallet_balance']=0;
 		$user_id=Auth::id();
 		if($user_id)
+		{
 			$user=User::find($user_id);
-		return View::make('Memberships.index',compact('credentials','user','metaContent'));
+			$credentials['wallet_amount']=$user->user_wallet;
+			if($credentials['wallet_amount'])
+				$credentials['payment']=$credentials['price']-$credentials['wallet_amount'];
+			else
+				$credentials['payment']=$credentials['price'];
+			if($credentials['price']<$credentials['wallet_amount'])
+				$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['payment'];
+		}
+		return View::make('Memberships.index',compact('credentials','metaContent'));
 	}
 
 	/**
@@ -43,15 +54,29 @@ class MembershipsController extends \BaseController {
 	public function store()
 	{
 		$credentials = Input::all();
+		dd($credentials);
 		if($credentials['promo_code'])
 		{
 			$amt=PromosController::isValid($credentials['promo_code']);
 			if($amt!=$credentials['payment'])
 				return Lang::get('promo.promo_invalid_request');
+			$promo_id=Promo::where('promo_code',$credentials['promo_code'])->first()->id;
+			$credentials['promo_id']=$promo_id;
 		}
 		else
 		{
-			$credentials['payment']=$this->membershipVal['payment'];
+			$price=$this->membershipVal['payment'];
+			$user_id=Auth::id();
+			if($user_id)
+			{
+				$user=User::find($user_id);
+				$credentials['wallet_amount']=$user->user_wallet;
+				if($credentials['wallet_amount'])
+					$payment=$price-$credentials['wallet_amount'];
+				else
+					$payment=$price;
+			}
+			$credentials['payment']=$payment;
 		}
 		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
 		$credentials['start_date']=date('Y-m-d');

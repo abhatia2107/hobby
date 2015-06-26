@@ -35,6 +35,8 @@
 		"promo_expired"=>"Sorry this Promo Code has expired",
 
 		"promo_invalid"=>"Invalid Promo Code",
-
+		
+		"promo_empty"=>"You've not entered anything. Please enter a valid promo code.",
+		
 		"promo_invalid_request"=>"Invalid Request detected. Don't try to play with my code.",
 	);

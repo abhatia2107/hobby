@@ -223,11 +223,21 @@ class BatchesController extends \BaseController {
 			$institutesOfSubcategoryInLocality=$this->batch->getInstitutesForSubcategoryInLocality($batchDetails->batch_subcategory_id, $batchDetails->venue_locality_id);
 			$subcategoriesInLocality=$this->subcategory->getSubcategoryInLocality($batchDetails->venue_locality_id);
 			// dd($batchDetails->category);
+			$credentials['price']=$batchDetails->batch_single_price;
+			$credentials['wallet_amount']=0;
+			$credentials['wallet_balance']=0;
 			if($user_id=Auth::id())
 			{
 				$user=User::find($user_id);
+				$credentials['wallet_amount']=$user->user_wallet;
+				if($credentials['wallet_amount'])
+					$credentials['payment']=$credentials['price']-$credentials['wallet_amount'];
+				else
+					$credentials['payment']=$credentials['price'];
+				if($credentials['price']<$credentials['wallet_amount'])
+					$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['payment'];
 			}
-			return View::make('Batches.show',compact('batchDetails','user','difficulty_level','age_group','gender_group','trial','weekdays','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));
+			return View::make('Batches.show',compact('batchDetails','credentials','user','difficulty_level','age_group','gender_group','trial','weekdays','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));
 		}
 		else
 		{

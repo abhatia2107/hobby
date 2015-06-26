@@ -53,17 +53,15 @@ class Promo extends \Eloquent {
 
 	public function codeUsedByUser($promo,$user_id)
 	{
-		$promo_user=$promo->users()->where('users.id','=',$user_id)->first();
-		if($promo_user){
-			return true;
-		}
-		else{
+		$count=$promo->users()->where('users.id','=',$user_id)->count();
+		if($promo->max_allowed_count_per_user>$count)
 			return false;
-		}
+		else
+			return true;
 	}
 
 	public function users()
 	{
-		return $this->belongsToMany('User');
+		return $this->belongsToMany('User')->withTimestamps();
 	}
 }

@@ -17,6 +17,8 @@ class BaseController extends Controller {
 	protected $user;
 	protected $venue;
 
+	protected $membershipVal=array('payment'=>1999,'credits'=>30);
+
 	protected $age_group=array(1 => "All","Children","Adult");
 	protected $difficulty_level=array(1 => "All","Beginners","Intermediate","Advanced");
 	protected $gender_group=array(1 => "Both","Male","Female");

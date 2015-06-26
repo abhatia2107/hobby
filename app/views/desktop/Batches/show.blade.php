@@ -249,6 +249,7 @@
               <?php
                 $amountPayable = $sessionPrice;
               ?>
+              <a href="/promos/isvalid/HBX200">HBX200</a>
               <hr/>
               <div class="row totalAmount">               
                 <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>

@@ -131,20 +131,100 @@ class PromosController extends \BaseController {
 
 	/**
 	 * To check if the Promo code entered by user is valid or not.
+	 * If the code is expired.
+	 * If the code is used max no of times allowed per user.
+	 * If the code is applicable for membership or batches.
 	 * @param  string  $promo_code
 	 * @return boolean            [description]
 	 */
-	public function isValid()
+	public function isValid($promo_code)
 	{
-		$promo_code=Input::get('promo_code');
+		$referrer = URL::previous();
+		if($referrer==url("/memberships"))
+		{
+			$page='memberships';
+			$payment=$this->membershipVal['payment'];
+		}
+		else if(strpos($referrer,"/batches"))
+		{
+			$page='batches';
+			$batch_id = substr($referrer, strrpos($referrer, '/') + 1);
+			$batch=$this->batch->getbatch($batch_id);
+			$payment=$batch->batch_single_price;
+		}
+		else
+		{
+			return Lang::get('promo.promo_invalid_request');
+		}
 		$promo=Promo::where('promo_code','=',$promo_code)->valid()->first();
-		if(is_null($promo)){
-			return 'Invalid Promo Code';
+		if($promo)
+		{
+			if($page=="batches")
+			{
+				if(!$promo->coupon_valid_on_single_class)
+				{
+					return Lang::get('promo.promo_not_applicable');
+				}
+			}
+			else
+			{
+				if($promo->coupon_valid_on_single_class)
+				{
+					return Lang::get('promo.promo_not_applicable');
+				}	
+			}
+			$user_id=Auth::id();
+			if(isset($promo->max_allowed_count_per_user))
+			{
+				if($promo->codeUsedByUser($promo,$user_id))
+				{
+					return Lang::get('promo.promo_max_per_user',['count'=>$promo->max_allowed_count_per_user]);
+				}
+			}
+			$promo->count++;
+			$promo->users()->attach($user_id);
+			$promo->save();
+			if(isset($promo->discount_percentage))
+			{
+				$discount=$payment*$promo->discount_percentage/100;
+				if(isset($promo->max_discount))
+				{
+					if($discount>$promo->max_discount)
+					{
+						$final=$payment-$promo->max_discount;
+					}
+					else
+					{
+						$final=$payment-$discount;
+					}
+				}
+				else
+				{
+					$final=$payment-$discount;
+				}
+			}
+			else if(isset($promo->cash_discount))
+			{
+				$final=$payment-$promo->cash_discount;
+			}
+			else
+			{
+					return Lang::get('promo.promo_invalid');
+			}
 		}
-		$user_id=Auth::id();
-		if($promo->codeUsedByUser($promo,$user_id)){
-			return 'You can use this code only once.';
+		else
+		{
+			$expired=Promo::where('promo_code','=',$promo_code)->expired()->first();
+			if($expired)
+			{
+				return Lang::get('promo.promo_expired');
+			}
+			else
+			{
+				return Lang::get('promo.promo_invalid');
+			}
+
 		}
-		return($promo);
+		return $final;
 	}
 }

@@ -171,6 +171,7 @@ Route::post('/memberships/redirect','MembershipsController@redirect');
 Route::post('/memberships/cancel','MembershipsController@cancel');
 Route::get('/memberships/payment/{id}','MembershipsController@payment');
 
+Route::get('/promos/isvalid/{promo_code}','PromosController@isValid');
 
 Route::group(array('before' => "auth|admin"), function() {
 
@@ -279,8 +280,8 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
 	Route::post('/batches/sendMessage','BatchesController@sendMessage');
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
-    Route::post('promos/isValid','PromosController@isValid');
 });
+
 
 Route::get('/privacy', function()
 {

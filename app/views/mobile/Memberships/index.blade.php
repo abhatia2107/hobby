@@ -32,7 +32,7 @@
 
 		.membership_card_container input[type=text] { height: 25px; padding: 0px 0px 0px 5px; width: 90%; border-radius: 2px; }
 
-		#promoCodeContainer #statusMessage {color: red;font-size: 14px;}
+		#promoCodeContainer #statusMessage {color: #e24648;font-size: 14px;}
 
 		.get_membership hr {margin: 10px 15px 5px 15px;}
 
@@ -61,14 +61,43 @@
 					<div class="row">
 						<?php
 			                $amountPayable = $credentials['payment'];
+			                if(isset($user->user_wallet) && $user->user_wallet>0)                
+			                {
+			                  	if($user->user_wallet>=$credentials['payment'])
+			                  	{
+				                    $amountPayable = 0;
+			                  		$wallet_amount = $credentials['payment'];
+			                  		$wallet_balance = $user->user_wallet-$credentials['payment'];
+			                  	}
+			                  	else
+			                  	{
+				                  	$wallet_amount = $user->user_wallet;
+				                  	$wallet_balance = 0;
+			                  		$amountPayable = $credentials['payment']-$wallet_amount; 
+			                  	}
+			                }
+			                else
+			                	$wallet_amount = 0;
 			            ?>
 						<form method="post" enctype="multipart/form-data" action="/memberships">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+							<input type="hidden" name="start_date" value="{{$credentials['start_date']}}">
+							<input type="hidden" name="end_date" value="{{$credentials['end_date']}}">
+							<input type="hidden" name="credits" value="{{$credentials['credits']}}">
+							<input type="hidden" name="wallet_amount" value="{{$wallet_amount}}">
 							<input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
 							<li class="col-xs-12"><span class="col-xs-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
 							<li class="col-xs-12"><span class="col-xs-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
 							<li class="col-xs-12"><span class="col-xs-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
 							<li class="col-xs-12"><span class="col-xs-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
+							<li class="col-xs-12" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif >
+								<span class="col-xs-6">Hobbyix Wallet</span><span>: Rs. {{$user->user_wallet}}/-</span>
+							</li>
+							<li class="col-xs-12" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif >
+								<span class="col-xs-6">Balance</span><span>: Rs. {{$wallet_balance}}/-</span>
+							</li>
+							<!-- <li class="col-xs-12" @if($user->user_wallet>=$credentials['payment']) style="display:block" @else style="display:none" @endif > -->
+							<!-- </li> -->
 							<li class="col-xs-12" style="margin:5px 0px;">
 								<div class='col-xs-9' style="" id="promoCodeContainer">
             						<input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="promo_Code" />
@@ -105,38 +134,33 @@
 @stop
 @section('pagejquery')  
 	<script type="text/javascript">
-				var loginStatus = "{{$loggedIn}}";
+		var loginStatus = "{{$loggedIn}}";
 		var appliedPromoCode = false;      		
 		function verifyPromoCode () 
 		{
-      		var promoCodeIP = $('#promoCode').val();      		
-      		if((promoCodeIP == "HBX200") && (appliedPromoCode==false))
-      		{      			
-          		var totalAmount = $('#payment').val();
-          		totalAmount = totalAmount-200;          		
-          		if(totalAmount<0)
-          		{
-          			totalAmount=0;
-          		}
-          		$('#payment').val(totalAmount);
-          		$('#totalPrice').empty();          	
-          		$('#totalPrice').append(': Rs. '+totalAmount+'/-');
-          		/*$('#promoCodeMessageContainer').empty();
-          		$('#promoCodeMessageContainer').append("<span class='glyphicon glyphicon-ok'> </span>"); */
-          		$('#promoCodeContainer #statusMessage').empty();
-	    		$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied</span>");
-	    		appliedPromoCode = true;	    		
-      		}
-		   	else if ( (promoCodeIP != "HBX200") && (appliedPromoCode==false))
-	    	{	    		
-	    		$('#promoCodeContainer #statusMessage').empty();
-	    		$('#promoCodeContainer').append("<span id='statusMessage'>Invalid Promo Code</span>")
-	      	}
-	      	else
-	      	{
-	      		$('#promoCodeContainer #statusMessage').empty();
-	    		$('#promoCodeContainer').append("<span id='statusMessage'>Promo Code Applied Already</span>")
-	      	}
+			$('#promoCodeContainer #statusMessage').empty();
+      		var promoCode = $("#promoCode").val();
+			if(promoCode != "" )
+			{    
+				$.get("/promos/isvalid/"+promoCode,function(response)
+				{ 
+					if($.isNumeric(response))
+					{
+						$('#orderTotal').empty();  
+						$('#orderTotal').append(": Rs. "+response);
+						$('#payment').val(response);						
+						$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied</span>");
+					}
+					else
+					{            						
+						$('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
+					}
+				}); 
+			} 
+			else
+			{				
+				$('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");
+			}   
    		} 
    		$(document).ready(function () 
    		{   		

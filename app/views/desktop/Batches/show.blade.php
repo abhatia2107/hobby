@@ -89,6 +89,9 @@
     .help-block {color: #a94442 !important}
 
     .facilities_icon {margin-right: 5px;}
+
+    #promoCodeContainer #statusMessage {color: red;font-size: 14px;}
+
   </style> 
 @stop
 @section('content')
@@ -248,12 +251,39 @@
               </div>
               <?php
                 $amountPayable = $sessionPrice;
+                if(isset($user->user_wallet) && $user->user_wallet>0)                
+                {
+                    if($user->user_wallet>=$sessionPrice)
+                    {
+                      $amountPayable = 0;
+                      $wallet_amount = $sessionPrice;
+                    }
+                    else
+                    {
+                      $wallet_amount = $user->user_wallet;
+                      $amountPayable = $sessionPrice-$wallet_amount; 
+                    }
+                }
+                else
+                  $wallet_amount = 0;
               ?>
-              <a href="/promos/isvalid/HBX200">HBX200</a>
+              <div class="row batchOrderField" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif>
+                <div class='col-md-6 col-sm-6 col-xs-6'>Hobbyix Wallet</div>
+                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$user->user_wallet}}/-</div>
+              </div>    
+              <div class="row batchOrderField">
+                <div class='col-xs-9' id="promoCodeContainer">
+                  <input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="promo_code" />                     
+                </div>
+                <div class='col-xs-3' style="text-align:left;padding:1px 0px 1px 0px;font-size:15px;">
+                   <a href="javascript:verifyPromoCode();">Apply</a>
+                </div>          
+              </div>       
               <hr/>
               <div class="row totalAmount">               
                 <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>
                 <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
+                <input type="hidden" name="wallet_amount" value="{{$wallet_amount}}">
                 <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
               </div>
               <div class="row batchOrderButtons">    
@@ -393,7 +423,36 @@
   <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
   <script type="text/javascript"> 
     var dateToday = new Date();
-    var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};    
+    var walletAmount = {{json_encode( $wallet_amount ) }};            
+    var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};  
+    function verifyPromoCode () 
+    {
+      var promoCode = $("#promoCode").val();
+      if(promoCode != "" )
+      {    
+        $.get("/promos/isvalid/"+promoCode,function(response)
+        { 
+          if($.isNumeric(response))
+          {
+            $('#orderTotal').empty();  
+            $('#orderTotal').append(": Rs. "+response);
+            $('#payment').val(response);
+            $('#promoCodeContainer #statusMessage').empty();
+            $('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied</span>");
+          }
+          else
+          {            
+            $('#promoCodeContainer #statusMessage').empty();
+            $('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
+          }
+        }); 
+      } 
+      else
+      {
+        $('#promoCodeContainer #statusMessage').empty();
+        $('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");
+      }   
+    }  
     function DisableDay(date) 
     {
         var day = date.getDay();        
@@ -447,6 +506,13 @@
             var sessionsCount = $(this).val();             
             var sessionPrice = {{$sessionPrice}};
             var subtotal = sessionPrice*sessionsCount;
+            if(walletAmount>0)
+            {
+              if(walletAmount>=subtotal)        
+                subtotal = 0;
+              else
+                subtotal = subtotal - walletAmount;
+            }
             $('#orderTotal').empty();  
             $('#orderTotal').append(": Rs. "+subtotal);
             $('#payment').val(subtotal);

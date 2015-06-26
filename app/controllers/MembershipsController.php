@@ -14,12 +14,10 @@ class MembershipsController extends \BaseController {
 		$metaContent[1] = "One Hobbyix Membership @Rs. 1999/- & workout at any gym, yoga, fitness centers etc. in Hyderabad";
 		$metaContent[2] = "Hobbyix Membership, Hobbyix Membership Features, Get Your Hobbyix Membership";
 		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
-		$credentials['start_date']=date('Y-m-d');
-		$credentials['end_date']=date('Y-m-d',$end_date);
-		$credentials['payment']='1999';
+		$credentials['payment']=$this->membershipVal['payment'];
 		$credentials['start']=date('d M Y');
 		$credentials['end']=date('d M Y', $end_date);
-		$credentials['credits']=30;
+		$credentials['credits']=$this->membershipVal['credits'];
 		$user_id=Auth::id();
 		if($user_id)
 			$user=User::find($user_id);
@@ -44,8 +42,21 @@ class MembershipsController extends \BaseController {
 	 */
 	public function store()
 	{
-		// dd(Input::all());
 		$credentials = Input::all();
+		if($credentials['promo_code'])
+		{
+			$amt=PromosController::isValid($credentials['promo_code']);
+			if($amt!=$credentials['payment'])
+				return Lang::get('promo.promo_invalid_request');
+		}
+		else
+		{
+			$credentials['payment']=$this->membershipVal['payment'];
+		}
+		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
+		$credentials['start_date']=date('Y-m-d');
+		$credentials['end_date']=date('Y-m-d',$end_date);
+		$credentials['credits']=$this->membershipVal['credits'];		
 		$validator = Validator::make($credentials, Membership::$rules);
 		if ($validator->fails())
 		{

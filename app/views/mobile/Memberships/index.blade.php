@@ -64,9 +64,6 @@
 			            ?>
 						<form method="post" enctype="multipart/form-data" action="/memberships">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-							<input type="hidden" name="start_date" value="{{$credentials['start_date']}}">
-							<input type="hidden" name="end_date" value="{{$credentials['end_date']}}">
-							<input type="hidden" name="credits" value="{{$credentials['credits']}}">
 							<input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
 							<li class="col-xs-12"><span class="col-xs-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
 							<li class="col-xs-12"><span class="col-xs-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>

@@ -27,4 +27,14 @@
 		"promo_not_exist"=>"No promo exist with this ID.",
 	
 		"promo_access_failed"=>"You don't have permission to access this promo details.",
+
+		"promo_not_applicable"=>"This promo code is not applicable here.",
+
+		"promo_max_per_user"=>"You have used this code :count times. You can't use this any more.",
+
+		"promo_expired"=>"Sorry this Promo Code has expired",
+
+		"promo_invalid"=>"Invalid Promo Code",
+
+		"promo_invalid_request"=>"Invalid Request detected. Don't try to play with my code.",
 	);

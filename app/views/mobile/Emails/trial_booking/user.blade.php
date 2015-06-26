@@ -32,7 +32,7 @@
 						<div style="max-width:47.5%;display:inline-block;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Class Booked for: {{$date}}</div>
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Number of Sessions: {{$no_of_sessions}}</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">This is a trial class.</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">This is a trial booking.</div>
 						</div>								
 					</div>
 				</div>	

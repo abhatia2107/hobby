@@ -22,6 +22,8 @@ class CreateMembershipsTable extends Migration {
 			$table->integer('payment');
 			$table->string('order_id',8);
 			$table->string('order_status',10)->nullable();
+			$table->string('promo_code',25);
+			$table->integer('wallet_amount')->default(0);
 			$table->integer('promo_id')->unsigned()->nullable()->foreign('promo_id')->references('id')->on('promos');
 	        $table->softDeletes();
 			$table->timestamps();

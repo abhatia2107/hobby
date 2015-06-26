@@ -20,7 +20,10 @@ class MembershipsController extends \BaseController {
 		$credentials['start']=date('d M Y');
 		$credentials['end']=date('d M Y', $end_date);
 		$credentials['credits']=30;
-		return View::make('Memberships.index',compact('credentials','metaContent'));
+		$user_id=Auth::id();
+		if($user_id)
+			$user=User::find($user_id);
+		return View::make('Memberships.index',compact('credentials','user','metaContent'));
 	}
 
 	/**
@@ -43,23 +46,26 @@ class MembershipsController extends \BaseController {
 	{
 		// dd(Input::all());
 		$credentials = Input::all();
-		$user_id=Auth::id();
-		// $user=User::find($user_id);
-		// $credentials['credits']=30;
-		// $credentials['start_date']=Carbon::now()->date();
-		// $credentials['payment']=2000;
-		// dd($credentials);
 		$validator = Validator::make($credentials, Membership::$rules);
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 		unset($credentials['csrf_token']);
-		unset($credentials['Promo_Code']);
+		$credentials['credits']=30;
 		$credentials['order_id']=substr(uniqid(),0,8);
 		$credentials['user_id']=Auth::id();
+		if($credentials['payment']==0)
+		{
+			$credentials['order_status']='success';
+		}
 		$membership=Membership::create($credentials);
-		return Redirect::to('/memberships/payment/'.$membership->id);
+		if($credentials['payment']==0)
+		{
+			return $this->success($membership);
+		}
+		else
+			return Redirect::to('/memberships/payment/'.$membership->id);
 	}
 
 
@@ -82,7 +88,7 @@ class MembershipsController extends \BaseController {
 		$posted['cancel_url']=url('/memberships/cancel');
 		$posted['integration_type']='iframe_normal';
 		$posted['language']='en';
-		$posted['billing_name']=$user->user_first_name.' '.$user->user_last_name;
+		$posted['billing_name']=$user->user_name;
 		$posted['billing_email']=$user->email;
 		$posted['billing_tel']=$user->user_contact_no;
 		$posted['billing_address']='Kondapur';
@@ -101,16 +107,51 @@ class MembershipsController extends \BaseController {
 		return View::make('Bookings.non-seamless',compact('encrypted_data', 'access_code'));
 	}
 
-	public function success()
+	public function success($membership)
 	{
-		$membership=Membership::find(1);
-		// var_dump(strtotime($membership->end_date));
+		$user=User::find($membership->user_id);
+        if(isset($user->user_wallet) && $user->user_wallet>0)
+        {
+          	if($user->user_wallet == $membership->wallet_amount)
+                $user->user_wallet = 0;
+            else
+            	$user->user_wallet = $user->user_wallet-($membership->wallet_amount);
+            $user->save();
+        }
+		$referee_id=$user->user_referee_id;
+		if(!is_null($referee_id)&&!($user->user_membership_purchased))
+		{
+			$referee=User::find($referee_id);
+			if($referee->user_pending_referral)
+			{
+				$referee->user_wallet=$referee->user_wallet+100;
+				$referee->user_pending_referral=$referee->user_pending_referral-100;
+				$referee->save();
+				$email=$referee->email;
+		        $name=$referee->user_name;
+                $data = [
+                    'name'=>$name,
+	                'user_wallet' => $referee->user_wallet,
+	                'user_pending_referral' => $referee->user_pending_referral,
+                    'friend_name' => $user->user_name,
+                ];
+		        /*Successful referral mail, to be sent to the referee on purchase of first membership*/
+		        $subject = Lang::get('user.user_successful_referral_subject',array("name"=>$data['friend_name']));
+		        Mail::later(15, 'Emails.user.successful_referral', $data, function ($message) use ($email, $name, $subject) {
+		            $message->to($email, $name)->subject($subject);
+		        });
+			}
+		}
+		$user->user_credits_left=$membership->credits;
+		$user->user_credits_expiry=$membership->end_date;
+		$user->user_membership_purchased=1;
+		$user->save();
+		$this->sms_email($membership->id);
 		$data=array(
-					'order_id'=>'$membership->order_id',
+					'credits'=>$membership->credits,
+					'order_id'=>$membership->order_id,
 					'end_date'=>date("d M Y", strtotime($membership->end_date)),
-					'credits'=>'$membership->credits'
 			);
-		dd($data);
 		return View::make('Memberships.success')->with($data);
 	}
 
@@ -133,17 +174,7 @@ class MembershipsController extends \BaseController {
 		$membership->save();
 		if($information['order_status']==="Success")
 		{
-			$user=User::find($membership->user_id);
-			$user->user_credits_left=$membership->credits;
-			$user->user_credits_expiry=$membership->end_date;
-			$user->save();
-			$this->sms_email($membership->id);
-			$data=array(
-						'credits'=>$membership->credits,
-						'order_id'=>$membership->order_id,
-						'end_date'=>date("d M Y", strtotime($membership->end_date)),
-				);
-			return View::make('Memberships.success')->with($data);
+			return $this->success($membership);
 		}
 		else if($information['order_status']==="Aborted")
 		{
@@ -258,7 +289,7 @@ class MembershipsController extends \BaseController {
 					'start_date' => date("d M Y", strtotime($membership->start_date)),
 					'end_date' => date("d M Y", strtotime($membership->end_date)),
 					'credits' => $membership->credits,
-					'user_name' => $user->user_first_name.' '.$user->user_last_name,
+					'user_name' => $user->user_name,
 					'user_email' => $user->email,
 					'user_contact_no' => $user->user_contact_no,
 					'admin_contact_no' => '9100946081',

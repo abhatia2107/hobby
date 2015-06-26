@@ -50,36 +50,24 @@
 				<div class="membership_card_container get_membership" style="padding-bottom:15px">
 					<h1 class="header" style="margin-top:10px">
 						Get Your Membership
-					</h1>				
+					</h1>
+					<?php
+		                $amountPayable = $credentials['payment'];
+					?>	
 					<div class="row">
-						<?php
-			                $amountPayable = $credentials['payment'];
-			                if(isset($user->user_successful_referral) && $user->user_successful_referral>0)                
-			                {
-			                  	$referralAmount = $user->user_successful_referral;
-			                  	$amountPayable = $credentials['payment']-$referralAmount; 
-			                  	if($referralAmount>=$credentials['payment'])
-				                    $amountPayable = 0;
-			                }
-			                else
-			                	$referralAmount = 0;
-			            ?>
 						<form method="post" enctype="multipart/form-data" action="/memberships">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 							<input type="hidden" name="start_date" value="{{$credentials['start_date']}}">
 							<input type="hidden" name="end_date" value="{{$credentials['end_date']}}">
-							<input type="hidden" name="credits" value="{{$amountPayable}}">
-							<input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
+							<input type="hidden" name="credits" value="{{$credentials['credits']}}">
+							<input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['payment']}}/-</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
-							<li class="col-md-12" @if($referralAmount>0) style="display:block" @else style="display:none" @endif >
-								<span class="col-md-6 col-sm-6">Hobbyix Wallet</span><span>: Rs. {{$referralAmount}}/-</span>							
-							</li>
 							<li class="col-md-12" style="margin:5px 0px;">
 								<div class='col-md-10 col-sm-10' style="" id="promoCodeContainer">
-            						<input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="Promo Code" />
+            						<input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="promo_Code" />
           						</div>
           						<div class='col-md-2 col-sm-2' id="promoCodeMessageContainer" style="text-align:left;padding:1px 0px 0px 0px;font-size:15px;color:green">
              					<a href="javascript:verifyPromoCode();">Apply</a>
@@ -120,7 +108,11 @@
       		if((promoCodeIP == "HBX200") && (appliedPromoCode==false))
       		{      			
           		var totalAmount = $('#payment').val();
-          		totalAmount = totalAmount-200;          		
+          		totalAmount = totalAmount-200;
+          		if(totalAmount<0)
+          		{
+          			totalAmount=0;
+          		}
           		$('#payment').val(totalAmount);
           		$('#totalPrice').empty();          	
           		$('#totalPrice').append(': Rs. '+totalAmount+'/-');

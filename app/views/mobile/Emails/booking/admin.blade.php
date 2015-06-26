@@ -28,7 +28,7 @@
 						<div style="max-width:47.5%;display:inline-block;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Class Booked for: {{$date}}</div>
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Number of Sessions: {{$no_of_sessions}}</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Amount Paid: {{$amount}}/-</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Amount Paid: Rs.{{$amount}}/-</div>
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">User Contact Number: {{$venue_contact_no}}</div>
 						</div>								
 					</div>

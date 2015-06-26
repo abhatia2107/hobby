@@ -244,11 +244,9 @@ Route::group(array('before' => "auth"), function() {
 	Route::get('/users/profile','UsersController@profile');
 	Route::get('/users/orders','UsersController@orders');
 	Route::get('/users/changepassword','UsersController@getChangePassword');
-	Route::get('/users/edit','VenuesController@edit');
-	Route::post('/users/update','UsersController@update');
+	Route::get('/users/edit','UsersController@edit');
 	Route::get('/users/logout','UsersController@getLogout');
 	Route::get('/users/subscribe/{id}','UsersController@subscribe');
-	Route::get('/users/show/{id}','UsersController@show');
 });
 
 /*  To verify that unsubscribe request came from a valid email only,
@@ -276,12 +274,12 @@ Route::group(array('before' => "csrf"), function() {
 	Route::post('/memberships','MembershipsController@store');
 	Route::post('/users/login/submit','UsersController@postAuthenticate');
 	Route::post('/users/signup/submit','UsersController@postSignup');
+	Route::post('/users/update','UsersController@update');
 	Route::post('/users/changepassword/submit','UsersController@postChangePassword');
 	Route::post('/users/password/remind/submit','RemindersController@postRemind');
 	Route::post('/batches/sendMessage','BatchesController@sendMessage');
 	Route::post('/users/password/reset/submit','RemindersController@postReset');
     Route::post('promos/isValid','PromosController@isValid');
-	Route::post('/yoga','YogasController@store');
 });
 
 Route::get('/privacy', function()
@@ -327,9 +325,9 @@ Route::get('/filter/subcategory/{id}','FiltersController@subcategory');
 
 Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');
 
-Route::get('/yoga','YogasController@create');
-Route::get('/yoga/list','YogasController@index');
-
+Route::get('/yoga',function(){
+	return Redirect::to('/');
+});
 
 
 

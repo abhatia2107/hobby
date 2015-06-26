@@ -23,7 +23,7 @@
                 </div>                
                 <div class="row">
                     <div class="form-group rememberMe col-md-6 col-sm-6 col-xs-6">                               
-                        <label class="control-label">
+                        <label class="control-label" for="remember">
                             <input name="remember"  value="forever" checked="checked" type="checkbox">
                             Remember Me 
                         </label>                                                             
@@ -59,9 +59,9 @@
                             message: 'The password is required and cannot be empty'
                         },
                         stringLength: {
-                            min: 8,
+                            min: 6,
                             max: 20,
-                            message: 'The password must be more than 8 and less than 20 characters long'
+                            message: 'The password must be more than 6 and less than 20 characters long'
                         },
                         regexp: {
                             regexp: /^[a-zA-Z0-9!@#$-%&_]+$/,

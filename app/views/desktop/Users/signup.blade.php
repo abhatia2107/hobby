@@ -1,4 +1,4 @@
 @extends('Layouts.layout')
 @section('content')
-        @include('Modals.signup')
+    @include('Modals.signup')
 @stop

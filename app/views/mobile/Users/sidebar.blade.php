@@ -30,7 +30,7 @@
 ?>
 <div class="uac_sidebar">
   <div class="uac_sidebar_header">
-    {{$user->user_first_name}}    
+    {{$user->user_name}}    
   </div>
   <div class="uac_credits_container">
       <span class="fa fa-credit-card"></span>
@@ -43,7 +43,7 @@
   <div class="uac_nav_items">
     <li @if($nav_item==1) class="active" @endif> <a href="/users/profile">My Profile</a></li>
     <li @if($nav_item==2) class="active" @endif> <a href="/users/orders">My Orders</a> </li>
-    <li @if($nav_item==3) class="active" @endif> <a href="/users/show/{{$id}}">Change Password</a> </li>
+    <li @if($nav_item==3) class="active" @endif> <a href="/users/changepassword">Change Password</a> </li>
   </div>
 </div>
 @show

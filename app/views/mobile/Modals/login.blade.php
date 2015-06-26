@@ -39,9 +39,9 @@
     </form>
 </div>
 <script type="text/javascript" >
-    $(document).ready(function(){
-        
-        $('.login').bootstrapValidator({
+    $(document).ready(function()
+    {        
+        $('#loginForm').bootstrapValidator({
             message: 'This value is not valid',
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
@@ -57,9 +57,9 @@
                             message: 'The password is required and cannot be empty'
                         },
                         stringLength: {
-                            min: 8,
+                            min: 6,
                             max: 20,
-                            message: 'The password must be more than 8 and less than 20 characters long'
+                            message: 'The password must be more than 6 and less than 20 characters long'
                         },
                         regexp: {
                             regexp: /^[a-zA-Z0-9!@#$-%&_]+$/,

@@ -15,6 +15,8 @@
   
   <h4>Booking Date: {{$date}}, No of sessions: {{$no_of_sessions}}</h4>
 
+  <h4>Please confirm the timing before going for the class.</h4>
+
   <h4>Continue to our <a href="{{url('/')}}">website.</a></h4>
 
   </div>

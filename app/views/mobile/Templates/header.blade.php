@@ -14,9 +14,9 @@
 		{
 			$user=User::find($id);
 			if($user)
-				$name=$user->user_first_name;
+				$name=$user->user_name;
 			else
-				$name = "USER ACCOUNT";
+				$name = "My Account";
 		}
 	?>
 	<div class="clearfix header_row1">
@@ -25,7 +25,7 @@
 				<span class="website-title">HOBBYIX</span>
 			</a>
 		</div>						
-		<div class="userInfoListing col-xs-5">
+		<div class="userInfoListing col-xs-4">
 			@if(!$id)				
 				<div class="login">
 					<a href="/users/login" >LOGIN</a>
@@ -34,13 +34,14 @@
 				</div>
 			@else			
 				<div class="btn-group dropdown user_account_options">
-					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">{{$name}}
-						&nbsp;<span class="caret"></span>
-					</button>													
+					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+						<span class="text_over_flow_hide" style="max-width:85%;padding: 3px 0px 3px 5px;float:left ">{{$name}}</span>
+						<span style="padding: 3px 10px 0px 0px;float:left;max-width:10%">&nbsp;<span class="caret"></span></span>
+					</button>												
 					<ul class="dropdown-menu">
 						<li> <a href="/users/profile">My Profile</a></li>
 						<li> <a href="/users/orders">My Orders</a> </li>
-						<li> <a class="" href="/users/show/{{$id}}">Change Password</a>	</li>
+						<li> <a class="" href="/users/changepassword">Change Password</a>	</li>
 						<li class="divider"> </li>
 						<li> <a class="header_logout_a" href="/users/logout" >Logout</a> </li>
 					</ul>

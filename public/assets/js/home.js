@@ -53,9 +53,9 @@
     $('#'+navID).addClass("active");
   }
   function refreshForm(formId)
-  { 
-       $(formId)[0].reset();
-       $(formId).bootstrapValidator('resetForm', true);
+  {     
+    $(formId)[0].reset();
+    $(formId).bootstrapValidator('resetForm', true);
   }
   function hideMembershipMessage () {
     var date = new Date();   

@@ -29,7 +29,7 @@
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Credits given: {{$credits}}</div>
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Valid Till: {{$end_date}}</div>
 							<div style="width:100%;float:left;padding:5px 6px;">User Contact Number: {{$user_contact_no}}</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Amount paid: {{$amount}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Amount paid: Rs.{{$amount}}/-</div>
 						</div>								
 					</div>
 				</div>	

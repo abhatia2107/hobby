@@ -185,10 +185,39 @@
         </div>
         <?php
           $amountPayable = $sessionPrice;
-        ?>            
+          if(isset($user->user_wallet) && $user->user_wallet>0)                
+          {
+              if($user->user_wallet>=$sessionPrice)
+              {
+                $amountPayable = 0;
+                $wallet_amount = $sessionPrice;
+              }
+              else
+              {
+                $wallet_amount = $user->user_wallet;
+                $amountPayable = $sessionPrice-$wallet_amount; 
+              }
+          }
+          else
+            $wallet_amount = 0;
+        ?>
+        <div class="row batchOrderField" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif>
+          <div class='col-xs-6'>Hobbyix Wallet</div>
+          <div class='col-xs-6'>: Rs. {{$user->user_wallet}}/-</div>
+        </div> 
+        <div class="row batchOrderField">
+          <div class='col-xs-9 batchOrderFieldLabel'>
+            <input type="text" style="width:100%" placeholder="Enter Promo Code" class="form-control" id="promoCode" name="promo_code" />                     
+          </div>
+          <div class='col-xs-3' style="text-align:left;padding:5px 0px 0px 0px;font-size:15px;">
+             <a href="javascript:verifyPromoCode();">Apply</a>
+          </div>          
+        </div>            
+        <hr/>
         <div class="row totalAmount">         
           <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>
           <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
+          <input type="hidden" name="wallet_amount" value="{{$wallet_amount}}">
           <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
         </div>
         <div class="row batchOrderButtons" style="margin-top:5px;">    
@@ -358,6 +387,7 @@
 @section('pagejquery')
 <script type="text/javascript">
   var dateToday = new Date();
+  var walletAmount = {{json_encode( $wallet_amount ) }};
   var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};    
   function DisableDay(date) 
   {
@@ -410,6 +440,10 @@
           var sessionsCount = $(this).val(); 
           var sessionPrice = {{$sessionPrice}};
           var subtotal = sessionPrice*sessionsCount; 
+          if(walletAmount>=subtotal)        
+            subtotal = 0;
+          else
+            subtotal = subtotal - walletAmount;         
           $('#orderTotal').empty();  
           $('#orderTotal').append(": Rs. "+subtotal);
           $('#payment').val(subtotal);          

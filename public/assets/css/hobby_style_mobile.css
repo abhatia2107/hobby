@@ -26,9 +26,9 @@ body li {  list-style-type: none; }
 
 .header_row1  { background-color: #202e54;padding: 0px 0px;text-align: left; /*max-width: 480px;*/}
 
-.user_account { font-size: 20px;text-align: center;color: white}
+.user_account { font-size: 20px;text-align: center;color: white;}
 
-.user_account_options button, .dropdown-toggle { background: none;color: white;font-family: 'Montserrat', sans-serif;font-weight: lighter; }
+.user_account_options button, .dropdown-toggle { background: none;color: white;font-family: 'Montserrat', sans-serif;font-weight: lighter;max-width:94%; }
 
 .user_account_options .btn:hover, .btn:active {color: white !important;}
 
@@ -38,7 +38,7 @@ body li {  list-style-type: none; }
 
 .user_account_options .btn:focus, .btn:active:focus, .btn.active:focus {   outline: 0 none; }
  
-.user_account_options .btn-primary { color: #ffffff;border-color:#20cfb1;padding: 3px 10px; }
+.user_account_options .btn-primary { color: #ffffff;border-color:#20cfb1;padding: 0px 0px; }
  
 .user_account_options .btn-primary:active{ box-shadow: none; }
 

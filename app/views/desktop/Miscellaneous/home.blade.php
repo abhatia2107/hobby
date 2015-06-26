@@ -6,7 +6,7 @@
 			<!-- <a href="tel:+919100946081"> -->Call: +91-9100 946 081<!-- </a> -->
 		</div>
 		<button onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>		 
-		<h3><a href="/memberships"><u>{{$homeLang['home_membership_title']}}</u></a></h3>
+		<h3><a title="Hobbyix Membership" href="/memberships">{{$homeLang['home_membership_title']}}</a></h3>
 		<strong>{{$homeLang['home_membership_tagline']}}</strong>		
 	</div>
 </div>
@@ -19,8 +19,8 @@
 	            <h2>{{$homeLang['home_subtitle1']}}</h2>
 	            <h2>{{$homeLang['home_subtitle2']}}</h2>
 	         </div> 
-	         <span class="explore_button"><a href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
-	         <span class="explore_button" style="margin-left:5px;" ><a href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
+	         <span class="explore_button"><a title="Hobbyix Membership" href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
+	         <span class="explore_button" style="margin-left:5px;" ><a title="Check out Classes" href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
 	      </div>
 	   </div>
 	</div>
@@ -29,19 +29,6 @@
 	<div class="header">
 		<a style="color:black;text-decoration:none" href="/memberships">Hobbyix Membership</a>
 	</div>
-	<script>
-  (function() {
-    var cx = '001868570926516956913:k1behnqa6xq';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    //s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<gcse:search></gcse:search>
 	<div class="col-md-12 col-sm-12 col-xs-12">	
 		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
@@ -124,16 +111,4 @@
 </div>
 @stop
 @section('pagejquery')
-<script type="application/ld+json">
-{
-   "@context": "http://schema.org",
-   "@type": "WebSite",
-   "url": "http://hobbyix.com",
-   "potentialAction": {
-     "@type": "SearchAction",
-     "target": "http://hobbyix.com/filter/search?keyword={keyword}&category_id=0&location_id=0&chunk=0",
-     "query-input": "required name=keyword"
-   }
-}
-</script>
 @stop

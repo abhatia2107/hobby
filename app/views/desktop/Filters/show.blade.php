@@ -133,7 +133,7 @@
 					</div>
 				</div>
 				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 25px 0px;padding:0px 1% 0px 0px;" >
-					<ul class="list-unstyled" valuelimit="" style="" keepcollapsed="" displaytype="" nofilter="" id="filter_data"> 
+					<ul class="list-unstyled" id="filter_data"> 
 					</ul>
 					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif">Loading Results</div>
 					<div id="noResults" class='resultsMessage' >No more results to display.</div>
@@ -406,7 +406,7 @@
 				address = address.replace(/\n/g," ");	
 				if ( $( "#batch"+batchID ).length == 0 ) 
 				{		
-					$("<li style='display:none'></li>")
+					$("<li style='display:none' itemscope itemtype='http://schema.org/SportsActivityLocation'></li>")
 					.attr("subcategory",subcategoryID)
 					.attr("locality",localityID)
 					.attr("class","batchInfo batch"+index)
@@ -421,8 +421,8 @@
 							.attr("class","col-md-8 col-xs-12 col-sm-7")
 							.append
 							(
-								$("<span></span>")
-								.attr("id","batch_name")
+								$("<h2></h2>")								
+								.attr("title","Institute Name")
 								.append
 								(
 									$("<a></a>")
@@ -434,6 +434,7 @@
 							(
 								$("<span></span>")
 								.attr("class","inst_name")
+								.attr("title","Activity Name, Locality")
 								.text(subcategory+", "+locality)
 							)																	
 						)						

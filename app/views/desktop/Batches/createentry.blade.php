@@ -101,7 +101,7 @@
                                 {{($batchDetails->batch_user_id==$data->id)?
                                 'selected="selected"':''}}
                                 @endif>
-                                {{$data->user_first_name.' '.$data->user_last_name}}
+                                {{$data->user_name}}
                             </option>
                         @endforeach
                     </select>

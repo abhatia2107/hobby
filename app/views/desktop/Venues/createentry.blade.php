@@ -40,7 +40,7 @@
                                         {{((Input::old('venue_user_id'))==$user->id)?
                                         'selected="selected"':''}}
                                         @endif>
-                                        {{$user->user_first_name.' '.$user->user_last_name}}
+                                        {{$user->user_name}}
                                     </option>
                                 @endforeach
                             </select>

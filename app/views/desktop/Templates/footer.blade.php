@@ -13,7 +13,7 @@
          </div>
       </div>
       <div class="footer-widget-column col-xs-12 col-sm-3 col-lg-3 ">
-         <h1 class="footer-widget-title">About Hobbyix</h1>
+         <div class="footer-widget-title">About Hobbyix</div>
          <div class="menu-need-help-menu-container">
             <ul id="menu-need-help-menu" class="menu"  itemscope itemtype="http://schema.org/BreadcrumbList">
                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-question-sign"></span><a itemprop="url" href="/aboutus"><span itemprop="name">About Hobbyix</span></a><meta itemprop="position" content="1" /></li>               
@@ -25,7 +25,7 @@
          </div>
       </div>
       <div class="footer-widget-column col-xs-12 col-sm-3 col-lg-3">
-         <h1 class="footer-widget-title">Stay Connected</h1>
+         <div class="footer-widget-title">Stay Connected</div>
          <div class="menu-social-widget-menu-container">
             <ul id="menu-social-widget-menu" class="menu">                
                <li><a href="https://twitter.com/hobbyix"><span class="glyphicon fa fa-fw fa-twitter"></span>Twitter</a></li>

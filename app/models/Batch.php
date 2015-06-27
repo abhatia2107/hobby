@@ -12,7 +12,7 @@ class Batch extends \Eloquent {
         'created_at',
         'updated_at',
     ];
-    protected $pageSize=15;
+    protected $pageSize=20;
 /*
     public static $rules = [
         'batch'=>'required',
@@ -89,7 +89,7 @@ class Batch extends \Eloquent {
                 ->paginate($this->pageSize);
     }
 
-    public function getBatchForFilter($subcategories,$localities,$chunk)
+    public function getBatchForFilter($subcategories,$localities)
     {
         if(!is_numeric($subcategories[0])){
             $subcategories2=Subcategory::whereIn('subcategories.subcategory',$subcategories)->get();
@@ -119,7 +119,7 @@ class Batch extends \Eloquent {
         return $allBatches;
     }
 
-    public function search($keyword,$category_id,$location_id,$chunk)
+    public function search($keyword,$category_id,$location_id)
     {
         // $allBatches=Batch::all();
         // dd($allBatches[0]->schedules[0]);

@@ -52,12 +52,9 @@
 			<a href="javascript:displaySearchOption();" class="col-xs-1 glyphicon glyphicon-search"></a>
 		</span>
 		<div class="col-xs-12 search_option_container" style="display:none">
-			<form class="navbar-form" action="/filter/search" method="get" role="search">
+			<form class="navbar-form" action="/search" method="get" role="search">
 				<div class="input-group search-box">
 					<input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword" >
-					<input type="hidden" name="category_id" value="0">
-					<input type="hidden" name="location_id" value="0">
-					<input type="hidden" name="chunk" value="0">
 					<div class="input-group-btn">
 						<button class=" header_search_button btn btn-default" type="submit" >
 							<i class="glyphicon glyphicon-search"></i>

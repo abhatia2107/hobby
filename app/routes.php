@@ -311,15 +311,15 @@ Route::get('/aboutus', function()
 	return View::make('Miscellaneous.aboutus',compact('metaContent'));
 });
 	
-Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
+Route::get('/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
-Route::get('/filter/search','FiltersController@search');
+Route::get('/search','FiltersController@search');
 
-Route::get('/filter/institute/{id}','FiltersController@institute');
+Route::get('/institute/{id}','FiltersController@institute');
 
-Route::get('/filter/locality/{id}','FiltersController@locality');
+Route::get('/locality/{id}','FiltersController@locality');
 
-Route::get('/filter/subcategory/{id}','FiltersController@subcategory');
+Route::get('/subcategory/{id}','FiltersController@subcategory');
 
 Route::get('/filter/{subcategoriesString}/{localitiesString}','FiltersController@filter');
 

@@ -24,7 +24,7 @@ class FiltersController extends \BaseController {
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->search($keyword,$category_id,$location_id);
-		if(empty($batchesForCategoryLocation->toarray()))
+		if(empty($batchesForCategoryLocation->toarray()['total']))
 		{
 			$batchesForCategoryLocation="";
 			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
@@ -149,7 +149,7 @@ class FiltersController extends \BaseController {
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->getBatchesForInstitute($id);
 		// dd($batchesForCategoryLocation);
-		if(empty($batchesForCategoryLocation->toarray()))
+		if(empty($batchesForCategoryLocation->toarray()['total']))
 		{
 			$batchesForCategoryLocation="";
 			// $batchesForCategoryLocation=$this->feature->getFeaturedBatches();
@@ -210,8 +210,7 @@ class FiltersController extends \BaseController {
 		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->getBatchesForLocality($id);
 		$locality_id = $id;
-		// dd($batchesForCategoryLocation[0]);
-		if(empty($batchesForCategoryLocation->toarray()))
+		if(empty($batchesForCategoryLocation->toarray()['total']))
 		{
 			$batchesForCategoryLocation="";
 			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
@@ -268,7 +267,7 @@ class FiltersController extends \BaseController {
 		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->getBatchesForSubcategory($id);
 		$subcategory_id = $id;
-		if(empty($batchesForCategoryLocation->toarray()))
+		if(empty($batchesForCategoryLocation->toarray()['total']))
 		{
 			$batchesForCategoryLocation="";
 			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();

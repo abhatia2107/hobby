@@ -216,6 +216,9 @@
 					</ul>
 					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div>
 					<div id="noResults" class='resultsMessage' >No More results to display.</div>
+					@if($batchesForCategoryLocation)
+						{{$batchesForCategoryLocation->links()}}
+					@endif
 				</div><!--end of results info -->
 			</div>
 		</div>
@@ -287,7 +290,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$locationSubcategories[$index]->subcategory}} classes in {{$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$locationSubcategories[$index]->subcategory}}">
+				        <a class="text_over_flow_hide" href="/subcategory/{{$locationSubcategories[$index]->subcategory}}">
 				          {{$locationSubcategories[$index]->subcategory}} classes in {{$location}}
 				        </a>
 				      </li>
@@ -312,7 +315,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$localitySubcategories[$index]->subcategory}}">
+				        <a class="text_over_flow_hide" href="/subcategory/{{$localitySubcategories[$index]->subcategory}}">
 				          {{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
 				        </a>
 				      </li>
@@ -335,13 +338,11 @@
 		var trials = {{json_encode( $trial )}};
 		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
 		var daysResult = new Array();			
-		var categoryId = "{{$category_id}}";
-		var locationId = "{{$location_id}}";
+		var category = "{{$categories[$category_id-1]->category}}";
 		var range = 10;
 		var filterRestultCount = 0;
 		var filterStatus=false;
 		var loadFilters = false;
-		var chunk = 1;
 		var resultCount = 0;
 		var sub_select = new Array();
 		var loc_select = new Array();
@@ -382,9 +383,8 @@
 			if(loc_select.length==0)
 				loc_select=0;			
 			//alert("sub = "+sub_select+"loc = "+loc_select+"trial = ");
-			$.get("/filter/"+sub_select+"/"+loc_select+"/"+locationId+"/"+chunk,function(response)
+			$.get("/filter/"+sub_select+"/"+loc_select,function(response)
 			{
-				chunk++;
 				loadFilters = true;									
 				if(response == "")
 				{
@@ -627,7 +627,7 @@
 					{
 						if(!filterStatus)
 						{
-							$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
+							$.get("/categories/"+category+"/locations",function(response)
 							{								
 								if(response == "")
 								{
@@ -643,7 +643,6 @@
 									displayResults(result,resultRange);	
 									LoadResult(range,range+10);
 								}
-								chunk++;
 								response = [];	
 							});
 						}
@@ -674,14 +673,13 @@
 			{				
 				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();				
-				chunk = 0;				
 				if( sub_select.length == 1 && loc_select.length ==0 )
 				{
-					window.location.href = "/filter/subcategory/"+sub_select;
+					window.location.href = "/subcategory/"+sub_select;
 				}
 				else if(loc_select.length == 1 && sub_select.length ==0)
 				{
-					window.location.href = "/filter/locality/"+loc_select;
+					window.location.href = "/locality/"+loc_select;
 				}				
 				else
 				{

@@ -52,7 +52,7 @@
 						Get Your Membership
 					</h1>				
 					<div class="row">
-						<form method="post" onsubmit="return(verifyPromoCode('onsubmit'));" enctype="multipart/form-data" action="/memberships">
+						<form method="post" enctype="multipart/form-data" action="/memberships" id="buyMembershipForm">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 							<input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
@@ -81,16 +81,16 @@
 			</div>
 			<div class="col-xs-12 col-md-8 col-sm-7 membership_page_item">
 				<div class="membership_features_container">
-						<h1 class="header">
-							Hobbyix Membership Features
-						</h1>
-						<ul class="membership_features">
-							<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of fitness activities with Hobbyix Membership</li>
-							<li><span class="glyphicon glyphicon-hand-right"></span>There is no limit on how many types of activities you indulge in</li>
-							<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>							
-							<li><span class="glyphicon glyphicon-hand-right"></span>You will get 30 credits in your account. Each class is of 1 credit except a few which could be of 2-3 credits</li>
-							<li><span class="glyphicon glyphicon-hand-right"></span>You can book a maximum of 1 class per day</li>
-						</ul>					
+					<h1 class="header">
+						Hobbyix Membership Features
+					</h1>
+					<ul class="membership_features">
+						<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of fitness activities with Hobbyix Membership</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>There is no limit on how many types of activities you indulge in</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>							
+						<li><span class="glyphicon glyphicon-hand-right"></span>You will get 30 credits in your account. Each class is of 1 credit except a few which could be of 2-3 credits</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>You can book a maximum of 1 class per day</li>
+					</ul>					
 				</div>				
 			</div>
 		</div>
@@ -101,36 +101,42 @@
 @section('pagejquery')  
 	<script type="text/javascript">
 		var loginStatus = "{{$loggedIn}}";
-		var appliedPromoCode = false;      		
-		function verifyPromoCode (position) 
-		{
-			var result=true;
+		var formValidationStatus = false;
+		var oldPromoCode = "";			   	
+		function verifyPromoCode (condition) 
+		{	
+			formValidationStatus = false;								
 			$('#promoCodeContainer #statusMessage').empty();
       		var promoCode = $("#promoCode").val();
+      		var conditionMessage = "";      		
+      		if(condition == "onDirectApply")
+      			conditionMessage = ". Click on Pay Now";
 			if(promoCode != "" )
-			{    
+			{
+				oldPromoCode = promoCode;   				
 				$.get("/promos/isvalid/"+promoCode,function(response)
 				{ 
 					if($.isNumeric(response))
 					{
 						$('#orderTotal').empty();  
-						$('#orderTotal').append(": Rs. "+response);
+						$('#orderTotal').append(": Rs. "+response+"/-");
 						$('#payment').val(response);						
-						$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied</span>");
+						$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied"+conditionMessage+"</span>");
+						formValidationStatus = true; 						
 					}
 					else
-					{  
-						result = false;  
+					{
+						$('#orderTotal').empty();  
+						$('#orderTotal').append(": Rs. "+{{$credentials['payment']}}+"/-");
+						$('#payment').val({{$credentials['payment']}});						
 						$('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
 					}
-				}); 
-			} 
-			else if(position != "onsubmit" )
-			{				
-				$('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");
-			} 
-			return result;
-   		} 
+				});										
+			} 			
+			else if (condition != "onDirectApply" )			
+				$('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");																	
+			return formValidationStatus;			
+   		}    		
    		$(document).ready(function () 
    		{   		
 			$('#membership_pay').click(function(e)
@@ -140,6 +146,20 @@
 	            e.preventDefault();
 	            e.stopPropagation();
 	            $('#loginModal').modal('show');
+	          }
+	          else
+	          {
+	          	var promoCode = $("#promoCode").val();      	
+	          	if(promoCode != "")
+				{				
+					if(oldPromoCode != promoCode || formValidationStatus==false)
+					{
+	          			e.preventDefault();
+	            		e.stopPropagation();
+	            		verifyPromoCode('onDirectApply');
+	            	}
+	          	}
+	          	oldPromoCode = promoCode;
 	          }
 	        });
 	        $('#promoCode').keypress(function(e){

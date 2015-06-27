@@ -3,12 +3,12 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <style type="text/css">
     #page { width: 100%;margin-top: 0px; background-repeat:no-repeat;background-position:left center;-o-background-size: cover;
-  -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
+        -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
     }
 
-    #sample-institute-name { font-size: 40px;font-weight: bold; }
+    #sample-institute-name { font-size: 40px;font-weight: bold;margin: 5px 0px; }
 
-    #sample-batch-type { font-size: 22px;font-weight: normal;margin-bottom: 5px; }
+    #sample-batch-type { font-size: 22px;font-weight: normal;margin: 0px 0px 10px 0px; }
 
     #sample-institute-address { font-size: 22px;font-weight: normal;margin-bottom: 5px; }
 
@@ -34,7 +34,7 @@
 
     .sample-box-small { background: white;margin-top: 30px;padding:20px 30px 30px 30px;webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);box-shadow: inset 0 0 2px rgba(0,0,0,.3);-moz-box-shadow: inset 0 0 2px rgba(0,0,0,.3);}
 
-    #pin-icon { font-size: 16px;color: #0099FF;margin: 5px 5px 0px 0px; }
+    .pin-icon { font-size: 16px;color: #0099FF;margin: 5px 5px 0px 0px; }
 
     #batch-facilities {text-align: center;margin-top: 20px;}
 
@@ -90,7 +90,9 @@
 
     .facilities_icon {margin-right: 5px;}
 
-    #promoCodeContainer #statusMessage {color: red;font-size: 14px;}
+    #promoCodeContainer #statusMessage {color: #e24648;font-size: 14px;}
+
+    ul{margin: 0px;}
 
   </style> 
 @stop
@@ -120,6 +122,7 @@
       $landMark = $batchDetails->venue_landmark;
       $location = $batchDetails->location;
       $facilitiesName = ["Air Conditioning","Cafe","Changing Room","Locker","Shower Room","Steam"];
+      $facilitiesImageName = ["Air%20Conditioning","Cafe","Changing%20Room","Locker","Shower%20Room","Steam"];
       $facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
       $facilitesAvailable = [];
       for ($i=0; $i < 6 ; $i++) 
@@ -131,7 +134,7 @@
       for ($i=0; $i < 7 ; $i++) 
       { 
         $weekDaysAvailable[$i] = $batchDetails->$weekDays[$i];   
-      }
+      }      
       $todayDate = date('Y-m-d');
   ?>
   <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/workout.jpg);">
@@ -139,16 +142,16 @@
       <div class="samplePageInfo cover-wrapper ">
         <div class="container">
           <div class="col-sm-10 col-md-10" itemscope itemtype="http://schema.org/SportsActivityLocation">
-            <div id='sample-institute-name' itemprop="name" >{{$instituteName}}</div>
-            <div id='sample-batch-type'>{{'  '.$subcategory}},{{' '.$category}}</div>
-            <div id='sample-institute-address' class="text_over_flow_hide">
+            <h1 id='sample-institute-name' title="Name of the Institute is {{$instituteName}}" itemprop="name" >{{$instituteName}}</h1>
+            <h2 id='sample-batch-type' title="{{$instituteName}} Subcategory and Category">{{'  '.$subcategory}},{{' '.$category}}</h2>
+            <div id='sample-institute-address' title="Landmark, Locality and Location of {{$instituteName}}" class="text_over_flow_hide">
               <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                 <span class='glyphicon glyphicon-map-marker'></span>
                 <span itemprop="streetAddress">{{'  '.$landMark}}</span>, 
                 <span itemprop="addressLocality">{{$locality.', '.$location}}</span>
               </div>
             </div>
-            <div id='sample-institute-contact'>
+            <div id='sample-institute-contact' title="{{$instituteName}} Contact Number">
               <div class='glyphicon glyphicon-phone-alt'></div><span itemprop="telephone">{{'  +91 '.$instituteContact}}</span>
             </div>
           </div>
@@ -168,25 +171,25 @@
         <div class="sample-box col-md-12 col-sm-12 col-xs-12" id="sample-batch-details" >
           <div itemscope itemtype="http://schema.org/SportsActivityLocation">          
             <div id='sample-batch-name'><span itemprop="name" >{{$instituteName}}</span> Details</div> 
-            <div class="batch-details" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-              <span class='glyphicon glyphicon-home' id='pin-icon'></span>
+            <div title="Complete Address of {{$instituteName}}" class="batch-details" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+              <span class='glyphicon glyphicon-home pin-icon' ></span>
               <span itemprop="streetAddress">{{$instituteAddress}}</span>, 
               <span itemprop="addressLocality">{{$locality.', '.$location}}</span>,
               <span itemprop="postalCode">{{$pincode}}</span>      
             </div>
-            <div @if(!isset($landMark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker' id='pin-icon'></span>
+            <div title="Landmark of {{$instituteName}}" @if(!isset($landMark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker'></span>
               Land Mark: {{$landMark}}
             </div>
-            <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-phone-alt' id='pin-icon'></span>
+            <div title="{{$instituteName}} Contact Number" class="batch-details"><span class='glyphicon glyphicon-phone-alt'></span>
               <span itemprop="telephone">+91 {{$instituteContact}}</span>
             </div>
-            <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-time' id='pin-icon'></span>
+            <div title="Timings of {{$instituteName}}" class="batch-details"><span class='glyphicon glyphicon-time'></span>
               {{$comment.' '.$tagline}}
             </div>
             <div id='batch-facilities' class="batch-details">
               @for($i=0;$i<=5;$i++)            
-                  <span class="facilities_icon" @if($facilitesAvailable[$i]==0) style="opacity:.2" @endif>
-                    <img src="/assets/images/Facilities/{{$facilitiesName[$i]}}.png" width="35px" height="35px" title="{{$facilitiesName[$i]}}" alt="{{$facilitiesName[$i]}}">
+                  <span class="facilities_icon">
+                    <img src="/assets/images/Facilities/{{$facilitiesImageName[$i]}}.png" width="35" height="35" alt="{{$facilitiesName[$i]}}" @if($facilitesAvailable[$i]==0) title="{{$facilitiesName[$i]}} is not Available" style="opacity:.2" @else title="{{$facilitiesName[$i]}} is Available" @endif >
                   </span>           
               @endfor
             </div>
@@ -269,7 +272,7 @@
               ?>
               <div class="row batchOrderField" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif>
                 <div class='col-md-6 col-sm-6 col-xs-6'>Hobbyix Wallet</div>
-                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$user->user_wallet}}/-</div>
+                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$wallet_amount}}/-</div>
               </div>    
               <div class="row batchOrderField">
                 <div class='col-xs-9' id="promoCodeContainer">
@@ -281,14 +284,13 @@
               </div>       
               <hr/>
               <div class="row totalAmount">               
-                <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>
+                <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}/-</span></div>
                 <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
                 <input type="hidden" name="wallet_amount" value="{{$wallet_amount}}">
                 <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
               </div>
               <div class="row batchOrderButtons">    
-                <button style="padding:5px 70px;" class="booknowButton" id="proceedButton">Proceed</button>
-                <!-- <a href=""><div class="col-md-7 col-sm-12 col-xs-12 payNowButton payNowButton1">Hobbyix Passport</div></a> -->
+                <button style="padding:5px 70px;" class="booknowButton" id="proceedButton">Proceed</button>               
               </div>
             </div>
             <div class="" id="bookOrderFormStep2">
@@ -318,45 +320,14 @@
                 <button type="submit" style="padding:5px 58px;background:#36BF6C" class="booknowButton" id="payCredits" name="pay_hobbyix" value="credit">Pay Using Hobbyix Membership</button>
               </div>              
             </div>
-          </form>
-          <!---
-          <form method="post" action="/promos/isValid" enctype="multipart/form-data">
-            <input type="hidden" id="csrf_token" name="csrf_token" value="{{csrf_token()}}">
-            <input type="checkbox" id ="promo" name="promo">
-            <label for="promo">I have a promo code</label>
-            <input type="text" id="promo_code" name="promo_code">
-            <input type="submit">
-          </form> -->
+          </form>          
         </div>
         @if($instituteDetails!=null)
         <div class="sample-box-small" id='institute-details'>
            <div id='sample-batch-name'>Institute Details</div>
            <span id='sample-details' class="details-container">{{$instituteDetails}}</span>    
         </div>
-        @endif
-       <!--<div id='sample-social-profiles' class="sample-box-small">
-         <div id='sample-batch-name'>Social Profiles</div>
-            <div class="social-profiles-container">
-              <a href="{{$twitterLink}}" class="sample-social-twitter"><img src="/assets/images/sample/twitter.jpg"></a>
-              <a href="{{$facebookLink}}" class="sample-social-facebook"><img src="/assets/images/sample/facebook.jpg"></a>
-             <a href="https://plus.google.com/" class="sample-social-googleplus"><img height="42px" src="/assets/images/sample/googleplus.jpg"></a>
-            <a href="http://linkedin.com/Astoundify" class="sample-social-linkedin"><img src="/assets/images/sample/linkedin.jpg"></a></center> 
-            </div>
-        </div> -->
-        <div id='sample-demo-model'  class="sample-box-small" style="display:none">
-          <div id='sample-batch-name'>Gallery</div>     
-          <ul class="listify-gallery-images">
-            <li class="gallery-preview-image" >
-               <a data-toggle="modal" data-target="#myModal"> </a>
-            </li>
-            <li class="gallery-preview-image" >
-               <a data-toggle="modal" data-target="#myModal"> </a>
-            </li>
-            <li class="gallery-preview-image" >
-               <a data-toggle="modal" data-target="#myModal"> </a>
-            </li>
-          </ul>              
-        </div>
+        @endif       
       </div>    
     </div>  
   </div>
@@ -371,13 +342,13 @@
             if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                 
           ?>
            @for(;$index<$maxlength; $index++ )
-            <div class="col-md-3 col-sm-3 col-xs-6">           
+            <ul class="col-md-3 col-sm-3 col-xs-6">           
               <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
                 <a class="text_over_flow_hide" href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
                   {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
                 </a>
               </li>
-            </div>          
+            </ul>          
           @endfor           
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12 related_item">
@@ -389,13 +360,13 @@
             if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                  
           ?>
           @for(;$index<$maxlength; $index++ )
-            <div class="col-md-3 col-sm-3 col-xs-6">            
+            <ul class="col-md-3 col-sm-3 col-xs-6">            
               <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
                 <a class="text_over_flow_hide" href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
                   {{$institutesOfSubcategoryInLocality[$index]->institute}}
                 </a>
               </li>
-            </div>        
+            </ul>        
           @endfor   
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12 related_item">
@@ -407,13 +378,13 @@
             if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                  
           ?>
           @for(; $index<$maxlength; $index++ )
-            <div class="col-md-3 col-sm-3 col-xs-6">            
+            <ul class="col-md-3 col-sm-3 col-xs-6">            
                 <li title="{{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}">
                   <a class="text_over_flow_hide" href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
                     {{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}
                   </a> 
                 </li>
-            </div>
+            </ul>
           @endfor   
         </div>
     </div>
@@ -425,34 +396,52 @@
     var dateToday = new Date();
     var walletAmount = {{json_encode( $wallet_amount ) }};            
     var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};  
-    function verifyPromoCode () 
-    {
+    var formValidationStatus = false;
+    var oldPromoCode = "";          
+    function verifyPromoCode (condition) 
+    { 
+      formValidationStatus = false;               
+      $('#promoCodeContainer #statusMessage').empty();
       var promoCode = $("#promoCode").val();
+      var conditionMessage = "";          
+      if(condition == "onDirectApply")
+        conditionMessage = ". Click on Proceed";
       if(promoCode != "" )
-      {    
+      {
+        oldPromoCode = promoCode;           
         $.get("/promos/isvalid/"+promoCode,function(response)
         { 
           if($.isNumeric(response))
           {
             $('#orderTotal').empty();  
-            $('#orderTotal').append(": Rs. "+response);
-            $('#payment').val(response);
-            $('#promoCodeContainer #statusMessage').empty();
-            $('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied</span>");
+            $('#orderTotal').append(": Rs. "+response+"/-");
+            $('#payment').val(response);            
+            $('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied"+conditionMessage+"</span>");
+            formValidationStatus = true;            
           }
           else
           {            
-            $('#promoCodeContainer #statusMessage').empty();
+            var sessionsCount = $("#numberOfSessions").val();             
+            var sessionPrice = {{$sessionPrice}};
+            var subtotal = sessionPrice*sessionsCount; 
+            if(walletAmount>0)
+            {
+              if(walletAmount>=subtotal)        
+                subtotal = 0;
+              else
+                subtotal = subtotal - walletAmount;
+            }           
+            $('#orderTotal').empty();  
+            $('#orderTotal').append(": Rs. "+subtotal+"/-");
+            $('#payment').val(subtotal);      
             $('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
           }
-        }); 
-      } 
-      else
-      {
-        $('#promoCodeContainer #statusMessage').empty();
-        $('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");
-      }   
-    }  
+        });                   
+      }       
+      else if (condition != "onDirectApply" )     
+        $('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");                                 
+      return formValidationStatus;      
+    }     
     function DisableDay(date) 
     {
         var day = date.getDay();        
@@ -514,7 +503,7 @@
                 subtotal = subtotal - walletAmount;
             }
             $('#orderTotal').empty();  
-            $('#orderTotal').append(": Rs. "+subtotal);
+            $('#orderTotal').append(": Rs. "+subtotal+"/-");
             $('#payment').val(subtotal);
         });
         $('#SubmitReviewButton').bind('click', function(event) 
@@ -535,12 +524,20 @@
         $('#proceedButton').click(function(e)
         {  
           e.preventDefault();       
-          e.stopPropagation();         
-          if(bookOrderFormValidate())
-          {   
+          e.stopPropagation();
+          var promoCode = $("#promoCode").val();
+          var promoCodeStatus = true;        
+          if(promoCode != "")
+          {       
+            if(oldPromoCode != promoCode || formValidationStatus==false)                      
+              verifyPromoCode('onDirectApply');                    
+            oldPromoCode = promoCode;        
+          }
+          if(bookOrderFormValidate() && formValidationStatus)
+          {              
             $("#bookOrderFormStep1").hide();
             $("#bookOrderFormStep2").fadeIn();              
-          }      
+          }          
         }); 
         $('#goBackButton').click(function(e)
         {          
@@ -550,38 +547,38 @@
           $("#bookOrderFormStep2").hide();                        
         }); 
         $('#batchOrderForm').bootstrapValidator({                    
-              fields: {
+          fields: {
 
-                  name: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Name is required'
-                          }
-                      }
-                  },
-                  email: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Email is required'
-                          },
-                          emailAddress: {
-                              message: 'The input is not a valid email address'
-                          }
-                      }
-                  },
-                  contact_no: {                       
-                          validators: {
-                              notEmpty: {
-                                  message: 'Mobile number is required'
-                              },
-
-                              regexp: {
-                                  regexp: /^[0-9]{10}$/,
-                                  message: 'The mobile number consists of 10 digits. Skip adding +91 or 0'
-                              }
-                          }
-                      }
+          name: {
+          validators: {
+              notEmpty: {
+                  message: 'Name is required'
               }
+          }
+          },
+          email: {
+          validators: {
+              notEmpty: {
+                  message: 'Email is required'
+              },
+              emailAddress: {
+                  message: 'The input is not a valid email address'
+              }
+          }
+          },
+          contact_no: {                       
+              validators: {
+                  notEmpty: {
+                      message: 'Mobile number is required'
+                  },
+
+                  regexp: {
+                      regexp: /^[0-9]{10}$/,
+                      message: 'The mobile number consists of 10 digits. Skip adding +91 or 0'
+                  }
+              }
+          }
+          }
         });   
 
     });

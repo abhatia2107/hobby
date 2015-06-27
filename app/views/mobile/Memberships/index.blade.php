@@ -111,43 +111,66 @@
 @section('pagejquery')  
 	<script type="text/javascript">
 		var loginStatus = "{{$loggedIn}}";
-		var appliedPromoCode = false;      		
-		function verifyPromoCode () 
-		{
+		var formValidationStatus = false;
+		var oldPromoCode = "";		  		
+		function verifyPromoCode (condition) 
+		{	
+			formValidationStatus = false;								
 			$('#promoCodeContainer #statusMessage').empty();
       		var promoCode = $("#promoCode").val();
+      		var conditionMessage = "";      		
+      		if(condition == "onDirectApply")
+      			conditionMessage = ". Click on Pay Now";
 			if(promoCode != "" )
-			{    
+			{
+				oldPromoCode = promoCode;   				
 				$.get("/promos/isvalid/"+promoCode,function(response)
 				{ 
 					if($.isNumeric(response))
 					{
 						$('#orderTotal').empty();  
-						$('#orderTotal').append(": Rs. "+response);
+						$('#orderTotal').append(": Rs. "+response+"/-");
 						$('#payment').val(response);						
-						$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied</span>");
+						$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied"+conditionMessage+"</span>");
+						formValidationStatus = true; 						
 					}
 					else
-					{            						
+					{
+						$('#orderTotal').empty();  
+						$('#orderTotal').append(": Rs. "+"{{$credentials['payment']}}"+"/-");
+						$('#payment').val("{{$credentials['payment']}}");						
 						$('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
 					}
-				}); 
-			} 
-			else
-			{				
-				$('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");
-			}   
-   		} 
+				});										
+			} 			
+			else if (condition != "onDirectApply" )			
+				$('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");																	
+			return formValidationStatus;			
+   		}
    		$(document).ready(function () 
    		{   		
 			$('#membership_pay').click(function(e)
 	        {
-	          if(loginStatus=="")
-	          {
-	            e.preventDefault();
-	            e.stopPropagation();
-	            $('#loginModal').modal('show');
-	          }
+		        if(loginStatus=="")
+		        {
+		        	e.preventDefault();
+		            e.stopPropagation();
+		            $('#loginModal').modal('show');
+		        }
+	          	else
+	          	{
+		          	var promoCode = $("#promoCode").val();      	
+		          	if(promoCode != "")
+					{				
+						if(oldPromoCode != promoCode || formValidationStatus==false)
+						{
+	          				e.preventDefault();
+	            			e.stopPropagation();
+	            			verifyPromoCode('onDirectApply');
+	            		}
+	          		}
+	          		oldPromoCode = promoCode;
+	          	}
 	        });
 	        $('#promoCode').keypress(function(e){
 			    if ( e.which == 13 )

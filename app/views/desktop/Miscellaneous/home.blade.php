@@ -58,17 +58,17 @@
 	<?php
 		$institutesLength = sizeof($subcategories);
 		$index = 0;
-		$maxlength = 60;			
+		$maxlength = 20;			
 		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
 	?>
 	@for(; $index<$maxlength; $index++ )
-		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
+		<ul  style="margin:0;padding:0 0 0 10px" class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
 			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
 				<a class="text_over_flow_hide" itemprop="url" href="/filter/subcategory/{{$subcategories[$index]->subcategory}}">
 					<span itemprop="name">{{$subcategories[$index]->subcategory}}</span>
 				</a>
 			</li>
-		</div>					
+		</ul>					
 	@endfor
 </div>
 <div class="division_divider"></div>
@@ -77,17 +77,17 @@
 	<?php
 		$localitiesLength = sizeof($localities);
 		$index = 0;
-		$maxlength = 60;	
+		$maxlength = 20;	
 		if ($localitiesLength<$maxlength) { $maxlength = $localitiesLength; }		
 	?>
 	@for(;$index<$maxlength; $index++ )
-		<div class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation" >		
-			<li title="Fitness Activities in {{$localities[$index]->locality}}">
-				<a itemprop="url" href="/filter/locality/{{$localities[$index]->locality_url}}">
+		<ul  style="margin:0;padding:0 0 0 10px" class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation" >		
+			<li title="Fitness Activities in {{$localities[$index]->locality}}" style="margin:0;padding:0">
+				<a class="text_over_flow_hide" itemprop="url" href="/filter/locality/{{$localities[$index]->locality_url}}">
 					<span itemprop="name">{{$localities[$index]->locality}}</span>
 				</a>
 			</li>
-		</div>		
+		</ul>		
 	@endfor
 </div>
 <div class="division_divider"></div>
@@ -96,17 +96,17 @@
 	<?php
 		$institutesLength = sizeof($institutes);
 		$index = 0;
-		$maxlength = 60;				
+		$maxlength = 30;				
 		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
 	?>	
 	@for(;$index<$maxlength; $index++ )
-		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
+		<ul style="margin:0;padding:0 0 0 10px" class="col-md-4 col-sm-4 col-xs-12 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
 			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad" >
 				<a class="text_over_flow_hide" itemprop="url" href="/filter/institute/{{$institutes[$index]->institute_url}}">
 					<span itemprop="name">{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}</span>
 				</a>
 			</li>
-		</div>	
+		</ul>	
 	@endfor				
 </div>
 @stop

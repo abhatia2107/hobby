@@ -3,13 +3,13 @@
         <div class="modal-content">
              <form name="signUp" class="signUp" id="signUpForm" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span onClick="refreshForm('#signUpForm')" aria-hidden="true" title="close">&times;</span>                
+                    <button class="close" data-dismiss="modal">
+                        <span onClick="refreshForm('#signUpForm')" aria-hidden="true" title="close">X</span>                
                     </button>
                     <h4 class="modal-title" id="myModalLabel1">Sign Up</h4>
                     <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
                 </div>
-                <center><a href="/login/fb"><img alt="SignUp Using Facebook" title="SignUp Using Facebook" height="35px" style="margin-top:10px;" src="/assets/images/signup-with-facebook.png"></a></center>
+                <center><a href="/login/fb"><img alt="SignUp Using Facebook" title="SignUp Using Facebook" height="35" style="margin-top:10px;" src="/assets/images/signup-with-facebook.png"></a></center>
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">                        
@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="form-group">                         
                             <div class="col-sm-12">
-                                <input type="email" placeholder="Enter Your Email ID*" class="form-control" name="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
+                                <input type="email" placeholder="Enter Your Email ID*" class="form-control" name="email"  id="emailSignUp" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="row">
                         <div class="form-group">                            
                             <div class="col-sm-12">
-                                <input type="password" placeholder="Enter Password For Your Account*" class="form-control" name="password"  id="password">
+                                <input type="password" placeholder="Enter Password For Your Account*" class="form-control" name="password"  id="passwordSignUp">
                             </div>
                         </div>
                     </div>

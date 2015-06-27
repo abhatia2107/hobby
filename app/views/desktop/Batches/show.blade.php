@@ -251,27 +251,9 @@
                       <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />                     
                 </div>          
               </div>
-              <?php
-                $amountPayable = $sessionPrice;
-                if(isset($user->user_wallet) && $user->user_wallet>0)                
-                {
-                    if($user->user_wallet>=$sessionPrice)
-                    {
-                      $amountPayable = 0;
-                      $wallet_amount = $sessionPrice;
-                    }
-                    else
-                    {
-                      $wallet_amount = $user->user_wallet;
-                      $amountPayable = $sessionPrice-$wallet_amount; 
-                    }
-                }
-                else
-                  $wallet_amount = 0;
-              ?>
-              <div class="row batchOrderField" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif>
+              <div class="row batchOrderField" @if($credentials['wallet_amount']>0) style="display:block" @else style="display:none" @endif>
                 <div class='col-md-6 col-sm-6 col-xs-6'>Hobbyix Wallet</div>
-                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$wallet_amount}}/-</div>
+                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$credentials['wallet_amount']}}/-</div>
               </div>    
               <div class="row batchOrderField">
                 <div class='col-xs-9' id="promoCodeContainer">
@@ -283,10 +265,8 @@
               </div>       
               <hr/>
               <div class="row totalAmount">               
-                <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}/-</span></div>
-                <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
-                <input type="hidden" name="wallet_amount" value="{{$wallet_amount}}">
-                <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
+                <div class="">Amount Payable<span id="orderTotal">: Rs. {{$credentials['payment']}}/-</span></div>
+                <input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
               </div>
               <div class="row batchOrderButtons">    
                 <button style="padding:5px 70px;" class="booknowButton" id="proceedButton">Proceed</button>               
@@ -393,7 +373,7 @@
   <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
   <script type="text/javascript"> 
     var dateToday = new Date();
-    var walletAmount = {{json_encode( $wallet_amount ) }};            
+    var walletAmount = {{json_encode( $credentials['wallet_amount'] ) }};            
     var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};  
     var formValidationStatus = false;
     var oldPromoCode = "";          
@@ -521,11 +501,11 @@
           dateFormat: 'yy-mm-dd'         
         });    
         $('#proceedButton').click(function(e)
-        {  
+        {
           e.preventDefault();       
           e.stopPropagation();
           var promoCode = $("#promoCode").val();
-          var promoCodeStatus = true;        
+          var promoCodeStatus = true;
           if(promoCode != "")
           {       
             if(oldPromoCode != promoCode || formValidationStatus==false)                      
@@ -537,6 +517,8 @@
             $("#bookOrderFormStep1").hide();
             $("#bookOrderFormStep2").fadeIn();              
           }          
+          alert(promoCodeStatus);
+          
         }); 
         $('#goBackButton').click(function(e)
         {          
@@ -579,7 +561,13 @@
           }
           }
         });   
-
+       /* $('#promoCode').keypress(function(e){
+          if ( e.which == 13 )
+          {
+            verifyPromoCode () ;
+            e.preventDefault();
+          } 
+        });*/
     });
   </script>
 @stop

@@ -33,39 +33,68 @@ class BookingsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$data = Input::all();
-		dd($data);
+		$credentials = Input::all();
 		$referrer = URL::previous();
-		if(strpos($referrer,"/batches"))
-		{
-			$page='batches';
-			$data['batch_id'] = substr($referrer, strrpos($referrer, '/') + 1);
-			$batch=$this->batch->getbatch($data['batch_id']);
-			$payment=$batch->batch_single_price*$data['no_of_sessions'];
-		}
-		
-		$validator = Validator::make($data, Booking::$rules);
+		$credentials['batch_id'] = substr($referrer, strrpos($referrer, '/') + 1);
+		$user_id=Auth::id();
+		$validator = Validator::make($credentials, Booking::$rules);
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}		
-		$data['user_id']=Auth::id();
-		$data['order_id']=substr(uniqid(),0,8);
-		$data['payment'] = $data['no_of_sessions']*Batch::find($data['batch_id'])->batch_single_price;
-		unset($data['csrf_token']);
-		// dd($data);
-		if(isset($data['pay_cc']))
+		$credentials['user_id']=$user_id;
+		$credentials['order_id']=substr(uniqid(),0,8);
+		unset($credentials['csrf_token']);
+		// dd($credentials);
+		if(isset($credentials['pay_cc']))
 		{
-			unset($data['referral_credit_used']);
-			unset($data['pay_cc']);
-			if($data['payment']==0)
+			if($user_id)
 			{
-				$data['order_status']='success';
+				$user=User::find($user_id);
+				$credentials['wallet_amount']=$user->user_wallet;
 			}
-			$booking = Booking::create($data);
+			else
+			{
+				$credentials['wallet_amount']=0;
+			}
+			if($credentials['promo_code'])
+			{
+				$amt=PromosController::isValid($credentials['promo_code']);
+				if(is_numeric($amt))
+				{
+					if($amt!=$credentials['payment'])
+						$credentials['payment']=$amt;
+					$promo_id=Promo::where('promo_code',$credentials['promo_code'])->first()->id;
+					$credentials['promo_id']=$promo_id;
+				}
+				else
+				{
+					return Redirect::back()->with('failure',$amt);
+				}
+			}
+			else
+			{
+				$batch=$this->batch->getbatch($credentials['batch_id']);
+				$credentials['payment'] = $batch->batch_single_price*$credentials['no_of_sessions'];
+				if($user_id)
+				{
+					if($credentials['wallet_amount'])
+						$payment=$price-$credentials['wallet_amount'];
+					else
+						$payment=$price;
+				}	
+				$credentials['payment']=$payment;
+			}
+			unset($credentials['referral_credit_used']);
+			unset($credentials['pay_cc']);
+			if($credentials['payment']==0)
+			{
+				$credentials['order_status']='success';
+			}
+			$booking = Booking::create($credentials);
 			if($booking)
 			{
-				if($data['payment']==0)
+				if($credentials['payment']==0)
 				{
 					return $this->success($booking);
 				}
@@ -75,40 +104,40 @@ class BookingsController extends \BaseController {
 			else
 				return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
 		}
-		else if(isset($data['pay_hobbyix'])){
-			unset($data['pay_hobbyix']);
-			$user=User::find($data['user_id']);
+		else if(isset($credentials['pay_hobbyix'])){
+			unset($credentials['pay_hobbyix']);
+			$user=User::find($credentials['user_id']);
 
-			$booking_already_done = Booking::where('user_id',$data['user_id'])->where('booking_date', $data['booking_date'])->first();
-			$batch_booking_already = Booking::where('user_id',$data['user_id'])->where('batch_id', $data['batch_id'])->first();
+			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->first();
+			$batch_booking_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->first();
 			// dd($booking_already_done);
-			if($data['no_of_sessions']==1){
-				if(($user->user_free_credits_left>=$data['referral_credit_used'])||($user->user_credits_left>=$data['referral_credit_used'])){
+			if($credentials['no_of_sessions']==1){
+				if(($user->user_free_credits_left>=$credentials['referral_credit_used'])||($user->user_credits_left>=$credentials['referral_credit_used'])){
 					if(!$booking_already_done){
 						// dd('test');
-						unset($data['csrf_token']);
-						unset($data['Promo_Code']);
-						$booking = Booking::create($data);
+						unset($credentials['csrf_token']);
+						unset($credentials['Promo_Code']);
+						$booking = Booking::create($credentials);
 						if($booking){
 							if(!$batch_booking_already){
-								// dd($data['referral_credit_used']);
-								if($user->user_free_credits_left>=$data['referral_credit_used']){
-									$user->user_free_credits_left=$user->user_free_credits_left-$data['referral_credit_used'];
+								// dd($credentials['referral_credit_used']);
+								if($user->user_free_credits_left>=$credentials['referral_credit_used']){
+									$user->user_free_credits_left=$user->user_free_credits_left-$credentials['referral_credit_used'];
 									$user->save();
-									$batch=Batch::find($data['batch_id']);
+									$batch=Batch::find($credentials['batch_id']);
 									$batch->batch_trial=$batch->batch_trial+1;
 									$batch->save();
 									$this->sms_email_trial($booking->id);
 								}
 								else{
-									$user->user_credits_left=$user->user_credits_left-$data['referral_credit_used'];
+									$user->user_credits_left=$user->user_credits_left-$credentials['referral_credit_used'];
 									$user->save();
 									$this->sms_email($booking->id);
 								}
 							}
 							else{
-								if($user->user_credits_left>=$data['referral_credit_used']){
-									$user->user_credits_left=$user->user_credits_left-$data['referral_credit_used'];
+								if($user->user_credits_left>=$credentials['referral_credit_used']){
+									$user->user_credits_left=$user->user_credits_left-$credentials['referral_credit_used'];
 									$user->save();
 									$this->sms_email($booking->id);
 								}
@@ -120,7 +149,7 @@ class BookingsController extends \BaseController {
 								}
 							}
 							$batch=$this->batch->getBatch($booking->batch_id);
-							$data=array('subcategory'=>$batch->subcategory,
+							$credentials=array('subcategory'=>$batch->subcategory,
 										'institute'=>$batch->institute,
 										'order_id'=>$booking->order_id,
 										'date'=>$booking->booking_date,
@@ -128,7 +157,7 @@ class BookingsController extends \BaseController {
 								);
 							$batch->batch_bookings=$batch->batch_bookings+1;
 							$batch->save();
-							return View::make('Bookings.success')->with($data);
+							return View::make('Bookings.success')->with($credentials);
 						}
 						else{
 							return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));

@@ -15,6 +15,7 @@ class MembershipsController extends \BaseController {
 		$metaContent[2] = "Hobbyix Membership, Hobbyix Membership Features, Get Your Hobbyix Membership";
 		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
 		$credentials['price']=$this->membershipVal['payment'];
+		$credentials['payment']=$credentials['price'];
 		$credentials['start']=date('d M Y');
 		$credentials['end']=date('d M Y', $end_date);
 		$credentials['credits']=$this->membershipVal['credits'];
@@ -57,10 +58,17 @@ class MembershipsController extends \BaseController {
 		if($credentials['promo_code'])
 		{
 			$amt=PromosController::isValid($credentials['promo_code']);
-			if($amt!=$credentials['payment'])
-				$credentials['payment']=$amt;
-			$promo_id=Promo::where('promo_code',$credentials['promo_code'])->first()->id;
-			$credentials['promo_id']=$promo_id;
+			if(is_numeric($amt))
+			{
+				if($amt!=$credentials['payment'])
+					$credentials['payment']=$amt;
+				$promo_id=Promo::where('promo_code',$credentials['promo_code'])->first()->id;
+				$credentials['promo_id']=$promo_id;
+			}
+			else
+			{
+				return Redirect::back()->with('failure',$amt);
+			}
 		}
 		else
 		{

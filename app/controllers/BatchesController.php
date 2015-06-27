@@ -224,6 +224,7 @@ class BatchesController extends \BaseController {
 			$subcategoriesInLocality=$this->subcategory->getSubcategoryInLocality($batchDetails->venue_locality_id);
 			// dd($batchDetails->category);
 			$credentials['price']=$batchDetails->batch_single_price;
+			$credentials['payment']=$batchDetails->batch_single_price;
 			$credentials['wallet_amount']=0;
 			$credentials['wallet_balance']=0;
 			if($user_id=Auth::id())
@@ -237,6 +238,7 @@ class BatchesController extends \BaseController {
 				if($credentials['price']<$credentials['wallet_amount'])
 					$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['payment'];
 			}
+			// dd($credentials);
 			return View::make('Batches.show',compact('batchDetails','credentials','user','difficulty_level','age_group','gender_group','trial','weekdays','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));
 		}
 		else

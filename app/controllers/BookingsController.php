@@ -79,11 +79,10 @@ class BookingsController extends \BaseController {
 				if($user_id)
 				{
 					if($credentials['wallet_amount'])
-						$payment=$price-$credentials['wallet_amount'];
+						$credentials['payment']=$credentials['payment']-$credentials['wallet_amount'];
 					else
-						$payment=$price;
+						$credentials['payment']=$credentials['payment'];
 				}	
-				$credentials['payment']=$payment;
 			}
 			unset($credentials['referral_credit_used']);
 			unset($credentials['pay_cc']);

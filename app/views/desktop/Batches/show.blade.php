@@ -511,14 +511,17 @@
             if(oldPromoCode != promoCode || formValidationStatus==false)                      
               verifyPromoCode('onDirectApply');                    
             oldPromoCode = promoCode;        
+            if(bookOrderFormValidate() && formValidationStatus)
+            {              
+              $("#bookOrderFormStep1").hide();
+              $("#bookOrderFormStep2").fadeIn();              
+            }       
           }
-          if(bookOrderFormValidate() && formValidationStatus)
-          {              
+          else if(bookOrderFormValidate())
+          {
             $("#bookOrderFormStep1").hide();
-            $("#bookOrderFormStep2").fadeIn();              
-          }          
-          alert(promoCodeStatus);
-          
+            $("#bookOrderFormStep2").fadeIn(); 
+          }            
         }); 
         $('#goBackButton').click(function(e)
         {          
@@ -561,13 +564,13 @@
           }
           }
         });   
-       /* $('#promoCode').keypress(function(e){
+        $('#promoCode').keypress(function(e){
           if ( e.which == 13 )
           {
             verifyPromoCode () ;
             e.preventDefault();
           } 
-        });*/
+        });
     });
   </script>
 @stop

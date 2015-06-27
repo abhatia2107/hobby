@@ -160,7 +160,7 @@ class FiltersController extends \BaseController {
 			$instituteName = $batchesForCategoryLocation[0]->institute;
 			$location = $batchesForCategoryLocation[0]->location;
 			$locality = $batchesForCategoryLocation[0]->locality;			
-			$locality_id = $batchesForCategoryLocation[0]->venue_locality_id;
+			$locArr = [$batchesForCategoryLocation[0]->locality];
 			$subcategories= $this->subcategory->getSubcategoryForInstitute($id);
         	$subcategoryArray = array();
         	$index = 0;
@@ -186,7 +186,7 @@ class FiltersController extends \BaseController {
 				$response['success']=0;
 		 	return json_encode($response);
 		}
-		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','subcategories','instituteName','location','locality','locality_id'));
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','subcategories','instituteName','location','locality','locArr'));
 	}
 
 	public function locality($id)
@@ -209,7 +209,7 @@ class FiltersController extends \BaseController {
 		$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
 		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->getBatchesForLocality($id);
-		$locality_id = $id;
+		$locArr = [$id];
 		if(empty($batchesForCategoryLocation->getTotal()))
 		{
 			$batchesForCategoryLocation="";
@@ -243,7 +243,7 @@ class FiltersController extends \BaseController {
 				$response['success']=0;
 		 	return json_encode($response);
 		}
-		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localitySubcategories','location','locality','locality_id'));
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localitySubcategories','location','locality','locArr'));
 	}
 
 	public function subcategory($id)
@@ -266,7 +266,7 @@ class FiltersController extends \BaseController {
 		$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
 		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->getBatchesForSubcategory($id);
-		$subcategory_id = $id;
+		$subArr = [$id];
 		if(empty($batchesForCategoryLocation->getTotal()))
 		{
 			$batchesForCategoryLocation="";
@@ -294,7 +294,7 @@ class FiltersController extends \BaseController {
 				$response['success']=0;
 		 	return json_encode($response);
 		}
-		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localities','subcategory','location','subcategory_id'));
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localities','subcategory','location','subArr'));
 	}
 
 

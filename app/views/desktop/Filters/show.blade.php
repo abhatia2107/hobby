@@ -144,7 +144,7 @@
 										$sub_id = $subcategoryData->id;
 									?>				
 									<li subcategory="{{$sub_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryName}}" type="checkbox" id="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subcategory_id)) @if($subcategory_id == $sub_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryName}}" type="checkbox" id="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($sub_id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
 									</li>
 								 @endforeach
 							 </ul>
@@ -163,7 +163,7 @@
 										$loc_id = $localityData->id;
 									?>
 									<li subcategory="{{$loc_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" style="" value="{{$localityUrl}}" type="checkbox" id="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locality_id)) @if($locality_id == $loc_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$localityName}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" style="" value="{{$localityUrl}}" type="checkbox" id="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($loc_id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityName}}</span></label>
 									</li> 
 								@endforeach
 							 </ul>							 
@@ -261,7 +261,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locality_id}}">
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locArr[0]}}">
 				          {{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
 				        </a>
 				      </li>
@@ -286,7 +286,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/{{$subcategory_id}}/{{$localities[$index]->locality}}">
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
 				          {{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}
 				        </a>
 				      </li>

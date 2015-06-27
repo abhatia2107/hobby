@@ -224,7 +224,6 @@
           <div id='sample-batch-name'>Book This Class</div>
           <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
             <div class="" id="bookOrderFormStep1">
-              <input type="hidden" name="batch_id" value="{{$batchID}}">
               <div class="row batchOrderField">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>
                 <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}} or {{$batchDetails->batch_credit}} Credit</div>

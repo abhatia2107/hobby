@@ -313,9 +313,6 @@ Route::get('/aboutus', function()
 	
 Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
-Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','FiltersController@show');
-
-
 Route::get('/filter/search','FiltersController@search');
 
 Route::get('/filter/institute/{id}','FiltersController@institute');
@@ -324,7 +321,7 @@ Route::get('/filter/locality/{id}','FiltersController@locality');
 
 Route::get('/filter/subcategory/{id}','FiltersController@subcategory');
 
-Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');
+Route::get('/filter/{subcategoriesString}/{localitiesString}','FiltersController@filter');
 
 Route::get('/yoga',function(){
 	return Redirect::to('/');

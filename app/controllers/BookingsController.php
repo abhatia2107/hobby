@@ -33,13 +33,21 @@ class BookingsController extends \BaseController {
 	 */
 	public function store()
 	{
-		// dd(Input::all());
 		$data = Input::all();
+		$referrer = URL::previous();
+		if(strpos($referrer,"/batches"))
+		{
+			$page='batches';
+			$data['batch_id'] = substr($referrer, strrpos($referrer, '/') + 1);
+			$batch=$this->batch->getbatch($data['batch_id']);
+			$payment=$batch->batch_single_price*$data['no_of_sessions'];
+		}
+		
 		$validator = Validator::make($data, Booking::$rules);
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
-		}
+		}		
 		$data['user_id']=Auth::id();
 		$data['order_id']=substr(uniqid(),0,8);
 		$data['payment'] = $data['no_of_sessions']*Batch::find($data['batch_id'])->batch_single_price;

@@ -12,6 +12,7 @@ class Batch extends \Eloquent {
         'created_at',
         'updated_at',
     ];
+    protected $pageSize=15;
 /*
     public static $rules = [
         'batch'=>'required',
@@ -50,7 +51,7 @@ class Batch extends \Eloquent {
         return Batch::where('id','=',$id)->pluck('category');
     }
 
-    public function getBatchForCategoryLocation($category_id,$location_id,$chunk)
+    public function getBatchForCategoryLocation($category_id,$location_id)
     {
         //See join->on in detail from /docs/queries and improve this query.
         $allBatches=Batch::
@@ -65,35 +66,27 @@ class Batch extends \Eloquent {
         
         if(!$category_id&&!$location_id)
             return $allBatches
-                ->skip($chunk)
-                ->take(40)
                 ->orderBy('institute_rating','desc')
-                ->get();
+                ->paginate($this->pageSize);
 
         else if(!$location_id)
             return $allBatches
                 ->where('batches.batch_category_id','=',$category_id)
-                ->skip($chunk)
-                ->take(40)
                 ->orderBy('institute_rating','desc')
-                ->get();
+                ->paginate($this->pageSize);
 
         else if(!$category_id)
             return $allBatches
                 ->where('venues.venue_location_id','=',$location_id)
-                ->skip($chunk)
-                ->take(40)
                 ->orderBy('institute_rating','desc')
-                ->get();
+                ->paginate($this->pageSize);
 
         else
             return $allBatches
                 ->where('batches.batch_category_id','=',$category_id)
                 ->where('venues.venue_location_id','=',$location_id)
-                ->skip($chunk)
-                ->take(40)
                 ->orderBy('institute_rating','desc')
-                ->get();
+                ->paginate($this->pageSize);
     }
 
     public function getBatchForFilter($subcategories,$localities,$chunk)
@@ -120,11 +113,9 @@ class Batch extends \Eloquent {
                         ->where('batches.batch_approved','=','1')
                         ->whereIn('venues.venue_locality_id',$localities)
                         ->whereIn('batches.batch_subcategory_id',$subcategories)
-                        ->skip($chunk)
-                        ->take(40)
                         ->orderBy('institute_rating','desc')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
-                        ->get();
+                        ->paginate($this->pageSize);
         return $allBatches;
     }
 
@@ -164,10 +155,9 @@ class Batch extends \Eloquent {
         });
             $allBatches=$allBatches
                     ->orderBy('institute_rating','desc')
-                    ->skip($chunk)
-                    ->take(40)
                     ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
-                    ->get();
+                    ->paginate($this->pageSize);
+
         // dd($allBatches[0]);
 
        return ($allBatches);
@@ -267,7 +257,7 @@ class Batch extends \Eloquent {
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->orderBy('batches.created_at','desc')
-                        ->get();
+                        ->paginate($this->pageSize);
     }
 
     public function getBatchesForLocality($batch_locality_id)
@@ -282,7 +272,7 @@ class Batch extends \Eloquent {
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->orderBy('batches.created_at','desc')
-                        ->get();
+                        ->paginate($this->pageSize);
     }
 
     public function getBatchesForSubcategory($batch_subcategory_id)
@@ -297,7 +287,7 @@ class Batch extends \Eloquent {
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->orderBy('batches.created_at','desc')
-                        ->get();
+                        ->paginate($this->pageSize);
     }
 
     public function getInstitutesForSubcategoryInLocality($batch_subcategory_id, $venue_locality_id)

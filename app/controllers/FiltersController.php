@@ -8,7 +8,6 @@ class FiltersController extends \BaseController {
 		$keyword=Input::get('keyword');
 		$category_id=Input::get('category_id');
 		$location_id=Input::get('location_id');
-		$chunk=Input::get('chunk');
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
@@ -24,8 +23,7 @@ class FiltersController extends \BaseController {
 			$localitiesForLocation = $this->locality->all();
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
-		$chunk=$chunk*40;
-		$batchesForCategoryLocation=$this->batch->search($keyword,$category_id,$location_id,$chunk);
+		$batchesForCategoryLocation=$this->batch->search($keyword,$category_id,$location_id);
 		if(empty($batchesForCategoryLocation->toarray()))
 		{
 			$batchesForCategoryLocation="";
@@ -45,7 +43,7 @@ class FiltersController extends \BaseController {
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
 
-	public function show($category_id,$location_id="0",$chunk="0")
+	public function show($category_id,$location_id="0")
 	{
 		//check count how many time page is viewed in filter page.
 		//For future filters
@@ -72,8 +70,7 @@ class FiltersController extends \BaseController {
 			$localitiesForLocation = $this->locality->getAllLocalities();
 		else		
 			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
-		$chunk=$chunk*40;
-		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
+		$batchesForCategoryLocation = $this->batch->getBatchForCategoryLocation($category_id,$location_id);
 		if(Request::ajax())
 		{
 			if($batchesForCategoryLocation)
@@ -119,7 +116,6 @@ class FiltersController extends \BaseController {
 				$subcategoriesString = implode(" classes in $location, ",$subcategoryArray);
 				$metaContent[2] = "$subcategoriesString classes in $location";
 			}
-			// dd($batchesForCategoryLocation);
 			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','locationSubcategories','category_id','location_id','location','metaContent'));
 		}
 	}
@@ -306,7 +302,7 @@ class FiltersController extends \BaseController {
 	}
 
 
-	public function filter($subcategoriesString,$localitiesString,$category_id='1',$location_id='1',$chunk='0')
+	public function filter($subcategoriesString,$localitiesString)
 	{
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
@@ -339,12 +335,10 @@ class FiltersController extends \BaseController {
 		}
 
 		if(!$subcategories[0]&&!$localities[0]){
-			$chunk=$chunk*40;
-			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id,$chunk);
+			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id);
 		}
 		else{
-			$chunk=$chunk*40;
-			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities,$chunk);
+			$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities);
 		}
 		// dd($batchesForCategoryLocation);
 

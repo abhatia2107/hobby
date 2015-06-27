@@ -10,7 +10,7 @@
             <h2>{{$homeLang['home_subtitle2']}}</h2>
          </div>
          <span class="explore_button" ><a href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
-	     <span class="explore_button" style="margin-left:5px;" ><a href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
+	     <span class="explore_button" style="margin-left:5px;" ><a href="/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
       </div>
    </div>
 </div>
@@ -36,7 +36,7 @@
 	@for(; $index<$maxlength; $index++ )
 		<div class="col-xs-6 featured_listing_item">		
 			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
-				<a class="text_over_flow_hide" href="/filter/subcategory/{{$subcategories[$index]->subcategory}}">
+				<a class="text_over_flow_hide" href="/subcategory/{{$subcategories[$index]->subcategory}}">
 					{{$subcategories[$index]->subcategory}}
 				</a>
 			</li>
@@ -55,7 +55,7 @@
 	@for(;$index<$maxlength; $index++ )
 		<div class="col-xs-6 featured_listing_item">		
 			<li title="Fitness Activities in {{$localities[$index]->locality}}">
-				<a href="/filter/locality/{{$localities[$index]->locality_url}}">
+				<a href="/locality/{{$localities[$index]->locality_url}}">
 					{{$localities[$index]->locality}}
 				</a>
 			</li>
@@ -74,7 +74,7 @@
 	@for(;$index<$maxlength; $index++ )
 		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
 			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad">
-				<a class="text_over_flow_hide" href="/filter/institute/{{$institutes[$index]->institute_url}}">
+				<a class="text_over_flow_hide" href="/institute/{{$institutes[$index]->institute_url}}">
 					{{$institutes[$index]->institute}},{{$institutes[$index]->locality}}
 				</a>
 			</li>

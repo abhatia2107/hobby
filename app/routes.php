@@ -59,15 +59,11 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/batches/approve/{id}','BatchesController@approve');
 });
 
-// Route::group(array('before' => "approved-or-admin"), function() {
-Route::group(array('before' => "admin"), function() {
-	/*Route::get('/batches/increment/{id}','BatchesController@increment');
-	Route::get('/batches/show/{id}','BatchesController@show');
-	// Route::get('/batches/order/{id}','BatchesController@order');*/
+Route::group(array('before' => "approved-or-admin"), function() {
+	Route::get('/batches/increment/{id}','BatchesController@increment');
+	Route::get('/batch/{id}','BatchesController@show');
+	// Route::get('/batches/order/{id}','BatchesController@order');
 });
-
-Route::get('/batches/increment/{id}','BatchesController@increment');
-Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');
 Route::get('/batches/createentry', 'BatchesController@createentry');
@@ -311,20 +307,17 @@ Route::get('/aboutus', function()
 	return View::make('Miscellaneous.aboutus',compact('metaContent'));
 });
 	
-Route::get('/filter/categories/{category_id}/locations/{location_id?}','FiltersController@show');
+Route::get('/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
-Route::get('/filter/categories/{category_id}/locations/{location_id?}/chunk/{chunk_id}','FiltersController@show');
+Route::get('/search','FiltersController@search');
 
+Route::get('/institute/{id}','FiltersController@institute');
 
-Route::get('/filter/search','FiltersController@search');
+Route::get('/locality/{id}','FiltersController@locality');
 
-Route::get('/filter/institute/{id}','FiltersController@institute');
+Route::get('/subcategory/{id}','FiltersController@subcategory');
 
-Route::get('/filter/locality/{id}','FiltersController@locality');
-
-Route::get('/filter/subcategory/{id}','FiltersController@subcategory');
-
-Route::get('/filter/{subcategoriesString}/{localitiesString}/{category_id?}/{location_id?}/{chunk?}','FiltersController@filter');
+Route::get('/filter/{subcategoriesString}/{localitiesString}','FiltersController@filter');
 
 Route::get('/yoga',function(){
 	return Redirect::to('/');

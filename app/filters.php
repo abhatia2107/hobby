@@ -70,7 +70,10 @@ Route::filter('csrf', function()
 
 function approved()
 {
-	$batch_id=Request::segment(3);
+	if(Request::segment(1)=="batch")
+		$batch_id=Request::segment(2);
+	else
+		$batch_id=Request::segment(3);
 	$approved=Batch::isBatchApproved($batch_id);
 	if(!$approved)
 	{
@@ -216,7 +219,7 @@ Route::filter('mainAdmin',function()
 
 Route::filter('approved-or-admin', function () 
 {
-   	$admin=call_user_func('admin');
+	$admin=call_user_func('admin');
    	if(!$admin)
    		return ;
     $value = call_user_func('approved');

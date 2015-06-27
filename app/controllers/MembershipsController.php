@@ -54,12 +54,11 @@ class MembershipsController extends \BaseController {
 	public function store()
 	{
 		$credentials = Input::all();
-		dd($credentials);
 		if($credentials['promo_code'])
 		{
 			$amt=PromosController::isValid($credentials['promo_code']);
 			if($amt!=$credentials['payment'])
-				return Lang::get('promo.promo_invalid_request');
+				$credentials['payment']=$amt;
 			$promo_id=Promo::where('promo_code',$credentials['promo_code'])->first()->id;
 			$credentials['promo_id']=$promo_id;
 		}

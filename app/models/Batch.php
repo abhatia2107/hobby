@@ -12,6 +12,7 @@ class Batch extends \Eloquent {
         'created_at',
         'updated_at',
     ];
+    protected $pageSize=20;
 /*
     public static $rules = [
         'batch'=>'required',
@@ -50,7 +51,7 @@ class Batch extends \Eloquent {
         return Batch::where('id','=',$id)->pluck('category');
     }
 
-    public function getBatchForCategoryLocation($category_id,$location_id,$chunk)
+    public function getBatchForCategoryLocation($category_id,$location_id)
     {
         //See join->on in detail from /docs/queries and improve this query.
         $allBatches=Batch::
@@ -65,38 +66,30 @@ class Batch extends \Eloquent {
         
         if(!$category_id&&!$location_id)
             return $allBatches
-                ->skip($chunk)
-                ->take(40)
                 ->orderBy('institute_rating','desc')
-                ->get();
+                ->paginate($this->pageSize);
 
         else if(!$location_id)
             return $allBatches
                 ->where('batches.batch_category_id','=',$category_id)
-                ->skip($chunk)
-                ->take(40)
                 ->orderBy('institute_rating','desc')
-                ->get();
+                ->paginate($this->pageSize);
 
         else if(!$category_id)
             return $allBatches
                 ->where('venues.venue_location_id','=',$location_id)
-                ->skip($chunk)
-                ->take(40)
                 ->orderBy('institute_rating','desc')
-                ->get();
+                ->paginate($this->pageSize);
 
         else
             return $allBatches
                 ->where('batches.batch_category_id','=',$category_id)
                 ->where('venues.venue_location_id','=',$location_id)
-                ->skip($chunk)
-                ->take(40)
                 ->orderBy('institute_rating','desc')
-                ->get();
+                ->paginate($this->pageSize);
     }
 
-    public function getBatchForFilter($subcategories,$localities,$chunk)
+    public function getBatchForFilter($subcategories,$localities)
     {
         if(!is_numeric($subcategories[0])){
             $subcategories2=Subcategory::whereIn('subcategories.subcategory',$subcategories)->get();
@@ -120,15 +113,13 @@ class Batch extends \Eloquent {
                         ->where('batches.batch_approved','=','1')
                         ->whereIn('venues.venue_locality_id',$localities)
                         ->whereIn('batches.batch_subcategory_id',$subcategories)
-                        ->skip($chunk)
-                        ->take(40)
                         ->orderBy('institute_rating','desc')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
-                        ->get();
+                        ->paginate($this->pageSize);
         return $allBatches;
     }
 
-    public function search($keyword,$category_id,$location_id,$chunk)
+    public function search($keyword,$category_id,$location_id)
     {
         // $allBatches=Batch::all();
         // dd($allBatches[0]->schedules[0]);
@@ -164,10 +155,9 @@ class Batch extends \Eloquent {
         });
             $allBatches=$allBatches
                     ->orderBy('institute_rating','desc')
-                    ->skip($chunk)
-                    ->take(40)
                     ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
-                    ->get();
+                    ->paginate($this->pageSize);
+
         // dd($allBatches[0]);
 
        return ($allBatches);
@@ -175,10 +165,6 @@ class Batch extends \Eloquent {
 
     public function getBatch($id)
     {
-        //For incrementing batch view when someone open, show page.
-        Batch::
-        where('batches.id','=',$id)
-        ->increment('batch_view');
         if (is_numeric($id))
         {
             $column = 'id';
@@ -187,6 +173,12 @@ class Batch extends \Eloquent {
         {
             $column = 'batch'; // This is the name of the column you wish to search
         }
+        
+        //For incrementing batch view when someone open, show page.
+        Batch::
+        where('batches.'.$column,'=',$id)
+        ->increment('batch_view');
+
         $batch= Batch:://find($id)
             where('batches.'.$column,'=',$id)
             ->where('batches.batch_approved','=','1')
@@ -267,7 +259,7 @@ class Batch extends \Eloquent {
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->orderBy('batches.created_at','desc')
-                        ->get();
+                        ->paginate($this->pageSize);
     }
 
     public function getBatchesForLocality($batch_locality_id)
@@ -282,7 +274,7 @@ class Batch extends \Eloquent {
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->orderBy('batches.created_at','desc')
-                        ->get();
+                        ->paginate($this->pageSize);
     }
 
     public function getBatchesForSubcategory($batch_subcategory_id)
@@ -297,7 +289,7 @@ class Batch extends \Eloquent {
                         ->Join('locations', 'locations.id', '=', 'venues.venue_location_id')
                         ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')
                         ->orderBy('batches.created_at','desc')
-                        ->get();
+                        ->paginate($this->pageSize);
     }
 
     public function getInstitutesForSubcategoryInLocality($batch_subcategory_id, $venue_locality_id)
@@ -357,7 +349,15 @@ class Batch extends \Eloquent {
 
     public static function isBatchApproved($id)
     {
-        $batch=Batch::find($id);
+        if (is_numeric($id))
+        {
+            $column = 'id';
+        }
+        else
+        {
+            $column = 'batch'; // This is the name of the column you wish to search
+        }
+        $batch=Batch::where('batches.'.$column,'=',$id)->first();
         if($batch->batch_approved)
             return true;
         else

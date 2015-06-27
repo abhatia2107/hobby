@@ -133,7 +133,7 @@ class PromosController extends \BaseController {
 	 * To check if the Promo code entered by user is valid or not.
 	 * If the code is expired.
 	 * If the code is used max no of times allowed per user.
-	 * If the code is applicable for membership or batches.
+	 * If the code is applicable for membership or batch.
 	 * @param  string  $promo_code
 	 * @return boolean            [description]
 	 */
@@ -144,12 +144,12 @@ class PromosController extends \BaseController {
 		$referrer = URL::previous();
 		if($referrer==url("/memberships"))
 		{
-			$page='memberships';
+			$page='membership';
 			$payment=$this->membershipVal['payment'];
 		}
-		else if(strpos($referrer,"/batches"))
+		else if(strpos($referrer,"/batch"))
 		{
-			$page='batches';
+			$page='batch';
 			$batch_id = substr($referrer, strrpos($referrer, '/') + 1);
 			$batch=$this->batch->getbatch($batch_id);
 			$payment=$batch->batch_single_price*$no_of_session;
@@ -161,7 +161,7 @@ class PromosController extends \BaseController {
 		$promo=Promo::where('promo_code','=',$promo_code)->valid()->first();
 		if($promo)
 		{
-			if($page=="batches")
+			if($page=="batch")
 			{
 				if(!$promo->coupon_valid_on_single_class)
 				{

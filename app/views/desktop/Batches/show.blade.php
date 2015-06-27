@@ -227,7 +227,6 @@
           <div id='sample-batch-name'>Book This Class</div>
           <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
             <div class="" id="bookOrderFormStep1">
-              <input type="hidden" name="batch_id" value="{{$batchID}}">
               <div class="row batchOrderField">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>
                 <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}} or {{$batchDetails->batch_credit}} Credit</div>
@@ -344,7 +343,7 @@
            @for(;$index<$maxlength; $index++ )
             <ul class="col-md-3 col-sm-3 col-xs-6">           
               <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
-                <a class="text_over_flow_hide" href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
+                <a class="text_over_flow_hide" href="/batch/{{$batchesOfInstitute[$index]->id}}">
                   {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
                 </a>
               </li>

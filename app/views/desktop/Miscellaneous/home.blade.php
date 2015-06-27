@@ -20,7 +20,7 @@
 	            <h2>{{$homeLang['home_subtitle2']}}</h2>
 	         </div> 
 	         <span class="explore_button"><a title="Hobbyix Membership" href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
-	         <span class="explore_button" style="margin-left:5px;" ><a title="Check out Classes" href="/filter/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
+	         <span class="explore_button" style="margin-left:5px;" ><a title="Check out Classes" href="/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
 	      </div>
 	   </div>
 	</div>
@@ -64,7 +64,7 @@
 	@for(; $index<$maxlength; $index++ )
 		<ul  style="margin:0;padding:0 0 0 10px" class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
 			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
-				<a class="text_over_flow_hide" itemprop="url" href="/filter/subcategory/{{$subcategories[$index]->subcategory}}">
+				<a class="text_over_flow_hide" itemprop="url" href="/subcategory/{{$subcategories[$index]->subcategory}}">
 					<span itemprop="name">{{$subcategories[$index]->subcategory}}</span>
 				</a>
 			</li>
@@ -83,7 +83,7 @@
 	@for(;$index<$maxlength; $index++ )
 		<ul  style="margin:0;padding:0 0 0 10px" class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation" >		
 			<li title="Fitness Activities in {{$localities[$index]->locality}}" style="margin:0;padding:0">
-				<a class="text_over_flow_hide" itemprop="url" href="/filter/locality/{{$localities[$index]->locality_url}}">
+				<a class="text_over_flow_hide" itemprop="url" href="/locality/{{$localities[$index]->locality_url}}">
 					<span itemprop="name">{{$localities[$index]->locality}}</span>
 				</a>
 			</li>
@@ -102,7 +102,7 @@
 	@for(;$index<$maxlength; $index++ )
 		<ul style="margin:0;padding:0 0 0 10px" class="col-md-4 col-sm-4 col-xs-12 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
 			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad" >
-				<a class="text_over_flow_hide" itemprop="url" href="/filter/institute/{{$institutes[$index]->institute_url}}">
+				<a class="text_over_flow_hide" itemprop="url" href="/institute/{{$institutes[$index]->institute_url}}">
 					<span itemprop="name">{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}</span>
 				</a>
 			</li>

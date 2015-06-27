@@ -45,12 +45,9 @@
 			</div>		
 		@endif						
 		<div class="col-sm-6 col-md-6 col-xs-12 search_area">
-			<form action="/filter/search" method="get" role="search">
+			<form action="/search" method="get" role="search">
 				<div class="input-group search-box">
 					<input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword" >
-					<input type="hidden" name="category_id" value="0">
-					<input type="hidden" name="location_id" value="0">
-					<input type="hidden" name="chunk" value="0">
 					<div class="input-group-btn">
 						<button class=" header_search_button btn btn-default" type="submit" >
 							<i class="glyphicon glyphicon-search"></i>

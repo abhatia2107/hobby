@@ -32,7 +32,7 @@
 
 		"promo_max_per_user"=>"You have used this code :count times. You can't use this any more.",
 
-		"promo_expired"=>"Sorry this Promo Code has expired",
+		"promo_expired"=>"Sorry, this Promo Code has expired",
 
 		"promo_invalid"=>"Invalid Promo Code",
 		

@@ -178,11 +178,11 @@
 					<ul class="list-unstyled row maz_pad_z" id="batchesData">
 					@if(!empty($batchesForCategoryLocation)) 
 					@foreach($batchesForCategoryLocation as $batchInfo)
-						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batches/show/{{$batchInfo->batch}}" >
+						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batch/{{$batchInfo->batch}}" >
 							<div class="batch col-md-12 col-xs-12 col-sm-12 maz_pad_z" id="batch{{$batchInfo->id}}" >
 								<div class="col-md-9 col-xs-12 col-sm-12 body maz_pad_z" >
 									<div class="col-md-12 col-xs-12 col-sm-12 header">
-										<h2 title="Institute Name"><a href="/batches/show/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
+										<h2 title="Institute Name"><a href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
 										<h3 class="maz_pad_z" title="Activity Name, Locality">
 											<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">{{$batchInfo->subcategory}}, 
 											<span itemprop="addressLocality">{{$batchInfo->locality}}</span></span>
@@ -203,7 +203,7 @@
 										</div>									
 									</div>								
 									<div class="col-md-6 col-xs-12 col-sm-6 rightPart maz_pad_z">
-										<div class="col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick="show_contact({{$batchInfo->id}})">										
+										<div class="col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
 											<span style='display:none'value="$batchInfo->id" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone">											
 												+91 {{$batchInfo->venue_contact_no}}
 											</span>
@@ -220,7 +220,7 @@
 								<div class="col-md-3 col-xs-12 col-sm-12 bookClass singleSessionPriceContainer 	">
 									<div class="singleSessionPrice">
 									<div class="times_font">₹{{$batchInfo->batch_single_price}} / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
-									<a class="btn btn-primary booknowButton" href="/batches/show/{{$batchInfo->batch}}">Book Now</a>
+									<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
 									</div>
 								</div>	
 							</span>																		
@@ -229,9 +229,13 @@
 					@endif
 					<!--<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div> -->
 					<div id="noResults" class='resultsMessage' >No More results to display.</div>
-					</ul>					
+					</ul>
+					@if($batchesForCategoryLocation)
+						<div style="text-align:right">
+							{{$batchesForCategoryLocation->links()}}
+						</div>
+					@endif
 				</div><!--end of results info -->
-				{{$batchesForCategoryLocation->links()}}
 			</div>
 		</div>
 	</div>
@@ -301,7 +305,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$locationSubcategories[$index]->subcategory}} classes in {{$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$locationSubcategories[$index]->subcategory}}">
+				        <a class="text_over_flow_hide" href="/subcategory/{{$locationSubcategories[$index]->subcategory}}">
 				          {{$locationSubcategories[$index]->subcategory}} classes in {{$location}}
 				        </a>
 				      </li>
@@ -326,7 +330,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$localitySubcategories[$index]->subcategory}}">
+				        <a class="text_over_flow_hide" href="/subcategory/{{$localitySubcategories[$index]->subcategory}}">
 				          {{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
 				        </a>
 				      </li>
@@ -343,13 +347,11 @@
 		var trials = {{json_encode( $trial )}};
 		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
 		var daysResult = new Array();			
-		var categoryId = "{{$category_id}}";
-		var locationId = "{{$location_id}}";
+		var category = "{{$categories[$category_id-1]->category}}";
 		var range = 10;
 		var filterRestultCount = 0;
 		var filterStatus=false;
 		var loadFilters = false;
-		var chunk = 1;
 		var resultCount = 0;
 		var sub_select = new Array();
 		var loc_select = new Array();
@@ -393,23 +395,22 @@
 					filterStatus = true;				
 					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();					
 					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
-					chunk = 0;
 					if(sub_select.length == 1 && loc_select.length ==0)
 					{
-						window.location.href = "/filter/subcategory/"+sub_select;
+						window.location.href = "/subcategory/"+sub_select;
 					}
 					else if(loc_select.length == 1 && sub_select.length ==0)
 					{
-						window.location.href = "/filter/locality/"+loc_select;
+						window.location.href = "/locality/"+loc_select;
 					}				
 					else
 					{												
-						window.location.href = "/filter/"+sub_select+"/"+loc_select+"/"+locationId+"/"+chunk;
+						window.location.href = "/filter/"+sub_select+"/"+loc_select;
 					}
 				}
 				else
 				{					
-					window.location.href = "/filter/categories/"+categoryId+"/locations";					
+					window.location.href = "/categories/"+category+"/locations";					
 				}				
 			});			
 		});

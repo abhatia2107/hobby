@@ -223,10 +223,15 @@
 							</span>																		
 						</li>
 					@endforeach
-					@endif
+					@endif					
 					</ul>					
 					<div id="noResults" class='resultsMessage' >No Results Found</div>
 				</div><!--end of results info -->
+				@if($batchesForCategoryLocation)
+					<div style="text-align:center">
+						{{$batchesForCategoryLocation->links()}}
+					</div>
+				@endif
 			</div>
 		</div>
 		<div class="filter_options_button"><button onclick="displayFilterOptions();" class="btn btn-primary">Filter</button></div>
@@ -297,7 +302,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$locationSubcategories[$index]->subcategory}} classes in {{$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$locationSubcategories[$index]->subcategory}}">
+				        <a class="text_over_flow_hide" href="/subcategory/{{$locationSubcategories[$index]->subcategory}}">
 				          {{$locationSubcategories[$index]->subcategory}} classes in {{$location}}
 				        </a>
 				      </li>
@@ -322,7 +327,7 @@
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/subcategory/{{$localitySubcategories[$index]->subcategory}}">
+				        <a class="text_over_flow_hide" href="/subcategory/{{$localitySubcategories[$index]->subcategory}}">
 				          {{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
 				        </a>
 				      </li>
@@ -341,10 +346,23 @@
 			$('#results-container').hide();				
 			$('html').css('overflow-y','hidden');			
 		}
+<<<<<<< HEAD
 		var result = {{json_encode( $batchesForCategoryLocation ) }};  								
 		var categoryId = "{{$category_id}}";
 		var locationId = "{{$location_id}}";								
 		var chunk = 1;		
+=======
+		var result = {{json_encode( $batchesForCategoryLocation ) }};  		
+		var trials = {{json_encode( $trial )}};
+		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
+		var daysResult = new Array();			
+		var category = "{{$categories[$category_id-1]->category}}";
+		var range = 10;
+		var filterRestultCount = 0;
+		var filterStatus=false;
+		var loadFilters = false;
+		var resultCount = 0;
+>>>>>>> a40f1e8d1ce5e2b7ca9c689e68bdb50d38fca8fc
 		var sub_select = new Array();
 		var loc_select = new Array();
 		var filter_select = new Array();		
@@ -355,7 +373,256 @@
 		{
 			$('#loadMore').css('display','none');
 			$('#noResults').css('display','block');
+<<<<<<< HEAD
 		}			
+=======
+		}	
+		function LoadResult(start,end)
+		{
+			var index = 0;
+			$("#filter_data li").each(function () 
+			{	
+				if(index>=start && index<=end)
+				{					
+					$(this).fadeIn(100);
+				}
+				index++;
+			});
+			range = end;
+			if(range>index) range=index;
+			if(index<10)
+			{						
+				LoadFilterResults(sub_select,loc_select,0);
+			}
+		}
+		displayResults(result,0);
+		LoadResult(0,20);
+		function LoadFilterResults(sub_select,loc_select,start)
+		{
+			resultRange = result.length;
+			if(sub_select.length==0)
+				sub_select=0;
+			if(loc_select.length==0)
+				loc_select=0;			
+			//alert("sub = "+sub_select+"loc = "+loc_select+"trial = ");
+			$.get("/filter/"+sub_select+"/"+loc_select,function(response)
+			{
+				loadFilters = true;									
+				if(response == "")
+				{
+					$('#loadMore').hide();
+					$('#noResults').show();
+				}
+				else
+				{
+					for (var index=0; index<response.length; index++)
+					{
+						result[index+resultRange] = response[index];
+					}
+					displayResults(result,start);
+					LoadResult(start,start+20);					
+				}
+				response = [];
+			});
+		}
+		function displayResults(results,start)
+		{
+			var linksContainer = $('#filter_data'),baseUrl;
+			for (var index=start; index<results.length; index++)
+			{
+			   	var institute = results[index]['institute'];
+			   	var institute_id =  results[index]['batch_institute_id'];
+			   	var institute_photo_path = '/assets/images/institute/institute.gif';
+			   	var institute_photo_exists = results[index]['institute_photo'];
+			   	if(institute_photo_exists==1)
+			   	{ institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}
+				var batch = results[index]['batch'];
+				var batchID= results[index]['id'];
+				var price = results[index]['batch_single_price'];
+				var subcategory = results[index]['subcategory'];
+				var category =  results[index]['category'];
+				var location_name = results[index]['location'];
+				var locality =results[index]['locality'];
+				var tagline =results[index]['batch_tagline'];
+				var comment =results[index]['batch_comment'];
+				var subcategoryID = results[index]['batch_subcategory_id'];
+				var localityID = results[index]['venue_locality_id'];
+				var email = results[index]['venue_email'];
+				var contact = results[index]['venue_contact_no'];
+				var trialID = results[index]['batch_trial'];
+				var institute_rating = results[index]['institute_rating'];
+				var landmark = results[index]['venue_landmark'];
+				var address = results[index]['venue_address'];
+				var venue_email = results[index]['venue_email'];
+				var batchCredit = results[index]['batch_credit'];
+				if(batchCredit>1)
+					batchCredit += " Credits)";
+				else
+					batchCredit += " Credit)";
+				address = address.replace(/\n/g," ");
+				if ( $("#batch"+batchID ).length == 0 ) 
+				{			
+					$("<li style='display:none;max-width:100%;overflow-x:hidden'></li>")
+					.attr("subcategory",subcategoryID)
+					.attr("locality",localityID)
+					.attr("class","batchInfo batch"+index)
+					.attr("id","batch"+batchID)
+					.append
+					(
+						$("<div></div>")
+						.attr("class","row overflow_x")
+						.append
+						(		
+							$("<div></div>")
+							.attr("class","col-xs-12 overflow_x")
+							.append
+							(
+								$("<div></div>")
+								.attr("class","row")
+								.append
+								(
+									$("<div></div>")
+									.attr("class"," col-xs-12")
+									.append
+									(
+										$("<div></div>")
+										.attr("class"," col-xs-12 ")
+										.append
+										(
+											$("<span></span>")
+											.attr("id","batch_name")
+											.attr("class","text_over_flow_hide")
+											.append
+											(
+												$("<a></a>")
+												.prop("href","/batch/"+batch)
+												.text(institute)
+											)									
+										)									
+									)																					
+								)
+							)
+						)
+					)
+					.append
+					(
+						$("<div></div>")
+						.attr("class","row overflow_x")
+						.append
+						(
+							$("<div ></div>")
+							.attr("class","col-xs-8")
+							.append
+							(
+								$("<div></div>")
+								.attr("class","inst_name col-xs-12 text_over_flow_hide")
+								.text(subcategory+', '+locality)
+							)						
+							.append
+							(
+								$("<div></div>")
+								.attr("class","col-xs-12  batchDetailsAndPrice")
+								.append
+								(								
+										$("<div style='clear:both'></div>")
+										.attr("class","row")									
+										.append
+										(
+											$("<div></div>")
+											.attr("id","inst_type")
+											.attr("title",locality+", "+landmark+", "+address)	
+											.attr("class"," col-xs-12 text_over_flow_hide")								
+											.append
+											(
+												$("<span></span>")
+												.attr("id","hand-icon")
+												.attr("class","glyphicon glyphicon-map-marker")
+											)
+											.append
+											(
+												$("<span></span>")																					
+												.text(locality+", "+landmark)
+											)
+										)
+										.append
+										(
+											$("<div></div>")
+											.attr("id","inst_price")									
+											.attr("class"," col-xs-12 text_over_flow_hide")	
+											.attr("title",comment+' '+tagline)							
+											.append
+											(
+												$("<span></span>")
+												.attr("id","hand-icon")
+												.attr("class","glyphicon glyphicon-time")
+											)
+											.append
+											(
+												$("<span></span>")																					
+												.text(comment+' '+tagline)
+											)
+										)
+									
+								)																					
+							)		
+						)
+						.append
+						(
+							$("<div style='padding:0 0px 0 0;'></div>")
+							.attr("class","col-xs-4")
+							.append
+							(
+								$("<div></div>")
+								.attr("class","col-xs-12 singleSessionPrice text_over_flow_hide ")								
+								.append
+								(
+									$("<div></div>")								
+									.text("₹"+price+"/Session")
+									.append("<br>(or "+batchCredit)									
+								)
+								.append
+								(
+									$("<a></a>")
+									.attr("class","btn btn-primary")
+									.attr("id","booknowButton")	
+									.attr("href","/batch/"+batch)							
+									.text("Book Now")
+								)
+								.append
+								(
+									$("<div style='display:none'></div>")
+									.attr("class"," col-xs-12 ")
+									.attr("id","inst_contact")
+									.attr("onClick","show_contact("+index+")")
+									.append
+									(
+										$("<span></span>")
+										.attr("id","cell-icon")
+										.attr("class","glyphicon glyphicon-phone-alt")
+									)
+									.append
+									(
+										$("<span style='display:none'></span>")
+										.attr("id","contact"+index)
+										.attr("value", batchID)
+										.text(" "+contact)									
+									)
+									.append
+									(
+										$("<span></span>")
+										.attr("id","show_contact"+index)
+										.text(" View Number")								
+									)								
+								)	
+							)			
+						)
+					)			
+					.appendTo(linksContainer);	
+				}			
+		    }
+		  	$('span.stars').stars();
+		}	
+>>>>>>> a40f1e8d1ce5e2b7ca9c689e68bdb50d38fca8fc
 		var linksContainer = $('#filter_data'),baseUrl;	
 		$(document).ready(function() 
 		{	
@@ -371,7 +638,52 @@
 				$('.filter_options_popup').hide();
 				$('html').css('overflow-y','auto');
 				$('#results-container').show();	
+<<<<<<< HEAD
 			})		
+=======
+			})
+
+			window.onscroll = function(ev)
+			{
+				var height = $(document).height();  
+	            if($(window).scrollTop() + $(window).height() > height-250) 
+				{
+					resultRange = result.length;
+					if(range>=resultRange)
+					{
+						if(!filterStatus)
+						{
+							$.get("/categories/"+category+"/locations",function(response)
+							{								
+								if(response == "")
+								{
+									$('#loadMore').css('display','none');
+									$('#noResults').css('display','block');
+								}
+								else
+								{
+									for (var index=0; index<response.length; index++)
+									{	
+										result[index+resultRange] = response[index];	
+									}
+									displayResults(result,resultRange);	
+									LoadResult(range,range+10);
+								}
+								response = [];	
+							});
+						}
+						if(filterStatus)
+						{							
+							LoadFilterResults(sub_select,loc_select,resultRange);
+						}
+					}
+					else
+					{	
+						LoadResult(range,range+10);	
+					}
+				}
+			}			
+>>>>>>> a40f1e8d1ce5e2b7ca9c689e68bdb50d38fca8fc
 		});
 		function filterApply() 
 		{
@@ -385,14 +697,13 @@
 			{				
 				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();				
-				chunk = 0;				
 				if( sub_select.length == 1 && loc_select.length ==0 )
 				{
-					window.location.href = "/filter/subcategory/"+sub_select;
+					window.location.href = "/subcategory/"+sub_select;
 				}
 				else if(loc_select.length == 1 && sub_select.length ==0)
 				{
-					window.location.href = "/filter/locality/"+loc_select;
+					window.location.href = "/locality/"+loc_select;
 				}				
 				else
 				{

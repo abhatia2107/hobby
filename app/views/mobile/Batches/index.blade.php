@@ -86,7 +86,7 @@
 							<div class="col-md-12 col-xs-12 col-sm-12 column">
 								<div class="col-md-12 col-xs-12 col-sm-12 column">
 									<div class="col-md-8 col-xs-12 col-sm-7 column">
-										<span id="batch_name"><a href="/batches/show/{{$data->id}}">{{$data->batch}} </a></span>
+										<span id="batch_name"><a href="/batch/{{$data->id}}">{{$data->batch}} </a></span>
 										<span class="inst_name">{{$data->institute}}</span>
 									</div>
 									<div class="col-md-4 col-xs-12 col-sm-5 edit_delete_buttons">

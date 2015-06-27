@@ -8,11 +8,9 @@
 
     .facilities_icon {margin-right: 5px;}
 
-    .singleSessionPriceContainer {padding: 0px;margin:0px;}
+    .singleSessionPriceContainer {padding: 0px;margin:0px 0px 10px 0px;}
 
-    @media (min-width: 920px){.singleSessionPriceContainer { margin-top: -35px; } }
-
-    .singleSessionPrice {clear: both;}
+    @media (min-width: 920px){.singleSessionPriceContainer { margin-top: 30px; } }
 
     .filter_page {width:100%;padding:0% 1% 0% 1% }
 
@@ -31,6 +29,50 @@
   	.filter_option_loading {position: absolute;margin:18.5% 20% 0 10%;display: none}
 
   	.filter_option_loading img{width: 100%;height: 100%}
+
+
+  	/* new style for filter page */  	
+
+  	.maz_pad_z {margin: 0px;padding:0;}
+
+  	a, a:hover {text-decoration: none}
+
+  	#batchesData { box-shadow: 0px 0px 2px #3366CC; -moz-box-shadow: 0px 0px 2px #3366CC;-webkit-box-shadow: 0px 0px 2px #3366CC;
+  		color: #333; font-family: 'Open Sans',sans-serif;font-size: 15px;font-weight: normal;
+	}
+
+  	.batch { background: white;border-bottom:1px solid skyblue;}
+
+	.batch .header {padding: 7px 0px 5px 10px;margin: 0; }
+
+	.batch .header h2 { font-size: 22px; font-weight: bold; color: #0033CC;margin: 0 0 5px 0px;padding: 0; }
+
+	.batch .header h3 { font-size: 16px; font-weight: normal; color: #333;}
+
+	.batch .body .glyphicon {color: #3396d1; }
+
+	.batch .body .leftPart {padding: 7px 0 0 10px}
+
+	.batch .body .rightPart {padding: 0px 0px 0px 20px;margin-top: -10px;}
+
+	.batch .body .item {margin-top:1px; }
+
+	.batch .body {padding-bottom: 5px;}
+
+	.batch .instConMsg { border: 1px solid;padding:3px 3px 3px 3px;border-color: #0099FF;border-radius: 5px;float:left;text-align: center;
+  		font-size: 13px;height: 26px;overflow: hidden;display: inline-block;margin-bottom:3px;font-family: 
+	}
+
+	.batch .instConMsg:hover {background: #E8E8E8; cursor: pointer;}
+
+	.batch .instCon {margin-right:5px;min-width: 140px}
+
+	.batch .instMsg {margin-right:5px;min-width: 120px}
+
+	.batch .singleSessionPrice {  text-align: center;margin-bottom: 10px }
+
+	.times_font { font-family: "Times New Roman", Georgia, Serif;}
+	
   	
    </style>
 @stop
@@ -95,7 +137,7 @@
 						<div class="filterTitle">Sub Categories</div>
 						<div class="filterOptionsList">
 							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
-							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 	
+							<ul class="list-unstyled filters" id="filter-sub"> 	
 								@foreach ($subcategoriesForCategory as $subcategoryData)
 									<?php
 										$subcategoryName = $subcategoryData->subcategory;
@@ -113,7 +155,7 @@
 						<div class="filterTitle">Locality</div> 
 						<div class="filterOptionsList">
 							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
-							<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+							<ul class="list-unstyled filters" id="filter-sub"> 
 								@foreach ($localitiesForLocation as $localityData)
 									<?php 
 										$localityName = $localityData->locality;
@@ -133,11 +175,63 @@
 					</div>
 				</div>
 				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 25px 0px;padding:0px 1% 0px 0px;" >
-					<ul class="list-unstyled" id="filter_data"> 
-					</ul>
-					<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif">Loading Results</div>
-					<div id="noResults" class='resultsMessage' >No more results to display.</div>
+					<ul class="list-unstyled row maz_pad_z" id="batchesData">
+					@if(!empty($batchesForCategoryLocation)) 
+					@foreach($batchesForCategoryLocation as $batchInfo)
+						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batches/show/{{$batchInfo->batch}}" >
+							<div class="batch col-md-12 col-xs-12 col-sm-12 maz_pad_z" id="batch{{$batchInfo->id}}" >
+								<div class="col-md-9 col-xs-12 col-sm-12 body maz_pad_z" >
+									<div class="col-md-12 col-xs-12 col-sm-12 header">
+										<h2 title="Institute Name"><a href="/batches/show/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
+										<h3 class="maz_pad_z" title="Activity Name, Locality">
+											<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">{{$batchInfo->subcategory}}, 
+											<span itemprop="addressLocality">{{$batchInfo->locality}}</span></span>
+										</h3>
+									</div>																
+									<div class="col-md-6 col-xs-12 col-sm-6 leftPart maz_pad_z" >
+										<div class="item" title="Landmark is {{$batchInfo->venue_landmark}}">
+											<span class="text_over_flow_hide">
+											<span class="glyphicon glyphicon-map-marker"></span>
+											<span>{{$batchInfo->venue_landmark}}</span>
+											</span>
+										</div>
+										<div class="item" title="Schedule: {{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}">
+											<span class="text_over_flow_hide">
+											<span class="glyphicon glyphicon-time"></span>
+											<span>{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</span>
+											<span class="text_over_flow_hide">
+										</div>									
+									</div>								
+									<div class="col-md-6 col-xs-12 col-sm-6 rightPart maz_pad_z">
+										<div class="col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick="show_contact({{$batchInfo->id}})">										
+											<span style='display:none'value="$batchInfo->id" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone">											
+												+91 {{$batchInfo->venue_contact_no}}
+											</span>
+											<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>
+										</div>		
+										<div class="col-md-4 col-xs-12 col-sm-5 instConMsg instMsg" data-toggle="modal" href="#sendMessage" data-batch="{{$batchInfo->batch}}"
+											data-email="{{$batchInfo->venue_email}}" data-institute="{{$batchInfo->institute}}" title="Send Message to Institute and get response">
+											<span class="glyphicon glyphicon-envelope"></span>										
+											<span>Send Message</span>
+										</div>	
+										<div class="col-md-12 col-sm-12 facilities_continer"></div>
+									</div>								
+								</div>
+								<div class="col-md-3 col-xs-12 col-sm-12 bookClass singleSessionPriceContainer 	">
+									<div class="singleSessionPrice">
+									<div class="times_font">₹{{$batchInfo->batch_single_price}} / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
+									<a class="btn btn-primary booknowButton" href="/batches/show/{{$batchInfo->batch}}">Book Now</a>
+									</div>
+								</div>	
+							</span>																		
+						</li>
+					@endforeach
+					@endif
+					<!--<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div> -->
+					<div id="noResults" class='resultsMessage' >No More results to display.</div>
+					</ul>					
 				</div><!--end of results info -->
+				{{$batchesForCategoryLocation->links()}}
 			</div>
 		</div>
 	</div>
@@ -261,353 +355,14 @@
 		var loc_select = new Array();
 		var filter_select = new Array();
 		sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();			
-		//navActive('NavItem'+categoryId);
+		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();	
 		if(result.length==0)	
 		{
 			$('#noResults').empty();
 			$('#noResults').append("No Results Found");
 			$('#loadMore').hide();
 			$('#noResults').show();
-		}
-		function addFacilities (batchID,facilitesAvailable) 
-		{
-			var linksContainer = $('#facilities_continer_'+batchID),baseUrl;
-			//var linksContainerStatus = linksContainer.html().trim();
-			//alert(linksContainerStatus);
-			if(linksContainer.is(':empty'))
-			{				
-				var facilitiesName = ["Air Conditioning","Cafe","Changing Room","Locker","Shower Room","Steam"];				
-				var index = 0;
-				for (index=0;index<facilitesAvailable.length;index++) 
-				{
-	  				if(facilitesAvailable[index]==1)
-	  				{
-	  					$("<span></span>")
-	  					.attr("class","facilities_icon")
-	  					.append
-	  					(
-	  						$("<img>")
-	  						.attr("src","/assets/images/Facilities/"+facilitiesName[index]+".png")
-	  						.attr("width","30px")
-	  						.attr("height","30px")
-	  						.attr("title",facilitiesName[index])
-	  						.attr("alt",facilitiesName[index])
-	  					)
-	  					.appendTo(linksContainer)
-	  						
-	  				}
-				}
-			}
-		}
-		function LoadResult(start,end)
-		{
-			var index = 0;
-			$("#filter_data li").each(function () 
-			{	
-				if(index>=start && index<=end)
-				{
-					$(this).fadeIn(100);
-				}
-				index++;
-			});
-			range = end;		
-			if(range>index) range=index;
-			if(index<10)
-			{				
-				LoadFilterResults(sub_select,loc_select,0);
-			}			
-		}
-		displayResults(result,0);
-		LoadResult(0,20);
-		function LoadFilterResults(sub_select,loc_select,start)
-		{		
-			$(".filterOptionsList").css('pointer-events','none');	
-			resultRange = result.length;
-			if(sub_select.length==0)
-				sub_select=0;
-			if(loc_select.length==0)
-				loc_select=0;
-			//alert("sub = "+sub_select+"loc = "+loc_select+"trial = "+trial_select);
-			$.get("/filter/"+sub_select+"/"+loc_select+"/"+categoryId+"/"+locationId+"/"+chunk,function(response)
-			{
-				chunk++;
-				loadFilters = true;					
-				if(response == "")
-				{
-					if(result.length==0)
-					{
-						$('#noResults').empty();
-						$('#noResults').append("No Results Found");
-					}
-					else
-					{
-						$('#noResults').empty();
-						$('#noResults').append("No more results found");
-					}
-					$('#loadMore').hide();
-					$('#noResults').show();
-				}
-				else
-				{
-					//alert(response.length);
-					for (var index=0; index<response.length; index++)
-					{
-						result[index+resultRange] = response[index];
-					}
-					displayResults(result,start);
-					LoadResult(start,start+20);
-					//alert(count);
-					
-				}
-				setTimeout("$('.filterOptionsList').css('pointer-events','all');$('.filter_option_loading').hide();$('.filters').css('opacity','1');", 1000);					
-			});
-		}
-		function displayResults(results,start)
-		{
-			var linksContainer = $('#filter_data'),baseUrl;
-			for (var index=start; index<results.length; index++)
-			{				
-			   	var institute = results[index]['institute'];
-			   	var institute_id =  results[index]['batch_institute_id'];
-			   	var institute_photo_path = '/assets/images/institute/institute.gif';
-			   	var institute_photo_exists = results[index]['institute_photo'];
-			   	if(institute_photo_exists==1)
-			   	{ institute_photo_path = "/assets/images/institute/"+institute_id+".jpg";}
-				var batch = results[index]['batch'];
-				var batchID= results[index]['id'];
-				var price = results[index]['batch_single_price'];
-				var subcategory = results[index]['subcategory'];
-				var category =  results[index]['category'];
-				var location_name = results[index]['location'];
-				var locality = results[index]['locality'];
-				if(results[index]['batch_comment'])
-					var comment = results[index]['batch_comment'];
-				else
-					var comment = '';
-				if(results[index]['batch_tagline'])
-					var tagline = results[index]['batch_tagline'];
-				else
-					var tagline= '';
-				var subcategoryID = results[index]['batch_subcategory_id'];
-				var localityID = results[index]['venue_locality_id'];
-				var email = results[index]['venue_email'];
-				var contact = results[index]['venue_contact_no'];
-				var trialID = results[index]['batch_trial'];
-				var institute_rating = results[index]['institute_rating'];
-				var landmark = results[index]['venue_landmark'];
-				var address = results[index]['venue_address'];
-				var venue_email = results[index]['venue_email'];
-				var batchCredit = results[index]['batch_credit'];
-				if(batchCredit>1)
-					batchCredit += " Credits)";
-				else
-					batchCredit += " Credit)";
-				address = address.replace(/\n/g," ");	
-				if ( $( "#batch"+batchID ).length == 0 ) 
-				{		
-					$("<li style='display:none' itemscope itemtype='http://schema.org/SportsActivityLocation'></li>")
-					.attr("subcategory",subcategoryID)
-					.attr("locality",localityID)
-					.attr("class","batchInfo batch"+index)
-					.attr("id","batch"+batchID)
-					.append
-					(
-						$("<div></div>")
-						.attr("class","col-md-12 col-xs-12 col-sm-12 post_header")
-						.append
-						(	
-							$("<div></div>")
-							.attr("class","col-md-8 col-xs-12 col-sm-7")
-							.append
-							(
-								$("<h2></h2>")								
-								.attr("title","Institute Name")
-								.append
-								(
-									$("<a></a>")
-									.prop("href","/batches/show/"+batch)
-									.text(institute)
-								)									
-							)
-							.append
-							(
-								$("<span></span>")
-								.attr("class","inst_name")
-								.attr("title","Activity Name, Locality")
-								.text(subcategory+", "+locality)
-							)																	
-						)						
-					)
-					.append
-					(
-						$("<div></div>")
-						.attr("class","row clearfix batch")
-						.append
-						(
-							$("<div style='margin-top:10px'></div>")
-							.attr("class","")						
-							.append
-							(
-								$("<div></div>")
-								.attr("class","col-md-12 col-xs-12 col-sm-12 batchDetailsAndPrice")
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-4 col-xs-12 col-sm-6")															
-									.append
-									(
-										$("<div></div>")
-										.attr("class","row")								
-										.append
-										(
-											$("<div></div>")
-											.attr("id","inst_type")
-											.attr("title",locality+", "+landmark+", "+address)	
-											.attr("class","col-md-12 col-xs-12 col-sm-12 text_over_flow_hide")								
-											.append
-											(
-												$("<span></span>")
-												.attr("id","hand-icon")
-												.attr("class","glyphicon glyphicon-map-marker")
-											)
-											.append
-											(
-												$("<span></span>")																					
-												.text(locality+", "+landmark+", "+address)
-											)
-										)
-										.append
-										(
-											$("<div></div>")
-											.attr("id","inst_price")									
-											.attr("class","col-md-12 col-xs-12 col-sm-12 text_over_flow_hide")
-											.attr("title",comment+' '+tagline)
-											.append
-											(
-												$("<span></span>")
-												.attr("id","hand-icon")
-												.attr("class","glyphicon glyphicon-time")
-											)
-											.append
-											(
-												$("<span></span>")																					
-												.text(comment+' '+tagline)
-											)
-										)
-									)
-								)
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-5 col-xs-12 col-sm-6 batchDetailsMiddlePart")
-									.attr("id","")	
-									.append
-									(
-										$("<div></div>")
-										.attr("class","col-md-5 col-xs-12 col-sm-6 ")
-										.attr("id","inst_contact")
-										.attr("onClick","show_contact("+index+")")
-										.append
-										(
-											$("<span></span>")
-											.attr("id","cell-icon")
-											.attr("class","glyphicon glyphicon-phone-alt")
-										)
-										.append
-										(
-											$("<span style='display:none'></span>")
-											.attr("id","contact"+index)
-											.attr("value",batchID)
-											.text(" +91"+contact)									
-										)
-										.append
-										(
-											$("<span></span>")
-											.attr("id","show_contact"+index)
-											.text(" View Number")								
-										)
-									)
-									.append
-									(
-										$("<div></div>")
-										.attr("class","col-md-5 col-xs-12 col-sm-6 ")
-										.attr("id","inst_message")
-										.attr("href","#sendMessage")
-										.attr("data-toggle","modal")
-										.attr("data-batch",batch)
-										.attr("data-email",email)
-										.attr("data-institute",institute)
-										.append
-										(
-											$("<span></span>")
-											.attr("id","cell-icon")
-											.attr("class","glyphicon glyphicon-envelope")
-										)
-										.append
-										(
-											$("<span></span>")
-											.text(" Send Message")
-										)
-									)	
-									.append
-									(
-										$("<div></div>")
-										.attr("class","col-md-12 col-sm-12 facilities_continer hidden-xs")
-										.attr("id","facilities_continer_"+batchID)									
-									)																											
-								)
-								.append
-								(
-									$("<div></div>")
-									.attr("class","col-md-3 col-xs-12 col-sm-12 singleSessionPriceContainer ")
-									.append
-									(	
-										$("<div></div>")						
-										.attr("class","singleSessionPrice")
-										.append
-										(
-											$("<div></div>")								
-											.text("₹ "+price+" / Session")
-											.append("<br>(or "+batchCredit)
-										)
-										.append
-										(
-											$("<a></a>")
-											.attr("class","btn btn-primary booknowButton")
-											.attr("id","booknowButton")	
-											.attr("href","/batches/show/"+batch)							
-											.text("Book Now")
-										)
-									)
-								)																			
-							)
-						)
-					)
-					.appendTo(linksContainer);
-					var facilitesAvailable = new Array();
-					var facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
-					for (facilitesIndex=0;facilitesIndex<facilities.length;facilitesIndex++) 
-					{
-						facilitesAvailable[facilitesIndex] = results[index][facilities[facilitesIndex]];
-					}				
-					addFacilities(batchID,facilitesAvailable);
-				}				
-		    }
-		  	$('span.stars').stars();
-		}
-		//triggered when modal is about to be shown
-		$('#sendMessage').on('show.bs.modal', function(e) 
-		{
-		    //get data-id attribute of the clicked element
-		    var batch = $(e.relatedTarget).data('batch');
-		    var email = $(e.relatedTarget).data('email');
-		    var institute = $(e.relatedTarget).data('institute');
-		    //populate the textbox
-		    $(e.currentTarget).find('input[name="batch"]').val(batch);
-		    $(e.currentTarget).find('input[name="email"]').val(email);
-		    $(e.currentTarget).find('input[name="institute"]').val(institute);
-		});
+		}	
 		$(document).ready(function() 
 		{
 			filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();
@@ -616,64 +371,11 @@
 			if(filter_select.length>0)
 			{
 				filterStatus = true;
-			}
-			$('[data-toggle="popover"]').popover(); 
-			var linksContainer = $('#filter_data'),baseUrl;
-			window.onscroll = function(ev)
-			{
-				var height = $(document).height();  
-	            if($(window).scrollTop() + $(window).height() > height-250) 
-				{
-					resultRange = result.length;
-					if(range>=resultRange)
-					{
-						if(!filterStatus)
-						{
-							$.get("/filter/categories/"+categoryId+"/locations/"+locationId+"/chunk/"+chunk,function(response)
-							{	
-								if(response == "")
-								{
-									if(result.length==0)
-									{
-										$('#noResults').empty();
-										$('#noResults').append("No Results Found");
-									}
-									else
-									{
-										$('#noResults').empty();
-										$('#noResults').append("No more results found");
-									}
-									$('#loadMore').hide();
-									$('#noResults').show();
-								}
-								else
-								{
-									// alert(response.length);
-									for (var index=0; index<response.length; index++)
-									{	
-										result[index+resultRange] = response[index];	
-									}
-									displayResults(result,resultRange);	
-									LoadResult(range,range+10);
-								}
-								chunk++;	
-							});
-						}
-						if(filterStatus)
-						{								
-							LoadFilterResults(sub_select,loc_select,resultRange);
-						}
-					}
-					else
-					{	
-						LoadResult(range,range+10);	
-					}
-				}
-			}
+			}				
 			$("#filter-sub input").click(function(e)
 			{		
 				if($(this).attr('id')=="subcategory_filter")
-				{
+				{					
 					$('.filter-option-1 .filters').css('opacity','.5');
 					$('.filter-option-1 .filter_option_loading').show();
 				}
@@ -687,7 +389,7 @@
 				result = [];				
 				filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();							
 				if(filter_select.length>0)
-				{	
+				{						
 					filterStatus = true;				
 					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();					
 					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
@@ -701,9 +403,8 @@
 						window.location.href = "/filter/locality/"+loc_select;
 					}				
 					else
-					{						
-						$(linksContainer).empty();						
-						LoadFilterResults(sub_select,loc_select,0);					
+					{												
+						window.location.href = "/filter/"+sub_select+"/"+loc_select+"/"+locationId+"/"+chunk;
 					}
 				}
 				else

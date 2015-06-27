@@ -36,11 +36,11 @@
 			</header>
 		@endif	
 		<!--sign-In pop up modal-->
-		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
 			@include('Modals.login')
 		</div>
 		<!--sign-UP pop up modal-->
-		<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y:auto">
+		<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true" style="overflow-y:auto">
 			@include('Modals.signup')
 		</div>
 		<!-- Error and success messages -->

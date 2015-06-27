@@ -150,23 +150,7 @@ span.stars span {  background-position: 0 0; }
 
 @media (min-width:992px) { .filterOption {width: 90%;margin-left: 10%} }
 
-.batchInfo { background: white;border-bottom:1px solid skyblue;margin-bottom: 5px;color: #333;
-  font-family: 'Open Sans',sans-serif;font-size: 15px;font-weight: normal;
-}
-
-#filter_data { box-shadow: 0px 0px 2px #3366CC; -moz-box-shadow: 0px 0px 2px #3366CC;-webkit-box-shadow: 0px 0px 2px #3366CC;
-  margin: 0px; padding: 0px;color: #333; font-family: 'Open Sans',sans-serif;font-size: 15px;
-}
-
-.batchInfo h2 { font-size: 22px; font-weight: bold; color: #0033CC;  float: left; margin: 5px 0px 4px 0px; }
-
-.batchInfo a {   text-decoration: none;  }
-
-#inst_tagline { font-size: 14px;  font-weight: normal; color: #333; }
-
 .facilities_title {color: #333;font-size: 18px;}
-
-.inst_name  {  font-size: 16px; font-weight: normal; color: #333; clear: both; float: left; }
 
 .filters  {  max-height: 130px; overflow: auto; color: #333;padding: 0px; }
 
@@ -188,93 +172,11 @@ span.stars span {  background-position: 0 0; }
 
 #noResults   {  display: none;  }
 
-.location-icon  { width:12px;height: 17px;margin-top: -4px;margin-right: 5px; }
-
-#inst_contact { border: 1px solid;padding:3px 3px 3px 3px;border-color: #0099FF;border-radius: 4px;float:left;text-align: center;
-  margin-right:3px;margin-top: 2px;font-size: 13px;height: 26px;min-width: 130px;max-width: 130px;
-}
-
 .batchDetailsAndPrice {  margin-bottom: 10px; }
-
-#inst_session_price { border: 1px solid;padding:3px 3px 3px 3px;border-color: #0099FF;height: 26px;border-radius: 4px;float: left;
-  text-align: center;margin-right:5px;margin-top: 2px;font-size: 0.85em;max-width:94px;min-width: 94px;background-color:#E0FFD6;font-weight: bold;
-}
-
-#inst_contact:hover { background: #E8E8E8; cursor: pointer; }
-
-#inst_message:hover { background: #E8E8E8  ;  cursor: pointer;  }
-
-#inst_message  { margin-top: 2px;border: 1px solid;padding:3px;border-color: #0099FF;font-size: 13px;overflow: hidden;display: inline-block;
-  border-radius: 4px; float: left; text-align: center;margin-right: 3px;height: 26px;min-width: 115px;max-width: 115px;
-}
-
-.inscore { border-radius: 50%;border: 2px solid;border-color:#FF8000;vertical-align: middle;width: 30px;height: 30px;padding: 4px 2px 2px 2px;
-  font-size: 14px;font-weight: bold;color: #333;text-align: center; float: left; margin-left: 25px; margin-bottom: 7px;
-}
-
-#rating-schedule { margin-top: 5px;}
-
-#ratingCircle { margin-left: 6%}
 
 .rating_starts  { clear:both;color: #FF8000;margin-top:0px;  }
 
-#rating { margin-top: -6px; margin-left: 42px;  }
-
-#rating-tittle  { text-align: center; float:left; margin-top: 10px; }
-
-#inst_type  { margin-top: 10px; }
-
 .text_over_flow_hide {display:inline-block; white-space: nowrap; overflow:hidden !important;text-overflow: ellipsis;max-width:100%;}
-
-#inst_price { margin-top: 4px; }
-
-#tag-icon { float:left; font-weight: bolder;font-size: 18px;text-align: right;margin-top: 10px;}
-
-#tag-icon .glyphicon  { color: #0099FF; font-size: 18px;  margin-right: 9px;  }
-
-#hand-icon  { color: #0099FF; margin-right: 5px;  }
-
-#cell-icon  { color: #0099FF; font-size: 0.9em; }
-
-#msg-icon { color: #0099FF; font-size: 0.9em; }
-
-#contact  { display: none;  }
-
-.institute-profile-pic { width:116px;height: 115px;border-radius: 50%;border: 3px solid;border-color:#0099FF;
-  vertical-align: middle;margin-top: -9px;margin-bottom: 10px;
-}
-
-.institute-profile-pic img {  width:140px;  height: 140px;  }
-
-#inst_details { margin-top: 7px;margin-bottom: 10px;  }
-
-#batch-schedule { margin-top: -2px;text-align: center;  }
-
-#batch-schedule-title {text-align: left;margin-top: 7px;}
-
-#starsValue { clear:both;position:relative;}
-
-.price_for_single_class {margin-top: 12px !important;}
-
-#price_schedule_container { border-top: 0px dotted;border-bottom: 0px solid;margin-bottom: 7px;margin-top: 3px;padding-bottom: 5px; }
-
-#schedulePrice,#scheduleWeekDays { margin-top: 4px }
-
-#horizontalLine { border-bottom:0px dotted;margin-top: -10px; }
-
-#scheduleWeekDays { float: right;margin-right: 7px; }
-
-#schedulePrice { margin-left: 15px; }
-
-#moreScheduleButton { margin-right:-22px;padding-left:8px;color:#0099FF;font-size: 12px;padding-top: 3px;
-  font-weight: bolder;float: left;cursor: pointer;text-decoration: none;
-}
-
-@media screen and (min-width: 992px) {.inscore {margin-left: 47%;margin-top:-7px; } }
-
-@media screen and (min-width: 768px) {.inscore {margin-top:-7px; } }
-
-@media screen and (min-width: 992px) { #starsValue { margin-left:36% !important;}}
 
 .sendMessage a  { color: #333;  }
 
@@ -297,10 +199,6 @@ span.stars span {  background-position: 0 0; }
 .right-addon { right: 22px;position: absolute;float: left;padding-top: 8px;}
 
 .inner-addon input  { padding-left:  30px;padding-right: 0px; }
-
-#offerMessage { float: right; margin-top: -60px; }
-
-#offerMessage .glyphicon { float: right; font-size: 100px;  }
 
 #close_model:hover { color: black }
 
@@ -546,5 +444,3 @@ span.stars span {  background-position: 0 0; }
 .sample-box-small .totalAmount {  font-size: 18px;text-align: center;font-weight: bold;margin-top: -7px; }
 
 .booknowButton, .booknowButton:hover, .booknowButton button:active { background: #3396d1;margin-top: 5px;padding: 5px 25px 5px 25px;border-radius: 0px;border:0px solid;text-align: center; }
-
-.singleSessionPrice {  text-align: center; }

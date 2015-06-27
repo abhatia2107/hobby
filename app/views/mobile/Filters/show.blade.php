@@ -175,7 +175,7 @@
 						<div id="browse-filter" class="filter-option-1 filterOption" style="max-height:45%">	
 							<div class="filterTitle">Sub Categories</div>
 							<div class="filterOptionsList">
-								<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 	
+								<ul class="list-unstyled filters" id="filter-sub"> 	
 									@foreach ($subcategoriesForCategory as $subcategoryData)
 										<?php
 											$subcategoryName = $subcategoryData->subcategory;
@@ -191,7 +191,7 @@
 						<div id="browse-filter" class="filter-option-2 filterOption" style="max-height:45%">	
 							<div class="filterTitle">Locality</div> 
 							<div class="filterOptionsList">
-								<ul class="list-unstyled filters" valuelimit="" keepcollapsed="" displaytype="" nofilter="" id="filter-sub"> 
+								<ul class="list-unstyled filters" id="filter-sub"> 
 									@foreach ($localitiesForLocation as $localityData)
 										<?php 
 											$localityName = $localityData->locality;
@@ -199,7 +199,7 @@
 											$loc_id = $localityData->id;
 										?>
 										<li subcategory="{{$loc_id}}" >								
-										 	 <label class="sub"><input autocomplete="off" style="" value="{{$localityUrl}}" type="checkbox" class="LocCheckbox filterCheckBox" @if(isset($locality_id)) @if($locality_id == $loc_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$localityName}}</span></label>
+										 	 <label class="sub"><input autocomplete="off" value="{{$localityUrl}}" type="checkbox" class="LocCheckbox filterCheckBox" @if(isset($locality_id)) @if($locality_id == $loc_id) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$localityName}}</span></label>
 										</li> 
 									@endforeach
 								 </ul>

@@ -3,8 +3,8 @@
     <div class="modal-content">
         <form name="login" class="loginForm" id="loginForm" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
             <div class="modal-header">
-                <div type="button" class="close" title="Close"  data-dismiss="modal" @if(isset($loginPage)) style="display:none" @endif>
-                    <span onClick="refreshForm('#loginForm')" aria-hidden="true">&times;</span>
+                <div class="close" title="Close" data-dismiss="modal" @if(isset($loginPage)) style="display:none" @endif>
+                    <span onClick="refreshForm('#loginForm')" aria-hidden="true">X</span>
                 </div>
                 <h3 class="modal-title" id="myModalLabel2">LogIn</h3>
             </div>
@@ -35,7 +35,7 @@
                 <div class="signin_button"><button type="submit" class="btn btn-primary">LogIn</button></div>
             </div>
             <div class="modal-footer">                               
-                <a href="/login/fb"><img alt="Login Using Facebook" title="Login Using Facebook" height="35px" src="/assets/images/login_facebook.png"></a>                
+                <a href="/login/fb"><img alt="Login Using Facebook" title="Login Using Facebook" height="35" src="/assets/images/login_facebook.png"></a> 
             </div>
         </form>
     </div>

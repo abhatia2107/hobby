@@ -205,7 +205,7 @@
         ?>
         <div class="row batchOrderField" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif>
           <div class='col-xs-6'>Hobbyix Wallet</div>
-          <div class='col-xs-6'>: Rs. {{$user->user_wallet}}/-</div>
+          <div class='col-xs-6'>: Rs. {{$wallet_amount}}/-</div>
         </div> 
         <div class="row batchOrderField">
           <div class='col-xs-9 batchOrderFieldLabel' id="promoCodeContainer">
@@ -217,7 +217,7 @@
         </div>            
         <hr/>
         <div class="row totalAmount">         
-          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}</span></div>
+          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}/-</span></div>
           <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
           <input type="hidden" name="wallet_amount" value="{{$wallet_amount}}">
           <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
@@ -391,32 +391,52 @@
   var dateToday = new Date();
   var walletAmount = {{json_encode( $wallet_amount ) }};
   var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }}; 
-  function verifyPromoCode () 
-  {
+  var formValidationStatus = false;
+  var oldPromoCode = "";          
+  function verifyPromoCode (condition) 
+  { 
+    formValidationStatus = false;               
     $('#promoCodeContainer #statusMessage').empty();
-    var promoCode = $("#promoCode").val();
+      var promoCode = $("#promoCode").val();
+      var conditionMessage = "";          
+      if(condition == "onDirectApply")
+        conditionMessage = ". Click on Proceed";
     if(promoCode != "" )
-    {    
+    {
+      oldPromoCode = promoCode;           
       $.get("/promos/isvalid/"+promoCode,function(response)
       { 
         if($.isNumeric(response))
         {
           $('#orderTotal').empty();  
-          $('#orderTotal').append(": Rs. "+response);
+          $('#orderTotal').append(": Rs. "+response+"/-");
           $('#payment').val(response);            
-          $('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied</span>");
+          $('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied"+conditionMessage+"</span>");
+          formValidationStatus = true;            
         }
         else
-        {                       
+        {            
+          var sessionsCount = $("#numberOfSessions").val();             
+          var sessionPrice = {{$sessionPrice}};
+          var subtotal = sessionPrice*sessionsCount; 
+          if(walletAmount>0)
+          {
+            if(walletAmount>=subtotal)        
+              subtotal = 0;
+            else
+              subtotal = subtotal - walletAmount;
+          }           
+          $('#orderTotal').empty();  
+          $('#orderTotal').append(": Rs. "+subtotal+"/-");
+          $('#payment').val(subtotal);      
           $('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
         }
-      }); 
-    } 
-    else
-    {       
-      $('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");
-    }   
-  }    
+      });                   
+    }       
+    else if (condition != "onDirectApply" )     
+      $('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");                                 
+    return formValidationStatus;      
+  }     
   function DisableDay(date) 
   {
       var day = date.getDay();        
@@ -473,7 +493,7 @@
           else
             subtotal = subtotal - walletAmount;         
           $('#orderTotal').empty();  
-          $('#orderTotal').append(": Rs. "+subtotal);
+          $('#orderTotal').append(": Rs. "+subtotal+"/-");
           $('#payment').val(subtotal);          
       });
       $('#SubmitReviewButton').bind('click', function(event) 
@@ -487,12 +507,20 @@
       $('#proceedButton').click(function(e)
       {          
         e.preventDefault();       
-        e.stopPropagation();         
-        if(bookOrderFormValidate())
-        {   
+        e.stopPropagation();
+        var promoCode = $("#promoCode").val();
+        var promoCodeStatus = true;        
+        if(promoCode != "")
+        {       
+          if(oldPromoCode != promoCode || formValidationStatus==false)                  
+            verifyPromoCode('onDirectApply');                  
+          oldPromoCode = promoCode;        
+        }
+        if(bookOrderFormValidate() && formValidationStatus)
+        {              
           $("#bookOrderFormStep1").hide();
           $("#bookOrderFormStep2").fadeIn();              
-        }      
+        }          
       }); 
       $('#goBackButton').click(function(e)
       {          

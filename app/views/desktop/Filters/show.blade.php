@@ -400,8 +400,11 @@
 						window.location.href = "/locality/"+loc_select;
 					}				
 					else
-					{												
-						window.location.href = "/filter/"+sub_select+"/"+loc_select;
+					{											
+						if(sub_select.length==0)	
+							window.location.href = "/filter/"+category+"/"+loc_select;
+						else
+							window.location.href = "/filter/"+sub_select+"/"+loc_select;
 					}
 				}
 				else

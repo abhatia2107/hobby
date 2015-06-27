@@ -317,7 +317,7 @@ Route::get('/locality/{id}','FiltersController@locality');
 
 Route::get('/subcategory/{id}','FiltersController@subcategory');
 
-Route::get('/filter/{subcategoriesString}/{localitiesString}','FiltersController@filter');
+Route::get('/filter/{subcategoriesString}/{localitiesString?}','FiltersController@filter');
 
 Route::get('/yoga',function(){
 	return Redirect::to('/');

@@ -168,7 +168,7 @@ class FiltersController extends \BaseController {
 	            array_push($subcategoryArray,$subcategory->subcategory);
 	            if($index==5)
 	            	break;
-	            $index++;	            
+	            $index++;
 	        }
 			$subcategoriesString = implode(", ",$subcategoryArray);						
 			$metaContent[0] = "$instituteName in $locality, $location :: Hobbyix";
@@ -278,10 +278,7 @@ class FiltersController extends \BaseController {
 			$subcategory = $batchesForCategoryLocation[0]->subcategory;
 			$location = $batchesForCategoryLocation[0]->location;
 			$localities = $this->locality->getLocalitiesForSubcategory($id);
-			$localityArray= array();
-			foreach ($localities as $locality) {
-							array_push($localityArray, $locality->locality);
-						}			
+			$localityArray= $localities->lists('locality');
 			// $localities = ["locality1","locality2","locality3"];
 			$localitiesString = implode(", $subcategory ",$localityArray);
 			$metaContent[0] = "$subcategory classes in $location :: Hobbyix";
@@ -301,8 +298,10 @@ class FiltersController extends \BaseController {
 	}
 
 
-	public function filter($subcategoriesString,$localitiesString)
+	public function filter($subcategoriesString="0",$localitiesString="0")
 	{
+		if($subcategoriesString=="Fitness")
+			$subcategoriesString=0;
 		$age_group=$this->age_group;
 		$difficulty_level=$this->difficulty_level;
 		$gender_group=$this->gender_group;
@@ -319,20 +318,22 @@ class FiltersController extends \BaseController {
 
 		if(!$subcategories[0])
 		{
-			$subcategory=$this->subcategory->getSubcategoriesForCategory($category_id);
-			foreach ($subcategory as $data) {
-				array_push($subcategories, ($data->id));
-			}
+			$subcategories=$this->subcategory->getSubcategoriesForCategory($category_id)->lists('id');
+			$subArr=[];
 		}
-		// var_dump($subcategories);
+		else
+		{
+			$subArr = Subcategory::whereIn('subcategories.subcategory', $subcategories)->lists('id');
+		}
 		if(!$localities[0])
 		{
-			$locality=$this->locality->getLocalitiesForLocation($location_id);
-			foreach ($locality as $data) {
-				array_push($localities, ($data->id));
-			}
+			$localities=$this->locality->getLocalitiesForLocation($location_id)->lists('id');
+			$locArr=[];
 		}
-
+		else
+		{
+			$locArr = Locality::whereIn('localities.locality_url', $localities)->lists('id');
+		}
 		if(!$subcategories[0]&&!$localities[0]){
 			$batchesForCategoryLocation=$this->batch->getBatchForCategoryLocation($category_id,$location_id);
 		}
@@ -362,7 +363,7 @@ class FiltersController extends \BaseController {
 		}
 		else{
 			// dd($batchesForCategoryLocation);
-			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','subArr','locArr'));
 		}
 	}
 

@@ -397,14 +397,15 @@
   { 
     formValidationStatus = false;               
     $('#promoCodeContainer #statusMessage').empty();
-      var promoCode = $("#promoCode").val();
-      var conditionMessage = "";          
-      if(condition == "onDirectApply")
-        conditionMessage = ". Click on Proceed";
+    var promoCode = $("#promoCode").val();
+    var conditionMessage = "";
+    var sessionsCount = $("#numberOfSessions").val();                       
+    if(condition == "onDirectApply")
+      conditionMessage = ". Click on Proceed";
     if(promoCode != "" )
     {
       oldPromoCode = promoCode;           
-      $.get("/promos/isvalid/"+promoCode,function(response)
+      $.get("/promos/isvalid/"+promoCode+"/"+sessionsCount,function(response)
       { 
         if($.isNumeric(response))
         {
@@ -415,26 +416,30 @@
           formValidationStatus = true;            
         }
         else
-        {            
-          var sessionsCount = $("#numberOfSessions").val();             
-          var sessionPrice = {{$sessionPrice}};
-          var subtotal = sessionPrice*sessionsCount; 
-          if(walletAmount>0)
-          {
-            if(walletAmount>=subtotal)        
-              subtotal = 0;
-            else
-              subtotal = subtotal - walletAmount;
-          }           
-          $('#orderTotal').empty();  
-          $('#orderTotal').append(": Rs. "+subtotal+"/-");
-          $('#payment').val(subtotal);      
+        {                          
           $('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
         }
       });                   
     }       
-    else if (condition != "onDirectApply" )     
-      $('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");                                 
+    else if (condition != "onDirectApply" ) 
+    {   
+      $('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");                            
+    }
+    if(!formValidationStatus)
+    {        
+      var sessionPrice = {{$sessionPrice}};
+      var subtotal = sessionPrice*sessionsCount; 
+      if(walletAmount>0)
+      {
+        if(walletAmount>=subtotal)        
+          subtotal = 0;
+        else
+          subtotal = subtotal - walletAmount;
+      }           
+      $('#orderTotal').empty();  
+      $('#orderTotal').append(": Rs. "+subtotal+"/-");
+      $('#payment').val(subtotal); 
+    }
     return formValidationStatus;      
   }     
   function DisableDay(date) 
@@ -521,11 +526,16 @@
             $("#bookOrderFormStep2").fadeIn();              
           }       
         }
+        else if(oldPromoCode != promoCode)
+        {
+          verifyPromoCode();
+          oldPromoCode = promoCode;        
+        }
         else if(bookOrderFormValidate())
         {
           $("#bookOrderFormStep1").hide();
           $("#bookOrderFormStep2").fadeIn(); 
-        }        
+        }           
       }); 
       $('#goBackButton').click(function(e)
       {          

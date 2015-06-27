@@ -525,18 +525,23 @@
           e.preventDefault();       
           e.stopPropagation();
           var promoCode = $("#promoCode").val();
-          var promoCodeStatus = true;        
+          var promoCodeStatus = true;               
           if(promoCode != "")
           {       
             if(oldPromoCode != promoCode || formValidationStatus==false)                      
               verifyPromoCode('onDirectApply');                    
             oldPromoCode = promoCode;        
+            if(bookOrderFormValidate() && formValidationStatus)
+            {              
+              $("#bookOrderFormStep1").hide();
+              $("#bookOrderFormStep2").fadeIn();              
+            }       
           }
-          if(bookOrderFormValidate() && formValidationStatus)
-          {              
+          else if(bookOrderFormValidate())
+          {
             $("#bookOrderFormStep1").hide();
-            $("#bookOrderFormStep2").fadeIn();              
-          }          
+            $("#bookOrderFormStep2").fadeIn(); 
+          }            
         }); 
         $('#goBackButton').click(function(e)
         {          

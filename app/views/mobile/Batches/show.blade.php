@@ -340,7 +340,7 @@
          @for(;$index<$maxlength; $index++ )
           <div class="col-xs-6">           
             <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
-              <a class="text_over_flow_hide" href="/batches/show/{{$batchesOfInstitute[$index]->id}}">
+              <a class="text_over_flow_hide" href="/batch/{{$batchesOfInstitute[$index]->id}}">
                 {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
               </a>
             </li>

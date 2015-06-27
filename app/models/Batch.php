@@ -165,10 +165,6 @@ class Batch extends \Eloquent {
 
     public function getBatch($id)
     {
-        //For incrementing batch view when someone open, show page.
-        Batch::
-        where('batches.id','=',$id)
-        ->increment('batch_view');
         if (is_numeric($id))
         {
             $column = 'id';
@@ -177,6 +173,12 @@ class Batch extends \Eloquent {
         {
             $column = 'batch'; // This is the name of the column you wish to search
         }
+        
+        //For incrementing batch view when someone open, show page.
+        Batch::
+        where('batches.'.$column,'=',$id)
+        ->increment('batch_view');
+
         $batch= Batch:://find($id)
             where('batches.'.$column,'=',$id)
             ->where('batches.batch_approved','=','1')
@@ -347,7 +349,15 @@ class Batch extends \Eloquent {
 
     public static function isBatchApproved($id)
     {
-        $batch=Batch::find($id);
+        if (is_numeric($id))
+        {
+            $column = 'id';
+        }
+        else
+        {
+            $column = 'batch'; // This is the name of the column you wish to search
+        }
+        $batch=Batch::where('batches.'.$column,'=',$id)->first();
         if($batch->batch_approved)
             return true;
         else

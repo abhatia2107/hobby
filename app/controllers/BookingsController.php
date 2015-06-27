@@ -34,6 +34,7 @@ class BookingsController extends \BaseController {
 	public function store()
 	{
 		$data = Input::all();
+		dd($data);
 		$referrer = URL::previous();
 		if(strpos($referrer,"/batches"))
 		{

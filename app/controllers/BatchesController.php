@@ -448,8 +448,17 @@ class BatchesController extends \BaseController {
 
 	public function increment($id)
 	{
-        Batch::where('batches.id','=',$id)->increment('batch_view');
-	}/*
+        if (is_numeric($id))
+        {
+            $column = 'id';
+        }
+        else
+        {
+            $column = 'batch'; // This is the name of the column you wish to search
+        }
+		Batch::where('batches.'.$column,'=',$id)->increment('batch_view');
+	}
+	/*
 	public function order($id)
 	{
 		$user_id=Auth::id();

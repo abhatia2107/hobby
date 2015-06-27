@@ -59,15 +59,11 @@ Route::group(array('before' => "auth|admin"), function() {
 	Route::get('/batches/approve/{id}','BatchesController@approve');
 });
 
-// Route::group(array('before' => "approved-or-admin"), function() {
-Route::group(array('before' => "admin"), function() {
-	/*Route::get('/batches/increment/{id}','BatchesController@increment');
-	Route::get('/batches/show/{id}','BatchesController@show');
-	// Route::get('/batches/order/{id}','BatchesController@order');*/
+Route::group(array('before' => "approved-or-admin"), function() {
+	Route::get('/batches/increment/{id}','BatchesController@increment');
+	Route::get('/batch/{id}','BatchesController@show');
+	// Route::get('/batches/order/{id}','BatchesController@order');
 });
-
-Route::get('/batches/increment/{id}','BatchesController@increment');
-Route::get('/batches/show/{id}','BatchesController@show');
 
 Route::get('/bookings/sms','BookingsController@sms');
 Route::get('/batches/createentry', 'BatchesController@createentry');

@@ -178,11 +178,11 @@
 					<ul class="list-unstyled row maz_pad_z" id="batchesData">
 					@if(!empty($batchesForCategoryLocation)) 
 					@foreach($batchesForCategoryLocation as $batchInfo)
-						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batches/show/{{$batchInfo->batch}}" >
+						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batch/{{$batchInfo->batch}}" >
 							<div class="batch col-md-12 col-xs-12 col-sm-12 maz_pad_z" id="batch{{$batchInfo->id}}" >
 								<div class="col-md-9 col-xs-12 col-sm-12 body maz_pad_z" >
 									<div class="col-md-12 col-xs-12 col-sm-12 header">
-										<h2 title="Institute Name"><a href="/batches/show/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
+										<h2 title="Institute Name"><a href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
 										<h3 class="maz_pad_z" title="Activity Name, Locality">
 											<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">{{$batchInfo->subcategory}}, 
 											<span itemprop="addressLocality">{{$batchInfo->locality}}</span></span>
@@ -203,7 +203,7 @@
 										</div>									
 									</div>								
 									<div class="col-md-6 col-xs-12 col-sm-6 rightPart maz_pad_z">
-										<div class="col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick="show_contact({{$batchInfo->id}})">										
+										<div class="col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
 											<span style='display:none'value="$batchInfo->id" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone">											
 												+91 {{$batchInfo->venue_contact_no}}
 											</span>
@@ -220,7 +220,7 @@
 								<div class="col-md-3 col-xs-12 col-sm-12 bookClass singleSessionPriceContainer 	">
 									<div class="singleSessionPrice">
 									<div class="times_font">₹{{$batchInfo->batch_single_price}} / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
-									<a class="btn btn-primary booknowButton" href="/batches/show/{{$batchInfo->batch}}">Book Now</a>
+									<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
 									</div>
 								</div>	
 							</span>																		

@@ -473,7 +473,7 @@
 											.append
 											(
 												$("<a></a>")
-												.prop("href","/batches/show/"+batch)
+												.prop("href","/batch/"+batch)
 												.text(institute)
 											)									
 										)									
@@ -563,7 +563,7 @@
 									$("<a></a>")
 									.attr("class","btn btn-primary")
 									.attr("id","booknowButton")	
-									.attr("href","/batches/show/"+batch)							
+									.attr("href","/batch/"+batch)							
 									.text("Book Now")
 								)
 								.append

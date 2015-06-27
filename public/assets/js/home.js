@@ -34,10 +34,10 @@
   {
     $('#show_contact'+id).empty();
     $('#contact'+id).fadeIn(700);
-    var batch_id  = $('#contact'+id).attr('value');
-    $.get("/batches/increment/"+batch_id,function(response)
+    // var batch_id  = $('#contact'+id).attr('value');
+    $.get("/batches/increment/"+id,function(response)
     {
-      var result  = response; 
+      // alert(response);
     });
     // body...
   }

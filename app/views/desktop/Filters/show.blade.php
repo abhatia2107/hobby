@@ -176,6 +176,12 @@
 				</div>
 				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 25px 0px;padding:0px 1% 0px 0px;" >
 					<ul class="list-unstyled row maz_pad_z" id="batchesData">
+					<?php 
+						if(sizeof($batchesForCategoryLocation)>0)
+							$dataAvaiable = true;
+						else
+							$dataAvaiable = false;
+					?>
 					@if(!empty($batchesForCategoryLocation)) 
 					@foreach($batchesForCategoryLocation as $batchInfo)
 						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batch/{{$batchInfo->batch}}" >
@@ -228,7 +234,7 @@
 					@endforeach
 					@endif
 					<!--<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div> -->
-					<div id="noResults" class='resultsMessage' >No More results to display.</div>
+					<div id="noResults" class='resultsMessage' >No Results Found</div>
 					</ul>
 					@if($batchesForCategoryLocation)
 						<div style="text-align:right">
@@ -343,26 +349,16 @@
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
-		var result = {{json_encode( $batchesForCategoryLocation ) }};  
-		var trials = {{json_encode( $trial )}};
-		var weekDays = ["monday", "tuesday", "wednesday","thursday","friday","saturday","sunday"];
+		var result = {{json_encode( $dataAvaiable ) }};  				
 		var daysResult = new Array();			
-		var category = "{{$categories[$category_id-1]->category}}";
-		var range = 10;
-		var filterRestultCount = 0;
-		var filterStatus=false;
-		var loadFilters = false;
-		var resultCount = 0;
+		var category = "{{$categories[$category_id-1]->category}}";		
 		var sub_select = new Array();
 		var loc_select = new Array();
 		var filter_select = new Array();
 		sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();	
-		if(result.length==0)	
-		{
-			$('#noResults').empty();
-			$('#noResults').append("No Results Found");
-			$('#loadMore').hide();
+		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();					
+		if(result == false)	
+		{			
 			$('#noResults').show();
 		}	
 		$(document).ready(function() 

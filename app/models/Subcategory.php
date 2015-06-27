@@ -53,14 +53,11 @@ class Subcategory extends \Eloquent {
 
     public function getSubcategoryInLocality($venue_locality_id)
     {
-        $subcategories=Batch::where('venue_locality_id',$venue_locality_id)
+        $sub=Batch::where('venue_locality_id',$venue_locality_id)
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->select('batch_subcategory_id')
-                        ->get();
-        $sub = array();
-        foreach ($subcategories as $subcategory) {
-            array_push($sub,$subcategory->batch_subcategory_id);
-        }
+                        ->get()
+                        ->lists('batch_subcategory_id');
         $subcategories = array_unique($sub);
         // dd($subcategories[4]->batch_subcategory_id);
         return Subcategory::whereIn('subcategories.id',$subcategories)
@@ -72,14 +69,11 @@ class Subcategory extends \Eloquent {
 
     public function getSubcategoryForInstitute($institute_id)
     {
-        $subcategories=Batch::where('batch_institute_id',$institute_id)
+        $sub=Batch::where('batch_institute_id',$institute_id)
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->select('batch_subcategory_id')
-                        ->get();
-        $sub = array();
-        foreach ($subcategories as $subcategory) {
-            array_push($sub,$subcategory->batch_subcategory_id);
-        }
+                        ->get()
+                        ->lists('batch_subcategory_id');
         $subcategories = array_unique($sub);
         // dd($subcategories[4]->batch_subcategory_id);
         return Subcategory::whereIn('subcategories.id',$subcategories)

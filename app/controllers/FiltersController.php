@@ -14,15 +14,13 @@ class FiltersController extends \BaseController {
 		$trial=$this->trial;
 		$weekdays=$this->weekdays;
 		if(!$category_id){
-			$subcategoriesForCategory=$this->subcategory->all();
+			$category_id=1;
 		}
-		else
-			$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
+		$subcategoriesForCategory =  $this->subcategory->getSubcategoriesForCategory($category_id);
 		
 		if(!$location_id)
-			$localitiesForLocation = $this->locality->all();
-		else		
-			$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
+			$location_id = 1;
+		$localitiesForLocation = $this->locality->getlocalitiesForLocation($location_id);
 		$batchesForCategoryLocation=$this->batch->search($keyword,$category_id,$location_id);
 		if(empty($batchesForCategoryLocation->getTotal()))
 		{
@@ -40,7 +38,7 @@ class FiltersController extends \BaseController {
 		}
 		
 		// dd($batchesForCategoryLocation[0]->schedules->all());
-		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
+		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays', 'keyword', 'batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
 
 	public function show($category_id,$location_id="0")

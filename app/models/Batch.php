@@ -153,6 +153,7 @@ class Batch extends \Eloquent {
             ->orWhere('category','LIKE','%'.$keyword.'%')
             ->orWhere('subcategory','LIKE','%'.$keyword.'%');
         });
+        // dd($allBatches->get());
             $allBatches=$allBatches
                     ->orderBy('institute_rating','desc')
                     ->select('*','batches.id as id','batches.deleted_at as deleted_at','batches.created_at as created_at','batches.updated_at as updated_at')

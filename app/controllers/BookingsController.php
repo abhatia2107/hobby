@@ -36,6 +36,7 @@ class BookingsController extends \BaseController {
 		$credentials = Input::all();
 		$referrer = URL::previous();
 		$credentials['batch_id'] = substr($referrer, strrpos($referrer, '/') + 1);
+		$batch=$this->batch->getbatch($credentials['batch_id']);
 		$user_id=Auth::id();
 		$validator = Validator::make($credentials, Booking::$rules);
 		if ($validator->fails())
@@ -59,7 +60,7 @@ class BookingsController extends \BaseController {
 			}
 			if($credentials['promo_code'])
 			{
-				$amt=PromosController::isValid($credentials['promo_code']);
+				$amt=PromosController::isValid($credentials['promo_code'],$credentials['no_of_sessions']);
 				if(is_numeric($amt))
 				{
 					if($amt!=$credentials['payment'])
@@ -74,7 +75,6 @@ class BookingsController extends \BaseController {
 			}
 			else
 			{
-				$batch=$this->batch->getbatch($credentials['batch_id']);
 				$credentials['payment'] = $batch->batch_single_price*$credentials['no_of_sessions'];
 				if($user_id)
 				{
@@ -105,8 +105,8 @@ class BookingsController extends \BaseController {
 		}
 		else if(isset($credentials['pay_hobbyix'])){
 			unset($credentials['pay_hobbyix']);
+			$credentials['referral_credit_used']=$batch->batch_credit;
 			$user=User::find($credentials['user_id']);
-
 			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->first();
 			$batch_booking_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->first();
 			// dd($booking_already_done);
@@ -162,24 +162,15 @@ class BookingsController extends \BaseController {
 							return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
 						}
 					}
-					else{	
-						$booking->order_status="booking_already_done";
-						$booking->save();
-						$booking->delete();
+					else{
 						return Redirect::back()->with('failure',Lang::get('booking.booking_already_done'));
 					}
 				}
 				else{
-					$booking->order_status="not_enough_credit";
-					$booking->save();
-					$booking->delete();
 					return Redirect::back()->with('failure',Lang::get('booking.booking_not_enough_credit'));
 				}
 			}
 			else{
-				$booking->order_status="booking_one_allowed";
-				$booking->save();
-				$booking->delete();
 				return Redirect::back()->with('failure',Lang::get('booking.booking_one_allowed'));
 			}
 		}

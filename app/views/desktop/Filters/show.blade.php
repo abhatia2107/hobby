@@ -177,10 +177,10 @@
 				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 25px 0px;padding:0px 1% 0px 0px;" >
 					<ul class="list-unstyled row maz_pad_z" id="batchesData">
 					<?php 
-						if(sizeof($batchesForCategoryLocation)>0)
-							$dataAvaiable = true;
-						else
+						if(empty($batchesForCategoryLocation))
 							$dataAvaiable = false;
+						else
+							$dataAvaiable = true;
 					?>
 					@if(!empty($batchesForCategoryLocation)) 
 					@foreach($batchesForCategoryLocation as $batchInfo)
@@ -237,8 +237,12 @@
 					<div id="noResults" class='resultsMessage' >No Results Found</div>
 					</ul>
 					@if($batchesForCategoryLocation)
-						<div style="text-align:right">
-							{{$batchesForCategoryLocation->links()}}
+						<div class="text-right">
+							@if(isset($keyword))
+								{{$batchesForCategoryLocation->appends(array('keyword' => $keyword))->links()}}
+							@else
+								{{$batchesForCategoryLocation->links()}}
+							@endif
 						</div>
 					@endif
 				</div><!--end of results info -->
@@ -356,7 +360,7 @@
 		var loc_select = new Array();
 		var filter_select = new Array();
 		sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();					
+		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();				
 		if(result == false)	
 		{			
 			$('#noResults').show();

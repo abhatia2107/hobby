@@ -90,8 +90,8 @@
             <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-12">
                     <div class="form-group">
-                        <label class="label_size title" for="institute_description" >Tell us about your institute <span class="important_required">*</span></label>
-                        <textarea name="institute_description" id="institute_description"  class="form-control .jqte-test" rows="5" required="required">
+                        <label class="label_size title" for="institute_description" >Tell us about your institute <!-- <span class="important_required">*</span> --></label>
+                        <textarea name="institute_description" id="institute_description"  class="form-control .jqte-test" rows="5">
                             @if(isset($instituteDetails)){{$instituteDetails->institute_description}}@else{{Input::old('institute_description')}}@endif
                         </textarea>
                     </div>

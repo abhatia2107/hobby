@@ -20,12 +20,8 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                        <div class="form-group inner-addon">
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> 
-                                 <i class="glyphicon glyphicon-home left-addon"></i>   
-                                <input placeholder="Enter Venue Name (Ex: Madhapur Branch)" class="form-control" type="text" id="venue" name="venue" value="@if(isset($venueDetails)){{$venueDetails->venue}}@else{{Input::old('venue')}}@endif" required/>
-                        </div>
                         <div class="form-group inner-addon ">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> 
                             <i class="glyphicon glyphicon-envelope left-addon"></i>
                             <input type="email" class="form-control" name='venue_email' id='venue_email'  placeholder='Enter E-Mail Address For Venue' value="@if(isset($venueDetails)){{$venueDetails->venue_email}}@else{{Input::old('venue_email')}}@endif" required/>
                         </div>
@@ -104,7 +100,7 @@
             validating: 'glyphicon glyphicon-refresh',
         },
         fields: {
-            venue: {
+           /* venue: {
                 message: 'The name is not valid',
                 validators: {
                     notEmpty: {
@@ -116,7 +112,7 @@
                         message: 'The venue name must be more than 3 and less than 30 characters long',
                     },
                 }
-            },
+            },*/
             venue_address: {
                 validators: {
                     notEmpty: {

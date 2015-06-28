@@ -41,14 +41,14 @@ class Promo extends \Eloquent {
 	{
         return $query
 		->where('valid_till','>=',Carbon::now())
-		->whereRaw('count <= max_allowed_count');
+		->whereRaw('count < max_allowed_count');
     }
 
 	public function scopeExpired($query)
 	{
 		return $query
 		->where('valid_till','<',Carbon::now())
-		->OrwhereRaw('count > max_allowed_count');
+		->OrwhereRaw('count >= max_allowed_count');
 	}
 
 	public function codeUsedByUser($promo,$user_id)

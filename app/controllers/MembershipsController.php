@@ -55,6 +55,15 @@ class MembershipsController extends \BaseController {
 	public function store()
 	{
 		$credentials = Input::all();
+		if($user_id)
+		{
+			$user=User::find($user_id);
+			$credentials['wallet_amount']=$user->user_wallet;
+		}
+		else
+		{
+			$credentials['wallet_amount']=0;
+		}
 		if($credentials['promo_code'])
 		{
 			$amt=PromosController::isValid($credentials['promo_code']);
@@ -76,8 +85,6 @@ class MembershipsController extends \BaseController {
 			$user_id=Auth::id();
 			if($user_id)
 			{
-				$user=User::find($user_id);
-				$credentials['wallet_amount']=$user->user_wallet;
 				if($credentials['wallet_amount'])
 					$payment=$price-$credentials['wallet_amount'];
 				else

@@ -436,7 +436,7 @@ class BatchesController extends \BaseController {
 			$message->to($email,$name)->subject($subject);
 		});
 
-		//To vendor.
+		// To vendor.
 		$email=$credentials['email'];
 		$name=$credentials['institute'];
 		$subject=Lang::get('message.message_subject',array("batch"=>$credentials['batch']));

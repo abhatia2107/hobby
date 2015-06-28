@@ -133,8 +133,7 @@
 		<li class="active">
 			Fitness
 		</li>		
-		<?php $filterPageTitle = "Fitness Classes in Hyderabad"; ?>
-		<h1>{{$filterPageTitle}}</h1>
+		<h1>{{$metaContent[3]}}</h1>
 	</ul>	
 <div class="container filter_page" >		
 	<div class="row">		
@@ -224,7 +223,7 @@
 									<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
 									</div>
 								</div>	
-							</span>																		
+							</div>																		
 						</li>
 					@endforeach
 					@endif
@@ -410,7 +409,20 @@
 				{					
 					window.location.href = "/categories/"+category+"/locations";					
 				}				
-			});			
+			});	
+
+			$('#sendMessage').on('show.bs.modal', function(e) 
+			{
+			    //get data-id attribute of the clicked element
+			    var batch = $(e.relatedTarget).data('batch');
+			    var email = $(e.relatedTarget).data('email');
+			    var institute = $(e.relatedTarget).data('institute');
+			    //populate the textbox
+			    $(e.currentTarget).find('input[name="batch"]').val(batch);
+			    $(e.currentTarget).find('input[name="email"]').val(email);
+			    $(e.currentTarget).find('input[name="institute"]').val(institute);
+			});
 		});
+		
 	</script>
 @stop

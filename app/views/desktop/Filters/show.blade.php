@@ -126,12 +126,22 @@
 		<strong>{{$homeLang['home_membership_tagline']}}</strong>
 	</div>
 </div>
-<div class="container filter_page" >	
+<ul class="breadcrumb">
+		<li>
+			<a href="{{url('/')}}">Home</a> <span class="divider">/</span>
+		</li>
+		<li class="active">
+			Fitness
+		</li>		
+		<?php $filterPageTitle = "Fitness Classes in Hyderabad"; ?>
+		<h1>{{$filterPageTitle}}</h1>
+	</ul>	
+<div class="container filter_page" >		
 	<div class="row">		
 		<div class="col-md-12 col-xs-12 col-sm-12">					
 			<div class="">
 				<!--Start of filter division -->
-				<div class="col-md-3 col-xs-12 col-sm-3" style="margin:15px 0px 25px 0px;padding:0px 1% 0px 0px;">
+				<div class="col-md-3 col-xs-12 col-sm-3" style="margin:0px 0px 25px 0px;padding:0px 1% 0px 0px;">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->
 					<div id="browse-filter" class="filter-option-1 filterOption">	
 						<div class="filterTitle">Sub Categories</div>
@@ -174,7 +184,7 @@
 						<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 					</div>
 				</div>
-				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:30px 0px 25px 0px;padding:0px 1% 0px 0px;" >
+				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:15px 0px 25px 0px;padding:0px 1% 0px 0px;" >
 					<ul class="list-unstyled row maz_pad_z" id="batchesData">
 					<?php 
 						if(sizeof($batchesForCategoryLocation)>0)

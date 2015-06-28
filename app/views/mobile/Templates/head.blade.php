@@ -2,7 +2,7 @@
 <?php
     if(!isset($metaContent))
     {
-        $metaContent[0] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing :: Hobbyix";
+        $metaContent[0] = "Gym, Zumba, Yoga, Swimming, Boxing in Hyderabad:: Hobbyix";
         $metaContent[1] = "Get access to all gym, zumba classes, aerobics, pilates, yoga, kick-boxing and dance etc. with one membership.";
         $metaContent[2] = "gyms, best gyms, zumba classes, zumba dance, gym, aerobics classes, pilates classes, yoga centers, yoga classes, kick boxing, gym membership, aerobic exercise";
     }

@@ -2,7 +2,7 @@
 <?php
     if(!isset($metaContent))
     {
-        $metaContent[0] = "Gym, Zumba, Yoga, Aerobic, Pilates and Kick-Boxing :: Hobbyix";
+        $metaContent[0] = "Gym, Zumba, Yoga, Swimming, Boxing in Hyderabad:: Hobbyix";
         $metaContent[1] = "Get access to all gym, zumba classes, aerobics, pilates, yoga, kick-boxing and dance etc. with one membership.";
         $metaContent[2] = "gyms, best gyms, zumba classes, zumba dance, gym, aerobics classes, pilates classes, yoga centers, yoga classes, kick boxing, gym membership, aerobic exercise";
     }
@@ -16,8 +16,10 @@
     <meta name="author" content="Hobbyix">   
     <meta property="og:title" content="Hobbyix" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://www.facebook.com/hobbyix" />
+    <meta property="og:site_name" content="hobbyix.com"/>
+    <meta property="og:url" content="http://hobbyix.com" />    
     <meta property="og:image" content="/assets/images/home/institute.jpg" />
+    <meta property="og:description" content="Get access to all gym, zumba classes, aerobics, pilates, yoga, kick-boxing and dance etc. with one membership." />
     <link rel="icon" type="image/png" href="/assets/images/hobbyix_favicon.png">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css">

@@ -214,7 +214,7 @@ class BatchesController extends \BaseController {
 			$instituteName = $batchDetails->institute;
 			$locality = $batchDetails->locality;
 			$location = $batchDetails->location;
-			$metaContent[0] = "$subcategory -  $instituteName - $locality - $location :: Hobbyix";
+			$metaContent[0] = "$instituteName - $locality:: Hobbyix";
 			$metaContent[1] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";
 			$metaContent[2] = "$instituteName $locality, $instituteName $location, $subcategory classes in $locality, $subcategory classes in $location, $subcategory classes $instituteName";
 			$institute_id=$batchDetails->batch_institute_id;

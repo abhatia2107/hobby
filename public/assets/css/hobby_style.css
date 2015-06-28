@@ -204,7 +204,9 @@ span.stars span {  background-position: 0 0; }
 
 #filter-tittle-name { font-family: 'Open Sans',sans-serif; font-size: 18px; color: gray; margin-left: 10%}
 
-.breadcrumb { background: white; font-family: 'Open Sans',sans-serif; }
+.breadcrumb { background: white;font-family: 'Open Sans',sans-serif; width: 100%;padding: 10px 10px 15px 20px;margin: 0;}
+
+.breadcrumb h1 {font-size: 25px;margin:0;padding: 0;text-align: center;margin-top: -10px;font-family: Museo,Helvetica,arial,san-serif;color: #333}
 
 .filter_page_container {width: 100%;padding: 0px;}
 

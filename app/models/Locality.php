@@ -41,17 +41,16 @@ class Locality extends \Eloquent {
 			return Locality::all();
 	}
 
-	public function getLocalitiesForSubcategory($subcategory_id)
+	public function getLocalitiesInSubcategory($subcategory_id)
 	{
 		$loc=Batch::where('batch_subcategory_id',$subcategory_id)
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->select('venue_locality_id')
-                        ->get()
         				->lists('venue_locality_id');
         $localities=array_unique($loc);
         return Locality::whereIn('localities.id', $localities)
         				->select('id','locality')
-        				->take(5)
+        				->take(12)
         				->get()
         				->sortBy('locality');
 	}

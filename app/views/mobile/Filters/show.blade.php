@@ -255,9 +255,9 @@
 		        <h4>Related to {{$instituteName}} activities</h4>       		        		        
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
+				      <li title="{{$subcategories[$index]->subcategory}} activities in {{$locality.', '.$location}}" >
 				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locArr[0]}}">
-				          {{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
+				          {{$subcategories[$index]->subcategory}} activities in {{$locality.', '.$location}}
 				        </a>
 				      </li>
 				    </div> 
@@ -277,12 +277,12 @@
 		          	$width = 3;
 		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 		        ?>
-		        <h4>Related to {{$subcategory}} classes in {{$location}}</h4>       		        		        
+		        <h4>Related to {{$subcategory}} activities in {{$location}}</h4>       		        		        
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}" >
+				      <li title="{{$subcategory}} activities in {{$localities[$index]->locality.', '.$location}}" >
 				        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
-				          {{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}
+				          {{$subcategory}} activities in {{$localities[$index]->locality.', '.$location}}
 				        </a>
 				      </li>
 				    </div> 
@@ -302,12 +302,12 @@
 		          	$width = 3;
 		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 		        ?>
-		        <h4>Related to {{$categories[$category_id-1]->category}} classes in  {{$location}}</h4>       		        		        
+		        <h4>Related to {{$categories[$category_id-1]->category}} activities in  {{$location}}</h4>       		        		        
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$locationSubcategories[$index]->subcategory}} classes in {{$location}}" >
+				      <li title="{{$locationSubcategories[$index]->subcategory}} activities in {{$location}}" >
 				        <a class="text_over_flow_hide" href="/subcategory/{{$locationSubcategories[$index]->subcategory}}">
-				          {{$locationSubcategories[$index]->subcategory}} classes in {{$location}}
+				          {{$locationSubcategories[$index]->subcategory}} activities in {{$location}}
 				        </a>
 				      </li>
 				    </div> 
@@ -327,16 +327,16 @@
 		          	$width = 3;
 		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 		        ?>
-		        <h4>Related to {{$categories[$category_id-1]->category}} classes in  {{$locality.', '.$location}}</h4>       		        		        
+		        <h4>Related to {{$categories[$category_id-1]->category}} activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif</h4>
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
+				      <li title="{{$localitySubcategories[$index]->subcategory}} activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif" >
 				        <a class="text_over_flow_hide" href="/subcategory/{{$localitySubcategories[$index]->subcategory}}">
-				          {{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
+				          {{$localitySubcategories[$index]->subcategory}} activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif
 				        </a>
 				      </li>
 				    </div> 
-				@endfor		            		                  		             
+				@endfor              		             
 	      </div>       
 	  </div>
 	</div>

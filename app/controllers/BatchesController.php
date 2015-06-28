@@ -174,7 +174,7 @@ class BatchesController extends \BaseController {
 			$data['batch']=$credentials['batch'];
 			Mail::later(15,'Emails.batch.create', $data, function($message) use ($email,$name,$subject)
 			{
-				$message->to($email,$name)->subject($subject);
+				$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 			});*/
 			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_created'));
 		}
@@ -433,7 +433,7 @@ class BatchesController extends \BaseController {
 		$subject=Lang::get('message.message_emailSubjectRecieved');
 		Mail::queue('Emails.message.messageRecieved', $credentials, function($message) use ($email,$name,$subject)
 		{
-			$message->to($email,$name)->subject($subject);
+			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 		});
 
 		// To vendor.
@@ -442,7 +442,7 @@ class BatchesController extends \BaseController {
 		$subject=Lang::get('message.message_subject',array("batch"=>$credentials['batch']));
 		Mail::later(120,'Emails.message.sendMessage', $credentials, function($message) use ($email,$name,$subject)
 		{
-			$message->to($email,$name)->subject($subject);
+			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 		});
 
 		return Redirect::back()->with('success',Lang::get('message.message_sent',array("institute"=>$credentials['institute'])));

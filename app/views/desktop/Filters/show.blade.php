@@ -148,13 +148,9 @@
 						<div class="filterOptionsList">
 							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
 							<ul class="list-unstyled filters" id="filter-sub"> 	
-								@foreach ($subcategoriesForCategory as $subcategoryData)
-									<?php
-										$subcategoryName = $subcategoryData->subcategory;
-										$sub_id = $subcategoryData->id;
-									?>				
-									<li subcategory="{{$sub_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryName}}" type="checkbox" id="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($sub_id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
+								@foreach ($subcategoriesForCategory as $subcategoryData)											
+									<li subcategory="{{$subcategoryData->id}}" >								
+									 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryData->subcategory}}" type="checkbox" id="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($subcategoryData->id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryData->subcategory}}</span></label>
 									</li>
 								 @endforeach
 							 </ul>
@@ -166,14 +162,9 @@
 						<div class="filterOptionsList">
 							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
 							<ul class="list-unstyled filters" id="filter-sub"> 
-								@foreach ($localitiesForLocation as $localityData)
-									<?php 
-										$localityName = $localityData->locality;
-										$localityUrl = $localityData->locality_url;
-										$loc_id = $localityData->id;
-									?>
-									<li subcategory="{{$loc_id}}" >								
-									 	 <label class="sub"><input autocomplete="off" style="" value="{{$localityUrl}}" type="checkbox" id="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($loc_id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityName}}</span></label>
+								@foreach ($localitiesForLocation as $localityData)									
+									<li subcategory="{{$localityData->id}}" >								
+									 	 <label class="sub"><input autocomplete="off" style="" value="{{$localityData->locality_url}}" type="checkbox" id="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($localityData->id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityData->locality}}</span></label>
 									</li> 
 								@endforeach
 							 </ul>							 
@@ -185,13 +176,7 @@
 					</div>
 				</div>
 				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:15px 0px 25px 0px;padding:0px 1% 0px 0px;" >
-					<ul class="list-unstyled row maz_pad_z" id="batchesData">
-					<?php 
-						if(empty($batchesForCategoryLocation))
-							$dataAvaiable = false;
-						else
-							$dataAvaiable = true;
-					?>
+					<ul class="list-unstyled row maz_pad_z" id="batchesData">						
 					@if(!empty($batchesForCategoryLocation)) 
 					@foreach($batchesForCategoryLocation as $batchInfo)
 						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batch/{{$batchInfo->batch}}" >
@@ -363,15 +348,15 @@
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
-		var result = {{json_encode( $dataAvaiable ) }};  				
+		var result = {{json_encode( $batchesForCategoryLocation ) }};  				
 		var daysResult = new Array();			
 		var category = "{{$categories[$category_id-1]->category}}";		
 		var sub_select = new Array();
 		var loc_select = new Array();
 		var filter_select = new Array();
 		sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();				
-		if(result == false)	
+		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();						
+		if(result == "")	
 		{			
 			$('#noResults').show();
 		}	

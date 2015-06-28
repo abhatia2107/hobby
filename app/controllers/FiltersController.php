@@ -36,7 +36,7 @@ class FiltersController extends \BaseController {
 				$response['success']=0;
 		 	return json_encode($response);
 		}
-		
+		$filterPageTitle = "";
 		// dd($batchesForCategoryLocation[0]->schedules->all());
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays', 'keyword', 'batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id'));
 	}
@@ -114,6 +114,7 @@ class FiltersController extends \BaseController {
 				$subcategoriesString = implode(" classes in $location, ",$subcategoryArray);
 				$metaContent[2] = "$subcategoriesString classes in $location";
 			}
+			$filterPageTitle = "";
 			return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','locationSubcategories','category_id','location_id','location','metaContent'));
 		}
 	}
@@ -184,6 +185,7 @@ class FiltersController extends \BaseController {
 				$response['success']=0;
 		 	return json_encode($response);
 		}
+		$filterPageTitle = "";
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','subcategories','instituteName','location','locality','locArr'));
 	}
 
@@ -241,6 +243,8 @@ class FiltersController extends \BaseController {
 				$response['success']=0;
 		 	return json_encode($response);
 		}
+		// dd(empty($batchesForCategoryLocation));
+		$filterPageTitle = "";
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localitySubcategories','location','locality','locArr'));
 	}
 
@@ -292,6 +296,7 @@ class FiltersController extends \BaseController {
 				$response['success']=0;
 		 	return json_encode($response);
 		}
+		$filterPageTitle = "";
 		return View::make('Filters.show',compact('age_group','difficulty_level','gender_group','trial','weekdays','batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','localities','subcategory','location','subArr'));
 	}
 
@@ -340,6 +345,24 @@ class FiltersController extends \BaseController {
 		}
 		// dd($batchesForCategoryLocation);
 
+		if(empty($batchesForCategoryLocation->getTotal()))
+		{
+			$batchesForCategoryLocation="";
+			//$batchesForCategoryLocation=$this->feature->getFeaturedBatches();
+		}
+		else
+		{
+			$subcategory = $batchesForCategoryLocation[0]->subcategory;
+			$location = $batchesForCategoryLocation[0]->location;
+			$localities = $this->locality->getLocalitiesForSubcategory($id);
+			$localityArray= $localities->lists('locality');
+			// $localities = ["locality1","locality2","locality3"];
+			$localitiesString = implode(", $subcategory ",$localityArray);
+			$metaContent[0] = "$subcategory classes in $location :: Hobbyix";
+			$metaContent[1] = "Hobbyix helps you in exploring all $subcategory classes in $location. Get access to all activities with Hobbyix Membership.";
+			$metaContent[2] = "$subcategory, $subcategory $location, $subcategory classes in $location, $subcategory $localitiesString";
+		}
+		$filterPageTitle = "";
 		if(Request::ajax()){
 			if($batchesForCategoryLocation){
 				return $batchesForCategoryLocation;

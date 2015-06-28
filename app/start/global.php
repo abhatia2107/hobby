@@ -95,3 +95,8 @@ View::share('categories', $categories);
 View::share('homeLang', $homeLang);
 View::share('locations',$locations);
 View::share('loggedIn',$loggedIn);
+
+
+Blade::extend(function($value) {
+    return preg_replace('/\{\?(.+)\?\}/', '<?php ${1} ?>', $value);
+});

@@ -15,11 +15,11 @@
       <div class="footer-widget-column col-xs-12 col-sm-3 col-lg-3 ">
          <div class="footer-widget-title">About Hobbyix</div>
          <div class="menu-need-help-menu-container">
-            <ul id="menu-need-help-menu" class="menu"  itemscope itemtype="http://schema.org/BreadcrumbList">
-               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-question-sign"></span><a itemprop="url" href="/aboutus"><span itemprop="name">About Hobbyix</span></a><meta itemprop="position" content="1" /></li>               
-               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-list-alt"></span><a itemprop="url" href="/terms"><span itemprop="name">Terms Of Use</span></a><meta itemprop="position" content="2" /></li>
-               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-user"></span><a itemprop="url" href="/privacy"><span itemprop="name">Privacy Policy</span></a><meta itemprop="position" content="3" /></li>
-               <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"><span class="glyphicon glyphicon-dashboard"></span><a itemprop="url" href="/feedbacks/create"><span itemprop="name">Feedback</span></a><meta itemprop="position" content="4" /></li>       
+            <ul id="menu-need-help-menu" class="menu" >
+               <li><span class="glyphicon glyphicon-question-sign"></span><a href="/aboutus"><span itemprop="name">About Hobbyix</span></a></li>               
+               <li><span class="glyphicon glyphicon-list-alt"></span><a href="/terms"><span itemprop="name">Terms Of Use</span></a></li>
+               <li><span class="glyphicon glyphicon-user"></span><a href="/privacy"><span itemprop="name">Privacy Policy</span></a></li>
+               <li><span class="glyphicon glyphicon-dashboard"></span><a href="/feedbacks/create"><span itemprop="name">Feedback</span></a></li>       
                 <!--<li><span class="glyphicon glyphicon-globe"></span><a href-link="/blog">Hobbyix Blog</a></li> -->
             </ul>
          </div>

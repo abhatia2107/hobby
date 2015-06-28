@@ -185,27 +185,9 @@
               <input type="text" readonly="true" style="background:white"placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
           </div>          
         </div>
-        <?php
-          $amountPayable = $sessionPrice;
-          if(isset($user->user_wallet) && $user->user_wallet>0)                
-          {
-              if($user->user_wallet>=$sessionPrice)
-              {
-                $amountPayable = 0;
-                $wallet_amount = $sessionPrice;
-              }
-              else
-              {
-                $wallet_amount = $user->user_wallet;
-                $amountPayable = $sessionPrice-$wallet_amount; 
-              }
-          }
-          else
-            $wallet_amount = 0;
-        ?>
-        <div class="row batchOrderField" @if($wallet_amount>0) style="display:block" @else style="display:none" @endif>
+        <div class="row batchOrderField" @if($credentials['wallet_amount']>0) style="display:block" @else style="display:none" @endif>
           <div class='col-xs-6'>Hobbyix Wallet</div>
-          <div class='col-xs-6'>: Rs. {{$wallet_amount}}/-</div>
+          <div class='col-xs-6'>: Rs. {{$credentials['wallet_amount']}}/-</div>
         </div> 
         <div class="row batchOrderField">
           <div class='col-xs-9 batchOrderFieldLabel' id="promoCodeContainer">
@@ -217,10 +199,10 @@
         </div>            
         <hr/>
         <div class="row totalAmount">         
-          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$amountPayable}}/-</span></div>
+          <div class="">Amount Payable<span id="orderTotal">: Rs. {{$credentials['payment']}}/-</span></div>
           <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
-          <input type="hidden" name="wallet_amount" value="{{$wallet_amount}}">
-          <input type="hidden" id="payment" name="payment" value="{{$amountPayable}}">
+          <input type="hidden" name="wallet_amount" value="{{$credentials['wallet_amount']}}">
+          <input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
         </div>
         <div class="row batchOrderButtons" style="margin-top:5px;">    
           <button style="padding:5px 50px;" class="booknowButton" id="proceedButton">Proceed</button>
@@ -389,7 +371,7 @@
 @section('pagejquery')
 <script type="text/javascript">
   var dateToday = new Date();
-  var walletAmount = {{json_encode( $wallet_amount ) }};
+  var walletAmount = {{json_encode( $credentials['wallet_amount'] ) }};
   var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }}; 
   var formValidationStatus = false;
   var oldPromoCode = "";          
@@ -588,7 +570,14 @@
           minDate: dateToday,
           beforeShowDay: DisableDay,
           dateFormat: 'yy-mm-dd'         
-      });    
+      });  
+      $('#promoCode').keypress(function(e){
+        if ( e.which == 13 )
+        {
+          verifyPromoCode () ;
+          e.preventDefault();
+        } 
+      });  
   });
 </script>
 @stop

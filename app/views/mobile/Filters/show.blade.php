@@ -148,7 +148,7 @@
 											$sub_id = $subcategoryData->id;
 										?>				
 										<li subcategory="{{$sub_id}}" >								
-										 	 <label class="sub"><input autocomplete="off" @if(in_array($sub_id, $subArr)) checked="checked" @endif value="{{$subcategoryName}}" type="checkbox" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($sub_id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
+										 	 <label class="sub"><input autocomplete="off" @if(isset($subArr))@if(in_array($sub_id, $subArr)) checked="checked" @endif @endif value="{{$subcategoryName}}" type="checkbox" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($sub_id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryName}}</span></label>
 										</li>
 								 	@endforeach
 								 </ul>
@@ -165,7 +165,7 @@
 											$loc_id = $localityData->id;
 										?>
 										<li subcategory="{{$loc_id}}" >								
-										 	 <label class="sub"><input autocomplete="off" @if(in_array($loc_id, $locArr)) checked="checked" @endif value="{{$localityUrl}}" type="checkbox" class="LocCheckbox filterCheckBox"  @if(isset($locArr))@if(in_array($loc_id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityName}}</span></label>
+										 	 <label class="sub"><input autocomplete="off" @if(isset($locArr))@if(in_array($loc_id, $locArr)) checked="checked" @endif @endif value="{{$localityUrl}}" type="checkbox" class="LocCheckbox filterCheckBox"  @if(isset($locArr))@if(in_array($loc_id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityName}}</span></label>
 										</li> 
 									@endforeach
 								 </ul>
@@ -178,7 +178,13 @@
 					</div>			
 				</div>
 				<div class="col-xs-12 maz_pad_z" id="results-container" >
-					<ul class="list-unstyled maz_pad_z row" id="batchesData"> 
+					<ul class="list-unstyled maz_pad_z row" id="batchesData">
+					<?php 
+					if(empty($batchesForCategoryLocation))
+						$dataAvaiable = false;
+					else
+						$dataAvaiable = true;
+					?>
 					@if(!empty($batchesForCategoryLocation)) 
 					@foreach($batchesForCategoryLocation as $batchInfo)
 						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batch/{{$batchInfo->batch}}" >
@@ -228,8 +234,12 @@
 					<div id="noResults" class='resultsMessage' >No Results Found</div>
 				</div><!--end of results info -->
 				@if($batchesForCategoryLocation)
-					<div style="text-align:center">
-						{{$batchesForCategoryLocation->links()}}
+					<div class = "text-center">
+						@if(isset($keyword))
+							{{$batchesForCategoryLocation->appends(array('keyword' => $keyword))->links()}}
+						@else
+							{{$batchesForCategoryLocation->links()}}
+						@endif
 					</div>
 				@endif
 			</div>

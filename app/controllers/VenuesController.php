@@ -44,8 +44,14 @@ class VenuesController extends \BaseController {
 		$credentials=Input::all();
 		$venue_user_id=Auth::id();
 		$venue_institute_id=Institute::getInstituteforUser($venue_user_id);
+		
 		$credentials['venue_institute_id']=$venue_institute_id;
 		$credentials['venue_user_id']=$venue_user_id;
+		$institute=Institute::where('id',$credentials['venue_institute_id'])->first()->institute_url;
+		$locality=Locality::where('id',$credentials['venue_locality_id'])->first()->locality_url;
+		// dd($locality);
+		$credentials['venue']=$institute.'-'.$locality;
+		
 		$validator = Validator::make($credentials, Venue::$rules);
 		unset($credentials['csrf_token']);
 		if($validator->fails())

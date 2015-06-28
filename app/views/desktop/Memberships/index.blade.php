@@ -67,7 +67,7 @@
 							</li>
 							<li class="col-md-12" style="margin:5px 0px;">
 								<div class='col-md-10 col-sm-10' style="" id="promoCodeContainer">
-            						<input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="promo_Code" />
+            						<input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="promo_code" />
           						</div>
           						<div class='col-md-2 col-sm-2' id="promoCodeMessageContainer" style="text-align:left;padding:1px 0px 0px 0px;font-size:15px;color:green">
              					<a href="javascript:verifyPromoCode();">Apply</a>

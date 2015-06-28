@@ -178,13 +178,7 @@
 					</div>			
 				</div>
 				<div class="col-xs-12 maz_pad_z" id="results-container" >
-					<ul class="list-unstyled maz_pad_z row" id="batchesData">
-					<?php 
-					if(empty($batchesForCategoryLocation))
-						$dataAvaiable = false;
-					else
-						$dataAvaiable = true;
-					?>
+					<ul class="list-unstyled maz_pad_z row" id="batchesData">					
 					@if(!empty($batchesForCategoryLocation)) 
 					@foreach($batchesForCategoryLocation as $batchInfo)
 						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batch/{{$batchInfo->batch}}" >
@@ -364,7 +358,7 @@
 		sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();			
 		// navActive('NavItem'+categoryId);
-		if(result.length==0)	
+		if(result == "")
 		{
 			$('#loadMore').css('display','none');
 			$('#noResults').css('display','block');

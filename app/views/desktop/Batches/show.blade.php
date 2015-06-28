@@ -197,7 +197,7 @@
         </div>
         <div id="comments" class="sample-box">
           <div id='sample-batch-name'>Write a Review</div>
-          <form  action='/comments/store/' method='post' id="commentsForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
+          <form  action='/comments/store/' enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
             <div class="form-group" id='rating-input'>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="comment_institute_id" value="{{$instituteID}}">

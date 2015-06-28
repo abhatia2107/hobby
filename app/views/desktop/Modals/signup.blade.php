@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <input type="tel" placeholder="Enter Your Mobile Number*" class="form-control" name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
+                                <input type="text" placeholder="Enter Your Mobile Number*" class="form-control" name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
                             </div>
                         </div>
                     </div>

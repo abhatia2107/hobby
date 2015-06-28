@@ -133,6 +133,7 @@
 	<div class="row">
 		<div class="col-xs-12">			
 			<div class="row">
+				<h1>@if(isset($metaContent[3])){{$metaContent[3]}} @endif</h1>
 				<!--Start of filter division -->
 				<div class="col-xs-12 filter_options_popup">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->

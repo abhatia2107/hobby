@@ -102,7 +102,7 @@
 					</div>
 					<div class="form-group inner-addon">
 						<i class="glyphicon glyphicon-phone left-addon"></i>
-						 <input type="phone" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
+						 <input type="text" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
 					</div>
 					<div class="form-group">
 					  <label for="comment">Message:</label>
@@ -128,13 +128,12 @@
 </div>
 <ul class="breadcrumb">
 		<li>
-			<a href="{{url('/')}}">Home</a> <span class="divider">/</span>
+			<a href="{{url('/')}}">Home</a>
 		</li>
 		<li class="active">
 			Fitness
 		</li>		
-		<?php /*$filterPageTitle = "Fitness Classes in Hyderabad";*/ ?>
-		<h1>{{$metaContent[3]}}</h1>
+		<h1>@if(isset($metaContent[3])){{$metaContent[3]}} @endif</h1>
 	</ul>	
 <div class="container filter_page" >		
 	<div class="row">		
@@ -143,34 +142,33 @@
 				<!--Start of filter division -->
 				<div class="col-md-3 col-xs-12 col-sm-3" style="margin:0px 0px 25px 0px;padding:0px 1% 0px 0px;">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->
-					<div id="browse-filter" class="filter-option-1 filterOption">	
+					<div class="filter-option-1 filterOption">	
 						<div class="filterTitle">Sub Categories</div>
-						<div class="filterOptionsList">
-							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
-							<ul class="list-unstyled filters" id="filter-sub"> 	
+						<div class="filterOptionsList">							
+							<ul class="list-unstyled filters"> 	
 								@foreach ($subcategoriesForCategory as $subcategoryData)											
 									<li subcategory="{{$subcategoryData->id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryData->subcategory}}" type="checkbox" id="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($subcategoryData->id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryData->subcategory}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryData->subcategory}}" type="checkbox" data-filterid="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($subcategoryData->id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryData->subcategory}}</span></label>
 									</li>
 								 @endforeach
 							 </ul>
 							 
 						</div>
 					</div>			
-					<div id="browse-filter" class="filter-option-2 filterOption">	
+					<div class="filter-option-2 filterOption">	
 						<div class="filterTitle">Locality</div> 
 						<div class="filterOptionsList">
 							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
-							<ul class="list-unstyled filters" id="filter-sub"> 
+							<ul class="list-unstyled filters"> 
 								@foreach ($localitiesForLocation as $localityData)									
 									<li subcategory="{{$localityData->id}}" >								
-									 	 <label class="sub"><input autocomplete="off" style="" value="{{$localityData->locality_url}}" type="checkbox" id="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($localityData->id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityData->locality}}</span></label>
+									 	 <label class="sub"><input autocomplete="off" value="{{$localityData->locality_url}}" type="checkbox" data-filterid="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($localityData->id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityData->locality}}</span></label>
 									</li> 
 								@endforeach
 							 </ul>							 
 						</div>
 					</div>
-					<div id="browse-filter" class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 10px 5px;display:block;">	
+					<div class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 10px 5px;display:block;">	
 						<h5>Like us on facebook</h5>
 						<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 					</div>
@@ -179,27 +177,29 @@
 					<ul class="list-unstyled row maz_pad_z" id="batchesData">						
 					@if(!empty($batchesForCategoryLocation)) 
 					@foreach($batchesForCategoryLocation as $batchInfo)
-						<li itemscope itemtype='http://schema.org/SportsActivityLocation' id="/batch/{{$batchInfo->batch}}" >
+						<li itemscope itemtype="http://schema.org/SportsActivityLocation">
 							<div class="batch col-md-12 col-xs-12 col-sm-12 maz_pad_z" id="batch{{$batchInfo->id}}" >
 								<div class="col-md-9 col-xs-12 col-sm-12 body maz_pad_z" >
 									<div class="col-md-12 col-xs-12 col-sm-12 header">
-										<h2 title="Institute Name"><a href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
+										<h2 title="Institute Name"><a itemprop="url" href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
 										<h3 class="maz_pad_z" title="Activity Name, Locality">
-											<span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">{{$batchInfo->subcategory}}, 
-											<span itemprop="addressLocality">{{$batchInfo->locality}}</span></span>
+											<span style="display:none" itemprop="additionalType">ExerciseGym</span>
+											<span>{{$batchInfo->subcategory}}, {{$batchInfo->locality}}</span>
 										</h3>
 									</div>																
 									<div class="col-md-6 col-xs-12 col-sm-6 leftPart maz_pad_z" >
-										<div class="item" title="Landmark is {{$batchInfo->venue_landmark}}">
-											<span class="text_over_flow_hide">
-											<span class="glyphicon glyphicon-map-marker"></span>
-											<span>{{$batchInfo->venue_landmark}}</span>
+										<div class="item" title="Landmark is {{$batchInfo->venue_landmark}}, {{$batchInfo->locality}}">
+											<span class="text_over_flow_hide" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+												<span class="glyphicon glyphicon-map-marker"></span>
+												<span itemprop="streetAddress">{{$batchInfo->venue_landmark}}</span>, 
+												<span itemprop="addressLocality">{{$batchInfo->locality}}</span>, 
+												<span itemprop="postalCode">{{$batchInfo->venue_pincode}}</span>
 											</span>
 										</div>
 										<div class="item" title="Schedule: {{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}">
 											<span class="text_over_flow_hide">
 											<span class="glyphicon glyphicon-time"></span>
-											<span>{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</span>
+											<time itemprop="openingHours" datetime="Mo-Su">{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</time>
 											<span class="text_over_flow_hide">
 										</div>									
 									</div>								
@@ -220,7 +220,7 @@
 								</div>
 								<div class="col-md-3 col-xs-12 col-sm-12 bookClass singleSessionPriceContainer 	">
 									<div class="singleSessionPrice">
-									<div class="times_font">₹{{$batchInfo->batch_single_price}} / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
+									<div class="times_font">₹<span itemprop="priceRange">{{$batchInfo->batch_single_price}}</span> / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
 									<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
 									</div>
 								</div>	
@@ -369,25 +369,20 @@
 			{
 				filterStatus = true;
 			}				
-			$("#filter-sub input").click(function(e)
-			{		
-				if($(this).attr('id')=="subcategory_filter")
-				{					
-					$('.filter-option-1 .filters').css('opacity','.5');
-					$('.filter-option-1 .filter_option_loading').show();
+			$(".filters input").click(function(e)
+			{	
+				$(".filterOptionsList").css('pointer-events','none');
+				if($(this).data('filterid') == "subcategory_filter")
+				{				
+					$('.filter-option-1 .filters').css('opacity','.5');					
 				}
 				else
 				{
-					$('.filter-option-2 .filters').css('opacity','.5');
-					$('.filter-option-2 .filter_option_loading').show();
-				}				
-				$('#loadMore').show();
-				$('#noResults').hide();
-				result = [];				
+					$('.filter-option-2 .filters').css('opacity','.5');					
+				}					
 				filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();							
 				if(filter_select.length>0)
 				{						
-					filterStatus = true;				
 					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();					
 					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
 					if(sub_select.length == 1 && loc_select.length ==0)

@@ -9,7 +9,7 @@
 ?>
     <meta name="google-site-verification" content="vgzS24WtBop22kDPTpDMKE4pKu92EkBc3NVHcuIqPfk" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>{{$metaContent[0]}}</title>
     <meta name="description" content="{{$metaContent[1]}}">
     <meta name="keywords" content="{{$metaContent[2]}}">

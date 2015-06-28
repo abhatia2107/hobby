@@ -102,7 +102,7 @@
 					</div>
 					<div class="form-group inner-addon">
 						<i class="glyphicon glyphicon-phone left-addon"></i>
-						 <input type="phone" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
+						 <input type="text" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
 					</div>
 					<div class="form-group">
 					  <label for="comment">Message:</label>
@@ -142,10 +142,10 @@
 				<!--Start of filter division -->
 				<div class="col-md-3 col-xs-12 col-sm-3" style="margin:0px 0px 25px 0px;padding:0px 1% 0px 0px;">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->
-					<div id="browse-filter" class="filter-option-1 filterOption">	
+					<div class="filter-option-1 filterOption">	
 						<div class="filterTitle">Sub Categories</div>
 						<div class="filterOptionsList">							
-							<ul class="list-unstyled filters" id="filter-sub"> 	
+							<ul class="list-unstyled filters"> 	
 								@foreach ($subcategoriesForCategory as $subcategoryData)											
 									<li subcategory="{{$subcategoryData->id}}" >								
 									 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryData->subcategory}}" type="checkbox" data-filterid="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($subcategoryData->id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryData->subcategory}}</span></label>
@@ -155,11 +155,11 @@
 							 
 						</div>
 					</div>			
-					<div id="browse-filter" class="filter-option-2 filterOption">	
+					<div class="filter-option-2 filterOption">	
 						<div class="filterTitle">Locality</div> 
 						<div class="filterOptionsList">
 							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
-							<ul class="list-unstyled filters" id="filter-sub"> 
+							<ul class="list-unstyled filters"> 
 								@foreach ($localitiesForLocation as $localityData)									
 									<li subcategory="{{$localityData->id}}" >								
 									 	 <label class="sub"><input autocomplete="off" value="{{$localityData->locality_url}}" type="checkbox" data-filterid="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($localityData->id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityData->locality}}</span></label>
@@ -168,7 +168,7 @@
 							 </ul>							 
 						</div>
 					</div>
-					<div id="browse-filter" class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 10px 5px;display:block;">	
+					<div class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 10px 5px;display:block;">	
 						<h5>Like us on facebook</h5>
 						<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 					</div>
@@ -369,7 +369,7 @@
 			{
 				filterStatus = true;
 			}				
-			$("#filter-sub input").click(function(e)
+			$(".filters input").click(function(e)
 			{	
 				$(".filterOptionsList").css('pointer-events','none');
 				if($(this).data('filterid') == "subcategory_filter")

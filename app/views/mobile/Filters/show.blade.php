@@ -219,8 +219,8 @@
 									<div class="times_font">₹{{$batchInfo->batch_single_price}} / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
 									<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
 									</div>
-								</div>	
-							</span>																		
+								</div>
+							</div>	
 						</li>
 					@endforeach
 					@endif					

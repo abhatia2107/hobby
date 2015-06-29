@@ -309,7 +309,7 @@ span.stars span {  background-position: 0 0; }
 
 #signupModal .modal-body .row {margin-top: 10px;}
 
-#signupModal .modal-dialog { margin-top:3%; }
+#signupModal .modal-dialog { margin-top:9%; }
 
 #signupModal .modal-header {height: 60px;padding-top: 10px;}
 
@@ -341,11 +341,17 @@ span.stars span {  background-position: 0 0; }
 
 .required {  color: red; }
 
+a:hover, a:active, a:focus {text-decoration: none;outline: none;}
+
+button:hover, button:active, button:focus {text-decoration: none;outline: none;}
+
 .userInfoListing {  text-align: right;font-size: 18px;padding-top: 13px; }
 
 .MainHeaderUserInfo { padding-right: 5px;text-align: right;font-size: 18px !important;float: right; }
 
 .MainHeaderUserInfo a,.userInfoListing a {  text-decoration: none;color: white; }
+
+.userInfoListing a:hover, a:active, a:focus {text-decoration: none;outline: none;}
 
 .login {  padding: 2px 6px;border: 1px solid;border-color: #20cfb1;border-radius: 5px;font-size: 14px;}
 

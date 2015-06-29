@@ -29,7 +29,7 @@
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Class Booked for: {{$date}}</div>
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Number of Sessions: {{$no_of_sessions}}</div>
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">Amount Paid: Rs.{{$amount}}/-</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">User Contact Number: {{$venue_contact_no}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;">User Contact Number: {{$user_contact_no}}</div>
 						</div>								
 					</div>
 				</div>	

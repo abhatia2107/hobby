@@ -111,8 +111,8 @@ class BookingsController extends \BaseController {
 			unset($credentials['pay_hobbyix']);
 			$credentials['referral_credit_used']=$batch->batch_credit;
 			$user=User::find($credentials['user_id']);
-			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->first();
-			$batch_booking_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->first();
+			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->where('order_status','success')->where('referral_credit_used','>',0)->first();
+			$batch_booking_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->where('order_status','success')->first();
 			// dd($booking_already_done);
 			if($credentials['no_of_sessions']==1){
 				if(($user->user_free_credits_left>=$credentials['referral_credit_used'])||($user->user_credits_left>=$credentials['referral_credit_used'])){

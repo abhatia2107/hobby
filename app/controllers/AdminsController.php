@@ -64,15 +64,18 @@ class AdminsController extends \BaseController {
 		//dd($created);
 		if($created){
 			/*Confirmation mail is to be send to the newly registerd admin*/
-			$email=$user->email;
+			$id=$user->id;
 			$name=$user->user_name;
+			$email=$user->email;
 			$data=[
+				'id'=>$id,
 				'name'=>$name,
+				'email'=>$email,
 			];
 			$subject=Lang::get('admin.admin_mail_subject');
 			Mail::later(60,'Emails.admin.admin', $data, function($message) use ($email,$name,$subject)
 			{
-    			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
+    			$message->bcc("services.sent@hobbyix.com","Services Sent")->to($email, $name)->subject($subject);
 			});
 			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_created'));
 		}

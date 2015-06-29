@@ -14,5 +14,8 @@
 			Moreover you can control your events.<br/>
 			<br/>
 		</div>
+		<p> 
+			<a href="/users/unsubscribe/{{$email}}/{{$id}}">Unsubscribe</a> from these notifications
+		</p>
 	</body>
 </html>

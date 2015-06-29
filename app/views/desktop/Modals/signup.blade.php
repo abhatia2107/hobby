@@ -50,7 +50,7 @@
                     </div>
                     <div class="checkbox login-remember">
                         <label class="col-sm-12 control-label" for="signup_terms">
-                            <input name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
+                            <input id="signup_terms" name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
                             I agree to <a href="/terms">terms and conditions.</a>
                         </label>
                     </div>

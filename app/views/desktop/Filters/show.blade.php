@@ -157,8 +157,7 @@
 					</div>			
 					<div class="filter-option-2 filterOption">	
 						<div class="filterTitle">Locality</div> 
-						<div class="filterOptionsList">
-							<div class="filter_option_loading"><img src="/assets/images/loading.gif"></div>
+						<div class="filterOptionsList">							
 							<ul class="list-unstyled filters"> 
 								@foreach ($localitiesForLocation as $localityData)									
 									<li subcategory="{{$localityData->id}}" >								
@@ -182,8 +181,8 @@
 								<div class="col-md-9 col-xs-12 col-sm-12 body maz_pad_z" >
 									<div class="col-md-12 col-xs-12 col-sm-12 header">
 										<h2 title="Institute Name"><a itemprop="url" href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
-										<h3 class="maz_pad_z" title="Activity Name, Locality">
-											<span style="display:none" itemprop="additionalType">ExerciseGym</span>
+										<span style="display:none" itemprop="additionalType">ExerciseGym</span>
+										<h3 class="maz_pad_z" title="Activity Name, Locality">											
 											<span>{{$batchInfo->subcategory}}, {{$batchInfo->locality}}</span>
 										</h3>
 									</div>																
@@ -205,8 +204,8 @@
 									</div>								
 									<div class="col-md-6 col-xs-12 col-sm-6 rightPart maz_pad_z">
 										<div class="col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
-											<span style='display:none'value="$batchInfo->id" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone">											
-												+91 {{$batchInfo->venue_contact_no}}
+											<span style="display:none" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone" >											
+												 +91 {{$batchInfo->venue_contact_no}}
 											</span>
 											<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>
 										</div>		
@@ -227,8 +226,7 @@
 							</div>																		
 						</li>
 					@endforeach
-					@endif
-					<!--<div id="loadMore" class='resultsMessage'><img height="30px" width="30px" src="/assets/images/filter_loading.gif"> Loading More Results</div> -->
+					@endif					
 					<div id="noResults" class='resultsMessage' >No Results Found</div>
 					</ul>
 					@if($batchesForCategoryLocation)
@@ -311,7 +309,7 @@
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
 				      <li title="{{$locationSubcategories[$index]->subcategory}} classes in {{$location}}" >
 				        <a class="text_over_flow_hide" href="/subcategory/{{$locationSubcategories[$index]->subcategory}}">
-				          {{$locationSubcategories[$index]->subcategory}} classes in {{$location}}
+				          {{$locationSubcategories[$index]->subcategory}} in {{$location}}
 				        </a>
 				      </li>
 				    </div> 

@@ -54,6 +54,8 @@
 
     .rating-input { float: right;width: 16px;height: 16px;padding: 0;margin: 0 0 0 -16px;opacity: 0;}
 
+    #rating-input {margin: 10px 0px;padding: 0;}
+
     .rating-star { position: relative;float: right;display: block;width: 16px;height: 16px;background: url(/assets/images/sample/star.png) 0 -16px; }
 
     .rating-star:hover,.rating-star:hover ~ .rating-star,.rating-input:checked ~ .rating-star { background-position: 0 0; }
@@ -142,16 +144,16 @@
       <div class="samplePageInfo cover-wrapper ">
         <div class="container">
           <div class="col-sm-10 col-md-10" itemscope itemtype="http://schema.org/SportsActivityLocation">
-            <h1 id='sample-institute-name' title="Name of the Institute is {{$instituteName}}" itemprop="name" >{{$instituteName}}</h1>
-            <h2 id='sample-batch-type' title="{{$instituteName}} Subcategory and Category">{{'  '.$subcategory}},{{' '.$category}}</h2>
-            <div id='sample-institute-address' title="Landmark, Locality and Location of {{$instituteName}}" class="text_over_flow_hide">
+            <h1 id='sample-institute-name' title="Name of the Institute" itemprop="name" >{{$instituteName}}</h1>
+            <h2 id='sample-batch-type' title="Subcategory and Category">{{'  '.$subcategory}},{{' '.$category}}</h2>
+            <div id='sample-institute-address' title="Landmark, Locality and Location of Institute" class="text_over_flow_hide">
               <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                 <span class='glyphicon glyphicon-map-marker'></span>
                 <span itemprop="streetAddress">{{'  '.$landMark}}</span>, 
                 <span itemprop="addressLocality">{{$locality.', '.$location}}</span>
               </div>
             </div>
-            <div id='sample-institute-contact' title="{{$instituteName}} Contact Number">
+            <div id='sample-institute-contact' title="Institute Contact Number">
               <div class='glyphicon glyphicon-phone-alt'></div><span itemprop="telephone">{{'  +91 '.$instituteContact}}</span>
             </div>
           </div>
@@ -196,30 +198,34 @@
           </div>
         </div>
         <div id="comments" class="sample-box">
+          <div class="row">
           <div id='sample-batch-name'>Write a Review</div>
           <form  action='/comments/store/' enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
-            <div class="form-group" id='rating-input'>
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="comment_institute_id" value="{{$instituteID}}">
-                <span class="rating" >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="comment_institute_id" value="{{$instituteID}}">
+            <div class="form-group col-md-12 col-sm-12 col-xs-12" id='rating-input'>                
+                <span for="rating" class="col-md-4 col-sm-5 col-xs-12" style="margin:-7px 0px 0px 0px; ">Rate this Batch:</span>                
+                <span class="rating" class="col-md-7 col-sm-7 col-xs-12" >
                 @for($index = 5; $index > 0;$index--)
                   <input type="radio" class="rating-input" required='required'
                       id="rating-input-1-{{$index}}" value="{{$index}}" name="comment_rating">
                   <label for="rating-input-1-{{$index}}" class="rating-star"></label>
-                @endfor
-                 <label for="rating" style="float:right;margin-right:20px;margin-top:-7px">Rate this Batch:</label>
-              </span>                                                            
+                @endfor                 
+                </span>                                                            
             </div>  
-            <div class="form-group" id="ReviewForm">
+            <div class="form-group col-md-12" id="ReviewForm">
               <label for="comment">Review:</label>
               <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
             </div>
+            <div class="form-group col-md-12" >
             @if($loggedIn)
               <button type="submit" class="btn btn-primary">Submit</button>              
             @else
               <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-primary">Submit</button>           
             @endif
+            </div>
           </form>
+          </div>
         </div>
       </div>   
       <div class='col-md-4 col-sm-5 col-xs-12 column' style="margin-bottom:25px">

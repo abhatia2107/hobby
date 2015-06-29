@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="form-group rememberMe col-md-6 col-sm-6 col-xs-6">                               
                         <label class="control-label" for="remember">
-                            <input name="remember"  value="forever" checked="checked" type="checkbox">
+                            <input name="remember" id="remember" value="forever" checked="checked" type="checkbox">
                             Remember Me 
                         </label>                                                             
                     </div>                

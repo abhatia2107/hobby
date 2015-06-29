@@ -243,8 +243,8 @@
 		</div>
 	</div>
 </div>
-@if(isset($subcategories))
-	<div class="container" id="related_data_container">
+<div class="container" id="related_data_container">
+@if(isset($subcategories))	
 	 	<div class="row">
 	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
 	    		<?php	    			
@@ -254,22 +254,20 @@
 		          	$width = 3;
 		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 		        ?>
-		        <h4>Related to {{$instituteName}} activities</h4>       		        		        
+		        <h4>Related to {{$instituteName}}</h4>       		        		        
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
+				      <li title="{{$subcategories[$index]->subcategory}} in {{$locality.', '.$location}}" >
 				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locArr[0]}}">
-				          {{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
+				          {{$subcategories[$index]->subcategory}} in {{$locality.', '.$location}}
 				        </a>
 				      </li>
 				    </div> 
 				@endfor		            		                  		             
 	      </div>       
-	  </div>
-	</div>
+	  </div>	
 @endif
-@if(isset($localities))
-	<div class="container" id="related_data_container">
+@if(isset($localities))	
 	 	<div class="row">
 	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
 	    		<?php	    			
@@ -277,24 +275,26 @@
 		          	$index = 0;
 		          	$maxlength = 12;		          
 		          	$width = 3;
-		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; } 
+		          	if($subcategory=="Fitness")
+		          		$activities = "Activities";
+		          	else
+		          		$activities = "";
 		        ?>
-		        <h4>Related to {{$subcategory}} classes in {{$location}}</h4>       		        		        
+		        <h4>Related to {{$subcategory}} {{$activities}} in {{$locality}} @if($locality!=$location){{', '.$location}} @endif</h4>       		        		        
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}" >
+				      <li title="{{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}" >
 				        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
-				          {{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}
+				          {{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}
 				        </a>
 				      </li>
 				    </div> 
 				@endfor		            		                  		             
 	      </div>       
-	  </div>
-	</div>
+	  </div>	
 @endif
-@if(isset($locationSubcategories))
-	<div class="container" id="related_data_container">
+@if(isset($locationSubcategories))	
 	 	<div class="row">
 	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
 	    		<?php	    			
@@ -304,10 +304,10 @@
 		          	$width = 3;
 		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 		        ?>
-		        <h4>Related to {{$categories[$category_id-1]->category}} classes in  {{$location}}</h4>       		        		        
+		        <h4>Related to {{$categories[$category_id-1]->category}} Activities in  {{$location}}</h4>       		        		        
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$locationSubcategories[$index]->subcategory}} classes in {{$location}}" >
+				      <li title="{{$locationSubcategories[$index]->subcategory}} Activities in {{$location}}" >
 				        <a class="text_over_flow_hide" href="/subcategory/{{$locationSubcategories[$index]->subcategory}}">
 				          {{$locationSubcategories[$index]->subcategory}} in {{$location}}
 				        </a>
@@ -315,11 +315,9 @@
 				    </div> 
 				@endfor		            		                  		             
 	      </div>       
-	  </div>
-	</div>
+	  </div>	
 @endif
-@if(isset($localitySubcategories))
-	<div class="container" id="related_data_container">
+@if(isset($localitySubcategories))	
 	 	<div class="row">
 	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
 	    		<?php	    			
@@ -329,20 +327,20 @@
 		          	$width = 3;
 		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 		        ?>
-		        <h4>Related to {{$categories[$category_id-1]->category}} classes in  {{$locality.', '.$location}}</h4>       		        		        
+		        <h4>Related to {{$categories[$category_id-1]->category}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif</h4>
 				@for(; $index<$maxlength; $index++ )
 				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
+				      <li title="{{$localitySubcategories[$index]->subcategory}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif" >
 				        <a class="text_over_flow_hide" href="/subcategory/{{$localitySubcategories[$index]->subcategory}}">
-				          {{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
+				          {{$localitySubcategories[$index]->subcategory}} in {{$locality}}@if($locality!=$location){{', '.$location}}@endif
 				        </a>
 				      </li>
 				    </div> 
 				@endfor		            		                  		             
 	      </div>       
 	  </div>
-	</div>
 @endif
+</div>
 @stop
 @section('pagejquery')
 	<script type="text/javascript">

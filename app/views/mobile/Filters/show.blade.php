@@ -118,6 +118,8 @@
 
   	.related_item a {color:#5C5C5C;}
 
+  	.filter_page h1 {font-size: 20px;text-align: center;margin: 10px 5px; }
+
 </style>
 <div class="container membership_message" style="background:#3396D1">
 	<div class="alert">		
@@ -129,10 +131,11 @@
 		</div>
 	</div>
 </div>
-<div class="container" >
+<div class="container filter_page" >
 	<div class="row">
 		<div class="col-xs-12">			
 			<div class="row">
+				<h1>@if(isset($metaContent[3])){{$metaContent[3]}} @endif</h1>
 				<!--Start of filter division -->
 				<div class="col-xs-12 filter_options_popup">
 					<!--<span id='filter-tittle-name'>Filter By</span>-->
@@ -241,106 +244,6 @@
 		<div class="filter_options_button"><button onclick="displayFilterOptions();" class="btn btn-primary">Filter</button></div>
 	</div>	
 </div>
-@if(isset($subcategories))
-	<div class="container" id="related_data_container">
-	 	<div class="row">
-	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
-	    		<?php	    			
-		          	$institutesLength = sizeof($subcategories);
-		          	$index = 0;
-		          	$maxlength = 12;		          
-		          	$width = 3;
-		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
-		        ?>
-		        <h4>Related to {{$instituteName}} activities</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locArr[0]}}">
-				          {{$subcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
-				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
-	      </div>       
-	  </div>
-	</div>
-@endif
-@if(isset($localities))
-	<div class="container" id="related_data_container">
-	 	<div class="row">
-	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
-	    		<?php	    			
-		          	$institutesLength = sizeof($localities);
-		          	$index = 0;
-		          	$maxlength = 12;		          
-		          	$width = 3;
-		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
-		        ?>
-		        <h4>Related to {{$subcategory}} classes in {{$location}}</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
-				          {{$subcategory}} classes in {{$localities[$index]->locality.', '.$location}}
-				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
-	      </div>       
-	  </div>
-	</div>
-@endif
-@if(isset($locationSubcategories))
-	<div class="container" id="related_data_container">
-	 	<div class="row">
-	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
-	    		<?php	    			
-		          	$institutesLength = sizeof($locationSubcategories);
-		          	$index = 0;
-		          	$maxlength = 12;		          
-		          	$width = 3;
-		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
-		        ?>
-		        <h4>Related to {{$categories[$category_id-1]->category}} classes in  {{$location}}</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$locationSubcategories[$index]->subcategory}} classes in {{$location}}" >
-				        <a class="text_over_flow_hide" href="/subcategory/{{$locationSubcategories[$index]->subcategory}}">
-				          {{$locationSubcategories[$index]->subcategory}} classes in {{$location}}
-				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
-	      </div>       
-	  </div>
-	</div>
-@endif
-@if(isset($localitySubcategories))
-	<div class="container" id="related_data_container">
-	 	<div class="row">
-	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
-	    		<?php	    			
-		          	$institutesLength = sizeof($localitySubcategories);
-		          	$index = 0;
-		          	$maxlength = 12;		          
-		          	$width = 3;
-		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
-		        ?>
-		        <h4>Related to {{$categories[$category_id-1]->category}} classes in  {{$locality.', '.$location}}</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/subcategory/{{$localitySubcategories[$index]->subcategory}}">
-				          {{$localitySubcategories[$index]->subcategory}} classes in {{$locality.', '.$location}}
-				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
-	      </div>       
-	  </div>
-	</div>
-@endif
 @stop
 @stop
 @section('pagejquery')

@@ -139,6 +139,7 @@ class PromosController extends \BaseController {
 	 */
 	public function isValid($promo_code="",$no_of_session="1")
 	{
+		
 		if(!$promo_code)
 			return Lang::get('promo.promo_empty');
 		$referrer = URL::previous();
@@ -183,9 +184,12 @@ class PromosController extends \BaseController {
 					return Lang::get('promo.promo_max_per_user',['count'=>$promo->max_allowed_count_per_user]);
 				}
 			}
-			$promo->count++;
-			$promo->users()->attach($user_id);
-			$promo->save();
+			if(Request::isMethod('post'))
+			{
+				$promo->count++;
+				$promo->users()->attach($user_id);
+				$promo->save();
+			}
 			if(isset($promo->discount_percentage))
 			{
 				$discount=$payment*$promo->discount_percentage/100;

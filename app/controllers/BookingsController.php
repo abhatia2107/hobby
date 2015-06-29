@@ -37,6 +37,10 @@ class BookingsController extends \BaseController {
 		$referrer = URL::previous();
 		$credentials['batch_id'] = substr($referrer, strrpos($referrer, '/') + 1);
 		$batch=$this->batch->getbatch($credentials['batch_id']);
+	    if(!is_numeric($credentials['batch_id']))
+        {
+            $credentials['batch_id']=$batch->id;
+        }
 		$user_id=Auth::id();
 		$validator = Validator::make($credentials, Booking::$rules);
 		if ($validator->fails())
@@ -107,8 +111,8 @@ class BookingsController extends \BaseController {
 			unset($credentials['pay_hobbyix']);
 			$credentials['referral_credit_used']=$batch->batch_credit;
 			$user=User::find($credentials['user_id']);
-			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->first();
-			$batch_booking_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->first();
+			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->where('order_status','success')->where('referral_credit_used','>',0)->first();
+			$batch_booking_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->where('order_status','success')->first();
 			// dd($booking_already_done);
 			if($credentials['no_of_sessions']==1){
 				if(($user->user_free_credits_left>=$credentials['referral_credit_used'])||($user->user_credits_left>=$credentials['referral_credit_used'])){
@@ -400,7 +404,7 @@ class BookingsController extends \BaseController {
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.booking.user', $data, function($message) use ($email, $subject)
 		{
-			$message->to($email)->subject($subject);
+			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$batch->venue_email;
@@ -408,7 +412,7 @@ class BookingsController extends \BaseController {
 		$this->sms(false, $data['venue_contact_no'], $institute_msg);
 		Mail::send('Emails.booking.institute', $data, function($message) use ($email,$subject)
 		{
-			$message->to($email)->subject($subject);
+			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$data['admin_email'];
@@ -416,7 +420,7 @@ class BookingsController extends \BaseController {
 		$this->sms(false, $data['admin_contact_no'], $admin_msg);
 		Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
 		{
-			$message->to($email)->subject($subject);
+			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 		
 	}
@@ -453,7 +457,7 @@ class BookingsController extends \BaseController {
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.trial_booking.user', $data, function($message) use ($email, $subject)
 		{
-			$message->to($email)->subject($subject);
+			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$batch->venue_email;
@@ -461,7 +465,7 @@ class BookingsController extends \BaseController {
 		$this->sms(false, $data['venue_contact_no'], $institute_msg);
 		Mail::send('Emails.trial_booking.institute', $data, function($message) use ($email,$subject)
 		{
-			$message->to($email)->subject($subject);
+			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$data['admin_email'];
@@ -469,7 +473,7 @@ class BookingsController extends \BaseController {
 		$this->sms(false, $data['admin_contact_no'], $admin_msg);
 		Mail::send('Emails.trial_booking.admin', $data, function($message) use ($email,$subject)
 		{
-			$message->to($email)->subject($subject);
+			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 	}
 
@@ -485,7 +489,7 @@ class BookingsController extends \BaseController {
 		$subject='Booking Done';
 		$response=Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
 		{
-			$message->to($email)->subject($subject);
+			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 		dd($response);
 	}

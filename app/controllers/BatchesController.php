@@ -174,7 +174,7 @@ class BatchesController extends \BaseController {
 			$data['batch']=$credentials['batch'];
 			Mail::later(15,'Emails.batch.create', $data, function($message) use ($email,$name,$subject)
 			{
-				$message->to($email,$name)->subject($subject);
+				$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 			});*/
 			return Redirect::to('/batches')->with('success',Lang::get('batch.batch_created'));
 		}
@@ -214,7 +214,7 @@ class BatchesController extends \BaseController {
 			$instituteName = $batchDetails->institute;
 			$locality = $batchDetails->locality;
 			$location = $batchDetails->location;
-			$metaContent[0] = "$instituteName - $locality:: Hobbyix";
+			$metaContent[0] = "$instituteName - $locality :: Hobbyix";
 			$metaContent[1] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";
 			$metaContent[2] = "$instituteName $locality, $instituteName $location, $subcategory classes in $locality, $subcategory classes in $location, $subcategory classes $instituteName";
 			$institute_id=$batchDetails->batch_institute_id;
@@ -433,7 +433,7 @@ class BatchesController extends \BaseController {
 		$subject=Lang::get('message.message_emailSubjectRecieved');
 		Mail::queue('Emails.message.messageRecieved', $credentials, function($message) use ($email,$name,$subject)
 		{
-			$message->to($email,$name)->subject($subject);
+			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 		});
 
 		// To vendor.
@@ -442,7 +442,7 @@ class BatchesController extends \BaseController {
 		$subject=Lang::get('message.message_subject',array("batch"=>$credentials['batch']));
 		Mail::later(120,'Emails.message.sendMessage', $credentials, function($message) use ($email,$name,$subject)
 		{
-			$message->to($email,$name)->subject($subject);
+			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 		});
 
 		return Redirect::back()->with('success',Lang::get('message.message_sent',array("institute"=>$credentials['institute'])));

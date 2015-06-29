@@ -39,7 +39,11 @@ class BaseController extends Controller {
 									'subscriptions' => 'Subscriptions',
 									'users' => 'Users', 
 								);
+	protected $bcc_email='abhishek.bhatia@hobbyix.com';
+	protected $bcc_name='Abhishek Bhatia';
 
+	protected $location_id=1;
+	protected $category_id=1;
 	/**
 	 *Constructor to initialize the instance of all Models.
 	 */

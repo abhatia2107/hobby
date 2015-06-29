@@ -169,9 +169,7 @@
 					</div>
 					<div class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 5px 5px;text-align:center">							
 						<h4>Like us on facebook</h4>
-						<div class="fb-page" data-href="https://www.facebook.com/hobbyix"
-  data-width="380" data-hide-cover="false" data-show-facepile="false" 
-  data-show-posts="false"></div>
+						<div class="fb-page" data-href="https://www.facebook.com/hobbyix" data-width="380" data-hide-cover="false" data-show-facepile="false" data-show-posts="false"></div>						
 						<!---<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-width="240px" data-share="true"></div>						-->
 					</div>
 				</div>

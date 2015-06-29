@@ -229,7 +229,6 @@ class PromosController extends \BaseController {
 			{
 				return Lang::get('promo.promo_invalid');
 			}
-
 		}
 		$user_id=Auth::id();
 		if($user_id)

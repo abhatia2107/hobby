@@ -294,6 +294,7 @@
     </div>  
   </div>
   <div class="container" id="related_data_container">
+    <div class="fb-share-button" data-href="{{Request::url()}}" data-layout="button_count"></div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 related_item">
           <h4>Related to {{$batchDetails->institute}}</h4>       

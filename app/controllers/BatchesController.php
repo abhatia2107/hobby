@@ -37,19 +37,12 @@ class BatchesController extends \BaseController {
 		$all_subcategories=$this->subcategory->all();
 		$user_id=Auth::id();
 		$venuesForUser=$this->venue->all();
-		$age_group=$this->age_group;
-		$difficulty_level=$this->difficulty_level;
-		$gender_group=$this->gender_group;
 		//Locations are being send for venue create form which will be called up in the modal of venue.
 		$localities=$this->locality->all();
-		// $recurring=$this->recurring;
-		$schedule_session_month=$this->schedule_session_month;
-		$trial=$this->trial;
 		//For the navbar of vendor panel. It is being used in layout file to show this navbar.
 		$institute_id=$this->institute->getInstituteforUser($user_id);
-		$weekdays=$this->weekdays;
 		$facilitiesAvailable= $this->facilitiesAvailable;
-		return View::make('Batches.createentry',compact('institutes','users','all_subcategories','venuesForUser','difficulty_level','age_group','gender_group','institute_id','localities','schedule_session_month','trial','weekdays','facilitiesAvailable'));
+		return View::make('Batches.createentry',compact('institutes','users','all_subcategories','venuesForUser','institute_id','localities','facilitiesAvailable'));
 	}
 
 	public function storeentry()
@@ -197,12 +190,6 @@ class BatchesController extends \BaseController {
 	public function show($id)
 	{		
 		$batchDetails= $this->batch->getBatch($id);
-		$age_group=$this->age_group;
-		$difficulty_level=$this->difficulty_level;
-		$gender_group=$this->gender_group;
-		// $recurring=$this->recurring;
-		$trial=$this->trial;
-		$weekdays=$this->weekdays;
 		if(Request::segment(1)=='json')
 		{
 			$response['batches']=$batchDetails;
@@ -220,7 +207,7 @@ class BatchesController extends \BaseController {
 			$locality = $batchDetails->locality;
 			$location = $batchDetails->location;
 			$facebookContent[0] = $instituteName;
-	        $facebookContent[1] = "http://hobbyix.com";
+	        $facebookContent[1] = Request::url();
 	        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
 	        $facebookContent[3] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";
 			$metaContent[0] = "$instituteName - $locality :: Hobbyix";
@@ -248,7 +235,7 @@ class BatchesController extends \BaseController {
 					$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['payment'];
 			}
 			// dd($credentials);
-			return View::make('Batches.show',compact('batchDetails','credentials','user','difficulty_level','age_group','gender_group','trial','weekdays','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));
+			return View::make('Batches.show',compact('batchDetails','credentials','user','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));
 		}
 		else
 		{

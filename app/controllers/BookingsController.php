@@ -206,11 +206,11 @@ class BookingsController extends \BaseController {
 	        }
 		}
 		$facebookContent = array();
-		$facebookContent[0] = "Hobbyix Membership";
-        $facebookContent[1] = url('/');
+		$facebookContent[0] = $batch->institute;
+        $facebookContent[1] = Request::url();
         $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-        $facebookContent[3] = "Congratulations, your booking of $subcategory class with $institute is successful.";
-		return View::make('Bookings.success')->with($data,$facebookContent);
+        $facebookContent[3] = "Congratulations, your booking of $data['subcategory'] class with $data['institute'] is successful.";
+		return View::make('Bookings.success',compact($facebookContent))->with($data);
 	}
 
 	public function payment($id)

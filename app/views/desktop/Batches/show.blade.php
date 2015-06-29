@@ -243,7 +243,7 @@
                   <input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="promo_code" />                     
                 </div>
                 <div class='col-xs-3' style="text-align:left;padding:1px 0px 1px 0px;font-size:15px;">
-                   <a href="javascript:verifyPromoCode();">Apply</a>
+                   <a onclick="verifyPromoCode();" href="javascript:void(0);">Apply</a>
                 </div>          
               </div>       
               <hr/>
@@ -388,10 +388,11 @@
           }
         });                   
       }       
-      else if (condition != "onDirectApply" ) 
+      else if(condition != "onDirectApply" ) 
       {   
         $('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");                            
       }
+      else { var temp = null;}
       if(!formValidationStatus)
       {        
         var sessionPrice = {{$batchDetails->batch_single_price}};
@@ -560,7 +561,7 @@
         $('#promoCode').keypress(function(e){
           if ( e.which == 13 )
           {
-            verifyPromoCode () ;
+            verifyPromoCode ('') ;
             e.preventDefault();
           } 
         });

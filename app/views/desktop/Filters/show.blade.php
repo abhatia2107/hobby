@@ -167,9 +167,12 @@
 							 </ul>							 
 						</div>
 					</div>
-					<div class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 10px 5px;display:block;">	
-						<h5>Like us on facebook</h5>
-						<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+					<div class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 5px 5px;text-align:center">							
+						<h4>Like us on facebook</h4>
+						<div class="fb-page" data-href="https://www.facebook.com/hobbyix"
+  data-width="380" data-hide-cover="false" data-show-facepile="false" 
+  data-show-posts="false"></div>
+						<!---<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-width="240px" data-share="true"></div>						-->
 					</div>
 				</div>
 				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:15px 0px 25px 0px;padding:0px 1% 0px 0px;" >
@@ -180,7 +183,7 @@
 							<div class="batch col-md-12 col-xs-12 col-sm-12 maz_pad_z" id="batch{{$batchInfo->id}}" >
 								<div class="col-md-9 col-xs-12 col-sm-12 body maz_pad_z" >
 									<div class="col-md-12 col-xs-12 col-sm-12 header">
-										<h2 title="Institute Name"><a itemprop="url" href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
+										<h2><a itemprop="url" title="{{$batchInfo->institute}}" href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
 										<span style="display:none" itemprop="additionalType">ExerciseGym</span>
 										<h3 class="maz_pad_z" title="Activity Name, Locality">											
 											<span>{{$batchInfo->subcategory}}, {{$batchInfo->locality}}</span>
@@ -402,7 +405,6 @@
 					window.location.href = "/categories/"+category+"/locations";					
 				}				
 			});	
-
 			$('#sendMessage').on('show.bs.modal', function(e) 
 			{
 			    //get data-id attribute of the clicked element
@@ -413,7 +415,9 @@
 			    $(e.currentTarget).find('input[name="batch"]').val(batch);
 			    $(e.currentTarget).find('input[name="email"]').val(email);
 			    $(e.currentTarget).find('input[name="institute"]').val(institute);
-			});
+			});			
+			$('.fb-like').data('width',$('.filterOption').css('width'));
+			//alert($('.fb-like').data('width'));
 		});
 		
 	</script>

@@ -205,7 +205,12 @@ class BookingsController extends \BaseController {
 	            $user->save();
 	        }
 		}
-		return View::make('Bookings.success')->with($data);
+		$facebookContent = array();
+		$facebookContent[0] = "Hobbyix Membership";
+        $facebookContent[1] = url('/');
+        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
+        $facebookContent[3] = "Congratulations, your booking of $subcategory class with $institute is successful.";
+		return View::make('Bookings.success')->with($data,$facebookContent);
 	}
 
 	public function payment($id)

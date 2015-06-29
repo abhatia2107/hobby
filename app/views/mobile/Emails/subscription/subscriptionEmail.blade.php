@@ -25,6 +25,9 @@
 				<p style="text-align:center">
 				&#169;Hobbyix.com
 				</p>
+		        <p style="font-size:85%; text-align:center; color:#444;">
+		            <a href="{{url(/subscriptions/unsubscribe/{{$email}}/{{$id}})}}">Unsubscribe</a> from these notifications
+		        </p>
 		</div>
 	</body>
 </html>	

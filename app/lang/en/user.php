@@ -61,13 +61,13 @@
 		
 		"user_disable_failed" => "You already have disabled the user",
 		
-		"user_subscribed"=>"User have been subcribed to the mails successfully",
+		"user_subscribed"=>"You have been subscribed to the mails successfully",
 		
-		"user_subscribe_failed" => "User have already been subcribed to the mails",
+		"user_subscribe_failed" => "You have already been subscribed to the mails",
 		
-		"user_unsubscribed"=>"User have been unsubcribed to the mails successfully",
+		"user_unsubscribed"=>"You have been unsubcribed to the mails successfully",
 		
-		"user_unsubscribe_failed" => "User have already been unsubcribed to the mails",
+		"user_unsubscribe_failed" => "You have already been unsubcribed to the mails",
 		
 		"user_deleted"=>"Your user have been deleted successfully",
 		

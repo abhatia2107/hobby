@@ -155,7 +155,7 @@ class UsersController extends \BaseController {
 			{
 				$user->user_subscription_token=false;
 				$user->save();
-				return Redirect::back()->with('success',Lang::get('user.user_unsubscribed'));
+				return Redirect::to('/')->with('success',Lang::get('user.user_unsubscribed'));
 			}
 			else
 			{
@@ -164,7 +164,7 @@ class UsersController extends \BaseController {
 		}
 		else
 		{
-			return Redirect::back()->with('failure',Lang::get('user.user_not_exist'));
+			return Redirect::to('/')->with('failure',Lang::get('user.user_not_exist'));
 		}
 	}
 	/**

@@ -14,5 +14,8 @@
 			Moreover you can control your events.<br/>
 			<br/>
 		</div>
+        <p style="font-size:85%; text-align:center; color:#444;">
+            <a href="{{url("/users/unsubscribe/$email/$id")}}">Unsubscribe</a> from these notifications
+        </p>
 	</body>
 </html>

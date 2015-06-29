@@ -53,7 +53,7 @@ class SubscriptionsController extends \BaseController {
 			if($subscription->subscription_email==$email)
 			{
 				$subscription->delete();
-				return Redirect::back()->with('success',Lang::get('subscription.unsubscribed'));
+				return Redirect::to('/')->with('success',Lang::get('subscription.unsubscribed'));
 			}
 			else
 			{
@@ -62,7 +62,7 @@ class SubscriptionsController extends \BaseController {
 		}
 		else
 		{
-			return Redirect::back()->with('failure',Lang::get('subscription.subscription_not_exist'));
+			return Redirect::to('/')->with('failure',Lang::get('subscription.subscription_not_exist'));
 		}
 	}
 

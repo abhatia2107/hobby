@@ -327,8 +327,8 @@ class UsersController extends \BaseController {
 			$newUserData['user_referral_code']=$newUserData['user_contact_no'];
 			// dd($newUserData);
 			$this->user->create($newUserData);
-			$userId=$this->user->max('id');
-			// dd('test '.$userId);
+			$id=$this->user->max('id');
+			// dd('test '.$id);
             
             if(isset($referee))
             {
@@ -337,7 +337,9 @@ class UsersController extends \BaseController {
                 $name = $referee->user_name;
                 $email = $referee->email;
                 $data = [
+                	'id'=>$referee->id,
                     'name'=>$name,
+	            	'email'=>$email,
 	                'user_wallet' => $referee->user_wallet,
 	                'user_pending_referral' => $referee->user_pending_referral,
                     'friend_name' => $newUserData['user_name'],
@@ -345,7 +347,7 @@ class UsersController extends \BaseController {
                 /*Confirmation mail is to be send to the user for pending referral*/
                 $subject = Lang::get('user.user_pending_referral_subject',array("name"=>$newUserData['user_name']));
                 Mail::later(15, 'Emails.user.pending_referral', $data, function ($message) use ($email, $name, $subject) {
-                    $message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
+                    $message->bcc("services.sent@hobbyix.com","Services Sent")->to($email, $name)->subject($subject);
                 });
             }
 
@@ -365,12 +367,13 @@ class UsersController extends \BaseController {
                 $data = [
                     'name' => $newUserData['user_name'],
                     'confirmationcode' => $confirmationCode,
-                    'userId' => $userId,
+                    'email' => $email,
+                    'id' => $id,
                 ];
                 /*Confirmation mail is to be send to the newly registered user*/
                 $subject = Lang::get('user.user_verify_mail_subject');
                 Mail::later(15, 'Emails.user.verify', $data, function ($message) use ($email, $name, $subject) {
-                    $message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
+                    $message->bcc("services.sent@hobbyix.com","Services Sent")->to($email, $name)->subject($subject);
                 });
                 
                 return Redirect::to('/')->with('success', Lang::get('user.user_signup_success'));
@@ -381,7 +384,7 @@ class UsersController extends \BaseController {
 	/**
 	*Function to verify the email of the newly registered user. 
 	*
-	*@param integer userId and string confirmation code;
+	*@param integer id and string confirmation code;
 	*@return Route to login
 	*/
 	public function getEmailVerify($id,$confirmationCode)
@@ -417,7 +420,9 @@ class UsersController extends \BaseController {
         $email=$user['email'];
         $name=$user['user_name'];
         $data = [
+        	'id' => $user['id'],
             'name' => $name,
+            'email' => $email,
         ];
         if(isset($user['user_referee_id']))
         {
@@ -433,7 +438,7 @@ class UsersController extends \BaseController {
         /*Welcome on board mail is to be sent to the newly registered user*/
         $subject = Lang::get('user.user_welcome_mail_subject');
         Mail::later(15, 'Emails.user.welcome', $data, function ($message) use ($email, $name, $subject) {
-            $message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
+            $message->bcc("services.sent@hobbyix.com","Services Sent")->to($email, $name)->subject($subject);
         });
         return Redirect::to('/')->with('success',Lang::get('user.welcome',array("name"=>$user['user_name'])));
 	}

@@ -30,6 +30,9 @@
 				<p style="font-size:85%; text-align:center; color:#444;">
 					&#169; 2015 Hobbyix.com
 				</p>
+		        <p> 
+		            <a href="/users/unsubscribe/{{$email}}/{{$id}}">Unsubscribe</a> from these notifications
+		        </p>
 			</div>
 		</div>
 	</body>

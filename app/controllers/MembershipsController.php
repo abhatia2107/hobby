@@ -55,6 +55,7 @@ class MembershipsController extends \BaseController {
 	public function store()
 	{
 		$credentials = Input::all();
+		$user_id=Auth::id();
 		if($user_id)
 		{
 			$user=User::find($user_id);
@@ -82,7 +83,6 @@ class MembershipsController extends \BaseController {
 		else
 		{
 			$price=$this->membershipVal['payment'];
-			$user_id=Auth::id();
 			if($user_id)
 			{
 				if($credentials['wallet_amount'])

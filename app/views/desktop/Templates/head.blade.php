@@ -17,8 +17,8 @@
     <meta property="og:title" content="Hobbyix" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="hobbyix.com"/>
-    <meta property="og:url" content="http://hobbyix.com" />    
-    <meta property="og:image" content="/assets/images/home/institute.jpg" />
+    <meta property="og:url" content="{{url('/')}}" />    
+    <meta property="og:image" content="{{asset('/assets/images/home/institute.jpg')}}" />
     <meta property="og:description" content="Get access to all gym, zumba classes, aerobics, pilates, yoga, kick-boxing and dance etc. with one membership." />
     <link rel="icon" type="image/png" href="/assets/images/hobbyix_favicon.png">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">

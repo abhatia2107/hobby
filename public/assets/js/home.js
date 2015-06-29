@@ -33,13 +33,10 @@
   function show_contact (id) 
   {
     $('#show_contact'+id).empty();
-    $('#contact'+id).fadeIn(700);
-    // var batch_id  = $('#contact'+id).attr('value');
+    $('#contact'+id).fadeIn(700);   
     $.get("/batches/increment/"+id,function(response)
-    {
-      // alert(response);
-    });
-    // body...
+    {      
+    });    
   }
   function sendMessage(batchID,instituteID,EMail)
   {

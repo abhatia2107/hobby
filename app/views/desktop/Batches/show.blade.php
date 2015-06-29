@@ -6,9 +6,9 @@
         -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
     }
 
-    #sample-institute-name { font-size: 40px;font-weight: bold;margin: 5px 0px; }
+    .samplePageInfo h1 { font-size: 40px;font-weight: bold;margin: 5px 0px; }
 
-    #sample-batch-type { font-size: 22px;font-weight: normal;margin: 0px 0px 10px 0px; }
+    .samplePageInfo h3 { font-size: 22px;font-weight: normal;margin: 0px 0px 10px 0px; }
 
     #sample-institute-address { font-size: 22px;font-weight: normal;margin-bottom: 5px; }
 
@@ -16,7 +16,7 @@
 
     #sample-institute-contact .glyphicon { font-size: 19px; font-weight: normal; }
 
-    #sample-batch-name { font-size: 25px;font-weight: normal;-webkit-box-shadow: 0px 3px 0px -2px #0099FF;box-shadow: 0px 3px 0px -2px #0099FF;text-align: center; }
+    #sample-batch-name { font-size: 25px;font-weight: normal;-webkit-box-shadow: 0px 3px 0px -2px #0099FF;box-shadow: 0px 3px 0px -2px #0099FF;text-align: center;margin-top: 0;padding: 0 }
 
     #secondary { box-shadow: 1px 1px 10px rgba(0,0,0,0.5);-moz-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);-webkit-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
       font-size: 20px;margin-left: 50px;padding:20px 30px 20px 30px;
@@ -53,6 +53,8 @@
     .rating { overflow: hidden;display: inline-block; }
 
     .rating-input { float: right;width: 16px;height: 16px;padding: 0;margin: 0 0 0 -16px;opacity: 0;}
+
+    #rating-input {margin: 10px 0px;padding: 0;}
 
     .rating-star { position: relative;float: right;display: block;width: 16px;height: 16px;background: url(/assets/images/sample/star.png) 0 -16px; }
 
@@ -97,30 +99,7 @@
   </style> 
 @stop
 @section('content')
-  <?php
-      $batchID = $batchDetails->id;
-      $instituteName = $batchDetails->institute;
-      $instituteAddress = $batchDetails->venue_address;
-      $instituteContact = $batchDetails->venue_contact_no;
-      $instituteID = $batchDetails->batch_institute_id;
-      $batchName = $batchDetails->batch;
-      $category = $batchDetails->category;
-      $sessionPrice = $batchDetails->batch_single_price;
-      $subcategory = $batchDetails->subcategory;
-      $ageGroup = $batchDetails->batch_age_group;
-      $genderGroup = $batchDetails->batch_gender_group;
-      $comment = $batchDetails->batch_comment;
-      $tagline = $batchDetails->batch_tagline;
-      $sessionsCount = $batchDetails->batch_no_of_classes_in_week;
-      $batchAccomplishment = $batchDetails->batch_accomplishment;
-      $instituteDetails = $batchDetails->institute_description;
-      $facebookLink = $batchDetails->institute_fblink;
-      $twitterLink = $batchDetails->institute_twitter; 
-      $locality_id = $batchDetails->venue_locality_id; 
-      $locality =  $batchDetails->locality;
-      $pincode =  $batchDetails->venue_pincode;
-      $landMark = $batchDetails->venue_landmark;
-      $location = $batchDetails->location;
+  <?php      
       $facilitiesName = ["Air Conditioning","Cafe","Changing Room","Locker","Shower Room","Steam"];
       $facilitiesImageName = ["Air%20Conditioning","Cafe","Changing%20Room","Locker","Shower%20Room","Steam"];
       $facilities = ["air_conditioning","cafe","locker","locker","shower_room","steam"];
@@ -142,17 +121,17 @@
       <div class="samplePageInfo cover-wrapper ">
         <div class="container">
           <div class="col-sm-10 col-md-10" itemscope itemtype="http://schema.org/SportsActivityLocation">
-            <h1 id='sample-institute-name' title="Name of the Institute is {{$instituteName}}" itemprop="name" >{{$instituteName}}</h1>
-            <h2 id='sample-batch-type' title="{{$instituteName}} Subcategory and Category">{{'  '.$subcategory}},{{' '.$category}}</h2>
-            <div id='sample-institute-address' title="Landmark, Locality and Location of {{$instituteName}}" class="text_over_flow_hide">
+            <h1><span title="Name of the Institute" itemprop="name" > {{$batchDetails->institute}}<span></h1>
+            <h3><span title="Subcategory and Category">{{'  '.$batchDetails->subcategory}},{{' '.$batchDetails->category}}</span></h3>
+            <div id='sample-institute-address' title="Landmark, Locality and Location of Institute" class="text_over_flow_hide">
               <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                 <span class='glyphicon glyphicon-map-marker'></span>
-                <span itemprop="streetAddress">{{'  '.$landMark}}</span>, 
-                <span itemprop="addressLocality">{{$locality.', '.$location}}</span>
+                <span itemprop="streetAddress">{{'  '.$batchDetails->venue_landmark}}</span>, 
+                <span itemprop="addressLocality">{{$batchDetails->locality.', '.$batchDetails->location}}</span>
               </div>
             </div>
-            <div id='sample-institute-contact' title="{{$instituteName}} Contact Number">
-              <div class='glyphicon glyphicon-phone-alt'></div><span itemprop="telephone">{{'  +91 '.$instituteContact}}</span>
+            <div id='sample-institute-contact' title="Institute Contact Number">
+              <div class='glyphicon glyphicon-phone-alt'></div><span itemprop="telephone">{{'  +91 '.$batchDetails->venue_contact_no}}</span>
             </div>
           </div>
           <div class="col-sm-2 col-md-2">
@@ -170,21 +149,21 @@
       <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1" style="margin-bottom:15px">
         <div class="sample-box col-md-12 col-sm-12 col-xs-12" id="sample-batch-details" >
           <div itemscope itemtype="http://schema.org/SportsActivityLocation">          
-            <div id='sample-batch-name'><span itemprop="name" >{{$instituteName}}</span> Details</div> 
-            <div title="Complete Address of {{$instituteName}}" class="batch-details" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <h2 id='sample-batch-name'><span itemprop="name" >{{$batchDetails->institute}}</span> Details</h2> 
+            <div title="Complete Address of {{$batchDetails->institute}}" class="batch-details" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
               <span class='glyphicon glyphicon-home pin-icon' ></span>
-              <span itemprop="streetAddress">{{$instituteAddress}}</span>, 
-              <span itemprop="addressLocality">{{$locality.', '.$location}}</span>,
-              <span itemprop="postalCode">{{$pincode}}</span>      
+              <span itemprop="streetAddress">{{$batchDetails->venue_address}}</span>, 
+              <span itemprop="addressLocality">{{$batchDetails->locality.', '.$batchDetails->location}}</span>,
+              <span itemprop="postalCode">{{$batchDetails->venue_pincode}}</span>      
             </div>
-            <div title="Landmark of {{$instituteName}}" @if(!isset($landMark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker'></span>
-              Land Mark: {{$landMark}}
+            <div title="Landmark of {{$batchDetails->institute}}" @if(!isset($batchDetails->venue_landmark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker'></span>
+              Land Mark: {{$batchDetails->venue_landmark}}
             </div>
-            <div title="{{$instituteName}} Contact Number" class="batch-details"><span class='glyphicon glyphicon-phone-alt'></span>
-              <span itemprop="telephone">+91 {{$instituteContact}}</span>
+            <div title="{{$batchDetails->institute}} Contact Number" class="batch-details"><span class='glyphicon glyphicon-phone-alt'></span>
+              <span itemprop="telephone">+91 {{$batchDetails->venue_contact_no}}</span>
             </div>
-            <div title="Timings of {{$instituteName}}" class="batch-details"><span class='glyphicon glyphicon-time'></span>
-              {{$comment.' '.$tagline}}
+            <div title="Timings of {{$batchDetails->institute}}" class="batch-details"><span class='glyphicon glyphicon-time'></span>
+              {{$batchDetails->batch_comment.' '.$batchDetails->batch_tagline}}
             </div>
             <div id='batch-facilities' class="batch-details">
               @for($i=0;$i<=5;$i++)            
@@ -196,30 +175,34 @@
           </div>
         </div>
         <div id="comments" class="sample-box">
+          <div class="row">
           <div id='sample-batch-name'>Write a Review</div>
           <form  action='/comments/store/' enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
-            <div class="form-group" id='rating-input'>
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <input type="hidden" name="comment_institute_id" value="{{$instituteID}}">
-                <span class="rating" >
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="comment_institute_id" value="{{$batchDetails->batch_institute_id}}">
+            <div class="form-group col-md-12 col-sm-12 col-xs-12" id='rating-input'>                
+                <span for="rating" class="col-md-4 col-sm-5 col-xs-12" style="margin:-7px 0px 0px 0px; ">Rate this Batch:</span>                
+                <span class="rating" class="col-md-7 col-sm-7 col-xs-12" >
                 @for($index = 5; $index > 0;$index--)
                   <input type="radio" class="rating-input" required='required'
                       id="rating-input-1-{{$index}}" value="{{$index}}" name="comment_rating">
                   <label for="rating-input-1-{{$index}}" class="rating-star"></label>
-                @endfor
-                 <label for="rating" style="float:right;margin-right:20px;margin-top:-7px">Rate this Batch:</label>
-              </span>                                                            
+                @endfor                 
+                </span>                                                            
             </div>  
-            <div class="form-group" id="ReviewForm">
+            <div class="form-group col-md-12" id="ReviewForm">
               <label for="comment">Review:</label>
               <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
             </div>
+            <div class="form-group col-md-12" >
             @if($loggedIn)
               <button type="submit" class="btn btn-primary">Submit</button>              
             @else
               <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-primary">Submit</button>           
             @endif
+            </div>
           </form>
+          </div>
         </div>
       </div>   
       <div class='col-md-4 col-sm-5 col-xs-12 column' style="margin-bottom:25px">
@@ -229,7 +212,7 @@
             <div class="" id="bookOrderFormStep1">
               <div class="row batchOrderField">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>
-                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$sessionPrice}} or {{$batchDetails->batch_credit}} Credit</div>
+                <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$batchDetails->batch_single_price}} or {{$batchDetails->batch_credit}} Credit</div>
               </div>
               <!-- <div class="row batchOrderField">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Hobbyix Credits/Session</div>
@@ -301,10 +284,10 @@
             </div>
           </form>          
         </div>
-        @if($instituteDetails!=null)
+        @if($batchDetails->institute_description!=null)
         <div class="sample-box-small" id='institute-details'>
            <div id='sample-batch-name'>Institute Details</div>
-           <span id='sample-details' class="details-container">{{$instituteDetails}}</span>    
+           <span id='sample-details' class="details-container">{{$batchDetails->institute_description}}</span>    
         </div>
         @endif       
       </div>    
@@ -313,7 +296,7 @@
   <div class="container" id="related_data_container">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 related_item">
-          <h4>Related to {{$instituteName}}</h4>       
+          <h4>Related to {{$batchDetails->institute}}</h4>       
           <?php
             $institutesLength = sizeof($batchesOfInstitute);
             $index = 0;
@@ -331,7 +314,7 @@
           @endfor           
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12 related_item">
-          <h4>Other {{$subcategory}} classes</h4>
+          <h4>Other {{$batchDetails->subcategory}} classes</h4>
           <?php
             $institutesLength = sizeof($institutesOfSubcategoryInLocality);
             $index = 0;
@@ -349,7 +332,7 @@
           @endfor   
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12 related_item">
-          <h4>{{$category}} classes in {{$locality}}</h4>
+          <h4>{{$batchDetails->category}} classes in {{$batchDetails->locality}}</h4>
           <?php
             $institutesLength = sizeof($subcategoriesInLocality);
             $index = 0;
@@ -358,9 +341,9 @@
           ?>
           @for(; $index<$maxlength; $index++ )
             <ul class="col-md-3 col-sm-3 col-xs-6">            
-                <li title="{{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}">
-                  <a class="text_over_flow_hide" href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
-                    {{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}
+                <li title="{{$subcategoriesInLocality[$index]->subcategory}} classes in {{$batchDetails->locality}}">
+                  <a class="text_over_flow_hide" href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$batchDetails->venue_locality_id}}">
+                    {{$subcategoriesInLocality[$index]->subcategory}} classes in {{$batchDetails->locality}}
                   </a> 
                 </li>
             </ul>
@@ -411,7 +394,7 @@
       }
       if(!formValidationStatus)
       {        
-        var sessionPrice = {{$sessionPrice}};
+        var sessionPrice = {{$batchDetails->batch_single_price}};
         var subtotal = sessionPrice*sessionsCount; 
         if(walletAmount>0)
         {
@@ -477,7 +460,7 @@
         $('#numberOfSessions').change(function () 
         {
             var sessionsCount = $(this).val();             
-            var sessionPrice = {{$sessionPrice}};
+            var sessionPrice = {{$batchDetails->batch_single_price}};
             var subtotal = sessionPrice*sessionsCount;
             if(walletAmount>0)
             {

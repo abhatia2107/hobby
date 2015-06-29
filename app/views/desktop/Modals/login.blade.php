@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="form-group rememberMe col-md-6 col-sm-6 col-xs-6">                               
                         <label class="control-label" for="remember">
-                            <input name="remember"  value="forever" checked="checked" type="checkbox">
+                            <input name="remember" id="remember" value="forever" checked="checked" type="checkbox">
                             Remember Me 
                         </label>                                                             
                     </div>                
@@ -32,7 +32,7 @@
                         <a href="/users/password/remind">Forgot Password?</a>
                     </div>
                 </div>
-                <div class="signin_button"><button type="submit" class="btn btn-primary">LogIn</button></div>
+                <div class="booknowButton"><button type="submit" class="btn btn-primary">LogIn</button></div>
             </div>
             <div class="modal-footer">                               
                 <a href="/login/fb"><img alt="Login Using Facebook" title="Login Using Facebook" height="35" src="/assets/images/login_facebook.png"></a> 

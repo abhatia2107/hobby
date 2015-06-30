@@ -228,14 +228,12 @@ class MembershipsController extends \BaseController {
 			);
 		$facebookContent = array();
 		$facebookContent[0] = 'Membership';
-        $facebookContent[1] = Request::url();
+        $facebookContent[1] = url('/memberships/success/$membership->id');
         $facebookContent[2] = asset('/assets/images/home/institute.jpg');
         $facebookContent[3] = 'Congratulations, your purchase of hobbyix membership is successful.';
-        return Redirect::to('/memberships/success/'.$membership->id)->with('data',$data)->with('facebookContent',$facebookContent);
+        return Redirect::to('/memberships/success/$membership->id')->with('data',$data)->with('facebookContent',$facebookContent);
 		// return View::make('Memberships.success')->with($data);
 	}
-
-
 
 	public function redirect()
 	{

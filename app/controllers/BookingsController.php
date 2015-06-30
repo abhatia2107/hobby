@@ -166,11 +166,10 @@ class BookingsController extends \BaseController {
 							$batch->save();
 							$facebookContent = array();
 							$facebookContent[0] = $batch->institute;
-							$facebookContent[1] = Request::url();
+        					$facebookContent[1] = url('/bookings/success/$booking->id');
 							$facebookContent[2] = asset('/assets/images/home/institute.jpg');
 							$facebookContent[3] = 'Congratulations, your booking of $data["subcategory"] class with $data["institute"] is successful.';
-							return Redirect::to('/bookings/success/'.$booking->id)->with('data',$data)->with('facebookContent',$facebookContent);
-	// return View::make('Bookings.success')->with($credentials);
+							return Redirect::to('/bookings/success/$booking->id')->with('data',$data)->with('facebookContent',$facebookContent);
 						}
 						else{
 							return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
@@ -227,10 +226,10 @@ class BookingsController extends \BaseController {
 		}
 		$facebookContent = array();
 		$facebookContent[0] = $batch->institute;
-        $facebookContent[1] = Request::url();
+        $facebookContent[1] = url('/bookings/success/$booking->id');
         $facebookContent[2] = asset('/assets/images/home/institute.jpg');
         $facebookContent[3] = 'Congratulations, your booking of $data["subcategory"] class with $data["institute"] is successful.';
-        return Redirect::to('/bookings/success/'.$booking->id)->with('data',$data)->with('facebookContent',$facebookContent);
+        return Redirect::to('/bookings/success/$booking->id')->with('data',$data)->with('facebookContent',$facebookContent);
 		// return View::make('Bookings.success',compact($facebookContent))->with($data);
 		// return View::make('Bookings.success')->with($facebookContent)->with($data);
 	}

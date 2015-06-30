@@ -72,7 +72,8 @@
 	.batch .singleSessionPrice {  text-align: center;margin-bottom: 10px }
 
 	.times_font { font-family: "Times New Roman", Georgia, Serif;}
-	
+
+	.related_item ul {margin: 0;padding: 3px 0px}
   	
    </style>
 @stop
@@ -134,7 +135,7 @@
 			Fitness
 		</li>		
 		<h1>@if(isset($metaContent[3])){{$metaContent[3]}} @endif</h1>
-	</ul>	
+</ul>	
 <div class="container filter_page" >		
 	<div class="row">		
 		<div class="col-md-12 col-xs-12 col-sm-12">					
@@ -147,8 +148,8 @@
 						<div class="filterOptionsList">							
 							<ul class="list-unstyled filters"> 	
 								@foreach ($subcategoriesForCategory as $subcategoryData)											
-									<li subcategory="{{$subcategoryData->id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryData->subcategory}}" type="checkbox" data-filterid="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($subcategoryData->id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryData->subcategory}}</span></label>
+									<li>								
+									 	 <label class="sub"><input value="{{$subcategoryData->subcategory}}" type="checkbox" data-filterid="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($subcategoryData->id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryData->subcategory}}</span></label>
 									</li>
 								 @endforeach
 							 </ul>
@@ -160,8 +161,8 @@
 						<div class="filterOptionsList">							
 							<ul class="list-unstyled filters"> 
 								@foreach ($localitiesForLocation as $localityData)									
-									<li subcategory="{{$localityData->id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$localityData->locality_url}}" type="checkbox" data-filterid="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($localityData->id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityData->locality}}</span></label>
+									<li>								
+									 	 <label class="sub"><input value="{{$localityData->locality_url}}" type="checkbox" data-filterid="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($localityData->id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityData->locality}}</span></label>
 									</li> 
 								@endforeach
 							 </ul>							 
@@ -200,7 +201,6 @@
 											<span class="text_over_flow_hide">
 											<span class="glyphicon glyphicon-time"></span>
 											<time itemprop="openingHours" datetime="Mo-Su">{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</time>
-											<span class="text_over_flow_hide">
 										</div>									
 									</div>								
 									<div class="col-md-6 col-xs-12 col-sm-6 rightPart maz_pad_z">
@@ -227,9 +227,9 @@
 							</div>																		
 						</li>
 					@endforeach
-					@endif					
-					<div id="noResults" class='resultsMessage' >No Results Found</div>
+					@endif										
 					</ul>
+					<div id="noResults" class='resultsMessage' >No Results Found</div>
 					@if($batchesForCategoryLocation)
 						<div class="text-right">
 							@if(isset($keyword))
@@ -255,16 +255,16 @@
 		          	$width = 3;
 		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 		        ?>
-		        <h4>Related to {{$instituteName}}</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategories[$index]->subcategory}} in {{$locality.', '.$location}}" >
+		        <h4>Related to {{$instituteName}}</h4>
+		        <ul>				    		               		        		        
+				@for(; $index<$maxlength; $index++ )				  		   
+				    <li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$subcategories[$index]->subcategory}} in {{$locality.', '.$location}}" >
 				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locArr[0]}}">
-				          {{$subcategories[$index]->subcategory}} in {{$locality.', '.$location}}
+				        	{{$subcategories[$index]->subcategory}} in {{$locality.', '.$location}}
 				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
+				    </li>				    
+				@endfor
+				</ul>            		                  		             
 	      </div>       
 	  </div>	
 @endif
@@ -283,15 +283,15 @@
 		          		$activities = "";
 		        ?>
 		        <h4>Related to {{$subcategory}} {{$activities}} in {{$locality}} @if($locality!=$location){{', '.$location}} @endif</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}" >
+		        <ul>				    
+				@for(; $index<$maxlength; $index++ )				  	
+				      <li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}" >
 				        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
 				          {{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}
 				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
+				      </li>				   
+				@endfor		
+				</ul>             		                  		             
 	      </div>       
 	  </div>	
 @endif
@@ -306,15 +306,15 @@
 		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 		        ?>
 		        <h4>Related to {{$categories[$category_id-1]->category}} Activities in  {{$location}}</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$locationSubcategories[$index]->subcategory}} Activities in {{$location}}" >
+				<ul>				    		        
+				@for(; $index<$maxlength; $index++ )				  			   
+				    <li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$locationSubcategories[$index]->subcategory}} Activities in {{$location}}" >
 				        <a class="text_over_flow_hide" href="/subcategory/{{$locationSubcategories[$index]->subcategory}}">
-				          {{$locationSubcategories[$index]->subcategory}} in {{$location}}
+				        	{{$locationSubcategories[$index]->subcategory}} in {{$location}}
 				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
+				    </li>				      				  
+				@endfor		
+				</ul>             		                  		             
 	      </div>       
 	  </div>	
 @endif
@@ -329,15 +329,15 @@
 		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 		        ?>
 		        <h4>Related to {{$categories[$category_id-1]->category}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif</h4>
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$localitySubcategories[$index]->subcategory}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif" >
+		        <ul>
+				@for(; $index<$maxlength; $index++ )				  	   
+				    <li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$localitySubcategories[$index]->subcategory}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif" >
 				        <a class="text_over_flow_hide" href="/subcategory/{{$localitySubcategories[$index]->subcategory}}">
-				          {{$localitySubcategories[$index]->subcategory}} in {{$locality}}@if($locality!=$location){{', '.$location}}@endif
+				          	{{$localitySubcategories[$index]->subcategory}} in {{$locality}}@if($locality!=$location){{', '.$location}}@endif
 				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
+				    </li>				   
+				@endfor
+				</ul> 	            		                  		             
 	      </div>       
 	  </div>
 @endif

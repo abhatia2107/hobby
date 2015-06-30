@@ -43,7 +43,7 @@
 <script type="text/javascript" >
     $(document).ready(function(){
         
-        $('.loginForm').bootstrapValidator({
+        $('#loginForm').bootstrapValidator({
             message: 'This value is not valid',
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',

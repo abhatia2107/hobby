@@ -52,14 +52,12 @@
 		<div style="margin-top:0px;" class="">			
 			@yield('content')			
 		</div>
-
 		<!--Footer Section social networking links-->
 		<footer class="footer-wrapper">
 			@include('Templates.footer')
-		</footer>		
-		
+		</footer>						
 	    @yield('pagejavascript')	    
 	    <!--this page specific jquery-->
-	    @yield('pagejquery')	   
-	</body>
+	    @yield('pagejquery')   
+	</body>	
 </html>

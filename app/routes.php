@@ -68,9 +68,6 @@ Route::group(array('before' => "approved-or-admin"), function() {
 Route::get('/bookings/sms','BookingsController@sms');
 Route::get('/batches/createentry', 'BatchesController@createentry');
 Route::post('/batches/createentry', 'BatchesController@storeentry');
-Route::get('/test', function(){
-	return View::make('Miscellaneous.test');
-});
 Route::get('/email', 'BookingsController@sms_email');
 Route::get('venues/upfate', 'VenuesController@upfate');
 
@@ -146,6 +143,7 @@ Route::group(array('before' => "auth|instituteOwn-or-admin"), function() {
 
 //Route for BookingsController
 Route::get('/bookings','BookingsController@index');
+Route::get('/bookings/success/{id}','BookingsController@successView');
 Route::post('/bookings/update/{id}','BookingsController@update');
 Route::get('/bookings/enable/{id}','BookingsController@enable');
 Route::get('/bookings/disable/{id}','BookingsController@disable');

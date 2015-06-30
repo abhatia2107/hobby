@@ -58,7 +58,6 @@ class BatchesController extends \BaseController {
 			$data['batch_category_id']=1;
 			// $data['batch_approved']=1;
 			unset($data['csrf_token']);
-			dd($data);
 			Batch::create($data);
 			return Redirect::back()->with('success','Entry added');
 		}

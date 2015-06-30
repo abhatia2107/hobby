@@ -171,11 +171,21 @@ class MembershipsController extends \BaseController {
 	}
 
 
-	public function successView()
+	public function successView($id)
 	{
-		$data=Session::get('data');
-		$facebookContent=Session::get('facebookContent');
-		return View::make('Memberships.success',compact($facebookContent))->with($data);
+		$membership=Membership::find($id);
+		$data=array(
+					'credits'=>$membership->credits,
+					'order_id'=>$membership->order_id,
+					'end_date'=>date("d M Y", strtotime($membership->end_date)),
+			);
+		// $data=Session::get('data');
+		$facebookContent = array();
+		$facebookContent[0] = 'Membership';
+        $facebookContent[1] = url('/memberships/success/'.$membership->id);
+        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
+        $facebookContent[3] = 'Congratulations, your purchase of hobbyix membership is successful.';
+		return View::make('Memberships.success',compact('facebookContent'))->with($data);
 		// return View::make('Bookings.success')->with($credentials);
 	}
 
@@ -221,17 +231,7 @@ class MembershipsController extends \BaseController {
 		$user->user_membership_purchased=1;
 		$user->save();
 		// $this->sms_email($membership->id);
-		$data=array(
-					'credits'=>$membership->credits,
-					'order_id'=>$membership->order_id,
-					'end_date'=>date("d M Y", strtotime($membership->end_date)),
-			);
-		$facebookContent = array();
-		$facebookContent[0] = 'Membership';
-        $facebookContent[1] = url('/memberships/success/$membership->id');
-        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-        $facebookContent[3] = 'Congratulations, your purchase of hobbyix membership is successful.';
-        return Redirect::to('/memberships/success/$membership->id')->with('data',$data)->with('facebookContent',$facebookContent);
+		return Redirect::to('/memberships/success/'.$membership->id);
 		// return View::make('Memberships.success')->with($data);
 	}
 

@@ -156,20 +156,9 @@ class BookingsController extends \BaseController {
 								}
 							}
 							$batch=$this->batch->getBatch($booking->batch_id);
-							$credentials=array('subcategory'=>$batch->subcategory,
-										'institute'=>$batch->institute,
-										'order_id'=>$booking->order_id,
-										'date'=>$booking->booking_date,
-										'no_of_sessions'=>$booking->no_of_sessions
-								);
 							$batch->batch_bookings=$batch->batch_bookings+1;
 							$batch->save();
-							$facebookContent = array();
-							$facebookContent[0] = $batch->institute;
-        					$facebookContent[1] = url('/bookings/success/$booking->id');
-							$facebookContent[2] = asset('/assets/images/home/institute.jpg');
-							$facebookContent[3] = 'Congratulations, your booking of $data["subcategory"] class with $data["institute"] is successful.';
-							return Redirect::to('/bookings/success/$booking->id')->with('data',$data)->with('facebookContent',$facebookContent);
+							return Redirect::to('/bookings/success/'.$booking->id);
 						}
 						else{
 							return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
@@ -189,17 +178,9 @@ class BookingsController extends \BaseController {
 		}
 	}
 
-	public function successView()
+	public function successView($id)
 	{
-		$data=Session::get('data');
-		$facebookContent=Session::get('facebookContent');
-		return View::make('Bookings.success',compact($facebookContent))->with($data);
-		// return View::make('Bookings.success')->with($credentials);
-	}
-
-	public function success($booking)
-	{
-		// $this->sms_email($booking->id);
+		$booking=Booking::find($id);
 		$batch=$this->batch->getBatch($booking->batch_id);
 		$data=array(
 					// 'booking_id'=>$booking->id;
@@ -209,6 +190,19 @@ class BookingsController extends \BaseController {
 					'date'=>$booking->booking_date,
 					'no_of_sessions'=>$booking->no_of_sessions
 			);
+		$facebookContent = array();
+		$facebookContent[0] = $batch->institute;
+        $facebookContent[1] = url('/bookings/success/'.$booking->id);
+        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
+        $facebookContent[3] = 'Congratulations, your booking of $data["subcategory"] class with $data["institute"] is successful.';
+		return View::make('Bookings.success',compact('facebookContent'))->with($data);
+		// return View::make('Bookings.success')->with($credentials);
+	}
+
+	public function success($booking)
+	{
+		// $this->sms_email($booking->id);
+		$batch=$this->batch->getBatch($booking->batch_id);
 		$batch->batch_bookings=$batch->batch_bookings+1;
 		$batch->save();
 		if($booking->wallet_amount)
@@ -224,12 +218,7 @@ class BookingsController extends \BaseController {
 	            $user->save();
 	        }
 		}
-		$facebookContent = array();
-		$facebookContent[0] = $batch->institute;
-        $facebookContent[1] = url('/bookings/success/$booking->id');
-        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-        $facebookContent[3] = 'Congratulations, your booking of $data["subcategory"] class with $data["institute"] is successful.';
-        return Redirect::to('/bookings/success/$booking->id')->with('data',$data)->with('facebookContent',$facebookContent);
+        return Redirect::to('/bookings/success/'.$booking->id);
 		// return View::make('Bookings.success',compact($facebookContent))->with($data);
 		// return View::make('Bookings.success')->with($facebookContent)->with($data);
 	}

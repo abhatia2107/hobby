@@ -65,10 +65,11 @@ class BookingsController extends \BaseController {
 			if($credentials['promo_code'])
 			{
 				$amt=PromosController::isValid($credentials['promo_code'],$credentials['no_of_sessions']);
-				if(is_numeric($amt))
+				if(is_numeric($amt['price']))
 				{
-					if($amt!=$credentials['payment'])
-						$credentials['payment']=$amt;
+					if($amt['price']!=$credentials['payment'])
+						$credentials['payment']=$amt['price'];
+					$credentials['wallet_amount']=$credentials['wallet_amount']-$amt['wallet_balance'];
 					$promo_id=Promo::where('promo_code',$credentials['promo_code'])->first()->id;
 					$credentials['promo_id']=$promo_id;
 				}
@@ -82,11 +83,14 @@ class BookingsController extends \BaseController {
 				$credentials['payment'] = $batch->batch_single_price*$credentials['no_of_sessions'];
 				if($user_id)
 				{
-					if($credentials['wallet_amount'])
-						$credentials['payment']=$credentials['payment']-$credentials['wallet_amount'];
+					if($credentials['wallet_amount']>$credentials['payment'])
+					{
+						$credentials['wallet_amount']=$credentials['payment'];
+						$credentials['payment']=0;
+					}
 					else
-						$credentials['payment']=$credentials['payment'];
-				}	
+						$credentials['payment']=$credentials['payment']-$credentials['wallet_amount'];
+				}
 			}
 			unset($credentials['referral_credit_used']);
 			unset($credentials['pay_cc']);
@@ -130,19 +134,19 @@ class BookingsController extends \BaseController {
 									$batch=Batch::find($credentials['batch_id']);
 									$batch->batch_trial=$batch->batch_trial+1;
 									$batch->save();
-									$this->sms_email_trial($booking->id);
+									// $this->sms_email_trial($booking->id);
 								}
 								else{
 									$user->user_credits_left=$user->user_credits_left-$credentials['referral_credit_used'];
 									$user->save();
-									$this->sms_email($booking->id);
+									// $this->sms_email($booking->id);
 								}
 							}
 							else{
 								if($user->user_credits_left>=$credentials['referral_credit_used']){
 									$user->user_credits_left=$user->user_credits_left-$credentials['referral_credit_used'];
 									$user->save();
-									$this->sms_email($booking->id);
+									// $this->sms_email($booking->id);
 								}
 								else{
 									$booking->order_status="batch_booking_already";
@@ -160,8 +164,13 @@ class BookingsController extends \BaseController {
 								);
 							$batch->batch_bookings=$batch->batch_bookings+1;
 							$batch->save();
-        					Redirect::to('/bookings/success')->with($data,$facebookContent);
-							return View::make('Bookings.success')->with($credentials);
+							$facebookContent = array();
+							$facebookContent[0] = $batch->institute;
+							$facebookContent[1] = Request::url();
+							$facebookContent[2] = asset('/assets/images/home/institute.jpg');
+							$facebookContent[3] = 'Congratulations, your booking of $data["subcategory"] class with $data["institute"] is successful.';
+							return Redirect::to('/bookings/success/'.$booking->id)->with('data',$data)->with('facebookContent',$facebookContent);
+	// return View::make('Bookings.success')->with($credentials);
 						}
 						else{
 							return Redirect::back()->with('failure',Lang::get('booking.booking_create_failed'));
@@ -220,9 +229,9 @@ class BookingsController extends \BaseController {
 		$facebookContent[0] = $batch->institute;
         $facebookContent[1] = Request::url();
         $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-        // $facebookContent[3] = "Congratulations, your booking of $data['subcategory'] class with $data['institute'] is successful.";
-        Redirect::to('/bookings/success/'.$booking->id)->with('data',$data)->with('facebookContent',$facebookContent);
-		return View::make('Bookings.success',compact($facebookContent))->with($data);
+        $facebookContent[3] = 'Congratulations, your booking of $data["subcategory"] class with $data["institute"] is successful.';
+        return Redirect::to('/bookings/success/'.$booking->id)->with('data',$data)->with('facebookContent',$facebookContent);
+		// return View::make('Bookings.success',compact($facebookContent))->with($data);
 		// return View::make('Bookings.success')->with($facebookContent)->with($data);
 	}
 

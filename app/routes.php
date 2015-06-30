@@ -156,6 +156,7 @@ Route::get('/bookings/payment/{id}','BookingsController@payment');
 
 //Route for MembershipsController
 Route::get('/memberships','MembershipsController@index');
+Route::get('/memberships/success/{id}','MembershipsController@successView');
 Route::post('/memberships/update/{id}','MembershipsController@update');
 Route::get('/memberships/enable/{id}','MembershipsController@enable');
 Route::get('/memberships/disable/{id}','MembershipsController@disable');

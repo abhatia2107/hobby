@@ -27,11 +27,16 @@ class MembershipsController extends \BaseController {
 			$user=User::find($user_id);
 			$credentials['wallet_amount']=$user->user_wallet;
 			if($credentials['wallet_amount'])
-				$credentials['payment']=$credentials['price']-$credentials['wallet_amount'];
+			{
+				if($credentials['wallet_amount']>$credentials['price'])
+					$credentials['payment']=0;
+				else
+					$credentials['payment']=$credentials['price']-$credentials['wallet_amount'];
+			}
 			else
 				$credentials['payment']=$credentials['price'];
 			if($credentials['price']<$credentials['wallet_amount'])
-				$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['payment'];
+				$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['price'];
 		}
 		return View::make('Memberships.index',compact('credentials','metaContent'));
 	}
@@ -68,10 +73,13 @@ class MembershipsController extends \BaseController {
 		if($credentials['promo_code'])
 		{
 			$amt=PromosController::isValid($credentials['promo_code']);
-			if(is_numeric($amt))
+			if(is_numeric($amt['price']))
 			{
-				if($amt!=$credentials['payment'])
-					$credentials['payment']=$amt;
+				if($amt['price']!=$credentials['payment'])
+				{
+					$credentials['payment']=$amt['price'];
+				}
+				$credentials['wallet_amount']=$credentials['wallet_amount']-$amt['wallet_balance'];
 				$promo_id=Promo::where('promo_code',$credentials['promo_code'])->first()->id;
 				$credentials['promo_id']=$promo_id;
 			}
@@ -82,15 +90,20 @@ class MembershipsController extends \BaseController {
 		}
 		else
 		{
-			$price=$this->membershipVal['payment'];
+			$credentials['payment']=$this->membershipVal['payment'];
 			if($user_id)
 			{
 				if($credentials['wallet_amount'])
-					$payment=$price-$credentials['wallet_amount'];
-				else
-					$payment=$price;
+				{
+					if($credentials['wallet_amount']>$credentials['payment'])
+					{
+						$credentials['wallet_amount']=$credentials['payment'];
+						$credentials['payment']=0;
+					}
+					else
+						$credentials['payment']=$credentials['payment']-$credentials['wallet_amount'];
+				}
 			}
-			$credentials['payment']=$payment;
 		}
 		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
 		$credentials['start_date']=date('Y-m-d');
@@ -157,6 +170,15 @@ class MembershipsController extends \BaseController {
 		return View::make('Bookings.non-seamless',compact('encrypted_data', 'access_code'));
 	}
 
+
+	public function successView()
+	{
+		$data=Session::get('data');
+		$facebookContent=Session::get('facebookContent');
+		return View::make('Memberships.success',compact($facebookContent))->with($data);
+		// return View::make('Bookings.success')->with($credentials);
+	}
+
 	public function success($membership)
 	{
 		$user=User::find($membership->user_id);
@@ -198,13 +220,19 @@ class MembershipsController extends \BaseController {
 		$user->user_credits_expiry=$membership->end_date;
 		$user->user_membership_purchased=1;
 		$user->save();
-		$this->sms_email($membership->id);
+		// $this->sms_email($membership->id);
 		$data=array(
 					'credits'=>$membership->credits,
 					'order_id'=>$membership->order_id,
 					'end_date'=>date("d M Y", strtotime($membership->end_date)),
 			);
-		return View::make('Memberships.success')->with($data);
+		$facebookContent = array();
+		$facebookContent[0] = 'Membership';
+        $facebookContent[1] = Request::url();
+        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
+        $facebookContent[3] = 'Congratulations, your purchase of hobbyix membership is successful.';
+        return Redirect::to('/memberships/success/'.$membership->id)->with('data',$data)->with('facebookContent',$facebookContent);
+		// return View::make('Memberships.success')->with($data);
 	}
 
 

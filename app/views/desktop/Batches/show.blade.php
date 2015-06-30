@@ -237,6 +237,10 @@
               <div class="row batchOrderField" @if($credentials['wallet_amount']>0) style="display:block" @else style="display:none" @endif>
                 <div class='col-md-6 col-sm-6 col-xs-6'>Hobbyix Wallet</div>
                 <div class='col-md-6 col-sm-6 col-xs-6'>: Rs. {{$credentials['wallet_amount']}}/-</div>
+              </div> 
+              <div class="row batchOrderField" @if($credentials['wallet_amount']>0) style="display:block" @else style="display:none" @endif>
+                <div class='col-md-6 col-sm-6 col-xs-6'>Wallet Balance</div>
+                <div class='col-md-6 col-sm-6 col-xs-6'><span id="walletBalance">: Rs. {{$credentials['wallet_balance']}}/-</span></div>
               </div>    
               <div class="row batchOrderField">
                 <div class='col-xs-9' id="promoCodeContainer">
@@ -375,11 +379,13 @@
         oldPromoCode = promoCode;           
         $.get("/promos/isvalid/"+promoCode+"/"+sessionsCount,function(response)
         { 
-          if($.isNumeric(response))
+          if($.isNumeric(response['price']))
           {
             $('#orderTotal').empty();  
-            $('#orderTotal').append(": Rs. "+response+"/-");
-            $('#payment').val(response);            
+            $('#orderTotal').append(": Rs. "+response['price']+"/-");
+            $('#payment').val(response['price']);  
+            $('#walletBalance').empty();  
+            $('#walletBalance').append(": Rs. "+response['wallet_balance']+"/-");
             $('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied"+conditionMessage+"</span>");
             formValidationStatus = true;            
           }
@@ -388,7 +394,7 @@
             $('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
           }
         });                   
-      }       
+      }
       else if(condition != "onDirectApply" ) 
       {   
         $('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");                            
@@ -464,12 +470,21 @@
             var sessionsCount = $(this).val();             
             var sessionPrice = {{$batchDetails->batch_single_price}};
             var subtotal = sessionPrice*sessionsCount;
+            var walletBalance=0;
             if(walletAmount>0)
             {
               if(walletAmount>=subtotal)        
+              {
+                walletBalance = walletAmount-subtotal;
                 subtotal = 0;
+              }
               else
+              {
+                walletBalance = 0;
                 subtotal = subtotal - walletAmount;
+              }  
+              $('#walletBalance').empty();  
+              $('#walletBalance').append(": Rs. "+walletBalance+"/-");
             }
             $('#orderTotal').empty();  
             $('#orderTotal').append(": Rs. "+subtotal+"/-");

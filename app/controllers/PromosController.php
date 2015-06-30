@@ -197,21 +197,21 @@ class PromosController extends \BaseController {
 				{
 					if($discount>$promo->max_discount)
 					{
-						$final=$payment-$promo->max_discount;
+						$final['price']=$payment-$promo->max_discount;
 					}
 					else
 					{
-						$final=$payment-$discount;
+						$final['price']=$payment-$discount;
 					}
 				}
 				else
 				{
-					$final=$payment-$discount;
+					$final['price']=$payment-$discount;
 				}
 			}
 			else if(isset($promo->cash_discount))
 			{
-				$final=$payment-$promo->cash_discount;
+				$final['price']=$payment-$promo->cash_discount;
 			}
 			else
 			{
@@ -235,10 +235,22 @@ class PromosController extends \BaseController {
 		{
 			$user=User::find($user_id);
 			$wallet_amount=$user->user_wallet;
+			// dd($final['price']);
 			if($wallet_amount)
-				$final=$final-$wallet_amount;
+			{
+				if($wallet_amount>$final['price'])
+				{
+					$final['wallet_balance']=$wallet_amount-$final['price'];
+					$final['price']=0;
+				}
+				else
+				{
+					$final['price']=$final['price']-$wallet_amount;
+					$final['wallet_balance']=0;
+				}
+			}
 		}
-		if($final<0)
+		if($final['price']<0)
 			return 0;
 		else
 			return $final;

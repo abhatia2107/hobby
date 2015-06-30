@@ -228,11 +228,17 @@ class BatchesController extends \BaseController {
 				$user=User::find($user_id);
 				$credentials['wallet_amount']=$user->user_wallet;
 				if($credentials['wallet_amount'])
-					$credentials['payment']=$credentials['price']-$credentials['wallet_amount'];
+				{
+					if($credentials['wallet_amount']>$credentials['price'])
+					{
+						$credentials['payment']=0;
+						$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['price'];
+					}	
+					else
+						$credentials['payment']=$credentials['price']-$credentials['wallet_amount'];
+				}
 				else
 					$credentials['payment']=$credentials['price'];
-				if($credentials['price']<$credentials['wallet_amount'])
-					$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['payment'];
 			}
 			// dd($credentials);
 			return View::make('Batches.show',compact('batchDetails','credentials','user','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));

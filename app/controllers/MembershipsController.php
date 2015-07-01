@@ -182,7 +182,7 @@ class MembershipsController extends \BaseController {
 		// $data=Session::get('data');
 		$facebookContent = array();
 		$facebookContent[0] = 'Membership';
-        $facebookContent[1] = url('/memberships/success/'.$membership->id);
+        $facebookContent[1] = url('/memberships');
         $facebookContent[2] = asset('/assets/images/home/institute.jpg');
         $facebookContent[3] = 'Congratulations, your purchase of hobbyix membership is successful.';
 		return View::make('Memberships.success',compact('facebookContent'))->with($data);

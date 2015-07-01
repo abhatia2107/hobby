@@ -56,7 +56,7 @@ class BatchesController extends \BaseController {
 		if((($institute->institute_user_id)==$data['batch_user_id'])&&($venue->venue_user_id==$data['batch_user_id'])){
 			$data['batch']=$institute->institute_url.'-'.$subcategory.'-'.$locality;
 			$data['batch_category_id']=1;
-			// $data['batch_approved']=1;
+			$data['batch_approved']=1;
 			unset($data['csrf_token']);
 			Batch::create($data);
 			return Redirect::back()->with('success','Entry added');

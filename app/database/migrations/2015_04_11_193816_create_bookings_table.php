@@ -24,6 +24,8 @@ class CreateBookingsTable extends Migration {
 			$table->date('booking_date');
 			$table->integer('no_of_sessions');
 			$table->string('order_id',8);
+			$table->boolean('reviewed')->default(0);
+			$table->boolean('trial')->default(0);
 			$table->string('order_status',10)->nullable();
 			$table->string('promo_code',25);
 			$table->integer('wallet_amount')->default(0);

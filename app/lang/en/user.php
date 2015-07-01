@@ -52,6 +52,9 @@
 
 		"user_referral_error"=>"Invalid referral code",
 
+		"user_favorite_added"=>"Your favorite batch has been added successfully. Now you can book it with one click on homepage.",
+
+
 		//admin
 		"user_enabled"=>"Your user have been enabled successfully",
 		

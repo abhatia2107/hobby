@@ -35,7 +35,11 @@ class BookingsController extends \BaseController {
 	{
 		$credentials = Input::all();
 		$referrer = URL::previous();
-		$credentials['batch_id'] = substr($referrer, strrpos($referrer, '/') + 1);
+		if(is_null($credentials['batch_id']))
+		{
+			$credentials['batch_id'] = substr($referrer, strrpos($referrer, '/') + 1);
+		}
+		
 		$batch=$this->batch->getbatch($credentials['batch_id']);
 	    if(!is_numeric($credentials['batch_id']))
         {
@@ -134,6 +138,8 @@ class BookingsController extends \BaseController {
 									$batch=Batch::find($credentials['batch_id']);
 									$batch->batch_trial=$batch->batch_trial+1;
 									$batch->save();
+									$booking->trial=1;
+									$booking->save();
 									// $this->sms_email_trial($booking->id);
 								}
 								else{
@@ -192,7 +198,7 @@ class BookingsController extends \BaseController {
 			);
 		$facebookContent = array();
 		$facebookContent[0] = $batch->institute;
-        $facebookContent[1] = url('/bookings/success/'.$booking->id);
+        $facebookContent[1] = url('/batch/'.$batch->batch);
         $facebookContent[2] = asset('/assets/images/home/institute.jpg');
         $facebookContent[3] = 'Congratulations, your booking of $data["subcategory"] class with $data["institute"] is successful.';
 		return View::make('Bookings.success',compact('facebookContent'))->with($data);
@@ -396,6 +402,7 @@ class BookingsController extends \BaseController {
 					'institute' => $batch->institute, 
 					'subcategory' => $batch->subcategory,
 					'amount' => $booking->payment,
+					'amount' => $booking->referral_credit_used,
 					'date' => date("d M Y", strtotime($booking->booking_date)),
 					'no_of_sessions' => $booking->no_of_sessions,
 					'venue_address' => $batch->venue_address,

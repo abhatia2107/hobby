@@ -278,7 +278,11 @@ class FiltersController extends \BaseController {
 
 	public function filter($subcategoriesString="0",$localitiesString="0")
 	{
-		if($subcategoriesString=="Fitness")
+		$location = $this->location->first()->location;
+		$category = $this->category->first()->category;
+		if($localitiesString==$location)
+			$localitiesString=0;
+		if($subcategoriesString==$category)
 			$subcategoriesString=0;
 		$category_id=$this->category_id;
 		$location_id=$this->location_id;
@@ -317,8 +321,6 @@ class FiltersController extends \BaseController {
 		$batchesForCategoryLocation= $this->batch->getBatchForFilter($subcategories,$localities);
 	
 		//For Meta data in the Filter Page when no result come.
-		$location = $this->location->first()->location;
-		$category = $this->category->first()->category;
 		if($subcategory==$category)
 			$metaContent[0] = "$subcategory Activities in $locality :: Hobbyix";
 		else
@@ -341,6 +343,8 @@ class FiltersController extends \BaseController {
 		}
 		else
 		{
+			var_dump($subArr);
+			var_dump($locArr);
 			if(!empty($subArr))
 				$localities = $this->locality->getLocalitiesInSubcategory($subArr[0]);
 			else
@@ -350,6 +354,8 @@ class FiltersController extends \BaseController {
 			else
 				$localitySubcategories= null;
 		}
+		var_dump($localities);
+		var_dump($localitySubcategories);
 		if(Request::segment(1)=='json')
 		{
 			$response['institute']=$batchesForCategoryLocation;

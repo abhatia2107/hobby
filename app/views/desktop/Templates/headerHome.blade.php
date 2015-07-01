@@ -1,10 +1,10 @@
 @section("headerHome")
 	<div class="clearfix header_row1" >
-		<div class="col-sm-4 col-md-4 col-xs-5 website-title">
+		<div class="col-sm-4 col-md-5 col-xs-12 website-title">
 			<a href="/">HOBBYIX</a>
-		</div>		
-		<div class="MainHeaderUserInfo col-xs-7">		
-			<div class="userInfoListing">
+		</div>			
+		<div class="MainHeaderUserInfo  col-sm-8 col-md-5 col-xs-12">				
+			<div class="userInfoListing" style="float:right;">
 				<?php
 					$id=Auth::id();
 					if($id)
@@ -36,6 +36,15 @@
 					</div>											
 				@endif
 			</div>
+			<div class="userInfoListing" style="float:right;margin:0 10px 0 0">
+				<div class="user_account_options">
+					<button class="btn btn-primary" style="max-width:100%">
+						<span style="padding: 3px 10px 3px 10px;float:left ">
+						BOOK YOUR FAVORITE CLASS
+						</span>						
+					</button>																		
+				</div>
+			</div>	
 		</div>
 	</div>
 @show

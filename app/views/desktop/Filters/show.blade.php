@@ -2,9 +2,9 @@
 @section('pagestylesheet')
   <style type="text/css">
 
-     .post_header { background: #fff;margin: 0px;padding: 0px}
+    .post_header { background: #fff;margin: 0px;padding: 0px}
 
-     .facilities_continer {margin-top: 5px;clear: both;}
+    .facilities_continer {margin-top: 5px;clear: both;}
 
     .facilities_icon {margin-right: 5px;}
 
@@ -18,7 +18,7 @@
 
     @media screen and (min-width: 768px){ .batchDetailsMiddlePart {margin-top: -5px;}}
 
-    #related_data_container  {  border-top: 1px solid lightgrey;padding: 20px 5%;width: 100%;}
+    #related_data_container  { border-top: 1px solid lightgrey;padding: 20px 5%;width: 100%;}
 
   	#related_data_container h4 {font-size: 18px;color: #202e54;font-weight: bold;margin:0px 0px 5px 0px;}
 
@@ -65,9 +65,9 @@
 
 	.batch .instConMsg:hover {background: #E8E8E8; cursor: pointer;}
 
-	.batch .instCon {margin-right:5px;min-width: 140px}
+	.batch .instCon {margin-right:5px;min-width: 135px}
 
-	.batch .instMsg {margin-right:5px;min-width: 120px}
+	.batch .instMsg {margin-right:5px;min-width: 120px;color: #333}
 
 	.batch .singleSessionPrice {  text-align: center;margin-bottom: 10px }
 
@@ -170,7 +170,7 @@
 					</div>
 					<div class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 5px 5px;text-align:center">							
 						<h4>Like us on facebook</h4>
-						<div class="fb-page" data-href="https://www.facebook.com/hobbyix" data-width="380" data-hide-cover="false" data-show-facepile="false" data-show-posts="false"></div>						
+						<div class="fb-page" data-href="https://www.facebook.com/hobbyix" data-width="350" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>						
 						<!---<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-width="240px" data-share="true"></div>						-->						
 					</div>
 				</div>
@@ -204,17 +204,17 @@
 										</div>									
 									</div>								
 									<div class="col-md-6 col-xs-12 col-sm-6 rightPart maz_pad_z">
-										<div class="col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
+										<div class="col-md-4 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
 											<span style="display:none" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone" >											
 												 +91 {{$batchInfo->venue_contact_no}}
 											</span>
 											<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>
 										</div>		
-										<div class="col-md-4 col-xs-12 col-sm-5 instConMsg instMsg" data-toggle="modal" href="#sendMessage" data-batch="{{$batchInfo->batch}}"
+										<a class="col-md-4 col-xs-12 col-sm-5 instConMsg instMsg" data-toggle="modal" href="#sendMessage" data-batch="{{$batchInfo->batch}}"
 											data-email="{{$batchInfo->venue_email}}" data-institute="{{$batchInfo->institute}}" title="Send Message to Institute and get response">
 											<span class="glyphicon glyphicon-envelope"></span>										
 											<span>Send Message</span>
-										</div>	
+										</a>	
 										<div class="col-md-12 col-sm-12 facilities_continer"></div>
 									</div>								
 								</div>
@@ -341,6 +341,26 @@
 	      </div>       
 	  </div>
 @endif
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+		<?php	    			
+          	$institutesLength = 20;
+          	$index = 0;
+          	$maxlength = 12;		          
+          	$width = 3;
+          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+        ?>
+        <h4>Related Keywords</h4>        
+		@for(; $index<$maxlength; $index++ )				  	   		   
+		        <a class="text_over_flow_hide" href="/">
+					keyword{{$index}},		          	
+		        </a>		    
+		@endfor	
+		<a class="text_over_flow_hide" href="/">
+			keyword{{$index}}		          	
+        </a>	
+  	</div>       
+</div>
 </div>
 @stop
 @section('pagejquery')

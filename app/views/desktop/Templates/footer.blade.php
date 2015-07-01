@@ -32,9 +32,7 @@
                <li><a href="https://www.facebook.com/pages/HOBBYIX/836049089804962"><span class="glyphicon fa fa-fw fa-facebook"></span>Facebook</a></li>
                <li><a href=""><span class="glyphicon fa fa-fw fa-google-plus"></span>Google Plus</a></li>
                <li><span class="glyphicon fa fa-fw fa-phone"></span>+91 9100946081</li>
-               <li><span class="glyphicon fa fa-fw fa-envelope"></span><a href="mailto:support@hobbyix.com">support@hobbyix.com</a></li>
-               <!-- <li><span class="glyphicon fa fa-fw fa-instagram"></span><a href-link="$adminAccounts->instagram_link">Instagram</a></li> -->
-               <!--<li><span class="glyphicon fa fa-fw fa-vimeo-square"></span><a href-link="$adminAccounts->vimeo_link">Vimeo</a></li>-->
+               <li><span class="glyphicon fa fa-fw fa-envelope"></span><a href="mailto:support@hobbyix.com">support@hobbyix.com</a></li>               
             </ul>
          </div>
       </div>

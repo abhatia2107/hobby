@@ -17,8 +17,8 @@
 	         <div>
 	            <h1>{{$homeLang['home_title']}}</h1>
 	            <h2>{{$homeLang['home_subtitle1']}}</h2>
-	            <h2>{{$homeLang['home_subtitle2']}}</h2>
-	         </div> 
+	            <h2>{{$homeLang['home_subtitle2']}}</h2>	            
+	         </div>  
 	         <span class="explore_button"><a title="Hobbyix Membership" href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
 	         <span class="explore_button" style="margin-left:5px;" ><a title="Check out Classes" href="/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
 	      </div>
@@ -27,7 +27,7 @@
 </div>
 <div class="container membership_offer_container">
 	<div class="header">
-		<a style="color:black;text-decoration:none" href="/memberships">Hobbyix Membership</a>
+		Hobbyix Membership
 	</div>
 	<div class="col-md-12 col-sm-12 col-xs-12">	
 		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">

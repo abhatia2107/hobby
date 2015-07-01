@@ -306,18 +306,12 @@ Route::get('/aboutus', function()
 	$metaContent[2] = "About Hobbyix, About Us Hobbyix, Terms of Use Hobbyix, Privacy Policy Hobbyix";
 	return View::make('Miscellaneous.aboutus',compact('metaContent'));
 });
-	
-Route::get('/categories/{category_id}/locations/{location_id?}','FiltersController@show');
 
 Route::get('/search','FiltersController@search');
 
 Route::get('/institute/{id}','FiltersController@institute');
 
-Route::get('/locality/{id}','FiltersController@locality');
-
-Route::get('/subcategory/{id}','FiltersController@subcategory');
-
-Route::get('/filter/{subcategoriesString}/{localitiesString?}','FiltersController@filter');
+Route::get('/filter/{subcategoriesString}/{localitiesString}','FiltersController@filter');
 
 Route::get('/yoga',function(){
 	return Redirect::to('/');

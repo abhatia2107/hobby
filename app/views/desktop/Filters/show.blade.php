@@ -245,101 +245,105 @@
 	</div>
 </div>
 <div class="container" id="related_data_container">
-@if(isset($subcategories))	
-	 	<div class="row">
-	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
-	    		<?php	    			
-		          	$institutesLength = sizeof($subcategories);
-		          	$index = 0;
-		          	$maxlength = 12;		          
-		          	$width = 3;
-		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
-		        ?>
-		        <h4>Related to {{$instituteName}}</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategories[$index]->subcategory}} in {{$locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locArr[0]}}">
-				          {{$subcategories[$index]->subcategory}} in {{$locality.', '.$location}}
-				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
-	      </div>       
-	  </div>	
+<!-- For Institutes only-->
+@if(isset($instituteSubcategories))	
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+			<?php	    			
+	          	$institutesLength = sizeof($instituteSubcategories);
+	          	$index = 0;
+	          	$maxlength = 12;		          
+	          	$width = 3;
+	          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+	        ?>
+	        <h4>Related to {{$instituteName}}</h4>       		        		        
+			@for(; $index<$maxlength; $index++ )
+			  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+			      <li title="{{$instituteSubcategories[$index]->subcategory}} in {{$locality.', '.$location}}" >
+			        <a class="text_over_flow_hide" href="/filter/{{$instituteSubcategories[$index]->subcategory}}/{{$locArr[0]}}">
+			          {{$instituteSubcategories[$index]->subcategory}} in {{$locality.', '.$location}}
+			        </a>
+			      </li>
+			    </div> 
+			@endfor		            		                  		             
+	  	</div>       
+	</div>	
 @endif
-@if(isset($localities))	
-	 	<div class="row">
-	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
-	    		<?php	    			
-		          	$institutesLength = sizeof($localities);
-		          	$index = 0;
-		          	$maxlength = 12;		          
-		          	$width = 3;
-		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; } 
-		          	if($subcategory=="Fitness")
-		          		$activities = "Activities";
-		          	else
-		          		$activities = "";
-		        ?>
-		        <h4>Related to {{$subcategory}} {{$activities}} in {{$locality}} @if($locality!=$location){{', '.$location}} @endif</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}" >
-				        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
-				          {{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}
-				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
-	      </div>       
-	  </div>	
-@endif
+<!-- For Search and Institutes -->
 @if(isset($locationSubcategories))	
-	 	<div class="row">
-	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
-	    		<?php	    			
-		          	$institutesLength = sizeof($locationSubcategories);
-		          	$index = 0;
-		          	$maxlength = 12;		          
-		          	$width = 3;
-		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
-		        ?>
-		        <h4>Related to {{$categories[$category_id-1]->category}} Activities in  {{$location}}</h4>       		        		        
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$locationSubcategories[$index]->subcategory}} Activities in {{$location}}" >
-				        <a class="text_over_flow_hide" href="/subcategory/{{$locationSubcategories[$index]->subcategory}}">
-				          {{$locationSubcategories[$index]->subcategory}} in {{$location}}
-				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
-	      </div>       
-	  </div>	
+ 	<div class="row">
+    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+    		<?php	    			
+	          	$institutesLength = sizeof($locationSubcategories);
+	          	$index = 0;
+	          	$maxlength = 12;		          
+	          	$width = 3;
+	          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+	        ?>
+	        <h4>Related to {{$categories[$category_id-1]->category}} Activities in  {{$location}}</h4>       		        		        
+			@for(; $index<$maxlength; $index++ )
+			  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+			      <li title="{{$locationSubcategories[$index]->subcategory}} Activities in {{$location}}" >
+			        <a class="text_over_flow_hide" href="/filter/{{$locationSubcategories[$index]->subcategory}}/{{$location}}">
+			          {{$locationSubcategories[$index]->subcategory}} in {{$location}}
+			        </a>
+			      </li>
+			    </div> 
+			@endfor		            		                  		             
+      	</div>       
+	</div>
 @endif
-@if(isset($localitySubcategories))	
-	 	<div class="row">
-	    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
-	    		<?php	    			
-		          	$institutesLength = sizeof($localitySubcategories);
-		          	$index = 0;
-		          	$maxlength = 12;		          
-		          	$width = 3;
-		          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
-		        ?>
-		        <h4>Related to {{$categories[$category_id-1]->category}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif</h4>
-				@for(; $index<$maxlength; $index++ )
-				  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-				      <li title="{{$localitySubcategories[$index]->subcategory}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif" >
-				        <a class="text_over_flow_hide" href="/subcategory/{{$localitySubcategories[$index]->subcategory}}">
-				          {{$localitySubcategories[$index]->subcategory}} in {{$locality}}@if($locality!=$location){{', '.$location}}@endif
-				        </a>
-				      </li>
-				    </div> 
-				@endfor		            		                  		             
-	      </div>       
-	  </div>
+<!-- For Filter Page -->
+@if(isset($localities))	
+ 	<div class="row">
+    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+    		<?php	    			
+	          	$institutesLength = sizeof($localities);
+	          	$index = 0;
+	          	$maxlength = 12;		          
+	          	$width = 3;
+	          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; } 
+	          	if($subcategory=="Fitness")
+	          		$activities = "Activities";
+	          	else
+	          		$activities = "";
+	        ?>
+	        <h4>Related to {{$subcategory}} {{$activities}} in {{$locality}} @if($locality!=$location){{', '.$location}} @endif</h4>       		        		        
+			@for(; $index<$maxlength; $index++ )
+			  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+			      <li title="{{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}" >
+			        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
+			          {{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}
+			        </a>
+			      </li>
+			    </div> 
+			@endfor		            		                  		             
+    	</div>       
+	</div>	
+@endif
+<!-- For Filter Page -->
+@if(isset($subcategories))	
+ 	<div class="row">
+    	<div class="col-md-12 col-sm-12 col-xs-12 related_item">
+    		<?php	    			
+	          	$institutesLength = sizeof($subcategories);
+	          	$index = 0;
+	          	$maxlength = 12;		          
+	          	$width = 3;
+	          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
+	        ?>
+	        <h4>Related to {{$categories[$category_id-1]->category}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif</h4>
+			@for(; $index<$maxlength; $index++ )
+			  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
+			      <li title="{{$subcategories[$index]->subcategory}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif" >
+			        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locality}}">
+			          {{$subcategories[$index]->subcategory}} in {{$locality}}@if($locality!=$location){{', '.$location}}@endif
+			        </a>
+			      </li>
+			    </div> 
+			@endfor		            		                  		             
+        </div>       
+  	</div>
 @endif
 </div>
 @stop
@@ -347,7 +351,8 @@
 	<script type="text/javascript">
 		var result = {{json_encode( $batchesForCategoryLocation ) }};  				
 		var daysResult = new Array();			
-		var category = "{{$categories[$category_id-1]->category}}";		
+		var categoryName = "{{$categories[$category_id-1]->category}}";		
+		var locationName = "{{$locations[$location_id-1]->location}}";		
 		var sub_select = new Array();
 		var loc_select = new Array();
 		var filter_select = new Array();
@@ -382,25 +387,22 @@
 				{						
 					sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();					
 					loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();
-					if(sub_select.length == 1 && loc_select.length ==0)
+					if(sub_select.length > 0 && loc_select.length == 0)
 					{
-						window.location.href = "/subcategory/"+sub_select;
+						window.location.href = "/filter/"+sub_select+"/"+locationName;
 					}
-					else if(loc_select.length == 1 && sub_select.length ==0)
+					else if(sub_select.length == 0 && loc_select.length >0)
 					{
-						window.location.href = "/locality/"+loc_select;
-					}				
+						window.location.href = "/filter/"+categoryName+"/"+loc_select;
+					}
 					else
-					{											
-						if(sub_select.length==0)	
-							window.location.href = "/filter/"+category+"/"+loc_select;
-						else
-							window.location.href = "/filter/"+sub_select+"/"+loc_select;
+					{
+						window.location.href = "/filter/"+sub_select+"/"+loc_select;
 					}
 				}
 				else
-				{					
-					window.location.href = "/categories/"+category+"/locations";					
+				{
+					window.location.href = "/filter/"+categoryName+"/"+locationName;					
 				}				
 			});	
 			$('#sendMessage').on('show.bs.modal', function(e) 

@@ -39,6 +39,7 @@ class HomeController extends BaseController {
 				$batch = $this->batch->getBatch($favorite['id']);
 				$favorite['institute'] = $batch->institute;
 				$favorite['batch_id'] = $batch->id;
+				$favorite['payment'] = $batch->batch_single_price;
 			}
 		}
 		$homeLang =Lang::get('ViewsLang/home');

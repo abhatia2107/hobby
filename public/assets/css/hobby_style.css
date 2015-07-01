@@ -18,6 +18,12 @@ body li {  list-style-type: none; }
 
 .header_row1  { background-color: #202e54;padding: 7px 7px }
 
+.bookFavClassContainer #bookFavClassConfirm button {border:0;border-radius: 0px;padding: 0;color:#20cfb1;background: none}
+
+.bookFavClassContainer .bookFavClassConfirm {border:1px solid;border-color: #20cfb1;border-radius:3px; padding: 0px 7px;margin: 0px}
+
+.bookFavClassContainer .bookFavClassConfirm a {padding: 0px 0 1px 7px;border-left:1px solid;border-color:#20cfb1;margin: 0 0 0 5px;color: #e24648;border-radius:2px; }
+
 .user_account { /*padding: 2px 7px;border: 2px solid;border-color: #20cfb1;border-radius: 5px;*/font-size: 20px;text-align: center;color: white}
 
 .user_account_options button, .dropdown-toggle { background: none;color: white;font-family: 'Montserrat', sans-serif;font-weight: lighter; max-width: 155px;}

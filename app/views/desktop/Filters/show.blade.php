@@ -365,7 +365,7 @@
 @stop
 @section('pagejquery')
 	<script type="text/javascript">
-		var result = {{json_encode( $batchesForCategoryLocation ) }};  				
+		var result = {{json_encode( $batchesForCategoryLocation ) }};
 		var daysResult = new Array();			
 		var category = "{{$categories[$category_id-1]->category}}";		
 		var sub_select = new Array();
@@ -434,8 +434,7 @@
 			    $(e.currentTarget).find('input[name="email"]').val(email);
 			    $(e.currentTarget).find('input[name="institute"]').val(institute);
 			});			
-			$('.fb-like').data('width',$('.filterOption').css('width'));
-			//alert($('.fb-like').data('width'));
+			$('.fb-like').data('width',$('.filterOption').css('width'));			
 		});
 		
 	</script>

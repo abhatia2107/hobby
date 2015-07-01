@@ -59,7 +59,9 @@
 		$institutesLength = sizeof($subcategories);
 		$index = 0;
 		$maxlength = 20;			
-		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
+		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }	
+		$tomorrowDate = new DateTime('tomorrow');
+		$tomorrowDate = $tomorrowDate->format('Y-m-d');	
 	?>
 	@for(; $index<$maxlength; $index++ )
 		<ul  style="margin:0;padding:0 0 0 10px" class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
@@ -111,4 +113,21 @@
 </div>
 @stop
 @section('pagejquery')
+<script type="text/javascript">
+	$(document).ready(function () {		
+		$("#bookFavClass").click(function (e) {
+			e.preventDefault();
+            e.stopPropagation();
+			$("#bookFavClassButton").hide();
+			$("#bookFavClassConfirm").show();			
+		});
+		$("#bookingDateChange").click(function (e) {
+			e.preventDefault();
+            e.stopPropagation();
+            $("#booking_date").val("{{$tomorrowDate}}");
+            if($("#booking_date").val() == "{{$tomorrowDate}}")
+            	$("#bookFavClassForm").submit();
+		});
+	});	
+</script>
 @stop

@@ -35,7 +35,11 @@ class BookingsController extends \BaseController {
 	{
 		$credentials = Input::all();
 		$referrer = URL::previous();
-		$credentials['batch_id'] = substr($referrer, strrpos($referrer, '/') + 1);
+		if(is_null($credentials['batch_id']))
+		{
+			$credentials['batch_id'] = substr($referrer, strrpos($referrer, '/') + 1);
+		}
+		
 		$batch=$this->batch->getbatch($credentials['batch_id']);
 	    if(!is_numeric($credentials['batch_id']))
         {

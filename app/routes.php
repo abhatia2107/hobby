@@ -237,6 +237,7 @@ Route::group(array('before' => "auth|admin"), function() {
 });
 
 Route::group(array('before' => "auth"), function() {
+	Route::get('/users/favorite/{id}','UsersController@favorite');
 	Route::get('/users/profile','UsersController@profile');
 	Route::get('/users/orders','UsersController@orders');
 	Route::get('/users/changepassword','UsersController@getChangePassword');

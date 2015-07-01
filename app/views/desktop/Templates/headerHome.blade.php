@@ -16,6 +16,9 @@
 							$name = "My Account";						
 					}
 				?>
+				@if(isset($favorite['institute']))
+					{{$favorite['institute']}}
+				@endif
 				@if(!$id)
 					<div class="login">
 						<a class="header_signin_a" href="#" data-toggle="modal" data-target="#loginModal">LOGIN TO HOBBYIX</a>						

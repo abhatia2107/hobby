@@ -44,6 +44,15 @@ class UsersController extends \BaseController {
 		return View::make('Users.profile',compact('user'));
 	}
 
+	public function favorite($id)
+	{	
+		$user_id=Auth::id();
+		$user=User::find($user_id);
+		$user->user_favorite=$id;
+		$user->save();
+		return Redirect::back()->with('success',Lang::get('user.user_favorite_added'));
+	}
+
 	public function orders()
 	{
 		$user_id=Auth::id();

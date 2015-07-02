@@ -149,7 +149,7 @@
           <div class="col-sm-2 col-md-3" @if($loggedIn) style="display:block" @else style="display:none" @endif>
             <div class="submitReviewButton">
                <!--<a id="SubmitReviewButton" class="btn btn-primary">Submit a Review</a> -->
-               <button id="" onclick="markFavClass({{$batchDetails->id}});" class="btn btn-primary">Mark as Favorite</button>
+               <button id="favButton" onclick="markFavClass({{$batchDetails->id}});" @if($batchDetails->id!=$user->user_favorite) class="btn btn-primary" @else class="btn btn-success"@endif>Mark as Favorite</button>
             </div>
           </div>
         </div>
@@ -384,10 +384,12 @@
         $("#favClassAlertMessage").hide();
         $("#favClassAlertMessage").fadeIn(300);        
         $('html, body').animate({
-          scrollTop: $("#favClassAlertMessage").offset().top
+          scrollTop: $("#favClassAlertMessage").offset().top - 150
         }, 300);
         $("#responseMessage").empty();
         $("#responseMessage").append(response);
+        $("#favButton").removeClass("btn-primary");
+        $("#favButton").addClass("btn-success");
       }); 
     }         
     function verifyPromoCode (condition) 

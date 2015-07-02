@@ -33,6 +33,17 @@ class CommentsController extends \BaseController {
 	 */
 	public function store()
 	{
+		$user_id=Auth::id();
+		if($user_id)
+		{
+			$booking = Booking::where('user_id',$user_id)->where('reviewed',false)->orderBy('created_at', 'desc')->first();
+			$booking_institute = null;
+			if($booking)
+			{
+				$institute_id = Batch::find($booking->batch_id)->batch_institute_id;
+				$booking_institute = Institute::find($institute_id);	
+			}
+		}
 		$credentials=Input::all();
 		unset($credentials['csrf_token']);
 		$validator = Validator::make($credentials, Comment::$rules);
@@ -45,7 +56,7 @@ class CommentsController extends \BaseController {
 			$comment=Comment::create($credentials);
 			return Redirect::back()->with('success',Lang::get('comment.comment_updated'));
 		}
-		$credentials['comment_user_id']=Auth::id();
+		$credentials['comment_user_id']=$user_id;
 		$comment=Comment::create($credentials);
 		return Redirect::back()->with('success',Lang::get('comment.comment_created'));
 	}

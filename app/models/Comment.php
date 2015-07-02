@@ -12,7 +12,6 @@ class Comment extends \Eloquent {
 
 	public static $rules = [
 	    'comment_institute_id'=>'required|numeric',
-		'comment'=>'required',
 	    'comment_rating'=>'required|numeric|min:1|max:5',
     ];
     

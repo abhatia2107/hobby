@@ -41,10 +41,17 @@ class HomeController extends BaseController {
 				$favorite['batch_id'] = $batch->id;
 				$favorite['payment'] = $batch->batch_single_price;
 			}
+			$booking = Booking::where('user_id',$user_id)->where('reviewed',false)->orderBy('created_at', 'desc')->first();
+			$booking_institute = null;
+			if($booking)
+			{
+				$institute_id = Batch::find($booking->batch_id)->batch_institute_id;
+				$booking_institute = Institute::find($institute_id);	
+			}
 		}
 		$homeLang =Lang::get('ViewsLang/home');
 		// dd($homeLang);
-		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches','institutes','subcategories','localities','favorite'));
+		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches','institutes','subcategories','localities','favorite','booking_institute'));
 	}
 
 	public function showAdminHome()

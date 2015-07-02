@@ -1,7 +1,7 @@
 @section("login")
-<div class="modal-dialog" >
+<div class="modal-dialog loginForm" >
     <div class="modal-content">
-        <form name="login" class="loginForm" id="loginForm" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
+        <form name="login" class="" id="loginForm" role="form" method="post" action="/users/login/submit" enctype="multipart/form-data">
             <div class="modal-header">
                 <div class="close" title="Close" data-dismiss="modal" @if(isset($loginPage)) style="display:none" @endif>
                     <span onClick="refreshForm('#loginForm')" aria-hidden="true">X</span>
@@ -34,14 +34,12 @@
                 </div>
                 <div class="signin_button"><button type="submit" class="btn btn-primary">LogIn</button></div>
             </div>
-            <div class="modal-footer">                               
-                <a href="/login/fb">
-                    <button class="btn btn-primary">
-                        <span class="glyphicon fa fa-fw fa-facebook"></span>Login Using Facebook
-                    </button>
-                </a>                 
-            </div>
         </form>
+        <div class="modal-footer">                               
+            <a href="/login/fb" class="btn btn-primary">                   
+                <i class="glyphicon fa fa-fw fa-facebook"></i>Login Using Facebook                    
+            </a>                 
+        </div>        
     </div>
 </div>
 <script type="text/javascript" >

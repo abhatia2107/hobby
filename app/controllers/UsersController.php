@@ -50,7 +50,7 @@ class UsersController extends \BaseController {
 		$user=User::find($user_id);
 		$user->user_favorite=$id;
 		$user->save();
-		return Redirect::back()->with('success',Lang::get('user.user_favorite_added'));
+		return Lang::get('user.user_favorite_added');
 	}
 
 	public function orders()

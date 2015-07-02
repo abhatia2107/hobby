@@ -16,7 +16,7 @@
 
         <h4>Continue to our <a href="{{url('/')}}">website.</a></h4>
      
-        <div class="fb-share-button" data-href="{{Request::url()}}" data-layout="button_count"></div>
+        <div class="fb-share-button" data-href="url('/memberships').'?id='.$data->id" data-layout="button_count"></div>
      
       </div>
     </div>

@@ -41,8 +41,8 @@
 
 @section('content')
 	<div class="container membership_page_container">
-		<div class="row">
-			<div class="col-xs-12 col-md-4 col-sm-5 membership_page_item">
+		<div class="col-lg-12 col-md-12 maz_pad_z">
+			<div class="col-lg-4 col-xs-12 col-md-5 col-sm-6 membership_page_item">
 				<div class="membership_card_container">
 					<div class="membership_card"></div>					
 					<div class="membership_card_details"></div>
@@ -79,7 +79,7 @@
 					</div>
 				</div>				
 			</div>
-			<div class="col-xs-12 col-md-8 col-sm-7 membership_page_item">
+			<div class="col-lg-8 col-xs-12 col-md-7 col-sm-6 membership_page_item">
 				<div class="membership_features_container">
 					<h1 class="header">
 						Hobbyix Membership Features

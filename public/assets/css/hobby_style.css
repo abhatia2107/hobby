@@ -18,6 +18,12 @@ body li {  list-style-type: none; }
 
 .header_row1  { background-color: #202e54;padding: 7px 7px }
 
+.bookFavClassContainer #bookFavClassConfirm button {border:0;border-radius: 0px;padding: 0;color:#20cfb1;background: none}
+
+.bookFavClassContainer .bookFavClassConfirm {border:1px solid;border-color: #20cfb1;border-radius:3px; padding: 0px 7px;margin: 0px}
+
+.bookFavClassContainer .bookFavClassConfirm a {padding: 0px 0 1px 7px;border-left:1px solid;border-color:#20cfb1;margin: 0 0 0 5px;color: #e24648;border-radius:2px; }
+
 .user_account { /*padding: 2px 7px;border: 2px solid;border-color: #20cfb1;border-radius: 5px;*/font-size: 20px;text-align: center;color: white}
 
 .user_account_options button, .dropdown-toggle { background: none;color: white;font-family: 'Montserrat', sans-serif;font-weight: lighter; max-width: 155px;}
@@ -31,6 +37,8 @@ body li {  list-style-type: none; }
 .user_account_options .btn-primary { color: #ffffff;border-color:#20cfb1;padding: 0;}
  
 .user_account_options .btn-primary:active{  box-shadow: none; }
+
+.alertMessage {margin:0px;position:absolute;width:100%;z-index:1000000}
  
 .homepage-cover { width: 100%;text-align: center;background-color: rgba(0, 0, 0, 0.1);  }
 
@@ -89,9 +97,17 @@ body li {  list-style-type: none; }
 
 .explore_button {text-align: center;}
 
-.explore_button .btn-primary {border-radius: 0px;border:0px;min-width: 210px;max-width: 210px;margin: 10px 0px 5px 0px;background: #3396d1;font-size: 17px;}
+.explore_button .btn-primary {border-radius: 0px;border:0px;min-width: 210px;margin: 10px 0px 5px 0px;background: #3396d1;font-size: 17px;}
 
 .login {float: right;}
+
+.loginForm .btn-primary,.signUp .btn-primary {border-radius: 0px;background: #3a5795;font-weight: bold;font-size: 14px;padding: 4px 10px;}
+
+.loginForm .signin_button .btn-primary {border-radius: 0px;background: #3a5795;padding: 4px 30px;font-size: 16px;font-weight: normal;}
+
+.modal-footer .fa {font-size: 20px;margin-right: 5px;}
+
+.signUp .signin_button {margin: 10px 0px  -15px 0px}
 
  body select {  height: 34px;border-radius: 5px; }
 
@@ -99,15 +115,11 @@ body li {  list-style-type: none; }
 
 .membership_offer_container .header {font-size: 30px;text-align: center;padding: 0px 0px 5px 0px;border-bottom:2px solid #81d2f6;color: black}
 
-@media(min-width: 992px) {.membership_offer_container {padding: 20px 14% 50px 14%;}}
-
-@media(min-width: 992px) {.membership_offer_container .membership_offer_item {padding: 0px 4%; }}
-
 .membership_offer_container .membership_offer_item { background: #fff;background: #dfdfdf;margin: 20px 0px 0px 0px}
 
 .membership_offer_container .details {min-height: 230px;background: #fff;}
 
-.membership_offer_container .footer {color:black;background: #81d2f6;padding: 10px 5px 20px 5px;text-align: center;font-size: 17px;min-height: 100px;max-height: 100px;overflow: hidden;}
+.membership_offer_container .footer {color:black;background: #81d2f6;padding: 10px 5px 20px 5px;text-align: center;font-size: 17px;min-height: 110px;max-height: 110px;overflow: hidden;}
 
 .membership_offer_container .details img{width: 99%; height: auto;padding: 0 10px;margin-top: 40px;}
 
@@ -142,25 +154,17 @@ span.stars span {  background-position: 0 0; }
 
 /* filter page style sheet*/
 
-.filterOption { font-family: 'Open Sans',sans-serif; font-weight: lighter;  box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5); }
+.filterOption { font-family: 'Open Sans',sans-serif; font-weight: lighter;  box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);margin-bottom: 10px; }
 
 .filterTitle { color:white;font-family: 'Open Sans',sans-serif;font-size: 20px;padding: 0px 5px;background:#3396d1;height: 30px; }
 
 .filterOptionsList { padding: 5px 2px 0px 5px;border:1px solid;border-top:0px solid;border-color:#3396d1; }
-
-@media (min-width:992px) { .filterOption {width: 90%;margin-left: 10%} }
 
 .facilities_title {color: #333;font-size: 18px;}
 
 .filters  {  max-height: 130px; overflow: auto; color: #333;padding: 0px; }
 
 .filterOption label {font-weight: lighter;}
-
-.filter-option-2,.filter-option-3   {  margin-top: 10px;  font-weight: normal;   }
-
-.filter-option-3 {margin-bottom: 20px;}
-
-.filter-option-1   {  margin-top: 15px; font-weight: normal;   }
 
 .sub           {  cursor: pointer; }
 
@@ -301,21 +305,23 @@ span.stars span {  background-position: 0 0; }
 
 @media screen and (min-width: 992px) {  #loginModal .modal-dialog  { width:400px; }  }
 
-#loginModal .modal-footer {height: 50px;padding-top: 7px;}
+#loginModal .modal-footer {padding: 10px 0px;margin: 0;}
 
-#loginModal .modal-dialog { margin-top:9%; }
+#loginModal .modal-dialog { margin-top:9%;}
+
+#loginModal .modal-content, #signupModal .modal-content  {border-radius: 0px}
 
 @media screen and (min-width: 992px) {  #signupModal .modal-dialog  { width:430px; }  }
 
-#signupModal .modal-body .row {margin-top: 10px;}
+.signUp .modal-body .row {margin-top: 10px;}
 
 #signupModal .modal-dialog { margin-top:9%; }
+
+.maz_pad_z {margin: 0px;padding:0;}
 
 #signupModal .modal-header {height: 60px;padding-top: 10px;}
 
 .login-remember { text-align: center;margin-bottom: 20px; }
-
-#loginModal button {  height: 30px;padding: 5px 10px 10px 10px;width: 100px;border-radius: 5px; }
 
 #loginModal input[type=email],input[type=password] {  height: 40px;padding: 5px auto 5px auto; }
 
@@ -356,10 +362,6 @@ button:hover, button:active, button:focus {text-decoration: none;outline: none;}
 .login {  padding: 2px 6px;border: 1px solid;border-color: #20cfb1;border-radius: 5px;font-size: 14px;}
 
 .modal-header, .modal-footer, #loadmorebutton, .venues-list-buttons {  text-align: center; }
-
-#loadmorebutton, .results-container {  padding-bottom: 20px;}
-
-.results-container {padding-right: 0px;margin-right: 0px !important;}
 
 .venues-list-container {  margin-top: 20px; }
 
@@ -449,4 +451,4 @@ button:hover, button:active, button:focus {text-decoration: none;outline: none;}
 
 .sample-box-small .totalAmount {  font-size: 18px;text-align: center;font-weight: bold;margin-top: -7px; }
 
-.booknowButton, .booknowButton:hover, .booknowButton button:active { background: #3396d1;margin-top: 5px;padding: 5px 25px 5px 25px;border-radius: 0px;border:0px solid;text-align: center; }
+.booknowButton, .booknowButton:hover, .booknowButton button:active { background: #3396d1;margin-top: 5px;padding: 5px 20px 5px 20px;border-radius: 0px;border:0px solid;text-align: center; }

@@ -33,7 +33,7 @@ class BookingsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$credentials = Input::all();
+		$credentials = Input::all();		
 		$referrer = URL::previous();
 		if(is_null($credentials['batch_id']))
 		{

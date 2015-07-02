@@ -38,6 +38,29 @@
 					</ul>
 				</div>											
 			@endif			
-		</div>		
+		</div>
+		@if(isset($favorite['id']))	
+			<div class="row" style="margin:0;padding:5px 15px 10px 15px">									
+				<div class="userInfoListing bookFavClassContainer col-xs-12" style="margin:0;padding:0;">
+					<form role="form" method="post" id="bookFavClassForm" action="/bookings" enctype="multipart/form-data">
+						<input type="hidden" name="csrf_token" id="hiddenCSRF" value="{{ csrf_token() }}" >
+						<input type="hidden" name="batch_id" value="{{$favorite['batch_id']}}" >
+						<input type="hidden" id="booking_date" name="booking_date" value="{{date('Y-m-d')}}" >
+						<input type="hidden" name="name" value="{{$favorite['name']}}" >
+						<input type="hidden" name="email" value="{{$favorite['email']}}" >                     
+						<input type="hidden" name="contact_no" value="{{$favorite['contact_no']}}" >                     
+						<input type="hidden" name="payment" value="{{$favorite['payment']}}" >                     
+						<input type="hidden" name="no_of_sessions" value="1" > 
+						<input type="hidden" name="pay_hobbyix" value="credit"> 
+						<div class="bookFavClassConfirm text_over_flow_hide" id="bookFavClassButton" style="display:block;color:white;text-align:center">
+							{{$favorite['institute']}}
+						</div>						
+						<div class="bookFavClassConfirm" id="bookFavClassConfirm" style="display:none;color:white">
+							Book For <button type="sumbit">Today</button> or <button id="bookingDateChange">Tomorrow</button> <a onclick="closeFavClassBook();" href="javascript:void(0);">X</a>
+						</div>
+					</form>
+				</div>	
+			</div>			
+		@endif			
 	</div>
 @show

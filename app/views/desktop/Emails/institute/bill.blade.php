@@ -15,7 +15,7 @@
 					Dear {{$institute}},
 				</h1>
 				<p style="color:#000;">
-					You have received the payment from Hobbyix.com. Below are the payment details.
+					You have received the payment of $amount from Hobbyix.com. Below are the payment details.
 				</p>
 				<div style="background:#FAFDFE;border:2px solid #1E2C4F;display:inline-block;min-width:100%;overflow:hidden;border-radius:10px;">
 					<div style="background:#1E2C4F;padding:10px 5px; color:white">
@@ -25,20 +25,41 @@
 						<div style="max-width:47%;display:inline-block;float:left;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
 								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Institute Name : {{$institute}}</div>
 								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Address:  {{$locality.', '.$location}}</div>
-								<div style="width:100%;padding:5px 6px">Payment Done for: {{$month}}</div>
-						</div><!-- 							
+								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Payment Done for: {{$month}}</div>
+								<div style="width:100%;padding:5px 6px;">Total Amount Paid: {{$amount}}</div>
+						</div>							
 						<div style="max-width:47.5%;display:inline-block;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;"> Subcategory: {{$subcategory}}</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;"> Customer Name: {{$user_name}}</div> -->
-							<div style="width:100%;float:left;padding:5px 6px;">Number of Sessions: {{$no_of_sessions}}</div>
-						</div>								
+							<div style="width:100%;float:left;padding:5px 6px;border-bottom: 1px solid grey;">Category: {{$subcategory}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;"> Price per session: {{$price}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;"> Number of Sessions: {{$no_of_sessions}}</div>
+							<div style="width:100%;float:left;padding:5px 6px;">Amount: {{$amount}}</div>
+						</div>
+						<div style="max-width:47%;display:inline-block;float:left;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
+								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Category: {{$subcategory}}</div>
+								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Price per session: {{$price}}</div>
+								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Number of Sessions: {{$no_of_sessions}}</div>
+								<div style="width:100%;padding:5px 6px">Amount: {{$amount}}</div>
+						</div>							
+						<div style="max-width:47.5%;display:inline-block;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
+							<div style="width:100%;float:left;padding:5px 6px;border-bottom: 1px solid grey;">Category: {{$subcategory}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;"> Price per session: {{$price}}</div>
+							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;"> Number of Sessions: {{$no_of_sessions}}</div>
+							<div style="width:100%;float:left;padding:5px 6px;">Amount: {{$amount}}</div>
+						</div>
+								
 					</div>
 				</div>	
-				<p >	
+				<p>
+					The account stands clear from hobbyix side till 30th of June 2015 including this date.
+				</p>
+				<p>
+					If you have any discrepancy regarding the amount or number of sessions. Kindly revert to this mail within 2 business days, unless amount will be considered as settled.
+				</p>
+				<p>	
 				 Thanks for your cooperation. 
 				</p>
 				<p >	
-				Customer Services Team
+				Accounts Team
 				</p>		
 				<!--<div style="text-align:center;">
 					<a href="{{ URL::to('/batches')}}">

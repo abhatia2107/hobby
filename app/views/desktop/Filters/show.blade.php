@@ -33,8 +33,6 @@
 
   	/* new style for filter page */  	
 
-  	.maz_pad_z {margin: 0px;padding:0;}
-
   	a, a:hover {text-decoration: none}
 
   	#batchesData { box-shadow: 0px 0px 2px #3366CC; -moz-box-shadow: 0px 0px 2px #3366CC;-webkit-box-shadow: 0px 0px 2px #3366CC;
@@ -65,14 +63,15 @@
 
 	.batch .instConMsg:hover {background: #E8E8E8; cursor: pointer;}
 
-	.batch .instCon {margin-right:5px;min-width: 140px}
+	.batch .instCon {margin-right:5px;min-width: 120px}
 
 	.batch .instMsg {margin-right:5px;min-width: 120px}
 
 	.batch .singleSessionPrice {  text-align: center;margin-bottom: 10px }
 
 	.times_font { font-family: "Times New Roman", Georgia, Serif;}
-	
+  	
+  	.related_item ul {margin: 0;padding: 3px 0px}
   	
    </style>
 @stop
@@ -135,114 +134,108 @@
 		</li>		
 		<h1>@if(isset($metaContent[3])){{$metaContent[3]}} @endif</h1>
 	</ul>	
-<div class="container filter_page" >		
-	<div class="row">		
-		<div class="col-md-12 col-xs-12 col-sm-12">					
-			<div class="">
-				<!--Start of filter division -->
-				<div class="col-md-3 col-xs-12 col-sm-3" style="margin:0px 0px 25px 0px;padding:0px 1% 0px 0px;">
-					<!--<span id='filter-tittle-name'>Filter By</span>-->
-					<div class="filter-option-1 filterOption">	
-						<div class="filterTitle">Sub Categories</div>
-						<div class="filterOptionsList">							
-							<ul class="list-unstyled filters"> 	
-								@foreach ($subcategoriesForCategory as $subcategoryData)											
-									<li subcategory="{{$subcategoryData->id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryData->subcategory}}" type="checkbox" data-filterid="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($subcategoryData->id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryData->subcategory}}</span></label>
-									</li>
-								 @endforeach
-							 </ul>
-							 
-						</div>
-					</div>			
-					<div class="filter-option-2 filterOption">	
-						<div class="filterTitle">Locality</div> 
-						<div class="filterOptionsList">							
-							<ul class="list-unstyled filters"> 
-								@foreach ($localitiesForLocation as $localityData)									
-									<li subcategory="{{$localityData->id}}" >								
-									 	 <label class="sub"><input autocomplete="off" value="{{$localityData->locality_url}}" type="checkbox" data-filterid="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($localityData->id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityData->locality}}</span></label>
-									</li> 
-								@endforeach
-							 </ul>							 
-						</div>
-					</div>
-					<div class="filter-option-2 filterOption" style="overflow:auto;padding:0 5px 5px 5px;text-align:center">							
-						<h4>Like us on facebook</h4>
-						<div class="fb-page" data-href="https://www.facebook.com/hobbyix" data-width="380" data-hide-cover="false" data-show-facepile="false" data-show-posts="false"></div>						
-						<!---<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-width="240px" data-share="true"></div>						-->
-					</div>
+<div class="container filter_page_container" style="margin:15px 0px 30px 0px;">			
+	<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maz_pad_z">											
+		<div class="col-lg-3 col-md-3 col-xs-12 col-sm-3 maz_pad_z">			
+			<div class="col-lg-9 col-md-11 col-sm-11 filter-option-1 filterOption" style="padding:0;float:right">	
+				<div class="filterTitle">Sub Categories</div>
+				<div class="filterOptionsList">							
+					<ul class="list-unstyled filters"> 	
+						@foreach ($subcategoriesForCategory as $subcategoryData)											
+							<li subcategory="{{$subcategoryData->id}}" >								
+							 	 <label class="sub"><input autocomplete="off" value="{{$subcategoryData->subcategory}}" type="checkbox" data-filterid="subcategory_filter" class="SubCheckbox filterCheckBox" @if(isset($subArr))@if(in_array($subcategoryData->id, $subArr)) checked="checked" @endif @endif /><span class="checkbox_data">{{' '.$subcategoryData->subcategory}}</span></label>
+							</li>
+						 @endforeach
+					 </ul>
+					 
 				</div>
-				<div class="col-md-9 col-xs-12 col-sm-9 results-container" style="margin:15px 0px 25px 0px;padding:0px 1% 0px 0px;" >
-					<ul class="list-unstyled row maz_pad_z" id="batchesData">						
-					@if(!empty($batchesForCategoryLocation)) 
-					@foreach($batchesForCategoryLocation as $batchInfo)
-						<li itemscope itemtype="http://schema.org/SportsActivityLocation">
-							<div class="batch col-md-12 col-xs-12 col-sm-12 maz_pad_z" id="batch{{$batchInfo->id}}" >
-								<div class="col-md-9 col-xs-12 col-sm-12 body maz_pad_z" >
-									<div class="col-md-12 col-xs-12 col-sm-12 header">
-										<h2><a itemprop="url" title="{{$batchInfo->institute}}" href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
-										<span style="display:none" itemprop="additionalType">ExerciseGym</span>
-										<h3 class="maz_pad_z" title="Activity Name, Locality">											
-											<span>{{$batchInfo->subcategory}}, {{$batchInfo->locality}}</span>
-										</h3>
-									</div>																
-									<div class="col-md-6 col-xs-12 col-sm-6 leftPart maz_pad_z" >
-										<div class="item" title="Landmark is {{$batchInfo->venue_landmark}}, {{$batchInfo->locality}}">
-											<span class="text_over_flow_hide" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-												<span class="glyphicon glyphicon-map-marker"></span>
-												<span itemprop="streetAddress">{{$batchInfo->venue_landmark}}</span>, 
-												<span itemprop="addressLocality">{{$batchInfo->locality}}</span>, 
-												<span itemprop="postalCode">{{$batchInfo->venue_pincode}}</span>
-											</span>
-										</div>
-										<div class="item" title="Schedule: {{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}">
-											<span class="text_over_flow_hide">
-											<span class="glyphicon glyphicon-time"></span>
-											<time itemprop="openingHours" datetime="Mo-Su">{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</time>
-											<span class="text_over_flow_hide">
-										</div>									
-									</div>								
-									<div class="col-md-6 col-xs-12 col-sm-6 rightPart maz_pad_z">
-										<div class="col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
-											<span style="display:none" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone" >											
-												 +91 {{$batchInfo->venue_contact_no}}
-											</span>
-											<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>
-										</div>		
-										<div class="col-md-4 col-xs-12 col-sm-5 instConMsg instMsg" data-toggle="modal" href="#sendMessage" data-batch="{{$batchInfo->batch}}"
-											data-email="{{$batchInfo->venue_email}}" data-institute="{{$batchInfo->institute}}" title="Send Message to Institute and get response">
-											<span class="glyphicon glyphicon-envelope"></span>										
-											<span>Send Message</span>
-										</div>	
-										<div class="col-md-12 col-sm-12 facilities_continer"></div>
-									</div>								
-								</div>
-								<div class="col-md-3 col-xs-12 col-sm-12 bookClass singleSessionPriceContainer 	">
-									<div class="singleSessionPrice">
-									<div class="times_font">₹<span itemprop="priceRange">{{$batchInfo->batch_single_price}}</span> / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
-									<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
-									</div>
-								</div>	
-							</div>																		
-						</li>
-					@endforeach
-					@endif					
-					<div id="noResults" class='resultsMessage' >No Results Found</div>
-					</ul>
-					@if($batchesForCategoryLocation)
-						<div class="text-right">
-							@if(isset($keyword))
-								{{$batchesForCategoryLocation->appends(array('keyword' => $keyword))->links()}}
-							@else
-								{{$batchesForCategoryLocation->links()}}
-							@endif
-						</div>
-					@endif
-				</div><!--end of results info -->
+			</div>			
+			<div class="col-lg-9 col-md-11 col-sm-11 filter-option-2 filterOption" style="padding:0;float:right">	
+				<div class="filterTitle">Locality</div> 
+				<div class="filterOptionsList">							
+					<ul class="list-unstyled filters"> 
+						@foreach ($localitiesForLocation as $localityData)									
+							<li subcategory="{{$localityData->id}}" >								
+							 	 <label class="sub"><input autocomplete="off" value="{{$localityData->locality_url}}" type="checkbox" data-filterid="locality_filter" class="LocCheckbox filterCheckBox" @if(isset($locArr))@if(in_array($localityData->id, $locArr)) checked="checked" @endif @endif  /><span class="checkbox_data">{{' '.$localityData->locality}}</span></label>
+							</li> 
+						@endforeach
+					 </ul>							 
+				</div>
+			</div>
+			<div class="col-lg-9 col-md-11 col-sm-11 filterOption" style="overflow:auto;padding:0 5px 5px 5px;text-align:center;float:right">							
+				<h4>Like us on facebook</h4>
+				<div class="fb-page" data-href="https://www.facebook.com/hobbyix" data-width="300" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>						
+				<!---<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-width="240px" data-share="true"></div>						-->
 			</div>
 		</div>
-	</div>
+		<div class="col-lg-9 col-md-9 col-xs-12 col-sm-9" style="padding-left:1%" >
+			<ul class="list-unstyled row col-lg-11 col-md-12 maz_pad_z" id="batchesData">						
+			@if(!empty($batchesForCategoryLocation)) 
+			@foreach($batchesForCategoryLocation as $batchInfo)
+				<li itemscope itemtype="http://schema.org/SportsActivityLocation">
+					<div class="batch col-lg-12 col-md-12 col-xs-12 col-sm-12 maz_pad_z" id="batch{{$batchInfo->id}}" >
+						<div class="col-lg-10 col-md-10 col-xs-12 col-sm-12 body maz_pad_z" >
+							<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 header">
+								<h2><a itemprop="url" title="{{$batchInfo->institute}}" href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
+								<span style="display:none" itemprop="additionalType">ExerciseGym</span>
+								<h3 class="maz_pad_z" title="Activity Name, Locality">											
+									<span>{{$batchInfo->subcategory}}, {{$batchInfo->locality}}</span>
+								</h3>
+							</div>																
+							<div class="col-lg-6 col-md-6 col-xs-12 col-sm-5 leftPart maz_pad_z" >
+								<div class="item" title="Landmark is {{$batchInfo->venue_landmark}}, {{$batchInfo->locality}}">
+									<span class="text_over_flow_hide" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+										<span class="glyphicon glyphicon-map-marker"></span>
+										<span itemprop="streetAddress">{{$batchInfo->venue_landmark}}</span>, 
+										<span itemprop="addressLocality">{{$batchInfo->locality}}</span>, 
+										<span itemprop="postalCode">{{$batchInfo->venue_pincode}}</span>
+									</span>
+								</div>
+								<div class="item" title="Schedule: {{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}">
+									<span class="text_over_flow_hide">
+									<span class="glyphicon glyphicon-time"></span>
+									<time itemprop="openingHours" datetime="Mo-Su">{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</time>
+									<span class="text_over_flow_hide">
+								</div>									
+							</div>								
+							<div class="col-lg-6 col-md-6 col-xs-12 col-sm-7 rightPart maz_pad_z">
+								<div class="col-lg-5 col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
+									<span style="display:none" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone" >											
+										 +91 {{$batchInfo->venue_contact_no}}
+									</span>
+									<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>
+								</div>		
+								<div class="col-lg-5 col-md-5 col-xs-12 col-sm-5 instConMsg instMsg" data-toggle="modal" href="#sendMessage" data-batch="{{$batchInfo->batch}}"
+									data-email="{{$batchInfo->venue_email}}" data-institute="{{$batchInfo->institute}}" title="Send Message to Institute and get response">
+									<span class="glyphicon glyphicon-envelope"></span>										
+									<span>Send Message</span>
+								</div>	
+								<div class="col-lg-12 col-md-12 col-sm-12 facilities_continer"></div>
+							</div>								
+						</div>
+						<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 bookClass singleSessionPriceContainer 	">
+							<div class="singleSessionPrice">
+							<div class="times_font">₹<span itemprop="priceRange">{{$batchInfo->batch_single_price}}</span> / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
+							<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
+							</div>
+						</div>	
+					</div>																		
+				</li>
+			@endforeach
+			@endif					
+			<div id="noResults" class='resultsMessage' >No Results Found</div>
+			</ul>
+			@if($batchesForCategoryLocation)
+				<div class="text-right">
+					@if(isset($keyword))
+						{{$batchesForCategoryLocation->appends(array('keyword' => $keyword))->links()}}
+					@else
+						{{$batchesForCategoryLocation->links()}}
+					@endif
+				</div>
+			@endif
+		</div>
+	</div>		
 </div>
 <div class="container" id="related_data_container">
 <!-- For Institutes only-->
@@ -256,16 +249,16 @@
 	          	$width = 3;
 	          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 	        ?>
-	        <h4>Related to {{$instituteName}}</h4>       		        		        
-			@for(; $index<$maxlength; $index++ )
-			  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-			      <li title="{{$instituteSubcategories[$index]->subcategory}} in {{$locality.', '.$location}}" >
-			        <a class="text_over_flow_hide" href="/filter/{{$instituteSubcategories[$index]->subcategory}}/{{$locArr[0]}}">
-			          {{$instituteSubcategories[$index]->subcategory}} in {{$locality.', '.$location}}
-			        </a>
-			      </li>
-			    </div> 
-			@endfor		            		                  		             
+	        <h4>Related to {{$instituteName}}</h4>   
+	        <ul>    		        		        
+				@for(; $index<$maxlength; $index++ )			  	   
+					<li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$instituteSubcategories[$index]->subcategory}} in {{$locality.', '.$location}}" >
+						<a class="text_over_flow_hide" href="/filter/{{$instituteSubcategories[$index]->subcategory}}/{{$locArr[0]}}">
+						  {{$instituteSubcategories[$index]->subcategory}} in {{$locality.', '.$location}}
+						</a>
+					</li>			   
+				@endfor	
+			</ul>	            		                  		             
 	  	</div>       
 	</div>	
 @endif
@@ -281,15 +274,15 @@
 	          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 	        ?>
 	        <h4>Related to {{$categories[$category_id-1]->category}} Activities in  {{$location}}</h4>       		        		        
-			@for(; $index<$maxlength; $index++ )
-			  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-			      <li title="{{$locationSubcategories[$index]->subcategory}} Activities in {{$location}}" >
-			        <a class="text_over_flow_hide" href="/filter/{{$locationSubcategories[$index]->subcategory}}/{{$location}}">
-			          {{$locationSubcategories[$index]->subcategory}} in {{$location}}
-			        </a>
-			      </li>
-			    </div> 
-			@endfor		            		                  		             
+	        <ul>
+				@for(; $index<$maxlength; $index++ )			  				   
+				    <li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$locationSubcategories[$index]->subcategory}} Activities in {{$location}}" >
+				        <a class="text_over_flow_hide" href="/filter/{{$locationSubcategories[$index]->subcategory}}/{{$location}}">
+				          {{$locationSubcategories[$index]->subcategory}} in {{$location}}
+				        </a>
+				    </li>			   
+				@endfor
+			</ul>		            		                  		             
       	</div>       
 	</div>
 @endif
@@ -309,15 +302,15 @@
 	          		$activities = "";
 	        ?>
 	        <h4>Related to {{$subcategory}} {{$activities}} in {{$locality}} @if($locality!=$location){{', '.$location}} @endif</h4>       		        		        
-			@for(; $index<$maxlength; $index++ )
-			  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-			      <li title="{{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}" >
-			        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
-			          {{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}
-			        </a>
-			      </li>
-			    </div> 
-			@endfor		            		                  		             
+	        <ul>
+				@for(; $index<$maxlength; $index++ )			  	
+				    <li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}" >
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
+				          {{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}
+				        </a>
+				    </li>
+				@endfor	
+			</ul>	            		                  		             
     	</div>       
 	</div>	
 @endif
@@ -333,15 +326,15 @@
 	          	if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }        		     
 	        ?>
 	        <h4>Related to {{$categories[$category_id-1]->category}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif</h4>
-			@for(; $index<$maxlength; $index++ )
-			  	<div class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 ">				    
-			      <li title="{{$subcategories[$index]->subcategory}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif" >
-			        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locality}}">
-			          {{$subcategories[$index]->subcategory}} in {{$locality}}@if($locality!=$location){{', '.$location}}@endif
-			        </a>
-			      </li>
-			    </div> 
-			@endfor		            		                  		             
+	        <ul>
+				@for(; $index<$maxlength; $index++ )			  	
+				    <li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$subcategories[$index]->subcategory}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif" >
+				        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locality}}">
+				          {{$subcategories[$index]->subcategory}} in {{$locality}}@if($locality!=$location){{', '.$location}}@endif
+				        </a>
+				    </li>			   
+				@endfor	
+			</ul>	            		                  		             
         </div>       
   	</div>
 @endif

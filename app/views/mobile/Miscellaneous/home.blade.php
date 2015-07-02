@@ -69,7 +69,9 @@
 		$institutesLength = sizeof($institutes);
 		$index = 0;
 		$maxlength = 20;				
-		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
+		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }
+		$tomorrowDate = new DateTime('tomorrow');
+		$tomorrowDate = $tomorrowDate->format('Y-m-d');			
 	?>	
 	@for(;$index<$maxlength; $index++ )
 		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
@@ -84,4 +86,25 @@
 
 @stop
 @section('pagejquery')
+<script type="text/javascript">
+	$(document).ready(function () {		
+		$("#bookFavClassButton").click(function (e) {
+			e.preventDefault();
+            e.stopPropagation();
+			$("#bookFavClassButton").hide();
+			$("#bookFavClassConfirm").fadeIn(500);			
+		});
+		$("#bookingDateChange").click(function (e) {
+			e.preventDefault();
+            e.stopPropagation();
+            $("#booking_date").val("{{$tomorrowDate}}");
+            if($("#booking_date").val() == "{{$tomorrowDate}}")
+            	$("#bookFavClassForm").submit();
+		});
+	});	
+	function closeFavClassBook () {
+		$("#bookFavClassConfirm").hide();
+		$("#bookFavClassButton").fadeIn(500);	
+	}
+</script>
 @stop

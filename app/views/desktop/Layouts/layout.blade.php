@@ -35,6 +35,19 @@
 				@include('Templates.header')
 			</header>
 		@endif	
+		<!-- Error and success messages -->
+		<div class="alertMessage">
+			@include('Templates.message')
+		</div>
+
+		<!--  id="content" class="site-content" -->
+		<div>			
+			@yield('content')			
+		</div>
+		<!--Footer Section social networking links-->
+		<footer class="footer-wrapper">
+			@include('Templates.footer')
+		</footer>
 		<!--sign-In pop up modal-->
 		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
 			@include('Modals.login')
@@ -42,24 +55,9 @@
 		<!--sign-UP pop up modal-->
 		<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true" style="overflow-y:auto">
 			@include('Modals.signup')
-		</div>
-		<!-- Error and success messages -->
-		<div style="margin:0px;position:absolute;width:100%;z-index:1000000">
-			@include('Templates.message')
-		</div>
-
-		<!--  id="content" class="site-content" -->
-		<div style="margin-top:0px;" class="">			
-			@yield('content')			
-		</div>
-
-		<!--Footer Section social networking links-->
-		<footer class="footer-wrapper">
-			@include('Templates.footer')
-		</footer>		
-		
+		</div>						
 	    @yield('pagejavascript')	    
 	    <!--this page specific jquery-->
-	    @yield('pagejquery')	   
-	</body>
+	    @yield('pagejquery')   
+	</body>	
 </html>

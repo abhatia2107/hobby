@@ -8,8 +8,14 @@
                     </button>
                     <h4 class="modal-title" id="myModalLabel1">Sign Up</h4>
                     <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
+                </div> 
+                <div class="signin_button">              
+                    <a href="/login/fb">
+                        <button class="btn btn-primary">
+                            <span class="glyphicon fa fa-fw fa-facebook"></span>SignUp Using Facebook
+                        </button>
+                    </a>
                 </div>
-                <center><a href="/login/fb"><img alt="SignUp Using Facebook" title="SignUp Using Facebook" height="35" style="margin-top:10px;" src="/assets/images/signup-with-facebook.png"></a></center>
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">                        
@@ -30,7 +36,7 @@
                     <div class="row">
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <input type="text" placeholder="Enter Your Mobile Number*" class="form-control" name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
+                                <input autocomplete="off" type="text" placeholder="Enter Your Mobile Number*" class="form-control" name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
                             </div>
                         </div>
                     </div>

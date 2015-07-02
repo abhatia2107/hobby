@@ -66,6 +66,8 @@
 
     .submitReviewButton { text-align: center;padding-bottom: 10px; }
 
+    .submitReviewButton a {margin-top: 10px;}
+
     @media (min-width:768px) { .submitReviewButton { padding: 4.5em 0 2em; } }
 
     .social-profiles-container { margin-top: 15px;text-align: center; }
@@ -120,24 +122,25 @@
     <div id="content" class="site-content">
       <div class="samplePageInfo cover-wrapper ">
         <div class="container">
-          <div class="col-sm-10 col-md-10" itemscope itemtype="http://schema.org/SportsActivityLocation">
-            <h1><span title="Name of the Institute" itemprop="name" > {{$batchDetails->institute}}<span></h1>
-            <h3><span title="Subcategory and Category">{{'  '.$batchDetails->subcategory}},{{' '.$batchDetails->category}}</span></h3>
-            <div id='sample-institute-address' title="Landmark, Locality and Location of Institute" class="text_over_flow_hide">
-              <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <div class="col-sm-10 col-md-9" itemscope itemtype="http://schema.org/SportsActivityLocation">
+            <h1><span itemprop="name" > {{$batchDetails->institute}}<span></h1>
+            <h3>{{'  '.$batchDetails->subcategory}},{{' '.$batchDetails->category}}</h3>
+            <div id='sample-institute-address' title="{{$batchDetails->venue_landmark}}, {{$batchDetails->locality.', '.$batchDetails->location}}">
+              <div class="text_over_flow_hide" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
                 <span class='glyphicon glyphicon-map-marker'></span>
                 <span itemprop="streetAddress">{{'  '.$batchDetails->venue_landmark}}</span>, 
                 <span itemprop="addressLocality">{{$batchDetails->locality.', '.$batchDetails->location}}</span>
               </div>
             </div>
-            <div id='sample-institute-contact' title="Institute Contact Number">
+            <div id='sample-institute-contact'>
               <div class='glyphicon glyphicon-phone-alt'></div><span itemprop="telephone">{{'  +91 '.$batchDetails->venue_contact_no}}</span>
             </div>
           </div>
-          <div class="col-sm-2 col-md-2">
+          <div class="col-sm-2 col-md-3">
             <div class="submitReviewButton">
                <!-- <button  class="btn btn-primary">Share</button> -->
                <a id="SubmitReviewButton" class="btn btn-primary">Submit a Review</a>
+               <a id="favoriteButton" class="btn btn-primary">Mark as Favorite</a>
             </div>
           </div>
         </div>
@@ -145,24 +148,24 @@
     </div>
   </div>
   <div class="container" id='blog-container'>
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="col-md-6 col-sm-7 col-xs-12 col-md-offset-1" style="margin-bottom:15px">
-        <div class="sample-box col-md-12 col-sm-12 col-xs-12" id="sample-batch-details" >
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-6 col-md-7 col-sm-7 col-xs-12 col-lg-offset-1" style="margin-bottom:15px">
+        <div class="sample-box col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sample-batch-details" >
           <div itemscope itemtype="http://schema.org/SportsActivityLocation">          
             <h2 id='sample-batch-name'><span itemprop="name" >{{$batchDetails->institute}}</span> Details</h2> 
-            <div title="Complete Address of {{$batchDetails->institute}}" class="batch-details" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+            <div class="batch-details" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
               <span class='glyphicon glyphicon-home pin-icon' ></span>
               <span itemprop="streetAddress">{{$batchDetails->venue_address}}</span>, 
               <span itemprop="addressLocality">{{$batchDetails->locality.', '.$batchDetails->location}}</span>,
               <span itemprop="postalCode">{{$batchDetails->venue_pincode}}</span>      
             </div>
-            <div title="Landmark of {{$batchDetails->institute}}" @if(!isset($batchDetails->venue_landmark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker'></span>
+            <div @if(!isset($batchDetails->venue_landmark)) style="display:none" @endif id='batch-session-count' class="batch-details"><span class='glyphicon glyphicon-map-marker'></span>
               Land Mark: {{$batchDetails->venue_landmark}}
             </div>
-            <div title="{{$batchDetails->institute}} Contact Number" class="batch-details"><span class='glyphicon glyphicon-phone-alt'></span>
+            <div class="batch-details"><span class='glyphicon glyphicon-phone-alt'></span>
               <span itemprop="telephone">+91 {{$batchDetails->venue_contact_no}}</span>
             </div>
-            <div title="Timings of {{$batchDetails->institute}}" class="batch-details"><span class='glyphicon glyphicon-time'></span>
+            <div class="batch-details"><span class='glyphicon glyphicon-time'></span>
               {{$batchDetails->batch_comment.' '.$batchDetails->batch_tagline}}
             </div>
             <div id='batch-facilities' class="batch-details">
@@ -205,7 +208,7 @@
           </div>
         </div>
       </div>   
-      <div class='col-md-4 col-sm-5 col-xs-12 column' style="margin-bottom:25px">
+      <div class='col-lg-4 col-md-5 col-sm-5 col-xs-12 column' style="margin-bottom:25px">
         <div class="sample-box-small" id='batchOrderSample'>
           <div id='sample-batch-name'>Book This Class</div>
           <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 

@@ -101,6 +101,10 @@
 
   #promoCodeContainer #statusMessage {color: #e24648;font-size: 14px;}
 
+  #favClassAlertMessage {display: none;position:absolute;width:100%;border-radius:0;}
+
+  #favClassAlertMessage #responseMessage{padding: 0;font-size: 18px;}
+
 </style> 
 
 @stop

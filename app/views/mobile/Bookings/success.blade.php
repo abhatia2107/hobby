@@ -9,16 +9,14 @@
     <div class="panel-body">
     <div class="lead text-center">
 
-  <h4>Congratulations, your booking of {{$subcategory}} class with {{$institute}} is successful.</h4>
-  
-  <h4>Your Order ID for this order is <strong>{{$order_id}}</strong>.</h4>
-  
-  <h4>Booking Date: {{$date}}, No of sessions: {{$no_of_sessions}}</h4>
+    <h4>Congratulations, your booking of {{$subcategory}} class with {{$institute}} is successful.</h4>
+    
+    <h4>Your Order ID for this order is <strong>{{$order_id}}</strong>.</h4>
+    
+    <h4>Booking Date: {{$date}}, No of sessions: {{$no_of_sessions}}</h4>
 
-  <h4>Continue to our <a href="{{url('/')}}">website.</a></h4>
-
-  <div class="fb-share-button" data-href="{{Request::url()}}" data-layout="button_count"></div>
-
+    <h4>Continue to our <a href="{{url('/')}}">website.</a></h4>
+    <div class="fb-share-button" data-href="{{url('/batch/'.$batch)}}" data-layout="button_count"></div>
   </div>
   </div>
   </div>

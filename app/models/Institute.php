@@ -40,6 +40,7 @@ class Institute extends \Eloquent {
             ->select('institutes.id', 'institute', 'institute_url', 'locality')
             ->Join('venues', 'institutes.id', '=', 'venues.venue_institute_id')
             ->Join('localities', 'localities.id', '=', 'venues.venue_locality_id')
+            ->orderBy('institute_rating','desc')
             ->get());
     }
 

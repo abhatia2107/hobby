@@ -30,7 +30,7 @@ class CreateBookingsTable extends Migration {
 			$table->string('promo_code',25);
 			$table->integer('wallet_amount')->default(0);
 			$table->integer('promo_id')->nullable()->foreign('promo_id')->references('id')->on('promos');
-			$table->float('referral_credit_used');
+			$table->float('credit_used');
 	        $table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

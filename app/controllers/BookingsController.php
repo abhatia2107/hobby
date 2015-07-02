@@ -96,7 +96,7 @@ class BookingsController extends \BaseController {
 						$credentials['payment']=$credentials['payment']-$credentials['wallet_amount'];
 				}
 			}
-			unset($credentials['referral_credit_used']);
+			unset($credentials['credit_used']);
 			unset($credentials['pay_cc']);
 			if($credentials['payment']==0)
 			{
@@ -117,40 +117,36 @@ class BookingsController extends \BaseController {
 		}
 		else if(isset($credentials['pay_hobbyix'])){
 			unset($credentials['pay_hobbyix']);
-			$credentials['referral_credit_used']=$batch->batch_credit;
+			$credentials['credit_used']=$batch->batch_credit;
 			$user=User::find($credentials['user_id']);
-			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->where('order_status','success')->where('referral_credit_used','>',0)->first();
+			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->where('order_status','success')->where('credit_used','>',0)->first();
 			$batch_booking_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->where('order_status','success')->first();
-			// dd($booking_already_done);
 			if($credentials['no_of_sessions']==1){
-				if(($user->user_free_credits_left>=$credentials['referral_credit_used'])||($user->user_credits_left>=$credentials['referral_credit_used'])){
+				if(($user->user_free_credits_left>=$credentials['credit_used'])||($user->user_credits_left>=$credentials['credit_used'])){
 					if(!$booking_already_done){
-						// dd('test');
 						unset($credentials['csrf_token']);
 						unset($credentials['Promo_Code']);
 						$booking = Booking::create($credentials);
 						if($booking){
 							if(!$batch_booking_already){
-								// dd($credentials['referral_credit_used']);
-								if($user->user_free_credits_left>=$credentials['referral_credit_used']){
-									$user->user_free_credits_left=$user->user_free_credits_left-$credentials['referral_credit_used'];
+								if($user->user_free_credits_left>=$credentials['credit_used']){
+									$user->user_free_credits_left=$user->user_free_credits_left-$credentials['credit_used'];
 									$user->save();
 									$batch=Batch::find($credentials['batch_id']);
 									$batch->batch_trial=$batch->batch_trial+1;
 									$batch->save();
 									$booking->trial=1;
-									$booking->save();
 									// $this->sms_email_trial($booking->id);
 								}
 								else{
-									$user->user_credits_left=$user->user_credits_left-$credentials['referral_credit_used'];
+									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
 									$user->save();
 									// $this->sms_email($booking->id);
 								}
 							}
 							else{
-								if($user->user_credits_left>=$credentials['referral_credit_used']){
-									$user->user_credits_left=$user->user_credits_left-$credentials['referral_credit_used'];
+								if($user->user_credits_left>=$credentials['credit_used']){
+									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
 									$user->save();
 									// $this->sms_email($booking->id);
 								}
@@ -161,6 +157,8 @@ class BookingsController extends \BaseController {
 									return Redirect::back()->with('failure',Lang::get('booking.batch_booking_already'));
 								}
 							}
+							$booking->order_status="success";
+							$booking->save();
 							$batch=$this->batch->getBatch($booking->batch_id);
 							$batch->batch_bookings=$batch->batch_bookings+1;
 							$batch->save();
@@ -402,7 +400,7 @@ class BookingsController extends \BaseController {
 					'institute' => $batch->institute, 
 					'subcategory' => $batch->subcategory,
 					'amount' => $booking->payment,
-					'amount' => $booking->referral_credit_used,
+					'amount' => $booking->credit_used,
 					'date' => date("d M Y", strtotime($booking->booking_date)),
 					'no_of_sessions' => $booking->no_of_sessions,
 					'venue_address' => $batch->venue_address,
@@ -533,10 +531,10 @@ class BookingsController extends \BaseController {
 /*
 	public function test()
 	{
-		$data['referral_credit_used']=2;
+		$data['credit_used']=2;
 		$user_id=Auth::id();
 		$user=User::find($user_id);
-		$user->user_credits_left=$user->user_credits_left-$data['referral_credit_used'];
+		$user->user_credits_left=$user->user_credits_left-$data['credit_used'];
 		dd($user);
 	}*/
 

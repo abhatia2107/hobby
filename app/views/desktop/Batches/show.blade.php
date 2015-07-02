@@ -329,7 +329,7 @@
           @for(;$index<$maxlength; $index++ )
             <ul class="col-md-3 col-sm-3 col-xs-6">            
               <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
-                <a class="text_over_flow_hide" href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
+                <a class="text_over_flow_hide" href="/filter/{{$institutesOfSubcategoryInLocality[$index]->id}}">
                   {{$institutesOfSubcategoryInLocality[$index]->institute}}
                 </a>
               </li>

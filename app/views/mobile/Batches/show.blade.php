@@ -204,7 +204,7 @@
         <hr/>
         <div class="row totalAmount">         
           <div class="">Amount Payable<span id="orderTotal">: Rs. {{$credentials['payment']}}/-</span></div>
-          <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
+          <input type="hidden" name="credit_used" value="{{$batchDetails->batch_credit}}">
           <input type="hidden" name="wallet_amount" value="{{$credentials['wallet_amount']}}">
           <input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
         </div>
@@ -344,7 +344,7 @@
         @for(;$index<$maxlength; $index++ )
           <div class="col-xs-6">            
             <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
-              <a class="text_over_flow_hide" href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
+              <a class="text_over_flow_hide" href="/filter/{{$institutesOfSubcategoryInLocality[$index]->id}}">
                 {{$institutesOfSubcategoryInLocality[$index]->institute}}
               </a>
             </li>

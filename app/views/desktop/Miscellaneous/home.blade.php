@@ -102,7 +102,7 @@
 	@for(;$index<$maxlength; $index++ )
 		<ul style="margin:0;padding:0 0 0 10px" class="col-md-4 col-sm-4 col-xs-12 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
 			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad" >
-				<a class="text_over_flow_hide" itemprop="url" href="/institute/{{$institutes[$index]->institute_url}}">
+				<a class="text_over_flow_hide" itemprop="url" href="/filter/{{$institutes[$index]->institute_url}}">
 					<span itemprop="name">{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}</span>
 				</a>
 			</li>

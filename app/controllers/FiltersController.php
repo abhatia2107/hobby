@@ -152,7 +152,7 @@ class FiltersController extends \BaseController {
 			$locality = $batchesForCategoryLocation[0]->locality;			
 			$locArr = [$batchesForCategoryLocation[0]->locality];
 			$instituteSubcategories= $this->subcategory->getSubcategoryForInstitute($id);
-			$subcategoryArray= $subcategories->take(12)->lists('subcategory');
+			$subcategoryArray= $instituteSubcategories->take(12)->lists('subcategory');
 			$subcategoriesString = implode(", ",$subcategoryArray);						
 			$metaContent[0] = "$instituteName in $locality, $location :: Hobbyix";
 			//dd($metaContent[0]);

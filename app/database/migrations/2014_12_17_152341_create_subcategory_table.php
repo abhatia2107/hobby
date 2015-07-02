@@ -16,6 +16,7 @@ class CreateSubcategoryTable extends Migration {
 			$table->increments("id");
 			$table->integer('subcategory_category_id')->foreign('subcategory_category_id')->references('id')->on('Categories');
 			$table->string("subcategory");
+			$table->decimal('subcategory_rating', 2, 1);
 			$table->softDeletes();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at');

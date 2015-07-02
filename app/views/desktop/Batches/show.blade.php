@@ -52,13 +52,13 @@
 
     .rating { overflow: hidden;display: inline-block; }
 
-    .rating-input { float: right;width: 16px;height: 16px;padding: 0;margin: 0 0 0 -16px;opacity: 0;}
+    .rating-input { float: right;width: 16px;height: 16px;padding: 0;margin: 0 0 0 -16px;opacity: 0;cursor: pointer;}
 
     #rating-input {margin: 10px 0px;padding: 0;}
 
     .rating-star { position: relative;float: right;display: block;width: 16px;height: 16px;background: url(/assets/images/sample/star.png) 0 -16px; }
 
-    .rating-star:hover,.rating-star:hover ~ .rating-star,.rating-input:checked ~ .rating-star { background-position: 0 0; }
+    .rating-star:hover,.rating-star:hover ~ .rating-star,.rating-input:checked ~ .rating-star { background-position: 0 0;cursor: pointer; }
 
     #sample-social-profiles img { width: 50px;height: 53px;margin-right: 5px;}
 
@@ -139,8 +139,8 @@
           <div class="col-sm-2 col-md-3">
             <div class="submitReviewButton">
                <!-- <button  class="btn btn-primary">Share</button> -->
-               <a id="SubmitReviewButton" class="btn btn-primary">Submit a Review</a>
-               <a id="" class="btn btn-primary">Mark as Favorite</a>
+               <!--<a id="SubmitReviewButton" class="btn btn-primary">Submit a Review</a> -->
+               <a id="" href="/users/favorite/{{$batchDetails->id}}" class="btn btn-primary">Mark as Favorite</a>
             </div>
           </div>
         </div>
@@ -184,8 +184,8 @@
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" name="comment_institute_id" value="{{$batchDetails->batch_institute_id}}">
             <div class="form-group col-md-12 col-sm-12 col-xs-12" id='rating-input'>                
-                <span for="rating" class="col-md-4 col-sm-5 col-xs-12" style="margin:-7px 0px 0px 0px; ">Rate this Batch:</span>                
-                <span class="rating" class="col-md-7 col-sm-7 col-xs-12" >
+                <span for="rating" class="col-lg-4 col-md-5 col-sm-5 col-xs-12" style="margin:-7px 0px 0px 0px; ">Rate this Batch:</span>                
+                <span class="rating" class="col-lg-7 col-md-6 col-sm-7 col-xs-12" >
                 @for($index = 5; $index > 0;$index--)
                   <input type="radio" class="rating-input" required='required'
                       id="rating-input-1-{{$index}}" value="{{$index}}" name="comment_rating">
@@ -195,7 +195,7 @@
             </div>  
             <div class="form-group col-md-12" id="ReviewForm">
               <label for="comment">Review:</label>
-              <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
+              <textarea class="form-control" style="resize:none" rows="3" name='comment' id="comment" required='required'></textarea>
             </div>
             <div class="form-group col-md-12" >
             @if($loggedIn)

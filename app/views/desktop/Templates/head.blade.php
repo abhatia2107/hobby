@@ -11,7 +11,7 @@
         $facebookContent[0] = "Hobbyix";
         $facebookContent[1] = url('/');
         $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-        $facebookContent[3] = "Get access to all gym, zumba classes, aerobics, pilates, yoga, kick-boxing and dance etc. with one membership.";
+        $facebookContent[3] = "Get access to all the gyms, zumba classes, aerobics, pilates, yoga, kick-boxing and dance etc. with one membership.";
     }
 ?>
     <meta name="google-site-verification" content="vgzS24WtBop22kDPTpDMKE4pKu92EkBc3NVHcuIqPfk" />

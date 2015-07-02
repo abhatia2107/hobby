@@ -13,11 +13,11 @@
 @stop
 @section('content')
 <div class="container user_account_page">
-  <div class="col-md-10 col-sm-12 col-xs-12 uac_container col-md-offset-1">
-      <div class="col-md-3 col-sm-4 col-xs-12">
+  <div class="col-md-12 col-lg-10 col-sm-12 col-xs-12 uac_container col-lg-offset-1">
+      <div class="col-md-3 col-sm-4 col-xs-12 col-lg-3">
         @include('Users.sidebar')        
       </div>
-      <div class="col-md-9 col-sm-8 col-xs-12">
+      <div class="col-md-9 col-sm-8 col-xs-12 col-lg-9">
         <div class="uac_profile">          
           <div class="uac_sidebar_header">
             {{$user->user_name}}

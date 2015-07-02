@@ -36,12 +36,12 @@
 			</header>
 		@endif	
 		<!-- Error and success messages -->
-		<div style="margin:0px;position:absolute;width:100%;z-index:1000000">
+		<div class="alertMessage">
 			@include('Templates.message')
 		</div>
 
 		<!--  id="content" class="site-content" -->
-		<div style="margin-top:0px;" class="">			
+		<div>			
 			@yield('content')			
 		</div>
 		<!--Footer Section social networking links-->

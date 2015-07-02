@@ -20,7 +20,7 @@
 	            <h2>{{$homeLang['home_subtitle2']}}</h2>	            
 	         </div>  
 	         <span class="explore_button"><a title="Hobbyix Membership" href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
-	         <span class="explore_button" style="margin-left:5px;" ><a title="Check out Classes" href="/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
+	         <span class="explore_button" style="margin-left:5px;" ><a title="Check out Classes" href="/filter/Fitness/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
 	      </div>
 	   </div>
 	</div>
@@ -29,22 +29,22 @@
 	<div class="header">
 		Hobbyix Membership
 	</div>
-	<div class="col-md-12 col-sm-12 col-xs-12">	
-		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
+	<div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-1">	
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
 			<div class="details">
 				<img alt="Fitness_AnyTime" title="Fitness_AnyTime" src="/assets/images/home/Fitness_AnyTime.PNG">				
 			</div>
 			<div class="footer">Have Fitness Classes Available 24X7, Choose What Suits Your Schedule</div>
 		</div>
-		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 membership_offer_item ">
 			<div class="header"></div>
 			<div class="details">
 				<img alt="Fitness_AnyWhere" title="Fitness_AnyWhere" src="/assets/images/home/Fitness_AnyWhere.PNG">				
 			</div>		
 			<div class="footer">Don't Settle For One Gym when you can go to any gym</div>
 		</div>
-		<div class="col-md-4 col-sm-4 col-xs-12 membership_offer_item">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
 			<div class="details">
 				<img alt="Fitness_AnyType" title="Fitness_AnyType" src="/assets/images/home/Fitness_AnyType.PNG">				
@@ -63,15 +63,15 @@
 		$tomorrowDate = new DateTime('tomorrow');
 		$tomorrowDate = $tomorrowDate->format('Y-m-d');	
 	?>
-	@for(; $index<$maxlength; $index++ )
-		<ul  style="margin:0;padding:0 0 0 10px" class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
-			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
-				<a class="text_over_flow_hide" itemprop="url" href="/subcategory/{{$subcategories[$index]->subcategory}}">
-					<span itemprop="name">{{$subcategories[$index]->subcategory}}</span>
-				</a>
-			</li>
-		</ul>					
+	<ul class="maz_pad_z">		
+	@for(; $index<$maxlength; $index++ )		
+		<li class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation" title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
+			<a class="text_over_flow_hide" itemprop="url" href="/filter/{{$subcategories[$index]->subcategory}}/Hyderabad">
+				<span itemprop="name">{{$subcategories[$index]->subcategory}}</span>
+			</a>
+		</li>				
 	@endfor
+	</ul>		
 </div>
 <div class="division_divider"></div>
 <div class="container featured_listing_container">
@@ -82,15 +82,15 @@
 		$maxlength = 20;	
 		if ($localitiesLength<$maxlength) { $maxlength = $localitiesLength; }		
 	?>
-	@for(;$index<$maxlength; $index++ )
-		<ul  style="margin:0;padding:0 0 0 10px" class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation" >		
-			<li title="Fitness Activities in {{$localities[$index]->locality}}" style="margin:0;padding:0">
-				<a class="text_over_flow_hide" itemprop="url" href="/locality/{{$localities[$index]->locality_url}}">
-					<span itemprop="name">{{$localities[$index]->locality}}</span>
-				</a>
-			</li>
-		</ul>		
+	<ul class="maz_pad_z">		
+	@for(;$index<$maxlength; $index++ )		
+		<li class="col-md-3 col-sm-3 col-xs-6 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation"  title="Fitness Activities in {{$localities[$index]->locality}}">
+			<a class="text_over_flow_hide" itemprop="url" href="/filter/Fitness/{{$localities[$index]->locality_url}}">
+				<span itemprop="name">{{$localities[$index]->locality}}</span>
+			</a>
+		</li>		
 	@endfor
+	</ul>	
 </div>
 <div class="division_divider"></div>
 <div class="container featured_listing_container">
@@ -101,15 +101,15 @@
 		$maxlength = 30;				
 		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
 	?>	
-	@for(;$index<$maxlength; $index++ )
-		<ul style="margin:0;padding:0 0 0 10px" class="col-md-4 col-sm-4 col-xs-12 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation">		
-			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad" >
-				<a class="text_over_flow_hide" itemprop="url" href="/institute/{{$institutes[$index]->institute_url}}">
-					<span itemprop="name">{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}</span>
-				</a>
-			</li>
-		</ul>	
-	@endfor				
+	<ul class="maz_pad_z">		
+	@for(;$index<$maxlength; $index++ )	
+		<li class="col-md-4 col-sm-4 col-xs-12 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation" title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad" >
+			<a class="text_over_flow_hide" itemprop="url" href="/institute/{{$institutes[$index]->institute_url}}">
+				<span itemprop="name">{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}</span>
+			</a>
+		</li>		
+	@endfor
+	</ul>			
 </div>
 @stop
 @section('pagejquery')
@@ -119,7 +119,7 @@
 			e.preventDefault();
             e.stopPropagation();
 			$("#bookFavClassButton").hide();
-			$("#bookFavClassConfirm").show();			
+			$("#bookFavClassConfirm").fadeIn(500);			
 		});
 		$("#bookingDateChange").click(function (e) {
 			e.preventDefault();
@@ -129,5 +129,9 @@
             	$("#bookFavClassForm").submit();
 		});
 	});	
+	function closeFavClassBook () {
+		$("#bookFavClassConfirm").hide();
+		$("#bookFavClassButton").fadeIn(500);	
+	}
 </script>
 @stop

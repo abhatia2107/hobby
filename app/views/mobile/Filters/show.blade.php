@@ -254,7 +254,8 @@
 			$('html').css('overflow-y','hidden');			
 		}
 		var result = {{json_encode( $batchesForCategoryLocation ) }};  											
-		var category = "{{$categories[$category_id-1]->category}}";		
+		var categoryName = "{{$categories[$category_id-1]->category}}";		
+		var locationName = "{{$locations[$location_id-1]->location}}";		
 		var sub_select = new Array();
 		var loc_select = new Array();
 		var filter_select = new Array();		
@@ -294,22 +295,22 @@
 			{				
 				sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
 				loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();				
-				if( sub_select.length == 1 && loc_select.length ==0 )
+				if(sub_select.length > 0 && loc_select.length == 0)
 				{
-					window.location.href = "/subcategory/"+sub_select;
+					window.location.href = "/filter/"+sub_select+"/"+locationName;
 				}
-				else if(loc_select.length == 1 && sub_select.length ==0)
+				else if(sub_select.length == 0 && loc_select.length >0)
 				{
-					window.location.href = "/locality/"+loc_select;
-				}				
+					window.location.href = "/filter/"+categoryName+"/"+loc_select;
+				}
 				else
 				{
-									
-				}				
+					window.location.href = "/filter/"+sub_select+"/"+loc_select;
+				}
 			}
 			else
 			{
-				location.reload(true);					
+				window.location.href = "/filter/"+categoryName+"/"+locationName;					
 			}						
 		}
 		function resetFilter () {

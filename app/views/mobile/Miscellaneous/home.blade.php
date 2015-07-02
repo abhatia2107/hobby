@@ -10,7 +10,7 @@
             <h2>{{$homeLang['home_subtitle2']}}</h2>
          </div>
          <span class="explore_button" ><a href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
-	     <span class="explore_button" style="margin-left:5px;" ><a href="/categories/Fitness/locations/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
+	     <span class="explore_button" style="margin-left:5px;" ><a href="/filter/Fitness/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
       </div>
    </div>
 </div>
@@ -36,7 +36,7 @@
 	@for(; $index<$maxlength; $index++ )
 		<div class="col-xs-6 featured_listing_item">		
 			<li title="{{$subcategories[$index]->subcategory}} classes in Hyderabad">
-				<a class="text_over_flow_hide" href="/subcategory/{{$subcategories[$index]->subcategory}}">
+				<a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/Hyderabad">
 					{{$subcategories[$index]->subcategory}}
 				</a>
 			</li>
@@ -53,9 +53,9 @@
 		if ($localitiesLength<$maxlength) { $maxlength = $localitiesLength; }		
 	?>
 	@for(;$index<$maxlength; $index++ )
-		<div class="col-xs-6 featured_listing_item">		
+		<div class="col-xs-6 featured_listing_item">
 			<li title="Fitness Activities in {{$localities[$index]->locality}}">
-				<a href="/locality/{{$localities[$index]->locality_url}}">
+				<a href="/filter/Fitness/{{$localities[$index]->locality_url}}">
 					{{$localities[$index]->locality}}
 				</a>
 			</li>
@@ -69,7 +69,9 @@
 		$institutesLength = sizeof($institutes);
 		$index = 0;
 		$maxlength = 20;				
-		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
+		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }
+		$tomorrowDate = new DateTime('tomorrow');
+		$tomorrowDate = $tomorrowDate->format('Y-m-d');			
 	?>	
 	@for(;$index<$maxlength; $index++ )
 		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
@@ -84,4 +86,25 @@
 
 @stop
 @section('pagejquery')
+<script type="text/javascript">
+	$(document).ready(function () {		
+		$("#bookFavClassButton").click(function (e) {
+			e.preventDefault();
+            e.stopPropagation();
+			$("#bookFavClassButton").hide();
+			$("#bookFavClassConfirm").fadeIn(500);			
+		});
+		$("#bookingDateChange").click(function (e) {
+			e.preventDefault();
+            e.stopPropagation();
+            $("#booking_date").val("{{$tomorrowDate}}");
+            if($("#booking_date").val() == "{{$tomorrowDate}}")
+            	$("#bookFavClassForm").submit();
+		});
+	});	
+	function closeFavClassBook () {
+		$("#bookFavClassConfirm").hide();
+		$("#bookFavClassButton").fadeIn(500);	
+	}
+</script>
 @stop

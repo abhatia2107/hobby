@@ -1,7 +1,7 @@
 @section("footer")
 <div class="container">
    <div class="row">
-      <div class="footer-widget-column col-xs-12 col-sm-6 col-lg-6">
+      <div class="footer-widget-column col-xs-12 col-sm-4 col-md-5 col-lg-6">
          <div class="textwidget">
             <p>
                Hobbyix<br>
@@ -12,7 +12,7 @@
             Copyright Hobbyix 2015. All Rights Reserved  
          </div>
       </div>
-      <div class="footer-widget-column col-xs-12 col-sm-3 col-lg-3 ">
+      <div class="footer-widget-column col-xs-12 col-sm-4 col-md-3 col-lg-3 ">
          <div class="footer-widget-title">About Hobbyix</div>
          <div class="menu-need-help-menu-container">
             <ul id="menu-need-help-menu" class="menu" >
@@ -24,7 +24,7 @@
             </ul>
          </div>
       </div>
-      <div class="footer-widget-column col-xs-12 col-sm-3 col-lg-3">
+      <div class="footer-widget-column col-xs-12 col-sm-4 col-md-4 col-lg-3">
          <div class="footer-widget-title">Stay Connected</div>
          <div class="menu-social-widget-menu-container">
             <ul id="menu-social-widget-menu" class="menu">                

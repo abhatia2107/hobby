@@ -42,12 +42,6 @@ class MembershipsController extends \BaseController {
 		if($id)
 		{
 			$membership=Membership::find($id);
-			$data=array(
-						'credits'=>$membership->credits,
-						'order_id'=>$membership->order_id,
-						'end_date'=>date("d M Y", strtotime($membership->end_date)),
-				);
-			// $data=Session::get('data');
 			$facebookContent = array();
 			$facebookContent[0] = 'Membership';
 	        $facebookContent[1] = url('/memberships').'?id='.$id;
@@ -196,13 +190,7 @@ class MembershipsController extends \BaseController {
 					'order_id'=>$membership->order_id,
 					'end_date'=>date("d M Y", strtotime($membership->end_date)),
 			);
-		// $data=Session::get('data');
-		$facebookContent = array();
-		$facebookContent[0] = 'Membership';
-        $facebookContent[1] = url('/memberships');
-        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-        $facebookContent[3] = 'Congratulations, your purchase of hobbyix membership is successful.';
-		return View::make('Memberships.success',compact('facebookContent'))->with($data);
+		return View::make('Memberships.success')->with($data);
 		// return View::make('Bookings.success')->with($credentials);
 	}
 

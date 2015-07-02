@@ -149,7 +149,7 @@
           <div class="col-sm-2 col-md-3" @if($loggedIn) style="display:block" @else style="display:none" @endif>
             <div class="submitReviewButton">
                <!--<a id="SubmitReviewButton" class="btn btn-primary">Submit a Review</a> -->
-               <button id="favButton" onclick="markFavClass({{$batchDetails->id}});" @if($batchDetails->id!=$user->user_favorite) class="btn btn-primary" @else class="btn btn-success"@endif>Mark as Favorite</button>
+              @if(isset($user))<button id="favButton" onclick="markFavClass({{$batchDetails->id}});" @if($batchDetails->id!=$user->user_favorite) class="btn btn-primary" @else class="btn btn-success"@endif>Mark as Favorite</button>@endif
             </div>
           </div>
         </div>

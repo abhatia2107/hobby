@@ -189,19 +189,14 @@ class BookingsController extends \BaseController {
 		$booking=Booking::find($id);
 		$batch=$this->batch->getBatch($booking->batch_id);
 		$data=array(
-					// 'booking_id'=>$booking->id;
+					'batch'=>$batch->batch,
 					'subcategory'=>$batch->subcategory,
 					'institute'=>$batch->institute,
 					'order_id'=>$booking->order_id,
 					'date'=>$booking->booking_date,
 					'no_of_sessions'=>$booking->no_of_sessions
 			);
-		$facebookContent = array();
-		$facebookContent[0] = $batch->institute;
-        $facebookContent[1] = url('/batch/'.$batch->batch);
-        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-        $facebookContent[3] = 'Congratulations, your booking of $data["subcategory"] class with $data["institute"] is successful.';
-		return View::make('Bookings.success',compact('facebookContent'))->with($data);
+		return View::make('Bookings.success')->with($data);
 		// return View::make('Bookings.success')->with($credentials);
 	}
 

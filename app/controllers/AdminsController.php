@@ -75,7 +75,7 @@ class AdminsController extends \BaseController {
 			$subject=Lang::get('admin.admin_mail_subject');
 			Mail::later(60,'Emails.admin.admin', $data, function($message) use ($email,$name,$subject)
 			{
-    			$message->bcc("services.sent@hobbyix.com","Services Sent")->to($email, $name)->subject($subject);
+    			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 			});
 			return Redirect::to('/admins')->with('success',Lang::get('admin.admin_created'));
 		}

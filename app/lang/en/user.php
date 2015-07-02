@@ -52,7 +52,7 @@
 
 		"user_referral_error"=>"Invalid referral code",
 
-		"user_favorite_added"=>"Your favorite batch has been added successfully. Now you can book it with one click on homepage.",
+		"user_favorite_added"=>"Class marked as favorite. Book this class with one click on home page. Find out the booking button next to the login button(Top Right) of the home page.",
 
 
 		//admin

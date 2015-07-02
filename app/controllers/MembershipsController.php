@@ -242,7 +242,7 @@ class MembershipsController extends \BaseController {
 		        /*Successful referral mail, to be sent to the referee on purchase of first membership*/
 		        $subject = Lang::get('user.user_successful_referral_subject',array("name"=>$data['friend_name']));
 		        Mail::later(15, 'Emails.user.successful_referral', $data, function ($message) use ($email, $name, $subject) {
-		            $message->bcc("services.sent@hobbyix.com","Services Sent")->to($email, $name)->subject($subject);
+		            $message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 		        });
 			}
 		}
@@ -251,7 +251,7 @@ class MembershipsController extends \BaseController {
 		$user->user_membership_purchased=1;
 		$user->save();
 		$this->sms_email($membership->id);
-		return Redirect::to('/memberships/success/'.$membership->id);
+		return Illuminate\Support\Facades\Redirect::to('/memberships/success/'.$membership->id);
 		// return View::make('Memberships.success')->with($data);
 	}
 
@@ -400,7 +400,7 @@ class MembershipsController extends \BaseController {
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.membership.user', $data, function($message) use ($email, $subject)
 		{
-			$message->to($email)->bcc("services.sent@hobbyix.com","Services Sent")->subject($subject);
+			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$data['admin_email'];
@@ -408,7 +408,7 @@ class MembershipsController extends \BaseController {
 		$this->sms(false, $data['admin_contact_no'], $admin_msg);
 		Mail::send('Emails.membership.admin', $data, function($message) use ($email,$subject)
 		{
-			$message->to($email)->bcc("services.sent@hobbyix.com","Services Sent")->subject($subject);
+			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 		
 	}

@@ -222,8 +222,10 @@ class BatchesController extends \BaseController {
 			$credentials['payment']=$batchDetails->batch_single_price;
 			$credentials['wallet_amount']=0;
 			$credentials['wallet_balance']=0;
+			// $user_id become null if user is not logged in so if fails. Unless if user is logged in, $user_id gets a value and if condition is satisfied.
 			if($user_id=Auth::id())
 			{
+				dd('test');
 				$user=User::find($user_id);
 				$credentials['wallet_amount']=$user->user_wallet;
 				if($credentials['wallet_amount'])
@@ -240,7 +242,7 @@ class BatchesController extends \BaseController {
 					$credentials['payment']=$credentials['price'];
 			}
 			// dd($credentials);
-			return View::make('Batches.show',compact('batchDetails', 'credentials', 'user', 'metaContent', 'batchesOfInstitute', 'institutesOfSubcategoryInLocality', 'subcategoriesInLocality', 'facebookContent'));
+			return View::make('Batches.show',compact('batchDetails','credentials','user','metaContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));
 		}
 		else
 		{

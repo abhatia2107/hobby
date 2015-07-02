@@ -175,7 +175,7 @@
               <a style="color:white" href="tel:{{$instituteContact}}">{{$instituteContact}}</a>
             </div>
             <div class="col-xs-5 maz_pad_z">
-              <button id="favButton" onclick="markFavClass({{$batchDetails->id}});" @if($batchDetails->id!=$user->user_favorite) class="btn btn-primary" @else class="btn btn-success"@endif>Mark as Favorite</button>                                  
+              @if(isset($user))<button id="favButton" onclick="markFavClass({{$batchDetails->id}});" @if($batchDetails->id!=$user->user_favorite) class="btn btn-primary" @else class="btn btn-success"@endif>Mark as Favorite</button>@endif
             </div>
           </div>                    
         </div>        

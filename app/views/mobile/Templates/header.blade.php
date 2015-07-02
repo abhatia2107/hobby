@@ -6,7 +6,7 @@
 
 	  	.navbar-form input[type=text] {width: 100%;}
 
-	  	.header_row1 .searchicon a {color: white;font-size: 16px;padding: 17px 5px 17px 0px;float: right;text-decoration: none;}
+	  	.header_row1 .searchicon a {color: white;font-size: 16px;float: right;text-decoration: none;padding: 5px 0px;margin: 0px 0px 0px 5px }
   	</style>
   	<?php
 		$id=Auth::id();
@@ -19,38 +19,40 @@
 				$name = "My Account";
 		}
 	?>
-	<div class="clearfix header_row1">
-		<div class="col-xs-6 website-title">
+	<div class="row header_row1">
+		<div class="col-xs-3 website-title">
 			<a class="navbar-brand" href="/">
 				<span class="website-title">HOBBYIX</span>
 			</a>
 		</div>						
-		<div class="userInfoListing col-xs-4">
-			@if(!$id)				
-				<div class="login">
-					<a href="/users/login" >LOGIN</a>
-					<!--&nbsp;&nbsp;|&nbsp;&nbsp;
-					<a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a> -->
-				</div>
-			@else			
-				<div class="btn-group dropdown user_account_options">
-					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-						<span class="text_over_flow_hide" style="max-width:85%;padding: 3px 0px 3px 5px;float:left ">{{$name}}</span>
-						<span style="padding: 3px 10px 0px 0px;float:left;max-width:10%">&nbsp;<span class="caret"></span></span>
-					</button>												
-					<ul class="dropdown-menu">
-						<li> <a href="/users/profile">My Profile</a></li>
-						<li> <a href="/users/orders">My Orders</a> </li>
-						<li> <a class="" href="/users/changepassword">Change Password</a>	</li>
-						<li class="divider"> </li>
-						<li> <a class="header_logout_a" href="/users/logout" >Logout</a> </li>
-					</ul>
-				</div>					
-			@endif			
-		</div>
-		<span class="searchicon">
-			<a href="javascript:displaySearchOption();" class="col-xs-1 glyphicon glyphicon-search"></a>
-		</span>
+		<div class="userInfoListing col-xs-9">
+			<div class="col-xs-10" style="padding:0;margin:0">
+				@if(!$id)				
+					<div class="login">
+						<a href="/users/login" >LOGIN</a>
+						<!--&nbsp;&nbsp;|&nbsp;&nbsp;
+						<a href="#" data-toggle="modal" data-target="#signupModal">Sign Up</a> -->
+					</div>
+				@else			
+					<div class="btn-group dropdown user_account_options" style="float:right">
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+							<span class="text_over_flow_hide" style="max-width:85%;padding: 3px 0px 3px 5px;float:left ">{{$name}}</span>
+							<span style="padding: 3px 10px 0px 0px;float:left;max-width:10%">&nbsp;<span class="caret"></span></span>
+						</button>												
+						<ul class="dropdown-menu">
+							<li> <a href="/users/profile">My Profile</a></li>
+							<li> <a href="/users/orders">My Orders</a> </li>
+							<li> <a class="" href="/users/changepassword">Change Password</a>	</li>
+							<li class="divider"> </li>
+							<li> <a class="header_logout_a" href="/users/logout" >Logout</a> </li>
+						</ul>
+					</div>					
+				@endif		
+			</div>	
+			<div class="col-xs-2 searchicon">
+				<a href="javascript:void();" onclick="displaySearchOption();" class="glyphicon glyphicon-search"></a>
+			</div>
+		</div>		
 		<div class="col-xs-12 search_option_container" style="display:none">
 			<form class="navbar-form" action="/search" method="get" role="search">
 				<div class="input-group search-box">

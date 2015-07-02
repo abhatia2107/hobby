@@ -2,9 +2,6 @@
 @section('content')
 <style type="text/css">
 
-
-  	.maz_pad_z {margin: 0px;padding:0;}
-
   	a, a:hover {text-decoration: none}
 
   	#batchesData { box-shadow: 0px 0px 2px #3366CC; -moz-box-shadow: 0px 0px 2px #3366CC;-webkit-box-shadow: 0px 0px 2px #3366CC;

@@ -8,18 +8,20 @@
   #page { width: 100%;margin-top: 0px;padding: 4em 0 1.2em;
           background-repeat:no-repeat;
         background-position:center center;
-        -o-background-size: 130% 120%, auto;
-        -moz-background-size: 130% 120%, auto;
-        -webkit-background-size: 130% 120%, auto;
-        background-size: 100% 100%, auto;}
+        -o-background-size: cover,auto;
+        -moz-background-size:cover, auto;
+        -webkit-background-size:cover, auto;
+        background-size: cover, auto;}
 
-  .samplePageInfo {  background: rgba(0, 0, 0, 0.4); color: white; padding: 0px 0px 10px 0px;}
+  .samplePageInfo {  background: rgba(0, 0, 0, 0.9); color: white; padding: 0px 0px 10px 0px;}
 
   .sample-institute-name  { font-size: 22px;font-weight: bold;  }  
 
   .sample_batch_detail  { font-size: 15px;font-weight: normal;margin-bottom: 5px; }
 
-  .sample_batch_detail li {margin-top: 5px; font-size: 15px;}
+  .sample_batch_detail .lan_con {margin: 5px 0 0 0; font-size: 15px;padding: 0}
+
+  .lan_con button {padding: 1px 6px;border-radius: 0px }
 
   .sample_batch_detail .glyphicon { font-size: 15px;font-weight: normal; }
 
@@ -101,6 +103,10 @@
 
   #promoCodeContainer #statusMessage {color: #e24648;font-size: 14px;}
 
+  #favClassAlertMessage {display: none;position:absolute;width:100%;border-radius:0;}
+
+  #favClassAlertMessage #responseMessage{padding: 0;font-size: 14px;}
+
 </style> 
 
 @stop
@@ -157,9 +163,21 @@
         <div class="sample_batch_detail">
           <div class='sample-institute-name'>{{$instituteName}}</div>
           <div>{{'  '.$subcategory}},{{' '.$category}}</div>
-          <div><div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$instituteAddress}}</div></div>
-          <div><div class='glyphicon glyphicon-phone-alt'></div>&nbsp;<a style="color:white" href="tel:{{$instituteContact}}">{{$instituteContact}}</a></div>
-          <button id="favButton" onclick="markFavClass({{$batchDetails->id}});" @if($batchDetails->id!=$user->user_favorite) class="btn btn-primary" @else class="btn btn-success"@endif>Mark as Favorite</button>
+          <div class="row lan_con">
+            <div class="text_over_flow_hide">
+              <i class='glyphicon glyphicon-map-marker'></i>
+              {{'  '.$landMark.', '.$instituteAddress}}
+            </div>
+          </div>
+          <div class="row lan_con" style="margin-top:0px">
+            <div class="col-xs-7 maz_pad_z" >
+              <i class='glyphicon glyphicon-phone-alt'></i>&nbsp;
+              <a style="color:white" href="tel:{{$instituteContact}}">{{$instituteContact}}</a>
+            </div>
+            <div class="col-xs-5 maz_pad_z">
+              <button id="favButton" onclick="markFavClass({{$batchDetails->id}});" @if($batchDetails->id!=$user->user_favorite) class="btn btn-primary" @else class="btn btn-success"@endif>Mark as Favorite</button>                                  
+            </div>
+          </div>                    
         </div>        
       </div>
     </div>
@@ -318,64 +336,6 @@
     </div>  
   </div>
   <div class="space_footer"></div>
-</div>
-<div class="container" id="related_data_container">
-  <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12 related_item">
-        <h4>Related to {{$instituteName}}</h4>       
-        <?php
-          $institutesLength = sizeof($batchesOfInstitute);
-          $index = 0;
-          $maxlength = 12;        
-          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                 
-        ?>
-         @for(;$index<$maxlength; $index++ )
-          <div class="col-xs-6">           
-            <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
-              <a class="text_over_flow_hide" href="/batch/{{$batchesOfInstitute[$index]->id}}">
-                {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
-              </a>
-            </li>
-          </div>          
-        @endfor           
-      </div>
-      <div class="col-md-12 col-sm-12 col-xs-12 related_item">
-        <h4>Other {{$subcategory}} classes</h4>
-        <?php
-          $institutesLength = sizeof($institutesOfSubcategoryInLocality);
-          $index = 0;
-          $maxlength = 12;          
-          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                  
-        ?>
-        @for(;$index<$maxlength; $index++ )
-          <div class="col-xs-6">            
-            <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
-              <a class="text_over_flow_hide" href="/filter/{{$institutesOfSubcategoryInLocality[$index]->id}}">
-                {{$institutesOfSubcategoryInLocality[$index]->institute}}
-              </a>
-            </li>
-          </div>        
-        @endfor   
-      </div>
-      <div class="col-md-12 col-sm-12 col-xs-12 related_item">
-        <h4>{{$category}} classes in {{$locality}}</h4>
-        <?php
-          $institutesLength = sizeof($subcategoriesInLocality);
-          $index = 0;
-          $maxlength = 12;          
-          if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }                  
-        ?>
-        @for(; $index<$maxlength; $index++ )
-          <div class="col-xs-6">            
-              <li title="{{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}">
-                <a class="text_over_flow_hide" href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$locality_id}}">
-                  {{$subcategoriesInLocality[$index]->subcategory}} classes in {{$locality}}
-                </a> 
-              </li>
-          </div>
-        @endfor   
-      </div>
-  </div>
 </div>
 @stop
 @section('pagejquery')

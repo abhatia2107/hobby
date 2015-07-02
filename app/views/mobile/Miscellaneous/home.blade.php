@@ -50,7 +50,9 @@
 		$localitiesLength = sizeof($localities);
 		$index = 0;
 		$maxlength = 20;	
-		if ($localitiesLength<$maxlength) { $maxlength = $localitiesLength; }		
+		if ($localitiesLength<$maxlength) { $maxlength = $localitiesLength; }	
+		$tomorrowDate = new DateTime('tomorrow');
+		$tomorrowDate = $tomorrowDate->format('Y-m-d');				
 	?>
 	@for(;$index<$maxlength; $index++ )
 		<div class="col-xs-6 featured_listing_item">
@@ -62,28 +64,6 @@
 		</div>		
 	@endfor
 </div>
-<div class="division_divider"></div>
-<div class="container featured_listing_container">
-	<div class="featured_listing_title">Fitness Studios</div>
-	<?php
-		$institutesLength = sizeof($institutes);
-		$index = 0;
-		$maxlength = 20;				
-		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }
-		$tomorrowDate = new DateTime('tomorrow');
-		$tomorrowDate = $tomorrowDate->format('Y-m-d');			
-	?>	
-	@for(;$index<$maxlength; $index++ )
-		<div class="col-md-4 col-sm-4 col-xs-12 featured_listing_item">		
-			<li title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad">
-				<a class="text_over_flow_hide" href="/filter/{{$institutes[$index]->institute_url}}">
-					{{$institutes[$index]->institute}},{{$institutes[$index]->locality}}
-				</a>
-			</li>
-		</div>	
-	@endfor				
-</div>
-
 @stop
 @section('pagejquery')
 <script type="text/javascript">

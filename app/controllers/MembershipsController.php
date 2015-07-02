@@ -13,32 +13,51 @@ class MembershipsController extends \BaseController {
 		$metaContent[0] = "Hobbyix Membership :: Hobbyix";
 		$metaContent[1] = "One Hobbyix Membership @Rs. 1999/- & workout at any gym, yoga, fitness centers etc. in Hyderabad";
 		$metaContent[2] = "Hobbyix Membership, Hobbyix Membership Features, Get Your Hobbyix Membership";
-		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
-		$credentials['price']=$this->membershipVal['payment'];
-		$credentials['payment']=$credentials['price'];
-		$credentials['start']=date('d M Y');
-		$credentials['end']=date('d M Y', $end_date);
-		$credentials['credits']=$this->membershipVal['credits'];
-		$credentials['wallet_amount']=0;
-		$credentials['wallet_balance']=0;
-		$user_id=Auth::id();
-		if($user_id)
+		$id = Input::get('id');
+		if(!$id)
 		{
-			$user=User::find($user_id);
-			$credentials['wallet_amount']=$user->user_wallet;
-			if($credentials['wallet_amount'])
+			$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
+			$credentials['price']=$this->membershipVal['payment'];
+			$credentials['payment']=$credentials['price'];
+			$credentials['start']=date('d M Y');
+			$credentials['end']=date('d M Y', $end_date);
+			$credentials['credits']=$this->membershipVal['credits'];
+			$credentials['wallet_amount']=0;
+			$credentials['wallet_balance']=0;
+			$user_id=Auth::id();
+			if($user_id)
 			{
-				if($credentials['wallet_amount']>$credentials['price'])
-					$credentials['payment']=0;
+				$user=User::find($user_id);
+				$credentials['wallet_amount']=$user->user_wallet;
+				if($credentials['wallet_amount'])
+				{
+					if($credentials['wallet_amount']>$credentials['price'])
+						$credentials['payment']=0;
+					else
+						$credentials['payment']=$credentials['price']-$credentials['wallet_amount'];
+				}
 				else
-					$credentials['payment']=$credentials['price']-$credentials['wallet_amount'];
+					$credentials['payment']=$credentials['price'];
+				if($credentials['price']<$credentials['wallet_amount'])
+					$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['price'];
 			}
-			else
-				$credentials['payment']=$credentials['price'];
-			if($credentials['price']<$credentials['wallet_amount'])
-				$credentials['wallet_balance']=$credentials['wallet_amount']-$credentials['price'];
 		}
-		return View::make('Memberships.index',compact('credentials','metaContent'));
+		else
+		{
+			$membership=Membership::find($id);
+			$data=array(
+						'credits'=>$membership->credits,
+						'order_id'=>$membership->order_id,
+						'end_date'=>date("d M Y", strtotime($membership->end_date)),
+				);
+			// $data=Session::get('data');
+			$facebookContent = array();
+			$facebookContent[0] = 'Membership';
+	        $facebookContent[1] = url('/memberships').'?id='.$id;
+	        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
+	        $facebookContent[3] = 'Congratulations, your purchase of hobbyix membership is successful.';
+		}
+		return View::make('Memberships.index',compact('credentials','metaContent','facebookContent'));
 	}
 
 	/**
@@ -175,6 +194,7 @@ class MembershipsController extends \BaseController {
 	{
 		$membership=Membership::find($id);
 		$data=array(
+					'id'=>$id,
 					'credits'=>$membership->credits,
 					'order_id'=>$membership->order_id,
 					'end_date'=>date("d M Y", strtotime($membership->end_date)),

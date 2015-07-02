@@ -126,6 +126,8 @@ class BookingsController extends \BaseController {
 					if(!$booking_already_done){
 						unset($credentials['csrf_token']);
 						unset($credentials['Promo_Code']);
+						$credentials['payment']=0;
+						$credentials['wallet_amount']=0;
 						$booking = Booking::create($credentials);
 						if($booking){
 							if(!$batch_booking_already){

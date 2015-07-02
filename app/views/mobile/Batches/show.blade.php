@@ -144,7 +144,7 @@
       $weekDaysAvailable[$i] = $batchDetails->$weekDays[$i];   
     }    
 ?>
-<div id="favClassAlertMessage" class="alert alert-success alert-dismissable">         
+<div id="favClassAlertMessage" class="alert alert-success alert-dismissable" style="display:none">         
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
     X
   </button>    

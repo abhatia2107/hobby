@@ -205,10 +205,14 @@ class BatchesController extends \BaseController {
 			$instituteName = $batchDetails->institute;
 			$locality = $batchDetails->locality;
 			$location = $batchDetails->location;
-			$facebookContent[0] = $instituteName;
-	        $facebookContent[1] = Request::url();
-	        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-	        $facebookContent[3] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";
+			$id = Input::get('id');
+			if($id)
+			{
+				$facebookContent[0] = $instituteName;
+		        $facebookContent[1] = Request::url();
+		        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
+		        $facebookContent[3] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";
+		    }
 			$metaContent[0] = "$instituteName - $locality :: Hobbyix";
 			$metaContent[1] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";
 			$metaContent[2] = "$instituteName $locality, $instituteName $location, $subcategory classes in $locality, $subcategory classes in $location, $subcategory classes $instituteName";
@@ -225,7 +229,6 @@ class BatchesController extends \BaseController {
 			// $user_id become null if user is not logged in so if fails. Unless if user is logged in, $user_id gets a value and if condition is satisfied.
 			if($user_id=Auth::id())
 			{
-				dd('test');
 				$user=User::find($user_id);
 				$credentials['wallet_amount']=$user->user_wallet;
 				if($credentials['wallet_amount'])

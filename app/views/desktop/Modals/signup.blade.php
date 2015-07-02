@@ -1,78 +1,74 @@
 @section("signup")
-<div class="modal-dialog">
-        <div class="modal-content">
-             <form name="signUp" class="signUp" id="signUpForm" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <button class="close" data-dismiss="modal">
-                        <span onClick="refreshForm('#signUpForm')" aria-hidden="true" title="close">X</span>                
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel1">Sign Up</h4>
-                    <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
-                </div> 
-                <div class="signin_button">              
-                    <a href="/login/fb">
-                        <button class="btn btn-primary">
-                            <span class="glyphicon fa fa-fw fa-facebook"></span>SignUp Using Facebook
-                        </button>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group">                        
-                            <div class="col-sm-12">
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="user_fb_id" value="@if(isset($userDetails)){{$userDetails->user_fb_id}}@else{{Input::old('user_fb_id')}}@endif">
-                                <input type="text" placeholder="Enter Your Name*" class="form-control" name="user_name"  id="user_name" value="@if(isset($userDetails)){{$userDetails->user_name}}@else{{Input::old('user_name')}}@endif">
-                            </div>
+<div class="modal-dialog signUpForm">
+    <div class="modal-content">             
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">
+                <span onClick="refreshForm('#signUpForm')" aria-hidden="true" title="close">X</span>                
+            </button>
+            <h4 class="modal-title" id="myModalLabel1">Sign Up</h4>
+            <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Already a member? Login</a>
+        </div> 
+        <div class="signin_button">              
+            <a href="/login/fb" class="btn btn-primary">                        
+                <i class="glyphicon fa fa-fw fa-facebook"></i>SignUp Using Facebook                        
+            </a>
+        </div>
+        <form name="signUp" class="signUp" id="signUpForm" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">                        
+                        <div class="col-sm-12">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="user_fb_id" value="@if(isset($userDetails)){{$userDetails->user_fb_id}}@else{{Input::old('user_fb_id')}}@endif">
+                            <input type="text" placeholder="Enter Your Name*" class="form-control" name="user_name"  id="user_name" value="@if(isset($userDetails)){{$userDetails->user_name}}@else{{Input::old('user_name')}}@endif">
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">                         
-                            <div class="col-sm-12">
-                                <input type="email" placeholder="Enter Your Email ID*" class="form-control" name="email"  id="emailSignUp" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <input autocomplete="off" type="text" placeholder="Enter Your Mobile Number*" class="form-control" name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">                            
-                            <div class="col-sm-12">
-                                <input type="password" placeholder="Enter Password For Your Account*" class="form-control" name="password"  id="passwordSignUp">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">                           
-                            <div class="col-sm-12">
-                                <input type="text" placeholder="Referral Code (Optional)" class="form-control" name="user_referee_code"  id="user_referee_code" value="{{Input::old('user_referee_code')}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="checkbox login-remember">
-                        <label class="col-sm-12 control-label" for="signup_terms">
-                            <input id="signup_terms" name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
-                            I agree to <a href="/terms">terms and conditions.</a>
-                        </label>
                     </div>
                 </div>
-                <div class="modal-footer">                                
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="row">
+                    <div class="form-group">                         
+                        <div class="col-sm-12">
+                            <input type="email" placeholder="Enter Your Email ID*" class="form-control" name="email"  id="emailSignUp" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
+                        </div>
+                    </div>
                 </div>
-            </form>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input autocomplete="off" type="text" placeholder="Enter Your Mobile Number*" class="form-control" name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">                            
+                        <div class="col-sm-12">
+                            <input type="password" placeholder="Enter Password For Your Account*" class="form-control" name="password"  id="passwordSignUp">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">                           
+                        <div class="col-sm-12">
+                            <input type="text" placeholder="Referral Code (Optional)" class="form-control" name="user_referee_code"  id="user_referee_code" value="{{Input::old('user_referee_code')}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="checkbox login-remember">
+                    <label class="col-sm-12 control-label" for="signup_terms">
+                        <input id="signup_terms" name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
+                        I agree to <a href="/terms">terms and conditions.</a>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">                                
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
         </div>
     </div>
      <script type="text/javascript">
             $(document).ready(function(){     
-                $('.signUp').bootstrapValidator({
-                    message: 'This value is not valid',
-                   
-                        
+                $('#signUpForm').bootstrapValidator({
+                    message: 'This value is not valid',                                        
                 fields: {
                     user_name: {
                         message: 'Name is not valid',

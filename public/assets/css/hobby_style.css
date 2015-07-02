@@ -103,11 +103,11 @@ body li {  list-style-type: none; }
 
 .loginForm .btn-primary,.signUp .btn-primary {border-radius: 0px;background: #3a5795;font-weight: bold;font-size: 14px;padding: 4px 10px;}
 
-.loginForm .signin_button .btn-primary {border-radius: 0px;background: #3a5795;padding: 4px 30px;font-size: 16px;font-weight: normal;}
+.loginForm .signin_button .btn-primary, .signUpForm .signin_button .btn-primary {border-radius: 0px;background: #3a5795;padding: 4px 30px;font-size: 16px;font-weight: normal;}
 
 .modal-footer .fa {font-size: 20px;margin-right: 5px;}
 
-.signUp .signin_button {margin: 10px 0px  -15px 0px}
+.signUpForm .signin_button {margin: 10px 0px  -15px 0px}
 
  body select {  height: 34px;border-radius: 5px; }
 

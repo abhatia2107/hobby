@@ -57,8 +57,8 @@
                   No. of Sessions: <span class="order_values">{{$booking->no_of_sessions}}</span>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                  @if($booking->referral_credit_used)
-                    Credit Used: <span class="order_values">{{$booking->referral_credit_used}}</span>
+                  @if($booking->credit_used)
+                    Credit Used: <span class="order_values">{{$booking->credit_used}}</span>
                   @else
                     Amount Paid: <span class="order_values">Rs. {{$booking->payment}}/-</span>
                   @endif

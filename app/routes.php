@@ -309,7 +309,7 @@ Route::get('/aboutus', function()
 
 Route::get('/search','FiltersController@search');
 
-Route::get('/institute/{id}','FiltersController@institute');
+Route::get('/filter/{id}','FiltersController@institute');
 
 Route::get('/filter/{subcategoriesString}/{localitiesString}','FiltersController@filter');
 

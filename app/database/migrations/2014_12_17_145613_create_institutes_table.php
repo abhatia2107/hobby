@@ -20,7 +20,7 @@ class CreateInstitutesTable extends Migration {
 			$table->string('institute_website',255)->nullable();
 			$table->string('institute_fblink',255)->nullable();
 			$table->string('institute_twitter',255)->nullable();
-			$table->longText('institute_description');
+			$table->longText('institute_description')->nullable();
 			$table->decimal('institute_rating', 2, 1);
 			$table->boolean('institute_photo')->default(0);
 			$table->softDeletes();

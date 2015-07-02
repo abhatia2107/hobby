@@ -142,9 +142,14 @@
     for ($i=0; $i < 7 ; $i++) 
     { 
       $weekDaysAvailable[$i] = $batchDetails->$weekDays[$i];   
-    }
-    $todayDate = date('Y-m-d');
+    }    
 ?>
+<div id="favClassAlertMessage" class="alert alert-success alert-dismissable">         
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+    X
+  </button>    
+  <div id="responseMessage"></div>
+</div>
 <div id="page" class="hfeed site overflow_x" style="background-image: url(/assets/images/sample/workout.jpg);">
   <div id="content" class="site-content">
     <div class="samplePageInfo cover-wrapper">
@@ -152,8 +157,9 @@
         <div class="sample_batch_detail">
           <div class='sample-institute-name'>{{$instituteName}}</div>
           <div>{{'  '.$subcategory}},{{' '.$category}}</div>
-          <li><div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$instituteAddress}}</div></li>
-          <li><div class='glyphicon glyphicon-phone-alt'></div>&nbsp;<a style="color:white" href="tel:{{$instituteContact}}">{{$instituteContact}}</a></li>
+          <div><div id='sample-institute-address' class="text_over_flow_hide"><div class='glyphicon glyphicon-map-marker'></div>{{'  '.$landMark.', '.$instituteAddress}}</div></div>
+          <div><div class='glyphicon glyphicon-phone-alt'></div>&nbsp;<a style="color:white" href="tel:{{$instituteContact}}">{{$instituteContact}}</a></div>
+          <button id="" onclick="markFavClass({{$batchDetails->id}});" class="btn btn-primary">Mark as Favorite</button>
         </div>        
       </div>
     </div>
@@ -204,7 +210,7 @@
         <hr/>
         <div class="row totalAmount">         
           <div class="">Amount Payable<span id="orderTotal">: Rs. {{$credentials['payment']}}/-</span></div>
-          <input type="hidden" name="referral_credit_used" value="{{$batchDetails->batch_credit}}">
+          <input type="hidden" name="credit_used" value="{{$batchDetails->batch_credit}}">
           <input type="hidden" name="wallet_amount" value="{{$credentials['wallet_amount']}}">
           <input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
         </div>
@@ -344,7 +350,7 @@
         @for(;$index<$maxlength; $index++ )
           <div class="col-xs-6">            
             <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
-              <a class="text_over_flow_hide" href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
+              <a class="text_over_flow_hide" href="/filter/{{$institutesOfSubcategoryInLocality[$index]->id}}">
                 {{$institutesOfSubcategoryInLocality[$index]->institute}}
               </a>
             </li>
@@ -378,7 +384,20 @@
   var walletAmount = {{json_encode( $credentials['wallet_amount'] ) }};
   var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }}; 
   var formValidationStatus = false;
-  var oldPromoCode = "";          
+  var oldPromoCode = ""; 
+  function markFavClass(batchID)
+  {       
+    $.get("/users/favorite/"+batchID,function(response)
+    {
+      $("#favClassAlertMessage").hide();
+      $("#favClassAlertMessage").fadeIn(300);        
+      $('html, body').animate({
+        scrollTop: $("#favClassAlertMessage").offset().top
+      }, 300);
+      $("#responseMessage").empty();
+      $("#responseMessage").append(response);
+    }); 
+  }                  
   function verifyPromoCode (condition) 
   { 
     formValidationStatus = false;               

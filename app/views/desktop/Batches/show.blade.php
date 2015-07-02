@@ -98,6 +98,10 @@
 
     ul{margin: 0px;}
 
+    #favClassAlertMessage {display: none;position:absolute;width:100%;border-radius:0;}
+
+    #favClassAlertMessage #responseMessage{padding: 0;font-size: 18px;}
+
   </style> 
 @stop
 @section('content')
@@ -118,6 +122,12 @@
       }      
       $todayDate = date('Y-m-d');
   ?>
+  <div id="favClassAlertMessage" class="alert alert-success alert-dismissable">         
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+      X
+    </button>    
+    <div id="responseMessage"></div>
+  </div>
   <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/workout.jpg);">
     <div id="content" class="site-content">
       <div class="samplePageInfo cover-wrapper ">
@@ -136,11 +146,10 @@
               <div class='glyphicon glyphicon-phone-alt'></div><span itemprop="telephone">{{'  +91 '.$batchDetails->venue_contact_no}}</span>
             </div>
           </div>
-          <div class="col-sm-2 col-md-3">
+          <div class="col-sm-2 col-md-3" @if($loggedIn) style="display:block" @else style="display:none" @endif>
             <div class="submitReviewButton">
-               <!-- <button  class="btn btn-primary">Share</button> -->
                <!--<a id="SubmitReviewButton" class="btn btn-primary">Submit a Review</a> -->
-               <a id="" href="/users/favorite/{{$batchDetails->id}}" class="btn btn-primary">Mark as Favorite</a>
+               <button id="" onclick="markFavClass({{$batchDetails->id}});" class="btn btn-primary">Mark as Favorite</button>
             </div>
           </div>
         </div>
@@ -332,7 +341,7 @@
           @for(;$index<$maxlength; $index++ )
             <ul class="col-md-3 col-sm-3 col-xs-6">            
               <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
-                <a class="text_over_flow_hide" href="/filter/institute/{{$institutesOfSubcategoryInLocality[$index]->id}}">
+                <a class="text_over_flow_hide" href="/filter/{{$institutesOfSubcategoryInLocality[$index]->id}}">
                   {{$institutesOfSubcategoryInLocality[$index]->institute}}
                 </a>
               </li>
@@ -367,7 +376,20 @@
     var walletAmount = {{json_encode( $credentials['wallet_amount'] ) }};            
     var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};  
     var formValidationStatus = false;
-    var oldPromoCode = "";          
+    var oldPromoCode = ""; 
+    function markFavClass(batchID)
+    {       
+      $.get("/users/favorite/"+batchID,function(response)
+      {
+        $("#favClassAlertMessage").hide();
+        $("#favClassAlertMessage").fadeIn(300);        
+        $('html, body').animate({
+          scrollTop: $("#favClassAlertMessage").offset().top
+        }, 300);
+        $("#responseMessage").empty();
+        $("#responseMessage").append(response);
+      }); 
+    }         
     function verifyPromoCode (condition) 
     { 
       formValidationStatus = false;               

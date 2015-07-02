@@ -19,7 +19,7 @@ class BookingsTableSeeder extends Seeder {
 				'no_of_sessions'=>$faker->randomNumber(1,6),
 				'reference_id'=>$faker->bothify(8),
 				'promo_id'=>$faker->randomNumber(1,30),
-				'referral_credit_used'=>$faker->boolean(),
+				'credit_used'=>$faker->boolean(),
 			]);
 		}
 	}

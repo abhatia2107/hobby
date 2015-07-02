@@ -100,16 +100,16 @@
 		$index = 0;
 		$maxlength = 30;				
 		if ($institutesLength<$maxlength) { $maxlength = $institutesLength; }		
-	?>	
+	?>
 	<ul class="maz_pad_z">		
 	@for(;$index<$maxlength; $index++ )	
 		<li class="col-md-4 col-sm-4 col-xs-12 featured_listing_item" itemscope itemtype="http://schema.org/SportsActivityLocation" title="{{$institutes[$index]->institute}} in {{$institutes[$index]->locality}} - Hyderabad" >
-			<a class="text_over_flow_hide" itemprop="url" href="/institute/{{$institutes[$index]->institute_url}}">
+			<a class="text_over_flow_hide" itemprop="url" href="/filter/{{$institutes[$index]->institute_url}}">
 				<span itemprop="name">{{$institutes[$index]->institute}}, {{$institutes[$index]->locality}}</span>
 			</a>
 		</li>		
 	@endfor
-	</ul>			
+	</ul>
 </div>
 @stop
 @section('pagejquery')

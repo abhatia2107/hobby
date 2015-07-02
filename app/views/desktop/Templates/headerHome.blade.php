@@ -36,7 +36,7 @@
 					</div>											
 				@endif
 			</div>
-			@if(isset($favorite))										
+			@if(isset($favorite['id']))										
 				<div class="userInfoListing bookFavClassContainer" style="float:right;margin:0 10px 0 0">
 					<form role="form" method="post" id="bookFavClassForm" action="/bookings" enctype="multipart/form-data">
 						<input type="hidden" name="csrf_token" id="hiddenCSRF" value="{{ csrf_token() }}" >

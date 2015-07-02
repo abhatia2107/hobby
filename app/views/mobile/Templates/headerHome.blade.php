@@ -39,7 +39,7 @@
 				</div>											
 			@endif			
 		</div>
-		@if(isset($favorite))	
+		@if(isset($favorite['id']))	
 			<div class="row" style="margin:0;padding:5px 15px 10px 15px">									
 				<div class="userInfoListing bookFavClassContainer col-xs-12" style="margin:0;padding:0;">
 					<form role="form" method="post" id="bookFavClassForm" action="/bookings" enctype="multipart/form-data">

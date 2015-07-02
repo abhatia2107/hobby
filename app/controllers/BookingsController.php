@@ -136,19 +136,19 @@ class BookingsController extends \BaseController {
 									$batch->batch_trial=$batch->batch_trial+1;
 									$batch->save();
 									$booking->trial=1;
-									// $this->sms_email_trial($booking->id);
+									$this->sms_email_trial($booking->id);
 								}
 								else{
 									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
 									$user->save();
-									// $this->sms_email($booking->id);
+									$this->sms_email($booking->id);
 								}
 							}
 							else{
 								if($user->user_credits_left>=$credentials['credit_used']){
 									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
 									$user->save();
-									// $this->sms_email($booking->id);
+									$this->sms_email($booking->id);
 								}
 								else{
 									$booking->order_status="batch_booking_already";
@@ -205,7 +205,7 @@ class BookingsController extends \BaseController {
 
 	public function success($booking)
 	{
-		// $this->sms_email($booking->id);
+		$this->sms_email($booking->id);
 		$batch=$this->batch->getBatch($booking->batch_id);
 		$batch->batch_bookings=$batch->batch_bookings+1;
 		$batch->save();

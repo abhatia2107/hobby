@@ -14,6 +14,7 @@
         $facebookContent[3] = "Get access to all the gyms, zumba classes, aerobics, pilates, yoga, kick-boxing and dance etc. with one membership.";
     }
 ?>
+
     <meta name="google-site-verification" content="vgzS24WtBop22kDPTpDMKE4pKu92EkBc3NVHcuIqPfk" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">

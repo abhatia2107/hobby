@@ -45,6 +45,7 @@ class CommentsController extends \BaseController {
 			}
 		}
 		$credentials=Input::all();
+		// dd($credentials);
 		unset($credentials['csrf_token']);
 		$validator = Validator::make($credentials, Comment::$rules);
 		if(Request::Ajax())

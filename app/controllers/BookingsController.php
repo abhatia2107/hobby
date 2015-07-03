@@ -189,6 +189,7 @@ class BookingsController extends \BaseController {
 		$booking=Booking::find($id);
 		$batch=$this->batch->getBatch($booking->batch_id);
 		$data=array(
+					'id'=>$id,
 					'batch'=>$batch->batch,
 					'subcategory'=>$batch->subcategory,
 					'institute'=>$batch->institute,

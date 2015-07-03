@@ -34,31 +34,31 @@ class CommentsController extends \BaseController {
 	public function store()
 	{
 		$user_id=Auth::id();
-		if($user_id)
-		{
-			$booking = Booking::where('user_id',$user_id)->where('reviewed',false)->orderBy('created_at', 'desc')->first();
-			$booking_institute = null;
-			if($booking)
-			{
-				$institute_id = Batch::find($booking->batch_id)->batch_institute_id;
-				$booking_institute = Institute::find($institute_id);	
-			}
-		}
 		$credentials=Input::all();
-		// dd($credentials);
 		unset($credentials['csrf_token']);
-		$validator = Validator::make($credentials, Comment::$rules);
-		if(Request::Ajax())
+		if(!$user_id)
 		{
-			if($validator->fails())
-			{
-				return Redirect::back()->withInput()->withErrors($validator);
-			}
-			$comment=Comment::create($credentials);
-			return Redirect::back()->with('success',Lang::get('comment.comment_updated'));
+			return Redirect::back()->with('failure',Lang::get('comment.comment_login_fail'));
+		}
+		$validator = Validator::make($credentials, Comment::$rules);
+		if($validator->fails())
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
 		}
 		$credentials['comment_user_id']=$user_id;
 		$comment=Comment::create($credentials);
+		if($user_id)
+		{
+			$booking = Booking::where('user_id', $user_id)->orderBy('created_at', 'desc')->first();
+			if($booking)
+			{
+				if(!$booking->reviewed)
+				{
+					$booking->reviewed = true;
+					$booking->save();
+				}
+			}
+		}
 		return Redirect::back()->with('success',Lang::get('comment.comment_created'));
 	}
 

@@ -2,7 +2,7 @@
 
 	return array(
 		
-		"comment_created"=>"Your comment have been added successfully",
+		"comment_created"=>"Thank you for your feedback.",
 		
 		"comment_create_failed" => "Sorry, We are unable to add the comment",
 		
@@ -26,5 +26,7 @@
 	
 		"comment_not_exist"=>"No comment exist with this ID.",
 	
+		"comment_login_fail"=>"Kindly login first to review this class.",
+
 		"comment_access_failed"=>"You don't have permission to access this comment details.",
 	);

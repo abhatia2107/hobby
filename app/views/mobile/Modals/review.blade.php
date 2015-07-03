@@ -33,7 +33,7 @@
                 <div class="form-group row">
                     <div class="col-xs-12">
                         <label for="comment">Review:</label>
-                        <textarea class="form-control" rows="3" name='comment' id="comment"></textarea>
+                        <textarea class="form-control" rows="3" name='comment' id="comment" placeholder="Tell others what you think about this institute. Would you recommend it and why?"></textarea>
                     </div>
                 </div>                
             </div>                        

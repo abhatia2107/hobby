@@ -13,8 +13,7 @@
 
     #Redirect hobbyix.in to hobbyix.com
     RewriteCond %{HTTP_HOST} ^hobbyix.in$ [OR]
-    RewriteCond %{HTTP_HOST} ^104.236.85.67$ [OR]
-    RewriteCond %{HTTP_HOST} ^128.199.127.173$
+    RewriteCond %{HTTP_HOST} ^104.236.85.67$
     RewriteRule (.*)$ http://hobbyix.com/$1 [R=301,L]
 
     # Redirect Trailing Slashes...
@@ -25,4 +24,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
+    RewriteEngine On
+    RewriteCond %{HTTPS} !on
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 </IfModule>

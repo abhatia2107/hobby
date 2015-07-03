@@ -169,7 +169,7 @@ class BatchesController extends \BaseController {
 				'email'=>$email
 			];
 			$data['batch']=$credentials['batch'];
-			Mail::later(15,'Emails.batch.create', $data, function($message) use ($email,$name,$subject)
+			Mail::queue('Emails.batch.create', $data, function($message) use ($email,$name,$subject)
 			{
 				$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 			});*/
@@ -447,7 +447,7 @@ class BatchesController extends \BaseController {
 		$email=$credentials['email'];
 		$name=$credentials['institute'];
 		$subject=Lang::get('message.message_subject',array("batch"=>$credentials['batch']));
-		Mail::later(120,'Emails.message.sendMessage', $credentials, function($message) use ($email,$name,$subject)
+		Mail::queue('Emails.message.sendMessage', $credentials, function($message) use ($email,$name,$subject)
 		{
 			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 		});

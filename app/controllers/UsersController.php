@@ -355,7 +355,7 @@ class UsersController extends \BaseController {
                 ];
                 /*Confirmation mail is to be send to the user for pending referral*/
                 $subject = Lang::get('user.user_pending_referral_subject',array("name"=>$newUserData['user_name']));
-                Mail::later(15, 'Emails.user.pending_referral', $data, function ($message) use ($email, $name, $subject) {
+                Mail::queue('Emails.user.pending_referral', $data, function ($message) use ($email, $name, $subject) {
                     $message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
                 });
             }
@@ -381,7 +381,7 @@ class UsersController extends \BaseController {
                 ];
                 /*Confirmation mail is to be send to the newly registered user*/
                 $subject = Lang::get('user.user_verify_mail_subject');
-                Mail::later(15, 'Emails.user.verify', $data, function ($message) use ($email, $name, $subject) {
+                Mail::queue('Emails.user.verify', $data, function ($message) use ($email, $name, $subject) {
                     $message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
                 });
                 
@@ -446,7 +446,7 @@ class UsersController extends \BaseController {
         }
         /*Welcome on board mail is to be sent to the newly registered user*/
         $subject = Lang::get('user.user_welcome_mail_subject');
-        Mail::later(15, 'Emails.user.welcome', $data, function ($message) use ($email, $name, $subject) {
+        Mail::queue('Emails.user.welcome', $data, function ($message) use ($email, $name, $subject) {
             $message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
         });
         return Redirect::to('/')->with('success',Lang::get('user.welcome',array("name"=>$user['user_name'])));

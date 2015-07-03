@@ -319,6 +319,8 @@ Route::get('/yoga',function(){
 
 
 
+Route::get('/RandomSMS/{mobile}/{msg}', 'BookingsController@RandomSMS');
+Route::get('/RandomMail', 'BookingsController@RandomMail');
 
 // JSON routes.
 

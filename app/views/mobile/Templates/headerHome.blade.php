@@ -50,6 +50,7 @@
 						<input type="hidden" name="email" value="{{$favorite['email']}}" >                     
 						<input type="hidden" name="contact_no" value="{{$favorite['contact_no']}}" >                     
 						<input type="hidden" name="payment" value="{{$favorite['payment']}}" >                     
+						<input type="hidden" name="favorite_used" value="1" >                     
 						<input type="hidden" name="no_of_sessions" value="1" > 
 						<input type="hidden" name="pay_hobbyix" value="credit"> 
 						<div class="bookFavClassConfirm text_over_flow_hide" id="bookFavClassButton" style="display:block;color:white;text-align:center">

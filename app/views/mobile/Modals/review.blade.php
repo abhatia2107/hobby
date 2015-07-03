@@ -9,16 +9,16 @@
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="comment_institute_id" value="{{$booking_institute['id']}}">
                 <div class="row reviewInstituteName">
-                    <div class="col-xs-3">Institute:</div>
+                    <!--<div class="col-xs-3">Institute:</div>-->
                     <div class="col-xs-9 text_over_flow_hide" style="text-align:left;padding-left:7px;">
                         {{$booking_institute['institute']}}
                     </div>
                 </div>
                 <div class="form-group row" id='rating-input'>                    
                     <div class="col-xs-12 maz_pad_z" >
-                        <div class="col-xs-3 maz_pad_z">
+                        <!--<div class="col-xs-3 maz_pad_z">
                             <label for="rating" >Rating:</label>
-                        </div>
+                        </div> -->
                         <div class="col-xs-9 maz_pad_z">
                              <span class="rating" >
                                 @for($index = 5; $index > 0;$index--)

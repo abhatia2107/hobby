@@ -16,7 +16,7 @@
 
     #sample-institute-contact .glyphicon { font-size: 19px; font-weight: normal; }
 
-    #sample-batch-name { font-size: 25px;font-weight: normal;-webkit-box-shadow: 0px 3px 0px -2px #0099FF;box-shadow: 0px 3px 0px -2px #0099FF;text-align: center;margin-top: 0;padding: 0 }
+    .sample-batch-name { font-size: 25px;font-weight: normal;-webkit-box-shadow: 0px 3px 0px -2px #0099FF;box-shadow: 0px 3px 0px -2px #0099FF;text-align: center;margin-top: 0;padding: 0 }
 
     #secondary { box-shadow: 1px 1px 10px rgba(0,0,0,0.5);-moz-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);-webkit-box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
       font-size: 20px;margin-left: 50px;padding:20px 30px 20px 30px;
@@ -123,7 +123,7 @@
       <div class="samplePageInfo cover-wrapper ">
         <div class="container">
           <div class="col-sm-10 col-md-9" itemscope itemtype="http://schema.org/SportsActivityLocation">
-            <h1><span itemprop="name" > {{$batchDetails->institute}}<span></h1>
+            <h1><span itemprop="name" > {{$batchDetails->institute}}</span></h1>
             <h3>{{'  '.$batchDetails->subcategory}},{{' '.$batchDetails->category}}</h3>
             <div id='sample-institute-address' title="{{$batchDetails->venue_landmark}}, {{$batchDetails->locality.', '.$batchDetails->location}}">
               <div class="text_over_flow_hide" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
@@ -151,7 +151,7 @@
       <div class="col-lg-6 col-md-7 col-sm-7 col-xs-12 col-lg-offset-1" style="margin-bottom:15px">
         <div class="sample-box col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sample-batch-details" >
           <div itemscope itemtype="http://schema.org/SportsActivityLocation">          
-            <h2 id='sample-batch-name'><span itemprop="name" >{{$batchDetails->institute}}</span> Details</h2> 
+            <h2 class='sample-batch-name'><span itemprop="name" >{{$batchDetails->institute}}</span> Details</h2> 
             <div class="batch-details" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
               <span class='glyphicon glyphicon-home pin-icon' ></span>
               <span itemprop="streetAddress">{{$batchDetails->venue_address}}</span>, 
@@ -178,13 +178,13 @@
         </div>
         <div id="comments" class="sample-box">
           <div class="row">
-          <div id='sample-batch-name'>Write a Review</div>
+          <div class='sample-batch-name'>Write a Review</div>
           <form  action='/comments/store/' enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" name="comment_institute_id" value="{{$batchDetails->batch_institute_id}}">
             <div class="form-group col-md-12 col-sm-12 col-xs-12" id='rating-input'>                
-                <span for="rating" class="col-lg-4 col-md-5 col-sm-5 col-xs-12" style="margin:-7px 0px 0px 0px; ">Rate this Batch:</span>                
-                <span class="rating" class="col-lg-7 col-md-6 col-sm-7 col-xs-12" >
+                <span class="col-lg-4 col-md-5 col-sm-5 col-xs-12" style="margin:-7px 0px 0px 0px; ">Rate this Batch:</span>                
+                <span class="col-lg-7 col-md-6 col-sm-7 col-xs-12 rating" >
                 @for($index = 5; $index > 0;$index--)
                   <input type="radio" class="rating-input" required='required'
                       id="rating-input-1-{{$index}}" value="{{$index}}" name="comment_rating">
@@ -209,7 +209,7 @@
       </div>   
       <div class='col-lg-4 col-md-5 col-sm-5 col-xs-12 column' style="margin-bottom:25px">
         <div class="sample-box-small" id='batchOrderSample'>
-          <div id='sample-batch-name'>Book This Class</div>
+          <div class='sample-batch-name'>Book This Class</div>
           <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
             <div class="" id="bookOrderFormStep1">
               <div class="row batchOrderField">
@@ -272,7 +272,7 @@
               <div class="row batchOrderField">
                 <div class='col-md-5 col-sm-4 col-xs-5'>E-Mail ID*</div>
                 <div class='col-md-7 col-sm-8 col-xs-7'>
-                      <input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email" name="email" value="@if(isset($user)){{$user->email}}@endif" required />                     
+                      <input type="email" placeholder="Enter E-Mail ID" class="form-control" id="email_id" name="email" value="@if(isset($user)){{$user->email}}@endif" required />                     
                 </div>          
               </div>   
               <div class="row batchOrderField">
@@ -292,7 +292,7 @@
         </div>
         @if($batchDetails->institute_description!=null)
         <div class="sample-box-small" id='institute-details'>
-           <div id='sample-batch-name'>Institute Details</div>
+           <div class='sample-batch-name'>Institute Details</div>
            <span id='sample-details' class="details-container">{{$batchDetails->institute_description}}</span>    
         </div>
         @endif       

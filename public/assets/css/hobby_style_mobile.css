@@ -142,13 +142,17 @@ span.stars span {  background-position: 0 0; }
 
 .login a {color: white;text-decoration: none;}
 
+.signUpForm .signin_button {margin: 12px 0px  0px 0px}
+
 .login_form {padding: 0px 15px; }
 
 .signin_button {  text-align: center; }
 
 .signUp .signin_button {margin: 10px 0px -5px 0px;}
 
-.login_form button {font-size: 15px;height: 35px;padding: 2px 35px;border-radius: 0px;}
+.login_form button {font-size: 15px;height: 35px;padding: 2px 25px;border-radius: 0px;}
+
+.signUpForm button {font-size: 15px;padding: 5px 10px;border-radius: 0px;}
 
 .modal-header, .modal-footer, #loadmorebutton, .venues-list-buttons {  text-align: center; }
 
@@ -199,3 +203,22 @@ span.stars span {  background-position: 0 0; }
 .inner-addon input  { padding-left:  30px;padding-right: 0px; }
 
 .booknowButton, .booknowButton:hover, .booknowButton button:active { background: #3396d1;margin-top: 5px;padding: 5px 25px 5px 25px;border-radius: 0px;border:0px solid;text-align: center; }
+
+/* Review Stars Styling */
+.rating { overflow: hidden;display: inline-block; }
+
+.rating-input { float: right;width: 16px;height: 16px;padding: 0;margin: 0 0 0 -16px;opacity: 0;cursor: pointer;}
+
+#rating-input {margin: 10px 0px;padding: 0;}
+
+.rating-star { position: relative;float: right;display: block;width: 16px;height: 16px;background: url(/assets/images/sample/star.png) 0 -16px; }
+
+.rating-star:hover,.rating-star:hover ~ .rating-star,.rating-input:checked ~ .rating-star { background-position: 0 0;cursor: pointer; }
+
+#reviewModal .modal-dialog { margin-top:12%;}
+
+#reviewModal {z-index: 10000000000}
+
+.modal .modal-content{border-radius: 0px;}
+
+.reviewInstituteName {font-weight: bold;padding: 10px 0;text-align: left;}

@@ -182,13 +182,13 @@ span.stars span {  background-position: 0 0; }
 
 .sendMessage a  { color: #333;  }
 
-@media screen and (min-width: 768px) {  #sendMessage .modal-dialog  { width:430px; }  }
+@media screen and (min-width: 768px) {  #sendMessageModal .modal-dialog  { width:430px; }  }
 
-#sendMessage {  border-radius: 5px; font-family: 'Open Sans',sans-serif; font-size: 15px; }
+#sendMessageModal {  border-radius: 5px; font-family: 'Open Sans',sans-serif; font-size: 15px; }
 
-#sendMessage .modal-dialog { margin-top:7%; }
+#sendMessageModal .modal-dialog { margin-top:7%; }
 
-#sendMessage .modal-header {font-size: 22px;color: #333333;font-weight: bolder;font-family: serif; }
+#sendMessageModal .modal-header {font-size: 22px;color: #333333;font-weight: bolder;font-family: serif; }
 
 .inner-addon {  position: relative; }
 
@@ -307,15 +307,19 @@ span.stars span {  background-position: 0 0; }
 
 #loginModal .modal-footer {padding: 10px 0px;margin: 0;}
 
-#loginModal .modal-dialog { margin-top:9%;}
+#loginModal .modal-dialog, #reviewModal .modal-dialog { margin-top:9%;}
 
-#loginModal .modal-content, #signupModal .modal-content  {border-radius: 0px}
+.modal .modal-content{border-radius: 0px}
+
+textarea {resize:none;}
 
 @media screen and (min-width: 992px) {  #signupModal .modal-dialog  { width:430px; }  }
 
+@media screen and (min-width: 992px) {  #reviewModal .modal-dialog  { width:500px; }  }
+
 .signUp .modal-body .row {margin-top: 10px;}
 
-#signupModal .modal-dialog { margin-top:9%; }
+#signupModal .modal-dialog { margin-top:7%; }
 
 .maz_pad_z {margin: 0px;padding:0;}
 
@@ -452,3 +456,16 @@ button:hover, button:active, button:focus {text-decoration: none;outline: none;}
 .sample-box-small .totalAmount {  font-size: 18px;text-align: center;font-weight: bold;margin-top: -7px; }
 
 .booknowButton, .booknowButton:hover, .booknowButton button:active { background: #3396d1;margin-top: 5px;padding: 5px 20px 5px 20px;border-radius: 0px;border:0px solid;text-align: center; }
+
+/* Review Stars Styling */
+.rating { overflow: hidden;display: inline-block; }
+
+.rating-input { float: right;width: 16px;height: 16px;padding: 0;margin: 0 0 0 -16px;opacity: 0;cursor: pointer;}
+
+#rating-input {margin: 10px 0px;padding: 0;}
+
+.rating-star { position: relative;float: right;display: block;width: 16px;height: 16px;background: url(/assets/images/sample/star.png) 0 -16px; }
+
+.rating-star:hover,.rating-star:hover ~ .rating-star,.rating-input:checked ~ .rating-star { background-position: 0 0;cursor: pointer; }
+
+.reviewInstituteName {font-weight: bold;padding: 10px 0;text-align: left;}

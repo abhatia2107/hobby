@@ -3,23 +3,23 @@
     <div class="modal-content"> 
         <form  action='/comments/store/' method='post' id="reviewForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">       
             <div class="modal-header">              
-                <h3 class="modal-title">Rate The Last Class You Have Visited</h3>
+                <h4 class="modal-title">Rate The Last Class You Have Visited</h4>
             </div>
-            <div class="modal-body" style="padding:2% 7% ">            
+            <div class="modal-body" style="padding:2% 5% ">            
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="comment_institute_id" value="{{$booking_institute['id']}}">
                 <div class="row reviewInstituteName">
-                    <div class="col-md-4">Institute Name</div>
-                    <div class="col-md-8 text_over_flow_hide" style="text-align:left;padding-left:7px;">
+                    <div class="col-xs-3">Institute:</div>
+                    <div class="col-xs-9 text_over_flow_hide" style="text-align:left;padding-left:7px;">
                         {{$booking_institute['institute']}}
                     </div>
                 </div>
                 <div class="form-group row" id='rating-input'>                    
-                    <div class="col-md-12 maz_pad_z" >
-                        <div class="col-md-4 maz_pad_z">
-                            <label for="rating" >Rate The Institute</label>
+                    <div class="col-xs-12 maz_pad_z" >
+                        <div class="col-xs-3 maz_pad_z">
+                            <label for="rating" >Rating:</label>
                         </div>
-                        <div class="col-md-6 maz_pad_z">
+                        <div class="col-xs-9 maz_pad_z">
                              <span class="rating" >
                                 @for($index = 5; $index > 0;$index--)
                                   <input type="radio" class="rating-input" required
@@ -31,7 +31,7 @@
                     </div>                                                                        
                 </div>               
                 <div class="form-group row">
-                    <div class="col-md-12">
+                    <div class="col-xs-12">
                         <label for="comment">Review:</label>
                         <textarea class="form-control" rows="3" name='comment' id="comment"></textarea>
                     </div>

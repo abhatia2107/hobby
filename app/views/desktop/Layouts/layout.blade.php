@@ -34,7 +34,7 @@
 			<header class="layout_header" >
 				@include('Templates.header')
 			</header>
-		@endif	
+		@endif			
 		<!-- Error and success messages -->
 		<div class="alertMessage">
 			@include('Templates.message')

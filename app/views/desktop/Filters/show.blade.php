@@ -269,7 +269,7 @@
 		        <ul>
 					@for(; $index<$maxlength; $index++ )			  	
 					    <li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}" >
-					        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality}}">
+					        <a class="text_over_flow_hide" href="/filter/{{$subcategory}}/{{$localities[$index]->locality_url}}">
 					          {{$subcategory}} {{$activities}} in {{$localities[$index]->locality.', '.$location}}
 					        </a>
 					    </li>
@@ -293,7 +293,7 @@
 		        <ul>
 					@for(; $index<$maxlength; $index++ )			  	
 					    <li class="col-md-{{$width}} col-sm-{{$width}} col-xs-12 " title="{{$subcategories[$index]->subcategory}} Activities in {{$locality}}@if($locality!=$location){{', '.$location}}@endif" >
-					        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locality}}">
+					        <a class="text_over_flow_hide" href="/filter/{{$subcategories[$index]->subcategory}}/{{$locality_url}}">
 					          {{$subcategories[$index]->subcategory}} in {{$locality}}@if($locality!=$location){{', '.$location}}@endif
 					        </a>
 					    </li>			   

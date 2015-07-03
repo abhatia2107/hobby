@@ -189,6 +189,7 @@ class BookingsController extends \BaseController {
 		$booking=Booking::find($id);
 		$batch=$this->batch->getBatch($booking->batch_id);
 		$data=array(
+					'id'=>$id,
 					'batch'=>$batch->batch,
 					'subcategory'=>$batch->subcategory,
 					'institute'=>$batch->institute,
@@ -397,7 +398,7 @@ class BookingsController extends \BaseController {
 					'institute' => $batch->institute, 
 					'subcategory' => $batch->subcategory,
 					'amount' => $booking->payment,
-					'amount' => $booking->credit_used,
+					'credit' => $booking->credit_used,
 					'date' => date("d M Y", strtotime($booking->booking_date)),
 					'no_of_sessions' => $booking->no_of_sessions,
 					'venue_address' => $batch->venue_address,
@@ -418,7 +419,7 @@ class BookingsController extends \BaseController {
 		$institute_msg='Hobbyix: Order placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com- '.$data['admin_contact_no'];
 		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'.';
 		$subject='Booking Successful';
-		$this->sms(true, $data['user_contact_no'], $user_msg);
+		// $this->sms(true, $data['user_contact_no'], $user_msg);
 		Mail::send('Emails.booking.user', $data, function($message) use ($email, $subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
@@ -426,7 +427,7 @@ class BookingsController extends \BaseController {
 
 		$email=$batch->venue_email;
 		$subject='Booking for your class done';
-		$this->sms(false, $data['venue_contact_no'], $institute_msg);
+		// $this->sms(false, $data['venue_contact_no'], $institute_msg);
 		Mail::send('Emails.booking.institute', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
@@ -434,7 +435,7 @@ class BookingsController extends \BaseController {
 
 		$email=$data['admin_email'];
 		$subject='Booking Done';
-		$this->sms(false, $data['admin_contact_no'], $admin_msg);
+		// $this->sms(false, $data['admin_contact_no'], $admin_msg);
 		Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);

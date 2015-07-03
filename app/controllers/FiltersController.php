@@ -379,7 +379,8 @@ class FiltersController extends \BaseController {
 		}
 		else
 		{
-			return View::make('Filters.show',compact('batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','subArr','locArr','locality','subcategory','location','subcategories','localities','metaContent'));
+			$locality_url = str_replace(' ', '-', $locality);
+			return View::make('Filters.show',compact('batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','subArr','locArr','locality', 'locality_url', 'subcategory','location','subcategories','localities','metaContent'));
 		}
 	}
 

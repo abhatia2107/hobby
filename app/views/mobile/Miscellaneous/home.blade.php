@@ -1,5 +1,10 @@
 @extends('Layouts.layout')
 @section('content')
+@if(isset($booking_institute) && $booking_institute != null )
+<div class="modal fade" id="reviewModal" role="dialog" data-backdrop="static">
+	@include('Modals.review')
+</div>
+@endif
 <div class="overlay-slider">
 <div class="homepage-cover">
    <div class="container" id="hompage-cover" style="margin:0;padding:0">
@@ -67,6 +72,16 @@
 @stop
 @section('pagejquery')
 <script type="text/javascript">
+	var reviewModalStatus = false;
+	setInterval(function()
+	{
+		if(!reviewModalStatus)
+		{
+			reviewModalStatus = true; 
+			$('#reviewModal').modal('show');
+			$('#reviewModal').modal({backdrop: 'static'});		
+		}		
+	}, 1000);
 	$(document).ready(function () {		
 		$("#bookFavClassButton").click(function (e) {
 			e.preventDefault();

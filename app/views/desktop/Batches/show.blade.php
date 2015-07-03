@@ -50,16 +50,6 @@
 
     #sample-demo-model  { margin-top: 40px;  }
 
-    .rating { overflow: hidden;display: inline-block; }
-
-    .rating-input { float: right;width: 16px;height: 16px;padding: 0;margin: 0 0 0 -16px;opacity: 0;cursor: pointer;}
-
-    #rating-input {margin: 10px 0px;padding: 0;}
-
-    .rating-star { position: relative;float: right;display: block;width: 16px;height: 16px;background: url(/assets/images/sample/star.png) 0 -16px; }
-
-    .rating-star:hover,.rating-star:hover ~ .rating-star,.rating-input:checked ~ .rating-star { background-position: 0 0;cursor: pointer; }
-
     #sample-social-profiles img { width: 50px;height: 53px;margin-right: 5px;}
 
     .samplePageInfo {background: rgba(0, 0, 0, 0.4);color: white;}
@@ -204,7 +194,7 @@
             </div>  
             <div class="form-group col-md-12" id="ReviewForm">
               <label for="comment">Review:</label>
-              <textarea class="form-control" style="resize:none" rows="3" name='comment' id="comment" required='required'></textarea>
+              <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
             </div>
             <div class="form-group col-md-12" >
             @if($loggedIn)

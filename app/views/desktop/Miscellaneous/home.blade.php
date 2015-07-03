@@ -1,5 +1,10 @@
 @extends('Layouts.layout')
 @section('content')
+@if(isset($booking_institute) && $booking_institute != null )
+<div class="modal fade" id="reviewModal" role="dialog" data-backdrop="static">
+	@include('Modals.review')
+</div>
+@endif
 <div class="container membership_message" style="position:absolute;">	
 	<div class="alert">		
 		<div style="color:white;position:absolute;right:40px;">
@@ -113,7 +118,17 @@
 </div>
 @stop
 @section('pagejquery')
-<script type="text/javascript">
+<script type="text/javascript">	
+	var reviewModalStatus = false;
+	setInterval(function()
+	{
+		if(!reviewModalStatus)
+		{
+			reviewModalStatus = true; 
+			$('#reviewModal').modal('show');
+			$('#reviewModal').modal({backdrop: 'static'});		
+		}		
+	}, 1000);
 	$(document).ready(function () {		
 		$("#bookFavClass").click(function (e) {
 			e.preventDefault();
@@ -127,7 +142,7 @@
             $("#booking_date").val("{{$tomorrowDate}}");
             if($("#booking_date").val() == "{{$tomorrowDate}}")
             	$("#bookFavClassForm").submit();
-		});
+		});		
 	});	
 	function closeFavClassBook () {
 		$("#bookFavClassConfirm").hide();

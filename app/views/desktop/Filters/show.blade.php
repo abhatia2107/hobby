@@ -77,43 +77,8 @@
 @stop
 
 @section('content')
-<div class="modal fade" id="sendMessage" role="dialog" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" id='close_model' class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					Send Message To Institute
-			</div>
-			<div class="modal-body">
-				<form action="/batches/sendMessage" method="post" enctype="multipart/form-data" role="form">
-					<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
-					<input type="hidden" name="batch">
-					<input type="hidden" name="email">
-					<input type="hidden" name="institute">
-
-					<div class="form-group inner-addon" >
-						 <i class="glyphicon glyphicon-user left-addon"></i>
-						 <input type="text" class="form-control" style="padding:0px 0px 0px 30px; " name='msgInputName' id='MsgInputName' placeholder='Enter Your Name' required='required'/>
-					</div>
-					<div class="form-group inner-addon">
-						<i class="glyphicon glyphicon-envelope left-addon"></i>
-						 <input type="email" class="form-control" name='msgInputEmail' id='MsgInputEmail'  placeholder='Enter Your E-Mail Address' required='required'/>
-					</div>
-					<div class="form-group inner-addon">
-						<i class="glyphicon glyphicon-phone left-addon"></i>
-						 <input type="text" class="form-control" name='msgInputNumber' id='MsgInputPhone'  placeholder='Enter Your Mobile Number' required='required'/>
-					</div>
-					<div class="form-group">
-					  <label for="comment">Message:</label>
-					  <textarea class="form-control" rows="3" name='msgInputMessage' id="comment"></textarea>
-					</div>
-					<div class="modal-footer">
-						 <button type="submit" class="btn btn-primary">Send Message</button>
-					</div>
-				 </form>
-			</div>
-		</div>
-	</div>				
+<div class="modal fade" id="sendMessageModal" role="dialog" aria-hidden="true">	
+	@include('Modals.sendmessage')
 </div>
 <div class="container membership_message" style="background:#3396D1">
 	<div class="alert">
@@ -204,11 +169,11 @@
 									</span>
 									<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>
 								</div>		
-								<a class="col-lg-5 col-md-5 col-xs-12 col-sm-5 instConMsg instMsg" data-toggle="modal" href="#sendMessage" data-batch="{{$batchInfo->batch}}"
+								<div class="col-lg-5 col-md-5 col-xs-12 col-sm-5 instConMsg instMsg" id="sendMessageData" onclick="displaySendMessage();" data-batch="{{$batchInfo->batch}}"
 									data-email="{{$batchInfo->venue_email}}" data-institute="{{$batchInfo->institute}}" title="Send Message to Institute and get response">
 									<span class="glyphicon glyphicon-envelope"></span>										
 									<span>Send Message</span>
-								</a>	
+								</div>	
 								<div class="col-lg-12 col-md-12 col-sm-12 facilities_continer"></div>
 							</div>								
 						</div>
@@ -349,11 +314,11 @@
 		var loc_select = new Array();
 		var filter_select = new Array();
 		sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();						
+		loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();								
 		if(result == "")	
 		{			
 			$('#noResults').show();
-		}	
+		}			
 		$(document).ready(function() 
 		{
 			filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();
@@ -397,19 +362,20 @@
 					window.location.href = "/filter/"+categoryName+"/"+locationName;					
 				}				
 			});	
-			$('#sendMessage').on('show.bs.modal', function(e) 
+			$('#sendMessageModal').on('show.bs.modal', function(e) 
 			{
 			    //get data-id attribute of the clicked element
-			    var batch = $(e.relatedTarget).data('batch');
-			    var email = $(e.relatedTarget).data('email');
-			    var institute = $(e.relatedTarget).data('institute');
+			    var batch = $("#sendMessageData").data('batch');
+			    var email = $("#sendMessageData").data('email');
+			    var institute = $("#sendMessageData").data('institute');			   
 			    //populate the textbox
 			    $(e.currentTarget).find('input[name="batch"]').val(batch);
 			    $(e.currentTarget).find('input[name="email"]').val(email);
 			    $(e.currentTarget).find('input[name="institute"]').val(institute);
-			});			
-			$('.fb-like').data('width',$('.filterOption').css('width'));
-			//alert($('.fb-like').data('width'));
+			});
+			$(".instMsg").click(function () {
+				$("#sendMessageModal").modal("show");
+			})
 		});
 		
 	</script>

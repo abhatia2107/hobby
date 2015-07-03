@@ -213,6 +213,8 @@ span.stars span {  background-position: 0 0; }
 
 #reviewModal .modal-dialog { margin-top:12%;}
 
-.modal .modal-content{border-radius: 0px}
+#reviewModal {z-index: 10000000000}
+
+.modal .modal-content{border-radius: 0px;}
 
 .reviewInstituteName {font-weight: bold;padding: 10px 0;text-align: left;}

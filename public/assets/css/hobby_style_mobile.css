@@ -142,13 +142,17 @@ span.stars span {  background-position: 0 0; }
 
 .login a {color: white;text-decoration: none;}
 
+.signUpForm .signin_button {margin: 12px 0px  0px 0px}
+
 .login_form {padding: 0px 15px; }
 
 .signin_button {  text-align: center; }
 
 .signUp .signin_button {margin: 10px 0px -5px 0px;}
 
-.login_form button {font-size: 15px;height: 35px;padding: 2px 35px;border-radius: 0px;}
+.login_form button {font-size: 15px;height: 35px;padding: 2px 25px;border-radius: 0px;}
+
+.signUpForm button {font-size: 15px;padding: 5px 10px;border-radius: 0px;}
 
 .modal-header, .modal-footer, #loadmorebutton, .venues-list-buttons {  text-align: center; }
 

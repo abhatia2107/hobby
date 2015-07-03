@@ -128,7 +128,7 @@
 			$('#reviewModal').modal('show');
 			$('#reviewModal').modal({backdrop: 'static'});		
 		}		
-	}, 1000);
+	}, 3000);
 	$(document).ready(function () {		
 		$("#bookFavClass").click(function (e) {
 			e.preventDefault();

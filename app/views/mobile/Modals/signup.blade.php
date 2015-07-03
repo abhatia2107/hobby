@@ -1,69 +1,67 @@
 @section("signup")
-<div class="">
-        <div class="">
-            <form name="signUp" class="signUp" id="signUpForm" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
-                <div class="modal-header">                
-                    <h4 class="modal-title" id="myModalLabel1">Sign Up</h4>
-                    <a href="/users/login">Already a member? Login</a>
-                </div>
-                 <div class="signin_button">              
-                    <a href="/login/fb">
-                        <button class="btn btn-primary">
-                            <span class="glyphicon fa fa-fw fa-facebook"></span>SignUp Using Facebook
-                        </button>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group">                        
-                            <div class="col-sm-12">
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                                <input type="hidden" name="user_fb_id" value="@if(isset($userDetails)){{$userDetails->user_fb_id}}@else{{Input::old('user_fb_id')}}@endif">
-                                <input type="text" placeholder="Enter Your Name*"  class="form-control" name="user_name"  id="user_name" value="@if(isset($userDetails)){{$userDetails->user_name}}@else{{Input::old('user_name')}}@endif">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">                         
-                            <div class="col-sm-12">
-                                <input type="email" placeholder="Enter Your Email ID*"  class="form-control" name="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <input type="tel" placeholder="Enter Your Mobile Number*" class="form-control" name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">                            
-                            <div class="col-sm-12">
-                                <input type="password" placeholder="Enter Password For Your Account*" class="form-control" name="password"  id="password">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">                           
-                            <div class="col-sm-12">
-                                <input type="text" placeholder="Referral Code (Optional)" class="form-control" name="user_referee_code"  id="user_referee_code" value="{{Input::old('user_referee_code')}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="checkbox login-remember">
-                        <label class="col-sm-12 control-label">
-                            <input name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
-                            I agree to <a href="/terms">terms and conditions.</a>
-                        </label>
-                    </div>
-                </div>
-                <div class="modal-footer">                                
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
+<div class="signUpForm">        
+    <div class="modal-header">                
+        <h4 class="modal-title" id="myModalLabel1">Sign Up</h4>
+        <a href="/users/login">Already a member? Login</a>
     </div>
+    <div class="signin_button">              
+        <a href="/login/fb">
+            <button class="btn btn-primary">
+                <span class="glyphicon fa fa-fw fa-facebook"></span>SignUp Using Facebook
+            </button>
+        </a>
+    </div>
+    <form name="signUp" class="signUp" id="signUpForm" role="form" method="post" action="/users/signup/submit" enctype="multipart/form-data">
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-group">                        
+                    <div class="col-sm-12">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="user_fb_id" value="@if(isset($userDetails)){{$userDetails->user_fb_id}}@else{{Input::old('user_fb_id')}}@endif">
+                        <input type="text" placeholder="Enter Your Name*"  class="form-control" name="user_name"  id="user_name" value="@if(isset($userDetails)){{$userDetails->user_name}}@else{{Input::old('user_name')}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">                         
+                    <div class="col-sm-12">
+                        <input type="email" placeholder="Enter Your Email ID*"  class="form-control" name="email"  id="email" value="@if(isset($userDetails)){{$userDetails->email}}@else{{Input::old('email')}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="tel" placeholder="Enter Your Mobile Number*" class="form-control" name="user_contact_no"  id="user_contact_no" value="@if(isset($userDetails)){{$userDetails->user_contact_no}}@else{{Input::old('user_contact_no')}}@endif">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">                            
+                    <div class="col-sm-12">
+                        <input type="password" placeholder="Enter Password For Your Account*" class="form-control" name="password"  id="password">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">                           
+                    <div class="col-sm-12">
+                        <input type="text" placeholder="Referral Code (Optional)" class="form-control" name="user_referee_code"  id="user_referee_code" value="{{Input::old('user_referee_code')}}">
+                    </div>
+                </div>
+            </div>
+            <div class="checkbox login-remember">
+                <label class="col-sm-12 control-label">
+                    <input name="signup_terms"  value="forever" checked="checked" type="checkbox" required>
+                    I agree to <a href="/terms">terms and conditions.</a>
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">                                
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>        
+</div>
      <script type="text/javascript">
             $(document).ready(function(){     
                 $('.signUp').bootstrapValidator({

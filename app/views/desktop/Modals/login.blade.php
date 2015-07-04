@@ -43,17 +43,10 @@
     </div>
 </div>
 <script type="text/javascript" >
-    $(document).ready(function(){
-        
+    $(document).ready(function(){        
         $('#loginForm').bootstrapValidator({
-            message: 'This value is not valid',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
+            message: 'This value is not valid',            
             fields: {
-
                 password: {
                     message: 'The password is not valid',
                     validators: {

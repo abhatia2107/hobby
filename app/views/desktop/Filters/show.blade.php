@@ -36,7 +36,7 @@
   	a, a:hover {text-decoration: none}
 
   	#batchesData { box-shadow: 0px 0px 2px #3366CC; -moz-box-shadow: 0px 0px 2px #3366CC;-webkit-box-shadow: 0px 0px 2px #3366CC;
-  		color: #333; font-family: 'Open Sans',sans-serif;font-size: 15px;font-weight: normal;
+  		color: #333; font-family: 'Open Sans',sans-serif;font-size: 15px;font-weight: normal;margin: 0;padding: 0;
 	}
 
   	.batch { background: white;border-bottom:1px solid skyblue;}
@@ -133,72 +133,72 @@
 				<!---<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-width="240px" data-share="true"></div>						-->
 			</div>
 		</div>
-		<div class="col-lg-9 col-md-9 col-xs-12 col-sm-9" style="padding-left:1%" >
-			<ul class="list-unstyled row col-lg-11 col-md-12 maz_pad_z" id="batchesData">						
+		<div class="col-lg-9 col-md-9 col-xs-12 col-sm-9" style="padding-left:1%" >			
 			@if(!empty($batchesForCategoryLocation)) 
-			@foreach($batchesForCategoryLocation as $batchInfo)
-				<li itemscope itemtype="http://schema.org/SportsActivityLocation">
-					<div class="batch col-lg-12 col-md-12 col-xs-12 col-sm-12 maz_pad_z" id="batch{{$batchInfo->id}}">
-						<div class="col-lg-10 col-md-10 col-xs-12 col-sm-12 body maz_pad_z">
-							<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 header">
-								<h2><a itemprop="url" title="{{$batchInfo->institute}}" href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
-								<span style="display:none" itemprop="additionalType">ExerciseGym</span>
-								<h3 class="maz_pad_z" title="Activity Name, Locality">											
-									<span>{{$batchInfo->subcategory}}, {{$batchInfo->locality}}</span>
-								</h3>
-							</div>																
-							<div class="col-lg-6 col-md-6 col-xs-12 col-sm-5 leftPart maz_pad_z" >
-								<div class="item" title="Landmark is {{$batchInfo->venue_landmark}}, {{$batchInfo->locality}}">
-									<span class="text_over_flow_hide" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-										<span class="glyphicon glyphicon-map-marker"></span>
-										<span itemprop="streetAddress">{{$batchInfo->venue_landmark}}</span>, 
-										<span itemprop="addressLocality">{{$batchInfo->locality}}</span>, 
-										<span itemprop="postalCode">{{$batchInfo->venue_pincode}}</span>
-									</span>
+				<ul class="list-unstyled row col-lg-11 col-md-12 maz_pad_z" id="batchesData">						
+					@foreach($batchesForCategoryLocation as $batchInfo)
+						<li itemscope itemtype="http://schema.org/SportsActivityLocation">
+							<div class="batch col-lg-12 col-md-12 col-xs-12 col-sm-12 maz_pad_z" id="batch{{$batchInfo->id}}">
+								<div class="col-lg-10 col-md-10 col-xs-12 col-sm-12 body maz_pad_z">
+									<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 header">
+										<h2><a itemprop="url" title="{{$batchInfo->institute}}" href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
+										<span style="display:none" itemprop="additionalType">ExerciseGym</span>
+										<h3 class="maz_pad_z" title="Activity Name, Locality">											
+											<span>{{$batchInfo->subcategory}}, {{$batchInfo->locality}}</span>
+										</h3>
+									</div>																
+									<div class="col-lg-6 col-md-6 col-xs-12 col-sm-5 leftPart maz_pad_z" >
+										<div class="item" title="Landmark is {{$batchInfo->venue_landmark}}, {{$batchInfo->locality}}">
+											<span class="text_over_flow_hide" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+												<span class="glyphicon glyphicon-map-marker"></span>
+												<span itemprop="streetAddress">{{$batchInfo->venue_landmark}}</span>, 
+												<span itemprop="addressLocality">{{$batchInfo->locality}}</span>, 
+												<span itemprop="postalCode">{{$batchInfo->venue_pincode}}</span>
+											</span>
+										</div>
+										<div class="item" title="Schedule: {{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}">
+											<span class="text_over_flow_hide">
+												<span class="glyphicon glyphicon-time"></span>
+												<time itemprop="openingHours" datetime="Mo-Su">{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</time>									
+											</span>
+										</div>									
+									</div>								
+									<div class="col-lg-6 col-md-6 col-xs-12 col-sm-7 rightPart maz_pad_z">
+										<div class="col-lg-5 col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
+											<span style="display:none" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone" >											
+												 +91 {{$batchInfo->venue_contact_no}}
+											</span>
+											<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>
+										</div>		
+										<div class="col-lg-5 col-md-5 col-xs-12 col-sm-5 instConMsg instMsg" onclick="displaySendMessage();" data-batch="{{$batchInfo->batch}}"
+											data-email="{{$batchInfo->venue_email}}" data-institute="{{$batchInfo->institute}}" title="Send Message to Institute and get response">
+											<span class="glyphicon glyphicon-envelope"></span>										
+											<span>Send Message</span>
+										</div>	
+										<div class="col-lg-12 col-md-12 col-sm-12 facilities_continer"></div>
+									</div>								
 								</div>
-								<div class="item" title="Schedule: {{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}">
-									<span class="text_over_flow_hide">
-										<span class="glyphicon glyphicon-time"></span>
-										<time itemprop="openingHours" datetime="Mo-Su">{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</time>									
-									</span>
-								</div>									
-							</div>								
-							<div class="col-lg-6 col-md-6 col-xs-12 col-sm-7 rightPart maz_pad_z">
-								<div class="col-lg-5 col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
-									<span style="display:none" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone" >											
-										 +91 {{$batchInfo->venue_contact_no}}
-									</span>
-									<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>
-								</div>		
-								<div class="col-lg-5 col-md-5 col-xs-12 col-sm-5 instConMsg instMsg" onclick="displaySendMessage();" data-batch="{{$batchInfo->batch}}"
-									data-email="{{$batchInfo->venue_email}}" data-institute="{{$batchInfo->institute}}" title="Send Message to Institute and get response">
-									<span class="glyphicon glyphicon-envelope"></span>										
-									<span>Send Message</span>
+								<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 bookClass singleSessionPriceContainer 	">
+									<div class="singleSessionPrice">
+									<div class="times_font">₹<span itemprop="priceRange">{{$batchInfo->batch_single_price}}</span> / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
+									<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
+									</div>
 								</div>	
-								<div class="col-lg-12 col-md-12 col-sm-12 facilities_continer"></div>
-							</div>								
-						</div>
-						<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 bookClass singleSessionPriceContainer 	">
-							<div class="singleSessionPrice">
-							<div class="times_font">₹<span itemprop="priceRange">{{$batchInfo->batch_single_price}}</span> / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
-							<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
-							</div>
-						</div>	
-					</div>																		
-				</li>
-			@endforeach
-			@endif								
-			</ul>
-			<div id="noResults" class='resultsMessage' >No Results Found</div>
+							</div>																		
+						</li>
+					@endforeach					
+				</ul>				
+			@endif	
 			@if($batchesForCategoryLocation)
-				<div class="text-right">
+				<div class="text-right row col-lg-11 col-md-12 maz_pad_z">
 					@if(isset($keyword))
 						{{$batchesForCategoryLocation->appends(array('keyword' => $keyword))->links()}}
 					@else
 						{{$batchesForCategoryLocation->links()}}
 					@endif
 				</div>
-			@endif
+			@endif										
+			<div id="noResults" class='resultsMessage' >No Results Found</div>			
 		</div>
 	</div>		
 </div>

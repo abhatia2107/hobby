@@ -217,7 +217,7 @@
 								<div class="col-xs-4 singleSessionPriceContainer maz_pad_z">
 									<div class="singleSessionPrice">
 									<div class="times_font">₹{{$batchInfo->batch_single_price}} / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
-									<a class="btn btn-primary booknowButton" href="/batch/{{$batchInfo->batch}}">Book Now</a>
+									<button class="btn btn-primary booknowButton" data-href="/batch/{{$batchInfo->batch}}">Book Now</button>
 									</div>
 								</div>
 							</div>	
@@ -278,7 +278,11 @@
 				$('.filter_options_popup').hide();
 				$('html').css('overflow-y','auto');
 				$('#results-container').show();	
-			})		
+			});
+			$(".booknowButton").click(function (e) {
+				var url = $(this).data("href");
+				window.location.href = url;
+			});	
 		});
 		function filterApply() 
 		{

@@ -455,7 +455,7 @@ button:hover, button:active, button:focus {text-decoration: none;outline: none;}
 
 .sample-box-small .totalAmount {  font-size: 18px;text-align: center;font-weight: bold;margin-top: -7px; }
 
-.booknowButton, .booknowButton:hover, .booknowButton button:active { background: #3396d1;margin-top: 5px;padding: 5px 20px 5px 20px;border-radius: 0px;border:0px solid;text-align: center; }
+.booknowButton, .booknowButton:hover, .booknowButton button:active {cursor: pointer; background: #3396d1;margin-top: 5px;padding: 5px 20px 5px 20px;border-radius: 0px;border:0px solid;text-align: center; }
 
 /* Review Stars Styling */
 

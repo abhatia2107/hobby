@@ -128,6 +128,7 @@ class BookingsController extends \BaseController {
 						unset($credentials['Promo_Code']);
 						$credentials['payment']=0;
 						$credentials['wallet_amount']=0;
+						// dd($credentials);
 						$booking = Booking::create($credentials);
 						if($booking){
 							if(!$batch_booking_already){
@@ -414,29 +415,31 @@ class BookingsController extends \BaseController {
 					'admin_contact_no' => '9100946081',
 					'admin_email' => 'booking@hobbyix.com'
 					);
-		$email= $booking->email;
 		$user_msg='Hi '.$data['user_name'].', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
 		$institute_msg='Hobbyix: Order placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com- '.$data['admin_contact_no'];
 		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'.';
+		
+		$this->sms(true, $data['user_contact_no'], $user_msg);
+		$this->sms(false, $data['venue_contact_no'], $institute_msg);
+		$this->sms(false, $data['admin_contact_no'], $admin_msg);
+		
 		$subject='Booking Successful';
-		// $this->sms(true, $data['user_contact_no'], $user_msg);
-		Mail::send('Emails.booking.user', $data, function($message) use ($email, $subject)
+		$email= $booking->email;
+		Mail::queue('Emails.booking.user', $data, function($message) use ($email, $subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$batch->venue_email;
 		$subject='Booking for your class done';
-		// $this->sms(false, $data['venue_contact_no'], $institute_msg);
-		Mail::send('Emails.booking.institute', $data, function($message) use ($email,$subject)
+		Mail::queue('Emails.booking.institute', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$data['admin_email'];
 		$subject='Booking Done';
-		// $this->sms(false, $data['admin_contact_no'], $admin_msg);
-		Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
+		Mail::queue('Emails.booking.admin', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
@@ -470,47 +473,65 @@ class BookingsController extends \BaseController {
 		$user_msg='Hi '.$data['user_name'].', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. This is a trial class. Please display the confirmation sms/email at the venue.';
 		$institute_msg='Hobbyix: Order placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. This is a trial class. Thanks, hobbyix.com- '.$data['admin_contact_no'];
 		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'. This is a trial class.';
-		$subject='Trial Booking Successful';
+
 		$this->sms(true, $data['user_contact_no'], $user_msg);
-		Mail::send('Emails.trial_booking.user', $data, function($message) use ($email, $subject)
+		$this->sms(false, $data['venue_contact_no'], $institute_msg);
+		$this->sms(false, $data['admin_contact_no'], $admin_msg);
+		
+		$subject='Trial Booking Successful';
+		Mail::queue('Emails.trial_booking.user', $data, function($message) use ($email, $subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$batch->venue_email;
 		$subject='Trial Booking for your class done';
-		$this->sms(false, $data['venue_contact_no'], $institute_msg);
-		Mail::send('Emails.trial_booking.institute', $data, function($message) use ($email,$subject)
+		Mail::queue('Emails.trial_booking.institute', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$data['admin_email'];
 		$subject='Trial Booking Done';
-		$this->sms(false, $data['admin_contact_no'], $admin_msg);
-		Mail::send('Emails.trial_booking.admin', $data, function($message) use ($email,$subject)
+		Mail::queue('Emails.trial_booking.admin', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 	}
 
-/*
-	public function test()
+
+	public function RandomSMS($mobile, $msg)
+	{
+		static $smsObject;
+        require app_path().'/plivo/plivo.php';
+	 	$auth_id = "MANDE2YZJLMWNKYMEXMZ";
+	    $auth_token = "MTdhYzc2MTg4MzQzMTgwZjk0NzJlNTM3MDk1NGEz";
+	    $smsObject = new \RestAPI($auth_id, $auth_token);
+	    $params = array(
+	            'src' => 'HBXSMS',
+	            'dst' => '91'.$mobile,
+	            'text' => $msg,
+	            'type' => 'sms',
+	        );
+	    $smsObject->send_message($params);
+	    // var_dump($params);
+	}
+	public function RandomMail()
 	{
 		$data = array(
 					'admin_contact_no' => '9100946081',
-					'admin_email' => 'booking@hobbyix.com'
+					'admin_email' => 'jatin.bansal@hobbyix.com'
 					);
 		$email=$data['admin_email'];
 		var_dump($email);
 		$subject='Booking Done';
-		$response=Mail::send('Emails.booking.admin', $data, function($message) use ($email,$subject)
+		$response=Mail::queue('Emails.institute.bill', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 		dd($response);
 	}
-*/
+
 /*
 	public function test()
 	{

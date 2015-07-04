@@ -73,7 +73,7 @@ class AdminsController extends \BaseController {
 				'email'=>$email,
 			];
 			$subject=Lang::get('admin.admin_mail_subject');
-			Mail::later(60,'Emails.admin.admin', $data, function($message) use ($email,$name,$subject)
+			Mail::queue('Emails.admin.admin', $data, function($message) use ($email,$name,$subject)
 			{
     			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 			});

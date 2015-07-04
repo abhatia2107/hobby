@@ -226,7 +226,7 @@ class MembershipsController extends \BaseController {
                 ];
 		        /*Successful referral mail, to be sent to the referee on purchase of first membership*/
 		        $subject = Lang::get('user.user_successful_referral_subject',array("name"=>$data['friend_name']));
-		        Mail::later(15, 'Emails.user.successful_referral', $data, function ($message) use ($email, $name, $subject) {
+		        Mail::queue('Emails.user.successful_referral', $data, function ($message) use ($email, $name, $subject) {
 		            $message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 		        });
 			}
@@ -378,20 +378,22 @@ class MembershipsController extends \BaseController {
 					'admin_contact_no' => '9100946081',
 					'admin_email' => 'booking@hobbyix.com'
 					);
-		$email= $user->email;
 		$user_msg='Hi user, Order id: '.$data['order_id'].'. Thanks for buying Hobbyix Membership. 30 credits have been added to your account, valid till '. $data['end_date'];
 		$admin_msg='Membership booked, '.$membership_id.', Order id: '.$data['order_id']. ' by '. $data['user_contact_no'].'.';
-		$subject='Hobbyix Membership Booking Confirmation';
+		
 		$this->sms(true, $data['user_contact_no'], $user_msg);
-		Mail::send('Emails.membership.user', $data, function($message) use ($email, $subject)
+		$this->sms(false, $data['admin_contact_no'], $admin_msg);
+		
+		$email= $user->email;
+		$subject='Hobbyix Membership Booking Confirmation';
+		Mail::queue('Emails.membership.user', $data, function($message) use ($email, $subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});
 
 		$email=$data['admin_email'];
 		$subject='Hobbyix Membership Booking Done';
-		$this->sms(false, $data['admin_contact_no'], $admin_msg);
-		Mail::send('Emails.membership.admin', $data, function($message) use ($email,$subject)
+		Mail::queue('Emails.membership.admin', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);
 		});

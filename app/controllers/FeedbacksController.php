@@ -55,14 +55,14 @@ class FeedbacksController extends \BaseController {
 		$email=Lang::get('feedback.feedback_email');
 		$name=Lang::get('feedback.feedback_email_name');
 		$subject=$credentials['feedback_subject'];
-		Mail::later(60,'Emails.feedback.sendFeedback', $credentials, function($message) use ($email,$name,$subject)
+		Mail::queue('Emails.feedback.sendFeedback', $credentials, function($message) use ($email,$name,$subject)
 		{
 			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 		});
 		$email=$credentials['feedback_email'];
 		$name="User";
 		$subject=Lang::get('feedback.feedback_emailSubjectRecieved');
-		Mail::later(60,'Emails.feedback.feedbackRecieved', $credentials, function($message) use ($email,$name,$subject)
+		Mail::queue('Emails.feedback.feedbackRecieved', $credentials, function($message) use ($email,$name,$subject)
 		{
 			$message->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->to($email, $name)->subject($subject);
 		});

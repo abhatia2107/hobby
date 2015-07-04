@@ -306,17 +306,10 @@
           <div class='sample_box_title'>Write a Review</div>
           <div class="sample_box_data">          
             <form  action='/comments/store/' method='post' id="commentsForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">            
-              <div class="form-group" id='rating-input'>
-                  <label for="rating" style="float:left;margin-right:12px;">Rate this Batch:</label>
-                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                  <input type="hidden" name="comment_institute_id" value="{{$instituteID}}">
-                  <span class="rating">
-                  @for($index = 5; $index > 0;$index--)
-                    <input type="radio" class="rating-input" required='required'
-                        id="rating-input-1-{{$index}}" value="{{$index}}" name="comment_rating">
-                    <label for="rating-input-1-{{$index}}" class="rating-star"></label>
-                  @endfor                 
-                </span>                                                            
+              <div class="form-group reviewInstituteName" id='rating-input'>
+                  <div class="ratingInput">
+                    <input id="comment_rating" name="comment_rating" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false"  data-size="xs" >
+                  </div>                                                       
               </div>  
               <div class="form-group" id="ReviewForm">
                 <label for="comment">Review:</label>

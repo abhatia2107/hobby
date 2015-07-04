@@ -123,7 +123,7 @@
       <div class="samplePageInfo cover-wrapper ">
         <div class="container">
           <div class="col-sm-10 col-md-9" itemscope itemtype="http://schema.org/SportsActivityLocation">
-            <h1><span itemprop="name" > {{$batchDetails->institute}}</span></h1>
+            <h1><span itemprop="name" > {{$batchDetails->institute}} </span></h1>
             <h3>{{'  '.$batchDetails->subcategory}},{{' '.$batchDetails->category}}</h3>
             <div id='sample-institute-address' title="{{$batchDetails->venue_landmark}}, {{$batchDetails->locality.', '.$batchDetails->location}}">
               <div class="text_over_flow_hide" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
@@ -179,18 +179,13 @@
         <div id="comments" class="sample-box">
           <div class="row">
           <div class='sample-batch-name'>Write a Review</div>
-          <form  action='/comments/store/' enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
+          <form onsubmit="return(validateReviewForm())" action='/comments/store/' enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" name="comment_institute_id" value="{{$batchDetails->batch_institute_id}}">
-            <div class="form-group col-md-12 col-sm-12 col-xs-12" id='rating-input'>                
-                <span class="col-lg-4 col-md-5 col-sm-5 col-xs-12" style="margin:-7px 0px 0px 0px; ">Rate this Batch:</span>                
-                <span class="col-lg-7 col-md-6 col-sm-7 col-xs-12 rating" >
-                @for($index = 5; $index > 0;$index--)
-                  <input type="radio" class="rating-input" required='required'
-                      id="rating-input-1-{{$index}}" value="{{$index}}" name="comment_rating">
-                  <label for="rating-input-1-{{$index}}" class="rating-star"></label>
-                @endfor                 
-                </span>                                                            
+            <div class="form-group col-md-12 col-sm-12 col-xs-12 reviewInstituteName" id='rating-input'>
+                <div class="ratingInput">
+                <input name="comment_rating" type="text" id="comment_rating" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false"  data-size="sm" required />                                                                                          
+                </div>                
             </div>  
             <div class="form-group col-md-12" id="ReviewForm">
               <label for="comment">Review:</label>
@@ -198,7 +193,7 @@
             </div>
             <div class="form-group col-md-12" >
             @if($loggedIn)
-              <button type="submit" class="btn btn-primary">Submit</button>              
+              <button type="submit" class="btn btn-primary booknowButton">Submit</button>              
             @else
               <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-primary">Submit</button>           
             @endif

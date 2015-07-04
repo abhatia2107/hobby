@@ -11,8 +11,6 @@
 |
 */
 
-Route::group(array('https'), function()
-{
 	Route::get('/', 'HomeController@showWelcome');
 
 	//To allow access only to admin.
@@ -347,4 +345,3 @@ Route::group(array('https'), function()
 
 	Route::get('/json/localities','LocalitiesController@index');
 
-}

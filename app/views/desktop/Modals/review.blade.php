@@ -1,7 +1,7 @@
 @section("review")
 <div class="modal-dialog" >
     <div class="modal-content"> 
-        <form onsubmit="return(validateReviewForm())" action='/comments/store/' method='post' id="reviewForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">       
+        <form action='/comments/store/' method='post' id="reviewForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">       
             <div class="modal-header">              
                 <h3 class="modal-title">Rate Your Last Visit at {{$booking_institute['institute']}}</h3>
             </div>

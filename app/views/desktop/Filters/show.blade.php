@@ -158,8 +158,9 @@
 								</div>
 								<div class="item" title="Schedule: {{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}">
 									<span class="text_over_flow_hide">
-									<span class="glyphicon glyphicon-time"></span>
-									<time itemprop="openingHours" datetime="Mo-Su">{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</time>									
+										<span class="glyphicon glyphicon-time"></span>
+										<time itemprop="openingHours" datetime="Mo-Su">{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</time>									
+									</span>
 								</div>									
 							</div>								
 							<div class="col-lg-6 col-md-6 col-xs-12 col-sm-7 rightPart maz_pad_z">
@@ -169,7 +170,7 @@
 									</span>
 									<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>
 								</div>		
-								<div class="col-lg-5 col-md-5 col-xs-12 col-sm-5 instConMsg instMsg" id="sendMessageData" onclick="displaySendMessage();" data-batch="{{$batchInfo->batch}}"
+								<div class="col-lg-5 col-md-5 col-xs-12 col-sm-5 instConMsg instMsg" onclick="displaySendMessage();" data-batch="{{$batchInfo->batch}}"
 									data-email="{{$batchInfo->venue_email}}" data-institute="{{$batchInfo->institute}}" title="Send Message to Institute and get response">
 									<span class="glyphicon glyphicon-envelope"></span>										
 									<span>Send Message</span>
@@ -323,11 +324,7 @@
 		{
 			filter_select = $('.filterCheckBox:checked').map(function(){return this.value;}).get();
 			sub_select = $('.SubCheckbox:checked').map(function(){return this.value;}).get();
-			loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();							
-			if(filter_select.length>0)
-			{
-				filterStatus = true;
-			}				
+			loc_select = $('.LocCheckbox:checked').map(function(){return this.value;}).get();												
 			$(".filters input").click(function(e)
 			{	
 				$(".filterOptionsList").css('pointer-events','none');
@@ -361,22 +358,16 @@
 				{
 					window.location.href = "/filter/"+categoryName+"/"+locationName;					
 				}				
-			});	
-			$('#sendMessageModal').on('show.bs.modal', function(e) 
-			{
-			    //get data-id attribute of the clicked element
-			    var batch = $("#sendMessageData").data('batch');
-			    var email = $("#sendMessageData").data('email');
-			    var institute = $("#sendMessageData").data('institute');			   
-			    //populate the textbox
-			    $(e.currentTarget).find('input[name="batch"]').val(batch);
-			    $(e.currentTarget).find('input[name="email"]').val(email);
-			    $(e.currentTarget).find('input[name="institute"]').val(institute);
-			});
-			$(".instMsg").click(function () {
+			});			
+			$(".instMsg").click(function (e) {				
+				var batch = $(this).data('batch');
+			    var email = $(this).data('email');
+			    var institute = $(this).data('institute');			    
+			    $('#sendMessageModal').find('input[name="batch"]').val(batch);
+			    $('#sendMessageModal').find('input[name="email"]').val(email);
+			    $('#sendMessageModal').find('input[name="institute"]').val(institute);			    
 				$("#sendMessageModal").modal("show");
-			})
-		});
-		
+			});
+		});		
 	</script>
 @stop

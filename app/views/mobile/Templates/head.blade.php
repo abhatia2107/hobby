@@ -6,6 +6,13 @@
         $metaContent[1] = "Get access to all gym, zumba classes, aerobics, pilates, yoga, kick-boxing and dance etc. with one membership.";
         $metaContent[2] = "gyms, best gyms, zumba classes, zumba dance, gym, aerobics classes, pilates classes, yoga centers, yoga classes, kick boxing, gym membership, aerobic exercise";
     }
+    if(!isset($facebookContent))
+    {
+        $facebookContent[0] = "Hobbyix";
+        $facebookContent[1] = url('/');
+        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
+        $facebookContent[3] = "Get access to all the gyms, zumba classes, aerobics, yoga, kick-boxing and dance etc. with one membership.";
+    }
 ?>
     <meta name="google-site-verification" content="vgzS24WtBop22kDPTpDMKE4pKu92EkBc3NVHcuIqPfk" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

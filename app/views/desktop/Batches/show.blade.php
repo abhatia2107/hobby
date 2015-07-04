@@ -118,6 +118,16 @@
     </button>    
     <div id="responseMessage"></div>
   </div>
+  <div class="container membership_message" style="position:absolute;"> 
+    <div class="alert">   
+      <div style="color:white;position:absolute;right:40px;">
+        <!-- <a href="tel:+919100946081"> -->Call: +91-9100 946 081<!-- </a> -->
+      </div>
+      <button onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>     
+      <h3><a title="Hobbyix Membership" href="/memberships">{{$homeLang['home_membership_title']}}</a></h3>
+      <strong>{{$homeLang['home_membership_tagline']}}</strong>   
+      </div>
+  </div>
   <div id="page" class="hfeed site" style="background-image: url(/assets/images/sample/workout.jpg);">
     <div id="content" class="site-content">
       <div class="samplePageInfo cover-wrapper ">

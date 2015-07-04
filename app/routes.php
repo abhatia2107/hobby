@@ -344,4 +344,3 @@
 	Route::get('/json/subcategories','SubcategoriesController@index');
 
 	Route::get('/json/localities','LocalitiesController@index');
-

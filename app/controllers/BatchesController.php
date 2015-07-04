@@ -203,15 +203,17 @@ class BatchesController extends \BaseController {
 
 			$subcategory = $batchDetails->subcategory;
 			$instituteName = $batchDetails->institute;
+			$batch = $batchDetails->batch;
 			$locality = $batchDetails->locality;
 			$location = $batchDetails->location;
 			$id = Input::get('id');
 			if($id)
 			{
-				$facebookContent[0] = $instituteName;
-		        $facebookContent[1] = Request::url();
+				$booking=Booking::find($id);
+				$facebookContent[0] = '$booking->name is going to $instituteName with hobbyix membership.';
+		        $facebookContent[1] = url('/batch/'.$batch).'?id='.$id;
 		        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-		        $facebookContent[3] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";
+		        $facebookContent[3] = "Ask $booking->name for the referral code to get Rs. 100/- off on your hobbyix membership.";
 		    }
 			$metaContent[0] = "$instituteName - $locality :: Hobbyix";
 			$metaContent[1] = "$instituteName $locality, $subcategory classes in $locality - $location. Book a session, get address, contact info and reviews.";

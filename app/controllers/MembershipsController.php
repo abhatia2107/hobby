@@ -41,12 +41,12 @@ class MembershipsController extends \BaseController {
 		$id = Input::get('id');
 		if($id)
 		{
-			$membership=Membership::find($id);
+			$membership = Membership::find($id);
 			$facebookContent = array();
-			$facebookContent[0] = 'Membership';
+			$facebookContent[0] = 'I\'ve registered for the hobbyix membership.';
 	        $facebookContent[1] = url('/memberships').'?id='.$id;
 	        $facebookContent[2] = asset('/assets/images/home/institute.jpg');
-	        $facebookContent[3] = 'Congratulations, your purchase of hobbyix membership is successful.';
+	        $facebookContent[3] = 'Get access to all the gyms, zumba classes, aerobics, yoga, kick-boxing and dance etc. with one membership.';
 		}
 		return View::make('Memberships.index',compact('credentials','metaContent','facebookContent'));
 	}

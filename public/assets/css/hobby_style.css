@@ -458,14 +458,7 @@ button:hover, button:active, button:focus {text-decoration: none;outline: none;}
 .booknowButton, .booknowButton:hover, .booknowButton button:active { background: #3396d1;margin-top: 5px;padding: 5px 20px 5px 20px;border-radius: 0px;border:0px solid;text-align: center; }
 
 /* Review Stars Styling */
-.rating { overflow: hidden;display: inline-block; }
 
-.rating-input { float: right;width: 16px;height: 16px;padding: 0;margin: 0 0 0 -16px;opacity: 0;cursor: pointer;}
+.rating-fa{font-family:FontAwesome;padding-left:1px}.rating-fa .rating-stars:before{padding-left:1px}.rating-gly{font-family:'Glyphicons Halflings'}.rating-gly-star{font-family:'Glyphicons Halflings';padding-left:2px}.rating-gly-star .rating-stars:before{padding-left:2px}.rating-lg .rating-gly-star,.rating-lg .rating-gly-star .rating-stars:before{padding-left:4px}.rating-xl .rating-gly-star,.rating-xl .rating-gly-star .rating-stars:before{padding-left:2px}.rating-active{cursor:default}.rating-disabled{cursor:not-allowed}.rating-uni{font-size:1.2em;margin-top:-5px}.rating-container{position:relative;vertical-align:middle;display:inline-block;color:#e3e3e3;overflow:hidden}.rating-container:before{content:attr(data-content)}.rating-container .rating-stars{position:absolute;left:0;top:0;white-space:nowrap;overflow:hidden;color:#fde16d;transition:all .25s ease-out;-o-transition:all .25s ease-out;-moz-transition:all .25s ease-out;-webkit-transition:all .25s ease-out}.rating-container .rating-stars:before{content:attr(data-content);text-shadow:0 0 1px rgba(0,0,0,.7)}.rating-container-rtl{position:relative;vertical-align:middle;display:inline-block;overflow:hidden;color:#fde16d}.rating-container-rtl:before{content:attr(data-content);text-shadow:0 0 1px rgba(0,0,0,.7)}.rating-container-rtl .rating-stars{position:absolute;left:0;top:0;white-space:nowrap;overflow:hidden;color:#e3e3e3;transition:all .25s ease-out;-o-transition:all .25s ease-out;-moz-transition:all .25s ease-out;-webkit-transition:all .25s ease-out}.rating-container-rtl .rating-stars:before{content:attr(data-content)}.rating-xl{font-size:4.89em}.rating-lg{font-size:3.91em}.rating-md{font-size:3.13em}.rating-sm{font-size:2.5em}.rating-xs{font-size:2em}.star-rating .caption,.star-rating-rtl .caption{color:#999;display:inline-block;vertical-align:middle;font-size:55%;margin-left:10px}.star-rating .caption{padding-left:5px}.star-rating-rtl .caption{padding-right:5px}
 
-#rating-input {margin: 10px 0px;padding: 0;}
-
-.rating-star { position: relative;float: right;display: block;width: 16px;height: 16px;background: url(/assets/images/sample/star.png) 0 -16px; }
-
-.rating-star:hover,.rating-star:hover ~ .rating-star,.rating-input:checked ~ .rating-star { background-position: 0 0;cursor: pointer; }
-
-.reviewInstituteName {font-weight: bold;padding: 10px 0;text-align: left;}
+#statusMessage {color: #e24648;font-size: 14px;}

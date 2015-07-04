@@ -16,15 +16,12 @@
     <meta name="author" content="Hobbyix">
     <meta property="og:image" content="/assets/images/home/banner.jpg">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.min.css"> -->
-    <!--<link rel="stylesheet" type="text/css" href="/assets/css/normalize-3.0.2.min.css"> -->
     <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css"> 
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.11.2.min.css" >
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrapValidator.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/hobby_style_mobile.css">  
 
-    <script src="/assets/js/jquery-1.11.2.min.js"></script>
-    <script src="/assets/js/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/jquery-1.11.2.min.js"></script>   
     <script src="/assets/js/bootstrap.min.js"></script>
     <script src="/assets/js/bootstrapValidator-0.5.3.min.js"></script>
     <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>

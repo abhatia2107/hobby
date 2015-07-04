@@ -313,7 +313,7 @@
               </div>  
               <div class="form-group" id="ReviewForm">
                 <label for="comment">Review:</label>
-                <textarea class="form-control" rows="2" name='comment' id="comment" required='required'></textarea>
+                <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
               </div>
               <div class="review_submit_button">
                 @if($loggedIn)

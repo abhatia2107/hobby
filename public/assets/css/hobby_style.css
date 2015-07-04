@@ -18,6 +18,12 @@ body li {  list-style-type: none; }
 
 .header_row1  { background-color: #202e54;padding: 7px 7px }
 
+.bookFavClassContainer {float:right;margin:0 10px 0 0}
+
+.bookFavClassContainer .name {padding: 3px 10px 3px 10px;float:left }
+
+.bookFavClassContainer #bookFavClassConfirm {display:none;color:white}
+
 .bookFavClassContainer #bookFavClassConfirm button {border:0;border-radius: 0px;padding: 0;color:#20cfb1;background: none}
 
 .bookFavClassContainer .bookFavClassConfirm {border:1px solid;border-color: #20cfb1;border-radius:3px; padding: 0px 7px;margin: 0px}
@@ -97,7 +103,9 @@ body li {  list-style-type: none; }
 
 .explore_button {text-align: center;}
 
-.explore_button .btn-primary {border-radius: 0px;border:0px;min-width: 210px;margin: 10px 0px 5px 0px;background: #3396d1;font-size: 17px;}
+.hobby_search_listings .checkoutButton .btn-primary {margin-left:3px;background: #3396d1;}
+
+.hobby_search_listings .btn-primary {border-radius: 0px;border:0px;min-width: 210px;margin: 10px 0px 5px 0px;background: #e24648;font-size: 17px;}
 
 .login {float: right;}
 
@@ -154,7 +162,7 @@ span.stars span {  background-position: 0 0; }
 
 /* filter page style sheet*/
 
-.filterOption { font-family: 'Open Sans',sans-serif; font-weight: lighter;  box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);margin-bottom: 10px; }
+.filterOption { font-family: 'Open Sans',sans-serif; font-weight: lighter;  box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.5);margin-bottom: 10px;padding:0;float:right }
 
 .filterTitle { color:white;font-family: 'Open Sans',sans-serif;font-size: 20px;padding: 0px 5px;background:#3396d1;height: 30px; }
 
@@ -176,11 +184,7 @@ span.stars span {  background-position: 0 0; }
 
 .batchDetailsAndPrice {  margin-bottom: 10px; }
 
-.rating_starts  { clear:both;color: #FF8000;margin-top:0px;  }
-
 .text_over_flow_hide {display:inline-block; white-space: nowrap; overflow:hidden !important;text-overflow: ellipsis;max-width:100%;}
-
-.sendMessage a  { color: #333;  }
 
 @media screen and (min-width: 768px) {  #sendMessageModal .modal-dialog  { width:430px; }  }
 
@@ -210,9 +214,9 @@ span.stars span {  background-position: 0 0; }
 
 .breadcrumb h1 {font-size: 25px;margin:0;padding: 0;text-align: center;margin-top: -10px;font-family: Museo,Helvetica,arial,san-serif;color: #333}
 
-.filter_page_container {width: 100%;padding: 0px;}
+.filter_page_container {width: 100%;padding: 0px;margin:15px 0px 30px 0px;}
 
-.membership_message  {  margin: 0px;width: 100%;border-radius: 0px;padding: 0px;background-color : transparent;background-color: rgba(0, 0, 0, 0.4);color: white }
+.membership_message  {  margin: 0px;width: 100%;border-radius: 0px;padding: 0px;background-color : transparent;background-color: rgba(0, 0, 0, 0.4);color: white;position: absolute; }
 
 .membership_message  a{  color: white;font-weight: bold;}
 
@@ -223,6 +227,8 @@ span.stars span {  background-position: 0 0; }
 .membership_message h3 {margin: 0px 0px 3px 0px;padding:0px 0px;font-size: 22px;text-decoration: underline; } 
 
 .membership_message {display: none;text-align: center;font-size: 20px;}
+
+.membership_message .contact {color:white;position:absolute;right:40px;}
 
 
 /*vendor page style sheet */
@@ -309,6 +315,8 @@ span.stars span {  background-position: 0 0; }
 
 #loginModal .modal-dialog, #reviewModal .modal-dialog { margin-top:9%;}
 
+#reviewModal .modal-body {padding:2% 7% }
+
 .modal .modal-content{border-radius: 0px}
 
 textarea {resize:none;}
@@ -355,7 +363,11 @@ a:hover, a:active, a:focus { outline: none;}
 
 button:hover, button:active, button:focus {text-decoration: none;outline: none;}
 
-.userInfoListing {  text-align: right;font-size: 18px;padding-top: 13px; }
+.userInfoListing {  text-align: right;font-size: 18px;padding-top: 13px;float:right; }
+
+.userInfoListing .user_name{max-width:120px;padding: 3px 0px 3px 10px;float:left }
+
+.userInfoListing .down {padding: 2px 5px;float:left }
 
 .MainHeaderUserInfo { padding-right: 5px;text-align: right;font-size: 18px !important;float: right; }
 

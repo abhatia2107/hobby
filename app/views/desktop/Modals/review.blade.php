@@ -5,7 +5,7 @@
             <div class="modal-header">              
                 <h3 class="modal-title">Rate Your Last Visit at {{$booking_institute['institute']}}</h3>
             </div>
-            <div class="modal-body" style="padding:2% 7% ">            
+            <div class="modal-body">            
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="comment_institute_id" value="{{$booking_institute['id']}}">               
                 <div class="form-group row reviewInstituteName" id='rating-input'>                    

@@ -5,9 +5,9 @@
 	@include('Modals.review')
 </div>
 @endif
-<div class="container membership_message" style="position:absolute;">	
+<div class="container membership_message">	
 	<div class="alert">		
-		<div style="color:white;position:absolute;right:40px;">
+		<div class="contact">
 			<!-- <a href="tel:+919100946081"> -->Call: +91-9100 946 081<!-- </a> -->
 		</div>
 		<button onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>		 
@@ -24,8 +24,10 @@
 	            <h2>{{$homeLang['home_subtitle1']}}</h2>
 	            <h2>{{$homeLang['home_subtitle2']}}</h2>	            
 	         </div>  
-	         <span class="explore_button"><a title="Hobbyix Membership" href="/memberships" class="btn btn-primary" style="background:#e24648">Check out Membership</a></span>
-	         <span class="explore_button" style="margin-left:5px;" ><a title="Check out Classes" href="/filter/Fitness/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
+	         <span class="explore_button">
+	         	<a title="Hobbyix Membership" href="/memberships" class="btn btn-primary">Check out Membership</a>
+	         </span>
+	         <span class="checkoutButton" ><a title="Check out Classes" href="/filter/Fitness/Hyderabad" class="btn btn-primary">Check out Classes</a></span>
 	      </div>
 	   </div>
 	</div>

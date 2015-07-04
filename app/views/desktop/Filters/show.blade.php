@@ -72,6 +72,14 @@
 	.times_font { font-family: "Times New Roman", Georgia, Serif;}
   	
   	.related_item ul {margin: 0;padding: 3px 0px}
+
+  	.fb_page {overflow:auto;padding:0 5px 5px 5px;text-align:center;float:right}
+
+  	.filterResultsContainer {padding-left: 1%}
+
+  	.filterResultsContainer .type, .hideContact {display: none;}
+
+  	.membership_message {background:#3396D1;position: relative;}
   	
    </style>
 @stop
@@ -80,9 +88,9 @@
 <div class="modal fade" id="sendMessageModal" role="dialog" aria-hidden="true">	
 	@include('Modals.sendmessage')
 </div>
-<div class="container membership_message" style="background:#3396D1">
+<div class="container membership_message" >
 	<div class="alert">
-		<div style="color:white;position:absolute;right:40px;">
+		<div class="contact">
 			Call: +919100 946 081
 		</div>
 		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>
@@ -99,10 +107,10 @@
 	</li>		
 	<h1>@if(isset($metaContent[3])){{$metaContent[3]}} @endif</h1>
 </ul>	
-<div class="container filter_page_container" style="margin:15px 0px 30px 0px;">			
+<div class="container filter_page_container">			
 	<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maz_pad_z">											
 		<div class="col-lg-3 col-md-3 col-xs-12 col-sm-3 maz_pad_z">			
-			<div class="col-lg-9 col-md-11 col-sm-11 filter-option-1 filterOption" style="padding:0;float:right">	
+			<div class="col-lg-9 col-md-11 col-sm-11 filter-option-1 filterOption">	
 				<div class="filterTitle">Sub Categories</div>
 				<div class="filterOptionsList">							
 					<ul class="list-unstyled filters"> 	
@@ -115,7 +123,7 @@
 					 
 				</div>
 			</div>			
-			<div class="col-lg-9 col-md-11 col-sm-11 filter-option-2 filterOption" style="padding:0;float:right">	
+			<div class="col-lg-9 col-md-11 col-sm-11 filter-option-2 filterOption">	
 				<div class="filterTitle">Locality</div> 
 				<div class="filterOptionsList">							
 					<ul class="list-unstyled filters"> 
@@ -127,13 +135,13 @@
 					 </ul>							 
 				</div>
 			</div>
-			<div class="col-lg-9 col-md-11 col-sm-11 filterOption" style="overflow:auto;padding:0 5px 5px 5px;text-align:center;float:right">							
+			<div class="col-lg-9 col-md-11 col-sm-11 filterOption fb_page">							
 				<h4>Like us on facebook</h4>
 				<div class="fb-page" data-href="https://www.facebook.com/hobbyix" data-width="300" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>						
 				<!---<div class="fb-like" data-href="https://facebook.com/hobbyix" data-layout="standard" data-action="like" data-show-faces="true" data-width="240px" data-share="true"></div>						-->
 			</div>
 		</div>
-		<div class="col-lg-9 col-md-9 col-xs-12 col-sm-9" style="padding-left:1%" >			
+		<div class="col-lg-9 col-md-9 col-xs-12 col-sm-9 filterResultsContainer">			
 			@if(!empty($batchesForCategoryLocation)) 
 				<ul class="list-unstyled row col-lg-11 col-md-12 maz_pad_z" id="batchesData">						
 					@foreach($batchesForCategoryLocation as $batchInfo)
@@ -142,7 +150,7 @@
 								<div class="col-lg-10 col-md-10 col-xs-12 col-sm-12 body maz_pad_z">
 									<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 header">
 										<h2><a itemprop="url" title="{{$batchInfo->institute}}" href="/batch/{{$batchInfo->batch}}"><span itemprop="name">{{$batchInfo->institute}}</span></a></h2>
-										<span style="display:none" itemprop="additionalType">ExerciseGym</span>
+										<span class="type" itemprop="additionalType">ExerciseGym</span>
 										<h3 class="maz_pad_z" title="Activity Name, Locality">											
 											<span>{{$batchInfo->subcategory}}, {{$batchInfo->locality}}</span>
 										</h3>
@@ -165,7 +173,7 @@
 									</div>								
 									<div class="col-lg-6 col-md-6 col-xs-12 col-sm-7 rightPart maz_pad_z">
 										<div class="col-lg-5 col-md-5 col-xs-12 col-sm-6 instConMsg instCon" onClick='show_contact("{{$batchInfo->id}}")'>										
-											<span style="display:none" id="contact{{$batchInfo->id}}" class="times_font" itemprop="telephone" >											
+											<span id="contact{{$batchInfo->id}}" class="times_font hideContact" itemprop="telephone" >											
 												 +91 {{$batchInfo->venue_contact_no}}
 											</span>
 											<span id="show_contact{{$batchInfo->id}}"><span class="glyphicon glyphicon-phone-alt"></span> View Number</span>

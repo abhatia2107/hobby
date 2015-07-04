@@ -29,7 +29,6 @@
     <meta property="og:image" content="{{$facebookContent[2]}}" />
     <meta property="og:description" content="{{$facebookContent[3]}}" />
     <meta property="fb:app_id" content="1061701537179263" />
-    <meta property="fb:app_id" content="1061701537179263" /> 
     <link rel="canonical" href="{{$facebookContent[1]}}">
     <link rel="icon" type="image/png" href="/assets/images/hobbyix_favicon.png">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">

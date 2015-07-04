@@ -21,7 +21,14 @@
     <meta name="description" content="{{$metaContent[1]}}">
     <meta name="keywords" content="{{$metaContent[2]}}">
     <meta name="author" content="Hobbyix">
-    <meta property="og:image" content="/assets/images/home/banner.jpg">
+    <meta property="og:title" content="{{$facebookContent[0]}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="hobbyix.com"/>
+    <meta property="og:url" content="{{$facebookContent[1]}}" />    
+    <meta property="og:image" content="{{$facebookContent[2]}}" />
+    <meta property="og:description" content="{{$facebookContent[3]}}" />
+    <meta property="fb:app_id" content="1061701537179263" />
+    <link rel="canonical" href="{{$facebookContent[1]}}">
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css"> 
     <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui-1.11.2.min.css" >

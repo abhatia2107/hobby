@@ -10,7 +10,7 @@
 					</button>
 				</a>
 				<div id="login-content">
-					<form action="/admins/store" enctype="multipart/form-data" method="post">
+					<form action="{{secure_url('/admins/store')}}" enctype="multipart/form-data" method="post">
 						<fieldset id="inputs">
 							<input type="email" name="email" placeholder="Email address" required>   
 							<input type="text" name="user_contact_no" placeholder="Mobile Number" required>

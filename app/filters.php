@@ -15,7 +15,7 @@
 
 App::before(function($request)
 {
-	//
+	//Before
 });
 
 

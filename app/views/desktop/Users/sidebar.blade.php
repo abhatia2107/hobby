@@ -35,9 +35,6 @@
 <?php
   $id=Auth::id();
 ?>
-<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      @include('Modals.review')
-</div>
 <div class="uac_sidebar">
   <div class="uac_sidebar_header">
     <!--<a href="#reviewModal" data-toggle="modal">My Profile</a> -->

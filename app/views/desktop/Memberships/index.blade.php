@@ -30,9 +30,7 @@
 
 		@media (min-width: 920px) { .get_membership li {padding: 0 20px}}
 
-		.membership_card_container input[type=text] { height: 25px; padding: 0px 0px 0px 5px; width: 90%; border-radius: 2px; }
-
-		#promoCodeContainer #statusMessage {color: #e24648;font-size: 14px;}
+		.membership_card_container input[type=text] { height: 25px; padding: 0px 0px 0px 5px; width: 90%; border-radius: 2px; }		
 
 		.get_membership hr {margin: 10px 15px 5px 15px;}
 

@@ -155,7 +155,7 @@ class BookingsController extends \BaseController {
 										{
 											if($user->user_batch_id!=$credentials['batch_id'])
 											{
-												$booking->order_status="batch_not_allowed";
+												$booking->order_status="Batch_not_allowed";
 												$booking->save();
 												$booking->delete();
 												return Redirect::back()->with('failure',Lang::get('booking.batch_not_allowed'));
@@ -182,7 +182,7 @@ class BookingsController extends \BaseController {
 										{
 											if($user->user_batch_id!=$credentials['batch_id'])
 											{
-												$booking->order_status="batch_not_allowed";
+												$booking->order_status="Batch_not_allowed";
 												$booking->save();
 												$booking->delete();
 												return Redirect::back()->with('failure',Lang::get('booking.batch_not_allowed'));

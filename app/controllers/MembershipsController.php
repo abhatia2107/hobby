@@ -390,8 +390,8 @@ class MembershipsController extends \BaseController {
 					'admin_contact_no' => '9100946081',
 					'admin_email' => 'booking@hobbyix.com'
 					);
-		$user_msg='Hi user, Order id: '.$data['order_id'].'. Thanks for buying Hobbyix Membership. 30 credits have been added to your account, valid till '. $data['end_date'];
-		$admin_msg='Membership booked, '.$membership_id.', Order id: '.$data['order_id']. ' by '. $data['user_contact_no'].'.';
+		$user_msg='Hi '.$data['user_name'].', Order id: '.$data['order_id'].'. Thanks for buying Hobbyix Membership. '.$data['credits'].' credits have been added to your account, valid till '. $data['end_date'];
+		$admin_msg='Membership booked, '.$membership_id.', Order id: '.$data['order_id']. ' by '.$data['user_name'].' '. $data['user_contact_no'].'.';
 		
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		$this->sms(false, $data['admin_contact_no'], $admin_msg);

@@ -50,7 +50,7 @@ class CommentsController extends \BaseController {
 		$referrer = rtrim($referrer,"/");
 		if($user_id && ($referrer==url('/')))
 		{
-			$booking = Booking::where('user_id',$user_id)->where('booking_date','<',date('Y-m-d'))->where('order_status','success')->orderBy('created_at', 'desc')->first();
+			$booking = Booking::where('user_id',$user_id)->where('booking_date','<',date('Y-m-d'))->where('order_status','Success')->orderBy('created_at', 'desc')->first();
 			if($booking)
 			{
 				if(!$booking->reviewed)

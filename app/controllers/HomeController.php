@@ -41,7 +41,7 @@ class HomeController extends BaseController {
 				$favorite['batch_id'] = $batch->id;
 				$favorite['payment'] = $batch->batch_single_price;
 			}
-			$booking = Booking::where('user_id',$user_id)->where('booking_date','<',date('Y-m-d'))->where('order_status','success')->orderBy('created_at', 'desc')->first();
+			$booking = Booking::where('user_id',$user_id)->where('booking_date','<',date('Y-m-d'))->where('order_status','Success')->orderBy('created_at', 'desc')->first();
 			// var_dump($booking->booking_date);
 			// dd(date('Y-m-d'));
 			$booking_institute = null;

@@ -27,7 +27,7 @@ class CreateBookingsTable extends Migration {
 			$table->boolean('reviewed')->default(0);
 			$table->boolean('favorite_used')->default(0);
 			$table->boolean('trial')->default(0);
-			$table->string('order_status',10)->nullable();
+			$table->string('order_status',100)->nullable();
 			$table->string('promo_code',25);
 			$table->integer('wallet_amount')->default(0);
 			$table->integer('promo_id')->nullable()->foreign('promo_id')->references('id')->on('promos');

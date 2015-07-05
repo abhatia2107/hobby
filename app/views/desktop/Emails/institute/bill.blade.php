@@ -15,7 +15,7 @@
 					Dear {{$institute}},
 				</h1>
 				<p style="color:#000;">
-					You have received the payment of $total_amount from Hobbyix.com. Below are the payment details.
+					You have received the payment of {{$total_amount}} from Hobbyix.com. Below are the payment details.
 				</p>
 				<div style="background:#FAFDFE;border:2px solid #1E2C4F;display:inline-block;min-width:100%;overflow:hidden;border-radius:10px;">
 					<div style="background:#1E2C4F;padding:10px 5px; color:white">
@@ -34,19 +34,6 @@
 							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;"> Number of Sessions: {{$no_of_sessions}}</div>
 							<div style="width:100%;float:left;padding:5px 6px;">Amount: {{$amount}}</div>
 						</div>
-						<div style="max-width:47%;display:inline-block;float:left;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
-								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Category: {{$subcategory}}</div>
-								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Price per session: {{$price}}</div>
-								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Number of Sessions: {{$no_of_sessions}}</div>
-								<div style="width:100%;padding:5px 6px">Amount: {{$amount}}</div>
-						</div>							
-						<div style="max-width:47.5%;display:inline-block;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
-							<div style="width:100%;float:left;padding:5px 6px;border-bottom: 1px solid grey;">Category: {{$subcategory}}</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;"> Price per session: {{$price}}</div>
-							<div style="width:100%;float:left;padding:5px 6px 5px;border-bottom: 1px solid grey;"> Number of Sessions: {{$no_of_sessions}}</div>
-							<div style="width:100%;float:left;padding:5px 6px;">Amount: {{$amount}}</div>
-						</div>
-								
 					</div>
 				</div>	
 				<p>

@@ -147,11 +147,19 @@ class BookingsController extends \BaseController {
 										if(is_null($user->user_batch_id))
 										{
 											$user->user_batch_id=$credentials['batch_id'];
+											$membership = Membership::where('user_id',$user_id)->where('membership_type',1)->where('order_status','Success')->orderBy('created_at', 'desc')->first();
+											$membership->batch_id=$credentials['batch_id'];
+											$membership->save();
 										}	
 										else
 										{
 											if($user->user_batch_id!=$credentials['batch_id'])
+											{
+												$booking->order_status="batch_not_allowed";
+												$booking->save();
+												$booking->delete();
 												return Redirect::back()->with('failure',Lang::get('booking.batch_not_allowed'));
+											}
 										}
 									}
 									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
@@ -166,11 +174,19 @@ class BookingsController extends \BaseController {
 										if(is_null($user->user_batch_id))
 										{
 											$user->user_batch_id=$credentials['batch_id'];
+											$membership = Membership::where('user_id',$user_id)->where('membership_type',1)->where('order_status','Success')->orderBy('created_at', 'desc')->first();
+											$membership->batch_id=$credentials['batch_id'];
+											$membership->save();
 										}	
 										else
 										{
 											if($user->user_batch_id!=$credentials['batch_id'])
+											{
+												$booking->order_status="batch_not_allowed";
+												$booking->save();
+												$booking->delete();
 												return Redirect::back()->with('failure',Lang::get('booking.batch_not_allowed'));
+											}
 										}
 									}
 									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
@@ -524,22 +540,58 @@ class BookingsController extends \BaseController {
 
 	public function bill()
 	{
+		
 		$data = array(
-					'institute' => 1,
-					'location' => 1,
-					'locality' => 1,
-					'month' => 1,
-					'total_amount' => 1,
-					'subcategory' => 1,
-					'price' => 1,
-					'no_of_sessions' => 1,
-					'amount' => 1,
+					'institute' => 'Solid Fitness',
+					'location' => 'Hyderabad',
+					'locality' => 'Kondapur',
+					'month' => 'June 2015',
+					'total_amount' => '750',
+					'subcategory' => 'Gym',
+					'price' => '150',
+					'no_of_sessions' => '5',
+					'amount' => '750',
+					'payment_id' => '8971W6NJ',
 					'admin_contact_no' => '9100946081',
 					'admin_email' => 'jatin.bansal@hobbyix.com'
 					);
+		$subject='Payment settlement of June 2015 done between Solid Fitness and hobbyix.com';
+				/*	
+		$data = array(
+					'institute' => 'Akshar Wellness Center',
+					'location' => 'Hyderabad',
+					'locality' => 'Kondapur',
+					'month' => 'June 2015',
+					'total_amount' => '500',
+					'subcategory' => 'Yoga',
+					'price' => '125',
+					'no_of_sessions' => '4',
+					'amount' => '500',
+					'payment_id' => '8970W6NJ',
+					'admin_contact_no' => '9100946081',
+					'admin_email' => 'jatin.bansal@hobbyix.com'
+					);
+		$subject='Payment settlement of June 2015 done between Akshar Wellness Center and hobbyix.com';
+		*/
+		/*
+			$data = array(
+					'institute' => 'All Tym Fit',
+					'location' => 'Hyderabad',
+					'locality' => 'Gachibowli',
+					'month' => 'June 2015',
+					'total_amount' => '300',
+					'subcategory' => 'Zumba',
+					'price' => '150',
+					'no_of_sessions' => '2',
+					'amount' => '300',
+					'payment_id' => '8972W6NJ',
+					'admin_contact_no' => '9100946081',
+					'admin_email' => 'jatin.bansal@hobbyix.com'
+					);
+		$subject='Payment settlement of June 2015 done between All Tym Fit and hobbyix.com';
+		*/
 		$email=$data['admin_email'];
-		var_dump($email);
-		$subject='Booking Done';
+		// var_dump($email);
 		$response=Mail::queue('Emails.institute.bill', $data, function($message) use ($email,$subject)
 		{
 			$message->to($email)->bcc("abhishek.bhatia@hobbyix.com","Abhishek Bhatia")->subject($subject);

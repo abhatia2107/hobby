@@ -121,7 +121,7 @@
 @stop
 @section('pagejquery')
 <script type="text/javascript">	
-	var reviewModalStatus = false;
+	var reviewModalStatus = false;	
 	if(!reviewModalStatus)
 	{
 		reviewModalStatus = true; 

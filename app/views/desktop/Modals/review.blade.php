@@ -11,8 +11,13 @@
                 <div class="form-group row reviewInstituteName" id='rating-input'>                    
                     <div class="col-md-12 ratingInput" >
                         <input name="comment_rating" type="text" id="comment_rating" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false"  data-size="sm" required />                                
-                    </div>                                                                        
-                </div>               
+                    </div>                                                                                                        
+                    <div class="col-md-12 ratingInput">
+                        <button class="btn btn-primary booknowButton">Didn't Attend The Class</button>
+                        
+                    </div>
+                </div>    
+
                 <div class="form-group row">
                     <div class="col-md-12">                    
                         <textarea class="form-control" rows="4" name='comment' id="comment" placeholder="Tell others what you think about this institute. Would you recommend it and why?"></textarea>

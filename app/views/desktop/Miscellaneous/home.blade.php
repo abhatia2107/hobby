@@ -122,6 +122,7 @@
 @section('pagejquery')
 <script type="text/javascript">	
 	var reviewModalStatus = false;
+	alert(reviewModalStatus);
 	if(!reviewModalStatus)
 	{
 		reviewModalStatus = true; 

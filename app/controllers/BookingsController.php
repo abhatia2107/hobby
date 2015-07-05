@@ -247,7 +247,6 @@ class BookingsController extends \BaseController {
 		}
         return Illuminate\Support\Facades\Redirect::to('/bookings/success/'.$booking->id);
 		// return View::make('Bookings.success',compact($facebookContent))->with($data);
-		// return View::make('Bookings.success')->with($facebookContent)->with($data);
 	}
 
 	public function payment($id)
@@ -523,26 +522,18 @@ class BookingsController extends \BaseController {
 		});
 	}
 
-
-	public function RandomSMS($mobile, $msg)
-	{
-		static $smsObject;
-        require app_path().'/plivo/plivo.php';
-	 	$auth_id = "MANDE2YZJLMWNKYMEXMZ";
-	    $auth_token = "MTdhYzc2MTg4MzQzMTgwZjk0NzJlNTM3MDk1NGEz";
-	    $smsObject = new \RestAPI($auth_id, $auth_token);
-	    $params = array(
-	            'src' => 'HBXSMS',
-	            'dst' => '91'.$mobile,
-	            'text' => $msg,
-	            'type' => 'sms',
-	        );
-	    $smsObject->send_message($params);
-	    // var_dump($params);
-	}
-	public function RandomMail()
+	public function bill()
 	{
 		$data = array(
+					'institute' => 1,
+					'location' => 1,
+					'locality' => 1,
+					'month' => 1,
+					'total_amount' => 1,
+					'subcategory' => 1,
+					'price' => 1,
+					'no_of_sessions' => 1,
+					'amount' => 1,
 					'admin_contact_no' => '9100946081',
 					'admin_email' => 'jatin.bansal@hobbyix.com'
 					);

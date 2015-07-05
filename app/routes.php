@@ -316,10 +316,12 @@
 		return Redirect::to('/');
 	});
 
-
-
-	Route::get('/RandomSMS/{mobile}/{msg}', 'BookingsController@RandomSMS');
-	Route::get('/RandomMail', 'BookingsController@RandomMail');
+	Route::group(array('before' => "admin"), function() {
+		Route::resource('messages', 'MessagesController');
+		Route::get('messages/delete/{id}', 'MessagesController@destroy');
+	});
+	
+	Route::get('/bill', 'BookingsController@bill');
 
 	// JSON routes.
 

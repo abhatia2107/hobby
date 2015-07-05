@@ -245,9 +245,9 @@ class MembershipsController extends \BaseController {
 		$user->user_credits_left=$membership->credits;
 		$user->user_credits_expiry=$membership->end_date;
 		$user->user_membership_purchased=1;
-		$user->user_membership_type=1;
+		$user->user_membership_type=$membership->membership_type;
 		$user->save();
-		// $this->sms_email($membership->id);
+		$this->sms_email($membership->id);
 		return Illuminate\Support\Facades\Redirect::to('/memberships/success/'.$membership->id);
 		// return View::make('Memberships.success')->with($data);
 	}

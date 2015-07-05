@@ -27,7 +27,7 @@
             <div class="modal-footer">                                               
                 <button type="submit" id="didntAttendButton"  class="btn btn-danger">Didn't Attend The Class</button>                        
             </div>
-        </form>        
+        </form>
     </div>
 </div>
 @show

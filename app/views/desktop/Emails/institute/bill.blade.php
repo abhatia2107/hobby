@@ -15,7 +15,7 @@
 					Dear {{$institute}},
 				</h1>
 				<p style="color:#000;">
-					You have received the payment of $amount from Hobbyix.com. Below are the payment details.
+					You have received the payment of $total_amount from Hobbyix.com. Below are the payment details.
 				</p>
 				<div style="background:#FAFDFE;border:2px solid #1E2C4F;display:inline-block;min-width:100%;overflow:hidden;border-radius:10px;">
 					<div style="background:#1E2C4F;padding:10px 5px; color:white">
@@ -26,7 +26,7 @@
 								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Institute Name : {{$institute}}</div>
 								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Address:  {{$locality.', '.$location}}</div>
 								<div style="width:100%;padding:5px 6px;border-bottom: 1px solid grey;">Payment Done for: {{$month}}</div>
-								<div style="width:100%;padding:5px 6px;">Total Amount Paid: {{$amount}}</div>
+								<div style="width:100%;padding:5px 6px;">Total Amount Paid: {{$total_amount}}</div>
 						</div>							
 						<div style="max-width:47.5%;display:inline-block;width:100%;border: 2px solid grey;margin:1%;overflow:hidden;border-radius:10px">
 							<div style="width:100%;float:left;padding:5px 6px;border-bottom: 1px solid grey;">Category: {{$subcategory}}</div>

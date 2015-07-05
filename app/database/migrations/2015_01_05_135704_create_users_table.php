@@ -31,6 +31,8 @@ class CreateUsersTable extends Migration {
 			$table->date('user_credits_expiry')->nullable();
 			$table->integer('user_favorite')->nullable();
 			$table->integer('user_wallet')->default(0);
+			$table->boolean('user_membership_type')->default(0);
+			$table->integer('user_batch_id')->nullable();
 			$table->integer('user_pending_referral')->default(0);
 	        $table->boolean('user_membership_purchased')->default(0);
 	        $table->softDeletes();

@@ -9,10 +9,11 @@ $(document).ready(function () {
 			instituteID = $form.find( "input[name='comment_institute_id']" ).val(),
 			rating = $form.find( "input[name='comment_rating']" ).val(),
 			comment = $form.find( "textarea[name='comment']" ).val(),
-			url = $form.attr( "action" );			
+			url = $form.attr( "action" );
 			var submitForm = $.post( url, { csrf_token: csrfToken, comment_institute_id:instituteID,
 			 comment_rating:rating,comment:comment } );			 
-			submitForm.done(function( data ) {							 				
+			submitForm.done(function( data ) {
+				// alert(data);				 				
 			});
 			$('#reviewModal').modal('hide');
 		}		

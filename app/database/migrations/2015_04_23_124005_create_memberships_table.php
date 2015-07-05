@@ -18,6 +18,8 @@ class CreateMembershipsTable extends Migration {
 			$table->integer('credits');
 			$table->date('start_date');
 			$table->date('end_date');
+			$table->boolean('membership_type')->default(0);
+			$table->integer('batch_id')->nullable();
 			$table->integer('user_id')->unsigned()->foreign('user_id')->references('id')->on('users');
 			$table->integer('payment');
 			$table->string('order_id',8);

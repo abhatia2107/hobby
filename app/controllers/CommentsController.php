@@ -47,6 +47,7 @@ class CommentsController extends \BaseController {
 		}
 		$credentials['comment_user_id']=$user_id;
 		$referrer = URL::previous();
+		$referrer = rtrim($referrer,"/");
 		if($user_id && ($referrer==url('/')))
 		{
 			$booking = Booking::where('user_id',$user_id)->where('booking_date','<',date('Y-m-d'))->where('order_status','success')->orderBy('created_at', 'desc')->first();

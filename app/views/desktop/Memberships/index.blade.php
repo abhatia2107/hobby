@@ -2,7 +2,7 @@
 
 @section('pagestylesheet')
 	<style type="text/css">
-		.membership_page_container { margin-top: 20px; font-family: 'Open Sans',sans-serif;color: #333;	}
+		.membership_page_container { margin-top: 20px; font-family: 'Open Sans',sans-serif;color: #333;}
 
 		.membership_page_item {padding: 0px 14px;}
 
@@ -30,7 +30,7 @@
 
 		@media (min-width: 920px) { .get_membership li {padding: 0 20px}}
 
-		.membership_card_container input[type=text] { height: 25px; padding: 0px 0px 0px 5px; width: 90%; border-radius: 2px; }		
+		.membership_card_container input[type=text] { height: 25px; padding: 0px 0px 0px 5px; width: 90%; border-radius: 2px; }
 
 		.get_membership hr {margin: 10px 15px 5px 15px;}
 
@@ -42,7 +42,7 @@
 		<div class="col-lg-12 col-md-12 maz_pad_z">
 			<div class="col-lg-4 col-xs-12 col-md-5 col-sm-6 membership_page_item">
 				<div class="membership_card_container">
-					<div class="membership_card"></div>					
+					<div class="membership_card"></div>
 					<div class="membership_card_details"></div>
 				</div>
 				<div class="membership_card_container get_membership" style="padding-bottom:15px">
@@ -53,10 +53,16 @@
 						<form method="post" enctype="multipart/form-data" action="/memberships" id="buyMembershipForm">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 							<input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span>: {{$credentials['credits']}}</span></li>
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Type</span><span>:
+								<select id="membership_type" name="membership_type" required="required">
+		                            <option value=0>Flexi class</option>
+		                            <option value=1>Flexi Time</option>
+	                    		</select>
+							</span></li>
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span id="credit">: {{$credentials['credits0']}}</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['price']}}/-</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span>: {{$credentials['end']}}</span></li>
+							<li class="col-md-12"><span class="col-md-6 col-sm-6">Expiry Date</span><span id="end">: {{$credentials['end0']}}</span></li>
 							<li class="col-md-12" @if($credentials['wallet_amount']>0) style="display:block" @else style="display:none" @endif >
 								<span class="col-md-6 col-sm-6">Hobbyix Wallet</span><span>: Rs. {{$credentials['wallet_amount']}}/-</span>
 							</li>
@@ -70,26 +76,40 @@
           						<div class='col-md-2 col-sm-2' id="promoCodeMessageContainer" style="text-align:left;padding:1px 0px 0px 0px;font-size:15px;color:green">
 				                   <a onclick="verifyPromoCode();" href="javascript:void(0);">Apply</a>
           						</div>          
-        					</li>        					
-        					<li class="col-md-12" style="text-align:center"><hr/>Amount Payable<span id="orderTotal">: Rs. {{$credentials['payment']}}/-</span></li>								     
-							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" id="membership_pay">Pay Now</button></div>							
+        					</li>
+        					<li class="col-md-12" style="text-align:center"><hr/>Amount Payable<span id="orderTotal">: Rs. {{$credentials['payment']}}/-</span></li>
+							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" id="membership_pay">Pay Now</button></div>
 						</form>
 					</div>
-				</div>				
+				</div>
 			</div>
 			<div class="col-lg-8 col-xs-12 col-md-7 col-sm-6 membership_page_item">
 				<div class="membership_features_container">
 					<h1 class="header">
-						Hobbyix Membership Features
+						Hobbyix Flexi Class Membership Features
 					</h1>
 					<ul class="membership_features">
-						<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of fitness activities with Hobbyix Membership</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of fitness activities for a month with Hobbyix Flexi Class Membership</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>There is no limit on how many types of activities you indulge in</li>
-						<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>							
+						<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>You will get 30 credits in your account. Each class is of 1 credit except a few which could be of 2-3 credits</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>You can book a maximum of 1 class per day</li>
-					</ul>					
-				</div>				
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-8 col-xs-12 col-md-7 col-sm-6 membership_page_item">
+				<div class="membership_features_container">
+					<h1 class="header">
+						Hobbyix Flexi Time Membership Features
+					</h1>
+					<ul class="membership_features">
+						<li><span class="glyphicon glyphicon-hand-right"></span>Access to one fitness activity for two months with Hobbyix Flexi Time Membership</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>You can go to only one type of activity in a single fitness center of your choice</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>You will get 25 credits in your account</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>You can book a maximum of 1 class per day</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="space_for_footer"></div>
@@ -100,18 +120,18 @@
 	<script type="text/javascript">
 		var loginStatus = "{{$loggedIn}}";
 		var formValidationStatus = false;
-		var oldPromoCode = "";			   	
+		var oldPromoCode = "";	
 		function verifyPromoCode (condition) 
-		{	
-			formValidationStatus = false;								
+		{
+			formValidationStatus = false;
 			$('#promoCodeContainer #statusMessage').empty();
       		var promoCode = $("#promoCode").val();
-      		var conditionMessage = "";      		
+      		var conditionMessage = ""; 		
       		if(condition == "onDirectApply")
       			conditionMessage = ". Click on Pay Now";
 			if(promoCode != "" )
 			{
-				oldPromoCode = promoCode;   				
+				oldPromoCode = promoCode;
 				$.get("/promos/isvalid/"+promoCode,function(response)
 				{ 
 					if($.isNumeric(response['price']))
@@ -122,23 +142,40 @@
 			            $('#walletBalance').empty();  
 			            $('#walletBalance').append(": Rs. "+response['wallet_balance']+"/-");
 						$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied"+conditionMessage+"</span>");
-						formValidationStatus = true; 						
+						formValidationStatus = true;
 					}
 					else
 					{
 						$('#orderTotal').empty();  
 						$('#orderTotal').append(": Rs. "+{{$credentials['payment']}}+"/-");
-						$('#payment').val({{$credentials['payment']}});						
+						$('#payment').val({{$credentials['payment']}});
 						$('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
 					}
-				});										
-			} 			
-			else if (condition != "onDirectApply" )			
-				$('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");																	
-			return formValidationStatus;			
+				});
+			}
+			else if (condition != "onDirectApply" )
+				$('#promoCodeContainer').append("<span id='statusMessage'>Please Enter Promo Code</span>");
+			return formValidationStatus;
    		}    		
    		$(document).ready(function () 
-   		{   		
+   		{   
+   			$('#membership_type').on('change', function() {
+				var type = this.value; // or $(this).val()
+				if(type==0)
+				{
+					$('#credit').empty();  
+					$('#credit').append(': {{$credentials['credits0']}}');
+					$('#end').empty();  
+					$('#end').append(': {{$credentials['end0']}}');
+				}
+				else
+				{
+					$('#credit').empty();  
+					$('#credit').append(': {{$credentials['credits1']}}');
+					$('#end').empty();  
+					$('#end').append(': {{$credentials['end1']}}');
+				}
+			});		
 			$('#membership_pay').click(function(e)
 	        {
 	          if(loginStatus=="")
@@ -149,9 +186,9 @@
 	          }
 	          else
 	          {
-	          	var promoCode = $("#promoCode").val();      	
+	          	var promoCode = $("#promoCode").val();
 	          	if(promoCode != "")
-				{				
+				{
 					if(oldPromoCode != promoCode || formValidationStatus==false)
 					{
 	          			e.preventDefault();

@@ -54,6 +54,7 @@ class HomeController extends BaseController {
 				}
 			}
 		}
+		// dd($booking);
 		$homeLang =Lang::get('ViewsLang/home');
 		return View::make('Miscellaneous.home',compact('homeLang','featuredBatches','institutes','subcategories','localities','favorite','booking_institute'));
 	}

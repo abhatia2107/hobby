@@ -13,12 +13,15 @@ class MembershipsController extends \BaseController {
 		$metaContent[0] = "Hobbyix Membership :: Hobbyix";
 		$metaContent[1] = "One Hobbyix Membership @Rs. 1999/- & workout at any gym, yoga, fitness centers etc. in Hyderabad";
 		$metaContent[2] = "Hobbyix Membership, Hobbyix Membership Features, Get Your Hobbyix Membership";
-		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
+		$end_date0=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
+		$end_date1=strtotime((Carbon::now()->addDays(59)->toDateTimeString()));
 		$credentials['price']=$this->membershipVal['payment'];
 		$credentials['payment']=$credentials['price'];
 		$credentials['start']=date('d M Y');
-		$credentials['end']=date('d M Y', $end_date);
-		$credentials['credits']=$this->membershipVal['credits'];
+		$credentials['end0']=date('d M Y', $end_date0);
+		$credentials['end1']=date('d M Y', $end_date1);
+		$credentials['credits0']=$this->membershipVal['credits0'];
+		$credentials['credits1']=$this->membershipVal['credits1'];
 		$credentials['wallet_amount']=0;
 		$credentials['wallet_balance']=0;
 		$user_id=Auth::id();
@@ -115,22 +118,30 @@ class MembershipsController extends \BaseController {
 				}
 			}
 		}
-		$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
 		$credentials['start_date']=date('Y-m-d');
-		$credentials['end_date']=date('Y-m-d',$end_date);
-		$credentials['credits']=$this->membershipVal['credits'];		
+		if($credentials['membership_type']==0)
+		{
+			$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
+			$credentials['end_date']=date('Y-m-d',$end_date);
+			$credentials['credits']=$this->membershipVal['credits0'];		
+		}
+		else
+		{
+			$end_date=strtotime((Carbon::now()->addDays(59)->toDateTimeString()));
+			$credentials['end_date']=date('Y-m-d',$end_date);
+			$credentials['credits']=$this->membershipVal['credits1'];		
+		}
 		$validator = Validator::make($credentials, Membership::$rules);
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
 		unset($credentials['csrf_token']);
-		$credentials['credits']=30;
 		$credentials['order_id']=substr(uniqid(),0,8);
 		$credentials['user_id']=Auth::id();
 		if($credentials['payment']==0)
 		{
-			$credentials['order_status']='success';
+			$credentials['order_status']='Success';
 		}
 		$membership=Membership::create($credentials);
 		if($credentials['payment']==0)
@@ -234,8 +245,9 @@ class MembershipsController extends \BaseController {
 		$user->user_credits_left=$membership->credits;
 		$user->user_credits_expiry=$membership->end_date;
 		$user->user_membership_purchased=1;
+		$user->user_membership_type=1;
 		$user->save();
-		$this->sms_email($membership->id);
+		// $this->sms_email($membership->id);
 		return Illuminate\Support\Facades\Redirect::to('/memberships/success/'.$membership->id);
 		// return View::make('Memberships.success')->with($data);
 	}

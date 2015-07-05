@@ -100,7 +100,7 @@ class BookingsController extends \BaseController {
 			unset($credentials['pay_cc']);
 			if($credentials['payment']==0)
 			{
-				$credentials['order_status']='success';
+				$credentials['order_status']='Success';
 			}
 			$booking = Booking::create($credentials);
 			if($booking)
@@ -119,8 +119,8 @@ class BookingsController extends \BaseController {
 			unset($credentials['pay_hobbyix']);
 			$credentials['credit_used']=$batch->batch_credit;
 			$user=User::find($credentials['user_id']);
-			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->where('order_status','success')->where('credit_used','>',0)->first();
-			$batch_booking_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->where('order_status','success')->first();
+			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->where('order_status','Success')->where('credit_used','>',0)->first();
+			$trial_booked_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->where('order_status','Success')->first();
 			if($credentials['no_of_sessions']==1){
 				if(($user->user_free_credits_left>=$credentials['credit_used'])||($user->user_credits_left>=$credentials['credit_used'])){
 					if(!$booking_already_done){
@@ -131,7 +131,7 @@ class BookingsController extends \BaseController {
 						// dd($credentials);
 						$booking = Booking::create($credentials);
 						if($booking){
-							if(!$batch_booking_already){
+							if(!$trial_booked_already){
 								if($user->user_free_credits_left>=$credentials['credit_used']){
 									$user->user_free_credits_left=$user->user_free_credits_left-$credentials['credit_used'];
 									$user->save();
@@ -142,6 +142,18 @@ class BookingsController extends \BaseController {
 									$this->sms_email_trial($booking->id);
 								}
 								else{
+									if($user->user_membership_type==1)
+									{
+										if(is_null($user->user_batch_id))
+										{
+											$user->user_batch_id=$credentials['batch_id'];
+										}	
+										else
+										{
+											if($user->user_batch_id!=$credentials['batch_id'])
+												return Redirect::back()->with('failure',Lang::get('booking.batch_not_allowed'));
+										}
+									}
 									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
 									$user->save();
 									$this->sms_email($booking->id);
@@ -149,18 +161,30 @@ class BookingsController extends \BaseController {
 							}
 							else{
 								if($user->user_credits_left>=$credentials['credit_used']){
+									if($user->user_membership_type==1)
+									{
+										if(is_null($user->user_batch_id))
+										{
+											$user->user_batch_id=$credentials['batch_id'];
+										}	
+										else
+										{
+											if($user->user_batch_id!=$credentials['batch_id'])
+												return Redirect::back()->with('failure',Lang::get('booking.batch_not_allowed'));
+										}
+									}
 									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
 									$user->save();
 									$this->sms_email($booking->id);
 								}
 								else{
-									$booking->order_status="batch_booking_already";
+									$booking->order_status="trial_fail";
 									$booking->save();
 									$booking->delete();
-									return Redirect::back()->with('failure',Lang::get('booking.batch_booking_already'));
+									return Redirect::back()->with('failure',Lang::get('booking.trial_booked_already'));
 								}
 							}
-							$booking->order_status="success";
+							$booking->order_status="Success";
 							$booking->save();
 							$batch=$this->batch->getBatch($booking->batch_id);
 							$batch->batch_bookings=$batch->batch_bookings+1;

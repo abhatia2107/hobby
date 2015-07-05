@@ -18,9 +18,12 @@
                         <textarea class="form-control" rows="4" name='comment' id="comment" placeholder="Tell others what you think about this fitness center. Would you recommend it and why?"></textarea>
                     </div>
                 </div>                
+                <div class="text-center">
+                    <button type="submit" class="booknowButton btn btn-primary">Submit</button>                            
+                </div>
             </div>                        
-            <div class="modal-footer">                               
-                 <button type="submit" class="booknowButton btn btn-primary">Submit</button>                            
+            <div class="modal-footer"> 
+                <button type="submit" id="didntAttendButton"  class="btn btn-danger">Didn't Attend The Class</button>                                               
             </div>
         </form>        
     </div>

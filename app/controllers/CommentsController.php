@@ -46,18 +46,26 @@ class CommentsController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 		$credentials['comment_user_id']=$user_id;
-		$comment=Comment::create($credentials);
-		if($user_id)
+		$referrer = URL::previous();
+		if($user_id && ($referrer==url('/')))
 		{
-			$booking = Booking::where('user_id', $user_id)->orderBy('created_at', 'desc')->first();
+			$booking = Booking::where('user_id',$user_id)->where('booking_date','<',date('Y-m-d'))->where('order_status','success')->orderBy('created_at', 'desc')->first();
 			if($booking)
 			{
 				if(!$booking->reviewed)
 				{
 					$booking->reviewed = true;
-					$booking->save();
 				}
+				if(!$credentials['comment_rating'])
+				{
+					$booking->attended = false;
+				}
+				$booking->save();
 			}
+		}
+		if($credentials['comment_rating'])
+		{
+			$comment=Comment::create($credentials);
 		}
 		return Redirect::back()->with('success',Lang::get('comment.comment_created'));
 	}

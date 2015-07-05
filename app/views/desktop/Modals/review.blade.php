@@ -15,9 +15,9 @@
                 </div>               
                 <div class="form-group row">
                     <div class="col-md-12">                    
-                        <textarea class="form-control" rows="4" name='comment' id="comment" placeholder="Tell others what you think about this institute. Would you recommend it and why?"></textarea>
+                        <textarea class="form-control" rows="4" name='comment' id="comment" placeholder="Tell others what you think about this fitness center. Would you recommend it and why?"></textarea>
                     </div>
-                </div>                
+                </div>
             </div>                        
             <div class="modal-footer">                               
                  <button type="submit" class="booknowButton btn btn-primary">Submit</button>                            

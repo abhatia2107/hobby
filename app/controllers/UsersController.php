@@ -236,7 +236,8 @@ class UsersController extends \BaseController {
 			|
 			*/
 			//$data=$this->user->getid(Input::get('email'));
-    		return Redirect::intended('/')/*->with('success','Welcome '.$userDetails['user_name'])*/;
+    		// return Redirect::intended('/')/*->with('success','Welcome '.$userDetails['user_name'])*/;
+			return Redirect::back();
 		}
 		else
 		{
@@ -266,7 +267,7 @@ class UsersController extends \BaseController {
 		Auth::logout();
 		Session::flush();
     	// Session::flash('success', Lang::get('user.logout'));
-    	return Redirect::to("/");
+    	return Redirect::back();
 	}
 
 	/**

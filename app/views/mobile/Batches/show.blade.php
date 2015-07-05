@@ -305,7 +305,7 @@
         <div id="comments" class="sample-box ">
           <div class='sample_box_title'>Write a Review</div>
           <div class="sample_box_data">          
-            <form  action='/comments/store/' method='post' id="commentsForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">            
+            <form  action='{{secure_url('/comments/store/')}}' method='post' id="commentsForm" enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">            
               <div class="form-group reviewInstituteName" id='rating-input'>
                   <div class="ratingInput">
                     <input id="comment_rating" name="comment_rating" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false"  data-size="xs" >
@@ -313,7 +313,7 @@
               </div>  
               <div class="form-group" id="ReviewForm">
                 <label for="comment">Review:</label>
-                <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
+                <textarea class="form-control" rows="4" name='comment' id="comment" placeholder="Tell others what you think about this fitness center. Would you recommend it and why?"></textarea>
               </div>
               <div class="review_submit_button">
                 @if($loggedIn)

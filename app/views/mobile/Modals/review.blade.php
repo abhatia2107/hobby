@@ -15,7 +15,7 @@
                 </div>               
                 <div class="form-group row">
                     <div class="col-xs-12">                        
-                        <textarea class="form-control" rows="4" name='comment' id="comment" placeholder="Tell others what you think about this institute. Would you recommend it and why?"></textarea>
+                        <textarea class="form-control" rows="4" name='comment' id="comment" placeholder="Tell others what you think about this fitness center. Would you recommend it and why?"></textarea>
                     </div>
                 </div>                
             </div>                        

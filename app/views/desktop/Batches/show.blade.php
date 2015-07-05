@@ -192,17 +192,18 @@
         <div id="comments" class="sample-box">
           <div class="row">
           <div class='sample-batch-name'>Write a Review</div>
-          <form onsubmit="return(validateReviewForm())" action='/comments/store/' enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
+          <form onsubmit="return(validateReviewForm())" action='{{secure_url('/comments/store/')}}' enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate="">
+          <!-- <form onsubmit="return(validateReviewForm())" action='/comments/store/' enctype="multipart/form-data" method="post" id="commentform" class="comment-form details-container" novalidate=""> -->
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" name="comment_institute_id" value="{{$batchDetails->batch_institute_id}}">
             <div class="form-group col-md-12 col-sm-12 col-xs-12 reviewInstituteName" id='rating-input'>
                 <div class="ratingInput">
-                <input name="comment_rating" type="text" id="comment_rating" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false"  data-size="sm" required />                                                                                          
+                  <input name="comment_rating" type="text" id="comment_rating" class="rating" data-min="0" data-max="5" data-step="1" data-show-clear="false"  data-size="sm" required />
                 </div>                
             </div>  
             <div class="form-group col-md-12" id="ReviewForm">
               <label for="comment">Review:</label>
-              <textarea class="form-control" rows="3" name='comment' id="comment" required='required'></textarea>
+              <textarea class="form-control" rows="4" name='comment' id="comment" placeholder="Tell others what you think about this fitness center. Would you recommend it and why?"></textarea>
             </div>
             <div class="form-group col-md-12" >
             @if($loggedIn)

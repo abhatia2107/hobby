@@ -246,6 +246,7 @@ class BatchesController extends \BaseController {
 				else
 					$credentials['payment']=$credentials['price'];
 			}
+			// dd($institutesOfSubcategoryInLocality[0]);
 			// dd($facebookContent);
 			// dd($credentials);
 			return View::make('Batches.show',compact('batchDetails','credentials','user','metaContent', 'facebookContent','batchesOfInstitute','institutesOfSubcategoryInLocality','subcategoriesInLocality'));

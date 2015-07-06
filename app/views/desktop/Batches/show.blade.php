@@ -322,7 +322,7 @@
            @for(;$index<$maxlength; $index++ )
             <ul class="col-md-3 col-sm-3 col-xs-6">           
               <li title="{{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}, {{$batchesOfInstitute[$index]->locality}} - {{$batchesOfInstitute[$index]->location}}">
-                <a class="text_over_flow_hide" href="/batch/{{$batchesOfInstitute[$index]->id}}">
+                <a class="text_over_flow_hide" href="/batch/{{$batchesOfInstitute[$index]->batch}}">
                   {{$batchesOfInstitute[$index]->subcategory}}, {{$batchesOfInstitute[$index]->institute}}
                 </a>
               </li>
@@ -340,7 +340,7 @@
           @for(;$index<$maxlength; $index++ )
             <ul class="col-md-3 col-sm-3 col-xs-6">            
               <li title="{{$institutesOfSubcategoryInLocality[$index]->institute}}">
-                <a class="text_over_flow_hide" href="/filter/{{$institutesOfSubcategoryInLocality[$index]->id}}">
+                <a class="text_over_flow_hide" href="/filter/{{$institutesOfSubcategoryInLocality[$index]->institute_url}}">
                   {{$institutesOfSubcategoryInLocality[$index]->institute}}
                 </a>
               </li>
@@ -358,7 +358,7 @@
           @for(; $index<$maxlength; $index++ )
             <ul class="col-md-3 col-sm-3 col-xs-6">            
                 <li title="{{$subcategoriesInLocality[$index]->subcategory}} classes in {{$batchDetails->locality}}">
-                  <a class="text_over_flow_hide" href="/filter/{{$subcategoriesInLocality[$index]->id}}/{{$batchDetails->venue_locality_id}}">
+                  <a class="text_over_flow_hide" href="/filter/{{$subcategoriesInLocality[$index]->subcategory}}/{{$batchDetails->locality_url}}">
                     {{$subcategoriesInLocality[$index]->subcategory}} classes in {{$batchDetails->locality}}
                   </a> 
                 </li>

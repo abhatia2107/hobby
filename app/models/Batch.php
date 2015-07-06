@@ -300,7 +300,7 @@ class Batch extends \Eloquent {
                         ->where('venue_locality_id',$venue_locality_id)
                         ->Join('institutes','institutes.id','=','batches.batch_institute_id')
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
-                        ->select('institutes.id as id','institute')
+                        ->select('institutes.id as id','institute','institute_url')
                         ->take(12)
                         ->get();
     }

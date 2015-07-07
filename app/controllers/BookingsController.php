@@ -147,6 +147,7 @@ class BookingsController extends \BaseController {
 										if(is_null($user->user_batch_id))
 										{
 											$user->user_batch_id=$credentials['batch_id'];
+											$user->user_favorite=$credentials['batch_id'];
 											$membership = Membership::where('user_id',$user_id)->where('membership_type',1)->where('order_status','Success')->orderBy('created_at', 'desc')->first();
 											$membership->batch_id=$credentials['batch_id'];
 											$membership->save();
@@ -174,6 +175,7 @@ class BookingsController extends \BaseController {
 										if(is_null($user->user_batch_id))
 										{
 											$user->user_batch_id=$credentials['batch_id'];
+											$user->user_favorite=$credentials['batch_id'];
 											$membership = Membership::where('user_id',$user_id)->where('membership_type',1)->where('order_status','Success')->orderBy('created_at', 'desc')->first();
 											$membership->batch_id=$credentials['batch_id'];
 											$membership->save();

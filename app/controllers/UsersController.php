@@ -307,7 +307,7 @@ class UsersController extends \BaseController {
             else
             {
                 $newUserData['user_referee_id']=$referee->id;
-                $newUserData['user_wallet']=100;
+                $newUserData['user_wallet']=$this->referral_amount;
             }
 		}
 		unset($newUserData['user_referee_code']);
@@ -342,7 +342,7 @@ class UsersController extends \BaseController {
             
             if(isset($referee))
             {
-                $referee->user_pending_referral=$referee->user_pending_referral+100;
+                $referee->user_pending_referral=$referee->user_pending_referral+$this->referral_amount;
                 $referee->save();
                 $name = $referee->user_name;
                 $email = $referee->email;
@@ -517,7 +517,7 @@ class UsersController extends \BaseController {
 		/*} catch(FacebookRequestException $ex) {
 		  // When Facebook returns an error
 		} catch(\Exception $ex) {
-			dd("test");
+		  // dd("test");
 		  // When validation fails or other local issues
 		}
 		*/

@@ -53,17 +53,25 @@ class Subcategory extends \Eloquent {
 
     public function getSubcategoryInLocality($venue_locality_id)
     {
+        // dd($venue_locality_id);
         $sub=Batch::where('venue_locality_id',$venue_locality_id)
                         ->Join('venues', 'venues.id', '=', 'batches.batch_venue_id')
                         ->select('batch_subcategory_id')
                         ->lists('batch_subcategory_id');
         $subcategories = array_unique($sub);
-        // dd($subcategories[4]->batch_subcategory_id);
-        return Subcategory::whereIn('subcategories.id',$subcategories)
+        // dd($subcategories[0]->batch_subcategory_id);
+        if($subcategories)
+        {
+            return Subcategory::whereIn('subcategories.id',$subcategories)
                         ->select('id','subcategory')
                         ->take(12)
                         ->get()
                         ->sortBy('subcategory');
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public function getSubcategoryForInstitute($institute_id)
@@ -74,11 +82,18 @@ class Subcategory extends \Eloquent {
                         ->lists('batch_subcategory_id');
         $subcategories = array_unique($sub);
         // dd($subcategories[4]->batch_subcategory_id);
-        return Subcategory::whereIn('subcategories.id',$subcategories)
+        if($subcategories)
+        {
+            return Subcategory::whereIn('subcategories.id',$subcategories)
                         ->select('id','subcategory')
                         ->take(12)
                         ->get()
                         ->sortBy('subcategory');
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public function disableSubcategoriesForCategory($subcategory_category_id)

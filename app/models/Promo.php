@@ -46,9 +46,10 @@ class Promo extends \Eloquent {
 
 	public function scopeExpired($query)
 	{
+		// dd($query->first());
 		return $query
 		->where('valid_till','<',Carbon::now())
-		->OrwhereRaw('count >= max_allowed_count');
+		->whereRaw('count >= max_allowed_count');
 	}
 
 	public function codeUsedByUser($promo,$user_id)

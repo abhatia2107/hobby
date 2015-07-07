@@ -48,11 +48,18 @@ class Locality extends \Eloquent {
                         ->select('venue_locality_id')
         				->lists('venue_locality_id');
         $localities=array_unique($loc);
-        return Locality::whereIn('localities.id', $localities)
+        if($localities)
+        {
+        	return Locality::whereIn('localities.id', $localities)
         				->select('id','locality')
         				->take(12)
         				->get()
         				->sortBy('locality');
+		}
+		else
+		{
+            return null;
+		}
 	}
 
 	public function getAllLocalities()

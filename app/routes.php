@@ -165,7 +165,7 @@
 	Route::post('/memberships/cancel','MembershipsController@cancel');
 	Route::get('/memberships/payment/{id}','MembershipsController@payment');
 
-	Route::get('/promos/isvalid/{promo_code?}/{no_of_session?}','PromosController@isValid');
+	Route::get('/promos/isvalid/{promo_code?}/{no_of_session?}/{type?}','PromosController@isValid');
 
 	Route::group(array('before' => "auth|admin"), function() {
 

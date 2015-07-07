@@ -43,9 +43,9 @@ class BaseController extends Controller {
 									'subscriptions' => 'Subscriptions',
 									'users' => 'Users', 
 								);
-	protected $bcc_email='abhishek.bhatia@hobbyix.com';
-	protected $bcc_name='Abhishek Bhatia';
-
+	protected $bcc_email = 'abhishek.bhatia@hobbyix.com';
+	protected $bcc_name = 'Abhishek Bhatia';
+	protected $referral_amount = 100;
 	protected $location_id=1;
 	protected $category_id=1;
 	/**

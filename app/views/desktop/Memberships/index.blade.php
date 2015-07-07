@@ -126,13 +126,14 @@
 			formValidationStatus = false;
 			$('#promoCodeContainer #statusMessage').empty();
       		var promoCode = $("#promoCode").val();
+      		var type = $("#membership_type").val();
       		var conditionMessage = ""; 		
       		if(condition == "onDirectApply")
       			conditionMessage = ". Click on Pay Now";
 			if(promoCode != "" )
 			{
 				oldPromoCode = promoCode;
-				$.get("/promos/isvalid/"+promoCode,function(response)
+				$.get("/promos/isvalid/"+promoCode+"/1/"+type,function(response)
 				{ 
 					if($.isNumeric(response['price']))
 					{

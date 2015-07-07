@@ -137,9 +137,8 @@ class PromosController extends \BaseController {
 	 * @param  string  $promo_code
 	 * @return boolean            [description]
 	 */
-	public function isValid($promo_code="",$no_of_session="1")
-	{
-		
+	public function isValid($promo_code="",$no_of_session="1",$type="0")
+	{	
 		if(!$promo_code)
 			return Lang::get('promo.promo_empty');
 		$referrer = URL::previous();
@@ -174,7 +173,14 @@ class PromosController extends \BaseController {
 				if($promo->coupon_valid_on_single_class)
 				{
 					return Lang::get('promo.promo_not_applicable');
-				}	
+				}
+				if(isset($promo->coupon_valid_on_type))
+				{
+					if ($promo->coupon_valid_on_type!=$type) 
+					{
+						return Lang::get('promo.promo_not_applicable');
+					}
+				}
 			}
 			$user_id=Auth::id();
 			if(isset($promo->max_allowed_count_per_user))
@@ -220,10 +226,11 @@ class PromosController extends \BaseController {
 		}
 		else
 		{
-			$expired=Promo::where('promo_code','=',$promo_code)->expired()->first();
-			if($expired)
+			$promo=Promo::where('promo_code',$promo_code)->first();
+			if(isset($promo))
 			{
-				return Lang::get('promo.promo_expired');
+				if(($promo->valid_till<Carbon::now())||($promo->count >= $promo->max_allowed_count))
+					return Lang::get('promo.promo_expired');
 			}
 			else
 			{

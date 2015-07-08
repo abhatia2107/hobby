@@ -85,7 +85,7 @@ class MembershipsController extends \BaseController {
 		}
 		if($credentials['promo_code'])
 		{
-			$amt=PromosController::isValid($credentials['promo_code']);
+			$amt=PromosController::isValid($credentials['promo_code'],1,$credentials['membership_type']);
 			if(is_numeric($amt['price']))
 			{
 				if($amt['price']!=$credentials['payment'])
@@ -222,8 +222,8 @@ class MembershipsController extends \BaseController {
 			$referee=User::find($referee_id);
 			if($referee->user_pending_referral)
 			{
-				$referee->user_wallet=$referee->user_wallet+100;
-				$referee->user_pending_referral=$referee->user_pending_referral-100;
+				$referee->user_wallet=$referee->user_wallet+$this->referral_amount;
+				$referee->user_pending_referral=$referee->user_pending_referral-$this->referral_amount;
 				$referee->save();
 				$email=$referee->email;
 		        $name=$referee->user_name;

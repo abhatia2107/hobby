@@ -121,13 +121,13 @@
 @stop
 @section('pagejquery')
 <script type="text/javascript">	
-	var reviewModalStatus = false;	
+	var reviewModalStatus = false;
 	if(!reviewModalStatus)
 	{
 		reviewModalStatus = true; 
 		$('#reviewModal').modal('show');
 		$('#reviewModal').modal({backdrop: 'static'});		
-	}			
+	}		
 	$(document).ready(function () {		
 		$("#bookFavClass").click(function (e) {
 			e.preventDefault();
@@ -136,12 +136,23 @@
 			$("#bookFavClassConfirm").fadeIn(500);			
 		});
 		$("#bookingDateChange").click(function (e) {
-			e.preventDefault();            
-            $("#booking_date").val("{{$tomorrowDate}}");
-            if($("#booking_date").val() == "{{$tomorrowDate}}")
-            	$("#bookFavClassForm").submit();
-		});		
-	});	
+			e.preventDefault();
+        	$("#booking_date").val("{{$tomorrowDate}}");
+        	if($("#booking_date").val() == "{{$tomorrowDate}}")
+        		$("#bookFavClassForm").submit();
+		});
+	});
+	function lockoutSubmit(button) {
+	    var oldValue = button.value;
+
+	    button.setAttribute('disabled', true);
+	    button.value = '...Processing...';
+
+	    setTimeout(function(){
+	        button.value = oldValue;
+	        button.removeAttribute('disabled');
+	    }, 3000)
+	}
 	function closeFavClassBook () {
 		$("#bookFavClassConfirm").hide();
 		$("#bookFavClassButton").fadeIn(500);	

@@ -57,7 +57,7 @@
 							</button>																		
 						</div>
 						<div class="bookFavClassConfirm" id="bookFavClassConfirm">
-							Book For <button type="sumbit">Today</button> or <button id="bookingDateChange">Tomorrow</button> <a onclick="closeFavClassBook();" href="javascript:void(0);">X</a>
+							Book For <button type="sumbit" onclick="lockoutSubmit(this)">Today</button> or <button id="bookingDateChange" onclick="lockoutSubmit(this)">Tomorrow</button> <a onclick="closeFavClassBook();" href="javascript:void(0);">X</a>
 						</div>
 					</form>
 				</div>				

@@ -83,9 +83,9 @@
 		$("#bookingDateChange").click(function (e) {
 			e.preventDefault();
             e.stopPropagation();
-            $("#booking_date").val("{{$tomorrowDate}}");
-            if($("#booking_date").val() == "{{$tomorrowDate}}")
-            	$("#bookFavClassForm").submit();
+        	$("#booking_date").val("{{$tomorrowDate}}");
+        	if($("#booking_date").val() == "{{$tomorrowDate}}")
+        		$("#bookFavClassForm").submit();
 		});
 		if(!reviewModalStatus)
 		{
@@ -96,7 +96,18 @@
 		$("#input-id").rating(); 
 		// with plugin options
 		//$("#input-id").rating(['min'=>1, 'max'=>10, 'step'=>2, 'size'=>'lg']);		
-	});	
+	});
+	function lockoutSubmit(button) {
+	    var oldValue = button.value;
+
+	    button.setAttribute('disabled', true);
+	    button.value = '...Processing...';
+
+	    setTimeout(function(){
+	        button.value = oldValue;
+	        button.removeAttribute('disabled');
+	    }, 3000)
+	}
 	function closeFavClassBook () {
 		$("#bookFavClassConfirm").hide();
 		$("#bookFavClassButton").fadeIn(500);	

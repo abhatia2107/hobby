@@ -13,8 +13,8 @@ class MembershipsController extends \BaseController {
 		$metaContent[0] = "Hobbyix Membership :: Hobbyix";
 		$metaContent[1] = "One Hobbyix Membership @Rs. 1999/- & workout at any gym, yoga, fitness centers etc. in Hyderabad";
 		$metaContent[2] = "Hobbyix Membership, Hobbyix Membership Features, Get Your Hobbyix Membership";
-		$end_date0=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
-		$end_date1=strtotime((Carbon::now()->addDays(59)->toDateTimeString()));
+		$end_date0=strtotime((Carbon::now()->addDays($this->membershipVal['end0'])->toDateTimeString()));
+		$end_date1=strtotime((Carbon::now()->addDays($this->membershipVal['end1'])->toDateTimeString()));
 		$credentials['price']=$this->membershipVal['payment'];
 		$credentials['payment']=$credentials['price'];
 		$credentials['start']=date('d M Y');
@@ -121,15 +121,23 @@ class MembershipsController extends \BaseController {
 		$credentials['start_date']=date('Y-m-d');
 		if($credentials['membership_type']==0)
 		{
-			$end_date=strtotime((Carbon::now()->addDays(29)->toDateTimeString()));
+			$end_date=strtotime((Carbon::now()->addDays($this->membershipVal['end0'])->toDateTimeString()));
 			$credentials['end_date']=date('Y-m-d',$end_date);
 			$credentials['credits']=$this->membershipVal['credits0'];		
 		}
 		else
 		{
-			$end_date=strtotime((Carbon::now()->addDays(59)->toDateTimeString()));
+			$end_date=strtotime((Carbon::now()->addDays($this->membershipVal['end1'])->toDateTimeString()));
 			$credentials['end_date']=date('Y-m-d',$end_date);
 			$credentials['credits']=$this->membershipVal['credits1'];		
+		}
+		if(isset($amt['credit']))
+		{
+			$credentials['credits']=$amt['credit'];
+		}
+		if(isset($amt['end_date']))
+		{
+			$credentials['end_date']=(date('Y-m-d',strtotime($amt['end_date'])));
 		}
 		$validator = Validator::make($credentials, Membership::$rules);
 		if ($validator->fails())

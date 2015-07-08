@@ -19,6 +19,8 @@ class BaseController extends Controller {
 
 	protected $membershipVal=array(
 									'payment'=>1999,
+									'end0'=>29,
+									'end1'=>59,
 									'credits0'=>30,
 									'credits1'=>25,
 								);

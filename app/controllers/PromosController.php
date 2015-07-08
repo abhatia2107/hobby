@@ -223,6 +223,33 @@ class PromosController extends \BaseController {
 			{
 					return Lang::get('promo.promo_invalid');
 			}
+			if(isset($promo->credit_change))
+			{
+				if($type==0)
+				{
+					$final['credit']=$this->membershipVal['credits0']+$promo->credit_change;
+				}
+				else
+				{
+					$final['credit']=$this->membershipVal['credits1']+$promo->credit_change;
+				}
+			}
+			if(isset($promo->date_change))
+			{
+				if($type==0)
+				{
+					$add_days=$this->membershipVal['end1']+$promo->date_change;
+					$end_date=strtotime((Carbon::now()->addDays($add_days)->toDateTimeString()));
+					$final['end_date']=date('d M Y', $end_date);
+				}
+				else
+				{
+					$add_days=$this->membershipVal['end1']+$promo->date_change;
+					$end_date=strtotime((Carbon::now()->addDays($add_days)->toDateTimeString()));
+					$final['end_date']=date('d M Y', $end_date);
+				}
+			}
+			// dd($final);
 		}
 		else
 		{

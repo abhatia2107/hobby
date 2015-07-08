@@ -236,8 +236,10 @@ class UsersController extends \BaseController {
 			|
 			*/
 			//$data=$this->user->getid(Input::get('email'));
-    		// return Redirect::intended('/')/*->with('success','Welcome '.$userDetails['user_name'])*/;
-			return Redirect::back();
+    		if(URL::previous()==url('/users/login'))
+    			return Redirect::intended('/')/*->with('success','Welcome '.$userDetails['user_name'])*/;
+			else
+				return Redirect::back();
 		}
 		else
 		{

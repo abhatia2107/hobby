@@ -164,6 +164,17 @@
 						$('#payment').val("{{$credentials['payment']}}");
 						$('#promoCodeContainer').append("<span id='statusMessage'>"+response+"</span>");
 					}
+					// alert(response['end_date']);
+					if($.isNumeric(response['credit']))
+					{
+						$('#credit').empty();
+						$('#credit').append(": "+response['credit']);
+					}
+					if((response['end_date']))
+					{
+						$('#end').empty();
+						$('#end').append(": "+response['end_date']);
+					}
 				});
 			}
 			else if (condition != "onDirectApply" )

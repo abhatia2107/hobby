@@ -137,22 +137,12 @@
 		});
 		$("#bookingDateChange").click(function (e) {
 			e.preventDefault();
+			$(".favButton").css('pointer-events','none');
         	$("#booking_date").val("{{$tomorrowDate}}");
         	if($("#booking_date").val() == "{{$tomorrowDate}}")
         		$("#bookFavClassForm").submit();
 		});
 	});
-	function lockoutSubmit(button) {
-	    var oldValue = button.value;
-
-	    button.setAttribute('disabled', true);
-	    button.value = '...Processing...';
-
-	    setTimeout(function(){
-	        button.value = oldValue;
-	        button.removeAttribute('disabled');
-	    }, 3000)
-	}
 	function closeFavClassBook () {
 		$("#bookFavClassConfirm").hide();
 		$("#bookFavClassButton").fadeIn(500);	

@@ -143,6 +143,11 @@
         		$("#bookFavClassForm").submit();
 		});
 	});
+	$(document).ready(function() {      
+	    $('.favButton').click(function() {
+			$("#bookFavClassConfirm").hide();
+	    })
+	});
 	function closeFavClassBook () {
 		$("#bookFavClassConfirm").hide();
 		$("#bookFavClassButton").fadeIn(500);	

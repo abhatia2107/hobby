@@ -98,6 +98,11 @@
 		// with plugin options
 		//$("#input-id").rating(['min'=>1, 'max'=>10, 'step'=>2, 'size'=>'lg']);		
 	});
+	$(document).ready(function() {      
+	    $('.favButton').click(function() {
+			$("#bookFavClassConfirm").hide();
+	    })
+	});
 	function closeFavClassBook () {
 		$("#bookFavClassConfirm").hide();
 		$("#bookFavClassButton").fadeIn(500);	

@@ -28,7 +28,7 @@ class CreateBatchesTable extends Migration {
 			$table->integer('batch_recurring')->default(0)->nullable();
 			$table->boolean('batch_approved')->default(0);
 			$table->integer('batch_trial')->default(0);
-			$table->integer('batch_credit')->default(1);
+			$table->float('batch_credit')->default(1);
 			$table->integer('batch_view')->default(0);
 			$table->string('batch_comment')->nullable();
 			$table->string('batch_tagline')->nullable();

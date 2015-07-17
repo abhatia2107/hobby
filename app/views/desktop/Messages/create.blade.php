@@ -59,7 +59,7 @@
                         stringLength: {
                             min: 1,
                             max: 160,
-                            message: 'The title must be more than 1 and less than 160 characters long'
+                            message: 'The message must be more than 1 and less than 160 characters long'
                         }
                     }
                 }

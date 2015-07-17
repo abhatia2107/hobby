@@ -116,10 +116,11 @@
 							Flexi Time Membership Features
 						</h1>
 						<ul class="membership_features">
-							<li><span class="glyphicon glyphicon-hand-right"></span>Access to one fitness activity for two months with Hobbyix Flexi Time Membership</li>
+							<li><span class="glyphicon glyphicon-hand-right"></span>Amount equivalent to half of the number of unused classes will be refunded in your account</li>
+							<li><span class="glyphicon glyphicon-hand-right"></span>Access to one fitness activity for a month with Hobbyix Flexi Time Membership</li>
 							<li><span class="glyphicon glyphicon-hand-right"></span>You can go to only one type of activity in a single fitness center of your choice</li>
 							<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>
-							<li><span class="glyphicon glyphicon-hand-right"></span>You will get 25 credits in your account</li>
+							<li><span class="glyphicon glyphicon-hand-right"></span>You will get 30 credits in your account</li>
 							<li><span class="glyphicon glyphicon-hand-right"></span>You can book a maximum of 1 class per day</li>
 						</ul>
 				</div>

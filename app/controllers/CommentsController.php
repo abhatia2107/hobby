@@ -68,7 +68,7 @@ class CommentsController extends \BaseController {
 		{
 			$comment=Comment::create($credentials);
 		}
-		return Redirect::back()->with('success',Lang::get('comment.comment_created'));
+		return Redirect::back();//->with('success',Lang::get('comment.comment_created'));
 	}
 
 	/**

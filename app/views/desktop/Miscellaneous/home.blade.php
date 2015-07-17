@@ -40,21 +40,21 @@
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
 			<div class="details">
-				<img alt="Fitness_AnyTime" title="Fitness_AnyTime" src="/assets/images/home/Fitness_AnyTime.PNG">				
+				<img alt="Fitness_AnyTime" title="Fitness_AnyTime" src="/assets/images/home/Fitness-AnyTime.PNG">				
 			</div>
 			<div class="footer">Have Fitness Classes Available 24X7, Choose What Suits Your Schedule</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 membership_offer_item ">
 			<div class="header"></div>
 			<div class="details">
-				<img alt="Fitness_AnyWhere" title="Fitness_AnyWhere" src="/assets/images/home/Fitness_AnyWhere.PNG">				
+				<img alt="Fitness_AnyWhere" title="Fitness_AnyWhere" src="/assets/images/home/Fitness-AnyWhere.PNG">				
 			</div>		
 			<div class="footer">Don't Settle For One Gym when you can go to any gym</div>
 		</div>
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 membership_offer_item">
 			<div class="header"></div>
 			<div class="details">
-				<img alt="Fitness_AnyType" title="Fitness_AnyType" src="/assets/images/home/Fitness_AnyType.PNG">				
+				<img alt="Fitness_AnyType" title="Fitness_AnyType" src="/assets/images/home/Fitness-AnyType.PNG">				
 			</div>		
 			<div class="footer">Spice Up Your Fitness Schedule With A New Type Of Activity Everyday</div>
 		</div>		

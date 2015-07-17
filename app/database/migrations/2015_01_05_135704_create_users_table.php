@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration {
 			$table->rememberToken();
 			$table->string('user_referral_code',10)->unique()->nullable();	
 			$table->integer('user_referee_id')->nullable();
-			$table->integer('user_free_credits_left')->default(0);
+			$table->float('user_free_credits_left')->default(0);
 			$table->float('user_credits_left')->default(0);
 			$table->date('user_credits_expiry')->nullable();
 			$table->integer('user_favorite')->nullable();

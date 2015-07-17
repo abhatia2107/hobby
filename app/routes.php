@@ -346,3 +346,8 @@
 	Route::get('/json/subcategories','SubcategoriesController@index');
 
 	Route::get('/json/localities','LocalitiesController@index');
+
+
+	Route::group(array('before' => "admin"), function() {
+		Route::get('/accounts/user','AccountsController@user');
+	});

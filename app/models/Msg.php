@@ -6,7 +6,7 @@ class Msg extends \Eloquent {
 
 	// Add your validation rules here
 	public static $rules = [
-		'contact_no'=>'required|integer|regex:/[0-9]{10}/',
+		'contact_no'=>'required|regex:/[0-9]{10}/',
 		'message'=>'required|max:160'
 	];
 

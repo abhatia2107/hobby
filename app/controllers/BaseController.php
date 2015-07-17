@@ -3,6 +3,7 @@
 class BaseController extends Controller {
 
 	protected $admin;
+	protected $account;
 	protected $batch;
 	protected $category;
 	protected $comment;
@@ -20,9 +21,9 @@ class BaseController extends Controller {
 	protected $membershipVal=array(
 									'payment'=>1999,
 									'end0'=>29,
-									'end1'=>59,
+									'end1'=>29,
 									'credits0'=>30,
-									'credits1'=>25,
+									'credits1'=>30,
 								);
 
 	protected $age_group=array(1 => "All","Children","Adult");
@@ -57,6 +58,7 @@ class BaseController extends Controller {
 	public function __construct()
 	{
 		$this->admin = new Admin;
+		$this->account = new Account;
 		$this->batch = new Batch;
 		$this->category = new Category;
 		$this->comment = new Comment;

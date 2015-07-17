@@ -169,7 +169,7 @@ function instituteNotOwn()
 	}
 	if($institute_id)
 	{
-		return Redirect::to('/institutes/'.$institute_id);
+		return Redirect::to('/institutes/show/'.$institute_id);
 	}
 }
 

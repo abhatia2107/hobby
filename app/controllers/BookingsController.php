@@ -123,6 +123,10 @@ class BookingsController extends \BaseController {
 			$trial_booked_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->where('order_status','Success')->first();
 			if($credentials['no_of_sessions']==1){
 				if(($user->user_free_credits_left>=$credentials['credit_used'])||($user->user_credits_left>=$credentials['credit_used'])){
+					if((strtotime($user->user_credits_expiry) < strtotime(date('Y-m-d'))))
+					{
+						return Redirect::back()->with('failure',Lang::get('booking.booking_membership_expired'));
+					}
 					if(!$booking_already_done){
 						unset($credentials['csrf_token']);
 						unset($credentials['Promo_Code']);

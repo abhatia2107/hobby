@@ -12,6 +12,9 @@
 */
 
 	Route::get('/', 'HomeController@showWelcome');
+	
+	Route::get('/test', 'AccountsController@test');
+	Route::get('/test2', 'AccountsController@test2');
 
 	//To allow access only to admin.
 	Route::group(array('before' => "auth|admin"), function() {

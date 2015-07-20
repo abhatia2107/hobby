@@ -89,9 +89,9 @@
 						Hobbyix Flexi Class Membership Features
 					</h1>
 					<ul class="membership_features">
-						<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of fitness activities for a month with Hobbyix Flexi Class Membership</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of fitness activities for a month</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>There is no limit on how many types of activities you indulge in</li>
-						<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>Book the session and pay with Hobbyix Membership</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>You will get 30 credits in your account. Each class is of 1 credit except a few which could be of 2-3 credits</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>You can book a maximum of 1 class per day</li>
 					</ul>
@@ -103,10 +103,9 @@
 						Hobbyix Flexi Time Membership Features
 					</h1>
 					<ul class="membership_features">
-						<li><span class="glyphicon glyphicon-hand-right"></span>Amount equivalent to half of the number of unused classes will be refunded in your account</li>
-						<li><span class="glyphicon glyphicon-hand-right"></span>Access to one fitness activity for a month with Hobbyix Flexi Time Membership</li>
-						<li><span class="glyphicon glyphicon-hand-right"></span>You can go to only one type of activity in a single fitness center of your choice</li>
-						<li><span class="glyphicon glyphicon-hand-right"></span>Just book the session and pay with Hobbyix Membership</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>Access to one fitness activity for a month</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>Missed classes will be refunded back*</li>
+						<li><span class="glyphicon glyphicon-hand-right"></span>Book the session and pay with Hobbyix Membership</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>You will get 30 credits in your account</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>You can book a maximum of 1 class per day</li>
 					</ul>

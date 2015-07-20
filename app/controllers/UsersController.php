@@ -305,6 +305,8 @@ class UsersController extends \BaseController {
             {
                 $newUserData['user_referee_id']=$referee->id;
                 $newUserData['user_free_credits_left']=2;
+				$end_date0=strtotime((Carbon::now()->addDays($this->membershipVal['end0'])->toDateTimeString()));
+                $newUserData['user_credits_expiry']=date('d M Y', $end_date0);
             }
             else
             {

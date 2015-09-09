@@ -189,7 +189,7 @@
 								<div class="col-lg-2 col-md-2 col-xs-12 col-sm-12 bookClass singleSessionPriceContainer 	">
 									<div class="singleSessionPrice">
 									<div class="times_font">₹<span itemprop="priceRange">{{$batchInfo->batch_single_price}}</span> / Session <br>(or {{$batchInfo->batch_credit}} Credit)</div>
-									<button class="btn btn-primary booknowButton" data-href="/batch/{{$batchInfo->batch}}">Book Now</button>
+									<button class="btn btn-primary booknowButton" id="bookNow" data-href="/batch/{{$batchInfo->batch}}">Book Now</button>
 									</div>
 								</div>	
 							</div>																		
@@ -376,7 +376,7 @@
 			    $('#sendMessageModal').find('input[name="institute"]').val(institute);			    
 				$("#sendMessageModal").modal("show");
 			});
-			$(".booknowButton").click(function (e) {
+			$("#bookNow").click(function (e) {
 				var url = $(this).data("href");
 				window.location.href = url;
 			});

@@ -55,14 +55,21 @@ class MembershipsController extends \BaseController {
 	}
 
 	/**
-	 * Show the form for creating a new membership
+	 * Show the list for membership
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function lists()
 	{
-		// dd($credentials);
-		// return View::make('Memberships.create',compact('credentials'));
+		$memberships=Membership::
+                        Join('users','users.id','=','memberships.user_id')
+                        ->where('order_status','Success')
+                        ->whereNotIn('user_id',[1,2])
+                        ->get();
+		$tableName="$_SERVER[REQUEST_URI]";
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Memberships.lists',compact('memberships','tableName','count','adminPanelListing'));
 	}
 
 	/**

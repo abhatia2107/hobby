@@ -81,4 +81,6 @@
 		"user_not_exist"=>"No user exist with this ID.",
 	
 		"user_access_failed"=>"You don't have permission to access this user details.",
+
+		"user_membership_expired"=>"Hi :name, your hobbyix membership has expired."
 	);

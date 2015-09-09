@@ -53,12 +53,7 @@
 						<form method="post" enctype="multipart/form-data" action="/memberships" id="buyMembershipForm">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 							<input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
-							<li class="col-md-12"><span class="col-md-6 col-sm-6">Type</span><span>:
-								<select id="membership_type" name="membership_type" required="required">
-		                            <option value=0>Flexi class</option>
-		                            <option value=1>Flexi Time</option>
-	                    		</select>
-							</span></li>
+							<input type="hidden" id="membership_type" name="membership_type" value="0">
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Credits</span><span id="credit">: {{$credentials['credits0']}}</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Price</span><span>: Rs. {{$credentials['price']}}/-</span></li>
 							<li class="col-md-12"><span class="col-md-6 col-sm-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
@@ -86,27 +81,13 @@
 			<div class="col-lg-8 col-xs-12 col-md-7 col-sm-6 membership_page_item">
 				<div class="membership_features_container">
 					<h1 class="header">
-						Hobbyix Flexi Class Membership Features
+						Hobbyix Membership Features
 					</h1>
 					<ul class="membership_features">
 						<li><span class="glyphicon glyphicon-hand-right"></span>Access to all types of fitness activities for a month</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>There is no limit on how many types of activities you indulge in</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>Book the session and pay with Hobbyix Membership</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>You will get 30 credits in your account. Each class is of 1 credit except a few which could be of 2-3 credits</li>
-						<li><span class="glyphicon glyphicon-hand-right"></span>You can book a maximum of 1 class per day</li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-lg-8 col-xs-12 col-md-7 col-sm-6 membership_page_item">
-				<div class="membership_features_container">
-					<h1 class="header">
-						Hobbyix Flexi Time Membership Features
-					</h1>
-					<ul class="membership_features">
-						<li><span class="glyphicon glyphicon-hand-right"></span>Access to one fitness activity for a month</li>
-						<li><span class="glyphicon glyphicon-hand-right"></span>Missed classes will be refunded back*</li>
-						<li><span class="glyphicon glyphicon-hand-right"></span>Book the session and pay with Hobbyix Membership</li>
-						<li><span class="glyphicon glyphicon-hand-right"></span>You will get 30 credits in your account</li>
 						<li><span class="glyphicon glyphicon-hand-right"></span>You can book a maximum of 1 class per day</li>
 					</ul>
 				</div>

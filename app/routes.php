@@ -13,8 +13,10 @@
 
 	Route::get('/', 'HomeController@showWelcome');
 	
-	Route::get('/test', 'AccountsController@test');
-	Route::get('/test2', 'AccountsController@test2');
+	Route::get('/gympp', 'GymsController@gympp');
+	Route::get('/fitpass', 'GymsController@fitpass');
+	Route::get('/goodservice', 'GymsController@goodservice');
+	Route::get('/phyzo', 'GymsController@phyzo');
 
 	//To allow access only to admin.
 	Route::group(array('before' => "auth|admin"), function() {
@@ -172,6 +174,8 @@
 
 	Route::group(array('before' => "auth|admin"), function() {
 
+		Route::get('/bookings/lists','BookingsController@lists');
+		
 		//Route for LocalitiesController
 		Route::get('/localities','LocalitiesController@index');
 		Route::post('/localities/store','LocalitiesController@store');
@@ -189,6 +193,8 @@
 		Route::get('/locations/disable/{id}','LocationsController@disable');
 		Route::get('/locations/delete/{id}','LocationsController@destroy');
 		Route::get('/locations/show/{id}','LocationsController@show');
+
+		Route::get('/memberships/lists','MembershipsController@lists');
 
 	    //Route for PromosController
 	    Route::resource('promos', 'PromosController');
@@ -353,4 +359,5 @@
 
 	Route::group(array('before' => "admin"), function() {
 		Route::get('/accounts/user','AccountsController@user');
+		Route::get('/accounts/batch','AccountsController@batch');
 	});

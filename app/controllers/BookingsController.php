@@ -8,10 +8,16 @@ class BookingsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function lists()
 	{
-		$bookings = Booking::all();
-		return View::make('Bookings.index', compact('bookings'));
+		$bookings = Booking::where('order_status','Success')
+                        ->Join('batches','batches.id','=','bookings.batch_id')
+                        ->select('bookings.*','batches.batch','bookings.created_at as created_at')
+						->get();
+		$tableName="$_SERVER[REQUEST_URI]";
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Bookings.lists',compact('bookings','tableName','count','adminPanelListing'));
 	}
 
 	/**
@@ -127,6 +133,10 @@ class BookingsController extends \BaseController {
 					{
 						return Redirect::back()->with('failure',Lang::get('booking.booking_membership_expired'));
 					}
+					if((strtotime($user->user_credits_expiry) < strtotime($credentials['booking_date'])))
+					{
+						return Redirect::back()->with('failure',Lang::get('booking.booking_after_expiry_date'));
+					}
 					if(!$booking_already_done){
 						unset($credentials['csrf_token']);
 						unset($credentials['Promo_Code']);
@@ -169,6 +179,11 @@ class BookingsController extends \BaseController {
 									}
 									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
 									$user->save();
+
+									$batch=Batch::find($booking->batch_id);
+									$batch->batch_bookings=$batch->batch_bookings+1;
+									$batch->save();
+
 									$this->sms_email($booking->id);
 								}
 							}
@@ -197,6 +212,11 @@ class BookingsController extends \BaseController {
 									}
 									$user->user_credits_left=$user->user_credits_left-$credentials['credit_used'];
 									$user->save();
+
+									$batch=Batch::find($booking->batch_id);
+									$batch->batch_bookings=$batch->batch_bookings+1;
+									$batch->save();
+
 									$this->sms_email($booking->id);
 								}
 								else{
@@ -251,7 +271,7 @@ class BookingsController extends \BaseController {
 	public function success($booking)
 	{
 		$this->sms_email($booking->id);
-		$batch=$this->batch->getBatch($booking->batch_id);
+		$batch=Batch::find($booking->batch_id);
 		$batch->batch_bookings=$batch->batch_bookings+1;
 		$batch->save();
 		if($booking->wallet_amount)
@@ -260,10 +280,7 @@ class BookingsController extends \BaseController {
 			$user=User::find($user_id);
 			if(isset($user->user_wallet) && $user->user_wallet>0)
 	        {
-	          	if($user->user_wallet == $booking->wallet_amount)
-	                $user->user_wallet = 0;
-	            else
-	            	$user->user_wallet = $user->user_wallet-($booking->wallet_amount);
+	          	$user->user_wallet = $user->user_wallet-($booking->wallet_amount);
 	            $user->save();
 	        }
 		}
@@ -443,6 +460,7 @@ class BookingsController extends \BaseController {
 					'order_id' => $booking->order_id,
 					'institute' => $batch->institute, 
 					'subcategory' => $batch->subcategory,
+					'bookings' => $batch->batch_bookings,
 					'amount' => $booking->payment,
 					'credit' => $booking->credit_used,
 					'date' => date("d M Y", strtotime($booking->booking_date)),
@@ -461,7 +479,7 @@ class BookingsController extends \BaseController {
 					'admin_email' => 'booking@hobbyix.com'
 					);
 		$user_msg='Hi '.$data['user_name'].', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
-		$institute_msg='Hobbyix: Order placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com- '.$data['admin_contact_no'];
+		$institute_msg='Hobbyix: Order '.$data['bookings'].' placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com- '.$data['admin_contact_no'];
 		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'.';
 		
 		$this->sms(true, $data['user_contact_no'], $user_msg);

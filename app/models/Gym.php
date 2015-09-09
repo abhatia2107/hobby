@@ -6,7 +6,7 @@ class Gym extends \Eloquent {
 
 	use SoftDeletingTrait;
 	
-	protected $table='phyzos';
+	protected $table='fitpass';
 	protected $guarded=['id'];
 	/*
 	protected $fillable = [''

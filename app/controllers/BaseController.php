@@ -18,7 +18,7 @@ class BaseController extends Controller {
 	protected $user;
 	protected $venue;
 
-	protected $membershipVal=array(
+	public $membershipVal=array(
 									'payment'=>1999,
 									'end0'=>29,
 									'end1'=>29,
@@ -72,7 +72,6 @@ class BaseController extends Controller {
 		$this->subscription = new Subscription;
 		$this->user = new User;
 		$this->venue = new Venue;
-		$useragent=$_SERVER['HTTP_USER_AGENT'];		
 	}
 	
 	/**

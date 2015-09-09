@@ -139,7 +139,7 @@
 					<div class="header"><a class="glyphicon glyphicon-arrow-left" id="return"></a> Filter </div>
 					<div class="filter_options_container">
 						<div id="browse-filter" class="filter-option-1 filterOption" style="max-height:45%">	
-							<div class="filterTitle">Sub Categories</div>
+							<div class="filterTitle">Activity</div>
 							<div class="filterOptionsList">
 								<ul class="list-unstyled filters" id="filter-sub"> 	
 									@foreach ($subcategoriesForCategory as $subcategoryData)

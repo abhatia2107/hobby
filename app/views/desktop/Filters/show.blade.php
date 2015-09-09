@@ -111,7 +111,7 @@
 	<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 maz_pad_z">											
 		<div class="col-lg-3 col-md-3 col-xs-12 col-sm-3 maz_pad_z">			
 			<div class="col-lg-9 col-md-11 col-sm-11 filter-option-1 filterOption">	
-				<div class="filterTitle">Sub Categories</div>
+				<div class="filterTitle">Activity</div>
 				<div class="filterOptionsList">							
 					<ul class="list-unstyled filters"> 	
 						@foreach ($subcategoriesForCategory as $subcategoryData)											

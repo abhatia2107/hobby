@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePhyzosTable extends Migration {
+class CreatePhyzoTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreatePhyzosTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('phyzos', function(Blueprint $table)
+		Schema::create('phyzo', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('name');
@@ -35,7 +35,7 @@ class CreatePhyzosTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('gyms');
+		Schema::drop('phyzo');
 	}
 
 }

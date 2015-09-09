@@ -37,9 +37,16 @@ class calculatePayment extends Command {
 	 */
 	public function fire()
 	{
-		$batches=Batch::where('batch_bookings','>',0);
+		$batches=Batch::where('batch_bookings','>',0)->get();
 		foreach ($batches as $batch) {
-			$payment=$batch['batch_bookings']*$batch['batch_hobbyix_price'];
+			$data['payment']=$batch->batch_bookings*$batch->batch_hobbyix_price;
+			$data['batch_id']=$batch->id;
+			$data['batch']=$batch->batch;
+			$data['bookings']=$batch->batch_bookings;
+			$data['hobbyix_price']=$batch->batch_hobbyix_price;
+			Account::create($data);
+			$batch->batch_bookings=0;
+			$batch->save();
 		}
 	}
 
@@ -51,7 +58,7 @@ class calculatePayment extends Command {
 	protected function getArguments()
 	{
 		return array(
-			array('example', InputArgument::REQUIRED, 'An example argument.'),
+			// array('example', InputArgument::REQUIRED, 'An example argument.'),
 		);
 	}
 
@@ -63,7 +70,7 @@ class calculatePayment extends Command {
 	protected function getOptions()
 	{
 		return array(
-			array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
+			// array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
 		);
 	}
 

@@ -15,6 +15,11 @@ class CreateAccountsTable extends Migration {
 		Schema::create('accounts', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('batch_id')->foreign('batch_id')->references('id')->on('batches');
+			$table->string('batch');
+			$table->integer('bookings');
+			$table->integer('hobbyix_price');
+			$table->integer('payment');
 			$table->timestamps();
 		});
 	}

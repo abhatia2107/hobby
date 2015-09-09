@@ -12,3 +12,5 @@
 */
 
 Artisan::add(new setCreditToZero);
+
+Artisan::add(new calculatePayment);

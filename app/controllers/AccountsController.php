@@ -9,6 +9,15 @@ class AccountsController extends \BaseController {
 	 * @return Response
 	 */
 
+	public function index()
+	{
+		$accounts = Account::all();
+		$tableName="$_SERVER[REQUEST_URI]";
+		$count=$this->getCountForAdmin();
+		$adminPanelListing=$this->adminPanelList;
+		return View::make('Accounts.index',compact('accounts','tableName','count','adminPanelListing'));
+	}
+
 	public function user()
 	{
 		$account = $this->account->getBookingPerUser();
@@ -19,7 +28,7 @@ class AccountsController extends \BaseController {
 	public function batch()
 	{
 		$account = $this->account->getBookingPerBatch();
-		// dd($account);
+		dd($account);
 		return View::make('Accounts.batch', compact('account'));
 	}
 

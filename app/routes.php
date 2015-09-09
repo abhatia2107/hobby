@@ -286,7 +286,6 @@
 		Route::post('/users/password/reset/submit','RemindersController@postReset');
 	});
 
-
 	Route::get('/privacy', function()
 	{
 	    return View::make('Miscellaneous.privacy');
@@ -302,8 +301,7 @@
 
 	Route::group(array('before' => "admin"), function() {
 
-	Route::get('/users/login/{id}','UsersController@loginViaId');
-
+		Route::get('/users/login/{id}','UsersController@loginViaId');
 
 	});
 
@@ -358,6 +356,7 @@
 
 
 	Route::group(array('before' => "admin"), function() {
-		Route::get('/accounts/user','AccountsController@user');
 		Route::get('/accounts/batch','AccountsController@batch');
+		Route::get('/accounts/user','AccountsController@user');
+		Route::resource('/accounts','AccountsController');
 	});

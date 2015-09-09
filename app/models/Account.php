@@ -1,8 +1,13 @@
 <?php
 
 class Account extends \Eloquent {
-	protected $fillable = [];
-
+	
+	protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+	
 	public function getBookingPerUser()
 	{
 		$users=User::where('user_membership_purchased',1)->lists('id');

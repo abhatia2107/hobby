@@ -81,6 +81,7 @@ class BaseController extends Controller {
 	 */
 	protected function setupLayout()
 	{
+		define("aol_institute", 68);
 		if ( ! is_null($this->layout))
 		{
 			$this->layout = View::make($this->layout);

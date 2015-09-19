@@ -360,3 +360,6 @@
 		Route::get('/accounts/user','AccountsController@user');
 		Route::resource('/accounts','AccountsController');
 	});
+
+
+	Route::get('/aol/{id}','BatchesController@aol');

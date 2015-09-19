@@ -50,7 +50,12 @@ class HomeController extends BaseController {
 				if(!$booking->reviewed)
 				{
 					$institute_id = Batch::find($booking->batch_id)->batch_institute_id;
-					$booking_institute = Institute::find($institute_id);	
+					if($institute_id==aol_institute){
+						$booking->reviewed=true;
+						$booking->save();
+					}
+					else
+						$booking_institute = Institute::find($institute_id);
 				}
 			}
 		}

@@ -164,10 +164,31 @@
 												<span itemprop="postalCode">{{$batchInfo->venue_pincode}}</span>
 											</span>
 										</div>
-										<div class="item" title="Schedule: {{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}">
+										<div class="item" title="Schedule: @if($batchInfo->batch_institute_id==aol_institute) {{$batchInfo->batch_comment}} @if($batchInfo->batch_tagline) {{', '.$batchInfo->batch_tagline}} @endif @if($batchInfo->batch_aol_3) {{', '.$batchInfo->batch_aol_3}} @endif @if($batchInfo->batch_aol_4) {{', '.$batchInfo->batch_aol_4}} @endif @if($batchInfo->batch_aol_5) {{', '.$batchInfo->batch_aol_5}} @endif @if($batchInfo->batch_aol_6) {{', '.$batchInfo->batch_aol_6}} @endif @else {{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}} @endif">
 											<span class="text_over_flow_hide">
 												<span class="glyphicon glyphicon-time"></span>
-												<time itemprop="openingHours" datetime="Mo-Su">{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}</time>									
+												<time itemprop="openingHours" datetime="Mo-Su">
+													@if($batchInfo->batch_institute_id==aol_institute)
+														{{$batchInfo->batch_comment}}
+														@if($batchInfo->batch_tagline)
+															{{', '.$batchInfo->batch_tagline}}
+														@endif
+														@if($batchInfo->batch_aol_3)
+															{{', '.$batchInfo->batch_aol_3}}
+														@endif
+														@if($batchInfo->batch_aol_4)
+															{{', '.$batchInfo->batch_aol_4}}
+														@endif
+														@if($batchInfo->batch_aol_5)
+															{{', '.$batchInfo->batch_aol_5}}
+														@endif
+														@if($batchInfo->batch_aol_6)
+															{{', '.$batchInfo->batch_aol_6}}
+														@endif
+													@else
+														{{$batchInfo->batch_comment.' '.$batchInfo->batch_tagline}}
+													@endif
+												</time>
 											</span>
 										</div>									
 									</div>								

@@ -11,7 +11,8 @@ use SoftDeletingTrait;
 		'batch_id' => 'integer|required',
 		'no_of_sessions' => 'integer|required',
 		'payment' => 'integer|required',
-		'booking_date' => 'required'
+		'booking_date' => 'required_without:aol_dates',
+		'aol_dates' => 'required_without:booking_date',
 	];
 
     protected $guarded = [

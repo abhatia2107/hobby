@@ -39,7 +39,7 @@ class BookingsController extends \BaseController {
 	 */
 	public function store()
 	{
-		$credentials = Input::all();		
+		$credentials = Input::all();
 		$referrer = URL::previous();
 		if(is_null($credentials['batch_id']))
 		{
@@ -125,7 +125,10 @@ class BookingsController extends \BaseController {
 			unset($credentials['pay_hobbyix']);
 			$credentials['credit_used']=$batch->batch_credit;
 			$user=User::find($credentials['user_id']);
-			$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->where('order_status','Success')->where('credit_used','>',0)->first();
+			if($batch->batch_institute_id==aol_institute)
+				$booking_already_done = false;
+			else
+				$booking_already_done = Booking::where('user_id',$credentials['user_id'])->where('booking_date', $credentials['booking_date'])->where('order_status','Success')->where('credit_used','>',0)->first();
 			$trial_booked_already = Booking::where('user_id',$credentials['user_id'])->where('batch_id', $credentials['batch_id'])->where('order_status','Success')->first();
 			if($credentials['no_of_sessions']==1){
 				if(($user->user_free_credits_left>=$credentials['credit_used'])||($user->user_credits_left>=$credentials['credit_used'])){
@@ -142,7 +145,6 @@ class BookingsController extends \BaseController {
 						unset($credentials['Promo_Code']);
 						$credentials['payment']=0;
 						$credentials['wallet_amount']=0;
-						// dd($credentials);
 						$booking = Booking::create($credentials);
 						if($booking){
 							if(!$trial_booked_already){
@@ -261,9 +263,13 @@ class BookingsController extends \BaseController {
 					'subcategory'=>$batch->subcategory,
 					'institute'=>$batch->institute,
 					'order_id'=>$booking->order_id,
-					'date'=>$booking->booking_date,
 					'no_of_sessions'=>$booking->no_of_sessions
 			);
+
+		if($batch->batch_institute_id==aol_institute)
+			$data['date']=$booking->aol_dates;
+		else
+			$data['date']=$booking->booking_date;
 		return View::make('Bookings.success')->with($data);
 		// return View::make('Bookings.success')->with($credentials);
 	}
@@ -463,7 +469,6 @@ class BookingsController extends \BaseController {
 					'bookings' => $batch->batch_bookings,
 					'amount' => $booking->payment,
 					'credit' => $booking->credit_used,
-					'date' => date("d M Y", strtotime($booking->booking_date)),
 					'no_of_sessions' => $booking->no_of_sessions,
 					'venue_address' => $batch->venue_address,
 					'locality' => $batch->locality,
@@ -478,6 +483,10 @@ class BookingsController extends \BaseController {
 					'admin_contact_no' => '9100946081',
 					'admin_email' => 'booking@hobbyix.com'
 					);
+		if($batch->batch_institute_id==aol_institute)
+			$data['date']=$booking->aol_dates;
+		else
+			$data['date']=date("d M Y", strtotime($booking->booking_date));
 		$user_msg='Hi '.$data['user_name'].', Order id: '.$data['order_id'].'. '. $data['institute'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].'. Please display the confirmation sms/email at the venue.';
 		$institute_msg='Hobbyix: Order '.$data['bookings'].' placed by, '.$data['user_name'].', Order id: '.$data['order_id'].' for '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality'].' branch. Thanks, hobbyix.com- '.$data['admin_contact_no'];
 		$admin_msg=$booking_id.', Order id: '.$data['order_id'].'. '. $data['institute'].', '.$data['venue_contact_no'].', '. $data['subcategory']. ' on '. $data['date']. ' at '. $data['locality']. ' by '. $data['user_name']. $data['user_contact_no'].'.';

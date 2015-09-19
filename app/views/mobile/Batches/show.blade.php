@@ -5,13 +5,22 @@
 
   .overflow_x {max-width:100%;overflow-x:hidden}
 
-  #page { width: 100%;margin-top: 0px;padding: 4em 0 1.2em;
-          background-repeat:no-repeat;
+  #pageAol {
+      background-image: url(/assets/images/sample/gurudev.jpg);
+  }
+
+  #page {
+      background-image: url(/assets/images/sample/workout.jpg);
+  }
+  #page, #pageAol {
+      width: 100%;margin-top: 0px;padding: 4em 0 1.2em;
+        background-repeat:no-repeat;
         background-position:center center;
         -o-background-size: cover,auto;
         -moz-background-size:cover, auto;
         -webkit-background-size:cover, auto;
-        background-size: cover, auto;}
+        background-size: cover, auto;
+  }
 
   .samplePageInfo {  background: rgba(0, 0, 0, 0.9); color: white; padding: 0px 0px 10px 0px;}
 
@@ -156,7 +165,12 @@
   </button>    
   <div id="responseMessage"></div>
 </div>
-<div id="page" class="hfeed site overflow_x" style="background-image: url(/assets/images/sample/workout.jpg);">
+
+@if($batchDetails->batch_institute_id==aol_institute)
+    <div id="pageAol" class="hfeed site overflow_x">
+@else
+    <div id="page" class="hfeed site overflow_x">
+@endif
   <div id="content" class="site-content">
     <div class="samplePageInfo cover-wrapper">
       <div class="container">
@@ -206,8 +220,31 @@
         <div class="row batchOrderField">
           <div class='col-xs-6 batchOrderFieldLabel'>Booking Date*</div>
           <div class='col-xs-6'>
-              <input type="text" readonly="true" style="background:white"placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
-          </div>          
+              @if($batchDetails->batch_institute_id!=aol_institute)
+                  <input type="text" readonly="true" style="background:white"placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
+              @else
+                  <select class="form-control" id="aol_dates" name="aol_dates">
+                      @if($batchDetails->batch_comment)
+                          <option value="{{$batchDetails->batch_comment}}">{{$batchDetails->batch_comment}}</option>
+                      @endif
+                      @if($batchDetails->batch_tagline)
+                          <option value="{{$batchDetails->batch_tagline}}">{{$batchDetails->batch_tagline}}</option>
+                      @endif
+                      @if($batchDetails->batch_aol_3)
+                          <option value="{{$batchDetails->batch_aol_3}}">{{$batchDetails->batch_aol_3}}</option>
+                      @endif
+                      @if($batchDetails->batch_aol_4)
+                          <option value="{{$batchDetails->batch_aol_4}}">{{$batchDetails->batch_aol_4}}</option>
+                      @endif
+                      @if($batchDetails->batch_aol_5)
+                          <option value="{{$batchDetails->batch_aol_5}}">{{$batchDetails->batch_aol_5}}</option>
+                      @endif
+                      @if($batchDetails->batch_aol_6)
+                          <option value="{{$batchDetails->batch_aol_6}}">{{$batchDetails->batch_aol_6}}</option>
+                      @endif
+                  </select>
+              @endif
+          </div>
         </div>
         <div class="row batchOrderField" @if($credentials['wallet_amount']>0) style="display:block" @else style="display:none" @endif>
           <div class='col-xs-6'>Hobbyix Wallet</div>
@@ -283,7 +320,26 @@
               +91 {{$instituteContact}}
             </div>
             <div id='batch-openclass' class="batch-details"><span class='glyphicon glyphicon-time' id='pin-icon'></span>
-              {{$comment.' '.$tagline}}
+                @if($batchDetails->batch_institute_id==aol_institute)
+                    {{$batchDetails->batch_comment}}
+                    @if($batchDetails->batch_tagline)
+                        {{', '.$batchDetails->batch_tagline}}
+                    @endif
+                    @if($batchDetails->batch_aol_3)
+                        {{', '.$batchDetails->batch_aol_3}}
+                    @endif
+                    @if($batchDetails->batch_aol_4)
+                        {{', '.$batchDetails->batch_aol_4}}
+                    @endif
+                    @if($batchDetails->batch_aol_5)
+                        {{', '.$batchDetails->batch_aol_5}}
+                    @endif
+                    @if($batchDetails->batch_aol_6)
+                        {{', '.$batchDetails->batch_aol_6}}
+                    @endif
+                @else
+                    {{$batchDetails->batch_comment.' '.$batchDetails->batch_tagline}}
+                @endif
             </div>
             <div id='batch-facilities' class="batch-details">
               @for($i=0;$i<=5;$i++)            
@@ -414,6 +470,11 @@
   {
     var Result = true;    
     var bookingDate = $('#booking_date').val();
+    var aolDate = $('#aol_dates').val();
+    if(aolDate!="")
+    {
+      return Result;
+    }
     if(bookingDate=="" || bookingDate==undefined)
     {
       Result =  false;

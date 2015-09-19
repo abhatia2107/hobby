@@ -72,11 +72,11 @@ body li {  list-style-type: none; }
 
 @media (min-width:320px) {  body,html { overflow-x: hidden; } }
 
-@media (min-width:768px) {  #page { padding: 9em 0 2em; } }
+@media (min-width:768px) {  #page, #pageAol { padding: 9em 0 2em; } }
 
-@media (min-width:992px) {  #page { padding: 23em 0 3em;} }
+@media (min-width:992px) {  #page, #pageAol { padding: 23em 0 3em;} }
 
-#page { color: white;font-weight: bold; }
+#page, #pageAol { color: white;font-weight: bold; }
 
 .home-widget-description, .home-widget-title {  margin: 0; padding: 0; text-align: center;  }
 

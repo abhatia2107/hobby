@@ -2,13 +2,18 @@
 @section('pagestylesheet')
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <style type="text/css">
-  
-    #page { 
+
+    #page {
       background-image: url(/assets/images/sample/workout.jpg);
       width: 100%;margin-top: 0px; background-repeat:no-repeat;background-position:left center;-o-background-size: cover;
         -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
     }
 
+    #pageAol {
+      background-image: url(/assets/images/sample/gurudev.jpg);
+      width: 100%;margin-top: 0px; background-repeat:no-repeat;background-position:left center;-o-background-size: cover;
+      -moz-background-size: cover;-webkit-background-size: cover;background-size: cover;
+    }
     .samplePageInfo h1 { font-size: 40px;font-weight: bold;margin: 5px 0px; }
 
     .samplePageInfo h3 { font-size: 22px;font-weight: normal;margin: 0px 0px 10px 0px; }
@@ -131,7 +136,11 @@
       <strong>{{$homeLang['home_membership_tagline']}}</strong>   
       </div>
   </div>
-  <div id="page" class="hfeed site">
+  @if($batchDetails->batch_institute_id==aol_institute)
+    <div id="pageAol" class="hfeed site">
+  @else
+    <div id="page" class="hfeed site">
+  @endif
     <div id="content" class="site-content">
       <div class="samplePageInfo cover-wrapper ">
         <div class="container">
@@ -178,7 +187,26 @@
               <span itemprop="telephone">+91 {{$batchDetails->venue_contact_no}}</span>
             </div>
             <div class="batch-details"><span class='glyphicon glyphicon-time'></span>
-              {{$batchDetails->batch_comment.' '.$batchDetails->batch_tagline}}
+              @if($batchDetails->batch_institute_id==aol_institute)
+                {{$batchDetails->batch_comment}}
+                @if($batchDetails->batch_tagline)
+                  {{', '.$batchDetails->batch_tagline}}
+                @endif
+                @if($batchDetails->batch_aol_3)
+                  {{', '.$batchDetails->batch_aol_3}}
+                @endif
+                @if($batchDetails->batch_aol_4)
+                  {{', '.$batchDetails->batch_aol_4}}
+                @endif
+                @if($batchDetails->batch_aol_5)
+                  {{', '.$batchDetails->batch_aol_5}}
+                @endif
+                @if($batchDetails->batch_aol_6)
+                  {{', '.$batchDetails->batch_aol_6}}
+                @endif
+              @else
+                {{$batchDetails->batch_comment.' '.$batchDetails->batch_tagline}}
+              @endif
             </div>
             <div id='batch-facilities' class="batch-details">
               @for($i=0;$i<=5;$i++)            
@@ -242,7 +270,30 @@
               <div class="row batchOrderField" id="batchOrderField1">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Booking Date*</div>
                 <div class='col-md-6 col-sm-6 col-xs-6'>
-                      <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />                     
+                    @if($batchDetails->batch_institute_id!=aol_institute)
+                      <input type="text" placeholder="Select Date" class="form-control" id="booking_date" name="booking_date" />
+                    @else
+                        <select class="form-control" id="aol_dates" name="aol_dates">
+                            @if($batchDetails->batch_comment)
+                                <option value="{{$batchDetails->batch_comment}}">{{$batchDetails->batch_comment}}</option>
+                            @endif
+                            @if($batchDetails->batch_tagline)
+                                <option value="{{$batchDetails->batch_tagline}}">{{$batchDetails->batch_tagline}}</option>
+                            @endif
+                            @if($batchDetails->batch_aol_3)
+                                <option value="{{$batchDetails->batch_aol_3}}">{{$batchDetails->batch_aol_3}}</option>
+                            @endif
+                            @if($batchDetails->batch_aol_4)
+                                <option value="{{$batchDetails->batch_aol_4}}">{{$batchDetails->batch_aol_4}}</option>
+                            @endif
+                            @if($batchDetails->batch_aol_5)
+                                <option value="{{$batchDetails->batch_aol_5}}">{{$batchDetails->batch_aol_5}}</option>
+                            @endif
+                            @if($batchDetails->batch_aol_6)
+                                <option value="{{$batchDetails->batch_aol_6}}">{{$batchDetails->batch_aol_6}}</option>
+                            @endif
+                        </select>
+                    @endif
                 </div>          
               </div>
               <div class="row batchOrderField" @if($credentials['wallet_amount']>0) style="display:block" @else style="display:none" @endif>
@@ -372,10 +423,11 @@
   <script src="/assets/js/jquery-ui-1.10.4.min.js"></script>
   <script type="text/javascript"> 
     var dateToday = new Date();
-    var walletAmount = {{json_encode( $credentials['wallet_amount'] ) }};            
+    var walletAmount = {{json_encode( $credentials['wallet_amount'] ) }};
     var weekDaysAvailable = {{json_encode( $weekDaysAvailable ) }};  
     var formValidationStatus = false;
-    var oldPromoCode = ""; 
+    var oldPromoCode = "";
+    var institute = {{$batchDetails->batch_institute_id}};
     function markFavClass(batchID)
     {       
       $.get("/users/favorite/"+batchID,function(response)
@@ -392,8 +444,8 @@
       }); 
     }         
     function verifyPromoCode (condition) 
-    { 
-      formValidationStatus = false;               
+    {
+      formValidationStatus = false;
       $('#promoCodeContainer #statusMessage').empty();
       var promoCode = $("#promoCode").val();
       var conditionMessage = "";
@@ -453,6 +505,11 @@
     {
       var Result = true;    
       var bookingDate = $('#booking_date').val();
+      var aolDate = $('#aol_dates').val();
+      if(aolDate!="")
+      {
+        return Result;
+      }
       if(bookingDate=="" || bookingDate==undefined)
       {
         Result =  false;
@@ -462,7 +519,7 @@
           .attr("id","errorMessage")
           .attr("class","batchCreateFormError")
           .text("Booking date is required")
-          .appendTo(errorMessageContainer);      
+          .appendTo(errorMessageContainer);
       }
       return Result;
     }
@@ -471,7 +528,7 @@
         $("#booking_date").change(function () {
             $('#errorMessage').remove();     
         });
-        var categoryId = "<?php echo $loggedIn; ?>";     
+        var categoryId = "<?php echo $loggedIn; ?>";
         $('.rating-input').attr('checked', false);
         $('#payCredits').click(function(e)
         {
@@ -524,13 +581,13 @@
           }, 1000, 'easeInOutSine');
           event.preventDefault();
         });
-        $("#booking_date").datepicker({          
+        $("#booking_date").datepicker({
           changeMonth: true,
           numberOfMonths: 1,
-          minDate: dateToday,                
+          minDate: dateToday,
           beforeShowDay: DisableDay,
-          dateFormat: 'yy-mm-dd'         
-        });    
+          dateFormat: 'yy-mm-dd'
+        });
         $('#proceedButton').click(function(e)
         {
           e.preventDefault();       

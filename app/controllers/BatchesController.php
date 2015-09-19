@@ -8,7 +8,7 @@ class BatchesController extends \BaseController {
 
 	public function __construct()
 	{
-		$this->schedulesControllerObject=new SchedulesController; 
+		$this->schedulesControllerObject=new SchedulesController;
 		parent::__construct();
 	}
 
@@ -28,6 +28,41 @@ class BatchesController extends \BaseController {
 		// dd($institute_id);
 		//dd($batchDetails[2]);
 		return View::make('Batches.index',compact('age_group','batchDetails','difficulty_level','gender_group','institute_id','trial','weekdays'));
+	}
+
+	public function aol($id)
+	{
+		$id=Ucfirst($id);
+		switch($id){
+			case 'Secunderabad':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Secunderabad');
+			case 'Begumpet':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Begumpet');
+			case 'Himayatnagar':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Himayatnagar');
+			case 'Ameerpet':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Ameerpet');
+			case 'Kukatpally':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-(3-Days)-Kukatpally');
+			case 'Manikonda':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-(3-Days)-Manikonda');
+			case 'Miyapur':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-(3-Days)-Miyapur');
+			case 'Malkajgiri':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-(3-Days)-Malkajgiri');
+			case 'Domalguda':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Domalguda');
+			case 'Erragadda':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Erragadda');
+			case 'Masab':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Masab-Tank');
+			case 'Masabtank':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Masab-Tank');
+			case 'Madhapur':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Madhapur');
+			case 'Moosapet':
+				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Moosapet');
+		}
 	}
 
 	public function createentry()

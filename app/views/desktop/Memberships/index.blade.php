@@ -70,7 +70,7 @@
           						</div>
           						<div class='col-md-2 col-sm-2' id="promoCodeMessageContainer" style="text-align:left;padding:1px 0px 0px 0px;font-size:15px;color:green">
 				                   <a onclick="verifyPromoCode();" href="javascript:void(0);">Apply</a>
-          						</div>          
+          						</div>
         					</li>
         					<li class="col-md-12" style="text-align:center"><hr/>Amount Payable<span id="orderTotal">: Rs. {{$credentials['payment']}}/-</span></li>
 							<div style="text-align:center;color:white"><button type="submit" class="booknowButton" id="membership_pay">Pay Now</button></div>

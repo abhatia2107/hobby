@@ -62,11 +62,7 @@
 						<form method="post" enctype="multipart/form-data" action="/memberships">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 							<input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
-							<li class="col-xs-12"><span class="col-xs-6">Type</span><span>:
-								<select id="membership_type" name="membership_type" required="required">
-		                            <option value=0>Flexi class</option>
-	                    		</select>
-							</span></li>
+							<input type="hidden" id="membership_type" name="membership_type" value="0">
 							<li class="col-xs-12"><span class="col-xs-6">Credits</span><span id="credit">: {{$credentials['credits0']}}</span></li>
 							<li class="col-xs-12"><span class="col-xs-6">Price</span><span>: Rs. {{$credentials['price']}}/-</span></li>
 							<li class="col-xs-12"><span class="col-xs-6">Start Date</span><span>: {{$credentials['start']}}</span></li>
@@ -84,7 +80,7 @@
             						<input type="text" style="width:100%" placeholder="Enter Promo Code (Optional)" class="form-control" id="promoCode" name="promo_code" />
           						</div>
           						<div class='col-xm-2' id="promoCodeMessageContainer" style="text-align:left;padding:1px 0px 0px 0px;font-size:15px;color:green">
-             					<a href="javascript:verifyPromoCode();">Apply</a>
+             					<a onclick="verifyPromoCode();"  href="javascript:verifyPromoCode();">Apply</a>
           						</div>          
         					</li>
         					<li class="col-xs-12" style="text-align:center"><hr/>Amount Payable<span id="totalPrice">: Rs. {{$credentials['payment']}}/-</span></li>

@@ -35,7 +35,7 @@ class Account extends \Eloquent {
 		// dd($users);
 		$batch=Batch::where('batch_bookings','>',0)->lists('batch','id');
 		// dd($batch);
-		$bookings=Booking::/*whereNotIn('user_id',$users)->*/where('trial',0)->where('order_status','Success')->where('booking_date','>=','2015-08-01')->where('booking_date','<','2015-09-01')->get()/*->toArray()*/;
+		$bookings=Booking::/*whereNotIn('user_id',$users)->*/where('trial',0)->where('order_status','Success')->where('booking_date','>=','2015-09-01')->where('booking_date','<','2015-10-01')->get()/*->toArray()*/;
 		// dd($bookings);
 		$bookingsPerUser = array();
 		foreach ($bookings as $key => $value) {
@@ -43,6 +43,7 @@ class Account extends \Eloquent {
 				$bookingsPerUser[$batch[$value->batch_id]][$value->name]=$bookingsPerUser[$batch[$value->batch_id]][$value->name]+1;
 			else
 				$bookingsPerUser[$batch[$value->batch_id]][$value->name]=1;
+			
 		}
 		return $bookingsPerUser;
 	}

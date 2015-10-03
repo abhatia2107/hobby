@@ -83,7 +83,7 @@
              					<a onclick="verifyPromoCode();"  href="javascript:verifyPromoCode();">Apply</a>
           						</div>          
         					</li>
-        					<li class="col-xs-12" style="text-align:center"><hr/>Amount Payable<span id="totalPrice">: Rs. {{$credentials['payment']}}/-</span></li>
+        					<li class="col-xs-12" style="text-align:center"><hr/>Amount Payable<span id="orderTotal">: Rs. {{$credentials['payment']}}/-</span></li>
 							<div style="text-align:center;color:white">
 								<button type="submit" class="booknowButton" id="membership_pay">Pay Now</button>
 							</div>
@@ -130,10 +130,10 @@
 				{ 
 					if($.isNumeric(response['price']))
 					{
-						$('#orderTotal').empty();  
+						$('#orderTotal').empty();
 						$('#orderTotal').append(": Rs. "+response['price']+"/-");
 						$('#payment').val(response['price']);
-			            $('#walletBalance').empty();  
+			            $('#walletBalance').empty();
 			            $('#walletBalance').append(": Rs. "+response['wallet_balance']+"/-");
 						$('#promoCodeContainer').append("<span id='statusMessage' style='color:green'>Promo Code Applied"+conditionMessage+"</span>");
 						formValidationStatus = true;

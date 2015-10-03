@@ -61,7 +61,7 @@ class BatchesController extends \BaseController {
 			case 'Madhapur':
 				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Madhapur');
 			case 'Moosapet':
-				return Redirect::to('/batch/The-Art-of-Living-Happiness-Program-Moosapet');
+				return Redirect::to('/batch/The-Art-of-Living-Art-Excel-Moosapet');
 		}
 	}
 

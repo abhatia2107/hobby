@@ -363,3 +363,13 @@
 
 
 	Route::get('/aol/{id}','BatchesController@aol');
+
+	Route::resource('teams', 'TeamsController');
+
+	Route::get('/cs6', function()
+	{
+		$metaContent[0] = "Cric Super6 :: Hobbyix";
+		$metaContent[1] = "Hobbyix is a new kind of membership which makes your workout new, exciting and diverse every time. You will get to browse through 1000's of classes";
+		$metaContent[2] = "About Hobbyix, About Us Hobbyix, Terms of Use Hobbyix, Privacy Policy Hobbyix";
+		return View::make('cs6.index',compact('metaContent'));
+	});

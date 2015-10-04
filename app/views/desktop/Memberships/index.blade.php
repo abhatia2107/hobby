@@ -48,7 +48,7 @@
 				<div class="membership_card_container get_membership" style="padding-bottom:15px">
 					<h1 class="header" style="margin-top:10px">
 						Get Your Membership
-					</h1>				
+					</h1>
 					<div class="row">
 						<form method="post" enctype="multipart/form-data" action="/memberships" id="buyMembershipForm">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

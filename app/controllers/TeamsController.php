@@ -32,13 +32,14 @@ class TeamsController extends \BaseController {
 	public function store()
 	{
 		$data = Input::all();
-//		dd($data);
+		dd($data);
 /*
 		if(array_diff_key($data['email'], array_unique($data['email'])))
 			return Redirect::back()->withInput()->with('failure',Lang::get('team.team_same_email'));
 		if(array_diff_key($data['mobile'], array_unique($data['mobile'])))
 			return Redirect::back()->withInput()->with('failure',Lang::get('team.team_same_mobile'));*/
-		foreach($data['name'] as $key => $value)
+
+		/*foreach($data['name'] as $key => $value)
 		{
 			$id=$key+1;
 			$data['p'.$id.'_name'] = $value;
@@ -53,7 +54,8 @@ class TeamsController extends \BaseController {
 			$id=$key+1;
 			$data['p'.$id.'_mobile'] = $value;
 		}
-//		dd($data);
+		dd($data);
+		*/
 		$validator = Validator::make($data, Team::$rules);
 
 		if ($validator->fails())

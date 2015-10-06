@@ -55,12 +55,12 @@
             <h4>
                 <ul class="membership_features">
                     <li><span class="glyphicon glyphicon-hand-right"></span>All Matches will be played on astro-turf pitch with lush green fast outfield</li>
-                    <li><span class="glyphicon glyphicon-hand-right"></span>Matches will happen both during Day & Night time</li>
+                    <li><span class="glyphicon glyphicon-hand-right"></span>Matches will happen both during Day &amp; Night time</li>
                     <li><span class="glyphicon glyphicon-hand-right"></span>Winning team will get a whooping prize of Rs. 25000/-</li>
-                    <li><span class="glyphicon glyphicon-hand-right"></span>DJ, commentary & Flood-lights to electrify the atmosphere </li>
-                    <li><span class="glyphicon glyphicon-hand-right"></span>Live Telecast of Semi-Final & Final match on hobbyix.com</li>
+                    <li><span class="glyphicon glyphicon-hand-right"></span>DJ, commentary &amp; Flood-lights to electrify the atmosphere </li>
+                    <li><span class="glyphicon glyphicon-hand-right"></span>Live Telecast of Semi-Final &amp; Final match on hobbyix.com</li>
                     <li><span class="glyphicon glyphicon-hand-right"></span>Scores will be updated online and audience can guess the winners/man of the match to win exciting prizes</li>
-                    <li><span class="glyphicon glyphicon-hand-right"></span>All matches will be supervised by professional umpires & referees</li>
+                    <li><span class="glyphicon glyphicon-hand-right"></span>All matches will be supervised by professional umpires &amp; referees</li>
                 </ul>
             </h4>
         </div>
@@ -74,8 +74,8 @@
                     <li><span class="glyphicon glyphicon-hand-right"></span>In case you don't have a team then we will form one for you</li>
                     <li><span class="glyphicon glyphicon-hand-right"></span>Only off-side and straight areas for scoring runs</li>
                     <li><span class="glyphicon glyphicon-hand-right"></span>Every match is of 6 overs and over limit for bowlers is 2 per bowler</li>
-                    <li><span class="glyphicon glyphicon-hand-right"></span>Registration fee is Rs. 2500 per team and Rs. 450 for individuals</li>
-                    <li><span class="glyphicon glyphicon-hand-right"></span>Special awards for maximum number of dot balls (for bowler) & maximum number of sixes (for batsman)</li>
+                    <li><span class="glyphicon glyphicon-hand-right"></span>Registration fee is Rs. 2500/- per team and Rs. 450/- for individuals</li>
+                    <li><span class="glyphicon glyphicon-hand-right"></span>Special awards for maximum number of dot balls (for bowler) &amp; maximum number of sixes (for batsman)</li>
                 </ul>
             </h4>
         </div>

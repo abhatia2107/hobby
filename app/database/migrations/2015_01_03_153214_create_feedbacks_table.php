@@ -17,7 +17,7 @@ class CreateFeedbacksTable extends Migration {
 			$table->increments('id');
 			$table->string('feedback_subject');
 			$table->string('feedback_email');
-			$table->integer('feedback_user_id')->foreign('feedback_user_id')->references('id')->on('users');;
+			$table->integer('feedback_user_id')->foreign('feedback_user_id')->references('id')->on('users')->nullable();
 			$table->text('feedback_description');
 			$table->boolean('feedback_read')->default(0);
 			$table->softDeletes();

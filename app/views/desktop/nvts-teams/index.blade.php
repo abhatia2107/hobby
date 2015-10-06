@@ -6,11 +6,11 @@
             <h1>Novartis vs. Amazon Tennis Ball Cricket Match</h1>
         </div>
         <div class="col-md-6">
-            @if(count($amzn_team)==11)
+            @if(count($nvts_team)==11)
                 <h2>Registration closed as team had already got 11 players. Cheer them up.</h2>
             @else
-                <h2>Register in Amazon 11</h2>
-                {{ Form::open(['url'=>'amzn-team', 'id'=>'teams', 'enctype'=>'multipart/form-data']) }}
+                <h2>Register in Novartis 11</h2>
+                {{ Form::open(['url'=>'nvts-team', 'id'=>'teams', 'enctype'=>'multipart/form-data']) }}
                 <div class="row batchOrderField">
                         <div class='col-md-5 col-sm-4 col-xs-5 text-left'>Name*</div>
                         <div class='col-md-7 col-sm-8 col-xs-7'>
@@ -41,8 +41,8 @@
         </div>
 
         <div class="col-md-6 verticalLine">
-            <h2>Already registered in Amazon 11</h2>
-            {{HTML::UL( $amzn_team, ['class'=> 'lead'])}}
+            <h2>Already registered in Novartis 11</h2>
+            {{HTML::UL( $nvts_team, ['class'=> 'lead'])}}
         </div>
     </div>
 

@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\MethodNotAllowedHttpException;
 
 App::fatal(function($exception)
 {
-   	Log::error($exception); 
+   	Log::error($exception);
    	return View::make('Errors.fatal');
 });
 

@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class AmznTeam extends \Eloquent {
+class NvtsTeam extends \Eloquent {
 	use SoftDeletingTrait;
 	protected $fillable = ['name', 'email', 'contact_no', 'booking_id'];
 

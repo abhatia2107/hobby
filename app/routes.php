@@ -383,3 +383,5 @@
 	});
 
 	Route::resource('amzn-team', 'AmznTeamsController');
+
+	Route::resource('nvts-team', 'NvtsTeamsController');

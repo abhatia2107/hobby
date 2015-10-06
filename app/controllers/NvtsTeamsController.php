@@ -1,42 +1,42 @@
 <?php
 
-class AmznTeamsController extends \BaseController {
+class NvtsTeamsController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET amzn-team
+	 * GET nvts-team
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$amzn_team = AmznTeam::Join('bookings', 'bookings.id', '=','amzn_teams.booking_id' )->where('order_status','Success')->select('bookings.name as name')->get()->toArray();
-		$amzn_team =  array_map(function($item) { return $item['name']; }, $amzn_team);
-//		dd($amzn_team);
-		return View::make('amzn-teams.index', compact('amzn_team'));
+		$nvts_team = NvtsTeam::Join('bookings', 'bookings.id', '=','nvts_teams.booking_id' )->where('order_status','Success')->select('bookings.name as name')->get()->toArray();
+		$nvts_team =  array_map(function($item) { return $item['name']; }, $nvts_team);
+//		dd($nvts_team);
+		return View::make('nvts-teams.index', compact('nvts_team'));
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET amzn-team/create
+	 * GET nvts-team/create
 	 *
 	 * @return Response
 	 */
 	/*public function create()
 	{
-		return View::make('amzn-teams.create');
+		return View::make('nvts-teams.create');
 	}*/
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST amzn-team
+	 * POST nvts-team
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
 		$data = Input::all();
-		$validator = Validator::make($data, AmznTeam::$rules);
+		$validator = Validator::make($data, NvtsTeam::$rules);
 
 		if ($validator->fails())
 		{
@@ -54,16 +54,16 @@ class AmznTeamsController extends \BaseController {
 //		dd($data);
 		$booking = Booking::create($data);
 		$data['booking_id'] = $booking->id;
-		AmznTeam::create($data);
+		NvtsTeam::create($data);
 
 		return Redirect::to('/bookings/payment/'.$booking->id);
 
-//		return Redirect::route('amzn-teams.index');
+//		return Redirect::route('nvts-teams.index');
 	}
 
 	/**
 	 * Display the specified resource.
-	 * GET amzn-team/{id}
+	 * GET nvts-team/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -75,7 +75,7 @@ class AmznTeamsController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET amzn-team/{id}/edit
+	 * GET nvts-team/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -87,7 +87,7 @@ class AmznTeamsController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT amzn-team/{id}
+	 * PUT nvts-team/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -99,16 +99,16 @@ class AmznTeamsController extends \BaseController {
 */
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE amzn-team/{id}
+	 * DELETE nvts-team/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 /*	public function destroy($id)
 	{
-		AmznTeam::destroy($id);
+		NvtsTeam::destroy($id);
 
-		return Redirect::route('amzn-teams.index');
+		return Redirect::route('nvts-teams.index');
 	}*/
 
 }

@@ -49,7 +49,7 @@
                         <h3 class=" text-left border-title">Questions, Comments, Contact
                         </h3>
                         <p>
-                            If you have any questions, comments or concerns with the privacy of your information collected by HOBBYIX., please contact us at contact@hobbyix.com.
+                            If you have any questions, comments or concerns with the privacy of your information collected by HOBBYIX, please contact us at contact@hobbyix.com.
                         </p>
                     </div>
                 </div>

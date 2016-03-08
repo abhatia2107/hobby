@@ -38,16 +38,25 @@ class FiltersController extends \BaseController {
 			$metaContent[2] = "$subcategoriesString in $location";
 			$metaContent[3] = "$category Activities in $location";
 		}
-		if(Request::segment(1)=='json')
-		{
-			$response['institute']=$batchesForCategoryLocation;
-			if($batchesForCategoryLocation)
-				$response['success']=1;
-			else
-				$response['success']=0;
-		 	return json_encode($response);
-		}
 		// dd($batchesForCategoryLocation[0]->schedules->all());
+		
+                if(Request::segment(1)=='json')
+                {
+                        if(empty($batchesForCategoryLocation))
+                        {
+                                $response['institute']="";
+                        }
+                        else
+                        {
+                                $response['institute']=$batchesForCategoryLocation->toArray();
+                        }
+                        if($batchesForCategoryLocation)
+                                $response['success']=1;
+                        else
+                                $response['success']=0;
+                        return json_encode($response);
+                }
+
 		return View::make('Filters.show',compact('keyword', 'batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id', 'localities','subcategory','locationSubcategories','locality','location','metaContent'));
 	}
 
@@ -161,16 +170,25 @@ class FiltersController extends \BaseController {
 			$metaContent[2] = "$instituteName, $instituteName in $locality, $instituteName in $location, $subcategoriesString $locality";
 			$metaContent[3] = "$instituteName in $locality, $location";
 		}
-		if(Request::segment(1)=='json')
-		{
-			$response['institute']=$batchesForCategoryLocation;
-			if($batchesForCategoryLocation)
-				$response['success']=1;
-			else
-				$response['success']=0;
-		 	return json_encode($response);
-		}
 		$filterPageTitle = "";
+		 if(Request::segment(1)=='json')
+                {
+                        if(empty($batchesForCategoryLocation))
+                        {
+                                $response['institute']="";
+                        }
+                        else
+                        {
+                                $response['institute']=$batchesForCategoryLocation->toArray();
+                        }
+                        if($batchesForCategoryLocation)
+                                $response['success']=1;
+                        else
+                                $response['success']=0;
+                        return json_encode($response);
+                }
+
+
 		return View::make('Filters.show',compact('batchesForCategoryLocation','localitiesForLocation','subcategoriesForCategory','category_id','location_id','metaContent','instituteSubcategories','instituteName','location','locality','locArr'));
 	}
 
@@ -368,9 +386,17 @@ class FiltersController extends \BaseController {
 			else
 				$subcategories= $this->subcategory->getAllSubcategories();
 		}
+
 		if(Request::segment(1)=='json')
 		{
-			$response['institute']=$batchesForCategoryLocation;
+			if(empty($batchesForCategoryLocation))
+                        {
+                            	$response['institute']="";
+                        }
+			else
+			{
+				$response['institute']=$batchesForCategoryLocation->toArray();
+			}
 			if($batchesForCategoryLocation)
 				$response['success']=1;
 			else

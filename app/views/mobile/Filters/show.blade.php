@@ -123,9 +123,9 @@
 		<button type="button" onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 		<h3><a href="/memberships"><em>{{$homeLang['home_membership_title']}}</em></a></h3>
 		<strong>{{$homeLang['home_membership_tagline']}}</strong>
-		<div style="color:white;">
+<!--		<div style="color:white;">
 			<a href="tel:+919100946081">Call: +919100946081</a>
-		</div>
+		</div>-->
 	</div>
 </div>
 <div class="container filter_page" >

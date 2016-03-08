@@ -28,7 +28,7 @@
                <span class="col-xs-3"><a href="" target="_blank"><span class="glyphicon fa fa-fw fa-globe"></span></a></span>
             </li>
             <div style="clear:both;padding:15px 30px 0px 30px;font-size:16px;text-align:center">
-               <li><a href="tel:+919100946081"><span class="glyphicon fa fa-fw fa-phone"></span>+91 9100946081</a></li>
+<!--               <li><a href="tel:+919100946081"><span class="glyphicon fa fa-fw fa-phone"></span>+91 9100946081</a></li>-->
                <li><span class="glyphicon fa fa-fw fa-envelope"></span><script>document.write('<'+'a'+' '+'h'+'r'+'e'+'f'+'='+"'"+'m'+'a'+'i'+'&'+'#'+'1'+'0'+'8'+';'+'&'+'#'+'1'+'1'+'6'+';'+'o'+'&'+'#'+'5'+'8'+';'+'s'+'&'+'#'+'3'+'7'+';'+'7'+'5'+'%'+'7'+'0'+'p'+'%'+'&'+'#'+'5'+'4'+';'+'&'+'#'+'7'+'0'+';'+'%'+'7'+'2'+'t'+'&'+'#'+'6'+'4'+';'+'h'+'%'+'&'+'#'+'5'+'4'+';'+'F'+'&'+'#'+'9'+'8'+';'+'b'+'&'+'#'+'1'+'2'+'1'+';'+'i'+'x'+'&'+'#'+'4'+'6'+';'+'%'+'6'+'&'+'#'+'5'+'1'+';'+'%'+'6'+'&'+'#'+'7'+'0'+';'+'m'+"'"+'>'+'s'+'&'+'#'+'1'+'1'+'7'+';'+'p'+'&'+'#'+'1'+'1'+'2'+';'+'o'+'r'+'t'+'&'+'#'+'6'+'4'+';'+'h'+'o'+'b'+'b'+'y'+'&'+'#'+'1'+'0'+'5'+';'+'x'+'&'+'#'+'4'+'6'+';'+'c'+'o'+'m'+'<'+'/'+'a'+'>');</script><noscript>[Turn on JavaScript to see the email address]</noscript></li>
             </div>
             <!-- <a href-link="$adminAccounts->instagram_link" class="col-xs-3"><span class="glyphicon fa fa-fw fa-instagram"></span></a> -->

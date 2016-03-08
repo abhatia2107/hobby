@@ -15,7 +15,6 @@
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\MethodNotAllowedHttpException;
-
 App::fatal(function($exception)
 {
    	Log::error($exception);

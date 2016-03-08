@@ -128,9 +128,9 @@
   </div>
   <div class="container membership_message"> 
     <div class="alert">   
-      <div class="contact">
+<!--      <div class="contact">
         Call: +91-9100 946 081
-      </div>
+      </div>-->
       <button onclick="hideMembershipMessage()" class="close" data-dismiss="alert" aria-hidden="true">x</button>     
       <h3><a title="Hobbyix Membership" href="/memberships">{{$homeLang['home_membership_title']}}</a></h3>
       <strong>{{$homeLang['home_membership_tagline']}}</strong>   

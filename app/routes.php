@@ -319,6 +319,14 @@
 
 	Route::get('/filter/{subcategoriesString}/{localitiesString}','FiltersController@filter');
 
+	Route::get('/json/search','FiltersController@search');
+
+	Route::get('/json/filter/{id}','FiltersController@institute');
+
+        Route::get('/json/filter/{subcategoriesString}/{localitiesString}','FiltersController@filter');
+
+
+
 	Route::get('/yoga',function(){
 		return Redirect::to('/');
 	});

@@ -14,7 +14,6 @@
 */
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\Eloquent\MethodNotAllowedHttpException;
 App::fatal(function($exception)
 {
    	Log::error($exception);
@@ -28,11 +27,6 @@ App::error(function(ModelNotFoundException $exception)
     dd('Sorry! Something is wrong with this URL!') ;
 });
 
-App::error(function(MethodNotAllowedHttpException $exception)
-{
-    Log::error($exception);
-    dd('Sorry! Something is wrong with this URL!') ;
-});
 
 App::missing(function($exception)
 {

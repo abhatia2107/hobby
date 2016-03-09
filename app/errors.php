@@ -23,12 +23,18 @@ App::fatal(function($exception)
 
 App::error(function(ModelNotFoundException $exception)
 {
-    Log::error($exception);
-    dd('Sorry! Something is wrong with this URL!') ;
+   Log::error($exception);
+   return View::make('Errors.fatal');
 });
 
-
+App::error(function($exception)
+{
+   Log::error($exception);
+   return View::make('Errors.fatal');
+});
+ 
 App::missing(function($exception)
 {
-    return Response::view('Errors.pageNotFound', array(), 404);
+   Log::error($exception);
+   return Response::view('Errors.pageNotFound', array(), 404);
 });

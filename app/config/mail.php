@@ -27,8 +27,8 @@ return array(
 	| the Mailgun mail service which will provide reliable deliveries.
 	|
 	*/
-	
-	'host' => '128.199.126.61',
+	'host' => 'smtp.gmail.com',
+	//'host' => '128.199.126.61',
 	// 'host' => 'box.hobbyix.com',
 
 	/*
@@ -55,7 +55,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'services@hobbyix.com', 'name' => 'Hobbyix'),
+	'from' => array('address' => 'hobbyix@gmail.com', 'name' => 'Hobbyix'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -81,7 +81,7 @@ return array(
 	|
 	*/
 
-	'username' => 'services@hobbyix.com',
+	'username' =>'hobbyix', 
 
 	/*
 	|--------------------------------------------------------------------------
@@ -94,7 +94,7 @@ return array(
 	|
 	*/
 
-	'password' => 'serviceshobby',
+	'password' => 'hobbyix12345',
 
 	/*
 	|--------------------------------------------------------------------------

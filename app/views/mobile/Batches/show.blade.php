@@ -200,7 +200,7 @@
 <div class="overflow_x" id='batchOrderSample' style="padding-top:0px;padding-bottom:5px;margin-top:0px;">        
   <div class='sample_box_title' style="padding:10px 0px 2px 0px;margin-top:0px;">Book This Class</div>
   <div class="sample_box_order_data" style="padding:10px 15px 0px 15px;">        
-    <form role="form" method="post" name="batchOrderForm"  enctype="multipart/form-data" id="batchOrderForm" action="/bookings" > 
+    <form role="form" method="post" name="batchOrderForm"  enctype="multipart/form-data" id="batchOrderForm" action="" > 
       <div class="" id="bookOrderFormStep1">
         <input type="hidden" name="batch_id" value="{{$batchID}}">
         <div class="row batchOrderField">

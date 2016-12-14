@@ -247,7 +247,7 @@
       <div class='col-lg-4 col-md-5 col-sm-5 col-xs-12 column' style="margin-bottom:25px">
         <div class="sample-box-small" id='batchOrderSample'>
           <div class='sample-batch-name'>Book This Class</div>
-          <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action="/bookings" > 
+          <form role="form" method="post" name="batchOrderForm" id="batchOrderForm" action=""> 
             <div class="" id="bookOrderFormStep1">
               <div class="row batchOrderField">
                 <div class='col-md-6 col-sm-6 col-xs-6'>Price Per Session</div>

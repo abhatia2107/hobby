@@ -493,7 +493,6 @@ class BookingsController extends \BaseController {
 		
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		$this->sms(false, $data['venue_contact_no'], $institute_msg);
-		$this->sms(false, $data['admin_contact_no'], $admin_msg);
 		
 		$subject='Booking Successful';
 		$email= $booking->email;
@@ -548,7 +547,6 @@ class BookingsController extends \BaseController {
 
 		$this->sms(true, $data['user_contact_no'], $user_msg);
 		$this->sms(false, $data['venue_contact_no'], $institute_msg);
-		$this->sms(false, $data['admin_contact_no'], $admin_msg);
 		
 		$subject='Trial Booking Successful';
 		Mail::queue('Emails.trial_booking.user', $data, function($message) use ($email, $subject)

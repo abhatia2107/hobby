@@ -409,7 +409,6 @@ class MembershipsController extends \BaseController {
 		$admin_msg='Membership booked, '.$membership_id.', Order id: '.$data['order_id']. ' by '.$data['user_name'].' '. $data['user_contact_no'].'.';
 		
 		$this->sms(true, $data['user_contact_no'], $user_msg);
-		$this->sms(false, $data['admin_contact_no'], $admin_msg);
 		
 		$email= $user->email;
 		$subject='Hobbyix Membership Booking Confirmation';

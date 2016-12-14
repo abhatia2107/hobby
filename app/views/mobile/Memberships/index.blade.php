@@ -59,7 +59,7 @@
 						Get Your Membership
 					</h1>
 					<div class="row">
-						<form method="post" enctype="multipart/form-data" action="/memberships">
+						<form method="post" enctype="multipart/form-data" action="/dummy">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 							<input type="hidden" id="payment" name="payment" value="{{$credentials['payment']}}">
 							<input type="hidden" id="membership_type" name="membership_type" value="0">
